@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">Jionex-Agent</string>
+    <string name="error_something_went_wrong">Something Went Wrong !!</string>
+    <string name="no_network">No Internet.</string>
+    <string name="login">Login</string>
+    <string name="signUp">Sign Up</string>
+    <string name="enter_password">Enter password</string>
+    <string name="enter_email">Enter email:</string>
+    <string name="password">Password</string>
+    <string name="e_mail">Email</string>
+    <string name="tag">Let\'s join us and \nBuild your relationship with others</string>
+    <string name="swipe_right_for_login">Swipe Right for Login</string>
+    <string name="register">Register</string>
+    <string name="re_type_password">Re-type Password</string>
+    <string name="your_name">Full Name</string>
+    <string name="updateAccount">Update Account</string>
+    <string name="update">Update</string>
+    <string name="signOut">Sign Out</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="enter_mobile">Enter Mobile No.</string>
+    <string name="addItem">Add Item</string>
+    <string name="enter_shoe_name">Brand</string>
+    <string name="enter_desc">Description</string>
+    <string name="enter_price">Price</string>
+    <string name="enter_id">Id</string>
+    <string name="upload">Upload</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="card_number">Card number</string>
+    <string name="cvc">CVV</string>
+    <string name="mm_yy">MM/YY</string>
+    <string name="pay">Pay</string>
+    <string name="enter_email_id">Enter email id</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="congratulations">Congratulations!! \n\n Order Placed</string>
+    <string name="buy_item">Add item to buy</string>
+    <string name="enter_address">Enter address</string>
+    <string name="address">Delivery Address</string>
+    <string name="submit">Submit</string>
+    <string name="enter_name_of_which_you_want_image">Enter name of which you want image</string>
+    <string name="welcome">Welcome</string>
+    <string name="create">Create</string>
+    <string name="cash_out">Cash Out =</string>
+    <string name="cash_in">Cash In = </string>
+    <string name="distributed_id">Distributed Code</string>
+    <string name="permission">PERMISSION</string>
+    <string name="sim_permission">SIM PERMISSION</string>
+    <string name="sim_read">SIM READ</string>
+    <string name="enter_dis">ENTER DISTRIBUTOR</string>
+    <string name="done">Done</string>
+    <string name="verify_mobile_number">Verify mobile number</string>
+    <string name="verify_mobile_desc">We need to verify from your phone to verify and register your mobile on <b>Rapidx</b></string>
+    <string name="select_sim">Please select SIM registered with your bank.</string>
+    <string name="Auth">Authentication</string>
+    <string name="cancel">Proceed</string>
+    <string name="read">Read</string>
+    <string name="confirmed">Confirmed</string>
+    <string name="init">Verification Initiated</string>
+    <string name="completed">Verification Completed</string>
+    <string name="enter_pin">PinCode</string>
+    <string name="confirm_sim">Confirm SIM</string>
+    <string name="you_have_selected_sim_operator_do_you_want_to_process">You have selected %1$s. Do you want to proceed?</string>
+    <string name="error_messages_verfication_fail">Enter correct 6 digit PinCode.</string>
+
+    <string-array name="bankList">
+        <item>item1</item>
+        <item>item2</item>
+        <item>item3</item>
+        <item>item4</item>
+    </string-array>
+</resources>

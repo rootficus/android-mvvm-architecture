@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="agentVerificationViewModel"
+            type="com.jionex.agent.ui.main.viewmodel.AgentVerificationViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lock_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/clear_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/sevenToNine"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_weight="0"
+                android:backgroundTint="@android:color/transparent"
+                android:fontFamily="@font/segoeui"
+                android:hint="Enter 6 digit PINCODE"
+                android:maxLength="6"
+                android:padding="14dp"
+                android:paddingTop="5sp"
+                android:paddingEnd="10sp"
+                android:textAlignment="center"
+                android:textColor="#1C1717"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnClear"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_weight="5"
+            android:background="@color/primaryColor"
+            android:text="Clear"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/sevenToNine"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/sevenToNine"
+            android:layout_width="fill_parent"
+            android:layout_height="55dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/fourTosix"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSeven"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@color/gray"
+                android:text="7"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnEight"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@color/gray"
+                android:text="8"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnNine"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@color/gray"
+                android:text="9"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/fourTosix"
+            android:layout_width="fill_parent"
+            android:layout_height="55dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/oneToThree"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnFour"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@color/gray"
+                android:text="4"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnFive"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@color/gray"
+                android:text="5"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSix"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:layout_weight="1"
+                android:background="@color/gray"
+                android:text="6"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/oneToThree"
+            android:layout_width="fill_parent"
+            android:layout_height="55dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/done"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnOne"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@color/gray"
+                android:text="1"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@color/gray"
+                android:text="2"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnThree"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@color/gray"
+                android:text="3"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/done"
+            android:layout_width="fill_parent"
+            android:layout_height="55dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDecimal"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_margin="1dp"
+                android:layout_weight="1.22"
+                android:background="@color/teal_700"
+                android:text="Done"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnZero"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_margin="1dp"
+                android:layout_weight=".98"
+                android:background="@color/gray"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@+id/progressView"
+        layout="@layout/include_progress_bar"
+        android:visibility="gone" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
