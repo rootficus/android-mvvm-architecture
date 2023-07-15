@@ -3,6 +3,7 @@ package com.jionex.agent.data.remote
 import com.jionex.agent.data.model.request.MessagesJsonModel
 import com.jionex.agent.data.model.request.ModemJsonModel
 import com.jionex.agent.data.model.request.PinCodeJsonModel
+import com.jionex.agent.data.model.request.SignInRequest
 import com.jionex.agent.data.model.response.UserResponseResult
 import org.json.JSONObject
 import retrofit2.Call
@@ -15,8 +16,8 @@ interface JionexApiServices {
     fun InsertOrUpdateMultiMessage(@Body jsonObject: MessagesJsonModel): Call<JSONObject>
 
     @Headers("Content-Type:application/json")
-    @POST("api/v1/agents/verify_agent_by_pincode")
-    fun verifyUserByPincode(@Body pinCode: PinCodeJsonModel) : Call<UserResponseResult>
+    @POST("api/v1/users/sign_in")
+    fun signIn(@Body pinCode: SignInRequest) : Call<UserResponseResult>
 
     @Headers("Content-Type:application/json")
     @POST("api/v1/agents/insert_or_update_modem")

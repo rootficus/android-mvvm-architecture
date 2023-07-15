@@ -45,7 +45,7 @@ class AgentVerificationActivity : BaseActivity<ActivityAgentVerificationBinding>
     }
 
     private fun initializationDagger() {
-        DaggerAgentVerificationActivityComponent.builder().appComponent(JionexSDK.appComponent)
+       DaggerAgentVerificationActivityComponent.builder().appComponent(JionexSDK.appComponent)
             .agentVerificationActivityModule(AgentVerificationActivityModule())
             .baseActivityModule(BaseActivityModule(this@AgentVerificationActivity)).build()
             .inject(this)

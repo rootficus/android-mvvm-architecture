@@ -7,13 +7,13 @@ import okhttp3.Response
  * Akash.Singh
  * RootFicus.
  */
-class AuthInterceptor() : Interceptor {
+class AuthInterceptor(private val sharedPreference: SharedPreference) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val requestBuilder = originalRequest.newBuilder().apply {
             header("Content-Type", "application/json")
-            header("Authorization", "Bearer \$2y\$10\$bOGgeIDpm5LOS3Nm2nqUa.ZKZY/O0rBAvLxsOfNr7pSRO.LGumseu")
+            header("Authorization", "Bearer ${sharedPreference.getAuthToken()}")
             header("Connection","close")
         }
 
