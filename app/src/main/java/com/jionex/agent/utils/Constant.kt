@@ -1,4 +1,5 @@
 package com.jionex.agent.utils
+
 /**
  * Akash.Singh
  * RootFicus.
@@ -8,17 +9,17 @@ object Constant {
     const val bKASH_Commission_Percentage: Double = 0.41
     const val DATE_FORMAT_DD_MM_YYYY_HH_MM = "dd/MM/yyyy HH:mm"
     const val DATE_FORMAT_DD_MMMM_YY_hh_mm_ss_a = "dd-MMMM-yy hh:mm:ss a"
-    const val  PREF_SIM2_AGENT_BALANCE = "sim2AgentAmount"
+    const val PREF_SIM2_AGENT_BALANCE = "sim2AgentAmount"
 
-    const val  PREF_SIM1_AGENT_BALANCE = "sim1AgentAmount"
+    const val PREF_SIM1_AGENT_BALANCE = "sim1AgentAmount"
 
     const val ACTION_EVENT_SMS_SYNC = "com.akrobyte.rapidx.ActionEventSMSSync"
     const val ACTION_EVENT_BALANCE_SYNC = "com.akrobyte.rapidx.ActionEventBALANCESync"
     const val MESSAGE_ID = "messageId"
 
-    const val PREF_PUSH_TOKEN =  "PushToken"
+    const val PREF_PUSH_TOKEN = "PushToken"
 
-    const val PREF_AUTH_TOKEN =  "AuthToken"
+    const val PREF_AUTH_TOKEN = "AuthToken"
 
     const val PREF_USER_ID = "UserId"
 
@@ -32,13 +33,15 @@ object Constant {
 
     const val PREF_PIN_CODE = "pinCode"
 
-    const val PREF_COUNTRY= "country";
+    const val PREF_COUNTRY = "country";
 
     const val PREF_PARENT_ID = "ParentId"
 
     const val PREF_USER_ROLE = "userRoles"
 
     const val PREF_MODEM_SETUP = "ModemSetup"
+
+    const val PREF_TOKEN = "token"
 
     enum class BalanceManagerStatus(val action: Int) {
         SUCCESS(0),
@@ -49,14 +52,14 @@ object Constant {
         DANGER(5)
     }
 
-    enum class SMSType(val value:Int){
-        CashIn (0),
-        CashOut (1),
-        B2B (2),
+    enum class SMSType(val value: Int) {
+        CashIn(0),
+        CashOut(1),
+        B2B(2),
         UNKNOWN(3)
     }
 
-    enum class SyncData(val  value:Int){
+    enum class SyncData(val value: Int) {
         SyncPending(0),
         SyncSuccess(1),
         SyncFail(2),

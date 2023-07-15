@@ -4,6 +4,7 @@
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -17,6 +18,12 @@
             android:name=".ui.main.activity.AgentVerificationActivity"
             android:exported="true"
             android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".ui.main.activity.SignInActivity"
+            android:exported="true"/>
+        <activity android:name=".ui.main.activity.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

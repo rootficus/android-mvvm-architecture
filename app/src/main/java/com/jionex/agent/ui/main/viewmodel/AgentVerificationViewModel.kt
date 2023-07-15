@@ -3,6 +3,10 @@ package com.jionex.agent.ui.main.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.jionex.agent.data.model.UserInfo
+import com.jionex.agent.data.model.request.SignInRequest
+import com.jionex.agent.data.model.request.VerifyPinRequest
+import com.jionex.agent.data.model.response.SignInResponse
+import com.jionex.agent.data.model.response.VerifyPinResponse
 import com.jionex.agent.data.repository.AgentVerificationRepository
 import com.jionex.agent.ui.base.BaseViewModel
 import com.jionex.agent.utils.ResponseData
@@ -28,6 +32,27 @@ class AgentVerificationViewModel@Inject constructor(private val agentVerificatio
                 pinCode,
                 { message -> agentVerificationResponseModel.setError(message) }
             )
+        }
+    }
+
+    val signInResponseModel = MutableLiveData<ResponseData<SignInResponse>>()
+    fun signInNow(signInRequest: SignInRequest) {
+        signInResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            agentVerificationRepository.signInNow({ success -> signInResponseModel.setSuccess(success) },
+                { error -> signInResponseModel.setError(error) },
+                signInRequest,
+                { message -> signInResponseModel.setError(message) })
+        }
+    }
+    val verifyUserByPinCodeResponseModel = MutableLiveData<ResponseData<VerifyPinResponse>>()
+    fun verifyUserByPinCode(verifyPinRequest: VerifyPinRequest) {
+        verifyUserByPinCodeResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            agentVerificationRepository.verifyUserByPinCode({ success -> verifyUserByPinCodeResponseModel.setSuccess(success) },
+                { error -> verifyUserByPinCodeResponseModel.setError(error) },
+                verifyPinRequest,
+                { message -> verifyUserByPinCodeResponseModel.setError(message) })
         }
     }
 

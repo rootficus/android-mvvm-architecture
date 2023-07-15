@@ -1,6 +1,6 @@
 package com.jionex.agent.data.model
 
-import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class UserInfo(
     var id: String,
@@ -13,4 +13,4 @@ data class UserInfo(
     var parent_id: String,
     var company_id: String,
     var role_id: String
-)
+) : Serializable

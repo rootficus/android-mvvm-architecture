@@ -16,7 +16,7 @@
     <string name="updateAccount">Update Account</string>
     <string name="update">Update</string>
     <string name="signOut">Sign Out</string>
-    <string name="enter_name">Enter Name</string>
+    <string name="user_name">User Name</string>
     <string name="enter_mobile">Enter Mobile No.</string>
     <string name="addItem">Add Item</string>
     <string name="enter_shoe_name">Brand</string>
@@ -62,7 +62,14 @@
     <string name="confirm_sim">Confirm SIM</string>
     <string name="you_have_selected_sim_operator_do_you_want_to_process">You have selected %1$s. Do you want to proceed?</string>
     <string name="error_messages_verfication_fail">Enter correct 6 digit PinCode.</string>
-
+    <string name="NO_INTERNET_CONNECTION">Please check your internet connection</string>
+    <string name="PLEASE_ENTER_NAME">Please enter your name</string>
+    <string name="login_text">Login to your account</string>
+    <string name="login_sub_heading"><![CDATA[Enter your username & password to login]]></string>
+    <string name="PLEASE_ENTER_PASSWORD">Please enter password</string>
+    <string name="verify_sub_heading">Enter your pincode</string>
+    <string name="pinCode">Pin Code</string>
+    <string name="PLEASE_ENTER_PIN">Please enter pincode</string>
     <string-array name="bankList">
         <item>item1</item>
         <item>item2</item>

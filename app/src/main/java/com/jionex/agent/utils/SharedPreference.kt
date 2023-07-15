@@ -1,6 +1,8 @@
 package com.jionex.agent.utils
 
 import android.content.Context
+import com.jionex.agent.utils.Constant.PREF_TOKEN
+
 /**
  * Akash.Singh
  * RootFicus.
@@ -96,20 +98,11 @@ class SharedPreference(context: Context) {
     fun setModemSetupConfirmation(modemSetup: Boolean){
         pref.edit().putBoolean(Constant.PREF_MODEM_SETUP,modemSetup).apply()
     }
-
-    fun setPushToken(result: String?) {
-        pref.edit().putString(Constant.PREF_PUSH_TOKEN,result).apply()
+    fun setToken(token: String) {
+        pref.edit().putString(PREF_TOKEN, token).apply()
     }
 
-    fun getPushToken(): String? {
-        return  pref.getString(Constant.PREF_PUSH_TOKEN,"")
-    }
-
-    fun getAuthToken(): String? {
-        return  pref.getString(Constant.PREF_AUTH_TOKEN,"")
-    }
-
-    fun setAuthToken(result: String?) {
-        pref.edit().putString(Constant.PREF_AUTH_TOKEN,result).apply()
+    fun getToken(): String? {
+        return pref.getString(PREF_TOKEN, "")
     }
 }

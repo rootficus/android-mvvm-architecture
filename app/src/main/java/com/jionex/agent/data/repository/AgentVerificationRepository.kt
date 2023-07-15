@@ -2,7 +2,11 @@ package com.jionex.agent.data.repository
 
 import android.content.Context
 import com.jionex.agent.data.model.UserInfo
+import com.jionex.agent.data.model.request.SignInRequest
+import com.jionex.agent.data.model.request.VerifyPinRequest
+import com.jionex.agent.data.model.response.SignInResponse
 import com.jionex.agent.data.model.response.UserResponseResult
+import com.jionex.agent.data.model.response.VerifyPinResponse
 import com.jionex.agent.data.remote.JionexApiServices
 import com.jionex.agent.roomDB.JionexDatabase
 import com.jionex.agent.ui.base.BaseRepository
@@ -27,6 +31,27 @@ class AgentVerificationRepository (val apiServices: JionexApiServices,
         /*apiServices.verifyUserByPincode(pinCode).apply {
             execute(this, success, fail, context, message)
         }*/
+    }
+
+    fun signInNow(
+        success: (signInResponse: SignInResponse) -> Unit,
+        fail: (error: String) -> Unit,
+        signInRequest: SignInRequest,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.signInNow(signInRequest).apply {
+            execute(this, success, fail, context, message)
+        }
+    }
+    fun verifyUserByPinCode(
+        success: (verifyPinResponse: VerifyPinResponse) -> Unit,
+        fail: (error: String) -> Unit,
+        verifyPinRequest: VerifyPinRequest,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.verifyUserByPinCode("Bearer " + sharedPreference.getToken(),verifyPinRequest).apply {
+            execute(this, success, fail, context, message)
+        }
     }
 
     fun setUserId(userId: String?) {

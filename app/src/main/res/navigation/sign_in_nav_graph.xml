@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_signin">
+
+    <fragment
+        android:id="@+id/navigation_signin"
+        android:name="com.jionex.agent.ui.main.fragment.SignInFragment"
+        android:label="SignInFragment"
+        tools:layout="@layout/fragment_sign_in">
+
+        <action
+            android:id="@+id/action_navigation_signin_to_navigation_verifyPin"
+            app:destination="@id/navigation_verifyPin" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_verifyPin"
+        android:name="com.jionex.agent.ui.main.fragment.VerifyPinFragment"
+        android:label="VerifyNumberFragment"
+        tools:layout="@layout/fragment_verify_pin">
+
+        <action
+            android:id="@+id/action_navigation_verifyPin_to_navigation_signin"
+            app:destination="@id/navigation_signin" />
+    </fragment>
+
+</navigation>
