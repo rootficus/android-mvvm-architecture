@@ -19,7 +19,6 @@ import com.jionex.agent.R
 import com.jionex.agent.roomDB.JionexDatabase
 import com.jionex.agent.roomDB.dao.JionexDao
 import com.jionex.agent.roomDB.model.SMSRecord
-import com.jionex.agent.syncManager.SMSDataSync
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -53,81 +52,6 @@ object Utility {
 
     fun logs(tag: String, s: String) {
         Log.d(tag,s)
-    }
-
-    fun syncDataToServer(context: Context) {
-        var rapidxDao : JionexDao? = JionexDatabase.getDatabase(context)?.rapidxDao()
-        rapidxDao.let {
-            GlobalScope.launch(Dispatchers.IO){
-                var getsyncResult = rapidxDao?.getSyncSMSRecord(1)
-                if (getsyncResult?.size!!>0){
-                    syncSMSRecordProgress(context,getsyncResult[0])
-                }
-            }
-        }
-    }
-
-    @SuppressLint("InvalidPeriodicWorkRequestInterval")
-    fun syncSMSRecordProgress(context: Context, smsRecord: SMSRecord) {
-        logs("Utility", "=syncRecordSessionProgress=")
-        val constraintBuilder = Constraints.Builder()
-        constraintBuilder.setRequiredNetworkType(NetworkType.CONNECTED)
-        constraintBuilder.setRequiresBatteryNotLow(true)
-        constraintBuilder.setRequiresStorageNotLow(true)
-        val inputData = Data.Builder()
-            .putString(Constant.MESSAGE_ID, smsRecord.messageId)
-            .build()
-        var tag = "DataSyncRecord_${smsRecord.messageId!!}"
-        val periodicWorkRequest =
-            PeriodicWorkRequest.Builder(SMSDataSync::class.java, 10, TimeUnit.SECONDS)
-                .setBackoffCriteria(
-                    BackoffPolicy.EXPONENTIAL,
-                    WorkRequest.MIN_BACKOFF_MILLIS,
-                    TimeUnit.MILLISECONDS
-                ).setInputData(inputData).addTag(tag).build()
-        val manager = WorkManager.getInstance(context)
-        if (manager != null) {
-            manager.cancelAllWorkByTag(tag)
-            logs("Utitlity", "SyncRecordProgress Tag:$tag")
-            manager.enqueue(periodicWorkRequest)
-            manager.enqueueUniquePeriodicWork(
-                tag,
-                ExistingPeriodicWorkPolicy.KEEP,
-                periodicWorkRequest
-            )
-        }
-    }
-
-    fun isB2BMessages(message: String): Boolean {
-        return if (!message.contains("You have received Cash-out"))
-            message.contains(
-                "B2B",
-                true
-            ) || message.contains("B2B Received") || message.contains("You have received", true)
-        else
-            false
-    }
-
-    fun isCashInMessages(message: String): Boolean {
-        return message.contains("Cash In",true) || message.contains("Cash-in") || message.contains("B2C: Cash-In",true)
-    }
-
-    fun isCashOutMessages(message: String): Boolean {
-        return message.contains("Cash Out",true) || message.contains("You have received Cash-out",true) || message.contains("B2C: Cash-Out",true)
-    }
-
-    fun getMessageType(message: String): String {
-        if(isB2BMessages(message)){
-            return if (message.contains("received",true) || message.contains("B2B Cash-in",true)|| message.contains("Cash-Out"))
-                "B2B Received"
-            else
-                "B2B Transfer"
-        }else if (isCashInMessages(message)){
-            return "Cash In"
-        }else if (isCashOutMessages(message)){
-            return "Cash Out"
-        }
-        return ""
     }
 
 

@@ -50,10 +50,10 @@ class AppServiceModule(private val mApplication: Application) {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient = OkHttpClient
+    fun provideOkHttpClient(sharedPreference: SharedPreference): OkHttpClient = OkHttpClient
         .Builder().apply {
             addInterceptor(
-                AuthInterceptor()
+                AuthInterceptor(sharedPreference)
             )
             if (BuildConfig.DEBUG) {
                 addInterceptor(HttpLoggingInterceptor().apply {
