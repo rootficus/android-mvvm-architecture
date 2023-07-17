@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_dashboard">
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.jionex.agent.ui.main.fragment.DashBoardFragment"
+        android:label="DashBoardFragment"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/go_home"
+            app:destination="@+id/navigation_dashboard"
+            app:popUpTo="@+id/destination_to_pop"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_blManager"
+        android:name="com.jionex.agent.ui.main.fragment.BLManagerFragment"
+        android:label="BLManagerFragment"
+        tools:layout="@layout/fragment_bl_manager">
+        <action
+            android:id="@+id/go_home"
+            app:destination="@+id/navigation_blManager"
+            app:popUpTo="@+id/destination_to_pop"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_smsInboxFragment"
+        android:name="com.jionex.agent.ui.main.fragment.SMSInboxFragment"
+        android:label="BLManagerFragment"
+        tools:layout="@layout/fragment_sms_inbox">
+        <action
+            android:id="@+id/go_home"
+            app:destination="@+id/navigation_smsInboxFragment"
+            app:popUpTo="@+id/destination_to_pop"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_modemFragment"
+        android:name="com.jionex.agent.ui.main.fragment.ModemFragment"
+        android:label="BLManagerFragment"
+        tools:layout="@layout/fragment_modem">
+        <action
+            android:id="@+id/go_home"
+            app:destination="@+id/navigation_modemFragment"
+            app:popUpTo="@+id/destination_to_pop"
+            app:popUpToInclusive="true"/>
+    </fragment>
+
+</navigation>

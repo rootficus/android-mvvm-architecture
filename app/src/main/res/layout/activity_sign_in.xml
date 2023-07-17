@@ -6,7 +6,7 @@
 
         <variable
             name="signInViewModel"
-            type="com.jionex.agent.ui.main.viewmodel.AgentVerificationViewModel" />
+            type="com.jionex.agent.ui.main.viewmodel.SignInViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

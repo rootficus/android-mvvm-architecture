@@ -43,6 +43,10 @@ object Constant {
 
     const val PREF_TOKEN = "token"
 
+    const val  PREFS_IS_LOGIN = "isLogin"
+
+    const val PREF_PASSWORD = "password"
+
     enum class BalanceManagerStatus(val action: Int) {
         SUCCESS(0),
         PENDING(1),

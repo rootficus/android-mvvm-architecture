@@ -15,7 +15,8 @@ import com.jionex.agent.ui.base.BaseActivityModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
 import com.jionex.agent.ui.main.di.DaggerSplashComponent
 import com.jionex.agent.ui.main.di.SplashModule
-import com.jionex.agent.ui.main.viewmodel.AgentVerificationViewModel
+import com.jionex.agent.ui.main.fragment.DashBoardFragment
+import com.jionex.agent.ui.main.viewmodel.SignInViewModel
 import com.jionex.agent.utils.NetworkHelper
 import com.jionex.agent.utils.SharedPreference
 import javax.inject.Inject
@@ -30,32 +31,14 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     lateinit var sharedPreference: SharedPreference
 
     @Inject
-    lateinit var splashViewModelFactory: BaseViewModelFactory<AgentVerificationViewModel>
-    private val viewmodel: AgentVerificationViewModel by viewModels { splashViewModelFactory }
-    var bundle: Bundle? = null
-    var type: String? = ""
-    var moduleTab: String? = ""
-    var userName: String? = ""
-    var userMessage: String? = ""
+    lateinit var splashViewModelFactory: BaseViewModelFactory<SignInViewModel>
+    private val viewmodel: SignInViewModel by viewModels { splashViewModelFactory }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initializationDagger()
         initialization()
-        checkIntentData()
-    }
-
-    private fun checkIntentData() {
-        try {
-            bundle = intent.extras
-            type = bundle?.getString("type")
-            moduleTab = bundle?.getString("moduleName")
-            userName = bundle?.getString("name")
-            userMessage = bundle?.getString("message")
-            Log.i("BundleSplash::", ":::${bundle.toString()}")
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 
     private fun initializationDagger() {
@@ -67,13 +50,23 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
 
     private fun initialization() {
 
-        viewDataBinding?.progressView?.visibility = View.VISIBLE
+        viewDataBinding?.progressView?.visibility = View.GONE
         Handler(Looper.getMainLooper()).postDelayed(
             {
-                startActivity(Intent(applicationContext, SignInActivity::class.java))
-                finish()
-            }, 3000
+                goToNextScreen()
+            }, 1000
         )
+    }
+
+    private fun goToNextScreen() {
+        if(viewmodel.isLogin()){
+            startActivity(Intent(this@SplashActivity, DashBoardActivity::class.java))
+            finishAffinity()
+        }else{
+            startActivity(Intent(this@SplashActivity, SignInActivity::class.java))
+            finishAffinity()
+        }
+
     }
 
 }

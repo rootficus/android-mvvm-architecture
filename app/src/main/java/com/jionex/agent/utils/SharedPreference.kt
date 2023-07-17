@@ -1,6 +1,8 @@
 package com.jionex.agent.utils
 
 import android.content.Context
+import com.jionex.agent.utils.Constant.PREFS_IS_LOGIN
+import com.jionex.agent.utils.Constant.PREF_PASSWORD
 import com.jionex.agent.utils.Constant.PREF_TOKEN
 
 /**
@@ -41,6 +43,10 @@ class SharedPreference(context: Context) {
 
     fun getEmail() :String?{
         return pref.getString(Constant.PREF_EMAIL,"")
+    }
+
+    fun getPassword():String?{
+        return pref.getString(Constant.PREF_PASSWORD,"")
     }
 
     fun setPhoneNumber(phoneNumber: String){
@@ -104,5 +110,17 @@ class SharedPreference(context: Context) {
 
     fun getToken(): String? {
         return pref.getString(PREF_TOKEN, "")
+    }
+
+    fun setIsLogin(isLogin: Boolean) {
+        pref.edit().putBoolean(PREFS_IS_LOGIN,isLogin).apply()
+    }
+
+    fun isLogin() : Boolean{
+        return pref.getBoolean(PREFS_IS_LOGIN,false)
+    }
+
+    fun setPassword(password: String?) {
+        pref.edit().putString(PREF_PASSWORD,password).apply()
     }
 }

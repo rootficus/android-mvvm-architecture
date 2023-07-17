@@ -13,7 +13,7 @@ class AuthInterceptor(private val sharedPreference: SharedPreference) : Intercep
         val originalRequest = chain.request()
         val requestBuilder = originalRequest.newBuilder().apply {
             header("Content-Type", "application/json")
-            header("Authorization", "Bearer ${sharedPreference.getAuthToken()}")
+            header("Authorization", "Bearer ${sharedPreference.getToken()}")
             header("Connection","close")
         }
 

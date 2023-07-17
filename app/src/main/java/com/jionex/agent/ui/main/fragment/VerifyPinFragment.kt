@@ -1,6 +1,7 @@
 package com.jionex.agent.ui.main.fragment
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,9 +17,11 @@ import com.jionex.agent.sdkInit.JionexSDK
 import com.jionex.agent.ui.base.BaseFragment
 import com.jionex.agent.ui.base.BaseFragmentModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
+import com.jionex.agent.ui.main.activity.DashBoardActivity
+import com.jionex.agent.ui.main.activity.SignInActivity
 import com.jionex.agent.ui.main.di.DaggerVerifyPinFragmentComponent
 import com.jionex.agent.ui.main.di.VerifyPinFragmentModule
-import com.jionex.agent.ui.main.viewmodel.AgentVerificationViewModel
+import com.jionex.agent.ui.main.viewmodel.SignInViewModel
 import com.jionex.agent.utils.NetworkHelper
 import com.jionex.agent.utils.SharedPreference
 import com.jionex.agent.utils.Status
@@ -40,8 +43,8 @@ class VerifyPinFragment :
     lateinit var networkHelper: NetworkHelper
 
     @Inject
-    lateinit var signInViewModelFactory: BaseViewModelFactory<AgentVerificationViewModel>
-    private val viewmodel: AgentVerificationViewModel by activityViewModels { signInViewModelFactory }
+    lateinit var signInViewModelFactory: BaseViewModelFactory<SignInViewModel>
+    private val viewmodel: SignInViewModel by activityViewModels { signInViewModelFactory }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -94,12 +97,12 @@ class VerifyPinFragment :
             val otp = mDataBinding.editTextPin.text.toString()
             if (otp.isEmpty()) {
                 callCustomToast(mActivity.getString(R.string.PLEASE_ENTER_PIN))
-            }  else {
+            }else {
                 callPinVerification()
             }
 
         }
-
+        mDataBinding.editTextPin.setText("583543")
     }
 
    private fun callPinVerification() {
@@ -107,15 +110,17 @@ class VerifyPinFragment :
 
         if (networkHelper.isNetworkConnected()) {
             viewmodel.verifyUserByPinCode(
-                VerifyPinRequest(
-                    userId = "17af2f0f-05ea-402d-84c7-71ae78833c48", pincode = "100689"
-                )
+                VerifyPinRequest(viewmodel.getUserId().toString(),mDataBinding.editTextPin.text.toString())
             )
             viewmodel.verifyUserByPinCodeResponseModel.observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.SUCCESS -> {
                         progressBar.dismiss()
                         val message = "The verification code is correct."
+                        viewmodel.setIsLogin(true)
+                        viewmodel.setPinCode(mDataBinding.editTextPin.text.toString().toInt())
+                        showMessage(message)
+                        goToNextScreen()
                     }
 
                     Status.ERROR -> {
@@ -132,6 +137,11 @@ class VerifyPinFragment :
             progressBar.dismiss()
             showMessage(mActivity.getString(R.string.NO_INTERNET_CONNECTION))
         }
+    }
+
+    private fun goToNextScreen() {
+        startActivity(Intent(activity, DashBoardActivity::class.java))
+        activity?.finishAffinity()
     }
 
     private fun callCustomToast(message: String) {

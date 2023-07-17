@@ -36,7 +36,7 @@ interface JionexApiServices {
     fun verifyUserByPinCode(
         @Header("Authorization") authHeader: String?,
         @Body verifyPinRequest: VerifyPinRequest
-    ): Call<BaseResponseModel<VerifyPinResponse>>
+    ): Call<BaseResponseModel<Any>>
 
 
 }

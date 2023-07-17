@@ -12,5 +12,5 @@ open class ParentBaseModelResponse(
 
     @field:SerializedName("status")
     @Expose
-    val status: Boolean? = null
+    val status: Int? = null
 )

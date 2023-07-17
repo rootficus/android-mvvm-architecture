@@ -11,7 +11,7 @@ import com.jionex.agent.ui.base.BaseActivityModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
 import com.jionex.agent.ui.main.di.DaggerSignInComponent
 import com.jionex.agent.ui.main.di.SignInModule
-import com.jionex.agent.ui.main.viewmodel.AgentVerificationViewModel
+import com.jionex.agent.ui.main.viewmodel.SignInViewModel
 import com.jionex.agent.utils.NetworkHelper
 import com.jionex.agent.utils.SharedPreference
 import javax.inject.Inject
@@ -26,12 +26,9 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     lateinit var sharedPreference: SharedPreference
 
     @Inject
-    lateinit var signInViewModelFactory: BaseViewModelFactory<AgentVerificationViewModel>
-    private val viewmodel: AgentVerificationViewModel by viewModels { signInViewModelFactory }
-    private val REQUEST_PERMISSIONS = 1
+    lateinit var signInViewModelFactory: BaseViewModelFactory<SignInViewModel>
+    private val viewmodel: SignInViewModel by viewModels { signInViewModelFactory }
     var dialog: Dialog? = null
-    var notificationAccess: Boolean = false
-    var displayOverlay: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

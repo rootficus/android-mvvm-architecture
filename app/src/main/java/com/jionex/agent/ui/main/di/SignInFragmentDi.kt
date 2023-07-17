@@ -2,14 +2,14 @@ package com.jionex.agent.ui.main.di
 
 import android.content.Context
 import com.jionex.agent.data.remote.JionexApiServices
-import com.jionex.agent.data.repository.AgentVerificationRepository
+import com.jionex.agent.data.repository.SignInRepository
 import com.jionex.agent.roomDB.JionexDatabase
 import com.jionex.agent.sdkInit.di.AppComponent
 import com.jionex.agent.ui.base.BaseFragmentModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
 import com.jionex.agent.ui.main.fragment.SignInFragment
 import com.jionex.agent.ui.main.fragment.VerifyPinFragment
-import com.jionex.agent.ui.main.viewmodel.AgentVerificationViewModel
+import com.jionex.agent.ui.main.viewmodel.SignInViewModel
 import com.jionex.agent.utils.ApplicationContext
 import com.jionex.agent.utils.FragmentScope
 import com.jionex.agent.utils.SharedPreference
@@ -34,12 +34,12 @@ class SignInFragmentModuleDi {
         @ApplicationContext context: Context,
         sharedPreference: SharedPreference,
         jionexDatabase: JionexDatabase
-    ): AgentVerificationRepository = AgentVerificationRepository(apiServices, context, sharedPreference, jionexDatabase)
+    ): SignInRepository = SignInRepository(apiServices, context, sharedPreference, jionexDatabase)
 
     @FragmentScope
     @Provides
-    fun provideViewModelFactory(agentVerificationRepository: AgentVerificationRepository): BaseViewModelFactory<AgentVerificationViewModel> =
-        BaseViewModelFactory { AgentVerificationViewModel(agentVerificationRepository) }
+    fun provideViewModelFactory(signInRepository: SignInRepository): BaseViewModelFactory<SignInViewModel> =
+        BaseViewModelFactory { SignInViewModel(signInRepository) }
 }
 
 @FragmentScope

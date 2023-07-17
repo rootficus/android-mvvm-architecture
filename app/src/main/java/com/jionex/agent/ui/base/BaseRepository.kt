@@ -84,7 +84,7 @@ abstract class BaseRepository {
                             response_.body()?.let { body_ ->
                                 body_.data?.let { results_ ->
                                     when (body_.status) {
-                                        true -> {
+                                        200 -> {
                                             success.invoke(results_)
                                             //message.invoke(body_.message.toString())
                                         }
@@ -109,7 +109,7 @@ abstract class BaseRepository {
                             response_.body()?.let { body_ ->
                                 body_.data?.let { results_ ->
                                     when (body_.status) {
-                                        true -> {
+                                        200 -> {
                                             success.invoke(results_)
                                             //message.invoke(body_.message.toString())
                                         }
@@ -261,7 +261,7 @@ abstract class BaseRepository {
                             response_.body()?.let { body_ ->
                                 body_.data?.let { results_ ->
                                     when (body_.status ?: -1) {
-                                        true -> {
+                                        200 -> {
                                             success.invoke(results_)
                                             // message.invoke(body_.message.toString())
                                         }
@@ -287,7 +287,7 @@ abstract class BaseRepository {
                             response_.body()?.let { body_ ->
                                 body_.data?.let { results_ ->
                                     when (body_.status ?: -1) {
-                                        true -> {
+                                        200 -> {
                                             success.invoke(results_)
                                             // message.invoke(body_.message.toString())
                                         }

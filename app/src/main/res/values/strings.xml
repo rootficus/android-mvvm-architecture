@@ -69,7 +69,12 @@
     <string name="PLEASE_ENTER_PASSWORD">Please enter password</string>
     <string name="verify_sub_heading">Enter your pincode</string>
     <string name="pinCode">Pin Code</string>
-    <string name="PLEASE_ENTER_PIN">Please enter pincode</string>
+    <string name="PLEASE_ENTER_PIN">Please enter PinCode</string>
+    <string name="PLEASE_ENTER_VALID">Please enter valid</string>
+    <string name="dashboard">DashBoard</string>
+    <string name="balance_manager">Balance Manager</string>
+    <string name="sms_inbox">SMS Inbox</string>
+    <string name="modems">Modems</string>
     <string-array name="bankList">
         <item>item1</item>
         <item>item2</item>

@@ -7,7 +7,7 @@ import com.jionex.agent.data.model.request.SignInRequest
 import com.jionex.agent.data.model.request.VerifyPinRequest
 import com.jionex.agent.data.model.response.SignInResponse
 import com.jionex.agent.data.model.response.VerifyPinResponse
-import com.jionex.agent.data.repository.AgentVerificationRepository
+import com.jionex.agent.data.repository.SignInRepository
 import com.jionex.agent.ui.base.BaseViewModel
 import com.jionex.agent.utils.ResponseData
 import com.jionex.agent.utils.setError
@@ -17,39 +17,24 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class AgentVerificationViewModel@Inject constructor(private val agentVerificationRepository: AgentVerificationRepository) :
+class SignInViewModel@Inject constructor(private val signInRepository: SignInRepository) :
     BaseViewModel() {
-
-
-    val agentVerificationResponseModel = MutableLiveData<ResponseData<UserInfo>>()
-
-    fun checkOnVerificationAPI(pinCode: String) {
-        agentVerificationResponseModel.setLoading(null)
-        viewModelScope.launch(Dispatchers.IO) {
-            agentVerificationRepository.checkOnVerificationAPI(
-                { success -> agentVerificationResponseModel.setSuccess(success) },
-                { error -> agentVerificationResponseModel.setError(error) },
-                pinCode,
-                { message -> agentVerificationResponseModel.setError(message) }
-            )
-        }
-    }
 
     val signInResponseModel = MutableLiveData<ResponseData<SignInResponse>>()
     fun signInNow(signInRequest: SignInRequest) {
         signInResponseModel.setLoading(null)
         viewModelScope.launch(Dispatchers.IO) {
-            agentVerificationRepository.signInNow({ success -> signInResponseModel.setSuccess(success) },
+            signInRepository.signInNow({ success -> signInResponseModel.setSuccess(success) },
                 { error -> signInResponseModel.setError(error) },
                 signInRequest,
                 { message -> signInResponseModel.setError(message) })
         }
     }
-    val verifyUserByPinCodeResponseModel = MutableLiveData<ResponseData<VerifyPinResponse>>()
+    val verifyUserByPinCodeResponseModel = MutableLiveData<ResponseData<Any>>()
     fun verifyUserByPinCode(verifyPinRequest: VerifyPinRequest) {
         verifyUserByPinCodeResponseModel.setLoading(null)
         viewModelScope.launch(Dispatchers.IO) {
-            agentVerificationRepository.verifyUserByPinCode({ success -> verifyUserByPinCodeResponseModel.setSuccess(success) },
+            signInRepository.verifyUserByPinCode({ success -> verifyUserByPinCodeResponseModel.setSuccess(success) },
                 { error -> verifyUserByPinCodeResponseModel.setError(error) },
                 verifyPinRequest,
                 { message -> verifyUserByPinCodeResponseModel.setError(message) })
@@ -58,38 +43,76 @@ class AgentVerificationViewModel@Inject constructor(private val agentVerificatio
 
 
     fun setUserId(userId: String?) {
-        agentVerificationRepository.setUserId(userId)
+        signInRepository.setUserId(userId)
     }
 
     fun setEmail(email: String?) {
-        agentVerificationRepository.setEmail(email)
+        signInRepository.setEmail(email)
     }
 
     fun setFullName(full_name: String?) {
-        agentVerificationRepository.setFullName(full_name)
+        signInRepository.setFullName(full_name)
+    }
+
+    fun getFullName(): String? {
+        return signInRepository.getFullName()
     }
 
     fun setPinCode(pin_code: Int?) {
-        agentVerificationRepository.setPinCode(pin_code)
+        signInRepository.setPinCode(pin_code)
     }
 
     fun setCountry(country: String?) {
-        agentVerificationRepository.setCountry(country)
+        signInRepository.setCountry(country)
     }
 
     fun setParentId(parent_id: String?) {
-        agentVerificationRepository.setParentId(parent_id)
+        signInRepository.setParentId(parent_id)
     }
 
     fun setPhoneNumber(phone: String?) {
-        agentVerificationRepository.setPhoneNumber(phone)
+        signInRepository.setPhoneNumber(phone)
     }
 
     fun setUserName(user_name: String?) {
-        agentVerificationRepository.setUserName(user_name)
+        signInRepository.setUserName(user_name)
     }
 
     fun setUserRole(role_id: String?) {
-        agentVerificationRepository.setUserRole(role_id)
+        signInRepository.setUserRole(role_id)
     }
+
+    fun isLogin() : Boolean{
+        return signInRepository.isLogin()
+    }
+
+    fun setToken(token: String) {
+        signInRepository.setToken(token)
+    }
+
+    fun setPassword(password: String) {
+        signInRepository.setPassword(password)
+    }
+
+    fun getEmail(): String? {
+        return signInRepository.getEmail()
+    }
+
+    fun getPassword(): String? {
+        return signInRepository.getPassword()
+    }
+
+    fun setIsLogin(isLogin: Boolean) {
+        signInRepository.setIsLogin(isLogin)
+    }
+
+    fun getUserId(): String? {
+        return signInRepository.getUserId()
+    }
+
+    fun getPinCode(): Int? {
+        return signInRepository.getPinCode()
+    }
+
+
 }

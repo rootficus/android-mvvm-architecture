@@ -17,7 +17,7 @@ import com.jionex.agent.ui.base.BaseFragmentModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
 import com.jionex.agent.ui.main.di.DaggerSignInFragmentComponent
 import com.jionex.agent.ui.main.di.SignInFragmentModule
-import com.jionex.agent.ui.main.viewmodel.AgentVerificationViewModel
+import com.jionex.agent.ui.main.viewmodel.SignInViewModel
 import com.jionex.agent.utils.NetworkHelper
 import com.jionex.agent.utils.SharedPreference
 import com.jionex.agent.utils.Status
@@ -39,8 +39,8 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
     lateinit var networkHelper: NetworkHelper
 
     @Inject
-    lateinit var signInViewModelFactory: BaseViewModelFactory<AgentVerificationViewModel>
-    private val viewmodel: AgentVerificationViewModel by activityViewModels { signInViewModelFactory }
+    lateinit var signInViewModelFactory: BaseViewModelFactory<SignInViewModel>
+    private val viewmodel: SignInViewModel by activityViewModels { signInViewModelFactory }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -118,7 +118,8 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                 callSignInAPI(view)
             }
         }
-
+        mDataBinding.etName.setText(viewmodel.getEmail().toString())
+        mDataBinding.etPassword.setText(viewmodel.getPassword().toString())
     }
 
     private fun callSignInAPI(view: View) {
@@ -134,9 +135,18 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                 when (it.status) {
                     Status.SUCCESS -> {
                         progressBar.dismiss()
+
                         val bundle = Bundle()
                         bundle.putString("password", password)
-                        sharedPreference.setToken(it.data?.token.toString())
+                        viewmodel.setPassword(password)
+                        viewmodel.setToken(it.data?.token.toString())
+                        viewmodel.setEmail(it.data?.userDetail?.email.toString())
+                        viewmodel.setFullName(it.data?.userDetail?.full_name.toString())
+                        viewmodel.setParentId(it.data?.userDetail?.parent_id.toString())
+                        viewmodel.setUserName(it.data?.userDetail?.user_name.toString())
+                        viewmodel.setPhoneNumber(it.data?.userDetail?.phone.toString())
+                        viewmodel.setUserId(it.data?.userDetail?.id.toString())
+                        viewmodel.setUserRole(it.data?.userRoles?.get(0).toString())
                         Navigation.findNavController(view).navigate(
                             R.id.action_navigation_signin_to_navigation_verifyPin, bundle
                         )
@@ -145,10 +155,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                     Status.ERROR -> {
                         progressBar.dismiss()
                         val message = it.message.toString()
-                        Navigation.findNavController(view).navigate(
-                            R.id.action_navigation_signin_to_navigation_verifyPin
-                        )
-                        callCustomToast(message)
+                        showMessage(message)
                     }
 
                     Status.LOADING -> {

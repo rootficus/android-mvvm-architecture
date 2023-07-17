@@ -5,33 +5,17 @@ import com.jionex.agent.data.model.UserInfo
 import com.jionex.agent.data.model.request.SignInRequest
 import com.jionex.agent.data.model.request.VerifyPinRequest
 import com.jionex.agent.data.model.response.SignInResponse
-import com.jionex.agent.data.model.response.UserResponseResult
 import com.jionex.agent.data.model.response.VerifyPinResponse
 import com.jionex.agent.data.remote.JionexApiServices
 import com.jionex.agent.roomDB.JionexDatabase
 import com.jionex.agent.ui.base.BaseRepository
 import com.jionex.agent.utils.SharedPreference
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class AgentVerificationRepository (val apiServices: JionexApiServices,
-                                   val context: Context,
-                                   val sharedPreference: SharedPreference,
-                                   val jionexDatabase: JionexDatabase
+class SignInRepository (val apiServices: JionexApiServices,
+                        val context: Context,
+                        val sharedPreference: SharedPreference,
+                        val jionexDatabase: JionexDatabase
 ) : BaseRepository() {
-
-
-    fun checkOnVerificationAPI(
-        success: (loginResponse: UserInfo) -> Unit,
-        fail: (error: String) -> Unit,
-        pinCode: String,
-        message: (msg: String) -> Unit,
-    ) {
-        /*apiServices.verifyUserByPincode(pinCode).apply {
-            execute(this, success, fail, context, message)
-        }*/
-    }
 
     fun signInNow(
         success: (signInResponse: SignInResponse) -> Unit,
@@ -44,7 +28,7 @@ class AgentVerificationRepository (val apiServices: JionexApiServices,
         }
     }
     fun verifyUserByPinCode(
-        success: (verifyPinResponse: VerifyPinResponse) -> Unit,
+        success: (verifyPinResponse: Any) -> Unit,
         fail: (error: String) -> Unit,
         verifyPinRequest: VerifyPinRequest,
         message: (msg: String) -> Unit
@@ -58,8 +42,20 @@ class AgentVerificationRepository (val apiServices: JionexApiServices,
         userId?.let { sharedPreference.setUserId(it) }
     }
 
+    fun getUserId(): String? {
+        return sharedPreference.getUserId()
+    }
+
     fun setEmail(email: String?) {
         email?.let { sharedPreference.setEmail(it) }
+    }
+
+    fun setPassword(password:String?){
+        password?.let { sharedPreference.setPassword(password) }
+    }
+
+    fun getPassword(): String? {
+        return sharedPreference.getPassword()
     }
 
     fun setFullName(full_name: String?) {
@@ -88,5 +84,29 @@ class AgentVerificationRepository (val apiServices: JionexApiServices,
 
     fun setUserRole(role_id: String?) {
         role_id?.let { sharedPreference.setUserRole(it) }
+    }
+
+    fun isLogin(): Boolean {
+        return sharedPreference.isLogin()
+    }
+
+    fun setIsLogin(isLogin: Boolean?) {
+        isLogin?.let { sharedPreference.setIsLogin(it) }
+    }
+
+    fun setToken(token: String?) {
+        token?.let { sharedPreference.setToken(it) }
+    }
+
+    fun getFullName(): String? {
+        return sharedPreference.getFullName()
+    }
+
+    fun getEmail():String?{
+        return sharedPreference.getEmail()
+    }
+
+    fun getPinCode(): Int? {
+        return sharedPreference.getPinCode()
     }
 }

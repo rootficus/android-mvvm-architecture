@@ -6,7 +6,7 @@
 
         <variable
             name="signInModel"
-            type="com.jionex.agent.ui.main.activity.SignInActivity" />
+            type="com.jionex.agent.ui.main.viewmodel.SignInViewModel" />
     </data>
 
     <ScrollView
@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
                     android:hint="@string/user_name"
-                    android:inputType="textCapWords"
+                    android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
