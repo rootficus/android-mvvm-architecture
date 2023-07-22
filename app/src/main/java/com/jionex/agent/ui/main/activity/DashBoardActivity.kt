@@ -18,7 +18,7 @@ import com.jionex.agent.ui.base.BaseActivityModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
 import com.jionex.agent.ui.main.di.DaggerDashBoardActivityComponent
 import com.jionex.agent.ui.main.di.DashBoardActivityModule
-import com.jionex.agent.ui.main.viewmodel.DashBoardViewModel
+import com.jionex.agent.viewmodel.DashBoardViewModel
 import com.jionex.agent.utils.NetworkHelper
 import com.jionex.agent.utils.SharedPreference
 import javax.inject.Inject

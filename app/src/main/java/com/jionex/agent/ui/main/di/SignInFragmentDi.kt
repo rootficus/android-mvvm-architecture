@@ -9,7 +9,7 @@ import com.jionex.agent.ui.base.BaseFragmentModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
 import com.jionex.agent.ui.main.fragment.SignInFragment
 import com.jionex.agent.ui.main.fragment.VerifyPinFragment
-import com.jionex.agent.ui.main.viewmodel.SignInViewModel
+import com.jionex.agent.viewmodel.SignInViewModel
 import com.jionex.agent.utils.ApplicationContext
 import com.jionex.agent.utils.FragmentScope
 import com.jionex.agent.utils.SharedPreference

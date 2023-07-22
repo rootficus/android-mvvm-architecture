@@ -14,8 +14,8 @@ import com.jionex.agent.ui.main.fragment.ModemFragment
 import com.jionex.agent.ui.main.fragment.SMSInboxFragment
 import com.jionex.agent.ui.main.fragment.SignInFragment
 import com.jionex.agent.ui.main.fragment.VerifyPinFragment
-import com.jionex.agent.ui.main.viewmodel.DashBoardViewModel
-import com.jionex.agent.ui.main.viewmodel.SignInViewModel
+import com.jionex.agent.viewmodel.DashBoardViewModel
+import com.jionex.agent.viewmodel.SignInViewModel
 import com.jionex.agent.utils.ApplicationContext
 import com.jionex.agent.utils.FragmentScope
 import com.jionex.agent.utils.SharedPreference

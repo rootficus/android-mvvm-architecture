@@ -2,8 +2,10 @@ package com.jionex.agent.data.repository
 
 import android.content.Context
 import com.jionex.agent.data.model.UserInfo
+import com.jionex.agent.data.model.request.GetBalanceByFilter
 import com.jionex.agent.data.model.request.SignInRequest
 import com.jionex.agent.data.model.request.VerifyPinRequest
+import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
 import com.jionex.agent.data.model.response.SignInResponse
 import com.jionex.agent.data.model.response.UserResponseResult
 import com.jionex.agent.data.model.response.VerifyPinResponse
@@ -41,6 +43,17 @@ class DashBoardRepository (val apiServices: JionexApiServices,
     ) {
         apiServices.signInNow(signInRequest).apply {
             execute(this, success, fail, context, message)
+        }
+    }
+
+    fun getBalanceByFilter(
+        success: (getBalanceByFilterResponse: List<GetBalanceByFilterResponse>) -> Unit,
+        fail: (error: String) -> Unit,
+        getBalanceByFilter: GetBalanceByFilter,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.getBalanceByFilter("Bearer " + sharedPreference.getToken(), getBalanceByFilter).apply {
+            executeFilter(this, success, fail, context, message)
         }
     }
 

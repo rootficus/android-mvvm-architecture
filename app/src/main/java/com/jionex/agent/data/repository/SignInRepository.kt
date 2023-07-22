@@ -2,6 +2,7 @@ package com.jionex.agent.data.repository
 
 import android.content.Context
 import com.jionex.agent.data.model.UserInfo
+import com.jionex.agent.data.model.request.GetBalanceByFilter
 import com.jionex.agent.data.model.request.SignInRequest
 import com.jionex.agent.data.model.request.VerifyPinRequest
 import com.jionex.agent.data.model.response.SignInResponse
@@ -37,6 +38,7 @@ class SignInRepository (val apiServices: JionexApiServices,
             execute(this, success, fail, context, message)
         }
     }
+
 
     fun setUserId(userId: String?) {
         userId?.let { sharedPreference.setUserId(it) }

@@ -7,7 +7,7 @@
 
         <variable
             name="dashBoardViewModel"
-            type="com.jionex.agent.ui.main.viewmodel.DashBoardViewModel" />
+            type="com.jionex.agent.viewmodel.DashBoardViewModel" />
     </data>
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"

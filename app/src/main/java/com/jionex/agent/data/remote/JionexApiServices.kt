@@ -1,14 +1,17 @@
 package com.jionex.agent.data.remote
 
+import com.jionex.agent.data.model.request.GetBalanceByFilter
 import com.jionex.agent.data.model.request.MessagesJsonModel
 import com.jionex.agent.data.model.request.ModemJsonModel
 import com.jionex.agent.data.model.request.PinCodeJsonModel
 import com.jionex.agent.data.model.request.SignInRequest
 import com.jionex.agent.data.model.request.VerifyPinRequest
+import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
 import com.jionex.agent.data.model.response.SignInResponse
 import com.jionex.agent.data.model.response.UserResponseResult
 import com.jionex.agent.data.model.response.VerifyPinResponse
 import com.jionex.agent.ui.base.BaseResponseModel
+import com.jionex.agent.ui.base.BaseResponseModelFilter
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.*
@@ -37,6 +40,13 @@ interface JionexApiServices {
         @Header("Authorization") authHeader: String?,
         @Body verifyPinRequest: VerifyPinRequest
     ): Call<BaseResponseModel<Any>>
+
+    @Headers("Content-Type:application/json")
+    @POST("api/v1/balance_manager/get_balance_by_filter")
+    fun getBalanceByFilter(
+        @Header("Authorization") authHeader: String?,
+        @Body getBalanceByFilter: GetBalanceByFilter
+    ): Call<BaseResponseModelFilter<GetBalanceByFilterResponse>>
 
 
 }

@@ -20,3 +20,10 @@ data class BaseResponseModel3<P>(
     @field:SerializedName("data")
     val data: List<P>? = null
 ) : ParentBaseModelResponse()
+
+data class BaseResponseModelFilter<P>(
+    @field:SerializedName("data")
+    val data: ArrayList<P>? = null,
+    @field:SerializedName("total_rows")
+    val total_rows: Long? = null,
+) : ParentBaseModelResponse()

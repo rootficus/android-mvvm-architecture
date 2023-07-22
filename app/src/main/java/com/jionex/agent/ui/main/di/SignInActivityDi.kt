@@ -8,7 +8,7 @@ import com.jionex.agent.sdkInit.di.AppComponent
 import com.jionex.agent.ui.base.BaseActivityModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
 import com.jionex.agent.ui.main.activity.SignInActivity
-import com.jionex.agent.ui.main.viewmodel.SignInViewModel
+import com.jionex.agent.viewmodel.SignInViewModel
 import com.jionex.agent.utils.ActivityScope
 import com.jionex.agent.utils.ApplicationContext
 import com.jionex.agent.utils.SharedPreference

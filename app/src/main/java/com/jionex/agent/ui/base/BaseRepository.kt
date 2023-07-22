@@ -63,6 +63,103 @@ abstract class BaseRepository {
 
     }
 
+    fun <P> executeFilter(
+        call: Call<BaseResponseModelFilter<P>>,
+        success: (payload: ArrayList<P>) -> Unit,
+        fail: (error: String) -> Unit,
+        context: Context,
+        message: (message: String) -> Unit
+    ) {
+        call.enqueue {
+            onResponse = { response_ ->
+                try {
+                    when (response_.code()) {
+                        APIResponseCode.ResponseCode200.codeValue -> {
+                            response_.body()?.let { body_ ->
+                                body_.data?.let { results_ ->
+                                    when (body_.status ?: -1) {
+                                        200 -> {
+                                            success.invoke(results_)
+                                            // message.invoke(body_.message.toString())
+                                        }
+
+                                        else -> {
+                                            fail.invoke(
+                                                body_.message
+                                                    ?: context.getString(R.string.error_something_went_wrong)
+                                            )
+                                        }
+                                    }
+                                } ?: kotlin.run {
+                                    fail.invoke(
+                                        body_.message
+                                            ?: context.getString(R.string.error_something_went_wrong)
+                                    )
+                                }
+                            } ?: kotlin.run {
+                                fail.invoke(context.getString(R.string.error_something_went_wrong))
+                            }
+                        }
+                        APIResponseCode.ResponseCode201.codeValue -> {
+                            response_.body()?.let { body_ ->
+                                body_.data?.let { results_ ->
+                                    when (body_.status ?: -1) {
+                                        200 -> {
+                                            success.invoke(results_)
+                                            // message.invoke(body_.message.toString())
+                                        }
+
+                                        else -> {
+                                            fail.invoke(
+                                                body_.message
+                                                    ?: context.getString(R.string.error_something_went_wrong)
+                                            )
+                                        }
+                                    }
+                                } ?: kotlin.run {
+                                    fail.invoke(
+                                        body_.message
+                                            ?: context.getString(R.string.error_something_went_wrong)
+                                    )
+                                }
+                            } ?: kotlin.run {
+                                fail.invoke(context.getString(R.string.error_something_went_wrong))
+                            }
+                        }
+                        APIResponseCode.ResponseCode403.codeValue -> {
+                            getErrorMessage(response_)?.let {
+                                fail.invoke(it)
+                            }
+                        }
+
+                        APIResponseCode.ResponseCode401.codeValue -> {
+                            getErrorMessage(response_)?.let {
+                               fail.invoke(it)
+                            }
+                        }
+                        else -> {
+                            getErrorMessage(response_)?.let {
+                                fail.invoke(it)
+                            }
+                        }
+                    }
+
+                } catch (e: Exception) {
+                    fail.invoke(context.getString(R.string.error_something_went_wrong))
+                }
+            }
+
+            onFailure = {
+                if (it.toString().contains("failed to connect")) {
+                    fail.invoke(context.getString(R.string.no_network))
+                } else {
+                    Log.i("Error", "" + it.toString())
+                    fail.invoke(context.getString(R.string.error_something_went_wrong))
+                }
+            }
+        }
+    }
+
     /**
      * Common response execute function
      * if it is of type of Call<BaseResponseModel<T>>?'
@@ -162,6 +259,7 @@ abstract class BaseRepository {
             }
         }
     }
+
 
     /**
      * Common response execute function
