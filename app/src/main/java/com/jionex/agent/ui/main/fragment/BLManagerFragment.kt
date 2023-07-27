@@ -19,7 +19,7 @@ import com.jionex.agent.ui.base.BaseViewModelFactory
 import com.jionex.agent.ui.main.adapter.ItemListAdapter
 import com.jionex.agent.ui.main.di.BLManagerFragmentModule
 import com.jionex.agent.ui.main.di.DaggerBLManagerFragmentComponent
-import com.jionex.agent.viewmodel.DashBoardViewModel
+import com.jionex.agent.ui.main.viewmodel.DashBoardViewModel
 import com.jionex.agent.utils.NetworkHelper
 import com.jionex.agent.utils.SharedPreference
 import com.jionex.agent.utils.Status

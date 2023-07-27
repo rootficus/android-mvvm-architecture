@@ -16,8 +16,8 @@ import com.jionex.agent.ui.main.di.DaggerSignInFragmentComponent
 import com.jionex.agent.ui.main.di.DashBoardFragmentModule
 import com.jionex.agent.ui.main.di.SMSInboxFragmentModule
 import com.jionex.agent.ui.main.di.SignInFragmentModule
-import com.jionex.agent.viewmodel.DashBoardViewModel
-import com.jionex.agent.viewmodel.SignInViewModel
+import com.jionex.agent.ui.main.viewmodel.DashBoardViewModel
+import com.jionex.agent.ui.main.viewmodel.SignInViewModel
 import com.jionex.agent.utils.NetworkHelper
 import com.jionex.agent.utils.SharedPreference
 import javax.inject.Inject

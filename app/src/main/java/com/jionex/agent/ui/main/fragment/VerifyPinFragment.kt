@@ -21,7 +21,7 @@ import com.jionex.agent.ui.main.activity.DashBoardActivity
 import com.jionex.agent.ui.main.activity.SignInActivity
 import com.jionex.agent.ui.main.di.DaggerVerifyPinFragmentComponent
 import com.jionex.agent.ui.main.di.VerifyPinFragmentModule
-import com.jionex.agent.viewmodel.SignInViewModel
+import com.jionex.agent.ui.main.viewmodel.SignInViewModel
 import com.jionex.agent.utils.NetworkHelper
 import com.jionex.agent.utils.SharedPreference
 import com.jionex.agent.utils.Status

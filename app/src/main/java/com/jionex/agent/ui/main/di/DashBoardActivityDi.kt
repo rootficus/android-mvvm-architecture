@@ -3,14 +3,12 @@ package com.jionex.agent.ui.main.di
 import android.content.Context
 import com.jionex.agent.data.remote.JionexApiServices
 import com.jionex.agent.data.repository.DashBoardRepository
-import com.jionex.agent.data.repository.SignInRepository
 import com.jionex.agent.roomDB.JionexDatabase
 import com.jionex.agent.sdkInit.di.AppComponent
 import com.jionex.agent.ui.base.BaseActivityModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
 import com.jionex.agent.ui.main.activity.DashBoardActivity
-import com.jionex.agent.viewmodel.DashBoardViewModel
-import com.jionex.agent.viewmodel.SignInViewModel
+import com.jionex.agent.ui.main.viewmodel.DashBoardViewModel
 import com.jionex.agent.utils.ActivityScope
 import com.jionex.agent.utils.ApplicationContext
 import com.jionex.agent.utils.SharedPreference

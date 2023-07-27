@@ -16,7 +16,7 @@ import com.jionex.agent.ui.base.BaseViewModelFactory
 import com.jionex.agent.ui.main.di.DaggerSplashComponent
 import com.jionex.agent.ui.main.di.SplashModule
 import com.jionex.agent.ui.main.fragment.DashBoardFragment
-import com.jionex.agent.viewmodel.SignInViewModel
+import com.jionex.agent.ui.main.viewmodel.SignInViewModel
 import com.jionex.agent.utils.NetworkHelper
 import com.jionex.agent.utils.SharedPreference
 import javax.inject.Inject

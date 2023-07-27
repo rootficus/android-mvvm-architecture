@@ -12,8 +12,7 @@ import com.jionex.agent.ui.base.BaseFragmentModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
 import com.jionex.agent.ui.main.di.DaggerDashBoardFragmentComponent
 import com.jionex.agent.ui.main.di.DashBoardFragmentModule
-import com.jionex.agent.viewmodel.DashBoardViewModel
-import com.jionex.agent.viewmodel.SignInViewModel
+import com.jionex.agent.ui.main.viewmodel.DashBoardViewModel
 import com.jionex.agent.utils.NetworkHelper
 import com.jionex.agent.utils.SharedPreference
 import javax.inject.Inject
