@@ -32,12 +32,90 @@
                 app:titleTextColor="@color/white">
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/header_card"
+            app:layout_constraintTop_toBottomOf="@id/app_bar_home">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:padding="6dp"
+                android:layout_height="match_parent">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_sr_no"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Sr."
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.05" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_custm_acc_no"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Customer no."
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toEndOf="@id/txt_sr_no"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.24" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_amount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="Amount"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toEndOf="@id/txt_custm_acc_no"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.23" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_transaction_id"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:text="Transaction id"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toEndOf="@id/txt_amount"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.23" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txt_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="Date"
+                    android:textStyle="bold"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toEndOf="@id/txt_transaction_id"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.24" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recentTrendingView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="1dp"
             app:layout_constraintBottom_toTopOf="@id/bottomButton"
-            app:layout_constraintTop_toBottomOf="@+id/app_bar_home" />
+            app:layout_constraintTop_toBottomOf="@+id/header_card" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout

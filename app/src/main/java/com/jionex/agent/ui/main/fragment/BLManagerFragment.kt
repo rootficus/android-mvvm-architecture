@@ -11,11 +11,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jionex.agent.R
 import com.jionex.agent.data.model.request.GetBalanceByFilter
+import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
 import com.jionex.agent.databinding.FragmentBlManagerBinding
 import com.jionex.agent.sdkInit.JionexSDK
 import com.jionex.agent.ui.base.BaseFragment
 import com.jionex.agent.ui.base.BaseFragmentModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
+import com.jionex.agent.ui.main.adapter.BleManagerListAdapter
 import com.jionex.agent.ui.main.adapter.ItemListAdapter
 import com.jionex.agent.ui.main.di.BLManagerFragmentModule
 import com.jionex.agent.ui.main.di.DaggerBLManagerFragmentComponent
@@ -44,7 +46,9 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
 
     private lateinit var allData: ArrayList<String>
     private var adapter: ItemListAdapter? = null
+    private var bleManagerListAdapter: BleManagerListAdapter? = null
     private val itemsPerPage = 10 // Number of items to display per page
+    private var listGetBalanceByFilter : ArrayList<GetBalanceByFilterResponse> = arrayListOf()
 
     private var currentPage = 1
     private var totalPages = 0
@@ -65,9 +69,6 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
     }
 
     private fun initializeView() {
-
-        // Initialize your allData list here (for demonstration purposes, I'm generating some dummy data)
-
         // Initialize your allData list here (for demonstration purposes, I'm generating some dummy data)
         allData = ArrayList()
         for (i in 1..1000) {
@@ -75,43 +76,44 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
         }
         getBalanceByFilterApi()
         // Calculate total number of pages
-
-        // Calculate total number of pages
         totalPages = Math.ceil(allData.size.toDouble() / itemsPerPage).toInt()
-
-        mDataBinding.recentTrendingView.layoutManager = LinearLayoutManager(context)
-
         updateAdapterDataForPage(currentPage)
+    }
+
+    private fun setBleAdapter() {
+        bleManagerListAdapter = BleManagerListAdapter(listGetBalanceByFilter)
+        mDataBinding.recentTrendingView.layoutManager = LinearLayoutManager(context)
+        mDataBinding.recentTrendingView.adapter = bleManagerListAdapter
     }
 
     private fun clickListener() {
         mDataBinding.btnNext.setOnClickListener {
             //Next Page
-            /*if (currentPage < totalPages) {
+            if (currentPage < totalPages) {
                     currentPage++;
                     updateAdapterDataForPage(currentPage);
                     updatePageNumbers();
-             }*/
+             }
             //Last Page
-            if (currentPage != totalPages) {
+        /*    if (currentPage != totalPages) {
                 currentPage = totalPages;
                 updateAdapterDataForPage(currentPage);
                 updatePageNumbers();
-            }
+            }*/
         }
         mDataBinding.btnPrev.setOnClickListener {
             //Previous Page
-            /*if (currentPage > 1) {
+            if (currentPage > 1) {
                 currentPage--;
                 updateAdapterDataForPage(currentPage);
                 updatePageNumbers();
-            }*/
+            }
             //First Page
-            if (currentPage != 1) {
+/*            if (currentPage != 1) {
                 currentPage = 1;
                 updateAdapterDataForPage(currentPage);
                 updatePageNumbers();
-            }
+            }*/
         }
 
     }
@@ -121,7 +123,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
         val end = min(start + itemsPerPage, allData.size)
         val pageData: List<String> = allData.subList(start, end)
         adapter = ItemListAdapter(pageData)
-        mDataBinding.recentTrendingView.adapter = adapter
+
 
         // Update the page numbers UI
         updatePageNumbers()
@@ -219,6 +221,9 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
                     Status.SUCCESS -> {
                         progressBar.dismiss()
                         Log.i("Data","::${it.data}")
+                        it.data?.let { it1 -> listGetBalanceByFilter.addAll(it1) }
+                        setBleAdapter()
+                       // bleManagerListAdapter?.notifyDataSetChanged()
                     }
 
                     Status.ERROR -> {
