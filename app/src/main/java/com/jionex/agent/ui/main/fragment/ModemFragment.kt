@@ -2,29 +2,30 @@ package com.jionex.agent.ui.main.fragment
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jionex.agent.R
-import com.jionex.agent.databinding.FragmentSignInBinding
+import com.jionex.agent.data.model.request.GetModemsByFilterRequest
+import com.jionex.agent.data.model.response.GetModemsByFilterResponse
+import com.jionex.agent.databinding.FragmentModemBinding
 import com.jionex.agent.sdkInit.JionexSDK
 import com.jionex.agent.ui.base.BaseFragment
 import com.jionex.agent.ui.base.BaseFragmentModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
-import com.jionex.agent.ui.main.di.DaggerBLManagerFragmentComponent
-import com.jionex.agent.ui.main.di.DaggerDashBoardFragmentComponent
+import com.jionex.agent.ui.main.adapter.ModemsManagerListAdapter
+import com.jionex.agent.ui.main.adapter.SmsManagerListAdapter
 import com.jionex.agent.ui.main.di.DaggerModemFragmentComponent
-import com.jionex.agent.ui.main.di.DaggerSignInFragmentComponent
-import com.jionex.agent.ui.main.di.DashBoardFragmentModule
 import com.jionex.agent.ui.main.di.ModemFragmentModule
-import com.jionex.agent.ui.main.di.SignInFragmentModule
 import com.jionex.agent.ui.main.viewmodel.DashBoardViewModel
-import com.jionex.agent.ui.main.viewmodel.SignInViewModel
 import com.jionex.agent.utils.NetworkHelper
 import com.jionex.agent.utils.SharedPreference
+import com.jionex.agent.utils.Status
 import javax.inject.Inject
 
 
-class ModemFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_modem) {
+class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem) {
 
     @Inject
     lateinit var sharedPreference: SharedPreference
@@ -37,14 +38,17 @@ class ModemFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_mode
 
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
-    private val viewmodel: SignInViewModel by activityViewModels { dashBoardViewModelFactory }
+    private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
+
+    private var modemsManagerListAdapter: ModemsManagerListAdapter? = null
+    private var listGetModemsByFilter : ArrayList<GetModemsByFilterResponse> = arrayListOf()
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initializeDagger()
-        initializeView(view)
+        initializeView()
 
     }
 
@@ -54,7 +58,60 @@ class ModemFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_mode
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
 
-    private fun initializeView(view: View) {
+    private fun initializeView() {
+        getModemsByFilterApi()
+    }
+
+
+    private fun getModemsByFilterApi() {
+
+        if (networkHelper.isNetworkConnected()) {
+            val getModemsByFilterRequest = GetModemsByFilterRequest(
+                page_size = 50,
+                page_number = 1,
+                /* sender = "",
+                 agent_account_no = 0,
+                 transaction_id = "",
+                 type = "",
+                 from = "",
+                 to = "",*/
+                is_active = true
+
+            )
+            viewModel.getModemsByFilter(
+                getModemsByFilterRequest
+            )
+            viewModel.getModemsByFilterResponseModel.observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        progressBar.dismiss()
+                        Log.i("Data","::${it.data}")
+                        it.data?.let { it1 -> listGetModemsByFilter.addAll(it1) }
+                        setModemsAdapter()
+                        // bleManagerListAdapter?.notifyDataSetChanged()
+                    }
+
+                    Status.ERROR -> {
+                        Log.i("Error","::${it}")
+                        progressBar.dismiss()
+
+                    }
+
+                    Status.LOADING -> {
+                        progressBar.show()
+                    }
+                }
+            }
+        } else {
+            progressBar.dismiss()
+            showMessage(mActivity.getString(R.string.NO_INTERNET_CONNECTION))
+        }
+    }
+
+    private fun setModemsAdapter() {
+        modemsManagerListAdapter = ModemsManagerListAdapter(listGetModemsByFilter)
+        mDataBinding.recentModemsList.layoutManager = LinearLayoutManager(context)
+        mDataBinding.recentModemsList.adapter = modemsManagerListAdapter
     }
 
 

@@ -2,20 +2,18 @@ package com.jionex.agent.data.repository
 
 import android.content.Context
 import com.jionex.agent.data.model.UserInfo
-import com.jionex.agent.data.model.request.GetBalanceByFilter
+import com.jionex.agent.data.model.request.GetBalanceByFilterRequest
+import com.jionex.agent.data.model.request.GetMessageByFilterRequest
+import com.jionex.agent.data.model.request.GetModemsByFilterRequest
 import com.jionex.agent.data.model.request.SignInRequest
-import com.jionex.agent.data.model.request.VerifyPinRequest
 import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
+import com.jionex.agent.data.model.response.GetMessageByFilterResponse
+import com.jionex.agent.data.model.response.GetModemsByFilterResponse
 import com.jionex.agent.data.model.response.SignInResponse
-import com.jionex.agent.data.model.response.UserResponseResult
-import com.jionex.agent.data.model.response.VerifyPinResponse
 import com.jionex.agent.data.remote.JionexApiServices
 import com.jionex.agent.roomDB.JionexDatabase
 import com.jionex.agent.ui.base.BaseRepository
 import com.jionex.agent.utils.SharedPreference
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class DashBoardRepository (val apiServices: JionexApiServices,
                            val context: Context,
@@ -49,10 +47,30 @@ class DashBoardRepository (val apiServices: JionexApiServices,
     fun getBalanceByFilter(
         success: (getBalanceByFilterResponse: List<GetBalanceByFilterResponse>) -> Unit,
         fail: (error: String) -> Unit,
-        getBalanceByFilter: GetBalanceByFilter,
+        getBalanceByFilterRequest: GetBalanceByFilterRequest,
         message: (msg: String) -> Unit
     ) {
-        apiServices.getBalanceByFilter("Bearer " + sharedPreference.getToken(), getBalanceByFilter).apply {
+        apiServices.getBalanceByFilter("Bearer " + sharedPreference.getToken(), getBalanceByFilterRequest).apply {
+            executeFilter(this, success, fail, context, message)
+        }
+    }
+    fun getMessageByFilter(
+        success: (getMessageByFilterResponse: List<GetMessageByFilterResponse>) -> Unit,
+        fail: (error: String) -> Unit,
+        getMessageByFilterRequest: GetMessageByFilterRequest,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.getMessageByFilter("Bearer " + sharedPreference.getToken(), getMessageByFilterRequest).apply {
+            executeFilter(this, success, fail, context, message)
+        }
+    }
+    fun getModemsByFilter(
+        success: (getMessageByFilterResponse: List<GetModemsByFilterResponse>) -> Unit,
+        fail: (error: String) -> Unit,
+        getModemsByFilterRequest: GetModemsByFilterRequest,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.getModemsByFilter("Bearer " + sharedPreference.getToken(), getModemsByFilterRequest).apply {
             executeFilter(this, success, fail, context, message)
         }
     }

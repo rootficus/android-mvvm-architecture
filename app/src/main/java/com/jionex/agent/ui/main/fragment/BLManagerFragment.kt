@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jionex.agent.R
-import com.jionex.agent.data.model.request.GetBalanceByFilter
+import com.jionex.agent.data.model.request.GetBalanceByFilterRequest
 import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
 import com.jionex.agent.databinding.FragmentBlManagerBinding
 import com.jionex.agent.sdkInit.JionexSDK
@@ -201,7 +201,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
     private fun getBalanceByFilterApi() {
 
         if (networkHelper.isNetworkConnected()) {
-            val getBalanceByFilter = GetBalanceByFilter(
+            val getBalanceByFilterRequest = GetBalanceByFilterRequest(
                 page_size = 50,
                 page_number = 1,
                /* sender = "",
@@ -214,7 +214,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
 
             )
             viewModel.getBalanceByFilter(
-                getBalanceByFilter
+                getBalanceByFilterRequest
             )
             viewModel.getBalanceByFilterResponseModel.observe(viewLifecycleOwner) {
                 when (it.status) {

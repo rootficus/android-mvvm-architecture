@@ -2,28 +2,30 @@ package com.jionex.agent.ui.main.fragment
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jionex.agent.R
+import com.jionex.agent.data.model.request.GetMessageByFilterRequest
+import com.jionex.agent.data.model.response.GetMessageByFilterResponse
 import com.jionex.agent.databinding.FragmentSignInBinding
+import com.jionex.agent.databinding.FragmentSmsInboxBinding
 import com.jionex.agent.sdkInit.JionexSDK
 import com.jionex.agent.ui.base.BaseFragment
 import com.jionex.agent.ui.base.BaseFragmentModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
-import com.jionex.agent.ui.main.di.DaggerDashBoardFragmentComponent
+import com.jionex.agent.ui.main.adapter.SmsManagerListAdapter
 import com.jionex.agent.ui.main.di.DaggerSMSInboxFragmentComponent
-import com.jionex.agent.ui.main.di.DaggerSignInFragmentComponent
-import com.jionex.agent.ui.main.di.DashBoardFragmentModule
 import com.jionex.agent.ui.main.di.SMSInboxFragmentModule
-import com.jionex.agent.ui.main.di.SignInFragmentModule
 import com.jionex.agent.ui.main.viewmodel.DashBoardViewModel
-import com.jionex.agent.ui.main.viewmodel.SignInViewModel
 import com.jionex.agent.utils.NetworkHelper
 import com.jionex.agent.utils.SharedPreference
+import com.jionex.agent.utils.Status
 import javax.inject.Inject
 
 
-class SMSInboxFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sms_inbox) {
+class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment_sms_inbox) {
 
     @Inject
     lateinit var sharedPreference: SharedPreference
@@ -36,14 +38,18 @@ class SMSInboxFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_s
 
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
-    private val viewmodel: SignInViewModel by activityViewModels { dashBoardViewModelFactory }
+    private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
+    private var smsManagerListAdapter: SmsManagerListAdapter? = null
+
+    private var listGetMessageByFilter : ArrayList<GetMessageByFilterResponse> = arrayListOf()
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initializeDagger()
-        initializeView(view)
+        initializeView()
 
     }
 
@@ -53,8 +59,59 @@ class SMSInboxFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_s
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
 
-    private fun initializeView(view: View) {
+    private fun initializeView() {
+        getMessageByFilterApi()
     }
 
+    private fun getMessageByFilterApi() {
+
+        if (networkHelper.isNetworkConnected()) {
+            val getMessageByFilterRequest = GetMessageByFilterRequest(
+                page_size = 50,
+                page_number = 1,
+                /* sender = "",
+                 agent_account_no = 0,
+                 transaction_id = "",
+                 type = "",
+                 from = "",
+                 to = "",*/
+                message_type = -1
+
+            )
+            viewModel.getMessageByFilter(
+                getMessageByFilterRequest
+            )
+            viewModel.getMessageByFilterResponseModel.observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        progressBar.dismiss()
+                        Log.i("Data","::${it.data}")
+                        it.data?.let { it1 -> listGetMessageByFilter.addAll(it1) }
+                        setMessageAdapter()
+                        // bleManagerListAdapter?.notifyDataSetChanged()
+                    }
+
+                    Status.ERROR -> {
+                        Log.i("Error","::${it}")
+                        progressBar.dismiss()
+
+                    }
+
+                    Status.LOADING -> {
+                        progressBar.show()
+                    }
+                }
+            }
+        } else {
+            progressBar.dismiss()
+            showMessage(mActivity.getString(R.string.NO_INTERNET_CONNECTION))
+        }
+    }
+
+    private fun setMessageAdapter() {
+        smsManagerListAdapter = SmsManagerListAdapter(listGetMessageByFilter)
+        mDataBinding.recentFilteredMessage.layoutManager = LinearLayoutManager(context)
+        mDataBinding.recentFilteredMessage.adapter = smsManagerListAdapter
+    }
 
 }

@@ -2,15 +2,15 @@ package com.jionex.agent.ui.main.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.jionex.agent.data.model.UserInfo
-import com.jionex.agent.data.model.request.GetBalanceByFilter
+import com.jionex.agent.data.model.request.GetBalanceByFilterRequest
+import com.jionex.agent.data.model.request.GetMessageByFilterRequest
+import com.jionex.agent.data.model.request.GetModemsByFilterRequest
 import com.jionex.agent.data.model.request.SignInRequest
-import com.jionex.agent.data.model.request.VerifyPinRequest
 import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
+import com.jionex.agent.data.model.response.GetMessageByFilterResponse
+import com.jionex.agent.data.model.response.GetModemsByFilterResponse
 import com.jionex.agent.data.model.response.SignInResponse
-import com.jionex.agent.data.model.response.VerifyPinResponse
 import com.jionex.agent.data.repository.DashBoardRepository
-import com.jionex.agent.sdkInit.JionexSDK.sharedPreference
 import com.jionex.agent.ui.base.BaseViewModel
 import com.jionex.agent.utils.ResponseData
 import com.jionex.agent.utils.setError
@@ -36,13 +36,34 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
     }
 
     val getBalanceByFilterResponseModel = MutableLiveData<ResponseData<List<GetBalanceByFilterResponse>>>()
-    fun getBalanceByFilter(getBalanceByFilter: GetBalanceByFilter) {
+    fun getBalanceByFilter(getBalanceByFilterRequest: GetBalanceByFilterRequest) {
         getBalanceByFilterResponseModel.setLoading(null)
         viewModelScope.launch(Dispatchers.IO) {
             dashBoardRepository.getBalanceByFilter({ success -> getBalanceByFilterResponseModel.setSuccess(success) },
                 { error -> getBalanceByFilterResponseModel.setError(error) },
-                getBalanceByFilter,
+                getBalanceByFilterRequest,
                 { message -> getBalanceByFilterResponseModel.setError(message) })
+        }
+    }
+    val getMessageByFilterResponseModel = MutableLiveData<ResponseData<List<GetMessageByFilterResponse>>>()
+    fun getMessageByFilter(getMessageByFilterRequest: GetMessageByFilterRequest) {
+        getMessageByFilterResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.getMessageByFilter({ success -> getMessageByFilterResponseModel.setSuccess(success) },
+                { error -> getMessageByFilterResponseModel.setError(error) },
+                getMessageByFilterRequest,
+                { message -> getMessageByFilterResponseModel.setError(message) })
+        }
+    }
+
+    val getModemsByFilterResponseModel = MutableLiveData<ResponseData<List<GetModemsByFilterResponse>>>()
+    fun getModemsByFilter(getModemsByFilterRequest: GetModemsByFilterRequest) {
+        getModemsByFilterResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.getModemsByFilter({ success -> getModemsByFilterResponseModel.setSuccess(success) },
+                { error -> getModemsByFilterResponseModel.setError(error) },
+                getModemsByFilterRequest,
+                { message -> getModemsByFilterResponseModel.setError(message) })
         }
     }
 

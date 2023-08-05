@@ -2,7 +2,7 @@ package com.jionex.agent.data.model.request
 
 import com.google.gson.annotations.SerializedName
 
-data class GetBalanceByFilter(
+data class GetModemsByFilterRequest(
     @field:SerializedName("page_size")
     var page_size: Int = 0,
     @field:SerializedName("page_number")
@@ -19,6 +19,6 @@ data class GetBalanceByFilter(
     var from: String? = null,
     @field:SerializedName("to")
     var to: String? = null,*/
-    @field:SerializedName("balance_manager_filter")
-    var balance_manager_filter: Int? = -1,
+    @field:SerializedName("is_active")
+    var is_active: Boolean? = true,
 )

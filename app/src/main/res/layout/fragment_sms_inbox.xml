@@ -60,25 +60,25 @@
                     android:id="@+id/txt_custm_acc_no"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Customer no."
+                    android:text="Sender"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:textAlignment="center"
                     app:layout_constraintStart_toEndOf="@id/txt_sr_no"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.24" />
+                    app:layout_constraintWidth_percent="0.2" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txt_amount"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="Amount"
+                    android:text="Message"
                     android:textStyle="bold"
                     android:textAlignment="center"
                     app:layout_constraintStart_toEndOf="@id/txt_custm_acc_no"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.23" />
+                    app:layout_constraintWidth_percent="0.35" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txt_transaction_id"
@@ -86,11 +86,11 @@
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    android:text="Transaction id"
+                    android:text="Receiver"
                     android:textAlignment="center"
                     app:layout_constraintStart_toEndOf="@id/txt_amount"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.23" />
+                    app:layout_constraintWidth_percent="0.2" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txt_date"
@@ -102,14 +102,14 @@
                     android:textAlignment="center"
                     app:layout_constraintStart_toEndOf="@id/txt_transaction_id"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.24" />
+                    app:layout_constraintWidth_percent="0.2" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recentTrendingView"
+            android:id="@+id/recentFilteredMessage"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:divider="@android:color/darker_gray"
