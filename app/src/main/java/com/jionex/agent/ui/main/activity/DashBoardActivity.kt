@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
@@ -16,6 +16,7 @@ import com.jionex.agent.sdkInit.JionexSDK
 import com.jionex.agent.ui.base.BaseActivity
 import com.jionex.agent.ui.base.BaseActivityModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
+import com.jionex.agent.ui.main.adapter.DrawerAdapter
 import com.jionex.agent.ui.main.di.DaggerDashBoardActivityComponent
 import com.jionex.agent.ui.main.di.DashBoardActivityModule
 import com.jionex.agent.ui.main.viewmodel.DashBoardViewModel
@@ -38,6 +39,8 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     private val dashBoardViewModel: DashBoardViewModel by viewModels { dashBoardViewModelFactory }
 
     private lateinit var navController: NavController
+    private var lastExpandedGroupPosition = -1
+    private lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,38 +63,160 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         NavigationUI.setupWithNavController(viewDataBinding?.navView!!, navController);
         val mNavigationView = findViewById<View>(R.id.nav_view) as NavigationView
         val header = mNavigationView.getHeaderView(0)
-        header.findViewById<AppCompatTextView>(R.id.textAgentValueFullName).text = "${dashBoardViewModel.getFullName()}"
-        header.findViewById<AppCompatTextView>(R.id.textAgentValuePinCode).text = "${dashBoardViewModel.getPinCode()}"
-
+        header.findViewById<AppCompatTextView>(R.id.textAgentValueFullName).text =
+            "${dashBoardViewModel.getFullName()}"
+        header.findViewById<AppCompatTextView>(R.id.textAgentValuePinCode).text =
+            "${dashBoardViewModel.getPinCode()}"
+        setDrawerData()
         if (mNavigationView != null) {
             mNavigationView.setNavigationItemSelectedListener(this);
         }
     }
 
-    private fun jumpToAnotherFragment(navigationTaskProfile: Int) {
+    private fun setDrawerData() {
+        val expandableListDetail = HashMap<String, List<String>>()
+
+        val bleManagerList: MutableList<String> = ArrayList()
+        bleManagerList.add("All Transactions")
+        bleManagerList.add("Success")
+        bleManagerList.add("Pending")
+        bleManagerList.add("Rejected")
+        bleManagerList.add("Approved")
+        bleManagerList.add("Danger")
+
+        val modemsList: MutableList<String> = ArrayList()
+        modemsList.add("Modem List")
+
+        val smsList: MutableList<String> = ArrayList()
+        smsList.add("All Sms")
+        smsList.add("Cash In")
+        smsList.add("B2B")
+
+        expandableListDetail["Sms Inbox"] = smsList
+        expandableListDetail["Balance Manager"] = bleManagerList
+        expandableListDetail["Modems"] = modemsList
+
+        val expandableListTitle = ArrayList<String>(expandableListDetail.keys.reversed())
+        val drawerAdapter =
+            DrawerAdapter(applicationContext, expandableListDetail, expandableListTitle)
+        viewDataBinding?.sideNav?.evMenu?.setAdapter(drawerAdapter)
+        drawerAdapter.listener = cardListener
+        //Call Dash Board
+        viewDataBinding?.sideNav?.textDash?.setOnClickListener {
+            viewDataBinding?.drawerLayout?.close()
+            navController.navigate(R.id.navigation_dashboard)
+        }
+        viewDataBinding?.sideNav?.evMenu?.setOnGroupExpandListener { groupPosition ->
+            if (lastExpandedGroupPosition != -1 && lastExpandedGroupPosition != groupPosition) {
+                // Collapse the previously expanded group
+                viewDataBinding?.sideNav?.evMenu?.collapseGroup(lastExpandedGroupPosition);
+            }
+            lastExpandedGroupPosition = groupPosition;
+        }
+
+        viewDataBinding?.sideNav?.evMenu?.setOnGroupCollapseListener { groupPosition ->
+
+        }
+
+        viewDataBinding?.sideNav?.evMenu?.setOnChildClickListener { parent, v, groupPosition, childPosition, id ->
+
+            false
+        }
+
+    }
+
+    private fun jumpToAnotherFragment(navigationTaskProfile: Int, bundle: Bundle) {
         viewDataBinding?.drawerLayout?.close()
-        navController.navigate(navigationTaskProfile)
+        navController.navigate(navigationTaskProfile, bundle)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         when (id) {
-            R.id.navigation_dashboard -> {
-                jumpToAnotherFragment(R.id.navigation_dashboard)
-            }
-            R.id.navigation_blManager-> {
-                jumpToAnotherFragment(R.id.navigation_blManager)
-            }
-            R.id.navigation_smsInboxFragment -> {
-                jumpToAnotherFragment(R.id.navigation_smsInboxFragment)
-            }
-            R.id.navigation_modemFragment -> {
-                jumpToAnotherFragment(R.id.navigation_modemFragment)
-            }
 
             else -> return false
         }
         return true
+    }
+
+    private val cardListener = object : DrawerAdapter.OnClickListener {
+        override fun click(text: String) {
+
+            when (text) {
+                "All Transactions" -> {
+                    val bundle = Bundle().apply {
+                        putString("Api", "All Transactions")
+                        putInt("Filer", -1)
+                    }
+                    jumpToAnotherFragment(R.id.navigation_blManager,bundle)
+                }
+                "Success" -> {
+                    val bundle = Bundle().apply {
+                        putString("Api", "Success")
+                        putInt("Filer", 0)
+                    }
+                    jumpToAnotherFragment(R.id.navigation_blManager, bundle)
+                }
+                "Pending" -> {
+                    val bundle = Bundle().apply {
+                        putString("Api", "Pending")
+                        putInt("Filer", 1)
+                    }
+                    jumpToAnotherFragment(R.id.navigation_blManager, bundle)
+                }
+                "Rejected" -> {
+                    val bundle = Bundle().apply {
+                        putString("Api", "Rejected")
+                        putInt("Filer", 3)
+                    }
+                    jumpToAnotherFragment(R.id.navigation_blManager, bundle)
+                }
+                "Approved" -> {
+                    val bundle = Bundle().apply {
+                        putString("Api", "Approved")
+                        putInt("Filer", 4)
+                    }
+                    jumpToAnotherFragment(R.id.navigation_blManager, bundle)
+                }
+                "Danger" -> {
+                    val bundle = Bundle().apply {
+                        putString("Api", "Danger")
+                        putInt("Filer", 5)
+                    }
+                    jumpToAnotherFragment(R.id.navigation_blManager, bundle)
+                }
+
+                "Modem List" -> {
+                    val bundle = Bundle().apply {
+                        putString("Api", "Modem List")
+                    }
+                    jumpToAnotherFragment(R.id.navigation_modemFragment, bundle)
+                }
+
+                "All Sms" -> {
+                    val bundle = Bundle().apply {
+                        putString("Api", "All Sms")
+                        putInt("Filer", -1)
+                    }
+                    jumpToAnotherFragment(R.id.navigation_smsInboxFragment, bundle)
+                }
+                "Cash In" -> {
+                    val bundle = Bundle().apply {
+                        putString("Api", "Cash In")
+                        putInt("Filer", 0)
+                    }
+                    jumpToAnotherFragment(R.id.navigation_smsInboxFragment, bundle)
+                }
+                "B2B" -> {
+                    val bundle = Bundle().apply {
+                        putString("Api", "B2B")
+                        putInt("Filer", 2)
+                    }
+                    jumpToAnotherFragment(R.id.navigation_smsInboxFragment, bundle)
+                }
+            }
+        }
+
     }
 }
 

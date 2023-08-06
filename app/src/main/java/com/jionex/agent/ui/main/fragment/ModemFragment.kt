@@ -1,6 +1,7 @@
 package com.jionex.agent.ui.main.fragment
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -14,6 +15,7 @@ import com.jionex.agent.sdkInit.JionexSDK
 import com.jionex.agent.ui.base.BaseFragment
 import com.jionex.agent.ui.base.BaseFragmentModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
+import com.jionex.agent.ui.main.activity.SignInActivity
 import com.jionex.agent.ui.main.adapter.ModemsManagerListAdapter
 import com.jionex.agent.ui.main.adapter.SmsManagerListAdapter
 import com.jionex.agent.ui.main.di.DaggerModemFragmentComponent
@@ -43,6 +45,8 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
     private var modemsManagerListAdapter: ModemsManagerListAdapter? = null
     private var listGetModemsByFilter : ArrayList<GetModemsByFilterResponse> = arrayListOf()
 
+    private var apiCall : String = ""
+    private var filter = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,7 +63,16 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
     }
 
     private fun initializeView() {
+        getBundleData()
         getModemsByFilterApi()
+    }
+
+    private fun getBundleData() {
+        val bundle = arguments
+        if (bundle != null) {
+            apiCall = bundle.getString("Api").toString()
+            filter = bundle.getInt("Filer")
+        }
     }
 
 
@@ -92,7 +105,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                     }
 
                     Status.ERROR -> {
-                        Log.i("Error","::${it}")
+                        startActivity(Intent(requireContext(), SignInActivity::class.java))
                         progressBar.dismiss()
 
                     }

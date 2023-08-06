@@ -1,6 +1,7 @@
 package com.jionex.agent.ui.main.fragment
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -15,6 +16,7 @@ import com.jionex.agent.sdkInit.JionexSDK
 import com.jionex.agent.ui.base.BaseFragment
 import com.jionex.agent.ui.base.BaseFragmentModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
+import com.jionex.agent.ui.main.activity.SignInActivity
 import com.jionex.agent.ui.main.adapter.SmsManagerListAdapter
 import com.jionex.agent.ui.main.di.DaggerSMSInboxFragmentComponent
 import com.jionex.agent.ui.main.di.SMSInboxFragmentModule
@@ -43,6 +45,8 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
 
     private var listGetMessageByFilter : ArrayList<GetMessageByFilterResponse> = arrayListOf()
 
+    private var apiCall : String = ""
+    private var filter = 0
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,9 +64,17 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
     }
 
     private fun initializeView() {
+        getBundleData()
         getMessageByFilterApi()
     }
 
+    private fun getBundleData() {
+        val bundle = arguments
+        if (bundle != null) {
+            apiCall = bundle.getString("Api").toString()
+            filter = bundle.getInt("Filer")
+        }
+    }
     private fun getMessageByFilterApi() {
 
         if (networkHelper.isNetworkConnected()) {
@@ -75,7 +87,7 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
                  type = "",
                  from = "",
                  to = "",*/
-                message_type = -1
+                message_type = filter
 
             )
             viewModel.getMessageByFilter(
@@ -92,7 +104,7 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
                     }
 
                     Status.ERROR -> {
-                        Log.i("Error","::${it}")
+                        startActivity(Intent(requireContext(), SignInActivity::class.java))
                         progressBar.dismiss()
 
                     }

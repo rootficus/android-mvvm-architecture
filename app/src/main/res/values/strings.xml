@@ -75,6 +75,17 @@
     <string name="balance_manager">Balance Manager</string>
     <string name="sms_inbox">SMS Inbox</string>
     <string name="modems">Modems</string>
+    <string name="sender">Sender</string>
+    <string name="a_account">A Account</string>
+    <string name="c_account">C Account</string>
+    <string name="old_balance">Old Balance</string>
+    <string name="amount">Amount</string>
+    <string name="commission">Commission</string>
+    <string name="last_balance">Last Balance</string>
+    <string name="transaction_id">Transaction Id</string>
+    <string name="type">Type</string>
+    <string name="status">Status</string>
+    <string name="date">Date</string>
     <string-array name="bankList">
         <item>item1</item>
         <item>item2</item>

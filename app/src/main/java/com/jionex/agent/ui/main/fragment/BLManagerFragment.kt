@@ -1,6 +1,7 @@
 package com.jionex.agent.ui.main.fragment
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.jionex.agent.sdkInit.JionexSDK
 import com.jionex.agent.ui.base.BaseFragment
 import com.jionex.agent.ui.base.BaseFragmentModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
+import com.jionex.agent.ui.main.activity.SignInActivity
 import com.jionex.agent.ui.main.adapter.BleManagerListAdapter
 import com.jionex.agent.ui.main.adapter.ItemListAdapter
 import com.jionex.agent.ui.main.di.BLManagerFragmentModule
@@ -52,6 +54,8 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
 
     private var currentPage = 1
     private var totalPages = 0
+    private var apiCall : String = ""
+    private var filter = 0
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,6 +74,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
 
     private fun initializeView() {
         // Initialize your allData list here (for demonstration purposes, I'm generating some dummy data)
+        getBundleData()
         allData = ArrayList()
         for (i in 1..1000) {
             allData.add("Item $i")
@@ -78,6 +83,14 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
         // Calculate total number of pages
         totalPages = Math.ceil(allData.size.toDouble() / itemsPerPage).toInt()
         updateAdapterDataForPage(currentPage)
+    }
+
+    private fun getBundleData() {
+        val bundle = arguments
+        if (bundle != null) {
+            apiCall = bundle.getString("Api").toString()
+            filter = bundle.getInt("Filer")
+        }
     }
 
     private fun setBleAdapter() {
@@ -210,7 +223,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
                 type = "",
                 from = "",
                 to = "",*/
-                balance_manager_filter = -1
+                balance_manager_filter = filter
 
             )
             viewModel.getBalanceByFilter(
@@ -227,6 +240,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
                     }
 
                     Status.ERROR -> {
+                        startActivity(Intent(requireContext(), SignInActivity::class.java))
                         progressBar.dismiss()
 
                     }

@@ -8,6 +8,7 @@ import com.jionex.agent.R
 import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
 import com.jionex.agent.databinding.ItemBleManagerBinding
 import com.jionex.agent.databinding.ItemListLayoutBinding
+import com.jionex.agent.utils.Utility
 import com.jionex.agent.utils.getTagName
 
 class BleManagerListAdapter(private var itemList: ArrayList<GetBalanceByFilterResponse>) :
@@ -27,8 +28,7 @@ class BleManagerListAdapter(private var itemList: ArrayList<GetBalanceByFilterRe
             binding.txtAmount.text = item.amount
             binding.txtCustmAccNo.text = item.customerAccountNo.toString()
             binding.txtTransactionId.text = item.transactionId.toString()
-            binding.txtDate.text = "24/07/2023"  //item.date.toString()
-
+            binding.txtDate.text = Utility.convertUtc2Local(item.date)  //item.date.toString()
 
         }
 

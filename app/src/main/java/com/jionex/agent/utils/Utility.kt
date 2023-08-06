@@ -1,32 +1,18 @@
 package com.jionex.agent.utils
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
-import androidx.work.BackoffPolicy
-import androidx.work.Constraints
-import androidx.work.Data
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.NetworkType
-import androidx.work.PeriodicWorkRequest
-import androidx.work.WorkManager
-import androidx.work.WorkRequest
 import com.jionex.agent.R
-import com.jionex.agent.roomDB.JionexDatabase
-import com.jionex.agent.roomDB.dao.JionexDao
-import com.jionex.agent.roomDB.model.SMSRecord
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import java.util.TimeZone
 import java.util.UUID
-import java.util.concurrent.TimeUnit
 
 object Utility {
 
@@ -54,5 +40,23 @@ object Utility {
         Log.d(tag,s)
     }
 
+    fun convertUtc2Local(utcTime: String?): String? {
+        var time = ""
+        if (utcTime != null) {
+            val utcFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.CHINA)
+            utcFormatter.timeZone = TimeZone.getTimeZone("UTC")
+            var gpsUTCDate: Date? = null //from  ww  w.j  a va 2 s  . c  o  m
+            try {
+                gpsUTCDate = utcFormatter.parse(utcTime)
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
+            val localFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.CHINA)
+            localFormatter.timeZone = TimeZone.getDefault()
+            assert(gpsUTCDate != null)
+            time = localFormatter.format(gpsUTCDate!!.time)
+        }
+        return time
+    }
 
 }
