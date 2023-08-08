@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import com.jionex.agent.R
 
 
@@ -73,7 +75,30 @@ class DrawerAdapter(
             convertView = layoutInflater.inflate(R.layout.adapter_childview, null)
         }
         val textView = convertView?.findViewById<TextView>(R.id.tv_name)
-        textView?.text = expandedListText
+        val textCount = convertView?.findViewById<TextView>(R.id.txt_count)
+        val cardCount = convertView?.findViewById<CardView>(R.id.card_count)
+        if(textView?.equals("Success") == true)
+        {
+            cardCount?.visibility = View.VISIBLE
+            cardCount?.setBackgroundColor(ContextCompat.getColor(context, R.color.success))
+        }else if(textView?.equals("Pending") == true)
+        {
+            cardCount?.visibility = View.VISIBLE
+            cardCount?.setBackgroundColor(ContextCompat.getColor(context, R.color.pending))
+        }else if(textView?.equals("Rejected") == true)
+        {
+            cardCount?.visibility = View.VISIBLE
+            cardCount?.setBackgroundColor(ContextCompat.getColor(context, R.color.reject))
+        } else{
+            cardCount?.visibility = View.GONE
+        }
+        if(expandedListText.contains(',')) {
+            textView?.text = expandedListText.split(',')[0]
+            textCount?.text = expandedListText.split(',')[1]
+        }
+        else {
+            textView?.text = expandedListText
+        }
         textView?.setOnClickListener{
             listener?.click(expandedListText)
         }

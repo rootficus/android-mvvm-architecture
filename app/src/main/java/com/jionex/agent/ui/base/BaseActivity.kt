@@ -17,7 +17,6 @@ import com.jionex.agent.App
 abstract class BaseActivity<VB : ViewDataBinding>(@LayoutRes val layoutRes: Int) : AppCompatActivity() {
     protected var viewDataBinding: VB? = null
     override fun onCreate(savedInstanceState: Bundle?) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState)
         viewDataBinding = DataBindingUtil.setContentView(this,layoutRes)
     }

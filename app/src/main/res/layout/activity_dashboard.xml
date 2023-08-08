@@ -9,12 +9,14 @@
             name="dashBoardViewModel"
             type="com.jionex.agent.ui.main.viewmodel.DashBoardViewModel" />
     </data>
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         tools:openDrawer="right">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,29 +24,33 @@
 
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/appBarLayout"
+                style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:fitsSystemWindows="true"
-                android:visibility="visible"
-                style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
+                android:visibility="gone"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@android:color/transparent"
-                android:elevation="0dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:title="@string/dashboard"
-                app:titleTextColor="@color/white" />
+                    android:id="@+id/toolbar"
+                    style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@android:color/transparent"
+                    android:elevation="0dp"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:title="@string/dashboard"
+                    app:titleTextColor="@color/white" />
 
             </com.google.android.material.appbar.AppBarLayout>
+
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent">
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appBarLayout">
+
                 <fragment
                     android:id="@+id/navHostOnDashBoardFragment"
                     android:name="androidx.navigation.fragment.NavHostFragment"
@@ -52,9 +58,9 @@
                     android:layout_height="match_parent"
                     app:defaultNavHost="true"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/app_bar_home"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/app_bar_home"
                     app:navGraph="@navigation/dashboard_nav_graph" />
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -63,14 +69,15 @@
                 android:id="@+id/progressView"
                 layout="@layout/include_progress_bar" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
+            android:background="@color/white"
             android:fitsSystemWindows="false"
-            app:headerLayout="@layout/nav_header_main"
-            android:background="@color/white">
+            app:headerLayout="@layout/nav_header_main">
 
             <include
                 android:id="@+id/sideNav"

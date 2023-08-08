@@ -14,6 +14,12 @@ import com.jionex.agent.utils.getTagName
 class BleManagerListAdapter(private var itemList: ArrayList<GetBalanceByFilterResponse>) :
     RecyclerView.Adapter<BleManagerListAdapter.ItemViewHolder>() {
 
+    interface CardEvent {
+        fun onCardClicked(title: GetBalanceByFilterResponse)
+    }
+
+    var listener: CardEvent? = null
+
     inner class ItemViewHolder(val binding: ItemBleManagerBinding) : RecyclerView.ViewHolder(binding.root)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val binding = ItemBleManagerBinding.inflate(LayoutInflater.from(parent.context),parent, false)
@@ -28,10 +34,13 @@ class BleManagerListAdapter(private var itemList: ArrayList<GetBalanceByFilterRe
             binding.txtAmount.text = item.amount
             binding.txtCustmAccNo.text = item.customerAccountNo.toString()
             binding.txtTransactionId.text = item.transactionId.toString()
-            binding.txtDate.text = Utility.convertUtc2Local(item.date)  //item.date.toString()
+            binding.txtDate.text = Utility.convertUtc2Local(item.date)
+            binding.cardHead.setOnClickListener {
+                listener?.onCardClicked(item)
+            }
+
 
         }
-
     }
 
     override fun getItemCount(): Int {

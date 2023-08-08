@@ -11,6 +11,7 @@ import com.jionex.agent.data.model.request.VerifyPinRequest
 import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
 import com.jionex.agent.data.model.response.GetMessageByFilterResponse
 import com.jionex.agent.data.model.response.GetModemsByFilterResponse
+import com.jionex.agent.data.model.response.GetStatusCountResponse
 import com.jionex.agent.data.model.response.SignInResponse
 import com.jionex.agent.data.model.response.UserResponseResult
 import com.jionex.agent.ui.base.BaseResponseModel
@@ -63,5 +64,10 @@ interface JionexApiServices {
         @Header("Authorization") authHeader: String?,
         @Body getModemsByFilterRequest: GetModemsByFilterRequest
     ): Call<BaseResponseModelFilter<GetModemsByFilterResponse>>
+    @Headers("Content-Type:application/json")
+    @GET("/api/v1/balance_manager/daily_status_count")
+    fun getStatusCount(
+        @Header("Authorization") authHeader: String?,
+    ): Call<BaseResponseModel<GetStatusCountResponse>>
 
 }

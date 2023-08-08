@@ -9,6 +9,7 @@ import com.jionex.agent.data.model.request.SignInRequest
 import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
 import com.jionex.agent.data.model.response.GetMessageByFilterResponse
 import com.jionex.agent.data.model.response.GetModemsByFilterResponse
+import com.jionex.agent.data.model.response.GetStatusCountResponse
 import com.jionex.agent.data.model.response.SignInResponse
 import com.jionex.agent.data.remote.JionexApiServices
 import com.jionex.agent.roomDB.JionexDatabase
@@ -72,6 +73,15 @@ class DashBoardRepository (val apiServices: JionexApiServices,
     ) {
         apiServices.getModemsByFilter("Bearer " + sharedPreference.getToken(), getModemsByFilterRequest).apply {
             executeFilter(this, success, fail, context, message)
+        }
+    }
+    fun getStatusCount(
+        success: (getStatusCountResponse: GetStatusCountResponse) -> Unit,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.getStatusCount("Bearer " + sharedPreference.getToken()).apply {
+            execute(this, success, fail, context, message)
         }
     }
 

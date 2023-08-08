@@ -8,11 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jionex.agent.R
 import com.jionex.agent.data.model.request.GetBalanceByFilterRequest
 import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
+import com.jionex.agent.databinding.CustomBleDialogBinding
 import com.jionex.agent.databinding.FragmentBlManagerBinding
 import com.jionex.agent.sdkInit.JionexSDK
 import com.jionex.agent.ui.base.BaseFragment
@@ -27,6 +29,7 @@ import com.jionex.agent.ui.main.viewmodel.DashBoardViewModel
 import com.jionex.agent.utils.NetworkHelper
 import com.jionex.agent.utils.SharedPreference
 import com.jionex.agent.utils.Status
+import com.jionex.agent.utils.Utility
 import java.lang.Math.min
 import javax.inject.Inject
 
@@ -50,11 +53,11 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
     private var adapter: ItemListAdapter? = null
     private var bleManagerListAdapter: BleManagerListAdapter? = null
     private val itemsPerPage = 10 // Number of items to display per page
-    private var listGetBalanceByFilter : ArrayList<GetBalanceByFilterResponse> = arrayListOf()
+    private var listGetBalanceByFilter: ArrayList<GetBalanceByFilterResponse> = arrayListOf()
 
     private var currentPage = 1
     private var totalPages = 0
-    private var apiCall : String = ""
+    private var apiCall: String = ""
     private var filter = 0
 
 
@@ -95,24 +98,64 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
 
     private fun setBleAdapter() {
         bleManagerListAdapter = BleManagerListAdapter(listGetBalanceByFilter)
+        bleManagerListAdapter?.listener = cardListener
         mDataBinding.recentTrendingView.layoutManager = LinearLayoutManager(context)
         mDataBinding.recentTrendingView.adapter = bleManagerListAdapter
+    }
+
+    private val cardListener = object : BleManagerListAdapter.CardEvent {
+        override fun onCardClicked(getBalanceByFilterResponse: GetBalanceByFilterResponse) {
+            showCustomDialog(getBalanceByFilterResponse)
+        }
+    }
+
+    private fun showCustomDialog(getBalanceByFilterResponse: GetBalanceByFilterResponse) {
+        val builder = AlertDialog.Builder(requireActivity(), R.style.CustomAlertDialog).create()
+        val binding = CustomBleDialogBinding.inflate(layoutInflater)
+        builder.setView(binding.root)
+        binding?.textAAccount?.text = getBalanceByFilterResponse.agentAccountNo.toString()
+        binding?.textAmount?.text = getBalanceByFilterResponse.amount.toString()
+        binding?.textCAccount?.text = getBalanceByFilterResponse.customerAccountNo.toString()
+        binding?.textCommission?.text = getBalanceByFilterResponse.commision.toString()
+        binding?.textDate?.text =
+            Utility.convertUtc2Local(getBalanceByFilterResponse.date.toString())
+        binding?.textSender?.text = getBalanceByFilterResponse.sender.toString()
+        binding?.textLastBalance?.text = getBalanceByFilterResponse.lastBalance.toString()
+        binding?.textOldBalance?.text = getBalanceByFilterResponse.oldBalance.toString()
+        binding?.textType?.text = getBalanceByFilterResponse.bType.toString()
+        binding?.textStatus?.text = getBalanceByFilterResponse.status.toString()
+        binding?.textLastTransactionId?.text = getBalanceByFilterResponse.transactionId.toString()
+        if (getBalanceByFilterResponse.status.equals("pending", true)) {
+            binding.btnReject.visibility = View.GONE
+            binding.btnAccept.visibility = View.GONE
+        } else {
+            binding.btnReject.visibility = View.VISIBLE
+            binding.btnAccept.visibility = View.VISIBLE
+        }
+        binding.btnReject.setOnClickListener {
+            builder.dismiss()
+        }
+        binding.imageClose.setOnClickListener {
+            builder.dismiss()
+        }
+        builder.setCanceledOnTouchOutside(false)
+        builder.show()
     }
 
     private fun clickListener() {
         mDataBinding.btnNext.setOnClickListener {
             //Next Page
             if (currentPage < totalPages) {
-                    currentPage++;
-                    updateAdapterDataForPage(currentPage);
-                    updatePageNumbers();
-             }
-            //Last Page
-        /*    if (currentPage != totalPages) {
-                currentPage = totalPages;
+                currentPage++;
                 updateAdapterDataForPage(currentPage);
                 updatePageNumbers();
-            }*/
+            }
+            //Last Page
+            /*    if (currentPage != totalPages) {
+                    currentPage = totalPages;
+                    updateAdapterDataForPage(currentPage);
+                    updatePageNumbers();
+                }*/
         }
         mDataBinding.btnPrev.setOnClickListener {
             //Previous Page
@@ -122,11 +165,11 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
                 updatePageNumbers();
             }
             //First Page
-/*            if (currentPage != 1) {
-                currentPage = 1;
-                updateAdapterDataForPage(currentPage);
-                updatePageNumbers();
-            }*/
+            /*            if (currentPage != 1) {
+                            currentPage = 1;
+                            updateAdapterDataForPage(currentPage);
+                            updatePageNumbers();
+                        }*/
         }
 
     }
@@ -217,12 +260,12 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
             val getBalanceByFilterRequest = GetBalanceByFilterRequest(
                 page_size = 50,
                 page_number = 1,
-               /* sender = "",
-                agent_account_no = 0,
-                transaction_id = "",
-                type = "",
-                from = "",
-                to = "",*/
+                /* sender = "",
+                 agent_account_no = 0,
+                 transaction_id = "",
+                 type = "",
+                 from = "",
+                 to = "",*/
                 balance_manager_filter = filter
 
             )
@@ -233,10 +276,10 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
                 when (it.status) {
                     Status.SUCCESS -> {
                         progressBar.dismiss()
-                        Log.i("Data","::${it.data}")
+                        Log.i("Data", "::${it.data}")
                         it.data?.let { it1 -> listGetBalanceByFilter.addAll(it1) }
                         setBleAdapter()
-                       // bleManagerListAdapter?.notifyDataSetChanged()
+                        // bleManagerListAdapter?.notifyDataSetChanged()
                     }
 
                     Status.ERROR -> {

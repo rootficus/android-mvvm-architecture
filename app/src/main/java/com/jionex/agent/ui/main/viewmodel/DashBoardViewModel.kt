@@ -1,5 +1,6 @@
 package com.jionex.agent.ui.main.viewmodel
 
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.jionex.agent.data.model.request.GetBalanceByFilterRequest
@@ -9,6 +10,7 @@ import com.jionex.agent.data.model.request.SignInRequest
 import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
 import com.jionex.agent.data.model.response.GetMessageByFilterResponse
 import com.jionex.agent.data.model.response.GetModemsByFilterResponse
+import com.jionex.agent.data.model.response.GetStatusCountResponse
 import com.jionex.agent.data.model.response.SignInResponse
 import com.jionex.agent.data.repository.DashBoardRepository
 import com.jionex.agent.ui.base.BaseViewModel
@@ -24,6 +26,10 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
     BaseViewModel() {
 
 
+    enum class DarkModeConfig {
+        YES,
+        NO
+    }
     val signInResponseModel = MutableLiveData<ResponseData<SignInResponse>>()
     fun signInNow(signInRequest: SignInRequest) {
         signInResponseModel.setLoading(null)
@@ -65,6 +71,34 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
                 getModemsByFilterRequest,
                 { message -> getModemsByFilterResponseModel.setError(message) })
         }
+    }
+
+    val getStatusCountResponseModel = MutableLiveData<ResponseData<GetStatusCountResponse>>()
+    fun getStatusCount() {
+        getStatusCountResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.getStatusCount({ success -> getStatusCountResponseModel.setSuccess(success) },
+                { error -> getStatusCountResponseModel.setError(error) },
+                { message -> getStatusCountResponseModel.setError(message) })
+        }
+    }
+
+    fun checkNightTheme(mode: Boolean)
+    {
+        if (mode) {
+            shouldEnableDarkMode(DarkModeConfig.YES)
+        } else {
+            shouldEnableDarkMode(DarkModeConfig.NO)
+        }
+
+    }
+
+    private fun shouldEnableDarkMode(config: DarkModeConfig) {
+        when (config) {
+            DarkModeConfig.YES -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            DarkModeConfig.NO -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+        //delegate.applyDayNight()
     }
 
     fun setUserId(userId: String?) {

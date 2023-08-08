@@ -25,11 +25,11 @@
                 style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@android:color/transparent"
+                android:background="@color/cardBgColor"
                 android:elevation="0dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:title="@string/modems"
-                app:titleTextColor="@color/white">
+                app:titleTextColor="@color/headerText">
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
         <androidx.cardview.widget.CardView

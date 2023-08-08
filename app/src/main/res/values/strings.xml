@@ -86,6 +86,9 @@
     <string name="type">Type</string>
     <string name="status">Status</string>
     <string name="date">Date</string>
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
+    <string name="sms_detail">SMS DETAIL</string>
     <string-array name="bankList">
         <item>item1</item>
         <item>item2</item>
