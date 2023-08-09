@@ -83,6 +83,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
                     android:hint="@string/user_name"
+                    android:text="jsn.orchid@gmail.com"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:textSize="14sp" />
@@ -106,6 +107,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
                     android:hint="@string/password"
+                    android:text="Orchid@1235"
                     android:maxLines="1"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>

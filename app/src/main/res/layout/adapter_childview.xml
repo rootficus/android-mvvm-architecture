@@ -20,6 +20,7 @@
         android:id="@+id/card_count"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
+        android:visibility="gone"
         android:padding="10dp"
         app:cardBackgroundColor="@color/primaryDarkColor"
         app:cardCornerRadius="8dp"

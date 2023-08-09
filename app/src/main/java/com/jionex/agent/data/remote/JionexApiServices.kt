@@ -46,17 +46,15 @@ interface JionexApiServices {
     ): Call<BaseResponseModel<Any>>
 
     @Headers("Content-Type:application/json")
-    @POST("api/v1/balance_manager/get_balance_by_filter")
+    @GET("api/v1/balance_manager/todays_data")
     fun getBalanceByFilter(
         @Header("Authorization") authHeader: String?,
-        @Body getBalanceByFilterRequest: GetBalanceByFilterRequest
     ): Call<BaseResponseModelFilter<GetBalanceByFilterResponse>>
 
     @Headers("Content-Type:application/json")
-    @POST("api/v1/messages/get_messages_by_filter")
+    @GET("api/v1/messages/todays_data")
     fun getMessageByFilter(
         @Header("Authorization") authHeader: String?,
-        @Body getMessageByFilterRequest: GetMessageByFilterRequest
     ): Call<BaseResponseModelFilter<GetMessageByFilterResponse>>
     @Headers("Content-Type:application/json")
     @POST("api/v1/modems/get_modems_by_filter")

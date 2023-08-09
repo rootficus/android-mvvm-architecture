@@ -51,7 +51,7 @@ class DashBoardRepository (val apiServices: JionexApiServices,
         getBalanceByFilterRequest: GetBalanceByFilterRequest,
         message: (msg: String) -> Unit
     ) {
-        apiServices.getBalanceByFilter("Bearer " + sharedPreference.getToken(), getBalanceByFilterRequest).apply {
+        apiServices.getBalanceByFilter("Bearer " + sharedPreference.getToken()).apply {
             executeFilter(this, success, fail, context, message)
         }
     }
@@ -61,7 +61,7 @@ class DashBoardRepository (val apiServices: JionexApiServices,
         getMessageByFilterRequest: GetMessageByFilterRequest,
         message: (msg: String) -> Unit
     ) {
-        apiServices.getMessageByFilter("Bearer " + sharedPreference.getToken(), getMessageByFilterRequest).apply {
+        apiServices.getMessageByFilter("Bearer " + sharedPreference.getToken()).apply {
             executeFilter(this, success, fail, context, message)
         }
     }

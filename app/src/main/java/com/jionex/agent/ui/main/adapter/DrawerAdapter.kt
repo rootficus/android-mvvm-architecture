@@ -77,7 +77,7 @@ class DrawerAdapter(
         val textView = convertView?.findViewById<TextView>(R.id.tv_name)
         val textCount = convertView?.findViewById<TextView>(R.id.txt_count)
         val cardCount = convertView?.findViewById<CardView>(R.id.card_count)
-        if(textView?.equals("Success") == true)
+       /* if(textView?.equals("Success") == true)
         {
             cardCount?.visibility = View.VISIBLE
             cardCount?.setBackgroundColor(ContextCompat.getColor(context, R.color.success))
@@ -96,9 +96,9 @@ class DrawerAdapter(
             textView?.text = expandedListText.split(',')[0]
             textCount?.text = expandedListText.split(',')[1]
         }
-        else {
+        else {*/
             textView?.text = expandedListText
-        }
+        //}
         textView?.setOnClickListener{
             listener?.click(expandedListText)
         }
