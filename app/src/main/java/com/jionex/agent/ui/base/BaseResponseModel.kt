@@ -1,5 +1,6 @@
 package com.jionex.agent.ui.base
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -13,17 +14,21 @@ data class BaseResponseModel<P>(
 
 data class BaseResponseModel2<P>(
     @field:SerializedName("data")
+    @Expose
     val data: ArrayList<P>? = null
 ) : ParentBaseModelResponse()
 
 data class BaseResponseModel3<P>(
     @field:SerializedName("data")
+    @Expose
     val data: List<P>? = null
 ) : ParentBaseModelResponse()
 
 data class BaseResponseModelFilter<P>(
     @field:SerializedName("data")
+    @Expose
     val data: ArrayList<P>? = null,
     @field:SerializedName("total_rows")
+    @Expose
     val total_rows: Long? = null,
 ) : ParentBaseModelResponse()

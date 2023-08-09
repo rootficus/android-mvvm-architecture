@@ -104,7 +104,7 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
                     }
 
                     Status.ERROR -> {
-                        startActivity(Intent(requireContext(), SignInActivity::class.java))
+                        //startActivity(Intent(requireContext(), SignInActivity::class.java))
                         progressBar.dismiss()
 
                     }

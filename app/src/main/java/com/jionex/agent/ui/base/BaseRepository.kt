@@ -79,16 +79,15 @@ abstract class BaseRepository {
                                 body_.data?.let { results_ ->
                                     if(body_.status != null){
                                         when (body_.status ?: -1) {
+                                            200.0->{
+                                                success.invoke(results_)
+                                            }
                                             200 -> {
                                                 success.invoke(results_)
                                                 // message.invoke(body_.message.toString())
                                             }
-
-                                            else -> {
-                                                fail.invoke(
-                                                    body_.message
-                                                        ?: context.getString(R.string.error_something_went_wrong)
-                                                )
+                                            true->{
+                                                success.invoke(results_)
                                             }
                                         }
                                     }else if(body_.message.equals("success"))
@@ -112,11 +111,16 @@ abstract class BaseRepository {
                             response_.body()?.let { body_ ->
                                 body_.data?.let { results_ ->
                                     when (body_.status ?: -1) {
+                                        200.0->{
+                                            success.invoke(results_)
+                                        }
                                         200 -> {
                                             success.invoke(results_)
                                             // message.invoke(body_.message.toString())
                                         }
-
+                                        true->{
+                                            success.invoke(results_)
+                                        }
                                         else -> {
                                             fail.invoke(
                                                 body_.message
@@ -134,15 +138,14 @@ abstract class BaseRepository {
                                 fail.invoke(context.getString(R.string.error_something_went_wrong))
                             }
                         }
-                        APIResponseCode.ResponseCode403.codeValue -> {
-                            getErrorMessage(response_)?.let {
+                        APIResponseCode.ResponseCode401.codeValue -> {
+                            getErrorBody(response_)?.let {
                                 fail.invoke(it)
                             }
                         }
-
-                        APIResponseCode.ResponseCode401.codeValue -> {
+                        APIResponseCode.ResponseCode403.codeValue -> {
                             getErrorMessage(response_)?.let {
-                               fail.invoke(it)
+                                fail.invoke(it)
                             }
                         }
                         else -> {
@@ -190,9 +193,15 @@ abstract class BaseRepository {
                                 body_.data?.let { results_ ->
                                     if(body_.status != null){
                                         when (body_.status ?: -1) {
+                                            200.0->{
+                                                success.invoke(results_)
+                                            }
                                             200 -> {
                                                 success.invoke(results_)
                                                 // message.invoke(body_.message.toString())
+                                            }
+                                            true->{
+                                                success.invoke(results_)
                                             }
 
                                             else -> {
@@ -220,11 +229,16 @@ abstract class BaseRepository {
                             response_.body()?.let { body_ ->
                                 body_.data?.let { results_ ->
                                     when (body_.status) {
+                                        200.0->{
+                                            success.invoke(results_)
+                                        }
                                         200 -> {
                                             success.invoke(results_)
-                                            //message.invoke(body_.message.toString())
+                                            // message.invoke(body_.message.toString())
                                         }
-
+                                        true->{
+                                            success.invoke(results_)
+                                        }
                                         else -> {
                                             fail.invoke(
                                                 body_.message
@@ -248,6 +262,11 @@ abstract class BaseRepository {
                             }
                         }
                         APIResponseCode.ResponseCode404.codeValue -> {
+                            getErrorMessage(response_)?.let {
+                                fail.invoke(it)
+                            }
+                        }
+                        APIResponseCode.ResponseCode401.codeValue -> {
                             getErrorMessage(response_)?.let {
                                 fail.invoke(it)
                             }
@@ -337,7 +356,24 @@ abstract class BaseRepository {
         }
     }
 
-
+    open fun getErrorBody(response: Response<*>): String? {
+        val errorBody = response.errorBody()
+        val errorMessage: String = try {
+            if (if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                        Objects.isNull(errorBody)
+                    } else {
+                        errorBody == null
+                    }
+            ) {
+                response.message()
+            } else {
+                JSONObject(errorBody?.string()).getString("error")
+            }
+        } catch (e: IOException) {
+            throw Exception("could not read error body", e)
+        }
+        return errorMessage
+    }
     open fun getErrorMessage(response: Response<*>): String? {
         val errorBody = response.errorBody()
         val errorMessage: String = try {

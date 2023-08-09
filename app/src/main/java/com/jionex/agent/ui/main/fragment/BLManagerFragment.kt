@@ -283,7 +283,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
                     }
 
                     Status.ERROR -> {
-                        startActivity(Intent(requireContext(), SignInActivity::class.java))
+                        //startActivity(Intent(requireContext(), SignInActivity::class.java))
                         progressBar.dismiss()
 
                     }
