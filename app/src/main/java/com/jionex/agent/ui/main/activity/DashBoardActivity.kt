@@ -71,6 +71,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
 
     private fun initializationView() {
         setSupportActionBar(viewDataBinding?.topAppBar)
+
         navController = Navigation.findNavController(this, R.id.navHostOnDashBoardFragment)
         NavigationUI.setupWithNavController(viewDataBinding?.navView!!, navController);
         val mNavigationView = findViewById<View>(R.id.nav_view) as NavigationView
@@ -81,10 +82,24 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
             "${dashBoardViewModel.getPinCode()}"
         getStatusCount()
 
+        val actionBarDrawerToggle = ActionBarDrawerToggle(
+            this,
+            viewDataBinding?.drawerLayout,
+            viewDataBinding?.topAppBar,
+            0,
+            0
+        )
+
+        supportActionBar!!.setHomeButtonEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        actionBarDrawerToggle
+        actionBarDrawerToggle.syncState()
         if (mNavigationView != null) {
             mNavigationView.setNavigationItemSelectedListener(this);
         }
     }
+
+
 
     private fun setDrawerData() {
         val expandableListDetail = HashMap<String, List<String>>()
