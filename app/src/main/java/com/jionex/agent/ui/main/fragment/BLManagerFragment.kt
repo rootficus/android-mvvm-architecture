@@ -20,6 +20,7 @@ import com.jionex.agent.sdkInit.JionexSDK
 import com.jionex.agent.ui.base.BaseFragment
 import com.jionex.agent.ui.base.BaseFragmentModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
+import com.jionex.agent.ui.main.activity.DashBoardActivity
 import com.jionex.agent.ui.main.activity.SignInActivity
 import com.jionex.agent.ui.main.adapter.BleManagerListAdapter
 import com.jionex.agent.ui.main.adapter.ItemListAdapter
@@ -78,6 +79,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
     private fun initializeView() {
         // Initialize your allData list here (for demonstration purposes, I'm generating some dummy data)
         getBundleData()
+
         allData = ArrayList()
         for (i in 1..1000) {
             allData.add("Item $i")
@@ -94,6 +96,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
             apiCall = bundle.getString("Api").toString()
             filter = bundle.getInt("Filer")
         }
+        (activity as DashBoardActivity).manageAppTitle("Balance Manager",apiCall);
     }
 
     private fun setBleAdapter() {

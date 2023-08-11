@@ -7,6 +7,7 @@ import com.jionex.agent.data.model.request.GetBalanceByFilterRequest
 import com.jionex.agent.data.model.request.GetMessageByFilterRequest
 import com.jionex.agent.data.model.request.GetModemsByFilterRequest
 import com.jionex.agent.data.model.request.SignInRequest
+import com.jionex.agent.data.model.response.DashBoardItemResponse
 import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
 import com.jionex.agent.data.model.response.GetMessageByFilterResponse
 import com.jionex.agent.data.model.response.GetModemsByFilterResponse
@@ -38,6 +39,16 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
                 { error -> signInResponseModel.setError(error) },
                 signInRequest,
                 { message -> signInResponseModel.setError(message) })
+        }
+    }
+
+    val dashBoardItemResponseModel = MutableLiveData<ResponseData<DashBoardItemResponse>>()
+    fun dashBoardData(){
+        dashBoardItemResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.dashBoardData({ success -> dashBoardItemResponseModel.setSuccess(success) },
+                { error -> dashBoardItemResponseModel.setError(error) },
+                { message -> dashBoardItemResponseModel.setError(message) })
         }
     }
 
@@ -172,4 +183,53 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
     fun getPinCode(): Int? {
         return dashBoardRepository.getPinCode()
     }
+
+    fun setTotalPending(totalPending: Long) {
+        dashBoardRepository.setTotalPending(totalPending)
+    }
+
+    fun getTotalPending(): Long {
+        return dashBoardRepository.getTotalPending()
+    }
+
+    fun setTotalTransactions(totalTransactions: String) {
+        dashBoardRepository.setTotalTransactions(totalTransactions)
+    }
+
+    fun getTotalTransactions(): String? {
+        return dashBoardRepository.getTotalTransactions()
+    }
+
+    fun setTodayTransactions(todayTransactions: Long) {
+        dashBoardRepository.setTodayTransactions(todayTransactions)
+    }
+
+    fun getTodayTransactions(): Long {
+        return dashBoardRepository.getTodayTransactions()
+    }
+
+    fun setTotalTrxAmount(totalTrxAmount: String) {
+        dashBoardRepository.setTotalTrxAmount(totalTrxAmount)
+    }
+
+    fun getTotalTrxAmount(): String? {
+        return dashBoardRepository.getTotalTrxAmount()
+    }
+
+    fun setTodayTrxAmount(todayTrxAmount: String) {
+        dashBoardRepository.setTodayTrxAmount(todayTrxAmount)
+    }
+
+    fun getTodayTrxAmount(): String? {
+        return dashBoardRepository.getTodayTrxAmount()
+    }
+
+    fun setTotalModem(totalModem: Int) {
+        dashBoardRepository.setTotalModem(totalModem)
+    }
+
+    fun getTotalModem(): Int {
+        return dashBoardRepository.getTotalModem()
+    }
+
 }

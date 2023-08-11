@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import com.jionex.agent.R
+import java.text.DecimalFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -57,6 +58,13 @@ object Utility {
             time = localFormatter.format(gpsUTCDate?.time)
         }
         return time
+    }
+
+    fun convertCurrencyFormat(currency: Double) : String{
+        Log.d("convertCurrencyFormat","::${currency}")
+        val formatter = DecimalFormat("###,###,##0.00")
+        Log.d("convertCurrencyFormat","::${formatter.format(currency)}")
+        return formatter.format(currency)
     }
 
 }

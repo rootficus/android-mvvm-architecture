@@ -1,9 +1,16 @@
 package com.jionex.agent.utils
 
 import android.content.Context
+import android.util.Log
 import com.jionex.agent.utils.Constant.PREFS_IS_LOGIN
 import com.jionex.agent.utils.Constant.PREF_PASSWORD
+import com.jionex.agent.utils.Constant.PREF_TODAY_TRANSACTIONS
+import com.jionex.agent.utils.Constant.PREF_TODAY_TRX_AMOUNT
 import com.jionex.agent.utils.Constant.PREF_TOKEN
+import com.jionex.agent.utils.Constant.PREF_TOTAL_MODEM
+import com.jionex.agent.utils.Constant.PREF_TOTAL_PENDING
+import com.jionex.agent.utils.Constant.PREF_TOTAL_TRANSACTIONS
+import com.jionex.agent.utils.Constant.PREF_TOTAL_TRX_AMOUNT
 
 /**
  * Akash.Singh
@@ -122,5 +129,53 @@ class SharedPreference(context: Context) {
 
     fun setPassword(password: String?) {
         pref.edit().putString(PREF_PASSWORD,password).apply()
+    }
+
+    fun setTotalPending(totalPending: Long) {
+        pref.edit().putLong(PREF_TOTAL_PENDING,totalPending).apply()
+    }
+
+    fun getTotalPending(): Long {
+        return pref.getLong(PREF_TOTAL_PENDING,0)
+    }
+
+    fun setTotalTransactions(totalTransactions: String) {
+        pref.edit().putString(PREF_TOTAL_TRANSACTIONS,totalTransactions).apply()
+    }
+
+    fun getTotalTransactions(): String? {
+        return pref.getString(PREF_TOTAL_TRANSACTIONS,"0.0")
+    }
+
+    fun setTodayTransactions(todayTransactions: Long) {
+        pref.edit().putLong(PREF_TODAY_TRANSACTIONS,todayTransactions).apply()
+    }
+
+    fun getTodayTransactions(): Long {
+        return pref.getLong(PREF_TODAY_TRANSACTIONS,0)
+    }
+
+    fun setTotalTrxAmount(totalTrxAmount: String) {
+        pref.edit().putString(PREF_TOTAL_TRX_AMOUNT,totalTrxAmount).apply()
+    }
+
+    fun getTotalTrxAmount(): String? {
+        return pref.getString(PREF_TOTAL_TRX_AMOUNT,"0.0")
+    }
+
+    fun setTodayTrxAmount(todayTrxAmount: String) {
+        pref.edit().putString(PREF_TODAY_TRX_AMOUNT,todayTrxAmount).apply()
+    }
+
+    fun getTodayTrxAmount(): String? {
+        return pref.getString(PREF_TODAY_TRX_AMOUNT,"0.0")
+    }
+
+    fun setTotalModem(totalModem: Int) {
+        pref.edit().putInt(PREF_TOTAL_MODEM,totalModem).apply()
+    }
+
+    fun getTotalModem(): Int {
+        return pref.getInt(PREF_TOTAL_MODEM,0)
     }
 }

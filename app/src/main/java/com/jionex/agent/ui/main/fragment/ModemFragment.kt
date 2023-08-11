@@ -15,6 +15,7 @@ import com.jionex.agent.sdkInit.JionexSDK
 import com.jionex.agent.ui.base.BaseFragment
 import com.jionex.agent.ui.base.BaseFragmentModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
+import com.jionex.agent.ui.main.activity.DashBoardActivity
 import com.jionex.agent.ui.main.activity.SignInActivity
 import com.jionex.agent.ui.main.adapter.ModemsManagerListAdapter
 import com.jionex.agent.ui.main.adapter.SmsManagerListAdapter
@@ -73,6 +74,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
             apiCall = bundle.getString("Api").toString()
             filter = bundle.getInt("Filer")
         }
+        (activity as DashBoardActivity).manageAppTitle("Modems",apiCall);
     }
 
 

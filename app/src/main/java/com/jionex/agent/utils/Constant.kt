@@ -47,6 +47,18 @@ object Constant {
 
     const val PREF_PASSWORD = "password"
 
+    const val PREF_TOTAL_PENDING = "totalPending"
+
+    const val PREF_TOTAL_TRANSACTIONS = "totalTransactions"
+
+    const val PREF_TODAY_TRANSACTIONS = "todayTransactions"
+
+    const val PREF_TODAY_TRX_AMOUNT = "todayTrxAmount"
+
+    const val PREF_TOTAL_TRX_AMOUNT = "totalTrxAmount"
+
+    const val PREF_TOTAL_MODEM = "todayModem"
+
     enum class BalanceManagerStatus(val action: Int) {
         SUCCESS(0),
         PENDING(1),

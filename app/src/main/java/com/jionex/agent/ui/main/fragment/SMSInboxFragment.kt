@@ -16,6 +16,7 @@ import com.jionex.agent.sdkInit.JionexSDK
 import com.jionex.agent.ui.base.BaseFragment
 import com.jionex.agent.ui.base.BaseFragmentModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
+import com.jionex.agent.ui.main.activity.DashBoardActivity
 import com.jionex.agent.ui.main.activity.SignInActivity
 import com.jionex.agent.ui.main.adapter.SmsManagerListAdapter
 import com.jionex.agent.ui.main.di.DaggerSMSInboxFragmentComponent
@@ -74,6 +75,7 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
             apiCall = bundle.getString("Api").toString()
             filter = bundle.getInt("Filer")
         }
+        (activity as DashBoardActivity).manageAppTitle("SMS Inbox",apiCall);
     }
     private fun getMessageByFilterApi() {
 

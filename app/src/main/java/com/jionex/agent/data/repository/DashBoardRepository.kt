@@ -6,6 +6,7 @@ import com.jionex.agent.data.model.request.GetBalanceByFilterRequest
 import com.jionex.agent.data.model.request.GetMessageByFilterRequest
 import com.jionex.agent.data.model.request.GetModemsByFilterRequest
 import com.jionex.agent.data.model.request.SignInRequest
+import com.jionex.agent.data.model.response.DashBoardItemResponse
 import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
 import com.jionex.agent.data.model.response.GetMessageByFilterResponse
 import com.jionex.agent.data.model.response.GetModemsByFilterResponse
@@ -41,6 +42,16 @@ class DashBoardRepository (val apiServices: JionexApiServices,
         message: (msg: String) -> Unit
     ) {
         apiServices.signInNow(signInRequest).apply {
+            execute(this, success, fail, context, message)
+        }
+    }
+
+    fun dashBoardData(
+        success: (dashBoardItemResponse : DashBoardItemResponse) -> Unit,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.dashboardData().apply {
             execute(this, success, fail, context, message)
         }
     }
@@ -155,5 +166,53 @@ class DashBoardRepository (val apiServices: JionexApiServices,
 
     fun getPinCode(): Int? {
         return sharedPreference.getPinCode()
+    }
+
+    fun setTotalPending(totalPending: Long) {
+        sharedPreference.setTotalPending(totalPending)
+    }
+
+    fun getTotalPending(): Long {
+        return sharedPreference.getTotalPending()
+    }
+
+    fun setTotalTransactions(totalTransactions: String) {
+        sharedPreference.setTotalTransactions(totalTransactions)
+    }
+
+    fun getTotalTransactions(): String? {
+        return sharedPreference.getTotalTransactions()
+    }
+
+    fun setTodayTransactions(todayTransactions: Long) {
+        sharedPreference.setTodayTransactions(todayTransactions)
+    }
+
+    fun getTodayTransactions(): Long {
+        return sharedPreference.getTodayTransactions()
+    }
+
+    fun setTotalTrxAmount(totalTrxAmount: String) {
+        sharedPreference.setTotalTrxAmount(totalTrxAmount)
+    }
+
+    fun getTotalTrxAmount(): String? {
+        return sharedPreference.getTotalTrxAmount()
+    }
+
+    fun setTodayTrxAmount(todayTrxAmount: String) {
+        sharedPreference.setTodayTrxAmount(todayTrxAmount)
+    }
+
+    fun getTodayTrxAmount(): String? {
+        return sharedPreference.getTodayTrxAmount()
+    }
+
+    fun setTotalModem(totalModem: Int) {
+        sharedPreference.setTotalModem(totalModem)
+    }
+
+    fun getTotalModem(): Int {
+        return sharedPreference.getTotalModem()
     }
 }

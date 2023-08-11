@@ -70,6 +70,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     }
 
     private fun initializationView() {
+        setSupportActionBar(viewDataBinding?.topAppBar)
         navController = Navigation.findNavController(this, R.id.navHostOnDashBoardFragment)
         NavigationUI.setupWithNavController(viewDataBinding?.navView!!, navController);
         val mNavigationView = findViewById<View>(R.id.nav_view) as NavigationView
@@ -269,6 +270,10 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         } else {
             showMessage(getString(R.string.NO_INTERNET_CONNECTION))
         }
+    }
+    public fun manageAppTitle(title:String, subTitle:String){
+        viewDataBinding?.topAppBar?.title = title
+        viewDataBinding?.topAppBar?.subtitle = subTitle
     }
 }
 

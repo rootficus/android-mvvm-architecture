@@ -8,6 +8,7 @@ import com.jionex.agent.data.model.request.ModemJsonModel
 import com.jionex.agent.data.model.request.PinCodeJsonModel
 import com.jionex.agent.data.model.request.SignInRequest
 import com.jionex.agent.data.model.request.VerifyPinRequest
+import com.jionex.agent.data.model.response.DashBoardItemResponse
 import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
 import com.jionex.agent.data.model.response.GetMessageByFilterResponse
 import com.jionex.agent.data.model.response.GetModemsByFilterResponse
@@ -67,5 +68,9 @@ interface JionexApiServices {
     fun getStatusCount(
         @Header("Authorization") authHeader: String?,
     ): Call<BaseResponseModel<GetStatusCountResponse>>
+
+    @Headers("Content-Type:application/json")
+    @GET("api/v1/users/dashboard_data")
+    fun dashboardData(): Call<BaseResponseModel<DashBoardItemResponse>>
 
 }
