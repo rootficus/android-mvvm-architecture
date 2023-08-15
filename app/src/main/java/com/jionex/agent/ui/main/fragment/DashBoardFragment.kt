@@ -41,7 +41,6 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
         super.onViewCreated(view, savedInstanceState)
         initializeDagger()
         initializeView(view)
-        (activity as DashBoardActivity).manageAppTitle("DashBoard","");
     }
 
     private fun initializeDagger() {

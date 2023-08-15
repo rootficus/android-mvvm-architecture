@@ -12,17 +12,28 @@
         android:layout_width="match_parent"
         android:background="@color/bgPrimaryColor"
         android:layout_height="match_parent">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/titleDashBoard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dashboard"
+            android:layout_margin="@dimen/_5sdp"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/roboto_medium"></androidx.appcompat.widget.AppCompatTextView>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/titleDashBoard">
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardHead1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:cardUseCompatPadding="true"
-                app:cardElevation="5dp"
-                app:cardCornerRadius="5sp"
+                app:cardElevation="@dimen/_2sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
                 app:cardBackgroundColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +41,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:background="@color/cardBgColor"
-                    android:padding="8dp"
+                    android:padding="@dimen/_5sdp"
                     android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -42,25 +53,25 @@
                         android:fontFamily="@font/roboto_bold"
                         android:textColor="#3FCBDA"
                         android:text="@string/total_modem"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/_10sdp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/totalModemValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         app:layout_constraintTop_toBottomOf="@id/totalModemLabel"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_medium"
                         android:textColor="#5a5c69"
                         android:text="@string/_0"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/_10sdp"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:textSize="12sp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textSize="@dimen/_10sdp"
                         app:layout_constraintTop_toBottomOf="@id/totalModemValue"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_regular"
@@ -68,8 +79,8 @@
                         android:text="@string/only_active_modem" />
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:background="@drawable/modem"
                         android:backgroundTint="#3FCBDA"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -83,8 +94,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardUseCompatPadding="true"
-                app:cardElevation="5dp"
-                app:cardCornerRadius="5sp"
+                app:cardElevation="@dimen/_2sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
                 app:cardBackgroundColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -92,7 +103,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:background="@color/cardBgColor"
-                    android:padding="8dp"
+                    android:padding="@dimen/_5sdp"
                     android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -104,25 +115,25 @@
                         android:fontFamily="@font/roboto_bold"
                         android:textColor="#008754"
                         android:text="@string/today_trx_amount"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/_10sdp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/todayTrxAmountValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         app:layout_constraintTop_toBottomOf="@id/todayTrxAmountLabel"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_medium"
                         android:textColor="#5a5c69"
                         android:text="@string/_0"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/_10sdp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:textSize="12sp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textSize="@dimen/_10sdp"
                         app:layout_constraintTop_toBottomOf="@id/todayTrxAmountValue"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_regular"
@@ -130,8 +141,8 @@
                         android:text="@string/only_success_approved" />
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:background="@drawable/money_transfer"
                         android:backgroundTint="#008754"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -144,8 +155,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardUseCompatPadding="true"
-                app:cardElevation="5dp"
-                app:cardCornerRadius="5sp"
+               app:cardElevation="@dimen/_2sdp"
+               app:cardCornerRadius="@dimen/_5sdp"
                 app:cardBackgroundColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -153,7 +164,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:background="@color/cardBgColor"
-                    android:padding="8dp"
+                    android:padding="@dimen/_5sdp"
                     android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -165,34 +176,34 @@
                         android:fontFamily="@font/roboto_bold"
                         android:textColor="#4E73DF"
                         android:text="@string/today_transactions"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/_10sdp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/todayTransactionsValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         app:layout_constraintTop_toBottomOf="@id/todayTransactionsLabel"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_medium"
                         android:textColor="#5a5c69"
                         android:text="@string/_0"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/_10sdp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         app:layout_constraintTop_toBottomOf="@id/todayTransactionsValue"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_regular"
                         android:textColor="#CC4E73DF"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/_10sdp"
                         android:text="@string/only_success_approved" />
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:background="@drawable/transaction"
                         android:backgroundTint="#4E73DF"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -205,8 +216,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardUseCompatPadding="true"
-                app:cardElevation="5dp"
-                app:cardCornerRadius="5sp"
+               app:cardElevation="@dimen/_2sdp"
+               app:cardCornerRadius="@dimen/_5sdp"
                 app:cardBackgroundColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -214,7 +225,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:background="@color/cardBgColor"
-                    android:padding="8dp"
+                    android:padding="@dimen/_5sdp"
                     android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -225,35 +236,35 @@
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_bold"
                         android:textColor="#FFC107"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/_10sdp"
                         android:text="@string/total_trx_amount" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/totalTrxAmountValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         app:layout_constraintTop_toBottomOf="@id/totalTrxAmountLabel"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_medium"
                         android:textColor="#5a5c69"
                         android:text="@string/_0"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/_10sdp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         app:layout_constraintTop_toBottomOf="@id/totalTrxAmountValue"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_regular"
                         android:textColor="#CCFFC107"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/_10sdp"
                         android:text="@string/only_success_approved" />
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:background="@drawable/money_transfer"
                         android:backgroundTint="#FFC107"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -266,8 +277,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardUseCompatPadding="true"
-            app:cardElevation="5dp"
-            app:cardCornerRadius="5sp"
+            app:cardElevation="@dimen/_2sdp"
+            app:cardCornerRadius="@dimen/_5sdp"
             app:cardBackgroundColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -275,7 +286,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:background="@color/cardBgColor"
-                android:padding="8dp"
+                android:padding="@dimen/_5sdp"
                 android:layout_height="match_parent">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -287,34 +298,34 @@
                     android:fontFamily="@font/roboto_bold"
                     android:textColor="#212529"
                     android:text="@string/total_transactions"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/_10sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/totalTransactionsValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     app:layout_constraintTop_toBottomOf="@id/totalTransactionsLabel"
                     app:layout_constraintStart_toStartOf="parent"
                     android:fontFamily="@font/roboto_medium"
                     android:textColor="#5a5c69"
                     android:text="@string/_0"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/_10sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="@dimen/_5sdp"
                     app:layout_constraintTop_toBottomOf="@id/totalTransactionsValue"
                     app:layout_constraintStart_toStartOf="parent"
                     android:fontFamily="@font/roboto_regular"
                     android:textColor="#CC212529"
-                    android:textSize="12sp"
+                    android:textSize="@dimen/_10sdp"
                     android:text="@string/only_success_approved" />
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
                     android:background="@drawable/transaction"
                     android:backgroundTint="#5a5c69"
                     android:importantForAccessibility="no"
@@ -328,8 +339,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardUseCompatPadding="true"
-                app:cardElevation="5dp"
-                app:cardCornerRadius="5sp"
+               app:cardElevation="@dimen/_2sdp"
+               app:cardCornerRadius="@dimen/_5sdp"
                 app:cardBackgroundColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -337,7 +348,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:background="@color/cardBgColor"
-                    android:padding="8dp"
+                    android:padding="@dimen/_5sdp"
                     android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -349,35 +360,35 @@
                         android:fontFamily="@font/roboto_bold"
                         android:textColor="#f65a3e"
                         android:text="@string/total_pending"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/_10sdp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/totalPendingValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         app:layout_constraintTop_toBottomOf="@id/totalPendingLabel"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_medium"
                         android:textColor="#5a5c69"
                         android:text="@string/_0"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/_10sdp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/totalModemSubValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         app:layout_constraintTop_toBottomOf="@id/totalPendingValue"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_regular"
                         android:textColor="#CCF65A3E"
-                        android:textSize="12sp"
+                        android:textSize="@dimen/_10sdp"
                         android:text="@string/waiting_danger_pending" />
 
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:importantForAccessibility="no"
                         android:background="@drawable/pending"
                         android:backgroundTint="#f65a3e"
@@ -386,6 +397,23 @@
                         app:layout_constraintBottom_toBottomOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/titleRecentTransactions"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:text="@string/recent_transactions"
+                android:layout_margin="@dimen/_5sdp"
+                android:textColor="@color/textColor"
+                app:layout_constraintTop_toBottomOf="@+id/cardHead6"
+                app:layout_constraintStart_toStartOf="parent"
+                android:fontFamily="@font/roboto_medium"></androidx.appcompat.widget.AppCompatTextView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recentTrendingRlView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/titleRecentTransactions"></androidx.recyclerview.widget.RecyclerView>
         </androidx.constraintlayout.widget.ConstraintLayout>
         <include
             android:id="@+id/progressView"

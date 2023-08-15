@@ -74,7 +74,6 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
             apiCall = bundle.getString("Api").toString()
             filter = bundle.getInt("Filer")
         }
-        (activity as DashBoardActivity).manageAppTitle("Modems",apiCall);
     }
 
 

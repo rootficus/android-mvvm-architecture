@@ -75,7 +75,6 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
             apiCall = bundle.getString("Api").toString()
             filter = bundle.getInt("Filer")
         }
-        (activity as DashBoardActivity).manageAppTitle("SMS Inbox",apiCall);
     }
     private fun getMessageByFilterApi() {
 

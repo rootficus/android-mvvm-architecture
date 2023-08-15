@@ -96,7 +96,6 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
             apiCall = bundle.getString("Api").toString()
             filter = bundle.getInt("Filer")
         }
-        (activity as DashBoardActivity).manageAppTitle("Balance Manager",apiCall);
     }
 
     private fun setBleAdapter() {

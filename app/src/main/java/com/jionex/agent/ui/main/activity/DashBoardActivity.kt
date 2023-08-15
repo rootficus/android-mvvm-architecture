@@ -44,8 +44,6 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     private val dashBoardViewModel: DashBoardViewModel by viewModels { dashBoardViewModelFactory }
 
     private lateinit var navController: NavController
-    private var lastExpandedGroupPosition = -1
-    private lateinit var toggle: ActionBarDrawerToggle
     var succes: Int? = 0
     var reject: Int? = 0
     var approve: Int? = 0
@@ -70,8 +68,6 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     }
 
     private fun initializationView() {
-        setSupportActionBar(viewDataBinding?.topAppBar)
-
         navController = Navigation.findNavController(this, R.id.navHostOnDashBoardFragment)
         NavigationUI.setupWithNavController(viewDataBinding?.navView!!, navController);
         val mNavigationView = findViewById<View>(R.id.nav_view) as NavigationView
@@ -82,76 +78,13 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
             "${dashBoardViewModel.getPinCode()}"
         getStatusCount()
 
-        val actionBarDrawerToggle = ActionBarDrawerToggle(
-            this,
-            viewDataBinding?.drawerLayout,
-            viewDataBinding?.topAppBar,
-            0,
-            0
-        )
-
-        supportActionBar!!.setHomeButtonEnabled(true)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        actionBarDrawerToggle
-        actionBarDrawerToggle.syncState()
         if (mNavigationView != null) {
             mNavigationView.setNavigationItemSelectedListener(this);
         }
-    }
 
-
-
-    private fun setDrawerData() {
-        val expandableListDetail = HashMap<String, List<String>>()
-
-        val bleManagerList: MutableList<String> = ArrayList()
-        bleManagerList.add("All Transactions")
-        bleManagerList.add("Success,$succes")
-        bleManagerList.add("Pending,$pending")
-        bleManagerList.add("Rejected,$reject")
-        bleManagerList.add("Approved,$approve")
-        bleManagerList.add("Danger,$danger")
-
-        val modemsList: MutableList<String> = ArrayList()
-        modemsList.add("Modem List")
-
-        val smsList: MutableList<String> = ArrayList()
-        smsList.add("All Sms")
-        smsList.add("Cash In")
-        smsList.add("B2B")
-
-        expandableListDetail["Sms Inbox"] = smsList
-        expandableListDetail["Balance Manager"] = bleManagerList
-        expandableListDetail["Modems"] = modemsList
-
-        val expandableListTitle = ArrayList<String>(expandableListDetail.keys.reversed())
-        val drawerAdapter =
-            DrawerAdapter(applicationContext, expandableListDetail, expandableListTitle)
-        viewDataBinding?.sideNav?.evMenu?.setAdapter(drawerAdapter)
-        drawerAdapter.listener = cardListener
-        //Call Dash Board
-        viewDataBinding?.sideNav?.textDash?.setOnClickListener {
-            viewDataBinding?.drawerLayout?.close()
-            dashBoardViewModel.checkNightTheme(false)
-            //navController.navigate(R.id.navigation_dashboard)
+        viewDataBinding?.bottomNavigation!!.setOnItemSelectedListener {
+            onNavigationItemSelected(it)
         }
-        viewDataBinding?.sideNav?.evMenu?.setOnGroupExpandListener { groupPosition ->
-            if (lastExpandedGroupPosition != -1 && lastExpandedGroupPosition != groupPosition) {
-                // Collapse the previously expanded group
-                viewDataBinding?.sideNav?.evMenu?.collapseGroup(lastExpandedGroupPosition);
-            }
-            lastExpandedGroupPosition = groupPosition;
-        }
-
-        viewDataBinding?.sideNav?.evMenu?.setOnGroupCollapseListener { groupPosition ->
-
-        }
-
-        viewDataBinding?.sideNav?.evMenu?.setOnChildClickListener { parent, v, groupPosition, childPosition, id ->
-
-            false
-        }
-
     }
 
     private fun jumpToAnotherFragment(navigationTaskProfile: Int, bundle: Bundle) {
@@ -162,7 +95,30 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         when (id) {
-
+            R.id.navigation_dashboard-> {
+                val bundle = Bundle()
+                jumpToAnotherFragment(R.id.navigation_dashboard, bundle)
+            }
+            R.id.navigation_blManager-> {
+                val bundle = Bundle().apply {
+                    putString("Api", "All Transactions")
+                    putInt("Filer", -1)
+                }
+                jumpToAnotherFragment(R.id.navigation_blManager, bundle)
+            }
+            R.id.navigation_smsInboxFragment-> {
+                val bundle = Bundle().apply {
+                    putString("Api", "B2B")
+                    putInt("Filer", 2)
+                }
+                jumpToAnotherFragment(R.id.navigation_blManager, bundle)
+            }
+            R.id.navigation_modemFragment-> {
+                val bundle = Bundle().apply {
+                    putString("Api", "Modem List")
+                }
+                jumpToAnotherFragment(R.id.navigation_modemFragment, bundle)
+            }
             else -> return false
         }
         return true
@@ -264,18 +220,18 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                 when (it.status) {
                     Status.SUCCESS -> {
                         val getStatusCountResponse = it.data
-                        Log.i("Status Count","::${getStatusCountResponse?.approved}")
-                        succes= getStatusCountResponse?.success
-                        approve= getStatusCountResponse?.approved
-                        danger= getStatusCountResponse?.danger
-                        pending= getStatusCountResponse?.pending
-                        reject=   10///getStatusCountResponse?.rejected
-                        setDrawerData()
+                        Log.i("Status Count", "::${getStatusCountResponse?.approved}")
+                        succes = getStatusCountResponse?.success
+                        approve = getStatusCountResponse?.approved
+                        danger = getStatusCountResponse?.danger
+                        pending = getStatusCountResponse?.pending
+                        reject = 10///getStatusCountResponse?.rejected
+                        //setDrawerData()
                     }
 
                     Status.ERROR -> {
-                        Log.i("Status Count","Error")
-                        setDrawerData()
+                        Log.i("Status Count", "Error")
+                        //setDrawerData()
                     }
 
                     Status.LOADING -> {
@@ -285,10 +241,6 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         } else {
             showMessage(getString(R.string.NO_INTERNET_CONNECTION))
         }
-    }
-    public fun manageAppTitle(title:String, subTitle:String){
-        viewDataBinding?.topAppBar?.title = title
-        viewDataBinding?.topAppBar?.subtitle = subTitle
     }
 }
 
