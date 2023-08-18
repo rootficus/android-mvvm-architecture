@@ -12,17 +12,83 @@
         android:layout_width="match_parent"
         android:background="@color/bgPrimaryColor"
         android:layout_height="match_parent">
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_home"
+            style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@android:color/white"
+            android:padding="@dimen/_3sdp"
+            app:elevation="@dimen/_5sdp"
+            android:elevation="@dimen/_5sdp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/_5sdp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/agentProfileImage"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:background="@drawable/ic_user"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textAgentFullName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AgentName"
+                    android:textSize="@dimen/_9sdp"
+                    android:fontFamily="@font/roboto_regular"
+                    app:layout_constraintStart_toStartOf="@+id/view001"
+                    app:layout_constraintBottom_toTopOf="@+id/view001"
+                    />
+
+                <View
+                    android:id="@+id/view001"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_2sdp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/agentProfileImage"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textAgentPinCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="******"
+                    android:textSize="@dimen/_8sdp"
+                    android:fontFamily="@font/roboto_regular"
+                    app:layout_constraintLeft_toLeftOf="@+id/textAgentFullName"
+                    app:layout_constraintTop_toBottomOf="@id/view001"/>
+
+                <ImageView
+                    android:id="@+id/logoutBtn"
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:background="@drawable/ic_logout"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:backgroundTint="@color/primaryColor"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/titleDashBoard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dashboard"
-            android:layout_margin="@dimen/_5sdp"
+            android:layout_margin="@dimen/_3sdp"
             android:textColor="@color/textColor"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="@dimen/_11sdp"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar_home"
             app:layout_constraintStart_toStartOf="parent"
-            android:fontFamily="@font/roboto_medium"></androidx.appcompat.widget.AppCompatTextView>
+            android:fontFamily="@font/roboto_medium" />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,7 +107,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:background="@color/cardBgColor"
-                    android:padding="@dimen/_5sdp"
+                    android:padding="@dimen/_3sdp"
                     android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -59,7 +125,7 @@
                         android:id="@+id/totalModemValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
                         app:layout_constraintTop_toBottomOf="@id/totalModemLabel"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_medium"
@@ -70,7 +136,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
                         android:textSize="@dimen/_10sdp"
                         app:layout_constraintTop_toBottomOf="@id/totalModemValue"
                         app:layout_constraintStart_toStartOf="parent"
@@ -103,7 +169,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:background="@color/cardBgColor"
-                    android:padding="@dimen/_5sdp"
+                    android:padding="@dimen/_3sdp"
                     android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -121,7 +187,7 @@
                         android:id="@+id/todayTrxAmountValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
                         app:layout_constraintTop_toBottomOf="@id/todayTrxAmountLabel"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_medium"
@@ -132,7 +198,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
                         android:textSize="@dimen/_10sdp"
                         app:layout_constraintTop_toBottomOf="@id/todayTrxAmountValue"
                         app:layout_constraintStart_toStartOf="parent"
@@ -164,7 +230,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:background="@color/cardBgColor"
-                    android:padding="@dimen/_5sdp"
+                    android:padding="@dimen/_3sdp"
                     android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -182,7 +248,7 @@
                         android:id="@+id/todayTransactionsValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
                         app:layout_constraintTop_toBottomOf="@id/todayTransactionsLabel"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_medium"
@@ -193,7 +259,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
                         app:layout_constraintTop_toBottomOf="@id/todayTransactionsValue"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_regular"
@@ -225,7 +291,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:background="@color/cardBgColor"
-                    android:padding="@dimen/_5sdp"
+                    android:padding="@dimen/_3sdp"
                     android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -243,7 +309,7 @@
                         android:id="@+id/totalTrxAmountValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
                         app:layout_constraintTop_toBottomOf="@id/totalTrxAmountLabel"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_medium"
@@ -254,7 +320,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
                         app:layout_constraintTop_toBottomOf="@id/totalTrxAmountValue"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_regular"
@@ -286,7 +352,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:background="@color/cardBgColor"
-                android:padding="@dimen/_5sdp"
+                android:padding="@dimen/_3sdp"
                 android:layout_height="match_parent">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -304,7 +370,7 @@
                     android:id="@+id/totalTransactionsValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
                     app:layout_constraintTop_toBottomOf="@id/totalTransactionsLabel"
                     app:layout_constraintStart_toStartOf="parent"
                     android:fontFamily="@font/roboto_medium"
@@ -315,7 +381,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
                     app:layout_constraintTop_toBottomOf="@id/totalTransactionsValue"
                     app:layout_constraintStart_toStartOf="parent"
                     android:fontFamily="@font/roboto_regular"
@@ -348,7 +414,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:background="@color/cardBgColor"
-                    android:padding="@dimen/_5sdp"
+                    android:padding="@dimen/_3sdp"
                     android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -366,7 +432,7 @@
                         android:id="@+id/totalPendingValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
                         app:layout_constraintTop_toBottomOf="@id/totalPendingLabel"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_medium"
@@ -378,7 +444,7 @@
                         android:id="@+id/totalModemSubValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
                         app:layout_constraintTop_toBottomOf="@id/totalPendingValue"
                         app:layout_constraintStart_toStartOf="parent"
                         android:fontFamily="@font/roboto_regular"

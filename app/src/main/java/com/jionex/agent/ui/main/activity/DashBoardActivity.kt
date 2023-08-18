@@ -1,20 +1,14 @@
 package com.jionex.agent.ui.main.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
 import com.jionex.agent.R
-import com.jionex.agent.data.model.request.GetModemsByFilterRequest
 import com.jionex.agent.databinding.ActivityDashboardBinding
 import com.jionex.agent.sdkInit.JionexSDK
 import com.jionex.agent.ui.base.BaseActivity
@@ -69,18 +63,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
 
     private fun initializationView() {
         navController = Navigation.findNavController(this, R.id.navHostOnDashBoardFragment)
-        NavigationUI.setupWithNavController(viewDataBinding?.navView!!, navController);
-        val mNavigationView = findViewById<View>(R.id.nav_view) as NavigationView
-        val header = mNavigationView.getHeaderView(0)
-        header.findViewById<AppCompatTextView>(R.id.textAgentValueFullName).text =
-            "${dashBoardViewModel.getFullName()}"
-        header.findViewById<AppCompatTextView>(R.id.textAgentValuePinCode).text =
-            "${dashBoardViewModel.getPinCode()}"
-        getStatusCount()
-
-        if (mNavigationView != null) {
-            mNavigationView.setNavigationItemSelectedListener(this);
-        }
+        NavigationUI.setupWithNavController(viewDataBinding?.bottomNavigation!!, navController);
 
         viewDataBinding?.bottomNavigation!!.setOnItemSelectedListener {
             onNavigationItemSelected(it)
@@ -88,13 +71,11 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     }
 
     private fun jumpToAnotherFragment(navigationTaskProfile: Int, bundle: Bundle) {
-        viewDataBinding?.drawerLayout?.close()
         navController.navigate(navigationTaskProfile, bundle)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        when (id) {
+        when (item.itemId) {
             R.id.navigation_dashboard-> {
                 val bundle = Bundle()
                 jumpToAnotherFragment(R.id.navigation_dashboard, bundle)
@@ -122,93 +103,6 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
             else -> return false
         }
         return true
-    }
-
-    private val cardListener = object : DrawerAdapter.OnClickListener {
-        override fun click(text: String) {
-
-            when (text) {
-                "All Transactions" -> {
-                    val bundle = Bundle().apply {
-                        putString("Api", "All Transactions")
-                        putInt("Filer", -1)
-                    }
-                    jumpToAnotherFragment(R.id.navigation_blManager, bundle)
-                }
-
-                "Success" -> {
-                    val bundle = Bundle().apply {
-                        putString("Api", "Success")
-                        putInt("Filer", 0)
-                    }
-                    jumpToAnotherFragment(R.id.navigation_blManager, bundle)
-                }
-
-                "Pending" -> {
-                    val bundle = Bundle().apply {
-                        putString("Api", "Pending")
-                        putInt("Filer", 1)
-                    }
-                    jumpToAnotherFragment(R.id.navigation_blManager, bundle)
-                }
-
-                "Rejected" -> {
-                    val bundle = Bundle().apply {
-                        putString("Api", "Rejected")
-                        putInt("Filer", 3)
-                    }
-                    jumpToAnotherFragment(R.id.navigation_blManager, bundle)
-                }
-
-                "Approved" -> {
-                    val bundle = Bundle().apply {
-                        putString("Api", "Approved")
-                        putInt("Filer", 4)
-                    }
-                    jumpToAnotherFragment(R.id.navigation_blManager, bundle)
-                }
-
-                "Danger" -> {
-                    val bundle = Bundle().apply {
-                        putString("Api", "Danger")
-                        putInt("Filer", 5)
-                    }
-                    jumpToAnotherFragment(R.id.navigation_blManager, bundle)
-                }
-
-                "Modem List" -> {
-                    val bundle = Bundle().apply {
-                        putString("Api", "Modem List")
-                    }
-                    jumpToAnotherFragment(R.id.navigation_modemFragment, bundle)
-                }
-
-                "All Sms" -> {
-                    val bundle = Bundle().apply {
-                        putString("Api", "All Sms")
-                        putInt("Filer", -1)
-                    }
-                    jumpToAnotherFragment(R.id.navigation_smsInboxFragment, bundle)
-                }
-
-                "Cash In" -> {
-                    val bundle = Bundle().apply {
-                        putString("Api", "Cash In")
-                        putInt("Filer", 0)
-                    }
-                    jumpToAnotherFragment(R.id.navigation_smsInboxFragment, bundle)
-                }
-
-                "B2B" -> {
-                    val bundle = Bundle().apply {
-                        putString("Api", "B2B")
-                        putInt("Filer", 2)
-                    }
-                    jumpToAnotherFragment(R.id.navigation_smsInboxFragment, bundle)
-                }
-            }
-        }
-
     }
 
     private fun getStatusCount() {
