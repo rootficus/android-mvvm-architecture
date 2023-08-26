@@ -83,7 +83,8 @@ object Constant {
         CashIn(0),
         CashOut(1),
         B2B(2),
-        UNKNOWN(3)
+        UNKNOWN(3),
+        All(-1)
     }
 
     enum class SyncData(val value: Int) {

@@ -64,7 +64,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
 
     private fun initializeView() {
         setBleAdapter(-1)
-        getStatusCount()
+        //getStatusCount()
         mDataBinding.chipGroup.setOnCheckedChangeListener { chipGroup, i ->
             val chip = chipGroup.findViewById<Chip>(i)
             if (chip != null) {

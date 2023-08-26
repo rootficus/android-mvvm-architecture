@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.chip.Chip
 import com.jionex.agent.R
 import com.jionex.agent.data.model.request.GetMessageByFilterRequest
 import com.jionex.agent.data.model.response.GetMessageByFilterResponse
@@ -22,6 +23,7 @@ import com.jionex.agent.ui.main.adapter.SmsManagerListAdapter
 import com.jionex.agent.ui.main.di.DaggerSMSInboxFragmentComponent
 import com.jionex.agent.ui.main.di.SMSInboxFragmentModule
 import com.jionex.agent.ui.main.viewmodel.DashBoardViewModel
+import com.jionex.agent.utils.Constant
 import com.jionex.agent.utils.NetworkHelper
 import com.jionex.agent.utils.SharedPreference
 import com.jionex.agent.utils.Status
@@ -46,9 +48,6 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
 
     private var listGetMessageByFilter : ArrayList<GetMessageByFilterResponse> = arrayListOf()
 
-    private var apiCall : String = ""
-    private var filter = 0
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,18 +64,33 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
     }
 
     private fun initializeView() {
-        getBundleData()
-        getMessageByFilterApi()
-    }
+        getMessageByFilterApi(Constant.SMSType.All.value)
+        mDataBinding.chipGroup.setOnCheckedChangeListener { chipGroup, i ->
+            val chip = chipGroup.findViewById<Chip>(i)
+            if (chip != null) {
+                when (chip.id) {
+                    mDataBinding.chipAllSMS.id -> {
+                        getMessageByFilterApi(Constant.SMSType.All.value)
+                    }
 
-    private fun getBundleData() {
-        val bundle = arguments
-        if (bundle != null) {
-            apiCall = bundle.getString("Api").toString()
-            filter = bundle.getInt("Filer")
+                    mDataBinding.chipCashIn.id -> {
+                        getMessageByFilterApi(Constant.SMSType.CashIn.value)
+                    }
+
+                    mDataBinding.chipCashOut.id -> {
+                        getMessageByFilterApi(Constant.SMSType.CashOut.value)
+                    }
+
+                    mDataBinding.chipB2B.id -> {
+                        getMessageByFilterApi(Constant.SMSType.B2B.value)
+                    }
+
+                }
+            }
         }
+
     }
-    private fun getMessageByFilterApi() {
+    private fun getMessageByFilterApi(filter: Int) {
 
         if (networkHelper.isNetworkConnected()) {
             val getMessageByFilterRequest = GetMessageByFilterRequest(
@@ -98,6 +112,7 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
                 when (it.status) {
                     Status.SUCCESS -> {
                         progressBar.dismiss()
+                        listGetMessageByFilter.clear()
                         Log.i("Data","::${it.data}")
                         it.data?.let { it1 -> listGetMessageByFilter.addAll(it1) }
                         setMessageAdapter()
