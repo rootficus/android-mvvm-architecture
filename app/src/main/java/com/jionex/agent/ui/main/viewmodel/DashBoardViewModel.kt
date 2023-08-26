@@ -8,7 +8,7 @@ import com.jionex.agent.data.model.request.GetMessageByFilterRequest
 import com.jionex.agent.data.model.request.GetModemsByFilterRequest
 import com.jionex.agent.data.model.request.SignInRequest
 import com.jionex.agent.data.model.response.DashBoardItemResponse
-import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
+import com.jionex.agent.data.model.response.GetBalanceManageRecord
 import com.jionex.agent.data.model.response.GetMessageByFilterResponse
 import com.jionex.agent.data.model.response.GetModemsByFilterResponse
 import com.jionex.agent.data.model.response.GetStatusCountResponse
@@ -20,6 +20,7 @@ import com.jionex.agent.utils.setError
 import com.jionex.agent.utils.setLoading
 import com.jionex.agent.utils.setSuccess
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -52,16 +53,39 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
         }
     }
 
-    val getBalanceByFilterResponseModel = MutableLiveData<ResponseData<List<GetBalanceByFilterResponse>>>()
+    val getBalanceManageRecordModel = MutableLiveData<ResponseData<List<GetBalanceManageRecord>>>()
     fun getBalanceByFilter(getBalanceByFilterRequest: GetBalanceByFilterRequest) {
-        getBalanceByFilterResponseModel.setLoading(null)
-        viewModelScope.launch(Dispatchers.IO) {
-            dashBoardRepository.getBalanceByFilter({ success -> getBalanceByFilterResponseModel.setSuccess(success) },
-                { error -> getBalanceByFilterResponseModel.setError(error) },
-                getBalanceByFilterRequest,
-                { message -> getBalanceByFilterResponseModel.setError(message) })
+        getBalanceManageRecordModel.setLoading(null)
+
+        if (dashBoardRepository.getCountBalanceManageRecord(-1)>0){
+            var arrayList = getBalanceByFilterRequest.balance_manager_filter?.let {
+                getBalanceManageRecord(it)
+            }
+            getBalanceManageRecordModel.setSuccess(arrayList)
+        }else{
+            viewModelScope.launch(Dispatchers.IO) {
+                dashBoardRepository.getBalanceByFilter(
+                    { success ->
+                        GlobalScope.launch {
+                            success.forEach {
+                                dashBoardRepository.insertBalanceManagerRecord(it)
+                            }
+                        }
+                        getBalanceManageRecordModel.setSuccess(success)
+                    },
+                    { error -> getBalanceManageRecordModel.setError(error) },
+                    getBalanceByFilterRequest,
+                    { message -> getBalanceManageRecordModel.setError(message) })
+            }
         }
+
     }
+
+    fun getBalanceManageRecord(it: Int) = dashBoardRepository.getBalanceManageRecord(it)
+
+    fun getCountBalanceManageRecord(it: Int)  = dashBoardRepository.getCountBalanceManageRecord(it)
+
+
     val getMessageByFilterResponseModel = MutableLiveData<ResponseData<List<GetMessageByFilterResponse>>>()
     fun getMessageByFilter(getMessageByFilterRequest: GetMessageByFilterRequest) {
         getMessageByFilterResponseModel.setLoading(null)
@@ -230,6 +254,46 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
 
     fun getTotalModem(): Int {
         return dashBoardRepository.getTotalModem()
+    }
+
+    fun setBLSuccess(success: Int?) {
+        dashBoardRepository.setBLSuccess(success)
+    }
+
+    fun getBLSuccess():Int{
+        return dashBoardRepository.getBLSuccess()
+    }
+
+    fun setBLPending(pending: Int?) {
+        dashBoardRepository.setBLPending(pending)
+    }
+
+    fun getBLPending():Int{
+        return dashBoardRepository.getBLPending()
+    }
+
+    fun setBLRejected(rejected: Int?) {
+        dashBoardRepository.setBLRejected(rejected)
+    }
+
+    fun getBLRejected():Int{
+        return dashBoardRepository.getBLRejected()
+    }
+
+    fun setBLApproved(approved: Int?) {
+        dashBoardRepository.setBLApproved(approved)
+    }
+
+    fun getBLApproved():Int{
+        return dashBoardRepository.getBLApproved()
+    }
+
+    fun setBLDanger(danger: Int?) {
+        dashBoardRepository.setBLDanger(danger)
+    }
+
+    fun getBLDanger():Int{
+        return dashBoardRepository.getBLDanger()
     }
 
 }

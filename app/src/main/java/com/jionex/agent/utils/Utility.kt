@@ -60,6 +60,25 @@ object Utility {
         return time
     }
 
+    fun convertTodayUtc2Local(utcTime: String?): String? {
+        var time = ""
+        if (utcTime != null) {
+            val utcFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+            utcFormatter.timeZone = TimeZone.getTimeZone("UTC")
+            var gpsUTCDate: Date? = null //from  ww  w.j  a va 2 s  . c  o  m
+            try {
+                gpsUTCDate = utcFormatter.parse(utcTime)
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
+            val localFormatter = SimpleDateFormat("hh:mm a", Locale.getDefault())
+            localFormatter.timeZone = TimeZone.getDefault()
+            assert(gpsUTCDate != null)
+            time = localFormatter.format(gpsUTCDate?.time)
+        }
+        return time
+    }
+
     fun convertCurrencyFormat(currency: Double) : String{
         Log.d("convertCurrencyFormat","::${currency}")
         val formatter = DecimalFormat("###,###,##0.00")

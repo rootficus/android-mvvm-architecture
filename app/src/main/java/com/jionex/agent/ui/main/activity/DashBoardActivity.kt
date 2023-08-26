@@ -38,11 +38,6 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     private val dashBoardViewModel: DashBoardViewModel by viewModels { dashBoardViewModelFactory }
 
     private lateinit var navController: NavController
-    var succes: Int? = 0
-    var reject: Int? = 0
-    var approve: Int? = 0
-    var danger: Int? = 0
-    var pending: Int? = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,7 +87,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                     putString("Api", "B2B")
                     putInt("Filer", 2)
                 }
-                jumpToAnotherFragment(R.id.navigation_blManager, bundle)
+                jumpToAnotherFragment(R.id.navigation_smsInboxFragment, bundle)
             }
             R.id.navigation_modemFragment-> {
                 val bundle = Bundle().apply {
@@ -103,38 +98,6 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
             else -> return false
         }
         return true
-    }
-
-    private fun getStatusCount() {
-
-        if (networkHelper.isNetworkConnected()) {
-
-            dashBoardViewModel.getStatusCount()
-            dashBoardViewModel.getStatusCountResponseModel.observe(this@DashBoardActivity) {
-                when (it.status) {
-                    Status.SUCCESS -> {
-                        val getStatusCountResponse = it.data
-                        Log.i("Status Count", "::${getStatusCountResponse?.approved}")
-                        succes = getStatusCountResponse?.success
-                        approve = getStatusCountResponse?.approved
-                        danger = getStatusCountResponse?.danger
-                        pending = getStatusCountResponse?.pending
-                        reject = 10///getStatusCountResponse?.rejected
-                        //setDrawerData()
-                    }
-
-                    Status.ERROR -> {
-                        Log.i("Status Count", "Error")
-                        //setDrawerData()
-                    }
-
-                    Status.LOADING -> {
-                    }
-                }
-            }
-        } else {
-            showMessage(getString(R.string.NO_INTERNET_CONNECTION))
-        }
     }
 }
 

@@ -59,13 +59,24 @@ object Constant {
 
     const val PREF_TOTAL_MODEM = "todayModem"
 
+    const val PREF_BL_SUCCESS = "BlSuccess"
+
+    const val PREF_BL_PENDING = "BlPending"
+
+    const val PREF_BL_REJECTED = "BlRejected"
+
+    const val PREF_BL_APPROVED = "BlApproved"
+
+    const val PREF_BL_DANGER = "BlDanger"
+
     enum class BalanceManagerStatus(val action: Int) {
         SUCCESS(0),
         PENDING(1),
         FAKE(2),
         REJECTED(3),
         APPROVED(4),
-        DANGER(5)
+        DANGER(5),
+        All(-1)
     }
 
     enum class SMSType(val value: Int) {

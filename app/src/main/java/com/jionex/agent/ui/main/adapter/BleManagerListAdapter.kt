@@ -1,21 +1,18 @@
 package com.jionex.agent.ui.main.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.jionex.agent.R
-import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
+import com.jionex.agent.data.model.response.GetBalanceManageRecord
 import com.jionex.agent.databinding.ItemBleManagerBinding
-import com.jionex.agent.databinding.ItemListLayoutBinding
 import com.jionex.agent.utils.Utility
-import com.jionex.agent.utils.getTagName
 
-class BleManagerListAdapter(private var itemList: ArrayList<GetBalanceByFilterResponse>) :
+class BleManagerListAdapter(private var itemList: ArrayList<GetBalanceManageRecord>) :
     RecyclerView.Adapter<BleManagerListAdapter.ItemViewHolder>() {
 
     interface CardEvent {
-        fun onCardClicked(title: GetBalanceByFilterResponse)
+        fun onCardClicked(title: GetBalanceManageRecord)
     }
 
     var listener: CardEvent? = null
@@ -27,15 +24,16 @@ class BleManagerListAdapter(private var itemList: ArrayList<GetBalanceByFilterRe
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item: GetBalanceByFilterResponse = itemList[position]
+        val item: GetBalanceManageRecord = itemList[position]
         with(holder)
         {
             binding.txtSrNo.text = position.toString()
             binding.txtAmount.text = item.amount
-            binding.txtCustmAccNo.text = item.customerAccountNo.toString()
-            binding.txtTransactionId.text = item.transactionId.toString()
-            binding.txtDate.text = Utility.convertUtc2Local(item.date)
-            binding.cardHead.setOnClickListener {
+            binding.txtCAccount.text = item.customerAccountNo.toString()
+            binding.txtTransactionId.text = item.transactionId
+            binding.txtDate.text = Utility.convertTodayUtc2Local(item.date)
+            binding.txtStatus.text = item.status
+            binding.layout.setOnClickListener {
                 listener?.onCardClicked(item)
             }
 

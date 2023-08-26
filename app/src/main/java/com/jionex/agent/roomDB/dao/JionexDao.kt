@@ -2,11 +2,13 @@ package com.jionex.agent.roomDB.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
+import com.jionex.agent.data.model.response.GetBalanceManageRecord
 import com.jionex.agent.roomDB.model.ModemSetting
 import com.jionex.agent.roomDB.model.OperatorRecord
 import com.jionex.agent.roomDB.model.SMSRecord
@@ -58,5 +60,21 @@ interface JionexDao {
     @Query("SELECT * FROM operatorRecord where operatorName =:operatorName")
     fun getOperatorUSSD(operatorName: String): OperatorRecord?
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertGetBalanceManageRecord(getBalanceManageRecord: GetBalanceManageRecord?)
 
+    @Query("DELETE FROM GetBalanceManageRecord")
+    fun deleteGetBalanceManageRecord()
+
+    @Query("Select * from GetBalanceManageRecord")
+    fun getBalanceTransaction(): List<GetBalanceManageRecord>
+
+    @Query("Select * from GetBalanceManageRecord Where status =LOWER(:status)")
+    fun getBalanceTransaction(status: String): List<GetBalanceManageRecord?>
+
+    @Query("select Count(*) from GetBalanceManageRecord where status =LOWER(:status)")
+    fun getCountBalanceTransaction(status: String): Int
+
+    @Query("select Count(*) from GetBalanceManageRecord")
+    fun getCountBalanceTransaction(): Int
 }

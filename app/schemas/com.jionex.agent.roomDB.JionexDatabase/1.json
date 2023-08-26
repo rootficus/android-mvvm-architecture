@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "f8d2ac462a26ce93d63a955da93e6089",
+    "identityHash": "389eb5e9b623a523eee227cede1b31e8",
     "entities": [
       {
         "tableName": "smsRecord",
@@ -183,12 +183,140 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "GetBalanceManageRecord",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `sender` TEXT, `bType` TEXT, `customerAccountNo` INTEGER, `agentAccountNo` INTEGER, `oldBalance` TEXT, `amount` TEXT, `commision` TEXT, `lastBalance` TEXT, `transactionId` TEXT NOT NULL, `status` TEXT, `date` TEXT, `message` TEXT, `userId` TEXT, `createdAt` TEXT, `updatedAt` TEXT, `formatedDate` TEXT, `formatedCreatedAt` TEXT, `dateInWords` TEXT, PRIMARY KEY(`transactionId`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sender",
+            "columnName": "sender",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bType",
+            "columnName": "bType",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "customerAccountNo",
+            "columnName": "customerAccountNo",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "agentAccountNo",
+            "columnName": "agentAccountNo",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "oldBalance",
+            "columnName": "oldBalance",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "amount",
+            "columnName": "amount",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "commision",
+            "columnName": "commision",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lastBalance",
+            "columnName": "lastBalance",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "transactionId",
+            "columnName": "transactionId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "status",
+            "columnName": "status",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "message",
+            "columnName": "message",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "userId",
+            "columnName": "userId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "createdAt",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "updatedAt",
+            "columnName": "updatedAt",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "formatedDate",
+            "columnName": "formatedDate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "formatedCreatedAt",
+            "columnName": "formatedCreatedAt",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "dateInWords",
+            "columnName": "dateInWords",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "transactionId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f8d2ac462a26ce93d63a955da93e6089')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '389eb5e9b623a523eee227cede1b31e8')"
     ]
   }
 }

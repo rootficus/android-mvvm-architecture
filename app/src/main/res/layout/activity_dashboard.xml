@@ -38,7 +38,7 @@
             android:elevation="@dimen/_10sdp"
             app:elevation="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:itemPaddingTop="@dimen/_7sdp"
+            app:itemPaddingTop="@dimen/_8sdp"
             app:menu="@menu/nav_menu_main" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

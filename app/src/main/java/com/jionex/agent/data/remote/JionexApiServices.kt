@@ -1,7 +1,5 @@
 package com.jionex.agent.data.remote
 
-import com.jionex.agent.data.model.request.GetBalanceByFilterRequest
-import com.jionex.agent.data.model.request.GetMessageByFilterRequest
 import com.jionex.agent.data.model.request.GetModemsByFilterRequest
 import com.jionex.agent.data.model.request.MessagesJsonModel
 import com.jionex.agent.data.model.request.ModemJsonModel
@@ -9,7 +7,7 @@ import com.jionex.agent.data.model.request.PinCodeJsonModel
 import com.jionex.agent.data.model.request.SignInRequest
 import com.jionex.agent.data.model.request.VerifyPinRequest
 import com.jionex.agent.data.model.response.DashBoardItemResponse
-import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
+import com.jionex.agent.data.model.response.GetBalanceManageRecord
 import com.jionex.agent.data.model.response.GetMessageByFilterResponse
 import com.jionex.agent.data.model.response.GetModemsByFilterResponse
 import com.jionex.agent.data.model.response.GetStatusCountResponse
@@ -50,7 +48,7 @@ interface JionexApiServices {
     @GET("api/v1/balance_manager/todays_data")
     fun getBalanceByFilter(
         @Header("Authorization") authHeader: String?,
-    ): Call<BaseResponseModelFilter<GetBalanceByFilterResponse>>
+    ): Call<BaseResponseModelFilter<GetBalanceManageRecord>>
 
     @Headers("Content-Type:application/json")
     @GET("api/v1/messages/todays_data")

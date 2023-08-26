@@ -1,13 +1,14 @@
 package com.jionex.agent.data.repository
 
 import android.content.Context
+import android.util.Log
 import com.jionex.agent.data.model.UserInfo
 import com.jionex.agent.data.model.request.GetBalanceByFilterRequest
 import com.jionex.agent.data.model.request.GetMessageByFilterRequest
 import com.jionex.agent.data.model.request.GetModemsByFilterRequest
 import com.jionex.agent.data.model.request.SignInRequest
 import com.jionex.agent.data.model.response.DashBoardItemResponse
-import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
+import com.jionex.agent.data.model.response.GetBalanceManageRecord
 import com.jionex.agent.data.model.response.GetMessageByFilterResponse
 import com.jionex.agent.data.model.response.GetModemsByFilterResponse
 import com.jionex.agent.data.model.response.GetStatusCountResponse
@@ -15,7 +16,9 @@ import com.jionex.agent.data.model.response.SignInResponse
 import com.jionex.agent.data.remote.JionexApiServices
 import com.jionex.agent.roomDB.JionexDatabase
 import com.jionex.agent.ui.base.BaseRepository
+import com.jionex.agent.utils.Constant
 import com.jionex.agent.utils.SharedPreference
+import com.jionex.agent.utils.Utility
 
 class DashBoardRepository (val apiServices: JionexApiServices,
                            val context: Context,
@@ -57,7 +60,7 @@ class DashBoardRepository (val apiServices: JionexApiServices,
     }
 
     fun getBalanceByFilter(
-        success: (getBalanceByFilterResponse: List<GetBalanceByFilterResponse>) -> Unit,
+        success: (getBalanceManageRecord: ArrayList<GetBalanceManageRecord>) -> Unit,
         fail: (error: String) -> Unit,
         getBalanceByFilterRequest: GetBalanceByFilterRequest,
         message: (msg: String) -> Unit
@@ -215,4 +218,93 @@ class DashBoardRepository (val apiServices: JionexApiServices,
     fun getTotalModem(): Int {
         return sharedPreference.getTotalModem()
     }
+
+    fun setBLSuccess(success: Int?) {
+        sharedPreference.setBLSuccess(success)
+    }
+
+    fun getBLSuccess():Int{
+        return sharedPreference.getBLSuccess()
+    }
+
+    fun setBLPending(pending: Int?) {
+        sharedPreference.setBLPending(pending)
+    }
+
+    fun getBLPending():Int{
+        return sharedPreference.getBLPending()
+    }
+
+    fun setBLRejected(rejected: Int?) {
+        sharedPreference.setBLRejected(rejected)
+    }
+
+    fun getBLRejected():Int{
+        return sharedPreference.getBLRejected()
+    }
+
+    fun setBLApproved(approved: Int?) {
+        sharedPreference.setBLApproved(approved)
+    }
+
+    fun getBLApproved():Int{
+        return sharedPreference.getBLApproved()
+    }
+
+    fun setBLDanger(danger: Int?) {
+        sharedPreference.setBLDanger(danger)
+    }
+
+    fun getBLDanger():Int{
+        return sharedPreference.getBLDanger()
+    }
+
+    fun insertBalanceManagerRecord(it: GetBalanceManageRecord) {
+        jionexDatabase.rapidxDao()?.insertGetBalanceManageRecord(it)
+    }
+
+    fun getBalanceManageRecord(isBalanceManage : Int) : ArrayList<GetBalanceManageRecord> {
+        return when(isBalanceManage){
+            -1 -> jionexDatabase.rapidxDao()?.getBalanceTransaction() as ArrayList<GetBalanceManageRecord>
+            Constant.BalanceManagerStatus.SUCCESS.action -> {
+                Log.d("getBalanceManagerRecord","::${isBalanceManage},${Constant.BalanceManagerStatus.SUCCESS.toString()}")
+                jionexDatabase.rapidxDao()?.getBalanceTransaction(Constant.BalanceManagerStatus.SUCCESS.toString()) as ArrayList<GetBalanceManageRecord>
+            }
+            Constant.BalanceManagerStatus.PENDING.action -> {
+                Log.d("getBalanceManagerRecord","::${isBalanceManage},${Constant.BalanceManagerStatus.PENDING.toString()}")
+                jionexDatabase.rapidxDao()?.getBalanceTransaction(Constant.BalanceManagerStatus.PENDING.toString()) as ArrayList<GetBalanceManageRecord>
+            }
+            Constant.BalanceManagerStatus.APPROVED.action -> {
+                Log.d("getBalanceManagerRecord","::${isBalanceManage},${Constant.BalanceManagerStatus.APPROVED.toString()}")
+                jionexDatabase.rapidxDao()?.getBalanceTransaction(Constant.BalanceManagerStatus.APPROVED.toString()) as ArrayList<GetBalanceManageRecord>
+            }
+            Constant.BalanceManagerStatus.REJECTED.action -> {
+                Log.d("getBalanceManagerRecord","::${isBalanceManage},${Constant.BalanceManagerStatus.REJECTED.toString()}")
+                jionexDatabase.rapidxDao()?.getBalanceTransaction(Constant.BalanceManagerStatus.REJECTED.toString()) as ArrayList<GetBalanceManageRecord>
+            }
+            Constant.BalanceManagerStatus.DANGER.action -> {
+                Log.d("getBalanceManagerRecord","::${isBalanceManage},${Constant.BalanceManagerStatus.DANGER.toString()}")
+                jionexDatabase.rapidxDao()?.getBalanceTransaction(Constant.BalanceManagerStatus.DANGER.toString()) as ArrayList<GetBalanceManageRecord>
+            }
+            else -> {
+                Log.d("getBalanceManagerRecord",":else:${isBalanceManage},${Constant.BalanceManagerStatus.DANGER.toString()}")
+                jionexDatabase.rapidxDao()?.getBalanceTransaction() as ArrayList<GetBalanceManageRecord>
+            }
+        }
+    }
+
+    fun getCountBalanceManageRecord(isBalanceManage : Int) : Int {
+        return when(isBalanceManage){
+            -1 -> jionexDatabase.rapidxDao()?.getCountBalanceTransaction() as Int
+            Constant.BalanceManagerStatus.SUCCESS.action -> jionexDatabase.rapidxDao()?.getCountBalanceTransaction(Constant.BalanceManagerStatus.SUCCESS.toString()) as Int
+            Constant.BalanceManagerStatus.PENDING.action -> jionexDatabase.rapidxDao()?.getCountBalanceTransaction(Constant.BalanceManagerStatus.PENDING.toString()) as Int
+            Constant.BalanceManagerStatus.APPROVED.action -> jionexDatabase.rapidxDao()?.getCountBalanceTransaction(Constant.BalanceManagerStatus.APPROVED.toString()) as Int
+            Constant.BalanceManagerStatus.REJECTED.action -> jionexDatabase.rapidxDao()?.getCountBalanceTransaction(Constant.BalanceManagerStatus.REJECTED.toString()) as Int
+            Constant.BalanceManagerStatus.DANGER.action -> jionexDatabase.rapidxDao()?.getCountBalanceTransaction(Constant.BalanceManagerStatus.DANGER.toString()) as Int
+            else -> {
+                jionexDatabase.rapidxDao()?.getBalanceTransaction() as Int
+            }
+        }
+    }
+
 }

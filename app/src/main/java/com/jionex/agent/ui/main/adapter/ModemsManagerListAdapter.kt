@@ -2,17 +2,9 @@ package com.jionex.agent.ui.main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.jionex.agent.R
-import com.jionex.agent.data.model.response.GetBalanceByFilterResponse
-import com.jionex.agent.data.model.response.GetMessageByFilterResponse
 import com.jionex.agent.data.model.response.GetModemsByFilterResponse
-import com.jionex.agent.databinding.ItemBleManagerBinding
-import com.jionex.agent.databinding.ItemListLayoutBinding
 import com.jionex.agent.databinding.ItemModemsManagerBinding
-import com.jionex.agent.databinding.ItemSmsManagerBinding
-import com.jionex.agent.utils.getTagName
 
 class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsByFilterResponse>) :
     RecyclerView.Adapter<ModemsManagerListAdapter.ItemViewHolder>() {

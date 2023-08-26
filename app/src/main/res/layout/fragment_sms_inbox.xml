@@ -13,10 +13,72 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.cardview.widget.CardView
+            android:id="@+id/app_bar_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardElevation="@dimen/_5sdp"
+            app:cardBackgroundColor="@color/white">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chipGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_2sdp"
+                    app:singleSelection="true"
+                    app:checkedChip="@id/chipAllSMS">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipAllSMS"
+                        style="@style/customChipChoice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sms_all_sms" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCashOut"
+                        style="@style/customChipChoice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sms_cash_out" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipCashIn"
+                        style="@style/customChipChoice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sms_cash_in" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipB2B"
+                        style="@style/customChipChoice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sms_b2b" />
+                </com.google.android.material.chip.ChipGroup>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.cardview.widget.CardView>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/titleTodaySMS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/today_sms"
+            android:layout_margin="@dimen/_3sdp"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/_11sdp"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar_home"
+            app:layout_constraintStart_toStartOf="parent"
+            android:fontFamily="@font/roboto_medium" />
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/header_card"
-            app:layout_constraintTop_toTopOf="parent">
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="@dimen/_5sdp"
+            app:layout_constraintTop_toBottomOf="@+id/titleTodaySMS">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:padding="6dp"
@@ -83,7 +145,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.2" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         </androidx.cardview.widget.CardView>
 

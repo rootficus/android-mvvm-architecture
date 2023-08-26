@@ -3,8 +3,8 @@
     <color name="black">#FF000000</color>
     <color name="textColor">#222121</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="divideColor">#454545</color>
-    <color name="primaryColor">#AE0617</color>
+    <color name="divideColor">#8E8B8B</color>
+    <color name="primaryColor">#DC135394</color>
     <color name="primaryDarkColor">#135394</color>
     <color name="primaryAccent">#DC135394</color>
     <color name="darkPrimary">#FFD778</color>
@@ -24,4 +24,8 @@
     <color name="pending">#FFC107</color>
     <color name="reject">#DC3545</color>
     <color name="approve">#198754</color>
+    <color name="selectChipColorBG">#FF0D6EFD</color>
+    <color name="unSelectChipColorBG">#66AFABAB</color>
+    <color name="colorChecked">#FFFFFFFF</color>
+    <color name="colorUnchecked">#131313</color>
 </resources>

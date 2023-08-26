@@ -3,6 +3,11 @@ package com.jionex.agent.utils
 import android.content.Context
 import android.util.Log
 import com.jionex.agent.utils.Constant.PREFS_IS_LOGIN
+import com.jionex.agent.utils.Constant.PREF_BL_APPROVED
+import com.jionex.agent.utils.Constant.PREF_BL_DANGER
+import com.jionex.agent.utils.Constant.PREF_BL_PENDING
+import com.jionex.agent.utils.Constant.PREF_BL_REJECTED
+import com.jionex.agent.utils.Constant.PREF_BL_SUCCESS
 import com.jionex.agent.utils.Constant.PREF_PASSWORD
 import com.jionex.agent.utils.Constant.PREF_TODAY_TRANSACTIONS
 import com.jionex.agent.utils.Constant.PREF_TODAY_TRX_AMOUNT
@@ -178,4 +183,45 @@ class SharedPreference(context: Context) {
     fun getTotalModem(): Int {
         return pref.getInt(PREF_TOTAL_MODEM,0)
     }
+
+    fun setBLSuccess(success: Int?) {
+        success?.let { pref.edit().putInt(PREF_BL_SUCCESS, it).apply() }
+    }
+
+    fun getBLSuccess():Int{
+        return pref.getInt(PREF_BL_SUCCESS,0)
+    }
+
+    fun setBLPending(pending: Int?) {
+        pending?.let { pref.edit().putInt(PREF_BL_PENDING, it).apply() }
+    }
+
+    fun getBLPending():Int{
+        return pref.getInt(PREF_BL_PENDING,0)
+    }
+
+    fun setBLRejected(rejected: Int?) {
+        rejected?.let { pref.edit().putInt(PREF_BL_REJECTED, it).apply() }
+    }
+
+    fun getBLRejected():Int{
+        return pref.getInt(PREF_BL_REJECTED,0)
+    }
+
+    fun setBLApproved(approved: Int?) {
+        approved?.let { pref.edit().putInt(PREF_BL_APPROVED, it).apply() }
+    }
+
+    fun getBLApproved():Int{
+        return pref.getInt(PREF_BL_APPROVED,0)
+    }
+
+    fun setBLDanger(danger: Int?) {
+        danger?.let { pref.edit().putInt(PREF_BL_DANGER, it).apply() }
+    }
+
+    fun getBLDanger():Int{
+        return pref.getInt(PREF_BL_DANGER,0)
+    }
+
 }

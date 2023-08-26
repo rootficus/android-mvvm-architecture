@@ -1,13 +1,18 @@
 package com.jionex.agent.data.model.response
 
+import androidx.annotation.Keep
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class GetBalanceByFilterResponse(
+@Keep
+@Entity(tableName = "GetBalanceManageRecord")
+data class GetBalanceManageRecord(
     @SerializedName("id")
     @Expose
-    val id: String? = null,
+    val id: String,
 
     @SerializedName("sender")
     @Expose
@@ -42,7 +47,8 @@ data class GetBalanceByFilterResponse(
 
     @SerializedName("transaction_id")
     @Expose
-    val transactionId: String? = null,
+    @PrimaryKey
+    val transactionId: String,
 
     @SerializedName("status")
     @Expose

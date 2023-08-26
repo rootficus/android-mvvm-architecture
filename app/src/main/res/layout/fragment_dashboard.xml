@@ -12,17 +12,13 @@
         android:layout_width="match_parent"
         android:background="@color/bgPrimaryColor"
         android:layout_height="match_parent">
-        <com.google.android.material.appbar.AppBarLayout
+        <androidx.cardview.widget.CardView
             android:id="@+id/app_bar_home"
-            style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@android:color/white"
-            android:padding="@dimen/_3sdp"
-            app:elevation="@dimen/_5sdp"
-            android:elevation="@dimen/_5sdp">
+            app:cardElevation="@dimen/_5sdp"
+            app:cardBackgroundColor="@color/white">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -76,7 +72,7 @@
                     android:backgroundTint="@color/primaryColor"
                     app:layout_constraintBottom_toBottomOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.appbar.AppBarLayout>
+        </androidx.cardview.widget.CardView>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/titleDashBoard"

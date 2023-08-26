@@ -83,7 +83,7 @@
     <string name="amount">Amount</string>
     <string name="commission">Commission</string>
     <string name="last_balance">Last Balance</string>
-    <string name="transaction_id">Transaction Id</string>
+    <string name="transaction_id">Txn Id</string>
     <string name="type">Type</string>
     <string name="status">Status</string>
     <string name="date">Date</string>
@@ -93,13 +93,26 @@
     <string name="waiting_danger_pending">▲Waiting + Danger + Pending</string>
     <string name="only_success_approved">▲Only Success + Approved</string>
     <string name="total_trx_amount">TOTAL TRX AMOUNT</string>
-    <string name="today_transactions">TODAY TRANSACTIONS</string>
+    <string name="today_transactions">Today Transactions</string>
+    <string name="today_sms">Today SMS</string>
     <string name="today_trx_amount">TODAY TRX AMOUNT</string>
     <string name="only_active_modem">▲Only Active Modem</string>
     <string name="total_modem">TOTAL MODEM</string>
     <string name="_0">0</string>
     <string name="total_transactions">TOTAL TRANSACTIONS</string>
     <string name="total_pending">TOTAL PENDING</string>
+    <string name="customer_no">Customer No.</string>
+    <string name="sr_no">Sr.</string>
+    <string name="bl_all_transactions">All Txn</string>
+    <string name="bl_success">Success</string>
+    <string name="bl_pending">Pending</string>
+    <string name="bl_rejected">Rejected</string>
+    <string name="bl_approved">Approved</string>
+    <string name="bl_danger">Danger</string>
+    <string name="sms_all_sms">All sms</string>
+    <string name="sms_cash_out">Cash Out</string>
+    <string name="sms_cash_in">Cash In</string>
+    <string name="sms_b2b">B2B</string>
     <string-array name="bankList">
         <item>item1</item>
         <item>item2</item>
