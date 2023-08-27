@@ -4,12 +4,13 @@ import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.RotateAnimation
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import com.jionex.agent.R
 import com.jionex.agent.data.model.request.GetBalanceByFilterRequest
 import com.jionex.agent.data.model.response.GetBalanceManageRecord
@@ -51,7 +52,6 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initializeDagger()
         initializeView()
     }
@@ -63,16 +63,16 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
     }
 
     private fun initializeView() {
+        mDataBinding.chipAllTransactions.isClickable = true
         setBleAdapter(-1)
-        //getStatusCount()
-        mDataBinding.chipGroup.setOnCheckedChangeListener { chipGroup, i ->
-            val chip = chipGroup.findViewById<Chip>(i)
-            if (chip != null) {
-                when (chip.id) {
+        setBleFilterCount()
+        getStatusCount()
+        mDataBinding.chipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
+            checkedIds.forEach {
+                when (it) {
                     mDataBinding.chipAllTransactions.id -> {
                         getBalanceByFilterApi(Constant.BalanceManagerStatus.All.action)
                     }
-
                     mDataBinding.chipSuccess.id -> {
                         getBalanceByFilterApi(Constant.BalanceManagerStatus.SUCCESS.action)
                     }
@@ -85,7 +85,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
                         getBalanceByFilterApi(Constant.BalanceManagerStatus.REJECTED.action)
                     }
 
-                    mDataBinding.chipRejected.id -> {
+                    mDataBinding.chipApproved.id -> {
                         getBalanceByFilterApi(Constant.BalanceManagerStatus.APPROVED.action)
                     }
 
@@ -93,6 +93,21 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
                         getBalanceByFilterApi(Constant.BalanceManagerStatus.DANGER.action)
                     }
                 }
+            }
+
+
+            mDataBinding.refreshLinear.setOnClickListener {
+                if (networkHelper.isNetworkConnected()) {
+                    viewModel.deleteLocalBlManager()
+                    initializeView()
+                } else {
+                    Toast.makeText(
+                        activity,
+                        getString(R.string.NO_INTERNET_CONNECTION),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
             }
         }
     }
@@ -105,6 +120,13 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
         mDataBinding.recentTrendingView.layoutManager = LinearLayoutManager(context)
         mDataBinding.recentTrendingView.adapter = bleManagerListAdapter
         bleManagerListAdapter?.notifyDataSetChanged()
+        if (bleManagerListAdapter?.itemCount!! >0){
+            mDataBinding.textNoTransactions.visibility = View.INVISIBLE
+            mDataBinding.recentTrendingView.visibility = View.VISIBLE
+        }else{
+            mDataBinding.recentTrendingView.visibility = View.INVISIBLE
+            mDataBinding.textNoTransactions.visibility = View.VISIBLE
+        }
     }
 
     private val cardListener = object : BleManagerListAdapter.CardEvent {
@@ -183,6 +205,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
             viewModel.getStatusCountResponseModel.observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.SUCCESS -> {
+                        progressBar.dismiss()
                         val getStatusCountResponse = it.data
                         viewModel.setBLSuccess(getStatusCountResponse?.success)
                         viewModel.setBLApproved(getStatusCountResponse?.approved)
@@ -195,10 +218,11 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
 
                     Status.ERROR -> {
                         Log.i("Status Count", "Error")
-                        //setDrawerData()
+                        progressBar.dismiss()
                     }
 
                     Status.LOADING -> {
+                        progressBar.show()
                     }
                 }
             }
@@ -208,24 +232,15 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
     }
 
     private fun setBleFilterCount() {
-        var totalCount = viewModel.getCountBalanceManageRecord(Constant.BalanceManagerStatus.SUCCESS.action) +
-                viewModel.getCountBalanceManageRecord(Constant.BalanceManagerStatus.PENDING.action) +
-                viewModel.getCountBalanceManageRecord(Constant.BalanceManagerStatus.APPROVED.action) +
-                viewModel.getCountBalanceManageRecord(Constant.BalanceManagerStatus.DANGER.action)+
-                viewModel.getCountBalanceManageRecord(Constant.BalanceManagerStatus.REJECTED.action)
-        mDataBinding.chipAllTransactions.text =
-            getString(R.string.bl_all_transactions) + " (" + totalCount + ")"
-        mDataBinding.chipSuccess.text =
-            getString(R.string.bl_success) + " (" + viewModel.getCountBalanceManageRecord(Constant.BalanceManagerStatus.SUCCESS.action) + ")"
-        mDataBinding.chipPending.text =
-            getString(R.string.bl_pending) + " (" + viewModel.getCountBalanceManageRecord(Constant.BalanceManagerStatus.PENDING.action) + ")"
-        mDataBinding.chipApproved.text =
-            getString(R.string.bl_approved) + " (" + viewModel.getCountBalanceManageRecord(Constant.BalanceManagerStatus.APPROVED.action) + ")"
-        mDataBinding.chipDanger.text =
-            getString(R.string.bl_danger) + " (" + viewModel.getCountBalanceManageRecord(Constant.BalanceManagerStatus.DANGER.action) + ")"
-        mDataBinding.chipRejected.text =
-            getString(R.string.bl_rejected) + " (" +viewModel.getCountBalanceManageRecord(Constant.BalanceManagerStatus.REJECTED.action) + ")"
-
+        var totalCount = viewModel.getBLSuccess() + viewModel.getBLPending() +
+                viewModel.getBLApproved() + viewModel.getBLDanger()+
+                viewModel.getBLRejected()
+        mDataBinding.chipAllTransactions.text = getString(R.string.bl_all_transactions) + " (" + totalCount + ")"
+        mDataBinding.chipSuccess.text = getString(R.string.bl_success) + " (" + viewModel.getBLSuccess() + ")"
+        mDataBinding.chipPending.text = getString(R.string.bl_pending) + " (" + viewModel.getBLPending() + ")"
+        mDataBinding.chipApproved.text = getString(R.string.bl_approved) + " (" + viewModel.getBLApproved() + ")"
+        mDataBinding.chipDanger.text = getString(R.string.bl_danger) + " (" + viewModel.getBLDanger() + ")"
+        mDataBinding.chipRejected.text = getString(R.string.bl_rejected) + " (" +viewModel.getBLRejected() + ")"
         if (mDataBinding.chipAllTransactions.isChecked) {
             getBalanceByFilterApi(Constant.BalanceManagerStatus.All.action)
         } else if (mDataBinding.chipSuccess.isChecked) {

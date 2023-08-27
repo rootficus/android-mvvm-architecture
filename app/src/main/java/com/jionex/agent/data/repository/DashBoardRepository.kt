@@ -307,4 +307,8 @@ class DashBoardRepository (val apiServices: JionexApiServices,
         }
     }
 
+    fun deleteLocalBlManager() {
+        jionexDatabase.rapidxDao()?.deleteGetBalanceManageRecord()
+    }
+
 }

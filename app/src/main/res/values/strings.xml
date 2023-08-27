@@ -113,6 +113,7 @@
     <string name="sms_cash_out">Cash Out</string>
     <string name="sms_cash_in">Cash In</string>
     <string name="sms_b2b">B2B</string>
+    <string name="refresh_txn">Refresh Txn</string>
     <string-array name="bankList">
         <item>item1</item>
         <item>item2</item>

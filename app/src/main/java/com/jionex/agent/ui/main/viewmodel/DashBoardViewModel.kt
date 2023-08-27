@@ -296,4 +296,8 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
         return dashBoardRepository.getBLDanger()
     }
 
+    fun deleteLocalBlManager() {
+        dashBoardRepository.deleteLocalBlManager()
+    }
+
 }
