@@ -256,17 +256,17 @@ abstract class BaseRepository {
                                 fail.invoke(context.getString(R.string.error_something_went_wrong))
                             }
                         }
-                        APIResponseCode.ResponseCode403.codeValue -> {
-                            getErrorMessage(response_)?.let {
-                                fail.invoke(it)
-                            }
-                        }
                         APIResponseCode.ResponseCode404.codeValue -> {
                             getErrorMessage(response_)?.let {
                                 fail.invoke(it)
                             }
                         }
                         APIResponseCode.ResponseCode401.codeValue -> {
+                            getErrorBody(response_)?.let {
+                                fail.invoke(it)
+                            }
+                        }
+                        APIResponseCode.ResponseCode403.codeValue -> {
                             getErrorMessage(response_)?.let {
                                 fail.invoke(it)
                             }

@@ -9,7 +9,7 @@ import com.jionex.agent.data.model.request.GetModemsByFilterRequest
 import com.jionex.agent.data.model.request.SignInRequest
 import com.jionex.agent.data.model.response.DashBoardItemResponse
 import com.jionex.agent.data.model.response.GetBalanceManageRecord
-import com.jionex.agent.data.model.response.GetMessageByFilterResponse
+import com.jionex.agent.data.model.response.GetMessageManageRecord
 import com.jionex.agent.data.model.response.GetModemsByFilterResponse
 import com.jionex.agent.data.model.response.GetStatusCountResponse
 import com.jionex.agent.data.model.response.SignInResponse
@@ -86,16 +86,35 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
     fun getCountBalanceManageRecord(it: Int)  = dashBoardRepository.getCountBalanceManageRecord(it)
 
 
-    val getMessageByFilterResponseModel = MutableLiveData<ResponseData<List<GetMessageByFilterResponse>>>()
+    val getMessageManageRecordModel = MutableLiveData<ResponseData<List<GetMessageManageRecord>>>()
     fun getMessageByFilter(getMessageByFilterRequest: GetMessageByFilterRequest) {
-        getMessageByFilterResponseModel.setLoading(null)
-        viewModelScope.launch(Dispatchers.IO) {
-            dashBoardRepository.getMessageByFilter({ success -> getMessageByFilterResponseModel.setSuccess(success) },
-                { error -> getMessageByFilterResponseModel.setError(error) },
-                getMessageByFilterRequest,
-                { message -> getMessageByFilterResponseModel.setError(message) })
+        getMessageManageRecordModel.setLoading(null)
+
+        if (dashBoardRepository.getCountMessageManageRecord(-1)>0){
+            var arrayList = getMessageByFilterRequest.message_type?.let {
+                getMessageManageRecord(it)
+            }
+            getMessageManageRecordModel.setSuccess(arrayList)
+        }else{
+            viewModelScope.launch(Dispatchers.IO) {
+                dashBoardRepository.getMessageByFilter(
+                    { success ->
+                        GlobalScope.launch {
+                            success.forEach {
+                                dashBoardRepository.insertGetMessageManageRecord(it)
+                            }
+                        }
+                        getMessageManageRecordModel.setSuccess(success)
+                    },
+                    { error -> getMessageManageRecordModel.setError(error) },
+                    getMessageByFilterRequest,
+                    { message -> getMessageManageRecordModel.setError(message) })
+            }
         }
     }
+    fun getMessageManageRecord(it: Int) = dashBoardRepository.getMessageManageRecord(it)
+
+    fun getCountMessageManageRecord(it: Int)  = dashBoardRepository.getCountMessageManageRecord(it)
 
     val getModemsByFilterResponseModel = MutableLiveData<ResponseData<List<GetModemsByFilterResponse>>>()
     fun getModemsByFilter(getModemsByFilterRequest: GetModemsByFilterRequest) {
@@ -298,6 +317,10 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
 
     fun deleteLocalBlManager() {
         dashBoardRepository.deleteLocalBlManager()
+    }
+
+    fun deleteLocalMessageManager() {
+        dashBoardRepository.deleteLocalMessageManager()
     }
 
 }

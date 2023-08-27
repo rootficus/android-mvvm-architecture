@@ -114,6 +114,11 @@
     <string name="sms_cash_in">Cash In</string>
     <string name="sms_b2b">B2B</string>
     <string name="refresh_txn">Refresh Txn</string>
+    <string name="refresh_sms">Refresh SMS</string>
+    <string name="message">Message</string>
+    <string name="msgType">Msg Type</string>
+    <string name="receiver">Receiver</string>
+    <string name="sms_unknown">Unknown</string>
     <string-array name="bankList">
         <item>item1</item>
         <item>item2</item>

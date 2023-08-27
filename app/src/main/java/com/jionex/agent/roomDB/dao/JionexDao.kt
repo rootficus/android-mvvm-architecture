@@ -9,6 +9,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
 import com.jionex.agent.data.model.response.GetBalanceManageRecord
+import com.jionex.agent.data.model.response.GetMessageManageRecord
 import com.jionex.agent.roomDB.model.ModemSetting
 import com.jionex.agent.roomDB.model.OperatorRecord
 import com.jionex.agent.roomDB.model.SMSRecord
@@ -77,4 +78,23 @@ interface JionexDao {
 
     @Query("select Count(*) from GetBalanceManageRecord")
     fun getCountBalanceTransaction(): Int
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertGetMessageManageRecord(getMessageManageRecord: GetMessageManageRecord)
+
+    @Query("DELETE FROM GetMessageManageRecord")
+    fun deleteGetMessageManageRecord()
+
+    @Query("Select * from GetMessageManageRecord")
+    fun getMessageTransaction(): List<GetMessageManageRecord>
+
+    @Query("Select * from GetMessageManageRecord Where smsType = :smsType")
+    fun getMessageTransaction(smsType: Int): List<GetMessageManageRecord?>
+
+    @Query("select Count(*) from GetMessageManageRecord where smsType =:smsType")
+    fun getCountMessageTransaction(smsType: Int): Int
+
+    @Query("select Count(*) from GetMessageManageRecord")
+    fun getCountMessageTransaction(): Int
 }

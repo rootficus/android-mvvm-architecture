@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.jionex.agent.R
 import com.jionex.agent.databinding.FragmentDashboardBinding
@@ -97,6 +98,9 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
 
                     Status.ERROR -> {
                         progressBar.dismiss()
+                        if(it.message == "Invalid access token"){
+                            sessionExpired()
+                        }
                     }
 
                     Status.LOADING -> {
@@ -104,6 +108,19 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
                     }
                 }
             }
+        }
+    }
+
+    fun sessionExpired(){
+        val mBuilder = AlertDialog.Builder(activity)
+            .setTitle("Session Expired")
+            .setMessage("your session has expired.\n\nYou will be redirected to login page.")
+            .setPositiveButton("Ok", null)
+            .show()
+        val mPositiveButton = mBuilder.getButton(AlertDialog.BUTTON_POSITIVE)
+        mPositiveButton.setOnClickListener {
+            startActivity(Intent(activity, SignInActivity::class.java))
+            activity?.finishAffinity()
         }
     }
 

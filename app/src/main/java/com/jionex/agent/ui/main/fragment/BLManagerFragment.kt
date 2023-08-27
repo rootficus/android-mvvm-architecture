@@ -20,6 +20,7 @@ import com.jionex.agent.sdkInit.JionexSDK
 import com.jionex.agent.ui.base.BaseFragment
 import com.jionex.agent.ui.base.BaseFragmentModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
+import com.jionex.agent.ui.main.activity.DashBoardActivity
 import com.jionex.agent.ui.main.adapter.BleManagerListAdapter
 import com.jionex.agent.ui.main.di.BLManagerFragmentModule
 import com.jionex.agent.ui.main.di.DaggerBLManagerFragmentComponent
@@ -94,21 +95,20 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
                     }
                 }
             }
+        }
 
-
-            mDataBinding.refreshLinear.setOnClickListener {
-                if (networkHelper.isNetworkConnected()) {
-                    viewModel.deleteLocalBlManager()
-                    initializeView()
-                } else {
-                    Toast.makeText(
-                        activity,
-                        getString(R.string.NO_INTERNET_CONNECTION),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
+        mDataBinding.refreshLinear.setOnClickListener {
+            if (networkHelper.isNetworkConnected()) {
+                viewModel.deleteLocalBlManager()
+                initializeView()
+            } else {
+                Toast.makeText(
+                    activity,
+                    getString(R.string.NO_INTERNET_CONNECTION),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+
         }
     }
 
@@ -188,6 +188,9 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
 
                     Status.ERROR -> {
                         progressBar.dismiss()
+                        if(it.message == "Invalid access token"){
+                            Toast.makeText(activity,"Invalid access token", Toast.LENGTH_SHORT).show()
+                        }
                     }
 
                     Status.LOADING -> {
@@ -219,6 +222,9 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
                     Status.ERROR -> {
                         Log.i("Status Count", "Error")
                         progressBar.dismiss()
+                        if(it.message == "Invalid access token"){
+                            Toast.makeText(activity,"Invalid access token",Toast.LENGTH_SHORT).show()
+                        }
                     }
 
                     Status.LOADING -> {

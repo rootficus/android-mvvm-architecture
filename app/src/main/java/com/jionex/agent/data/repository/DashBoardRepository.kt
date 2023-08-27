@@ -9,7 +9,7 @@ import com.jionex.agent.data.model.request.GetModemsByFilterRequest
 import com.jionex.agent.data.model.request.SignInRequest
 import com.jionex.agent.data.model.response.DashBoardItemResponse
 import com.jionex.agent.data.model.response.GetBalanceManageRecord
-import com.jionex.agent.data.model.response.GetMessageByFilterResponse
+import com.jionex.agent.data.model.response.GetMessageManageRecord
 import com.jionex.agent.data.model.response.GetModemsByFilterResponse
 import com.jionex.agent.data.model.response.GetStatusCountResponse
 import com.jionex.agent.data.model.response.SignInResponse
@@ -18,7 +18,6 @@ import com.jionex.agent.roomDB.JionexDatabase
 import com.jionex.agent.ui.base.BaseRepository
 import com.jionex.agent.utils.Constant
 import com.jionex.agent.utils.SharedPreference
-import com.jionex.agent.utils.Utility
 
 class DashBoardRepository (val apiServices: JionexApiServices,
                            val context: Context,
@@ -70,7 +69,7 @@ class DashBoardRepository (val apiServices: JionexApiServices,
         }
     }
     fun getMessageByFilter(
-        success: (getMessageByFilterResponse: List<GetMessageByFilterResponse>) -> Unit,
+        success: (getMessageManageRecord: List<GetMessageManageRecord>) -> Unit,
         fail: (error: String) -> Unit,
         getMessageByFilterRequest: GetMessageByFilterRequest,
         message: (msg: String) -> Unit
@@ -302,13 +301,61 @@ class DashBoardRepository (val apiServices: JionexApiServices,
             Constant.BalanceManagerStatus.REJECTED.action -> jionexDatabase.rapidxDao()?.getCountBalanceTransaction(Constant.BalanceManagerStatus.REJECTED.toString()) as Int
             Constant.BalanceManagerStatus.DANGER.action -> jionexDatabase.rapidxDao()?.getCountBalanceTransaction(Constant.BalanceManagerStatus.DANGER.toString()) as Int
             else -> {
-                jionexDatabase.rapidxDao()?.getBalanceTransaction() as Int
+                jionexDatabase.rapidxDao()?.getCountBalanceTransaction() as Int
+            }
+        }
+    }
+
+    fun insertGetMessageManageRecord(it: GetMessageManageRecord) {
+        jionexDatabase.rapidxDao()?.insertGetMessageManageRecord(it)
+    }
+
+    fun getMessageManageRecord(isBalanceManage : Int) : ArrayList<GetMessageManageRecord> {
+        return when(isBalanceManage){
+            Log.d("getMessageManageRecord",":All:${isBalanceManage},${Constant.SMSType.All.value}")
+            -1 -> jionexDatabase.rapidxDao()?.getMessageTransaction() as ArrayList<GetMessageManageRecord>
+            Constant.SMSType.CashOut.value -> {
+                Log.d("getMessageManageRecord",":CashOut:${isBalanceManage},${Constant.SMSType.CashOut.value}")
+                jionexDatabase.rapidxDao()?.getMessageTransaction(Constant.SMSType.CashOut.value) as ArrayList<GetMessageManageRecord>
+            }
+            Constant.SMSType.CashIn.value -> {
+                Log.d("getMessageManageRecord",":CashIn:${isBalanceManage},${Constant.SMSType.CashIn.value}")
+                jionexDatabase.rapidxDao()?.getMessageTransaction(Constant.SMSType.CashIn.value) as ArrayList<GetMessageManageRecord>
+            }
+            Constant.SMSType.B2B.value -> {
+                Log.d("getMessageManageRecord",":B2B:${isBalanceManage},${Constant.SMSType.B2B.value}")
+                jionexDatabase.rapidxDao()?.getMessageTransaction(Constant.SMSType.B2B.value) as ArrayList<GetMessageManageRecord>
+            }
+            Constant.SMSType.UNKNOWN.value -> {
+                Log.d("getMessageManageRecord",":UNKNOWN:${isBalanceManage},${Constant.SMSType.UNKNOWN.value}")
+                jionexDatabase.rapidxDao()?.getMessageTransaction(Constant.SMSType.UNKNOWN.value) as ArrayList<GetMessageManageRecord>
+            }
+            else -> {
+                Log.d("getMessageManageRecord",":AllElse:${isBalanceManage},${Constant.SMSType.All.value}")
+                jionexDatabase.rapidxDao()?.getMessageTransaction() as ArrayList<GetMessageManageRecord>
+            }
+        }
+    }
+
+    fun getCountMessageManageRecord(isBalanceManage : Int) : Int {
+        return when(isBalanceManage){
+            -1 -> jionexDatabase.rapidxDao()?.getCountMessageTransaction() as Int
+            Constant.SMSType.CashOut.value  -> jionexDatabase.rapidxDao()?.getCountMessageTransaction(Constant.SMSType.CashOut.value) as Int
+            Constant.SMSType.CashIn.value  -> jionexDatabase.rapidxDao()?.getCountMessageTransaction(Constant.SMSType.CashIn.value) as Int
+            Constant.SMSType.B2B.value  -> jionexDatabase.rapidxDao()?.getCountMessageTransaction(Constant.SMSType.B2B.value) as Int
+            Constant.SMSType.UNKNOWN.value  -> jionexDatabase.rapidxDao()?.getCountMessageTransaction(Constant.SMSType.UNKNOWN.value) as Int
+            else -> {
+                jionexDatabase.rapidxDao()?.getCountMessageTransaction() as Int
             }
         }
     }
 
     fun deleteLocalBlManager() {
         jionexDatabase.rapidxDao()?.deleteGetBalanceManageRecord()
+    }
+
+    fun deleteLocalMessageManager() {
+        jionexDatabase.rapidxDao()?.deleteGetMessageManageRecord()
     }
 
 }

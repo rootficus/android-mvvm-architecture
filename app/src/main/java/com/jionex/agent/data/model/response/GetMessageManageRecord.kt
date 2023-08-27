@@ -1,17 +1,22 @@
 package com.jionex.agent.data.model.response
 
+import androidx.annotation.Keep
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
-
-data class GetMessageByFilterResponse(
+@Keep
+@Entity(tableName = "GetMessageManageRecord")
+data class GetMessageManageRecord(
     @SerializedName("id")
     @Expose
     val id: String? = null,
 
     @SerializedName("message_id")
     @Expose
-    val messageId: String? = null,
+    @PrimaryKey
+    val messageId: String,
 
     @SerializedName("text_message")
     @Expose
@@ -30,7 +35,7 @@ data class GetMessageByFilterResponse(
     val simSlot: String? = null,
 
     @SerializedName("sms_type")
-    @Expose val smsType: String? = null,
+    @Expose val smsType: Int = 0,
 
     @SerializedName("android_id")
     @Expose
@@ -46,7 +51,7 @@ data class GetMessageByFilterResponse(
 
     @SerializedName("is_active")
     @Expose
-    val isActive: Any? = null,
+    val isActive: Boolean? = null,
 
     @SerializedName("user_id")
     @Expose

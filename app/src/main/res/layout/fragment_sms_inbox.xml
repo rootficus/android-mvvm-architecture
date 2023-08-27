@@ -57,6 +57,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/sms_b2b" />
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chipUnKnown"
+                        style="@style/customChipChoice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sms_unknown" />
                 </com.google.android.material.chip.ChipGroup>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.cardview.widget.CardView>
@@ -71,25 +77,53 @@
             app:layout_constraintTop_toBottomOf="@+id/app_bar_home"
             app:layout_constraintStart_toStartOf="parent"
             android:fontFamily="@font/roboto_medium" />
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/refreshLinear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar_home"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="@drawable/refresh_bg"
+            android:padding="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/_2sdp"
+            >
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_9sdp"
+                android:text="@string/refresh_sms"
+                android:textColor="@color/white"
+                android:fontFamily="@font/roboto_medium" />
+            <ImageView
+                android:id="@+id/refreshIcon"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:background="@drawable/refresh"
+                android:backgroundTint="@color/white">
+
+            </ImageView>
+        </androidx.appcompat.widget.LinearLayoutCompat>
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/header_card"
             app:cardBackgroundColor="@color/white"
             app:cardElevation="@dimen/_5sdp"
-            app:layout_constraintTop_toBottomOf="@+id/titleTodaySMS">
+            app:layout_constraintTop_toBottomOf="@+id/refreshLinear">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:padding="6dp"
                 android:layout_height="match_parent">
 
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txt_sr_no"
+                    android:id="@+id/txtSrNo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Sr."
+                    android:text="@string/sr_no"
                     android:textStyle="bold"
                     android:textSize="@dimen/_9sdp"
                     android:textAlignment="center"
@@ -97,67 +131,117 @@
                     android:paddingBottom="@dimen/_3sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.05" />
+                    app:layout_constraintWidth_percent="0.09" />
 
+                <TextView
+                    android:id="@+id/viewDivide1"
+                    android:layout_width="1sp"
+                    android:layout_height="match_parent"
+                    android:background="@color/divideColor"
+                    app:layout_constraintStart_toEndOf="@id/txtSrNo"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:orientation="horizontal" />
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txt_custm_acc_no"
+                    android:id="@+id/txtSender"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Sender"
-                    android:textStyle="bold"
+                    android:text="@string/sender"
                     android:textSize="@dimen/_9sdp"
-                    android:textAlignment="center"
+                    android:textStyle="bold"
                     android:paddingTop="@dimen/_3sdp"
                     android:paddingBottom="@dimen/_3sdp"
-                    app:layout_constraintStart_toEndOf="@id/txt_sr_no"
+                    android:textAlignment="center"
+                    android:ellipsize="middle"
+                    app:layout_constraintStart_toEndOf="@id/viewDivide1"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.2" />
+                    app:layout_constraintWidth_percent="0.19" />
+                <TextView
+                    android:id="@+id/viewDivide2"
+                    android:layout_width="1sp"
+                    android:layout_height="match_parent"
+                    android:background="@color/divideColor"
+                    app:layout_constraintStart_toEndOf="@id/txtSender"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:orientation="horizontal" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txt_amount"
+                    android:id="@+id/txtMessage"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Message"
-                    android:textStyle="bold"
                     android:textSize="@dimen/_9sdp"
+                    android:text="@string/message"
+                    android:textStyle="bold"
                     android:textAlignment="center"
+                    android:ellipsize="middle"
                     android:paddingTop="@dimen/_3sdp"
                     android:paddingBottom="@dimen/_3sdp"
-                    app:layout_constraintStart_toEndOf="@id/txt_custm_acc_no"
+                    app:layout_constraintStart_toEndOf="@id/viewDivide2"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.35" />
+                    app:layout_constraintWidth_percent="0.37" />
+                <TextView
+                    android:id="@+id/viewDivide3"
+                    android:layout_width="1sp"
+                    android:layout_height="match_parent"
+                    android:background="@color/divideColor"
+                    app:layout_constraintStart_toEndOf="@id/txtMessage"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:orientation="horizontal" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txt_transaction_id"
+                    android:id="@+id/txtReceiver"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:textSize="@dimen/_9sdp"
+                    android:textStyle="bold"
+                    android:text="@string/receiver"
                     android:textAlignment="center"
+                    android:ellipsize="middle"
                     android:paddingTop="@dimen/_3sdp"
                     android:paddingBottom="@dimen/_3sdp"
-                    android:text="Receiver"
-                    app:layout_constraintStart_toEndOf="@id/txt_amount"
+                    app:layout_constraintStart_toEndOf="@id/viewDivide3"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.2" />
-
+                    app:layout_constraintWidth_percent="0.19" />
+                <TextView
+                    android:id="@+id/viewDivide4"
+                    android:layout_width="1sp"
+                    android:layout_height="match_parent"
+                    android:background="@color/divideColor"
+                    app:layout_constraintStart_toEndOf="@id/txtReceiver"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:orientation="horizontal" />
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txt_date"
+                    android:id="@+id/txtDate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Date"
-                    android:textStyle="bold"
                     android:textSize="@dimen/_9sdp"
+                    android:text="@string/date"
+                    android:textStyle="bold"
                     android:textAlignment="center"
+                    android:ellipsize="middle"
                     android:paddingTop="@dimen/_3sdp"
                     android:paddingBottom="@dimen/_3sdp"
-                    app:layout_constraintStart_toEndOf="@id/txt_transaction_id"
+                    app:layout_constraintStart_toEndOf="@id/viewDivide4"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.2" />
+                    app:layout_constraintWidth_percent="0.14" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
-
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textNoTransactions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_8sdp"
+            android:text="No Transaction"
+            android:visibility="invisible"
+            android:textColor="@color/divideColor"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recentFilteredMessage"
             android:layout_width="match_parent"

@@ -8,7 +8,7 @@ import com.jionex.agent.data.model.request.SignInRequest
 import com.jionex.agent.data.model.request.VerifyPinRequest
 import com.jionex.agent.data.model.response.DashBoardItemResponse
 import com.jionex.agent.data.model.response.GetBalanceManageRecord
-import com.jionex.agent.data.model.response.GetMessageByFilterResponse
+import com.jionex.agent.data.model.response.GetMessageManageRecord
 import com.jionex.agent.data.model.response.GetModemsByFilterResponse
 import com.jionex.agent.data.model.response.GetStatusCountResponse
 import com.jionex.agent.data.model.response.SignInResponse
@@ -54,7 +54,7 @@ interface JionexApiServices {
     @GET("api/v1/messages/todays_data")
     fun getMessageByFilter(
         @Header("Authorization") authHeader: String?,
-    ): Call<BaseResponseModelFilter<GetMessageByFilterResponse>>
+    ): Call<BaseResponseModelFilter<GetMessageManageRecord>>
     @Headers("Content-Type:application/json")
     @POST("api/v1/modems/get_modems_by_filter")
     fun getModemsByFilter(

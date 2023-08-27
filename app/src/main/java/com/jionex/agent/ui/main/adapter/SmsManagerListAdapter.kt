@@ -3,11 +3,10 @@ package com.jionex.agent.ui.main.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.jionex.agent.data.model.response.GetMessageByFilterResponse
+import com.jionex.agent.data.model.response.GetMessageManageRecord
 import com.jionex.agent.databinding.ItemSmsManagerBinding
-import com.jionex.agent.utils.Utility
 
-class SmsManagerListAdapter(private var itemList: ArrayList<GetMessageByFilterResponse>) :
+class SmsManagerListAdapter(private var itemList: ArrayList<GetMessageManageRecord>) :
     RecyclerView.Adapter<SmsManagerListAdapter.ItemViewHolder>() {
 
 
@@ -18,14 +17,14 @@ class SmsManagerListAdapter(private var itemList: ArrayList<GetMessageByFilterRe
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item: GetMessageByFilterResponse = itemList[position]
+        val item: GetMessageManageRecord = itemList[position]
         with(holder)
         {
             binding.txtSrNo.text = position.toString()
-            binding.txtSms.text = item.textMessage
+            binding.txtMessage.text = item.textMessage
             binding.txtReceiver.text = item.receiver.toString()
             binding.txtSender.text = item.sender.toString()
-            binding.txtDate.text = Utility.convertTodayUtc2Local(item.smsDate) //item.date.toString()
+            binding.txtDate.text = ""+item.smsType//Utility.convertTodayUtc2Local(item.smsDate) //item.date.toString()
 
         }
 

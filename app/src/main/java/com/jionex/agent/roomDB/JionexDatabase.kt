@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.jionex.agent.data.model.response.GetBalanceManageRecord
+import com.jionex.agent.data.model.response.GetMessageManageRecord
 import com.jionex.agent.roomDB.model.ModemSetting
 import com.jionex.agent.roomDB.dao.JionexDao
 import com.jionex.agent.roomDB.model.OperatorRecord
@@ -12,7 +13,7 @@ import com.jionex.agent.roomDB.model.SMSRecord
 
 
 @Database(
-    entities = [SMSRecord::class, ModemSetting::class, OperatorRecord::class, GetBalanceManageRecord::class],
+    entities = [SMSRecord::class, ModemSetting::class, OperatorRecord::class, GetBalanceManageRecord::class, GetMessageManageRecord::class],
     version = 1
 )
 abstract class JionexDatabase : RoomDatabase() {
