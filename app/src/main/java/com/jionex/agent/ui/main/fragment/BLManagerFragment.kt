@@ -4,13 +4,10 @@ import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.RotateAnimation
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.chip.Chip
 import com.jionex.agent.R
 import com.jionex.agent.data.model.request.GetBalanceByFilterRequest
 import com.jionex.agent.data.model.response.GetBalanceManageRecord
@@ -20,7 +17,6 @@ import com.jionex.agent.sdkInit.JionexSDK
 import com.jionex.agent.ui.base.BaseFragment
 import com.jionex.agent.ui.base.BaseFragmentModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
-import com.jionex.agent.ui.main.activity.DashBoardActivity
 import com.jionex.agent.ui.main.adapter.BleManagerListAdapter
 import com.jionex.agent.ui.main.di.BLManagerFragmentModule
 import com.jionex.agent.ui.main.di.DaggerBLManagerFragmentComponent
@@ -131,41 +127,29 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
 
     private val cardListener = object : BleManagerListAdapter.CardEvent {
         override fun onCardClicked(getBalanceManageRecord: GetBalanceManageRecord) {
-            showCustomDialog(getBalanceManageRecord)
+            var bottomSheetFragment = BalanceDetailScreenFragment()
+            bottomSheetFragment.listener = balanceDetailScreenActionListener
+            val bundle = Bundle()
+            bundle.putSerializable(GetBalanceManageRecord::class.java.name,getBalanceManageRecord)
+            bottomSheetFragment.arguments = bundle
+            activity?.supportFragmentManager?.let { bottomSheetFragment.show(it, "ActionBottomDialogFragment") }
+            //showCustomDialog(getBalanceManageRecord)
         }
     }
 
-    private fun showCustomDialog(getBalanceManageRecord: GetBalanceManageRecord) {
-        val builder = AlertDialog.Builder(requireActivity(), R.style.CustomAlertDialog).create()
-        val binding = CustomBleDialogBinding.inflate(layoutInflater)
-        builder.setView(binding.root)
-        binding?.textAAccount?.text = getBalanceManageRecord.agentAccountNo.toString()
-        binding?.textAmount?.text = getBalanceManageRecord.amount.toString()
-        binding?.textCAccount?.text = getBalanceManageRecord.customerAccountNo.toString()
-        binding?.textCommission?.text = getBalanceManageRecord.commision.toString()
-        binding?.textDate?.text =
-            Utility.convertUtc2Local(getBalanceManageRecord.date.toString())
-        binding?.textSender?.text = getBalanceManageRecord.sender.toString()
-        binding?.textLastBalance?.text = getBalanceManageRecord.lastBalance.toString()
-        binding?.textOldBalance?.text = getBalanceManageRecord.oldBalance.toString()
-        binding?.textType?.text = getBalanceManageRecord.bType.toString()
-        binding?.textStatus?.text = getBalanceManageRecord.status.toString()
-        binding?.textLastTransactionId?.text = getBalanceManageRecord.transactionId.toString()
-        if (getBalanceManageRecord.status.equals("pending", true)) {
-            binding.btnReject.visibility = View.GONE
-            binding.btnAccept.visibility = View.GONE
-        } else {
-            binding.btnReject.visibility = View.VISIBLE
-            binding.btnAccept.visibility = View.VISIBLE
+    private val balanceDetailScreenActionListener = object : BalanceDetailScreenFragment.BottomDialogEvent {
+        override fun onAcceptRequest(getBalanceManageRecord: GetBalanceManageRecord) {
+
         }
-        binding.btnReject.setOnClickListener {
-            builder.dismiss()
+
+        override fun onRejectedRequest(getBalanceManageRecord: GetBalanceManageRecord) {
+            TODO("Not yet implemented")
         }
-        binding.imageClose.setOnClickListener {
-            builder.dismiss()
-        }
-        builder.setCanceledOnTouchOutside(false)
-        builder.show()
+
+    }
+
+    private fun acceptBalanceManager(getBalanceManageRecord: GetBalanceManageRecord){
+
     }
 
     private fun getBalanceByFilterApi(filter: Int) {
