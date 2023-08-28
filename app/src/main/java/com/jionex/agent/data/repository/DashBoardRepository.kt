@@ -7,6 +7,7 @@ import com.jionex.agent.data.model.request.GetBalanceByFilterRequest
 import com.jionex.agent.data.model.request.GetMessageByFilterRequest
 import com.jionex.agent.data.model.request.GetModemsByFilterRequest
 import com.jionex.agent.data.model.request.SignInRequest
+import com.jionex.agent.data.model.request.UpdateBalanceRequest
 import com.jionex.agent.data.model.response.DashBoardItemResponse
 import com.jionex.agent.data.model.response.GetBalanceManageRecord
 import com.jionex.agent.data.model.response.GetMessageManageRecord
@@ -68,6 +69,18 @@ class DashBoardRepository (val apiServices: JionexApiServices,
             executeFilter(this, success, fail, context, message)
         }
     }
+
+    fun updateBLStatus(
+        success: (getBalanceManageRecord :GetBalanceManageRecord) -> Unit,
+        fail: (error: String) -> Unit,
+        updateBalanceRequest: UpdateBalanceRequest,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.updateBLStatus("Bearer " + sharedPreference.getToken(),updateBalanceRequest).apply {
+            execute(this, success, fail, context, message)
+        }
+    }
+
     fun getMessageByFilter(
         success: (getMessageManageRecord: List<GetMessageManageRecord>) -> Unit,
         fail: (error: String) -> Unit,
@@ -356,6 +369,10 @@ class DashBoardRepository (val apiServices: JionexApiServices,
 
     fun deleteLocalMessageManager() {
         jionexDatabase.rapidxDao()?.deleteGetMessageManageRecord()
+    }
+
+    fun updateLocalBalanceManager(balanceManageRecord: GetBalanceManageRecord) {
+        jionexDatabase.rapidxDao()?.updateLocalBalanceManager(balanceManageRecord)
     }
 
 }

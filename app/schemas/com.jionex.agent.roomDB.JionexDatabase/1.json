@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "5722b9fbd8c316eaca47bd933dd5b366",
+    "identityHash": "960b5cdb9b29d59a5636c125325d98cc",
     "entities": [
       {
         "tableName": "smsRecord",
@@ -186,7 +186,7 @@
       },
       {
         "tableName": "GetBalanceManageRecord",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `sender` TEXT, `bType` TEXT, `customerAccountNo` INTEGER, `agentAccountNo` INTEGER, `oldBalance` TEXT, `amount` TEXT, `commision` TEXT, `lastBalance` TEXT, `transactionId` TEXT NOT NULL, `status` TEXT, `date` TEXT, `message` TEXT, `userId` TEXT, `createdAt` TEXT, `updatedAt` TEXT, `formatedDate` TEXT, `formatedCreatedAt` TEXT, `dateInWords` TEXT, PRIMARY KEY(`transactionId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `sender` TEXT, `bType` TEXT, `customerAccountNo` INTEGER, `agentAccountNo` INTEGER, `oldBalance` TEXT, `amount` TEXT, `commision` TEXT, `lastBalance` TEXT, `transactionId` TEXT NOT NULL, `status` TEXT, `date` TEXT, `message` TEXT, `userId` TEXT, `createdAt` TEXT, `updatedAt` TEXT, `formatedDate` TEXT, `formatedCreatedAt` TEXT, `dateInWords` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -306,7 +306,7 @@
         "primaryKey": {
           "autoGenerate": false,
           "columnNames": [
-            "transactionId"
+            "id"
           ]
         },
         "indices": [],
@@ -438,7 +438,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5722b9fbd8c316eaca47bd933dd5b366')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '960b5cdb9b29d59a5636c125325d98cc')"
     ]
   }
 }

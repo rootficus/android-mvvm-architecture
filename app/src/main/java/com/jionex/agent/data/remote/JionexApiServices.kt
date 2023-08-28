@@ -5,6 +5,7 @@ import com.jionex.agent.data.model.request.MessagesJsonModel
 import com.jionex.agent.data.model.request.ModemJsonModel
 import com.jionex.agent.data.model.request.PinCodeJsonModel
 import com.jionex.agent.data.model.request.SignInRequest
+import com.jionex.agent.data.model.request.UpdateBalanceRequest
 import com.jionex.agent.data.model.request.VerifyPinRequest
 import com.jionex.agent.data.model.response.DashBoardItemResponse
 import com.jionex.agent.data.model.response.GetBalanceManageRecord
@@ -61,6 +62,12 @@ interface JionexApiServices {
         @Header("Authorization") authHeader: String?,
         @Body getModemsByFilterRequest: GetModemsByFilterRequest
     ): Call<BaseResponseModelFilter<GetModemsByFilterResponse>>
+
+
+    @Headers("Content-Type:application/json")
+    @POST("api/v1/balance_manager/update_status")
+    fun updateBLStatus(@Header("Authorization") authHeader: String?,@Body updateBalanceRequest: UpdateBalanceRequest): Call<BaseResponseModel<GetBalanceManageRecord>>
+
     @Headers("Content-Type:application/json")
     @GET("/api/v1/balance_manager/daily_status_count")
     fun getStatusCount(
@@ -70,5 +77,7 @@ interface JionexApiServices {
     @Headers("Content-Type:application/json")
     @GET("api/v1/users/dashboard_data")
     fun dashboardData(): Call<BaseResponseModel<DashBoardItemResponse>>
+
+
 
 }

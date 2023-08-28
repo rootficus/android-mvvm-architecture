@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.jionex.agent.data.model.response.GetBalanceManageRecord
-import com.jionex.agent.databinding.BottomSheetBinding
+import com.jionex.agent.databinding.BlBottomSheetBinding
 import com.jionex.agent.utils.Constant
 import com.jionex.agent.utils.Utility
 import org.jetbrains.annotations.Nullable
@@ -19,13 +19,13 @@ class BalanceDetailScreenFragment: BottomSheetDialogFragment() {
     }
 
     var listener: BottomDialogEvent? = null
-    private lateinit var binding: BottomSheetBinding
+    private lateinit var binding: BlBottomSheetBinding
     @Nullable
     override fun onCreateView(
         inflater: LayoutInflater, @Nullable container: ViewGroup?,
         @Nullable savedInstanceState: Bundle?
     ): View? {
-        binding = BottomSheetBinding.inflate(inflater,container,false)
+        binding = BlBottomSheetBinding.inflate(inflater,container,false)
         return binding.root
     }
 
@@ -44,7 +44,7 @@ class BalanceDetailScreenFragment: BottomSheetDialogFragment() {
         binding?.textType?.text = getBalanceManageRecord.bType.toString()
         binding?.textStatus?.text = getBalanceManageRecord.status.toString()
         binding?.textLastTransactionId?.text = getBalanceManageRecord.transactionId.toString()
-        if (getBalanceManageRecord.status == Constant.BalanceManagerStatus.PENDING.toString()) {
+        if (getBalanceManageRecord.status.equals(Constant.BalanceManagerStatus.PENDING.toString(),true)) {
             binding.btnReject.visibility = View.VISIBLE
             binding.btnAccept.visibility = View.VISIBLE
         } else {
@@ -52,9 +52,11 @@ class BalanceDetailScreenFragment: BottomSheetDialogFragment() {
             binding.btnAccept.visibility = View.GONE
         }
         binding.btnReject.setOnClickListener {
+            dismiss()
             listener?.onRejectedRequest(getBalanceManageRecord)
         }
         binding.btnAccept.setOnClickListener {
+            dismiss()
             listener?.onAcceptRequest(getBalanceManageRecord)
         }
         binding.imageClose.setOnClickListener {

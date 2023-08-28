@@ -7,6 +7,7 @@ import com.jionex.agent.data.model.request.GetBalanceByFilterRequest
 import com.jionex.agent.data.model.request.GetMessageByFilterRequest
 import com.jionex.agent.data.model.request.GetModemsByFilterRequest
 import com.jionex.agent.data.model.request.SignInRequest
+import com.jionex.agent.data.model.request.UpdateBalanceRequest
 import com.jionex.agent.data.model.response.DashBoardItemResponse
 import com.jionex.agent.data.model.response.GetBalanceManageRecord
 import com.jionex.agent.data.model.response.GetMessageManageRecord
@@ -79,6 +80,17 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
             }
         }
 
+    }
+
+    val updateBLStatusResponseModel = MutableLiveData<ResponseData<GetBalanceManageRecord>>()
+    fun updateBLStatus(updateBalanceRequest: UpdateBalanceRequest) {
+        updateBLStatusResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.updateBLStatus({ success -> updateBLStatusResponseModel.setSuccess(success) },
+                { error -> updateBLStatusResponseModel.setError(error) },
+                updateBalanceRequest,
+                { message -> updateBLStatusResponseModel.setError(message) })
+        }
     }
 
     fun getBalanceManageRecord(it: Int) = dashBoardRepository.getBalanceManageRecord(it)
@@ -322,5 +334,7 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
     fun deleteLocalMessageManager() {
         dashBoardRepository.deleteLocalMessageManager()
     }
+
+    fun updateLocalBalanceManager(balanceManageRecord: GetBalanceManageRecord)  = dashBoardRepository.updateLocalBalanceManager(balanceManageRecord)
 
 }

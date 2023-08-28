@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.jionex.agent.data.model.response.GetBalanceManageRecord
 import com.jionex.agent.data.model.response.GetMessageManageRecord
-import com.jionex.agent.databinding.BottomSheetBinding
 import com.jionex.agent.databinding.SmsBottomSheetBinding
 import com.jionex.agent.utils.Constant
 import com.jionex.agent.utils.Utility

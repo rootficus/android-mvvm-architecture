@@ -14,7 +14,7 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-        setProperty("archivesBaseName", "JionexModem" + "V" + versionName + "." + versionCode + "")
+        setProperty("archivesBaseName", "JionexAgent" + "V" + versionName + "." + versionCode + "")
 
         vectorDrawables.useSupportLibrary = true
 

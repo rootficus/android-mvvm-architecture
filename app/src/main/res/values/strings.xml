@@ -128,6 +128,8 @@
     <string name="phone">Phone</string>
     <string name="agent">Agent</string>
     <string name="modem_detail">Model Detail</string>
+    <string name="you_want_to_approved">You want to approved</string>
+    <string name="you_want_to_rejected">You want to rejected</string>
     <string-array name="bankList">
         <item>item1</item>
         <item>item2</item>

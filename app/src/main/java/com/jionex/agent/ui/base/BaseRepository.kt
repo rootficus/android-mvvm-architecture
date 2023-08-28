@@ -214,6 +214,9 @@ abstract class BaseRepository {
                                     }else if(body_.message.equals("success"))
                                     {
                                         success.invoke(results_)
+                                    }else if(body_.message!!.contains("Status"))
+                                    {
+                                        success.invoke(results_)
                                     }
                                 } ?: kotlin.run {
                                     fail.invoke(

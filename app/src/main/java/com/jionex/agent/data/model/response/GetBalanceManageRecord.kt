@@ -12,6 +12,7 @@ import java.io.Serializable
 data class GetBalanceManageRecord(
     @SerializedName("id")
     @Expose
+    @PrimaryKey
     val id: String,
 
     @SerializedName("sender")
@@ -47,12 +48,11 @@ data class GetBalanceManageRecord(
 
     @SerializedName("transaction_id")
     @Expose
-    @PrimaryKey
     val transactionId: String,
 
     @SerializedName("status")
     @Expose
-    val status: String? = null,
+    var status: String? = null,
 
     @SerializedName("date")
     @Expose

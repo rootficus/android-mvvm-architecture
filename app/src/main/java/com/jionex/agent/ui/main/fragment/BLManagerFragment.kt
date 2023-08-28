@@ -1,6 +1,7 @@
 package com.jionex.agent.ui.main.fragment
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -8,8 +9,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.jionex.agent.R
 import com.jionex.agent.data.model.request.GetBalanceByFilterRequest
+import com.jionex.agent.data.model.request.UpdateBalanceRequest
 import com.jionex.agent.data.model.response.GetBalanceManageRecord
 import com.jionex.agent.databinding.CustomBleDialogBinding
 import com.jionex.agent.databinding.FragmentBlManagerBinding
@@ -17,6 +20,7 @@ import com.jionex.agent.sdkInit.JionexSDK
 import com.jionex.agent.ui.base.BaseFragment
 import com.jionex.agent.ui.base.BaseFragmentModule
 import com.jionex.agent.ui.base.BaseViewModelFactory
+import com.jionex.agent.ui.main.activity.SignInActivity
 import com.jionex.agent.ui.main.adapter.BleManagerListAdapter
 import com.jionex.agent.ui.main.di.BLManagerFragmentModule
 import com.jionex.agent.ui.main.di.DaggerBLManagerFragmentComponent
@@ -139,19 +143,63 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
 
     private val balanceDetailScreenActionListener = object : BalanceDetailScreenFragment.BottomDialogEvent {
         override fun onAcceptRequest(getBalanceManageRecord: GetBalanceManageRecord) {
-
+            getBalanceManageRecord.status = "approved"
+            onUpdateRequest(getBalanceManageRecord,UpdateBalanceRequest("approved",getBalanceManageRecord.id,viewModel.getUserId()!!),
+                getString(R.string.you_want_to_approved))
         }
 
         override fun onRejectedRequest(getBalanceManageRecord: GetBalanceManageRecord) {
-            TODO("Not yet implemented")
+            onUpdateRequest(getBalanceManageRecord,UpdateBalanceRequest("rejected",getBalanceManageRecord.id,viewModel.getUserId()!!),
+                getString(R.string.you_want_to_rejected))
         }
 
     }
 
-    private fun acceptBalanceManager(getBalanceManageRecord: GetBalanceManageRecord){
-        //Api calling
-        //getBalanceManageRecord.status = Constant.BalanceManagerStatus.APPROVED.toString()
+    private fun onUpdateRequest(getBalanceManageRecord: GetBalanceManageRecord,updateBalanceRequest: UpdateBalanceRequest,message: String) {
+        val mBuilder = android.app.AlertDialog.Builder(activity)
+            .setTitle("Are you sure?")
+            .setMessage(message)
+            .setPositiveButton("Yes", null)
+            .setNegativeButton("No", null)
+            .show()
+        val mPositiveButton = mBuilder.getButton(android.app.AlertDialog.BUTTON_POSITIVE)
+        mPositiveButton.setOnClickListener {
+            mBuilder.dismiss()
+            updateBLStatusApi(getBalanceManageRecord,updateBalanceRequest)
+        }
+    }
 
+    private fun updateBLStatusApi(getBalanceManageRecord: GetBalanceManageRecord, updateBalanceRequest: UpdateBalanceRequest){
+        //Api calling
+        if (networkHelper.isNetworkConnected()){
+            Log.d("updateBalanceRequest","::${Gson().toJson(updateBalanceRequest)}")
+            viewModel.updateBLStatus(updateBalanceRequest)
+            viewModel.updateBLStatusResponseModel.observe(viewLifecycleOwner) {
+                when(it.status){
+                    Status.SUCCESS -> {
+                        progressBar.dismiss()
+                        it.data?.let {
+                            viewModel.updateLocalBalanceManager(getBalanceManageRecord)
+                            bleManagerListAdapter?.notifyDataSetChanged()
+                        }
+                        Toast.makeText(activity,"Status updated successfully", Toast.LENGTH_SHORT).show()
+                        getStatusCount()
+                    }
+                    Status.ERROR -> {
+                        progressBar.dismiss()
+                        if(it.message == "Invalid access token"){
+                            Toast.makeText(activity,"Invalid access token", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                    Status.LOADING -> {
+                        progressBar.show()
+                    }
+                }
+            }
+        }else{
+            Toast.makeText(activity,getString(R.string.NO_INTERNET_CONNECTION),Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun getBalanceByFilterApi(filter: Int) {
@@ -184,6 +232,8 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
                     }
                 }
             }
+        }else{
+            Toast.makeText(activity,getString(R.string.NO_INTERNET_CONNECTION),Toast.LENGTH_SHORT).show()
         }
     }
 

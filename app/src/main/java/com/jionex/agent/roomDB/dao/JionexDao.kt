@@ -97,4 +97,7 @@ interface JionexDao {
 
     @Query("select Count(*) from GetMessageManageRecord")
     fun getCountMessageTransaction(): Int
+
+    @Update
+    fun updateLocalBalanceManager(balanceManageRecord: GetBalanceManageRecord)
 }
