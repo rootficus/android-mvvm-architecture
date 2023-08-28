@@ -102,7 +102,7 @@ class VerifyPinFragment :
             }
 
         }
-        mDataBinding.editTextPin.setText("224951")
+      /*  mDataBinding.editTextPin.setText("224951")*/
     }
 
    private fun callPinVerification() {
