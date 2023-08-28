@@ -149,6 +149,8 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
     }
 
     private fun acceptBalanceManager(getBalanceManageRecord: GetBalanceManageRecord){
+        //Api calling
+        //getBalanceManageRecord.status = Constant.BalanceManagerStatus.APPROVED.toString()
 
     }
 
