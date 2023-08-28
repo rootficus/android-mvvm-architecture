@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jionex.agent.R
 import com.jionex.agent.data.model.request.GetModemsByFilterRequest
+import com.jionex.agent.data.model.response.GetMessageManageRecord
 import com.jionex.agent.data.model.response.GetModemsByFilterResponse
 import com.jionex.agent.databinding.FragmentModemBinding
 import com.jionex.agent.sdkInit.JionexSDK
@@ -125,7 +126,36 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
     private fun setModemsAdapter() {
         modemsManagerListAdapter = ModemsManagerListAdapter(listGetModemsByFilter)
         mDataBinding.recentModemsList.layoutManager = LinearLayoutManager(context)
+        modemsManagerListAdapter?.listener = cardListener
         mDataBinding.recentModemsList.adapter = modemsManagerListAdapter
+    }
+
+    private val cardListener = object : ModemsManagerListAdapter.ModemCardEvent {
+        override fun onCardClicked(getModemsByFilterResponse: GetModemsByFilterResponse) {
+            val bottomSheetFragment = ModemDetailScreenFragment()
+            bottomSheetFragment.listener = modemDetailScreenActionListener
+            val bundle = Bundle()
+            bundle.putSerializable(GetMessageManageRecord::class.java.name, getModemsByFilterResponse)
+            bottomSheetFragment.arguments = bundle
+            activity?.supportFragmentManager?.let {
+                bottomSheetFragment.show(
+                    it,
+                    "ActionBottomDialogFragment"
+                )
+            }
+            //showCustomDialog(getBalanceManageRecord)
+        }
+    }
+
+    private val modemDetailScreenActionListener = object : ModemDetailScreenFragment.BottomDialogEvent {
+        override fun onAcceptRequest(getModemsByFilterResponse: GetModemsByFilterResponse) {
+
+        }
+
+        override fun onRejectedRequest(getModemsByFilterResponse: GetModemsByFilterResponse) {
+            TODO("Not yet implemented")
+        }
+
     }
 
 

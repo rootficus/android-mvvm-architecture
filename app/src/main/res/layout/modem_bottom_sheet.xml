@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/card_gray">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/header_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardBackgroundColor="@color/white"
+        app:cardElevation="@dimen/_2sdp">
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           <androidx.appcompat.widget.AppCompatImageView
+               android:id="@+id/imageClose"
+               android:layout_width="@dimen/_10sdp"
+               android:layout_height="@dimen/_10sdp"
+               android:layout_gravity="end"
+               android:layout_marginStart="@dimen/_4sdp"
+               android:src="@drawable/ic_left_arrow"
+               android:backgroundTint="@color/textColor"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               />
+
+           <androidx.appcompat.widget.AppCompatTextView
+               android:id="@+id/label_title"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:padding="@dimen/_4sdp"
+               android:text="@string/modem_detail"
+               android:textAlignment="center"
+               android:textStyle="bold"
+               android:textColor="@color/textColor"
+               android:textSize="12sp"
+               android:fontFamily="@font/roboto_medium"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintWidth_percent="0.5" />
+       </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/label_type"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:text="@string/type"
+        android:textColor="@color/textColor"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textSize="@dimen/_8sdp"
+        android:fontFamily="@font/roboto_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_card"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_type"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:textColor="@color/textColor"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textSize="@dimen/_8sdp"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintBottom_toBottomOf="@id/label_type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/label_type"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/label_operator"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:text="@string/operator"
+        android:textColor="@color/textColor"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textSize="@dimen/_8sdp"
+        android:fontFamily="@font/roboto_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_type"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_operator"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:textColor="@color/textColor"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textSize="@dimen/_8sdp"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintBottom_toBottomOf="@id/label_operator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/label_operator"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/label_device_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:text="@string/device_id"
+        android:textColor="@color/textColor"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textSize="@dimen/_8sdp"
+        android:fontFamily="@font/roboto_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_operator"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_device_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:textColor="@color/textColor"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textSize="@dimen/_8sdp"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintBottom_toBottomOf="@id/label_device_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/label_device_id"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/label_sim_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:text="@string/sim_id"
+        android:textColor="@color/textColor"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textSize="@dimen/_8sdp"
+        android:fontFamily="@font/roboto_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_device_id"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_sim_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:textColor="@color/textColor"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textSize="@dimen/_8sdp"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintBottom_toBottomOf="@id/label_sim_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/label_sim_id"
+        app:layout_constraintWidth_percent="0.5" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/label_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:text="@string/phone"
+        android:textColor="@color/textColor"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textSize="@dimen/_8sdp"
+        android:fontFamily="@font/roboto_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_sim_id"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:textColor="@color/textColor"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textSize="@dimen/_8sdp"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintBottom_toBottomOf="@id/label_phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/label_phone"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/label_agent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:text="@string/agent"
+        android:textColor="@color/textColor"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:visibility="gone"
+        android:textSize="@dimen/_8sdp"
+        android:fontFamily="@font/roboto_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_phone"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_agent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:textColor="@color/textColor"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:visibility="gone"
+        android:textSize="@dimen/_8sdp"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintBottom_toBottomOf="@id/label_agent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/label_agent"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/label_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:text="@string/status"
+        android:textColor="@color/textColor"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textSize="@dimen/_8sdp"
+        android:fontFamily="@font/roboto_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_agent"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:textColor="@color/textColor"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textSize="@dimen/_8sdp"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintBottom_toBottomOf="@id/label_status"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/label_status"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/label_device_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:text="@string/device_info"
+        android:textColor="@color/textColor"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textSize="@dimen/_8sdp"
+        android:fontFamily="@font/roboto_medium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_status"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_device_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:textColor="@color/textColor"
+        android:padding="@dimen/_5sdp"
+        android:textAlignment="center"
+        android:textSize="@dimen/_8sdp"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/label_device_info"
+
+        app:layout_constraintWidth_percent="0.5" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_20sdp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@+id/text_device_info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

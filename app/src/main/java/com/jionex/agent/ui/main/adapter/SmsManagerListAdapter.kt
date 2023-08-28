@@ -9,6 +9,11 @@ import com.jionex.agent.databinding.ItemSmsManagerBinding
 class SmsManagerListAdapter(private var itemList: ArrayList<GetMessageManageRecord>) :
     RecyclerView.Adapter<SmsManagerListAdapter.ItemViewHolder>() {
 
+    interface SmsCardEvent {
+        fun onCardClicked(title: GetMessageManageRecord)
+    }
+
+    var listener: SmsCardEvent? = null
 
     inner class ItemViewHolder(val binding: ItemSmsManagerBinding) : RecyclerView.ViewHolder(binding.root)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -25,7 +30,9 @@ class SmsManagerListAdapter(private var itemList: ArrayList<GetMessageManageReco
             binding.txtReceiver.text = item.receiver.toString()
             binding.txtSender.text = item.sender.toString()
             binding.txtDate.text = ""+item.smsType//Utility.convertTodayUtc2Local(item.smsDate) //item.date.toString()
-
+            binding.cardHead.setOnClickListener {
+                listener?.onCardClicked(item)
+            }
         }
 
     }

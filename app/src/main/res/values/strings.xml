@@ -41,8 +41,8 @@
     <string name="enter_name_of_which_you_want_image">Enter name of which you want image</string>
     <string name="welcome">Welcome</string>
     <string name="create">Create</string>
-    <string name="cash_out">Cash Out =</string>
-    <string name="cash_in">Cash In = </string>
+    <string name="cash_out">Cash Out </string>
+    <string name="cash_in">Cash In </string>
     <string name="distributed_id">Distributed Code</string>
     <string name="permission">PERMISSION</string>
     <string name="sim_permission">SIM PERMISSION</string>
@@ -119,6 +119,15 @@
     <string name="msgType">Msg Type</string>
     <string name="receiver">Receiver</string>
     <string name="sms_unknown">Unknown</string>
+    <string name="sms_type">Sms Type</string>
+    <string name="sim_slot">Sim Slot</string>
+    <string name="operator">Operator</string>
+    <string name="device_id">Device Id</string>
+    <string name="sim_id">Sim Id</string>
+    <string name="device_info">Device Info</string>
+    <string name="phone">Phone</string>
+    <string name="agent">Agent</string>
+    <string name="modem_detail">Model Detail</string>
     <string-array name="bankList">
         <item>item1</item>
         <item>item2</item>

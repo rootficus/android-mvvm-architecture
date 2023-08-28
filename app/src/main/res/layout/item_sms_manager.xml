@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -18,11 +19,11 @@
                 android:id="@+id/txtSrNo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/sr_no"
-                android:textSize="@dimen/_8sdp"
-                android:textAlignment="center"
                 android:paddingTop="@dimen/_3sdp"
                 android:paddingBottom="@dimen/_3sdp"
+                android:text="@string/sr_no"
+                android:textAlignment="center"
+                android:textSize="@dimen/_8sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.09" />
@@ -30,94 +31,99 @@
             <TextView
                 android:id="@+id/viewDivide1"
                 android:layout_width="1sp"
-                android:visibility="invisible"
                 android:layout_height="match_parent"
                 android:background="@color/divideColor"
-                app:layout_constraintStart_toEndOf="@id/txtSrNo"
-                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="horizontal"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:orientation="horizontal" />
+                app:layout_constraintStart_toEndOf="@id/txtSrNo"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtSender"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/sender"
-                android:textSize="@dimen/_8sdp"
+                android:ellipsize="middle"
                 android:paddingTop="@dimen/_3sdp"
                 android:paddingBottom="@dimen/_3sdp"
+                android:text="@string/sender"
                 android:textAlignment="center"
-                android:ellipsize="middle"
+                android:textSize="@dimen/_8sdp"
                 app:layout_constraintStart_toEndOf="@id/viewDivide1"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.19" />
+
             <TextView
                 android:id="@+id/viewDivide2"
                 android:layout_width="1sp"
                 android:layout_height="match_parent"
-                android:visibility="invisible"
                 android:background="@color/divideColor"
-                app:layout_constraintStart_toEndOf="@id/txtSender"
-                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="horizontal"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:orientation="horizontal" />
+                app:layout_constraintStart_toEndOf="@id/txtSender"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtMessage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_8sdp"
-                android:text="@string/message"
-                android:textAlignment="center"
                 android:ellipsize="middle"
                 android:paddingTop="@dimen/_3sdp"
                 android:paddingBottom="@dimen/_3sdp"
+                android:text="@string/message"
+                android:textAlignment="center"
+                android:textSize="@dimen/_8sdp"
                 app:layout_constraintStart_toEndOf="@id/viewDivide2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.37" />
+
             <TextView
                 android:id="@+id/viewDivide3"
                 android:layout_width="1sp"
                 android:layout_height="match_parent"
-                android:visibility="invisible"
                 android:background="@color/divideColor"
-                app:layout_constraintStart_toEndOf="@id/txtMessage"
-                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="horizontal"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:orientation="horizontal" />
+                app:layout_constraintStart_toEndOf="@id/txtMessage"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtReceiver"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_8sdp"
-                android:text="@string/receiver"
-                android:textAlignment="center"
                 android:ellipsize="middle"
                 android:paddingTop="@dimen/_3sdp"
                 android:paddingBottom="@dimen/_3sdp"
+                android:text="@string/receiver"
+                android:textAlignment="center"
+                android:textSize="@dimen/_8sdp"
                 app:layout_constraintStart_toEndOf="@id/viewDivide3"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.19" />
+
             <TextView
                 android:id="@+id/viewDivide4"
                 android:layout_width="1sp"
                 android:layout_height="match_parent"
-                android:visibility="invisible"
                 android:background="@color/divideColor"
-                app:layout_constraintStart_toEndOf="@id/txtReceiver"
-                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="horizontal"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:orientation="horizontal" />
+                app:layout_constraintStart_toEndOf="@id/txtReceiver"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_8sdp"
-                android:text="@string/date"
-                android:textAlignment="center"
                 android:ellipsize="middle"
                 android:paddingTop="@dimen/_3sdp"
                 android:paddingBottom="@dimen/_3sdp"
+                android:text="@string/date"
+                android:textAlignment="center"
+                android:textSize="@dimen/_8sdp"
                 app:layout_constraintStart_toEndOf="@id/viewDivide4"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.14" />
@@ -127,6 +133,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        app:layout_constraintTop_toBottomOf="@id/card_head"/>
+        app:layout_constraintTop_toBottomOf="@id/card_head" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

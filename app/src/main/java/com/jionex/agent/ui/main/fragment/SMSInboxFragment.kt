@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.jionex.agent.R
 import com.jionex.agent.data.model.request.GetMessageByFilterRequest
+import com.jionex.agent.data.model.response.GetBalanceManageRecord
 import com.jionex.agent.data.model.response.GetMessageManageRecord
 import com.jionex.agent.databinding.FragmentSmsInboxBinding
 import com.jionex.agent.sdkInit.JionexSDK
@@ -83,6 +84,7 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
                     mDataBinding.chipB2B.id -> {
                         getMessageByFilterApi(Constant.SMSType.B2B.value)
                     }
+
                     mDataBinding.chipUnKnown.id -> {
                         getMessageByFilterApi(Constant.SMSType.UNKNOWN.value)
                     }
@@ -106,6 +108,7 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
         }
 
     }
+
     private fun getMessageByFilterApi(filter: Int) {
 
         if (networkHelper.isNetworkConnected()) {
@@ -134,8 +137,9 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
                     Status.ERROR -> {
                         //startActivity(Intent(requireContext(), SignInActivity::class.java))
                         progressBar.dismiss()
-                        if(it.message == "Invalid access token"){
-                            Toast.makeText(activity,"Invalid access token", Toast.LENGTH_SHORT).show()
+                        if (it.message == "Invalid access token") {
+                            Toast.makeText(activity, "Invalid access token", Toast.LENGTH_SHORT)
+                                .show()
                         }
 
                     }
@@ -151,23 +155,51 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
         }
     }
 
-    private fun setMessageAdapter(filter:Int) {
+    private fun setMessageAdapter(filter: Int) {
         smsManagerListAdapter?.notifyDataSetChanged()
         var arrayList = viewModel.getMessageManageRecord(filter)
         Log.d("getBalanceByFilterApi", "::${filter},${arrayList.size}")
         smsManagerListAdapter = SmsManagerListAdapter(arrayList)
-        //smsManagerListAdapter?.listener = cardListener
+        smsManagerListAdapter?.listener = cardListener
         mDataBinding.recentFilteredMessage.layoutManager = LinearLayoutManager(context)
         mDataBinding.recentFilteredMessage.adapter = smsManagerListAdapter
         smsManagerListAdapter?.notifyDataSetChanged()
-        if (smsManagerListAdapter?.itemCount!! >0){
+        if (smsManagerListAdapter?.itemCount!! > 0) {
             mDataBinding.textNoTransactions.visibility = View.INVISIBLE
             mDataBinding.recentFilteredMessage.visibility = View.VISIBLE
-        }else{
+        } else {
             mDataBinding.recentFilteredMessage.visibility = View.INVISIBLE
             mDataBinding.textNoTransactions.visibility = View.VISIBLE
         }
         setMessageCountValue()
+    }
+
+    private val cardListener = object : SmsManagerListAdapter.SmsCardEvent {
+        override fun onCardClicked(getMessageManageRecord: GetMessageManageRecord) {
+            val bottomSheetFragment = SmsDetailScreenFragment()
+            bottomSheetFragment.listener = smsDetailScreenActionListener
+            val bundle = Bundle()
+            bundle.putSerializable(GetMessageManageRecord::class.java.name, getMessageManageRecord)
+            bottomSheetFragment.arguments = bundle
+            activity?.supportFragmentManager?.let {
+                bottomSheetFragment.show(
+                    it,
+                    "ActionBottomDialogFragment"
+                )
+            }
+            //showCustomDialog(getBalanceManageRecord)
+        }
+    }
+
+    private val smsDetailScreenActionListener = object : SmsDetailScreenFragment.BottomDialogEvent {
+        override fun onAcceptRequest(getMessageManageRecord: GetMessageManageRecord) {
+
+        }
+
+        override fun onRejectedRequest(getMessageManageRecord: GetMessageManageRecord) {
+            TODO("Not yet implemented")
+        }
+
     }
 
     private fun setMessageFilterCount() {
