@@ -14,6 +14,7 @@ import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
 import java.util.UUID
+import java.util.regex.Pattern
 
 object Utility {
 
@@ -86,4 +87,10 @@ object Utility {
         return formatter.format(currency)
     }
 
+    fun isEmailValid(email: String): Boolean {
+        val regex = "^[A-Za-z0-9+_.-]+@(.+)$"
+        val pattern = Pattern.compile(regex)
+        val matcher = pattern.matcher(email)
+        return matcher.matches()
+    }
 }

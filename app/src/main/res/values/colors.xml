@@ -28,4 +28,5 @@
     <color name="unSelectChipColorBG">#66AFABAB</color>
     <color name="colorChecked">#FFFFFFFF</color>
     <color name="colorUnchecked">#131313</color>
+    <color name="nonClickableButton">#33000000</color>
 </resources>

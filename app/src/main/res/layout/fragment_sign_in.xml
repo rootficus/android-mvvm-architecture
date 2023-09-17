@@ -25,13 +25,13 @@
                 android:id="@+id/imgTopLogo"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:src="@mipmap/logo"
+                android:src="@drawable/splash_logo"
                 app:layout_constraintBottom_toTopOf="@id/txt_heading"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.17"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintHeight_percent="0.08"
-                app:layout_constraintWidth_percent="0.45" />
+                app:layout_constraintWidth_percent="0.25" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_heading"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="@string/login_text"
+                android:text="@string/welcome_text"
                 android:textAlignment="center"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -57,60 +57,70 @@
                 android:text="@string/login_sub_heading"
                 android:textAlignment="center"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@id/textInputName"
+                app:layout_constraintBottom_toTopOf="@id/etName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintWidth_percent="0.7" />
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputName"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginBottom="20dp"
-                app:boxStrokeColor="@color/primaryDarkColor"
-                app:layout_constraintBottom_toTopOf="@id/textInputPhone"
+                android:background="@drawable/round_corners"
+                android:fontFamily="@font/roboto_medium"
+                android:hint="@string/user_name"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:padding="15dp"
+                android:text="jsn.orchid@gmail.com"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@id/etPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintWidth_percent="0.8">
+                app:layout_constraintWidth_percent="0.85" />
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/etName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:hint="@string/user_name"
-                    android:text="jsn.orchid@gmail.com"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/email_verified"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:src="@drawable/check_circle"
+                app:layout_constraintBottom_toBottomOf="@id/etName"
+                app:layout_constraintEnd_toEndOf="@id/etName"
+                app:layout_constraintTop_toTopOf="@id/etName" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputPhone"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etPassword"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:background="@drawable/round_corners"
+                android:fontFamily="@font/roboto_medium"
+                android:hint="@string/password"
+                android:maxLines="1"
+                android:padding="14dp"
+                android:text="Orchid@1235"
+                android:inputType="textPassword"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/textInputName"
-                app:layout_constraintStart_toStartOf="@id/textInputName"
-                app:layout_constraintTop_toBottomOf="@id/textInputName"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintEnd_toEndOf="@+id/etName"
+                app:layout_constraintStart_toStartOf="@id/etName"
+                app:layout_constraintTop_toBottomOf="@id/etName"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/et_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:hint="@string/password"
-                    android:text="Orchid@1235"
-                    android:maxLines="1"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/password_toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:src="@drawable/hide_password"
+                app:layout_constraintBottom_toBottomOf="@id/etPassword"
+                app:layout_constraintEnd_toEndOf="@id/etPassword"
+                app:layout_constraintTop_toTopOf="@id/etPassword" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_sign_in"
@@ -120,11 +130,12 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/btn_inactive_back"
                 android:text="@string/login"
+                android:backgroundTint="@color/black"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textInputPhone"
-                app:layout_constraintWidth_percent="0.8" />
+                app:layout_constraintTop_toBottomOf="@id/etPassword"
+                app:layout_constraintWidth_percent="0.85" />
 
             <ProgressBar
                 android:id="@+id/progressBar"

@@ -27,7 +27,7 @@
     </style>
 
     <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:windowBackground">@drawable/rounded_corner</item>
+        <item name="android:windowBackground">@drawable/otp_round_view</item>
     </style>
 
     <style name="customChipChoice" parent="@style/Widget.MaterialComponents.Chip.Choice">

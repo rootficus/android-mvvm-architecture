@@ -17,6 +17,7 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -32,7 +33,6 @@
                 app:layout_constraintWidth_percent="0.1" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgTopLogo"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:src="@mipmap/logo"
@@ -57,13 +57,25 @@
                 android:layout_gravity="center"
                 android:padding="10dp">
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgTopLogo"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:src="@drawable/splash_logo"
+                    app:layout_constraintBottom_toTopOf="@id/txt_heading"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight_percent="0.17"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.25" />
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txt_heading"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="20dp"
                     android:fontFamily="@font/roboto_medium"
-                    android:text="@string/login_text"
+                    android:text="@string/welcome_text"
                     android:textAlignment="center"
                     android:textSize="22sp"
                     android:textStyle="bold"
@@ -81,36 +93,42 @@
                     android:text="@string/verify_sub_heading"
                     android:textAlignment="center"
                     android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@id/textInputPin"
+                    app:layout_constraintBottom_toTopOf="@id/otp_layout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintWidth_percent="0.7" />
 
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputPin"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/editTextPin"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:hint="@string/pinCode"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:visibility="gone"
+                    android:maxLines="1"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toTopOf="@id/btnVerifyButton"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintWidth_percent="0.8">
+                    app:layout_constraintWidth_percent="0.8" />
 
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/editTextPin"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_medium"
-                        android:hint="@string/pinCode"
-                        android:inputType="number"
-                        android:maxLength="6"
-                        android:maxLines="1"
-                        android:textSize="14sp" />
-                </com.google.android.material.textfield.TextInputLayout>
+                <include
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:id="@+id/otp_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toTopOf="@id/btnVerifyButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    layout="@layout/optview"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnVerifyButton"
@@ -119,15 +137,18 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/btn_inactive_back"
+                    android:backgroundTint="@color/black"
                     android:fontFamily="@font/roboto_medium"
-                    android:text="@string/login"
+                    android:padding="15dp"
+                    android:text="@string/continues"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="14sp"
+                    app:layout_constraintWidth_percent="0.8"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/textInputPin"
-                    app:layout_constraintStart_toStartOf="@id/textInputPin"
-                    app:layout_constraintTop_toBottomOf="@id/textInputPin"
+                    app:layout_constraintEnd_toEndOf="@id/editTextPin"
+                    app:layout_constraintStart_toStartOf="@id/editTextPin"
+                    app:layout_constraintTop_toBottomOf="@id/otp_layout"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
