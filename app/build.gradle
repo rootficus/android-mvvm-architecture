@@ -5,16 +5,16 @@ plugins {
 }
 
 android {
-    namespace 'com.jionex.agent'
+    namespace 'com.fionpay.agent'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.jionex.agent"
+        applicationId "com.fionpay.agent"
         minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
-        setProperty("archivesBaseName", "JionexAgent" + "V" + versionName + "." + versionCode + "")
+        setProperty("archivesBaseName", "FionPayAgent" + "V" + versionName + "." + versionCode + "")
 
         vectorDrawables.useSupportLibrary = true
 
@@ -69,12 +69,12 @@ android {
         uat {
             dimension "default"
             buildConfigField("String", "VERSION", "\"UAT\"")
-            buildConfigField("String", "BASE_URL", "\"https://api.jionex.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.fion.com/\"")
         }
         prod {
             dimension "default"
             buildConfigField("String", "VERSION", "\"PROD\"")
-            buildConfigField("String", "BASE_URL", "\"https://api.jionex.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.fion.com/\"")
         }
 
     }

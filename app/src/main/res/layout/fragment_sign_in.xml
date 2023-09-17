@@ -6,7 +6,7 @@
 
         <variable
             name="signInModel"
-            type="com.jionex.agent.ui.main.viewmodel.SignInViewModel" />
+            type="com.fionpay.agent.ui.main.viewmodel.SignInViewModel" />
     </data>
 
     <ScrollView

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.jionex.agent.ui.main.fragment.DashBoardFragment"
+        android:name="com.fionpay.agent.ui.main.fragment.DashBoardFragment"
         android:label="DashBoardFragment"
         tools:layout="@layout/fragment_dashboard">
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_blManager"
-        android:name="com.jionex.agent.ui.main.fragment.BLManagerFragment"
+        android:name="com.fionpay.agent.ui.main.fragment.BLManagerFragment"
         android:label="BLManagerFragment"
         tools:layout="@layout/fragment_bl_manager">
         <action
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/navigation_smsInboxFragment"
-        android:name="com.jionex.agent.ui.main.fragment.SMSInboxFragment"
+        android:name="com.fionpay.agent.ui.main.fragment.SMSInboxFragment"
         android:label="BLManagerFragment"
         tools:layout="@layout/fragment_sms_inbox">
         <action
@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/navigation_modemFragment"
-        android:name="com.jionex.agent.ui.main.fragment.ModemFragment"
+        android:name="com.fionpay.agent.ui.main.fragment.ModemFragment"
         android:label="BLManagerFragment"
         tools:layout="@layout/fragment_modem">
         <action

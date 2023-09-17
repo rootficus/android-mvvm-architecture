@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_signin"
-        android:name="com.jionex.agent.ui.main.fragment.SignInFragment"
+        android:name="com.fionpay.agent.ui.main.fragment.SignInFragment"
         android:label="SignInFragment"
         tools:layout="@layout/fragment_sign_in">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_verifyPin"
-        android:name="com.jionex.agent.ui.main.fragment.VerifyPinFragment"
+        android:name="com.fionpay.agent.ui.main.fragment.VerifyPinFragment"
         android:label="VerifyNumberFragment"
         tools:layout="@layout/fragment_verify_pin">
 
