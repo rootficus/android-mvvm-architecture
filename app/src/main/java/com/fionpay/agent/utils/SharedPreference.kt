@@ -74,7 +74,7 @@ class SharedPreference(context: Context) {
     }
 
     fun getFullName() :String?{
-        return pref.getString(Constant.PREF_FULL_NAME,"")
+        return pref.getString(Constant.PREF_FULL_NAME,"Akash")
     }
 
     fun setPinCode(userId: Int){

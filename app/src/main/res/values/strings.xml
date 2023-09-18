@@ -25,7 +25,9 @@
     <string name="enter_id">Id</string>
     <string name="upload">Upload</string>
     <string name="email">Email</string>
-    <string name="name">Name</string>
+    <string name="name_dot">Name : </string>
+    <string name="pin_code_dot">PinCode : </string>
+    <string name="balance_added_dot">Balance Added : </string>
     <string name="card_number">Card number</string>
     <string name="cvc">CVV</string>
     <string name="mm_yy">MM/YY</string>
@@ -130,6 +132,26 @@
     <string name="modem_detail">Model Detail</string>
     <string name="you_want_to_approved">You want to approved</string>
     <string name="you_want_to_rejected">You want to rejected</string>
+    <string name="used_balance">Used Balance</string>
+    <string name="support">Support</string>
+    <string name="transaction">Transaction</string>
+    <string name="modem">Modem</string>
+    <string name="pending">Pending</string>
+    <string name="manage_modems">Manage Modems</string>
+    <string name="current_balance">Current Balance</string>
+    <string name="search">Search</string>
+    <string name="first_name">First Name</string>
+    <string name="next">Next</string>
+    <string name="pin_code">Pin Code</string>
+    <string name="last_name">Last Name</string>
+    <string name="refresh">refresh</string>
+    <string name="existing_balance">Existing BALANCE</string>
+    <string name="add_balance">Add Balance</string>
+    <string name="zero">0.0</string>
+    <string name="confirm_create"><![CDATA[Confirm & Create]]></string>
+    <string name="notifications">Notifications</string>
+    <string name="log_out">Log Out</string>
+    <string name="transactions">Transactions</string>
     <string-array name="bankList">
         <item>item1</item>
         <item>item2</item>

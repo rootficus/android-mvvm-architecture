@@ -7,13 +7,18 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.fionpay.agent.R
+import com.fionpay.agent.data.model.response.TransactionModel
 import com.fionpay.agent.databinding.FragmentDashboardBinding
 import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
 import com.fionpay.agent.ui.main.activity.SignInActivity
+import com.fionpay.agent.ui.main.adapter.BleManagerListAdapter
+import com.fionpay.agent.ui.main.adapter.DashBoardListAdapter
 import com.fionpay.agent.ui.main.di.DaggerDashBoardFragmentComponent
 import com.fionpay.agent.ui.main.di.DashBoardFragmentModule
 import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
@@ -38,12 +43,24 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
-
+    private lateinit var dashBoardListAdapter : DashBoardListAdapter
+    private var arrayList : ArrayList<TransactionModel> = arrayListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeDagger()
         initializeView()
+        setAdapter()
+    }
+
+    private fun setAdapter() {
+        arrayList.add(TransactionModel("Used Balance","৳35,00.00"))
+        arrayList.add(TransactionModel("Today’s Cash Out","৳100.00"))
+        arrayList.add(TransactionModel("Total Cash In","৳2000.00"))
+        arrayList.add(TransactionModel("Total Cash Out","৳15,00.00"))
+        dashBoardListAdapter = DashBoardListAdapter(arrayList)
+        mDataBinding.homeCardListView.layoutManager = GridLayoutManager(context, 2)
+        mDataBinding.homeCardListView.adapter = dashBoardListAdapter
     }
 
     private fun initializeDagger() {
@@ -53,10 +70,9 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
     }
 
     private fun initializeView() {
-        showLocalSaveValue()
-        mDataBinding.textAgentFullName.text = sharedPreference.getFullName()
-        mDataBinding.textAgentPinCode.text = sharedPreference.getPinCode().toString()
-        mDataBinding.logoutBtn.setOnClickListener {
+        val name =  sharedPreference.getFullName() ?: "Akash"
+        mDataBinding.textAgentFullName.text = "Hello, $name"
+        mDataBinding.notificationButton.setOnClickListener {
             val mBuilder = AlertDialog.Builder(activity)
                 .setTitle(getString(R.string.app_name))
                 .setMessage("Do you want to logout?")
@@ -93,7 +109,6 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
                         it.data?.totalPending?.let { it1 ->
                             viewModel.setTotalPending(it1)
                         }
-                        showLocalSaveValue()
                     }
 
                     Status.ERROR -> {
@@ -121,28 +136,6 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
         mPositiveButton.setOnClickListener {
             startActivity(Intent(activity, SignInActivity::class.java))
             activity?.finishAffinity()
-        }
-    }
-
-    private fun showLocalSaveValue() {
-        viewModel.getTotalModem().let { it1 ->
-            mDataBinding.totalModemValue.text = it1.toString()
-            viewModel.setTotalModem(it1)
-        }
-        viewModel.getTodayTrxAmount()?.let { it1 ->
-            mDataBinding.todayTrxAmountValue.text = Utility.convertCurrencyFormat(it1.toDouble())
-        }
-        viewModel.getTotalTrxAmount()?.let { it1 ->
-            mDataBinding.totalTrxAmountValue.text = Utility.convertCurrencyFormat(it1.toDouble())
-        }
-        viewModel.getTodayTransactions().let { it1 ->
-            mDataBinding.todayTransactionsValue.text = it1.toString()
-        }
-        viewModel.getTotalTransactions()?.let { it1 ->
-            mDataBinding.totalTransactionsValue.text = Utility.convertCurrencyFormat(it1.toDouble())
-        }
-        viewModel.getTotalPending().let { it1 ->
-            mDataBinding.totalPendingValue.text = it1.toString()
         }
     }
 

@@ -25,11 +25,6 @@ class SmsManagerListAdapter(private var itemList: ArrayList<GetMessageManageReco
         val item: GetMessageManageRecord = itemList[position]
         with(holder)
         {
-            binding.txtSrNo.text = position.toString()
-            binding.txtMessage.text = item.textMessage
-            binding.txtReceiver.text = item.receiver.toString()
-            binding.txtSender.text = item.sender.toString()
-            binding.txtDate.text = ""+item.smsType//Utility.convertTodayUtc2Local(item.smsDate) //item.date.toString()
             binding.cardHead.setOnClickListener {
                 listener?.onCardClicked(item)
             }

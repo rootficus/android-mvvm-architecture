@@ -2,88 +2,265 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:layout_marginBottom="@dimen/_5sdp"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        app:cardCornerRadius="12dp"
+        android:layout_marginBottom="@dimen/_5sdp"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:paddingVertical="10dp"
+            android:layout_height="match_parent"
             android:background="@color/cardBgColor"
-            android:layout_height="match_parent">
+            android:paddingVertical="10dp">
 
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txt_sr_no"
-                android:layout_width="0dp"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/userDetailLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                 android:textSize="@dimen/_10sdp"
-                android:textAlignment="center"
-                android:paddingTop="@dimen/_3sdp"
-                android:paddingBottom="@dimen/_3sdp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/_10sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.05" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtPinCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:fontFamily="@font/poppins"
+                    android:letterSpacing="1"
+                    android:text="123456"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgUser"
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/ic_user"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:fontFamily="@font/poppins"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:text="Akash"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgMenu"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_weight="0.1"
+                    android:src="@android:drawable/ic_menu_directions"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txt_operator"
+                android:id="@+id/currentBalancetxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_10sdp"
+                android:fontFamily="@font/poppins"
+                android:text="@string/current_balance"
                 android:textAlignment="center"
-                android:paddingTop="@dimen/_3sdp"
-                android:paddingBottom="@dimen/_3sdp"
-                app:layout_constraintStart_toEndOf="@id/txt_sr_no"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.28" />
+                android:textAllCaps="true"
+                android:textColor="@color/primaryBlue"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@id/currentBalanceAmount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/currentBalanceAmount"
+                app:layout_constraintWidth_percent="0.5" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txt_device_id"
+                android:id="@+id/currentBalanceAmount"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                 android:textSize="@dimen/_10sdp"
-                android:textAlignment="center"
-                android:paddingTop="@dimen/_3sdp"
-                android:paddingBottom="@dimen/_3sdp"
-                app:layout_constraintStart_toEndOf="@id/txt_operator"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.3" />
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/poppins"
+                android:text="৳‎12,000.00"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/currentBalancetxt"
+                app:layout_constraintTop_toBottomOf="@id/userDetailLayout"
+                app:layout_constraintWidth_percent="0.5" />
+
+            <View
+                android:id="@+id/viewSeparator"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/currentBalanceAmount"
+                app:layout_constraintWidth_percent="0.9" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgBalance"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:src="@drawable/ic_user"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/viewSeparator" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txt_phone"
-                android:layout_width="0dp"
+                android:id="@+id/txtUserBalanceAmount"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                 android:textSize="@dimen/_10sdp"
-                android:textAlignment="center"
-                android:paddingTop="@dimen/_3sdp"
-                android:paddingBottom="@dimen/_3sdp"
-                app:layout_constraintStart_toEndOf="@id/txt_device_id"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.23" />
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_weight="0.2"
+                android:fontFamily="@font/poppins"
+                android:paddingStart="@dimen/_5sdp"
+                android:text="৳‎35,00.00"
+                android:textColor="@color/primaryBlue"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/imgBalance"
+                app:layout_constraintTop_toTopOf="@id/imgBalance" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgTodayCashOut"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:src="@drawable/ic_user"
+                app:layout_constraintEnd_toStartOf="@id/txtTodayCashOut"
+                app:layout_constraintTop_toBottomOf="@id/viewSeparator" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txt_status"
-                android:layout_width="0dp"
+                android:id="@+id/txtTodayCashOut"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                 android:textSize="@dimen/_10sdp"
-                android:textAlignment="center"
-                android:paddingTop="@dimen/_3sdp"
-                android:paddingBottom="@dimen/_3sdp"
-                app:layout_constraintStart_toEndOf="@id/txt_phone"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.12" />
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_weight="0.2"
+                android:paddingStart="@dimen/_5sdp"
+                android:text="৳‎35,00.00"
+                android:textColor="@color/primaryBlue"
+                android:fontFamily="@font/poppins"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/imgBalance" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgCashIn"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:src="@drawable/ic_user"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtUserBalanceAmount" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtUserCashIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_weight="0.2"
+                android:paddingStart="@dimen/_5sdp"
+                android:text="৳‎35,00.00"
+                android:textColor="@color/primaryBlue"
+                android:fontFamily="@font/poppins"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/imgCashIn"
+                app:layout_constraintTop_toTopOf="@id/imgCashIn" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgTotalCashOut"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:src="@drawable/ic_user"
+                app:layout_constraintEnd_toStartOf="@id/txtTodayCashOut"
+                app:layout_constraintTop_toBottomOf="@id/txtUserBalanceAmount" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTotalCashOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_weight="0.2"
+                android:paddingStart="@dimen/_5sdp"
+                android:text="৳‎35,00.00"
+                android:textColor="@color/primaryBlue"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/imgTotalCashOut" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtActive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/rounded_corner"
+                android:backgroundTint="@color/activeGreenBg"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_3sdp"
+                android:text="Active"
+                android:textColor="@color/activeGreen"
+                android:fontFamily="@font/poppins"
+                app:layout_constraintEnd_toStartOf="@id/txtBlock"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtUserCashIn" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtBlock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/rounded_corner"
+                android:backgroundTint="@color/activeGreenBg"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_3sdp"
+                android:text="Unblocked"
+                android:textColor="@color/activeGreen"
+                android:fontFamily="@font/poppins"
+                app:layout_constraintEnd_toStartOf="@id/txtLoggedIn"
+                app:layout_constraintStart_toEndOf="@id/txtActive"
+                app:layout_constraintTop_toBottomOf="@id/txtUserCashIn" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtLoggedIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/rounded_corner"
+                android:backgroundTint="@color/activeGreenBg"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_3sdp"
+                android:text="Logged In"
+                android:textColor="@color/activeGreen"
+                android:fontFamily="@font/poppins"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/txtBlock"
+                app:layout_constraintTop_toBottomOf="@id/txtUserCashIn" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.cardview.widget.CardView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        app:layout_constraintTop_toBottomOf="@id/card_head"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

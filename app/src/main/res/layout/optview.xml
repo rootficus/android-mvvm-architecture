@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <!-- OTP Box 1 -->
+    <EditText
+        android:id="@+id/otpBox1"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_weight="1"
+        android:background="@drawable/otp_round_view"
+        android:contentDescription="OTP Box 1"
+        android:gravity="center"
+        android:inputType="number"
+        android:maxLength="1"
+        android:textSize="24sp" />
+
+    <!-- OTP Box 2 -->
+    <EditText
+        android:id="@+id/otpBox2"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_weight="1"
+        android:background="@drawable/otp_round_view"
+        android:contentDescription="OTP Box 2"
+        android:gravity="center"
+        android:inputType="number"
+        android:maxLength="1"
+        android:textSize="24sp" />
+
+    <!-- OTP Box 3 -->
+    <EditText
+        android:id="@+id/otpBox3"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_weight="1"
+        android:background="@drawable/otp_round_view"
+        android:contentDescription="OTP Box 3"
+        android:gravity="center"
+        android:inputType="number"
+        android:maxLength="1"
+        android:textSize="24sp" />
+
+    <!-- OTP Box 4 -->
+    <EditText
+        android:id="@+id/otpBox4"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_weight="1"
+        android:background="@drawable/otp_round_view"
+        android:contentDescription="OTP Box 4"
+        android:gravity="center"
+        android:inputType="number"
+        android:maxLength="1"
+        android:textSize="24sp" />
+    <!-- OTP Box 5 -->
+    <EditText
+        android:id="@+id/otpBox5"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_weight="1"
+        android:background="@drawable/otp_round_view"
+        android:contentDescription="OTP Box 5"
+        android:gravity="center"
+        android:inputType="number"
+        android:maxLength="1"
+        android:textSize="24sp" />
+    <!-- OTP Box 6 -->
+    <EditText
+        android:id="@+id/otpBox6"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_weight="1"
+        android:background="@drawable/otp_round_view"
+        android:contentDescription="OTP Box 6"
+        android:gravity="center"
+        android:inputType="number"
+        android:maxLength="1"
+        android:textSize="24sp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

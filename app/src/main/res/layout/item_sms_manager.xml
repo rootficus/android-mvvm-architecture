@@ -12,127 +12,124 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_5sdp">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtSrNo"
-                android:layout_width="0dp"
+                android:id="@+id/labelCustomerNumber"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/_3sdp"
-                android:paddingBottom="@dimen/_3sdp"
-                android:text="@string/sr_no"
-                android:textAlignment="center"
-                android:textSize="@dimen/_10sdp"
+                android:fontFamily="@font/poppins"
+                android:text="Customer No."
+                android:textColor="@color/primaryBlue"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.09" />
-
-            <TextView
-                android:id="@+id/viewDivide1"
-                android:layout_width="1sp"
-                android:layout_height="match_parent"
-                android:background="@color/divideColor"
-                android:orientation="horizontal"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/txtSrNo"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtSender"
-                android:layout_width="0dp"
+                android:id="@+id/txtCustomerNumber"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="middle"
-                android:paddingTop="@dimen/_3sdp"
-                android:paddingBottom="@dimen/_3sdp"
-                android:text="@string/sender"
-                android:textAlignment="center"
-                android:textSize="@dimen/_10sdp"
-                app:layout_constraintStart_toEndOf="@id/viewDivide1"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.19" />
+                android:layout_marginStart="@dimen/_25sdp"
+                android:fontFamily="@font/poppins"
+                android:text="Akash Singh"
+                android:textColor="@color/primaryBlue"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/labelCustomerNumber"
+                app:layout_constraintTop_toTopOf="@id/labelCustomerNumber" />
 
-            <TextView
-                android:id="@+id/viewDivide2"
-                android:layout_width="1sp"
-                android:layout_height="match_parent"
-                android:background="@color/divideColor"
-                android:orientation="horizontal"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/txtSender"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtMessage"
-                android:layout_width="0dp"
+                android:id="@+id/labelAmount"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="middle"
-                android:paddingTop="@dimen/_3sdp"
-                android:paddingBottom="@dimen/_3sdp"
-                android:text="@string/message"
-                android:textAlignment="center"
-                android:textSize="@dimen/_10sdp"
-                app:layout_constraintStart_toEndOf="@id/viewDivide2"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.37" />
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/poppins"
+                android:text="Amount"
+                android:textColor="@color/primaryBlue"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelCustomerNumber" />
 
-            <TextView
-                android:id="@+id/viewDivide3"
-                android:layout_width="1sp"
-                android:layout_height="match_parent"
-                android:background="@color/divideColor"
-                android:orientation="horizontal"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/txtMessage"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtReceiver"
-                android:layout_width="0dp"
+                android:id="@+id/txtAmount"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="middle"
-                android:paddingTop="@dimen/_3sdp"
-                android:paddingBottom="@dimen/_3sdp"
-                android:text="@string/receiver"
-                android:textAlignment="center"
-                android:textSize="@dimen/_10sdp"
-                app:layout_constraintStart_toEndOf="@id/viewDivide3"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.19" />
+                android:fontFamily="@font/poppins"
+                android:text="123456"
+                android:textColor="@color/primaryBlue"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/txtCustomerNumber"
+                app:layout_constraintTop_toTopOf="@id/labelAmount" />
 
-            <TextView
-                android:id="@+id/viewDivide4"
-                android:layout_width="1sp"
-                android:layout_height="match_parent"
-                android:background="@color/divideColor"
-                android:orientation="horizontal"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/txtReceiver"
-                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelOldBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/poppins"
+                android:text="Old Balance"
+                android:textColor="@color/primaryBlue"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelAmount" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtOldBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="৳‎1000.00"
+                android:textColor="@color/primaryBlue"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/txtCustomerNumber"
+                app:layout_constraintTop_toTopOf="@id/labelOldBalance" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtDate"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="middle"
-                android:paddingTop="@dimen/_3sdp"
-                android:paddingBottom="@dimen/_3sdp"
-                android:text="@string/date"
-                android:textAlignment="center"
-                android:textSize="@dimen/_10sdp"
-                app:layout_constraintStart_toEndOf="@id/viewDivide4"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.14" />
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:fontFamily="@font/poppins"
+                android:text="00/00/00 00:00 PM"
+                android:textColor="@color/primaryBlue"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/txtSuccess"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:src="@drawable/calendar_icon"
+                app:layout_constraintBottom_toBottomOf="@id/txtDate"
+                app:layout_constraintEnd_toStartOf="@id/txtDate" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtSuccess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/rounded_corner"
+                android:backgroundTint="@color/activeGreenBg"
+                android:fontFamily="@font/poppins"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_3sdp"
+                android:text="Success"
+                android:textColor="@color/activeGreen"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        app:layout_constraintTop_toBottomOf="@id/card_head" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

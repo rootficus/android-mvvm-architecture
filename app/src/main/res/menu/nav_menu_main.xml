@@ -2,22 +2,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@id/navigation_dashboard"
-        android:icon="@drawable/icon_dashboard"
-        android:title="Dashboard" />
-
+        android:icon="@drawable/dashboard_logo"
+        android:title="@string/dashboard" />
     <item
         android:id="@id/navigation_blManager"
-        android:icon="@drawable/icon_bl"
-        android:title="BL Manager" />
+        android:icon="@drawable/pending_logo"
+        android:title="@string/pending" />
     <item
         android:id="@id/navigation_smsInboxFragment"
-        android:icon="@drawable/icon_sms_inbox"
-        android:title="SMS Inbox" />
+        android:icon="@drawable/modem_logo"
+        android:title="@string/modem" />
 
     <item
         android:id="@id/navigation_modemFragment"
-        android:icon="@drawable/icon_modem"
-        android:title="Modems" />
+        android:icon="@drawable/transaction_logo"
+        android:title="@string/transaction" />
+    <item
+        android:id="@id/navigation_modemFragment"
+        android:icon="@drawable/support_logo"
+        android:title="@string/support" />
 
 
 </menu>
