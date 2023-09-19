@@ -5,16 +5,16 @@
         android:icon="@drawable/dashboard_logo"
         android:title="@string/dashboard" />
     <item
-        android:id="@id/navigation_blManager"
+        android:id="@id/navigation_modemFragment"
         android:icon="@drawable/pending_logo"
         android:title="@string/pending" />
     <item
-        android:id="@id/navigation_smsInboxFragment"
+        android:id="@id/navigation_modemFragment"
         android:icon="@drawable/modem_logo"
         android:title="@string/modem" />
 
     <item
-        android:id="@id/navigation_modemFragment"
+        android:id="@id/navigation_transactionFragment"
         android:icon="@drawable/transaction_logo"
         android:title="@string/transaction" />
     <item

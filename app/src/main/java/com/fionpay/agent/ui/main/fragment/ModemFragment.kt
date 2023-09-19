@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.request.GetModemsByFilterRequest
@@ -66,6 +67,9 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
 
     private fun initializeView() {
         getBundleData()
+        mDataBinding.addModemButton.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.navigation_addModemFragment)
+        }
         getModemsByFilterApi()
     }
 

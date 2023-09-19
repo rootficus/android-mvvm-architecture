@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fionpay.agent.R
@@ -71,7 +72,7 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
 
     private fun initializeView() {
         val name =  sharedPreference.getFullName() ?: "Akash"
-        mDataBinding.textAgentFullName.text = "Hello, $name"
+        mDataBinding.textAgentFullName.text = getString(R.string.userName, "Akash")
         mDataBinding.notificationButton.setOnClickListener {
             val mBuilder = AlertDialog.Builder(activity)
                 .setTitle(getString(R.string.app_name))
@@ -85,6 +86,15 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
                 activity?.finishAffinity()
             }
         }
+
+        mDataBinding.settingButton.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.navigation_settingFragment)
+        }
+
+        mDataBinding.notificationButton.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.navigation_notificationFragment)
+        }
+
         if (networkHelper.isNetworkConnected()) {
             viewModel.dashBoardData()
             viewModel.dashBoardItemResponseModel.observe(viewLifecycleOwner) {

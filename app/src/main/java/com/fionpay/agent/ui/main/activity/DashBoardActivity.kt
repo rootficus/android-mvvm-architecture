@@ -75,19 +75,19 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                 val bundle = Bundle()
                 jumpToAnotherFragment(R.id.navigation_dashboard, bundle)
             }
-            R.id.navigation_blManager-> {
+            R.id.navigation_modemFragment-> {
                 val bundle = Bundle().apply {
                     putString("Api", "All Transactions")
                     putInt("Filer", -1)
                 }
-                jumpToAnotherFragment(R.id.navigation_blManager, bundle)
+                jumpToAnotherFragment(R.id.navigation_modemFragment, bundle)
             }
-            R.id.navigation_smsInboxFragment-> {
+            R.id.navigation_transactionFragment-> {
                 val bundle = Bundle().apply {
                     putString("Api", "B2B")
                     putInt("Filer", 2)
                 }
-                jumpToAnotherFragment(R.id.navigation_smsInboxFragment, bundle)
+                jumpToAnotherFragment(R.id.navigation_transactionFragment, bundle)
             }
             R.id.navigation_modemFragment-> {
                 val bundle = Bundle().apply {

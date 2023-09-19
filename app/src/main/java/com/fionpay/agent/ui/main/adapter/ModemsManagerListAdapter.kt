@@ -26,14 +26,14 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsByFilter
         val item: GetModemsByFilterResponse = itemList[position]
         with(holder)
         {
-            binding.txtSrNo.text = position.toString()
+     /*       binding.txtSrNo.text = position.toString()
             binding.txtStatus.text = item.isActive.toString()
             binding.txtPhone.text = item.phoneNumber.toString()
             binding.txtOperator.text = item.operator.toString()
             binding.txtDeviceId.text = item.deviceId.toString()
             binding.cardHead.setOnClickListener {
                 listener?.onCardClicked(item)
-            }
+            }*/
         }
 
     }

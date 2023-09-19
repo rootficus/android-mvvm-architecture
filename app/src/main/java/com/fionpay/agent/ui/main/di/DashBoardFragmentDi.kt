@@ -3,7 +3,6 @@ package com.fionpay.agent.ui.main.di
 import android.content.Context
 import com.fionpay.agent.data.remote.FionApiServices
 import com.fionpay.agent.data.repository.DashBoardRepository
-import com.fionpay.agent.data.repository.SignInRepository
 import com.fionpay.agent.roomDB.FionDatabase
 import com.fionpay.agent.sdkInit.di.AppComponent
 import com.fionpay.agent.ui.base.BaseFragmentModule
@@ -11,6 +10,7 @@ import com.fionpay.agent.ui.base.BaseViewModelFactory
 import com.fionpay.agent.ui.main.fragment.BLManagerFragment
 import com.fionpay.agent.ui.main.fragment.DashBoardFragment
 import com.fionpay.agent.ui.main.fragment.ModemFragment
+import com.fionpay.agent.ui.main.fragment.NotificationFragment
 import com.fionpay.agent.ui.main.fragment.SMSInboxFragment
 import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
 import com.fionpay.agent.utils.ApplicationContext
@@ -37,7 +37,8 @@ class DashBoardFragmentModuleDi {
         @ApplicationContext context: Context,
         sharedPreference: SharedPreference,
         fionDatabase: FionDatabase
-    ): DashBoardRepository = DashBoardRepository(apiServices, context, sharedPreference, fionDatabase)
+    ): DashBoardRepository =
+        DashBoardRepository(apiServices, context, sharedPreference, fionDatabase)
 
     @FragmentScope
     @Provides
@@ -93,3 +94,15 @@ interface ModemFragmentComponent {
 
 @Module(includes = [DashBoardFragmentModuleDi::class])
 class ModemFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [ModemFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface NotificationFragmentComponent {
+    fun inject(notificationFragment: NotificationFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class  NotificationFragmentModule

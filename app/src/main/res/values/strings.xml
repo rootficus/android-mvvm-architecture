@@ -152,6 +152,8 @@
     <string name="notifications">Notifications</string>
     <string name="log_out">Log Out</string>
     <string name="transactions">Transactions</string>
+    <string name="userName">Hello, <b> %1$s </b></string>
+
     <string-array name="bankList">
         <item>item1</item>
         <item>item2</item>

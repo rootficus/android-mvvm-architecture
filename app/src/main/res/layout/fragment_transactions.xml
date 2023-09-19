@@ -32,7 +32,7 @@
                 android:fontFamily="@font/poppins"
                 android:text="@string/transactions"
                 android:textSize="24sp"
-                android:textColor="#283D80"
+                android:textColor="@color/primaryBlue"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
                 android:id="@+id/settingButton"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_40sdp"
-                android:background="@drawable/add_modem_icon"
+                android:background="@drawable/refresh_transaction_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

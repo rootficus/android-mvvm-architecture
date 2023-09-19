@@ -15,6 +15,18 @@
             app:destination="@+id/navigation_dashboard"
             app:popUpTo="@+id/destination_to_pop"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_modemFragment"
+            app:destination="@id/navigation_modemFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_transactionFragment"
+            app:destination="@id/navigation_transactionFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_settingFragment"
+            app:destination="@id/navigation_settingFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_notificationFragment"
+            app:destination="@id/navigation_notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_blManager"
@@ -50,6 +62,67 @@
             app:destination="@+id/navigation_modemFragment"
             app:popUpTo="@+id/destination_to_pop"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_navigation_modemFragment_to_navigation_addModemFragment"
+            app:destination="@id/navigation_addModemFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_notificationFragment"
+        android:name="com.fionpay.agent.ui.main.fragment.NotificationFragment"
+        android:label="NotificationFragment"
+        tools:layout="@layout/fragment_notification">
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_transactionFragment"
+        android:name="com.fionpay.agent.ui.main.fragment.TransactionFragment"
+        android:label="TransactionFragment"
+        tools:layout="@layout/fragment_transactions">
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_addModemFragment"
+        android:name="com.fionpay.agent.ui.main.fragment.AddModemFragment"
+        android:label="AddModemFragment"
+        tools:layout="@layout/fragment_add_modem">
+        <action
+            android:id="@+id/action_navigation_addModemFragment_to_navigation_addModemBalanceFragment"
+            app:destination="@id/navigation_addModemBalanceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_addModemBalanceFragment"
+        android:name="com.fionpay.agent.ui.main.fragment.AddModemBalanceFragment"
+        android:label="AddModemBalanceFragment"
+        tools:layout="@layout/fragment_add_modem_balance">
+        <action
+            android:id="@+id/action_navigation_addModemBalanceFragment_to_navigation_confirmModemFragment"
+            app:destination="@id/navigation_confirmModemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_confirmModemFragment"
+        android:name="com.fionpay.agent.ui.main.fragment.ConfirmModemFragment"
+        android:label="ConfirmModemFragment"
+        tools:layout="@layout/fragment_confirm_modem">
+        <action
+            android:id="@+id/action_navigation_confirmModemFragment_to_navigation_modemFragment"
+            app:destination="@id/navigation_modemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_settingFragment"
+        android:name="com.fionpay.agent.ui.main.fragment.SettingFragment"
+        android:label="SettingFragment"
+        tools:layout="@layout/fragment_setting">
+        <action
+            android:id="@+id/action_navigation_settingFragment_to_navigation_editProfileFragment"
+            app:destination="@id/navigation_editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_editProfileFragment"
+        android:name="com.fionpay.agent.ui.main.fragment.EditProfileFragment"
+        android:label="EditProfileFragment"
+        tools:layout="@layout/fragment_edit_profile">
+        <action
+            android:id="@+id/action_navigation_editProfileFragment_to_navigation_settingFragment"
+            app:destination="@id/navigation_settingFragment" />
+    </fragment>
+
 
 </navigation>
