@@ -3,6 +3,8 @@ package com.fionpay.agent.ui.main.fragment
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -139,12 +141,16 @@ class VerifyPinFragment :
 
     private fun openBottomDialog() {
         val homeBottomSheetLayoutBinding = SuccessBottomSheetBinding.inflate(layoutInflater)
-
         dialog.setCancelable(true)
         dialog.setCanceledOnTouchOutside(true)
         dialog.setContentView(homeBottomSheetLayoutBinding.root)
-
         dialog.show()
+
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                goToNextScreen()
+            }, 2000
+        )
     }
 
    private fun callPinVerification() {
