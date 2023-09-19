@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -12,8 +12,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@color/bgPrimaryColor"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/bgPrimaryColor">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/top_head_layout"
@@ -31,8 +31,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:text="@string/manage_modems"
-                android:textSize="24sp"
                 android:textColor="@color/primaryBlue"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -51,26 +51,26 @@
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
             android:layout_width="0dp"
-            app:layout_constraintWidth_percent="0.8"
-            android:background="@drawable/round_search_corners"
-            android:layout_marginStart="@dimen/_10sdp"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/top_head_layout"/>
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/round_search_corners"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_head_layout"
+            app:layout_constraintWidth_percent="0.8" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/searchButton"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:text="@string/search"
+            android:background="@drawable/round_search_corners"
+            android:backgroundTint="@color/black"
             android:fontFamily="@font/poppins"
-            app:layout_constraintTop_toTopOf="@id/searchView"
-            android:textColor="@color/white"
+            android:text="@string/search"
             android:textAllCaps="false"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@id/searchView"
             app:layout_constraintEnd_toEndOf="@id/searchView"
-            android:backgroundTint="@color/black"
-            android:background="@drawable/round_search_corners"/>
+            app:layout_constraintTop_toTopOf="@id/searchView" />
 
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -78,10 +78,10 @@
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:background="@drawable/filter_icon"
-            app:layout_constraintTop_toTopOf="@id/searchView"
             app:layout_constraintBottom_toBottomOf="@id/searchView"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/searchButton"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="@id/searchView" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recentModemsList"
@@ -89,10 +89,11 @@
             android:layout_height="0dp"
             android:divider="@android:color/darker_gray"
             android:dividerHeight="1dp"
-            tools:itemCount="3"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:listitem="@layout/item_modems_manager"
-            app:layout_constraintTop_toBottomOf="@+id/searchView" />
+            app:layout_constraintTop_toBottomOf="@+id/searchView"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_modems_manager" />
+
         <include
             android:id="@+id/progressView"
             layout="@layout/include_progress_bar" />

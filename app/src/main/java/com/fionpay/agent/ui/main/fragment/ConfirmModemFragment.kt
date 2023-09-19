@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.response.TransactionModel
 import com.fionpay.agent.databinding.FragmentAddModemBalanceBinding
@@ -43,9 +44,11 @@ class ConfirmModemFragment : BaseFragment<FragmentConfirmModemBinding>(R.layout.
     }
 
     private fun initialization() {
-        mDataBinding.topHeader.txtHeader.text = "Confirm Modem Info"
+        mDataBinding.topHeader.txtHeader.text = getString(R.string.confirm_modems)
+        mDataBinding.topHeader.backButton.setOnClickListener {
+            Navigation.findNavController(requireView()).navigateUp()
+        }
     }
-
     private fun initializeDagger() {
       /*  DaggerNotificationFragmentComponent.builder().appComponent(FionSDK.appComponent)
             .dashBoardFragmentModule(NotificationFragmentModule())

@@ -10,7 +10,6 @@ import androidx.navigation.Navigation
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.response.TransactionModel
 import com.fionpay.agent.databinding.FragmentEditProfileBinding
-import com.fionpay.agent.databinding.FragmentSettingBinding
 import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseViewModelFactory
 import com.fionpay.agent.ui.main.activity.SignInActivity
@@ -21,7 +20,8 @@ import com.fionpay.agent.utils.SharedPreference
 import javax.inject.Inject
 
 
-class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(R.layout.fragment_edit_profile) {
+class EditProfileFragment :
+    BaseFragment<FragmentEditProfileBinding>(R.layout.fragment_edit_profile) {
 
     @Inject
     lateinit var sharedPreference: SharedPreference
@@ -35,8 +35,8 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(R.layout.fr
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
-    private lateinit var dashBoardListAdapter : DashBoardListAdapter
-    private var arrayList : ArrayList<TransactionModel> = arrayListOf()
+    private lateinit var dashBoardListAdapter: DashBoardListAdapter
+    private var arrayList: ArrayList<TransactionModel> = arrayListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,18 +46,23 @@ class EditProfileFragment : BaseFragment<FragmentEditProfileBinding>(R.layout.fr
 
     private fun initialization() {
 
-        mDataBinding.topHeader.txtHeader.text = "Edit Profile"
+        mDataBinding.topHeader.txtHeader.text = getString(R.string.edit_profile)
+        mDataBinding.topHeader.backButton.setOnClickListener {
+            Navigation.findNavController(requireView()).navigateUp()
+        }
         mDataBinding.btnUpdate.setOnClickListener {
-            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_editProfileFragment_to_navigation_settingFragment)
+            Navigation.findNavController(requireView())
+                .navigate(R.id.action_navigation_editProfileFragment_to_navigation_settingFragment)
         }
     }
+
     private fun initializeDagger() {
-      /*  DaggerNotificationFragmentComponent.builder().appComponent(FionSDK.appComponent)
-            .dashBoardFragmentModule(NotificationFragmentModule())
-            .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)*/
+        /*  DaggerNotificationFragmentComponent.builder().appComponent(FionSDK.appComponent)
+              .dashBoardFragmentModule(NotificationFragmentModule())
+              .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)*/
     }
 
-    fun sessionExpired(){
+    fun sessionExpired() {
         val mBuilder = AlertDialog.Builder(activity)
             .setTitle("Session Expired")
             .setMessage("your session has expired.\n\nYou will be redirected to login page.")

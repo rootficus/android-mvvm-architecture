@@ -14,7 +14,7 @@
             android:id="@+id/go_home"
             app:destination="@+id/navigation_dashboard"
             app:popUpTo="@+id/destination_to_pop"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_navigation_dashboard_to_navigation_modemFragment"
             app:destination="@id/navigation_modemFragment" />
@@ -27,6 +27,12 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_navigation_notificationFragment"
             app:destination="@id/navigation_notificationFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_supportFragment"
+            app:destination="@id/navigation_supportFragment" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_pendingFragment"
+            app:destination="@id/navigation_pendingFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_blManager"
@@ -37,7 +43,7 @@
             android:id="@+id/go_home"
             app:destination="@+id/navigation_blManager"
             app:popUpTo="@+id/destination_to_pop"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -49,7 +55,7 @@
             android:id="@+id/go_home"
             app:destination="@+id/navigation_smsInboxFragment"
             app:popUpTo="@+id/destination_to_pop"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -61,7 +67,7 @@
             android:id="@+id/go_home"
             app:destination="@+id/navigation_modemFragment"
             app:popUpTo="@+id/destination_to_pop"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_navigation_modemFragment_to_navigation_addModemFragment"
             app:destination="@id/navigation_addModemFragment" />
@@ -70,14 +76,12 @@
         android:id="@+id/navigation_notificationFragment"
         android:name="com.fionpay.agent.ui.main.fragment.NotificationFragment"
         android:label="NotificationFragment"
-        tools:layout="@layout/fragment_notification">
-    </fragment>
+        tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/navigation_transactionFragment"
         android:name="com.fionpay.agent.ui.main.fragment.TransactionFragment"
         android:label="TransactionFragment"
-        tools:layout="@layout/fragment_transactions">
-    </fragment>
+        tools:layout="@layout/fragment_transactions" />
     <fragment
         android:id="@+id/navigation_addModemFragment"
         android:name="com.fionpay.agent.ui.main.fragment.AddModemFragment"
@@ -123,6 +127,16 @@
             android:id="@+id/action_navigation_editProfileFragment_to_navigation_settingFragment"
             app:destination="@id/navigation_settingFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_pendingFragment"
+        android:name="com.fionpay.agent.ui.main.fragment.PendingFragment"
+        android:label="PendingFragment"
+        tools:layout="@layout/fragment_pending" />
+    <fragment
+        android:id="@+id/navigation_supportFragment"
+        android:name="com.fionpay.agent.ui.main.fragment.SupportFragment"
+        android:label="SupportFragment"
+        tools:layout="@layout/fragment_support" />
 
 
 </navigation>

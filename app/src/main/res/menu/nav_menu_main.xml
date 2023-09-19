@@ -5,7 +5,7 @@
         android:icon="@drawable/dashboard_logo"
         android:title="@string/dashboard" />
     <item
-        android:id="@id/navigation_modemFragment"
+        android:id="@id/navigation_pendingFragment"
         android:icon="@drawable/pending_logo"
         android:title="@string/pending" />
     <item
@@ -18,7 +18,7 @@
         android:icon="@drawable/transaction_logo"
         android:title="@string/transaction" />
     <item
-        android:id="@id/navigation_modemFragment"
+        android:id="@id/navigation_supportFragment"
         android:icon="@drawable/support_logo"
         android:title="@string/support" />
 

@@ -20,10 +20,9 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
     var listener: BottomDialogEvent? = null
     private lateinit var binding: ModemBottomSheetBinding
 
-    @Nullable
     override fun onCreateView(
-        inflater: LayoutInflater, @Nullable container: ViewGroup?,
-        @Nullable savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = ModemBottomSheetBinding.inflate(inflater, container, false)
         return binding.root

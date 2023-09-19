@@ -34,8 +34,8 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_s
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
-    private lateinit var dashBoardListAdapter : DashBoardListAdapter
-    private var arrayList : ArrayList<TransactionModel> = arrayListOf()
+    private lateinit var dashBoardListAdapter: DashBoardListAdapter
+    private var arrayList: ArrayList<TransactionModel> = arrayListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,20 +44,24 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_s
     }
 
     private fun initializeDagger() {
-      /*  DaggerNotificationFragmentComponent.builder().appComponent(FionSDK.appComponent)
-            .dashBoardFragmentModule(NotificationFragmentModule())
-            .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)*/
+        /*  DaggerNotificationFragmentComponent.builder().appComponent(FionSDK.appComponent)
+              .dashBoardFragmentModule(NotificationFragmentModule())
+              .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)*/
     }
 
     private fun initialization() {
 
-        mDataBinding.topHeader.txtHeader.text = "Settings"
+        mDataBinding.topHeader.txtHeader.text = getString(R.string.settings)
+        mDataBinding.topHeader.backButton.setOnClickListener {
+            Navigation.findNavController(requireView()).navigateUp()
+        }
         mDataBinding.editProfileButton.setOnClickListener {
-            Navigation.findNavController(requireView()).navigate(R.id.navigation_editProfileFragment)
+            Navigation.findNavController(requireView())
+                .navigate(R.id.navigation_editProfileFragment)
         }
     }
 
-    fun sessionExpired(){
+    fun sessionExpired() {
         val mBuilder = AlertDialog.Builder(activity)
             .setTitle("Session Expired")
             .setMessage("your session has expired.\n\nYou will be redirected to login page.")

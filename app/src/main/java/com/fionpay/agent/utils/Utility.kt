@@ -88,7 +88,7 @@ object Utility {
     }
 
     fun isEmailValid(email: String): Boolean {
-        val regex = "^[A-Za-z0-9+_.-]+@(.+)$"
+        val regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}\$"
         val pattern = Pattern.compile(regex)
         val matcher = pattern.matcher(email)
         return matcher.matches()

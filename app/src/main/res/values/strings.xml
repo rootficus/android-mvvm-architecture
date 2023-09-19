@@ -158,6 +158,12 @@
     <string name="continues">Continue</string>
     <string name="account_verified">Your Account \nis now Verified!</string>
     <string name="account_verified_sub">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
+    <string name="pendings">Pendings</string>
+    <string name="no_data_found">No Data Found</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="settings">Settings</string>
+    <string name="add_modems">Add Modems</string>
+    <string name="confirm_modems">Confirm Modem Info</string>
     <string-array name="bankList">
         <item>item1</item>
         <item>item2</item>

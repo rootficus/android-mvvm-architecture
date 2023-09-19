@@ -75,6 +75,13 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                 val bundle = Bundle()
                 jumpToAnotherFragment(R.id.navigation_dashboard, bundle)
             }
+            R.id.navigation_pendingFragment-> {
+                val bundle = Bundle().apply {
+                    putString("Api", "All Transactions")
+                    putInt("Filer", -1)
+                }
+                jumpToAnotherFragment(R.id.navigation_pendingFragment, bundle)
+            }
             R.id.navigation_modemFragment-> {
                 val bundle = Bundle().apply {
                     putString("Api", "All Transactions")
@@ -89,11 +96,11 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                 }
                 jumpToAnotherFragment(R.id.navigation_transactionFragment, bundle)
             }
-            R.id.navigation_modemFragment-> {
+            R.id.navigation_supportFragment-> {
                 val bundle = Bundle().apply {
                     putString("Api", "Modem List")
                 }
-                jumpToAnotherFragment(R.id.navigation_modemFragment, bundle)
+                jumpToAnotherFragment(R.id.navigation_supportFragment, bundle)
             }
             else -> return false
         }
