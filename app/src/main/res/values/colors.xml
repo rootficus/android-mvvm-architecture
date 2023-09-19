@@ -31,4 +31,5 @@
     <color name="primaryBlue">#283D80</color>
     <color name="activeGreen">#17BF46</color>
     <color name="activeGreenBg">#1A17BF46</color>
+    <color name="nonClickableButton">#33000000</color>
 </resources>

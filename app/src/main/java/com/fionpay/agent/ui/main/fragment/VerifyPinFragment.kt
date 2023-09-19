@@ -10,9 +10,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.request.VerifyPinRequest
 import com.fionpay.agent.databinding.FragmentVerifyPinBinding
+import com.fionpay.agent.databinding.SuccessBottomSheetBinding
 import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
@@ -25,6 +27,7 @@ import com.fionpay.agent.ui.main.viewmodel.SignInViewModel
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import javax.inject.Inject
 
 class VerifyPinFragment :
@@ -45,7 +48,7 @@ class VerifyPinFragment :
     @Inject
     lateinit var signInViewModelFactory: BaseViewModelFactory<SignInViewModel>
     private val viewmodel: SignInViewModel by activityViewModels { signInViewModelFactory }
-
+    lateinit var dialog: BottomSheetDialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,6 +69,7 @@ class VerifyPinFragment :
             contactNumber = arguments?.getString("mobile").toString()
             Log.d("dialcode string", dialCode)
         }
+        dialog = BottomSheetDialog(requireActivity())
 
         mDataBinding.editTextPin.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -93,8 +97,36 @@ class VerifyPinFragment :
             Navigation.findNavController(view).navigateUp()
         }
 
+        val otpBoxes = arrayOf(mDataBinding.otpLayout.otpBox1, mDataBinding.otpLayout.otpBox2, mDataBinding.otpLayout.otpBox3, mDataBinding.otpLayout.otpBox4,
+            mDataBinding.otpLayout.otpBox5, mDataBinding.otpLayout.otpBox6)
+
+        // Set up text change listeners for each OTP box
+        for (i in otpBoxes.indices) {
+            otpBoxes[i].addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (s?.length == 1) {
+                        // When a digit is entered, move focus to the next OTP box
+                        if (i < otpBoxes.size - 1) {
+                            otpBoxes[i + 1].requestFocus()
+                        } else {
+                            // If this is the last OTP box, you can perform some action like submitting the OTP
+                            // For example: validateOTP()
+                        }
+                    } else if (s?.isEmpty() == true && i > 0) {
+                        // When the user clears the digit, move focus to the previous OTP box
+                        otpBoxes[i - 1].requestFocus()
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {}
+            })
+        }
+
         mDataBinding.btnVerifyButton.setOnClickListener {
             val otp = mDataBinding.editTextPin.text.toString()
+            openBottomDialog()
             if (otp.isEmpty()) {
                 callCustomToast(mActivity.getString(R.string.PLEASE_ENTER_PIN))
             }else {
@@ -103,6 +135,16 @@ class VerifyPinFragment :
 
         }
       /*  mDataBinding.editTextPin.setText("224951")*/
+    }
+
+    private fun openBottomDialog() {
+        val homeBottomSheetLayoutBinding = SuccessBottomSheetBinding.inflate(layoutInflater)
+
+        dialog.setCancelable(true)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.setContentView(homeBottomSheetLayoutBinding.root)
+
+        dialog.show()
     }
 
    private fun callPinVerification() {

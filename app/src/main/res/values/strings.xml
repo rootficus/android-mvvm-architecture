@@ -69,7 +69,7 @@
     <string name="login_text">Login to your account</string>
     <string name="login_sub_heading"><![CDATA[Enter your username & password to login]]></string>
     <string name="PLEASE_ENTER_PASSWORD">Please enter password</string>
-    <string name="verify_sub_heading">Enter your pincode</string>
+    <string name="verify_sub_heading">Please enter your Pin Code</string>
     <string name="pinCode">Pin Code</string>
     <string name="PLEASE_ENTER_PIN">Please enter PinCode</string>
     <string name="PLEASE_ENTER_VALID">Please enter valid</string>
@@ -154,6 +154,10 @@
     <string name="transactions">Transactions</string>
     <string name="userName">Hello, <b> %1$s </b></string>
 
+    <string name="welcome_text">Welcome to Fionpay</string>
+    <string name="continues">Continue</string>
+    <string name="account_verified">Your Account \nis now Verified!</string>
+    <string name="account_verified_sub">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
     <string-array name="bankList">
         <item>item1</item>
         <item>item2</item>
