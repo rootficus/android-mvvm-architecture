@@ -3,17 +3,24 @@ package com.fionpay.agent.ui.main.viewmodel
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.fionpay.agent.data.model.request.AddModemBalanceModel
 import com.fionpay.agent.data.model.request.GetBalanceByFilterRequest
 import com.fionpay.agent.data.model.request.GetMessageByFilterRequest
-import com.fionpay.agent.data.model.request.GetModemsByFilterRequest
+import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.SignInRequest
+import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
+import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateBalanceRequest
+import com.fionpay.agent.data.model.request.UpdateLoginRequest
 import com.fionpay.agent.data.model.response.DashBoardItemResponse
+import com.fionpay.agent.data.model.response.GetAddModemBalanceResponse
+import com.fionpay.agent.data.model.response.GetAddModemResponse
 import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
-import com.fionpay.agent.data.model.response.GetModemsByFilterResponse
+import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.GetStatusCountResponse
 import com.fionpay.agent.data.model.response.SignInResponse
+import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.data.repository.DashBoardRepository
 import com.fionpay.agent.ui.base.BaseViewModel
 import com.fionpay.agent.utils.ResponseData
@@ -25,7 +32,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class DashBoardViewModel@Inject constructor(private val dashBoardRepository: DashBoardRepository) :
+class DashBoardViewModel @Inject constructor(private val dashBoardRepository: DashBoardRepository) :
     BaseViewModel() {
 
 
@@ -33,6 +40,7 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
         YES,
         NO
     }
+
     val signInResponseModel = MutableLiveData<ResponseData<SignInResponse>>()
     fun signInNow(signInRequest: SignInRequest) {
         signInResponseModel.setLoading(null)
@@ -45,12 +53,33 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
     }
 
     val dashBoardItemResponseModel = MutableLiveData<ResponseData<DashBoardItemResponse>>()
-    fun dashBoardData(){
+    fun dashBoardData() {
         dashBoardItemResponseModel.setLoading(null)
         viewModelScope.launch(Dispatchers.IO) {
-            dashBoardRepository.dashBoardData({ success -> dashBoardItemResponseModel.setSuccess(success) },
+            dashBoardRepository.dashBoardData({ success ->
+                dashBoardItemResponseModel.setSuccess(
+                    success
+                )
+            },
                 { error -> dashBoardItemResponseModel.setError(error) },
                 { message -> dashBoardItemResponseModel.setError(message) })
+        }
+    }
+
+
+    val blTransactionsDataResponseModel =
+        MutableLiveData<ResponseData<ArrayList<TransactionModemResponse>>>()
+
+    fun getBlTransactionsData() {
+        blTransactionsDataResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.getBlTransactionsData({ success ->
+                blTransactionsDataResponseModel.setSuccess(
+                    success
+                )
+            },
+                { error -> blTransactionsDataResponseModel.setError(error) },
+                { message -> blTransactionsDataResponseModel.setError(message) })
         }
     }
 
@@ -58,12 +87,12 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
     fun getBalanceByFilter(getBalanceByFilterRequest: GetBalanceByFilterRequest) {
         getBalanceManageRecordModel.setLoading(null)
 
-        if (dashBoardRepository.getCountBalanceManageRecord(-1)>0){
+        if (dashBoardRepository.getCountBalanceManageRecord(-1) > 0) {
             var arrayList = getBalanceByFilterRequest.balance_manager_filter?.let {
                 getBalanceManageRecord(it)
             }
             getBalanceManageRecordModel.setSuccess(arrayList)
-        }else{
+        } else {
             viewModelScope.launch(Dispatchers.IO) {
                 dashBoardRepository.getBalanceByFilter(
                     { success ->
@@ -86,7 +115,11 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
     fun updateBLStatus(updateBalanceRequest: UpdateBalanceRequest) {
         updateBLStatusResponseModel.setLoading(null)
         viewModelScope.launch(Dispatchers.IO) {
-            dashBoardRepository.updateBLStatus({ success -> updateBLStatusResponseModel.setSuccess(success) },
+            dashBoardRepository.updateBLStatus({ success ->
+                updateBLStatusResponseModel.setSuccess(
+                    success
+                )
+            },
                 { error -> updateBLStatusResponseModel.setError(error) },
                 updateBalanceRequest,
                 { message -> updateBLStatusResponseModel.setError(message) })
@@ -95,19 +128,19 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
 
     fun getBalanceManageRecord(it: Int) = dashBoardRepository.getBalanceManageRecord(it)
 
-    fun getCountBalanceManageRecord(it: Int)  = dashBoardRepository.getCountBalanceManageRecord(it)
+    fun getCountBalanceManageRecord(it: Int) = dashBoardRepository.getCountBalanceManageRecord(it)
 
 
     val getMessageManageRecordModel = MutableLiveData<ResponseData<List<GetMessageManageRecord>>>()
     fun getMessageByFilter(getMessageByFilterRequest: GetMessageByFilterRequest) {
         getMessageManageRecordModel.setLoading(null)
 
-        if (dashBoardRepository.getCountMessageManageRecord(-1)>0){
+        if (dashBoardRepository.getCountMessageManageRecord(-1) > 0) {
             var arrayList = getMessageByFilterRequest.message_type?.let {
                 getMessageManageRecord(it)
             }
             getMessageManageRecordModel.setSuccess(arrayList)
-        }else{
+        } else {
             viewModelScope.launch(Dispatchers.IO) {
                 dashBoardRepository.getMessageByFilter(
                     { success ->
@@ -124,18 +157,54 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
             }
         }
     }
+
     fun getMessageManageRecord(it: Int) = dashBoardRepository.getMessageManageRecord(it)
 
-    fun getCountMessageManageRecord(it: Int)  = dashBoardRepository.getCountMessageManageRecord(it)
+    fun getCountMessageManageRecord(it: Int) = dashBoardRepository.getCountMessageManageRecord(it)
 
-    val getModemsByFilterResponseModel = MutableLiveData<ResponseData<List<GetModemsByFilterResponse>>>()
-    fun getModemsByFilter(getModemsByFilterRequest: GetModemsByFilterRequest) {
-        getModemsByFilterResponseModel.setLoading(null)
+    val getModemsListResponseModel = MutableLiveData<ResponseData<List<GetModemsListResponse>>>()
+    fun getModemsList() {
+        getModemsListResponseModel.setLoading(null)
         viewModelScope.launch(Dispatchers.IO) {
-            dashBoardRepository.getModemsByFilter({ success -> getModemsByFilterResponseModel.setSuccess(success) },
-                { error -> getModemsByFilterResponseModel.setError(error) },
-                getModemsByFilterRequest,
-                { message -> getModemsByFilterResponseModel.setError(message) })
+            dashBoardRepository.getModemsList({ success ->
+                getModemsListResponseModel.setSuccess(
+                    success
+                )
+            },
+                { error -> getModemsListResponseModel.setError(error) },
+                { message -> getModemsListResponseModel.setError(message) })
+        }
+    }
+
+    val getAddModemItemResponseModel = MutableLiveData<ResponseData<GetAddModemResponse>>()
+    fun addModemItem(modemItemModel: ModemItemModel) {
+        getAddModemItemResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.addModemItem({ success ->
+                getAddModemItemResponseModel.setSuccess(
+                    success
+                )
+            },
+                { error -> getAddModemItemResponseModel.setError(error) },
+                modemItemModel,
+                { message -> getAddModemItemResponseModel.setError(message) })
+        }
+    }
+
+    val getAddModemBalanceResponseModel =
+        MutableLiveData<ResponseData<GetAddModemBalanceResponse>>()
+
+    fun addModemBalance(addModemBalanceModel: AddModemBalanceModel) {
+        getAddModemBalanceResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.addModemBalance({ success ->
+                getAddModemBalanceResponseModel.setSuccess(
+                    success
+                )
+            },
+                { error -> getAddModemBalanceResponseModel.setError(error) },
+                addModemBalanceModel,
+                { message -> getAddModemBalanceResponseModel.setError(message) })
         }
     }
 
@@ -143,14 +212,61 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
     fun getStatusCount() {
         getStatusCountResponseModel.setLoading(null)
         viewModelScope.launch(Dispatchers.IO) {
-            dashBoardRepository.getStatusCount({ success -> getStatusCountResponseModel.setSuccess(success) },
+            dashBoardRepository.getStatusCount({ success ->
+                getStatusCountResponseModel.setSuccess(
+                    success
+                )
+            },
                 { error -> getStatusCountResponseModel.setError(error) },
                 { message -> getStatusCountResponseModel.setError(message) })
         }
     }
 
-    fun checkNightTheme(mode: Boolean)
-    {
+    val getUpdateActiveInActiveStatusResponseModel = MutableLiveData<ResponseData<Any>>()
+    fun updateActiveInActiveStatus(updateActiveInActiveRequest: UpdateActiveInActiveRequest) {
+        getUpdateActiveInActiveStatusResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.updateActiveInActiveStatus({ success ->
+                getUpdateActiveInActiveStatusResponseModel.setSuccess(
+                    success
+                )
+            },
+                { error -> getUpdateActiveInActiveStatusResponseModel.setError(error) },
+                updateActiveInActiveRequest,
+                { message -> getUpdateActiveInActiveStatusResponseModel.setError(message) })
+        }
+    }
+
+    val getUpdateAvailabilityStatusResponseModel = MutableLiveData<ResponseData<Any>>()
+    fun updateAvailabilityStatus(updateAvailabilityRequest: UpdateAvailabilityRequest) {
+        getUpdateAvailabilityStatusResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.updateAvailabilityStatus({ success ->
+                getUpdateAvailabilityStatusResponseModel.setSuccess(
+                    success
+                )
+            },
+                updateAvailabilityRequest,
+                { error -> getUpdateAvailabilityStatusResponseModel.setError(error) },
+                { message -> getUpdateAvailabilityStatusResponseModel.setError(message) })
+        }
+    }
+    val getUpdateLoginStatusResponseModel = MutableLiveData<ResponseData<Any>>()
+    fun updateLoginStatus(updateLoginRequest: UpdateLoginRequest) {
+        getUpdateLoginStatusResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.updateLoginStatus({ success ->
+                getUpdateLoginStatusResponseModel.setSuccess(
+                    success
+                )
+            },
+                updateLoginRequest,
+                { error -> getUpdateLoginStatusResponseModel.setError(error) },
+                { message -> getUpdateLoginStatusResponseModel.setError(message) })
+        }
+    }
+
+    fun checkNightTheme(mode: Boolean) {
         if (mode) {
             shouldEnableDarkMode(DarkModeConfig.YES)
         } else {
@@ -175,15 +291,15 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
         dashBoardRepository.setEmail(email)
     }
 
-    fun setFullName(full_name: String?) {
-        dashBoardRepository.setFullName(full_name)
+    fun setFullName(fullName: String?) {
+        dashBoardRepository.setFullName(fullName)
     }
 
     fun getFullName(): String? {
         return dashBoardRepository.getFullName()
     }
 
-    fun setPinCode(pin_code: Int?) {
+    fun setPinCode(pin_code: String?) {
         dashBoardRepository.setPinCode(pin_code)
     }
 
@@ -207,7 +323,7 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
         dashBoardRepository.setUserRole(role_id)
     }
 
-    fun isLogin() : Boolean{
+    fun isLogin(): Boolean {
         return dashBoardRepository.isLogin()
     }
 
@@ -291,7 +407,7 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
         dashBoardRepository.setBLSuccess(success)
     }
 
-    fun getBLSuccess():Int{
+    fun getBLSuccess(): Int {
         return dashBoardRepository.getBLSuccess()
     }
 
@@ -299,7 +415,7 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
         dashBoardRepository.setBLPending(pending)
     }
 
-    fun getBLPending():Int{
+    fun getBLPending(): Int {
         return dashBoardRepository.getBLPending()
     }
 
@@ -307,7 +423,7 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
         dashBoardRepository.setBLRejected(rejected)
     }
 
-    fun getBLRejected():Int{
+    fun getBLRejected(): Int {
         return dashBoardRepository.getBLRejected()
     }
 
@@ -315,15 +431,23 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
         dashBoardRepository.setBLApproved(approved)
     }
 
-    fun getBLApproved():Int{
+    fun getBLApproved(): Int {
         return dashBoardRepository.getBLApproved()
+    }
+
+    fun setDashBoardDataModel(model: String?) {
+        dashBoardRepository.setDashBoardDataModel(model)
+    }
+
+    fun getDashBoardDataModel(): String? {
+        return dashBoardRepository.getDashBoardDataModel()
     }
 
     fun setBLDanger(danger: Int?) {
         dashBoardRepository.setBLDanger(danger)
     }
 
-    fun getBLDanger():Int{
+    fun getBLDanger(): Int {
         return dashBoardRepository.getBLDanger()
     }
 
@@ -335,6 +459,7 @@ class DashBoardViewModel@Inject constructor(private val dashBoardRepository: Das
         dashBoardRepository.deleteLocalMessageManager()
     }
 
-    fun updateLocalBalanceManager(balanceManageRecord: GetBalanceManageRecord)  = dashBoardRepository.updateLocalBalanceManager(balanceManageRecord)
+    fun updateLocalBalanceManager(balanceManageRecord: GetBalanceManageRecord) =
+        dashBoardRepository.updateLocalBalanceManager(balanceManageRecord)
 
 }

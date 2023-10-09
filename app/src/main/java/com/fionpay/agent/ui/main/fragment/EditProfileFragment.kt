@@ -10,10 +10,14 @@ import androidx.navigation.Navigation
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.response.TransactionModel
 import com.fionpay.agent.databinding.FragmentEditProfileBinding
+import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
+import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
 import com.fionpay.agent.ui.main.activity.SignInActivity
 import com.fionpay.agent.ui.main.adapter.DashBoardListAdapter
+import com.fionpay.agent.ui.main.di.DaggerEditProfileFragmentComponent
+import com.fionpay.agent.ui.main.di.EditProfileFragmentModule
 import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
@@ -50,6 +54,11 @@ class EditProfileFragment :
         mDataBinding.topHeader.backButton.setOnClickListener {
             Navigation.findNavController(requireView()).navigateUp()
         }
+        val fullName = viewModel.getFullName()
+        val firstName = fullName?.split(' ')?.get(0) ?: " "
+        val lastName = fullName?.split(' ')?.get(1) ?: " "
+        mDataBinding.etFirstName.setText(firstName)
+        mDataBinding.etLastName.setText(lastName)
         mDataBinding.btnUpdate.setOnClickListener {
             Navigation.findNavController(requireView())
                 .navigate(R.id.action_navigation_editProfileFragment_to_navigation_settingFragment)
@@ -57,22 +66,8 @@ class EditProfileFragment :
     }
 
     private fun initializeDagger() {
-        /*  DaggerNotificationFragmentComponent.builder().appComponent(FionSDK.appComponent)
-              .dashBoardFragmentModule(NotificationFragmentModule())
-              .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)*/
+          DaggerEditProfileFragmentComponent.builder().appComponent(FionSDK.appComponent)
+              .editProfileFragmentModule(EditProfileFragmentModule())
+              .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
-
-    fun sessionExpired() {
-        val mBuilder = AlertDialog.Builder(activity)
-            .setTitle("Session Expired")
-            .setMessage("your session has expired.\n\nYou will be redirected to login page.")
-            .setPositiveButton("Ok", null)
-            .show()
-        val mPositiveButton = mBuilder.getButton(AlertDialog.BUTTON_POSITIVE)
-        mPositiveButton.setOnClickListener {
-            startActivity(Intent(activity, SignInActivity::class.java))
-            activity?.finishAffinity()
-        }
-    }
-
 }

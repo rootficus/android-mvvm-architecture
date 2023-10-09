@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
-import com.fionpay.agent.databinding.ItemSmsManagerBinding
+import com.fionpay.agent.databinding.ItemTransactionManagerBinding
 
 class SmsManagerListAdapter(private var itemList: ArrayList<GetMessageManageRecord>) :
     RecyclerView.Adapter<SmsManagerListAdapter.ItemViewHolder>() {
@@ -15,9 +15,9 @@ class SmsManagerListAdapter(private var itemList: ArrayList<GetMessageManageReco
 
     var listener: SmsCardEvent? = null
 
-    inner class ItemViewHolder(val binding: ItemSmsManagerBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ItemViewHolder(val binding: ItemTransactionManagerBinding) : RecyclerView.ViewHolder(binding.root)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val binding = ItemSmsManagerBinding.inflate(LayoutInflater.from(parent.context),parent, false)
+        val binding = ItemTransactionManagerBinding.inflate(LayoutInflater.from(parent.context),parent, false)
         return ItemViewHolder(binding)
     }
 

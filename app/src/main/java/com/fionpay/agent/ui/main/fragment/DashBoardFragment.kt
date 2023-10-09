@@ -5,12 +5,11 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.fionpay.agent.R
+import com.fionpay.agent.data.model.response.DashBoardItemResponse
 import com.fionpay.agent.data.model.response.TransactionModel
 import com.fionpay.agent.databinding.FragmentDashboardBinding
 import com.fionpay.agent.sdkInit.FionSDK
@@ -18,7 +17,6 @@ import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
 import com.fionpay.agent.ui.main.activity.SignInActivity
-import com.fionpay.agent.ui.main.adapter.BleManagerListAdapter
 import com.fionpay.agent.ui.main.adapter.DashBoardListAdapter
 import com.fionpay.agent.ui.main.di.DaggerDashBoardFragmentComponent
 import com.fionpay.agent.ui.main.di.DashBoardFragmentModule
@@ -26,7 +24,7 @@ import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
-import com.fionpay.agent.utils.Utility
+import com.google.gson.Gson
 import javax.inject.Inject
 
 
@@ -44,21 +42,45 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
-    private lateinit var dashBoardListAdapter : DashBoardListAdapter
-    private var arrayList : ArrayList<TransactionModel> = arrayListOf()
+    private lateinit var dashBoardListAdapter: DashBoardListAdapter
+    private var arrayList: ArrayList<TransactionModel> = arrayListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeDagger()
         initializeView()
-        setAdapter()
+
     }
 
-    private fun setAdapter() {
-        arrayList.add(TransactionModel("Used Balance","৳35,00.00"))
-        arrayList.add(TransactionModel("Today’s Cash Out","৳100.00"))
-        arrayList.add(TransactionModel("Total Cash In","৳2000.00"))
-        arrayList.add(TransactionModel("Total Cash Out","৳15,00.00"))
+    private fun setAdapter(responseData: DashBoardItemResponse?) {
+        arrayList.add(
+            TransactionModel(
+                "Today’s Cash In",
+                "${responseData?.todayCashId}",
+                R.drawable.today_cash_in
+            )
+        )
+        arrayList.add(
+            TransactionModel(
+                "Today’s Cash Out",
+                "${responseData?.todayCashOut}",
+                R.drawable.today_cash_out
+            )
+        )
+        arrayList.add(
+            TransactionModel(
+                "Total Cash In",
+                "${responseData?.totalCashId}",
+                R.drawable.total_cash_in
+            )
+        )
+        arrayList.add(
+            TransactionModel(
+                "Total Cash Out",
+                "${responseData?.totalCashOut}",
+                R.drawable.total_cash_out
+            )
+        )
         dashBoardListAdapter = DashBoardListAdapter(arrayList)
         mDataBinding.homeCardListView.layoutManager = GridLayoutManager(context, 2)
         mDataBinding.homeCardListView.adapter = dashBoardListAdapter
@@ -71,8 +93,8 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
     }
 
     private fun initializeView() {
-        val name =  sharedPreference.getFullName() ?: "Akash"
-        mDataBinding.textAgentFullName.text = getString(R.string.userName, "Akash")
+        val name = sharedPreference.getFullName() ?: "Akash"
+        mDataBinding.textAgentFullName.text = getString(R.string.userName, name)
         mDataBinding.notificationButton.setOnClickListener {
             val mBuilder = AlertDialog.Builder(activity)
                 .setTitle(getString(R.string.app_name))
@@ -92,7 +114,8 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
         }
 
         mDataBinding.notificationButton.setOnClickListener {
-            Navigation.findNavController(requireView()).navigate(R.id.navigation_notificationFragment)
+            Navigation.findNavController(requireView())
+                .navigate(R.id.navigation_notificationFragment)
         }
 
         if (networkHelper.isNetworkConnected()) {
@@ -101,29 +124,22 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
                 when (it.status) {
                     Status.SUCCESS -> {
                         progressBar.dismiss()
-                        it.data?.totalModem?.let { it1 ->
-                            viewModel.setTotalModem(it1)
-                        }
-                        it.data?.todayTrxAmount?.let { it1 ->
-                            viewModel.setTodayTrxAmount(it1.toString())
-                        }
-                        it.data?.totalTrxAmount?.let { it1 ->
-                            viewModel.setTotalTrxAmount(it1.toString())
-                        }
-                        it.data?.todayTransaction?.let { it1 ->
-                            viewModel.setTodayTransactions(it1)
-                        }
-                        it.data?.totalTransaction?.let { it1 ->
-                            viewModel.setTotalTransactions(it1.toString())
-                        }
-                        it.data?.totalPending?.let { it1 ->
-                            viewModel.setTotalPending(it1)
-                        }
+                        mDataBinding.currentBalanceAmount.text =
+                            "৳${it.data?.currentBalance.toString()}"
+                        val gson = Gson()
+                        val json = gson.toJson(it.data)
+                        viewModel.setDashBoardDataModel(json)
+                        setAdapter(it.data)
                     }
 
                     Status.ERROR -> {
                         progressBar.dismiss()
-                        if(it.message == "Invalid access token"){
+                        val gson = Gson()
+                        val json: String? = viewModel.getDashBoardDataModel()
+                        val obj: DashBoardItemResponse =
+                            gson.fromJson(json, DashBoardItemResponse::class.java)
+                        setAdapter(obj)
+                        if (it.message == "Invalid access token") {
                             sessionExpired()
                         }
                     }
@@ -134,18 +150,13 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
                 }
             }
         }
-    }
-
-    fun sessionExpired(){
-        val mBuilder = AlertDialog.Builder(activity)
-            .setTitle("Session Expired")
-            .setMessage("your session has expired.\n\nYou will be redirected to login page.")
-            .setPositiveButton("Ok", null)
-            .show()
-        val mPositiveButton = mBuilder.getButton(AlertDialog.BUTTON_POSITIVE)
-        mPositiveButton.setOnClickListener {
-            startActivity(Intent(activity, SignInActivity::class.java))
-            activity?.finishAffinity()
+        else
+        {
+            val gson = Gson()
+            val json: String? = viewModel.getDashBoardDataModel()
+            val obj: DashBoardItemResponse =
+                gson.fromJson(json, DashBoardItemResponse::class.java)
+            setAdapter(obj)
         }
     }
 

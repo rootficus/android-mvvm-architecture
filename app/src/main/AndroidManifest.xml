@@ -17,10 +17,14 @@
         <activity
             android:name=".ui.main.activity.DashBoardActivity"
             android:exported="true"
+            android:windowSoftInputMode="adjustPan"
+            android:isScrollContainer="false"
             android:screenOrientation="portrait">
 
         </activity>
         <activity android:name=".ui.main.activity.SignInActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:isScrollContainer="false"
             android:exported="true"/>
         <activity android:name=".ui.main.activity.SplashActivity"
             android:exported="true">

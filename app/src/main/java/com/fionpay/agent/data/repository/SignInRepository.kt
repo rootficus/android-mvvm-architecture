@@ -61,7 +61,7 @@ class SignInRepository (val apiServices: FionApiServices,
         full_name?.let { sharedPreference.setFullName(it) }
     }
 
-    fun setPinCode(pin_code: Int?) {
+    fun setPinCode(pin_code: String?) {
         pin_code?.let { sharedPreference.setPinCode(it) }
     }
 

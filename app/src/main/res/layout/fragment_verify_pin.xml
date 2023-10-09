@@ -99,25 +99,6 @@
                     app:layout_constraintWidth_percent="0.7" />
 
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/editTextPin"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="@font/roboto_medium"
-                    android:hint="@string/pinCode"
-                    android:inputType="number"
-                    android:maxLength="6"
-                    android:visibility="gone"
-                    android:maxLines="1"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toTopOf="@id/btnVerifyButton"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintWidth_percent="0.8" />
-
                 <include
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
@@ -146,8 +127,8 @@
                     android:textSize="14sp"
                     app:layout_constraintWidth_percent="0.8"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/editTextPin"
-                    app:layout_constraintStart_toStartOf="@id/editTextPin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/otp_layout"
                     app:layout_constraintTop_toTopOf="parent" />
 

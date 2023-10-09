@@ -138,8 +138,7 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
                         //startActivity(Intent(requireContext(), SignInActivity::class.java))
                         progressBar.dismiss()
                         if (it.message == "Invalid access token") {
-                            Toast.makeText(activity, "Invalid access token", Toast.LENGTH_SHORT)
-                                .show()
+                            sessionExpired()
                         }
 
                     }

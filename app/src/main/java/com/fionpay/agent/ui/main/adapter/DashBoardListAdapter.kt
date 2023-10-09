@@ -27,7 +27,8 @@ class DashBoardListAdapter(private var itemList: ArrayList<TransactionModel>) :
         val item: TransactionModel = itemList[position]
         with(holder)
         {
-            binding.txtAmount.text = item.amount
+            binding.cardHeadImg.setBackgroundResource(item.icon)
+            binding.txtAmount.text = "৳${item.amount}"
             binding.txtTitle.text = item.title
         }
     }

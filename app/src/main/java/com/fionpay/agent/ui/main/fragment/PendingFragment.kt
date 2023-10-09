@@ -11,10 +11,14 @@ import com.fionpay.agent.R
 import com.fionpay.agent.data.model.response.TransactionModel
 import com.fionpay.agent.databinding.FragmentPendingBinding
 import com.fionpay.agent.databinding.FragmentSettingBinding
+import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
+import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
 import com.fionpay.agent.ui.main.activity.SignInActivity
 import com.fionpay.agent.ui.main.adapter.DashBoardListAdapter
+import com.fionpay.agent.ui.main.di.DaggerPendingFragmentComponent
+import com.fionpay.agent.ui.main.di.PendingFragmentModule
 import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
@@ -45,26 +49,12 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
     }
 
     private fun initializeDagger() {
-      /*  DaggerNotificationFragmentComponent.builder().appComponent(FionSDK.appComponent)
-            .dashBoardFragmentModule(NotificationFragmentModule())
-            .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)*/
+        DaggerPendingFragmentComponent.builder().appComponent(FionSDK.appComponent)
+            .pendingFragmentModule(PendingFragmentModule())
+            .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
 
     private fun initialization() {
 
     }
-
-    fun sessionExpired(){
-        val mBuilder = AlertDialog.Builder(activity)
-            .setTitle("Session Expired")
-            .setMessage("your session has expired.\n\nYou will be redirected to login page.")
-            .setPositiveButton("Ok", null)
-            .show()
-        val mPositiveButton = mBuilder.getButton(AlertDialog.BUTTON_POSITIVE)
-        mPositiveButton.setOnClickListener {
-            startActivity(Intent(activity, SignInActivity::class.java))
-            activity?.finishAffinity()
-        }
-    }
-
 }

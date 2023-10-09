@@ -58,7 +58,7 @@ class SignInViewModel@Inject constructor(private val signInRepository: SignInRep
         return signInRepository.getFullName()
     }
 
-    fun setPinCode(pin_code: Int?) {
+    fun setPinCode(pin_code: String?) {
         signInRepository.setPinCode(pin_code)
     }
 

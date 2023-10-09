@@ -7,11 +7,19 @@ import com.fionpay.agent.roomDB.FionDatabase
 import com.fionpay.agent.sdkInit.di.AppComponent
 import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
+import com.fionpay.agent.ui.main.fragment.AddModemBalanceFragment
+import com.fionpay.agent.ui.main.fragment.AddModemFragment
 import com.fionpay.agent.ui.main.fragment.BLManagerFragment
+import com.fionpay.agent.ui.main.fragment.ConfirmModemFragment
 import com.fionpay.agent.ui.main.fragment.DashBoardFragment
+import com.fionpay.agent.ui.main.fragment.EditProfileFragment
 import com.fionpay.agent.ui.main.fragment.ModemFragment
 import com.fionpay.agent.ui.main.fragment.NotificationFragment
+import com.fionpay.agent.ui.main.fragment.PendingFragment
 import com.fionpay.agent.ui.main.fragment.SMSInboxFragment
+import com.fionpay.agent.ui.main.fragment.SettingFragment
+import com.fionpay.agent.ui.main.fragment.SupportFragment
+import com.fionpay.agent.ui.main.fragment.TransactionFragment
 import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
 import com.fionpay.agent.utils.ApplicationContext
 import com.fionpay.agent.utils.FragmentScope
@@ -98,11 +106,105 @@ class ModemFragmentModule
 @FragmentScope
 @Component(
     dependencies = [AppComponent::class],
-    modules = [ModemFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+    modules = [NotificationFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
 )
 interface NotificationFragmentComponent {
     fun inject(notificationFragment: NotificationFragment)
 }
 
 @Module(includes = [DashBoardFragmentModuleDi::class])
-class  NotificationFragmentModule
+class NotificationFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [AddModemFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface AddModemFragmentComponent {
+    fun inject(addModemFragment: AddModemFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class AddModemFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [EditProfileFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface EditProfileFragmentComponent {
+    fun inject(editProfileFragment: EditProfileFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class EditProfileFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [SettingFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface SettingFragmentComponent {
+    fun inject(settingFragment: SettingFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class SettingFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [AddModemBalanceFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface AddModemBalanceFragmentComponent {
+    fun inject(addModemBalanceFragment: AddModemBalanceFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class AddModemBalanceFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [ConfirmModemFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface ConfirmModemFragmentComponent {
+    fun inject(confirmModemFragment: ConfirmModemFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class ConfirmModemFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [PendingFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface PendingFragmentComponent {
+    fun inject(pendingFragment: PendingFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class PendingFragmentModule
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [SupportFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface SupportFragmentComponent {
+    fun inject(supportFragment: SupportFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class SupportFragmentModule
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [TransactionFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface TransactionFragmentComponent {
+    fun inject(transactionFragment: TransactionFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class TransactionFragmentModule

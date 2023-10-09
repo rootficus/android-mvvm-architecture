@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="#EFEFEF"
-        app:cardCornerRadius="25dp"
+        app:cardCornerRadius="30dp"
         app:cardElevation="@dimen/_2sdp"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,15 +21,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#F1F5F9"
-            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingHorizontal="@dimen/_15sdp"
             android:paddingVertical="@dimen/_15sdp" >
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/card_head_img"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:background="@drawable/modem"
-                android:backgroundTint="#3FCBDA"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
                 android:importantForAccessibility="no"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -38,11 +36,11 @@
                 android:id="@+id/txtAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_bold"
-                android:text="৳‎35,00.00"
-                android:textColor="@color/black"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/primaryBlue"
                 android:textSize="24sp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/_5sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/card_head_img" />
 
@@ -51,10 +49,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_3sdp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/used_balance"
-                android:textColor="#5a5c69"
-                android:textSize="@dimen/_10sdp"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/primaryBlue"
+                android:textSize="12sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txtAmount" />
 

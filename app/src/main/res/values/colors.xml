@@ -31,5 +31,12 @@
     <color name="primaryBlue">#283D80</color>
     <color name="activeGreen">#17BF46</color>
     <color name="activeGreenBg">#1A17BF46</color>
+    <color name="activeDangerBg">#1ABF1717</color>
+    <color name="activePendingBg">#1AFFC107</color>
     <color name="nonClickableButton">#33000000</color>
+    <color name="activeCard">#F4F8FF</color>
+
+    <color name="customPopupBackground">@color/white</color> <!-- Replace with your desired background color -->
+    <color name="customMenuItemSelected">@color/primaryBlue</color>
+
 </resources>

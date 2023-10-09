@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
+import android.widget.Toast
 import com.fionpay.agent.R
 import java.text.DecimalFormat
 import java.text.ParseException
@@ -15,6 +16,7 @@ import java.util.Locale
 import java.util.TimeZone
 import java.util.UUID
 import java.util.regex.Pattern
+
 
 object Utility {
 
@@ -39,7 +41,7 @@ object Utility {
     }
 
     fun logs(tag: String, s: String) {
-        Log.d(tag,s)
+        Log.d(tag, s)
     }
 
     fun convertUtc2Local(utcTime: String?): String? {
@@ -61,6 +63,27 @@ object Utility {
         return time
     }
 
+    fun convertTransactionDate(utcTime: String?): String? {
+        var utcTimestamp = ""
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault())
+        dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+
+        try {
+            val date = utcTime?.let { dateFormat.parse(it) }
+            val localDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+            // You can set the desired local time zone here if it's different from the device's default.
+            // localDateFormat.timeZone = TimeZone.getTimeZone("Your_Local_Time_Zone")
+            val localTime = date?.let { localDateFormat.format(it) }
+            if (localTime != null) {
+                utcTimestamp = localTime
+            }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return utcTimestamp
+    }
+
     fun convertTodayUtc2Local(utcTime: String?): String? {
         var time = ""
         if (utcTime != null) {
@@ -80,10 +103,10 @@ object Utility {
         return time
     }
 
-    fun convertCurrencyFormat(currency: Double) : String{
-        Log.d("convertCurrencyFormat","::${currency}")
+    fun convertCurrencyFormat(currency: Double): String {
+        Log.d("convertCurrencyFormat", "::${currency}")
         val formatter = DecimalFormat("###,###,##0.00")
-        Log.d("convertCurrencyFormat","::${formatter.format(currency)}")
+        Log.d("convertCurrencyFormat", "::${formatter.format(currency)}")
         return formatter.format(currency)
     }
 
@@ -93,4 +116,9 @@ object Utility {
         val matcher = pattern.matcher(email)
         return matcher.matches()
     }
+
+    fun callCustomToast(context: Context, message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
 }

@@ -40,4 +40,8 @@
     <style name="SwitchCompatTheme" >
         <item name="colorControlActivated">@color/primaryBlue</item>
     </style>
+
+    <style name="PopupMenuStyle" parent="@style/Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">@color/customPopupBackground</item>
+    </style>
 </resources>

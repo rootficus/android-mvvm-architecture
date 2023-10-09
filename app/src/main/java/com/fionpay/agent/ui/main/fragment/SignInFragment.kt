@@ -24,6 +24,7 @@ import com.fionpay.agent.ui.main.viewmodel.SignInViewModel
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
+import com.fionpay.agent.utils.Utility
 import com.fionpay.agent.utils.Utility.isEmailValid
 import javax.inject.Inject
 
@@ -139,16 +140,13 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             name = mDataBinding.etName.text.toString()
             password = mDataBinding.etPassword.text.toString()
             if (name.isEmpty()) {
-                callCustomToast(mActivity.getString(R.string.PLEASE_ENTER_NAME))
+                Utility.callCustomToast(requireContext(),mActivity.getString(R.string.PLEASE_ENTER_NAME))
                 //mDataBinding.etName.error = mActivity.getString(R.string.PLEASE_ENTER_NAME)
             } else if (password.isEmpty()) {
-                callCustomToast(mActivity.getString(R.string.PLEASE_ENTER_PASSWORD))
+                Utility.callCustomToast(requireContext(),mActivity.getString(R.string.PLEASE_ENTER_PASSWORD))
                 //mDataBinding.etPhoneNumber.error = mActivity.getString(R.string.PLEASE_ENTER_PHONE_NUMBER)
             } else {
-                Navigation.findNavController(view).navigate(
-                    R.id.action_navigation_signin_to_navigation_verifyPin
-                )
-                //callSignInAPI(view)
+                callSignInAPI(view)
             }
         }
         mDataBinding.etName.setText(viewmodel.getEmail().toString())
@@ -175,22 +173,21 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                         bundle.putString("password", password)
                         viewmodel.setPassword(password)
                         viewmodel.setToken(it.data?.token.toString())
-                        viewmodel.setEmail(it.data?.userDetail?.email.toString())
-                        viewmodel.setFullName(it.data?.userDetail?.full_name.toString())
-                        viewmodel.setParentId(it.data?.userDetail?.parent_id.toString())
-                        viewmodel.setUserName(it.data?.userDetail?.user_name.toString())
-                        viewmodel.setPhoneNumber(it.data?.userDetail?.phone.toString())
-                        viewmodel.setUserId(it.data?.userDetail?.id.toString())
-                        viewmodel.setUserRole(it.data?.userRoles?.get(0).toString())
+                        viewmodel.setEmail(mDataBinding.etName.text.toString())
+                        viewmodel.setFullName(it.data?.fullName)
+                        viewmodel.setPhoneNumber(it.data?.phone)
+                        viewmodel.setUserId(it.data?.id)
                         Navigation.findNavController(view).navigate(
-                            R.id.action_navigation_signin_to_navigation_verifyPin, bundle
+                            R.id.action_navigation_signin_to_navigation_verifyPin
                         )
                     }
 
                     Status.ERROR -> {
                         progressBar.dismiss()
-                        val message = it.message.toString()
-                        showMessage(message)
+                        if (it.message == "Invalid access token") {
+                            sessionExpired()
+                        }
+
                     }
 
                     Status.LOADING -> {
@@ -203,11 +200,6 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             showMessage(mActivity.getString(R.string.NO_INTERNET_CONNECTION))
         }
     }
-
-    private fun callCustomToast(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-    }
-
 
     private fun togglePasswordVisibility() {
         if (isPasswordVisible) {

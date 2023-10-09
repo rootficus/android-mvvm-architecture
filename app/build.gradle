@@ -69,12 +69,12 @@ android {
         uat {
             dimension "default"
             buildConfigField("String", "VERSION", "\"UAT\"")
-            buildConfigField("String", "BASE_URL", "\"https://api.fion.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.fionpay.com/\"")
         }
         prod {
             dimension "default"
             buildConfigField("String", "VERSION", "\"PROD\"")
-            buildConfigField("String", "BASE_URL", "\"https://api.fion.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.fionpay.com/\"")
         }
 
     }

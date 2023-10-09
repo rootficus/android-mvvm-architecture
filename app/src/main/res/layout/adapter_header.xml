@@ -25,5 +25,5 @@
         android:tint="@color/primaryTextColor"
         android:rotation="270"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_arrow_back"/>
+        android:src="@drawable/arrow_right"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

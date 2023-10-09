@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/all"
+        android:title="@string/all" />
+    <item
+        android:id="@+id/menu_active"
+        android:title="@string/active_modems" />
+    <item
+        android:id="@+id/menu_in_active"
+        android:title="@string/inactive_modems" />
+    <item
+        android:id="@+id/menu_unblocked"
+        android:title="@string/unblocked_modems" />
+    <item
+        android:id="@+id/menu_blocked"
+        android:title="@string/blocked_modems" />
+    <item
+        android:id="@+id/log_in"
+        android:title="@string/login" />
+    <item
+        android:id="@+id/log_out"
+        android:title="@string/log_out" />
+</menu>

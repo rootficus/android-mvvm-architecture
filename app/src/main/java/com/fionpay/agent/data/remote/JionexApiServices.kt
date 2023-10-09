@@ -1,20 +1,29 @@
 package com.fionpay.agent.data.remote
 
+import com.fionpay.agent.data.model.request.AddModemBalanceModel
 import com.fionpay.agent.data.model.request.GetModemsByFilterRequest
 import com.fionpay.agent.data.model.request.MessagesJsonModel
+import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.ModemJsonModel
 import com.fionpay.agent.data.model.request.PinCodeJsonModel
 import com.fionpay.agent.data.model.request.SignInRequest
+import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
+import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateBalanceRequest
+import com.fionpay.agent.data.model.request.UpdateLoginRequest
 import com.fionpay.agent.data.model.request.VerifyPinRequest
 import com.fionpay.agent.data.model.response.DashBoardItemResponse
+import com.fionpay.agent.data.model.response.GetAddModemBalanceResponse
+import com.fionpay.agent.data.model.response.GetAddModemResponse
 import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
-import com.fionpay.agent.data.model.response.GetModemsByFilterResponse
+import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.GetStatusCountResponse
 import com.fionpay.agent.data.model.response.SignInResponse
+import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.data.model.response.UserResponseResult
 import com.fionpay.agent.ui.base.BaseResponseModel
+import com.fionpay.agent.ui.base.BaseResponseModel2
 import com.fionpay.agent.ui.base.BaseResponseModelFilter
 import org.json.JSONObject
 import retrofit2.Call
@@ -35,11 +44,11 @@ interface FionApiServices {
     fun InsertOrUpdateModem(@Body jsonObject: ModemJsonModel): Call<JSONObject>
 
     @Headers("Content-Type:application/json")
-    @POST("api/v1/users/sign_in")
+    @POST("api/v1/app/agents/login")
     fun signInNow(@Body signInRequest: SignInRequest): Call<BaseResponseModel<SignInResponse>>
 
     @Headers("Content-Type:application/json")
-    @POST("api/v1/users/verify_user_by_pincode")
+    @POST("api/v1/app/agents/verify_agent_by_pincode")
     fun verifyUserByPinCode(
         @Header("Authorization") authHeader: String?,
         @Body verifyPinRequest: VerifyPinRequest
@@ -56,17 +65,33 @@ interface FionApiServices {
     fun getMessageByFilter(
         @Header("Authorization") authHeader: String?,
     ): Call<BaseResponseModelFilter<GetMessageManageRecord>>
+
     @Headers("Content-Type:application/json")
-    @POST("api/v1/modems/get_modems_by_filter")
-    fun getModemsByFilter(
+    @GET("api/v1/app/agents/modems")
+    fun getModemsList(
         @Header("Authorization") authHeader: String?,
-        @Body getModemsByFilterRequest: GetModemsByFilterRequest
-    ): Call<BaseResponseModelFilter<GetModemsByFilterResponse>>
+    ): Call<BaseResponseModelFilter<GetModemsListResponse>>
+
+    @Headers("Content-Type:application/json")
+    @POST("api/v1/app/agents/add_modem")
+    fun addModemItem(
+        @Header("Authorization") authHeader: String?,
+        @Body modemItemModel: ModemItemModel
+    ): Call<BaseResponseModel<GetAddModemResponse>>
+    @Headers("Content-Type:application/json")
+    @POST("api/v1/app/agents/add_modem_balance")
+    fun addModemBalance(
+        @Header("Authorization") authHeader: String?,
+        @Body addModemBalanceModel: AddModemBalanceModel
+    ): Call<BaseResponseModel<GetAddModemBalanceResponse>>
 
 
     @Headers("Content-Type:application/json")
     @POST("api/v1/balance_manager/update_status")
-    fun updateBLStatus(@Header("Authorization") authHeader: String?,@Body updateBalanceRequest: UpdateBalanceRequest): Call<BaseResponseModel<GetBalanceManageRecord>>
+    fun updateBLStatus(
+        @Header("Authorization") authHeader: String?,
+        @Body updateBalanceRequest: UpdateBalanceRequest
+    ): Call<BaseResponseModel<GetBalanceManageRecord>>
 
     @Headers("Content-Type:application/json")
     @GET("/api/v1/balance_manager/daily_status_count")
@@ -75,9 +100,21 @@ interface FionApiServices {
     ): Call<BaseResponseModel<GetStatusCountResponse>>
 
     @Headers("Content-Type:application/json")
-    @GET("api/v1/users/dashboard_data")
+    @GET("api/v1/app/agents/dashboard")
     fun dashboardData(): Call<BaseResponseModel<DashBoardItemResponse>>
 
+    @Headers("Content-Type:application/json")
+    @GET("api/v1/app/agents/bl_transactions")
+    fun getBlTransactionsData(): Call<BaseResponseModel2<TransactionModemResponse>>
+    @Headers("Content-Type:application/json")
+    @PUT("api/v1/app/agents/update_active_inactive_status")
+    fun updateActiveInActiveStatus(@Header("Authorization") authHeader: String?,@Body  updateActiveInActiveRequest: UpdateActiveInActiveRequest): Call<BaseResponseModel<Any>>
+    @Headers("Content-Type:application/json")
+    @PUT("api/v1/app/agents/update_availability_status")
+    fun updateAvailabilityStatus(@Header("Authorization") authHeader: String?,@Body  updateAvailabilityRequest: UpdateAvailabilityRequest): Call<BaseResponseModel<Any>>
+    @Headers("Content-Type:application/json")
+    @PUT("api/v1/app/agents/update_login_status")
+    fun updateLoginStatus(@Header("Authorization") authHeader: String?,@Body  updateLoginRequest: UpdateLoginRequest): Call<BaseResponseModel<Any>>
 
 
 }

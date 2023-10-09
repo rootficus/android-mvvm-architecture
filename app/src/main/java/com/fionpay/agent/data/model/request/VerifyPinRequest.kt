@@ -6,10 +6,5 @@ import java.io.Serializable
 
 @Keep
 data class VerifyPinRequest(
-
-    @SerializedName("userId") var userId: String?,
-
-    @SerializedName("pincode") var pincode: String?,
-
-
+    @SerializedName("pincode") var pinCode: String?,
 ) : Serializable

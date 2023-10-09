@@ -48,12 +48,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.SearchView
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/searchView"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_35sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:background="@drawable/round_search_corners"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:drawableTint="@color/black"
+            android:paddingStart="@dimen/_5sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/top_head_layout"
             app:layout_constraintWidth_percent="0.8" />
@@ -83,6 +86,19 @@
             app:layout_constraintStart_toEndOf="@id/searchButton"
             app:layout_constraintTop_toTopOf="@id/searchView" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtListTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/poppins"
+            android:text="All"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/searchView"
+            app:layout_constraintTop_toBottomOf="@id/searchView" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recentModemsList"
             android:layout_width="match_parent"
@@ -90,7 +106,7 @@
             android:divider="@android:color/darker_gray"
             android:dividerHeight="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchView"
+            app:layout_constraintTop_toBottomOf="@+id/txtListTitle"
             tools:itemCount="3"
             tools:listitem="@layout/item_modems_manager" />
 
