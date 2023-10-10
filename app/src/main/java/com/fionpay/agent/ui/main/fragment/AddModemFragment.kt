@@ -1,8 +1,6 @@
 package com.fionpay.agent.ui.main.fragment
 
-import android.app.AlertDialog
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -18,7 +16,6 @@ import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
-import com.fionpay.agent.ui.main.activity.SignInActivity
 import com.fionpay.agent.ui.main.adapter.DashBoardListAdapter
 import com.fionpay.agent.ui.main.di.AddModemFragmentModule
 import com.fionpay.agent.ui.main.di.DaggerAddModemFragmentComponent
@@ -27,6 +24,7 @@ import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
 import com.fionpay.agent.utils.Utility
+import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
 
@@ -54,8 +52,64 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
         initialization()
     }
 
+
+    private fun initializeDagger() {
+        DaggerAddModemFragmentComponent.builder().appComponent(FionSDK.appComponent)
+            .addModemFragmentModule(AddModemFragmentModule())
+            .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
+    }
+
     private fun initialization() {
         mDataBinding.topHeader.txtHeader.text = getString(R.string.add_modems)
+
+        val otpBoxes = arrayOf(
+            mDataBinding.otpLayout.otpBox1,
+            mDataBinding.otpLayout.otpBox2,
+            mDataBinding.otpLayout.otpBox3,
+            mDataBinding.otpLayout.otpBox4,
+            mDataBinding.otpLayout.otpBox5,
+            mDataBinding.otpLayout.otpBox6
+        )
+        generatePinCode()
+        disableOtpBoxes()
+        mDataBinding.labelRefresh.setOnClickListener {
+           generatePinCode()
+        }
+
+        mDataBinding.etName.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val name = s.toString()
+
+                if (name.isNotEmpty()) {
+                    mDataBinding.nameVerified.visibility = View.VISIBLE
+                } else {
+                    mDataBinding.nameVerified.visibility = View.GONE
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
+        mDataBinding.etLastName.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val lastName = s.toString()
+
+                if (lastName.isNotEmpty()) {
+                    mDataBinding.lastNameVerified.visibility = View.VISIBLE
+                } else {
+                    mDataBinding.lastNameVerified.visibility = View.GONE
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+            }
+        })
 
         mDataBinding.btnNext.setOnClickListener {
             if (mDataBinding.etName.text.toString().isEmpty()) {
@@ -76,7 +130,20 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
                     mActivity.getString(R.string.PLEASE_ENTER_PIN)
                 )
             } else {
-                addModemItem()
+                val modemItemModel = ModemItemModel(
+                    mDataBinding.etName.text.toString(),
+                    mDataBinding.etLastName.text.toString(),
+                    otpStringBuilder.toString().toLong()
+                )
+                val bundle = Bundle().apply {
+                    putSerializable("modemItemModel", modemItemModel)
+                }
+                Navigation.findNavController(requireView())
+                    .navigate(
+                        R.id.action_navigation_addModemFragment_to_navigation_addModemBalanceFragment,
+                        bundle
+                    )
+                //addModemItem()
             }
 
         }
@@ -85,14 +152,6 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
             Navigation.findNavController(requireView()).navigateUp()
         }
 
-        val otpBoxes = arrayOf(
-            mDataBinding.otpLayout.otpBox1,
-            mDataBinding.otpLayout.otpBox2,
-            mDataBinding.otpLayout.otpBox3,
-            mDataBinding.otpLayout.otpBox4,
-            mDataBinding.otpLayout.otpBox5,
-            mDataBinding.otpLayout.otpBox6
-        )
 
         // Set up text change listeners for each OTP box
         for (i in otpBoxes.indices) {
@@ -127,11 +186,63 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
 
     }
 
-    private fun initializeDagger() {
-        DaggerAddModemFragmentComponent.builder().appComponent(FionSDK.appComponent)
-            .addModemFragmentModule(AddModemFragmentModule())
-            .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
+    private fun disableOtpBoxes() {
+        mDataBinding.otpLayout.otpBox1.isFocusable = false
+        mDataBinding.otpLayout.otpBox1.isClickable = false
+        mDataBinding.otpLayout.otpBox2.isFocusable = false
+        mDataBinding.otpLayout.otpBox2.isClickable = false
+        mDataBinding.otpLayout.otpBox3.isFocusable = false
+        mDataBinding.otpLayout.otpBox3.isClickable = false
+        mDataBinding.otpLayout.otpBox4.isFocusable = false
+        mDataBinding.otpLayout.otpBox4.isClickable = false
+        mDataBinding.otpLayout.otpBox5.isFocusable = false
+        mDataBinding.otpLayout.otpBox5.isClickable = false
+        mDataBinding.otpLayout.otpBox6.isFocusable = false
+        mDataBinding.otpLayout.otpBox6.isClickable = false
     }
+
+
+    private fun generatePinCode() {
+        if (networkHelper.isNetworkConnected()) {
+            viewModel.generatePinCode()
+            viewModel.generatePinCodeResponseModel.observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        progressBar.dismiss()
+                        val pinCode = it.data.toString()
+                        if(pinCode.length == 6)
+                        {
+                            otpStringBuilder.clear()
+                            mDataBinding.otpLayout.otpBox1.setText(pinCode[0].toString())
+                            mDataBinding.otpLayout.otpBox2.setText(pinCode[1].toString())
+                            mDataBinding.otpLayout.otpBox3.setText(pinCode[2].toString())
+                            mDataBinding.otpLayout.otpBox4.setText(pinCode[3].toString())
+                            mDataBinding.otpLayout.otpBox5.setText(pinCode[4].toString())
+                            mDataBinding.otpLayout.otpBox6.setText(pinCode[5].toString())
+
+                        }
+                    }
+
+                    Status.ERROR -> {
+                        progressBar.dismiss()
+                        if (it.message == "Invalid access token") {
+                            sessionExpired()
+                        } else {
+                            showMessage(it.message.toString())
+                        }
+                    }
+
+                    Status.LOADING -> {
+                        progressBar.show()
+                    }
+                }
+            }
+        } else {
+            Snackbar.make(requireView(), "No Internet", Snackbar.LENGTH_LONG).show()
+        }
+
+    }
+
 
     private fun addModemItem() {
 
@@ -150,9 +261,13 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
                         val modemId = it.data?.id
                         val bundle = Bundle().apply {
                             putString("modem_id", modemId)
+                            putSerializable("modemItemModel", modemItemModel)
                         }
                         Navigation.findNavController(requireView())
-                            .navigate(R.id.action_navigation_addModemFragment_to_navigation_addModemBalanceFragment, bundle)
+                            .navigate(
+                                R.id.action_navigation_addModemFragment_to_navigation_addModemBalanceFragment,
+                                bundle
+                            )
                         // bleManagerListAdapter?.notifyDataSetChanged()
                     }
 

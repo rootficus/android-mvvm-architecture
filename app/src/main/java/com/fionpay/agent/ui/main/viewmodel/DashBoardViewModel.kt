@@ -8,11 +8,13 @@ import com.fionpay.agent.data.model.request.GetBalanceByFilterRequest
 import com.fionpay.agent.data.model.request.GetMessageByFilterRequest
 import com.fionpay.agent.data.model.request.GetPendingModemRequest
 import com.fionpay.agent.data.model.request.ModemItemModel
+import com.fionpay.agent.data.model.request.ProfileResponse
 import com.fionpay.agent.data.model.request.SignInRequest
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
 import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateBalanceRequest
 import com.fionpay.agent.data.model.request.UpdateLoginRequest
+import com.fionpay.agent.data.model.response.BLTransactionModemResponse
 import com.fionpay.agent.data.model.response.DashBoardItemResponse
 import com.fionpay.agent.data.model.response.GetAddModemBalanceResponse
 import com.fionpay.agent.data.model.response.GetAddModemResponse
@@ -70,7 +72,7 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
 
 
     val blTransactionsDataResponseModel =
-        MutableLiveData<ResponseData<ArrayList<TransactionModemResponse>>>()
+        MutableLiveData<ResponseData<ArrayList<BLTransactionModemResponse>>>()
 
     fun getBlTransactionsData() {
         blTransactionsDataResponseModel.setLoading(null)
@@ -84,6 +86,24 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
                 { message -> blTransactionsDataResponseModel.setError(message) })
         }
     }
+
+    val transactionsDataResponseModel =
+        MutableLiveData<ResponseData<ArrayList<TransactionModemResponse>>>()
+
+    fun getTransactionsData(getPendingModemRequest: GetPendingModemRequest) {
+        transactionsDataResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.getTransactionsData({ success ->
+                transactionsDataResponseModel.setSuccess(
+                    success
+                )
+            },
+                getPendingModemRequest,
+                { error -> transactionsDataResponseModel.setError(error) },
+                { message -> transactionsDataResponseModel.setError(message) })
+        }
+    }
+
     val getPendingModemResponseModel =
         MutableLiveData<ResponseData<ArrayList<PendingModemResponse>>>()
 
@@ -94,11 +114,44 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
                 pendingModemRequest,
                 { success ->
                     getPendingModemResponseModel.setSuccess(
-                    success
-                )
-            },
+                        success
+                    )
+                },
                 { error -> getPendingModemResponseModel.setError(error) },
                 { message -> getPendingModemResponseModel.setError(message) })
+        }
+    }
+
+    val generatePinCodeResponseModel =
+        MutableLiveData<ResponseData<Any>>()
+
+    fun generatePinCode() {
+        generatePinCodeResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.generatePinCode(
+                { success ->
+                    generatePinCodeResponseModel.setSuccess(
+                        success
+                    )
+                },
+                { error -> generatePinCodeResponseModel.setError(error) },
+                { message -> generatePinCodeResponseModel.setError(message) })
+        }
+    }
+    val getAgentProfileResponseModel =
+        MutableLiveData<ResponseData<ProfileResponse>>()
+
+    fun getAgentProfile() {
+        getAgentProfileResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.getAgentProfile(
+                { success ->
+                    getAgentProfileResponseModel.setSuccess(
+                        success
+                    )
+                },
+                { error -> getAgentProfileResponseModel.setError(error) },
+                { message -> getAgentProfileResponseModel.setError(message) })
         }
     }
 
@@ -270,6 +323,7 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
                 { message -> getUpdateAvailabilityStatusResponseModel.setError(message) })
         }
     }
+
     val getUpdateLoginStatusResponseModel = MutableLiveData<ResponseData<Any>>()
     fun updateLoginStatus(updateLoginRequest: UpdateLoginRequest) {
         getUpdateLoginStatusResponseModel.setLoading(null)

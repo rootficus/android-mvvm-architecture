@@ -8,14 +8,13 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fionpay.agent.R
-import com.fionpay.agent.data.model.request.GetPendingModemRequest
 import com.fionpay.agent.data.model.response.BLTransactionModemResponse
-import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.databinding.FragmentTransactionsBinding
 import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
+import com.fionpay.agent.ui.main.adapter.BleManagerListAdapter
 import com.fionpay.agent.ui.main.adapter.TransactionListAdapter
 import com.fionpay.agent.ui.main.di.DaggerTransactionFragmentComponent
 import com.fionpay.agent.ui.main.di.TransactionFragmentModule
@@ -28,7 +27,7 @@ import java.util.Locale
 import javax.inject.Inject
 
 
-class TransactionFragment :
+class BalanceManagerFragment :
     BaseFragment<FragmentTransactionsBinding>(R.layout.fragment_transactions) {
 
     @Inject
@@ -43,8 +42,8 @@ class TransactionFragment :
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
-    private lateinit var transactionListAdapter: TransactionListAdapter
-    private var arrayList: ArrayList<TransactionModemResponse> = arrayListOf()
+    private lateinit var transactionListAdapter: BleManagerListAdapter
+    private var arrayList: ArrayList<BLTransactionModemResponse> = arrayListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,22 +67,23 @@ class TransactionFragment :
     }
 
     private fun setAdapter() {
-        transactionListAdapter = TransactionListAdapter(arrayList)
+        transactionListAdapter = BleManagerListAdapter(arrayList)
         mDataBinding.recentModemsList.layoutManager = LinearLayoutManager(context)
         mDataBinding.recentModemsList.adapter = transactionListAdapter
     }
 
     private fun initializeDagger() {
-        DaggerTransactionFragmentComponent.builder().appComponent(FionSDK.appComponent)
+      /*  DaggerTransactionFragmentComponent.builder().appComponent(FionSDK.appComponent)
             .transactionFragmentModule(TransactionFragmentModule())
-            .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
+            .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)*/
     }
+
 
 
     private fun getTransactionRecord() {
         if (networkHelper.isNetworkConnected()) {
-            viewModel.getTransactionsData(GetPendingModemRequest(10, 1))
-            viewModel.transactionsDataResponseModel.observe(viewLifecycleOwner) {
+            viewModel.getBlTransactionsData()
+            viewModel.blTransactionsDataResponseModel.observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.SUCCESS -> {
                         arrayList.clear()
@@ -160,7 +160,7 @@ class TransactionFragment :
 
     private fun filter(text: String) {
         // creating a new array list to filter our data.
-        val filteredList: ArrayList<TransactionModemResponse> = ArrayList()
+        val filteredList: ArrayList<BLTransactionModemResponse> = ArrayList()
 
         for (item in arrayList) {
             // checking if the entered string matched with any item of our recycler view.
@@ -169,7 +169,7 @@ class TransactionFragment :
             ) {
                 // if the item is matched we are
                 filteredList.add(item)
-            } else if (text.isEmpty()) {
+            }else if (text.isEmpty()) {
                 filteredList.clear()
                 filteredList.addAll(arrayList)
             }
@@ -180,7 +180,7 @@ class TransactionFragment :
             Toast.makeText(context, "No Data Found..", Toast.LENGTH_SHORT).show()
         } else {
             // at last we are passing that filtered
-            transactionListAdapter?.filterList(filteredList)
+            //transactionListAdapter?.filterList(filteredList)
         }
     }
 

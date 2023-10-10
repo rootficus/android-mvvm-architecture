@@ -29,22 +29,35 @@
             app:layout_constraintWidth_percent="0.5" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtFionpay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fionpay Agent"
-            android:textSize="32sp"
-            android:textColor="@color/black"
+            android:text="@string/fionpay"
+            android:textColor="@color/primaryBlue"
+            android:textSize="38sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_onboard_logo" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtModem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/agent"
+            android:textColor="@color/secondaryBlue"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtFionpay" />
+
         <ProgressBar
             android:id="@+id/progressView"
             android:layout_width="wrap_content"
-            android:layout_height="80dp"
+            android:layout_height="60dp"
             android:layout_marginTop="15dp"
-            android:padding="20dp"
+            android:padding="15dp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

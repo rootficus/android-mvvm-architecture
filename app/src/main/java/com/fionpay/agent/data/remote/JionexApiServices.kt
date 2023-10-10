@@ -1,18 +1,19 @@
 package com.fionpay.agent.data.remote
 
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
-import com.fionpay.agent.data.model.request.GetModemsByFilterRequest
 import com.fionpay.agent.data.model.request.GetPendingModemRequest
 import com.fionpay.agent.data.model.request.MessagesJsonModel
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.ModemJsonModel
 import com.fionpay.agent.data.model.request.PinCodeJsonModel
+import com.fionpay.agent.data.model.request.ProfileResponse
 import com.fionpay.agent.data.model.request.SignInRequest
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
 import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateBalanceRequest
 import com.fionpay.agent.data.model.request.UpdateLoginRequest
 import com.fionpay.agent.data.model.request.VerifyPinRequest
+import com.fionpay.agent.data.model.response.BLTransactionModemResponse
 import com.fionpay.agent.data.model.response.DashBoardItemResponse
 import com.fionpay.agent.data.model.response.GetAddModemBalanceResponse
 import com.fionpay.agent.data.model.response.GetAddModemResponse
@@ -80,6 +81,7 @@ interface FionApiServices {
         @Header("Authorization") authHeader: String?,
         @Body modemItemModel: ModemItemModel
     ): Call<BaseResponseModel<GetAddModemResponse>>
+
     @Headers("Content-Type:application/json")
     @POST("api/v1/app/agents/add_modem_balance")
     fun addModemBalance(
@@ -107,19 +109,58 @@ interface FionApiServices {
 
     @Headers("Content-Type:application/json")
     @GET("api/v1/app/agents/bl_transactions")
-    fun getBlTransactionsData(): Call<BaseResponseModel2<TransactionModemResponse>>
+    fun getBlTransactionsData(): Call<BaseResponseModel2<BLTransactionModemResponse>>
+
+    @Headers("Content-Type:application/json")
+    @POST("api/v1/app/agents/approved_deposit_requests")
+    fun getTransactionsData(
+        @Header("Authorization") authHeader: String?,
+        @Body getPendingModemRequest: GetPendingModemRequest
+    ): Call<BaseResponseModel2<TransactionModemResponse>>
+
     @Headers("Content-Type:application/json")
     @PUT("api/v1/app/agents/update_active_inactive_status")
-    fun updateActiveInActiveStatus(@Header("Authorization") authHeader: String?,@Body  updateActiveInActiveRequest: UpdateActiveInActiveRequest): Call<BaseResponseModel<Any>>
+    fun updateActiveInActiveStatus(
+        @Header("Authorization") authHeader: String?,
+        @Body updateActiveInActiveRequest: UpdateActiveInActiveRequest
+    ): Call<BaseResponseModel<Any>>
+
     @Headers("Content-Type:application/json")
     @PUT("api/v1/app/agents/update_availability_status")
-    fun updateAvailabilityStatus(@Header("Authorization") authHeader: String?,@Body  updateAvailabilityRequest: UpdateAvailabilityRequest): Call<BaseResponseModel<Any>>
+    fun updateAvailabilityStatus(
+        @Header("Authorization") authHeader: String?,
+        @Body updateAvailabilityRequest: UpdateAvailabilityRequest
+    ): Call<BaseResponseModel<Any>>
+
     @Headers("Content-Type:application/json")
     @PUT("api/v1/app/agents/update_login_status")
-    fun updateLoginStatus(@Header("Authorization") authHeader: String?,@Body  updateLoginRequest: UpdateLoginRequest): Call<BaseResponseModel<Any>>
+    fun updateLoginStatus(
+        @Header("Authorization") authHeader: String?,
+        @Body updateLoginRequest: UpdateLoginRequest
+    ): Call<BaseResponseModel<Any>>
+
     @Headers("Content-Type:application/json")
     @POST("api/v1/app/agents/pending_deposit_requests")
-    fun getPendingRequest(@Header("Authorization") authHeader: String?,@Body  pendingModemRequest: GetPendingModemRequest): Call<BaseResponseModel2<PendingModemResponse>>
+    fun getPendingRequest(
+        @Header("Authorization") authHeader: String?,
+        @Body pendingModemRequest: GetPendingModemRequest
+    ): Call<BaseResponseModel2<PendingModemResponse>>
+
+    @Headers("Content-Type:application/json")
+    @GET("api/v1/app/agents/generate_pincode")
+    fun generatePinCode(
+        @Header("Authorization") authHeader: String?
+    ): Call<BaseResponseModel<Any>>
+    @Headers("Content-Type:application/json")
+    @GET("api/v1/app/agents/89f867f1-5167-4f68-af4d-8d103e01fd33")
+    fun getAgentProfile(
+        @Header("Authorization") authHeader: String?
+    ): Call<BaseResponseModel<ProfileResponse>>
+    @Headers("Content-Type:application/json")
+    @PUT("api/v1/app/agents/89f867f1-5167-4f68-af4d-8d103e01fd33")
+    fun updateAgentProfile(
+        @Header("Authorization") authHeader: String?
+    ): Call<BaseResponseModel<ProfileResponse>>
 
 
 }

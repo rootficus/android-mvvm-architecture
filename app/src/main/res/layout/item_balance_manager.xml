@@ -44,30 +44,6 @@
                 app:layout_constraintStart_toEndOf="@id/labelCustomerNumber"
                 app:layout_constraintTop_toTopOf="@id/labelCustomerNumber" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/labelBankType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/poppins"
-                android:text="Bank"
-                android:textColor="@color/primaryBlue"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/labelCustomerNumber" />
-
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtBankType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="XXXX"
-                android:textColor="@color/primaryBlue"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/txtCustomerNumber"
-                app:layout_constraintTop_toTopOf="@id/labelAmount" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/labelAmount"
@@ -79,7 +55,7 @@
                 android:textColor="@color/primaryBlue"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/labelBankType" />
+                app:layout_constraintTop_toBottomOf="@id/labelCustomerNumber" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -87,20 +63,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="XXXX"
+                android:text="123456"
                 android:textColor="@color/primaryBlue"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/txtCustomerNumber"
-                app:layout_constraintTop_toTopOf="@id/labelBankType" />
+                app:layout_constraintTop_toTopOf="@id/labelAmount" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/labelTransactionId"
+                android:id="@+id/labelOldBalance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/poppins"
-                android:text="TransactionId"
+                android:text="Old Balance"
                 android:textColor="@color/primaryBlue"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -108,16 +84,16 @@
 
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtTransactionId"
+                android:id="@+id/txtOldBalance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="XXXX"
+                android:text="৳‎1000.00"
                 android:textColor="@color/primaryBlue"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/txtCustomerNumber"
-                app:layout_constraintTop_toTopOf="@id/labelTransactionId" />
+                app:layout_constraintTop_toTopOf="@id/labelOldBalance" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtDate"

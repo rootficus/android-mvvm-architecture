@@ -55,7 +55,7 @@
     <string name="verify_mobile_desc">We need to verify from your phone to verify and register your mobile on <b>Rapidx</b></string>
     <string name="select_sim">Please select SIM registered with your bank.</string>
     <string name="Auth">Authentication</string>
-    <string name="cancel">Proceed</string>
+    <string name="cancel">Cancel</string>
     <string name="read">Read</string>
     <string name="confirmed">Confirmed</string>
     <string name="init">Verification Initiated</string>
@@ -172,6 +172,10 @@
     <string name="blocked_modems">Blocked Modems</string>
     <string name="pending_modems">Pending Modems</string>
     <string name="all">All</string>
+    <string name="fionpay">Fionpay</string>
+    <string name="upload_photo">Upload Photo</string>
+    <string name="take_photo">Camera</string>
+    <string name="choose_existing_photo">Gallery</string>
     <string-array name="bankList">
         <item>item1</item>
         <item>item2</item>

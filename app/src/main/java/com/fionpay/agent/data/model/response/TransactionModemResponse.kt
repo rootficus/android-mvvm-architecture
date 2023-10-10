@@ -4,17 +4,27 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class TransactionModemResponse(
-    @SerializedName("customer_number")
+    @SerializedName("id")
     @Expose
-    var customerNumber: String? = null,
+    var id: Int? = null,
+    @SerializedName("modem")
+    @Expose
+    var modem: String? = null,
+
+    @SerializedName("customer")
+    @Expose
+    var customer: String? = null,
+    @SerializedName("transation_id")
+    @Expose
+    var transactionId: String? = null,
+
+    @SerializedName("bank_type")
+    @Expose
+    var bankType: String? = null,
 
     @SerializedName("amount")
     @Expose
-    var amount: Int? = null,
-
-    @SerializedName("old_balance")
-    @Expose
-    var oldBalance: Int? = null,
+    var amount: String? = null,
 
     @SerializedName("date")
     @Expose

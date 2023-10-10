@@ -29,6 +29,7 @@
     <color name="colorChecked">#FFFFFFFF</color>
     <color name="colorUnchecked">#131313</color>
     <color name="primaryBlue">#283D80</color>
+    <color name="secondaryBlue">#1B9DD7</color>
     <color name="activeGreen">#17BF46</color>
     <color name="activeGreenBg">#1A17BF46</color>
     <color name="activeDangerBg">#1ABF1717</color>

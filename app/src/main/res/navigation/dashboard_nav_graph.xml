@@ -83,6 +83,11 @@
         android:label="TransactionFragment"
         tools:layout="@layout/fragment_transactions" />
     <fragment
+        android:id="@+id/navigation_blFragment"
+        android:name="com.fionpay.agent.ui.main.fragment.BalanceManagerFragment"
+        android:label="BalanceManagerFragment"
+        tools:layout="@layout/fragment_bl_manager" />
+    <fragment
         android:id="@+id/navigation_addModemFragment"
         android:name="com.fionpay.agent.ui.main.fragment.AddModemFragment"
         android:label="AddModemFragment"

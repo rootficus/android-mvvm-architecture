@@ -130,7 +130,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_sign_in"
+            android:id="@+id/btnConfirmCreate"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"

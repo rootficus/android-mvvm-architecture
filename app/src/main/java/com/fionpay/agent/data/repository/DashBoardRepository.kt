@@ -8,11 +8,13 @@ import com.fionpay.agent.data.model.request.GetBalanceByFilterRequest
 import com.fionpay.agent.data.model.request.GetMessageByFilterRequest
 import com.fionpay.agent.data.model.request.GetPendingModemRequest
 import com.fionpay.agent.data.model.request.ModemItemModel
+import com.fionpay.agent.data.model.request.ProfileResponse
 import com.fionpay.agent.data.model.request.SignInRequest
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
 import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateBalanceRequest
 import com.fionpay.agent.data.model.request.UpdateLoginRequest
+import com.fionpay.agent.data.model.response.BLTransactionModemResponse
 import com.fionpay.agent.data.model.response.DashBoardItemResponse
 import com.fionpay.agent.data.model.response.GetAddModemBalanceResponse
 import com.fionpay.agent.data.model.response.GetAddModemResponse
@@ -70,11 +72,25 @@ class DashBoardRepository(
     }
 
     fun getBlTransactionsData(
-        success: (transactionModemList: ArrayList<TransactionModemResponse>) -> Unit,
+        success: (transactionModemList: ArrayList<BLTransactionModemResponse>) -> Unit,
         fail: (error: String) -> Unit,
         message: (msg: String) -> Unit
     ) {
         apiServices.getBlTransactionsData().apply {
+            execute2(this, success, fail, context, message)
+        }
+    }
+
+    fun getTransactionsData(
+        success: (transactionModemList: ArrayList<TransactionModemResponse>) -> Unit,
+        getPendingModemRequest: GetPendingModemRequest,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.getTransactionsData(
+            "Bearer " + sharedPreference.getToken(),
+            getPendingModemRequest
+        ).apply {
             execute2(this, success, fail, context, message)
         }
     }
@@ -88,6 +104,28 @@ class DashBoardRepository(
         apiServices.getPendingRequest("Bearer " + sharedPreference.getToken(), pendingModemRequest)
             .apply {
                 execute2(this, success, fail, context, message)
+            }
+    }
+
+    fun generatePinCode(
+        success: (pinCode: Any) -> Unit,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.generatePinCode("Bearer " + sharedPreference.getToken())
+            .apply {
+                execute(this, success, fail, context, message)
+            }
+    }
+
+    fun getAgentProfile(
+        success: (profileResponse: ProfileResponse) -> Unit,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.getAgentProfile("Bearer " + sharedPreference.getToken())
+            .apply {
+                execute(this, success, fail, context, message)
             }
     }
 

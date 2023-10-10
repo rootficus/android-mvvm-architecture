@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.fionpay.agent.R
+import com.fionpay.agent.data.model.response.BLTransactionModemResponse
 import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.databinding.ItemTransactionManagerBinding
@@ -22,10 +23,15 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
     lateinit var context: Context
 
 
-    inner class ItemViewHolder(val binding: ItemTransactionManagerBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ItemViewHolder(val binding: ItemTransactionManagerBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val binding = ItemTransactionManagerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemTransactionManagerBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         context = parent.context
 
         return ItemViewHolder(binding)
@@ -37,9 +43,9 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
         with(holder)
         {
             setCardBgColor(binding, position)
-            binding.txtCustomerNumber.text = item.customerNumber
+            binding.txtCustomerNumber.text = item.customer
             binding.txtAmount.text = "৳${item.amount}"
-            binding.txtOldBalance.text = item.oldBalance.toString()
+            binding.txtTransactionId.text = item.transactionId.toString()
             binding.txtDate.text = Utility.convertTransactionDate(item.date)
             binding.txtSuccess.text = item.status
             setStatusView(item, binding)
@@ -47,11 +53,14 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
     }
 
     private fun setCardBgColor(binding: ItemTransactionManagerBinding, position: Int) {
-        if(position % 2 == 1)
-        {
-            binding.layoutCard.setBackgroundColor(ContextCompat.getColor(context, R.color.activeCard))
-        }else
-        {
+        if (position % 2 == 1) {
+            binding.layoutCard.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.activeCard
+                )
+            )
+        } else {
             binding.layoutCard.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
         }
     }
@@ -60,23 +69,22 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
         item: TransactionModemResponse,
         binding: ItemTransactionManagerBinding
     ) {
-        when(item.status)
-        {
-            "Success" -> {
-                binding.txtSuccess.setTextColor(ContextCompat.getColor(context, R.color.activeGreen))
-                binding.txtSuccess.backgroundTintList = (ContextCompat.getColorStateList(context, R.color.activeGreenBg))
+        when (item.status) {
+            "Approved" -> {
+                binding.txtSuccess.setTextColor(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.activeGreen
+                    )
+                )
+                binding.txtSuccess.backgroundTintList =
+                    (ContextCompat.getColorStateList(context, R.color.activeGreenBg))
             }
-            "Pending" -> {
-                binding.txtSuccess.setTextColor(ContextCompat.getColor(context, R.color.pending))
-                binding.txtSuccess.backgroundTintList = (ContextCompat.getColorStateList(context, R.color.activePendingBg))
-            }
-            "Danger" -> {
+
+            "Rejected" -> {
                 binding.txtSuccess.setTextColor(ContextCompat.getColor(context, R.color.reject))
-                binding.txtSuccess.backgroundTintList = (ContextCompat.getColorStateList(context, R.color.activeDangerBg))
-            }
-            "Rejected" ->{
-                binding.txtSuccess.setTextColor(ContextCompat.getColor(context, R.color.reject))
-                binding.txtSuccess.backgroundTintList = (ContextCompat.getColorStateList(context, R.color.activeDangerBg))
+                binding.txtSuccess.backgroundTintList =
+                    (ContextCompat.getColorStateList(context, R.color.activeDangerBg))
             }
         }
     }

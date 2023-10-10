@@ -1,26 +1,22 @@
 package com.fionpay.agent.ui.main.fragment
 
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.request.GetBalanceByFilterRequest
 import com.fionpay.agent.data.model.request.UpdateBalanceRequest
+import com.fionpay.agent.data.model.response.BLTransactionModemResponse
 import com.fionpay.agent.data.model.response.GetBalanceManageRecord
-import com.fionpay.agent.databinding.CustomBleDialogBinding
 import com.fionpay.agent.databinding.FragmentBlManagerBinding
 import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
-import com.fionpay.agent.ui.main.activity.SignInActivity
 import com.fionpay.agent.ui.main.adapter.BleManagerListAdapter
 import com.fionpay.agent.ui.main.di.BLManagerFragmentModule
 import com.fionpay.agent.ui.main.di.DaggerBLManagerFragmentComponent
@@ -29,7 +25,7 @@ import com.fionpay.agent.utils.Constant
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
-import com.fionpay.agent.utils.Utility
+import com.google.gson.Gson
 import javax.inject.Inject
 
 
@@ -74,6 +70,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
                     mDataBinding.chipAllTransactions.id -> {
                         getBalanceByFilterApi(Constant.BalanceManagerStatus.All.action)
                     }
+
                     mDataBinding.chipSuccess.id -> {
                         getBalanceByFilterApi(Constant.BalanceManagerStatus.SUCCESS.action)
                     }
@@ -112,18 +109,17 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
         }
     }
 
-    private fun setBleAdapter(filter:Int) {
-        var arrayList = viewModel.getBalanceManageRecord(filter)
-        Log.d("getBalanceByFilterApi", "::${filter},${arrayList.size}")
+    private fun setBleAdapter(filter: Int) {
+        var arrayList: ArrayList<BLTransactionModemResponse> = arrayListOf<BLTransactionModemResponse>()
         bleManagerListAdapter = BleManagerListAdapter(arrayList)
         bleManagerListAdapter?.listener = cardListener
         mDataBinding.recentTrendingView.layoutManager = LinearLayoutManager(context)
         mDataBinding.recentTrendingView.adapter = bleManagerListAdapter
         bleManagerListAdapter?.notifyDataSetChanged()
-        if (bleManagerListAdapter?.itemCount!! >0){
+        if (bleManagerListAdapter?.itemCount!! > 0) {
             mDataBinding.textNoTransactions.visibility = View.INVISIBLE
             mDataBinding.recentTrendingView.visibility = View.VISIBLE
-        }else{
+        } else {
             mDataBinding.recentTrendingView.visibility = View.INVISIBLE
             mDataBinding.textNoTransactions.visibility = View.VISIBLE
         }
@@ -134,28 +130,52 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
             var bottomSheetFragment = BalanceDetailScreenFragment()
             bottomSheetFragment.listener = balanceDetailScreenActionListener
             val bundle = Bundle()
-            bundle.putSerializable(GetBalanceManageRecord::class.java.name,getBalanceManageRecord)
+            bundle.putSerializable(GetBalanceManageRecord::class.java.name, getBalanceManageRecord)
             bottomSheetFragment.arguments = bundle
-            activity?.supportFragmentManager?.let { bottomSheetFragment.show(it, "ActionBottomDialogFragment") }
+            activity?.supportFragmentManager?.let {
+                bottomSheetFragment.show(
+                    it,
+                    "ActionBottomDialogFragment"
+                )
+            }
             //showCustomDialog(getBalanceManageRecord)
         }
     }
 
-    private val balanceDetailScreenActionListener = object : BalanceDetailScreenFragment.BottomDialogEvent {
-        override fun onAcceptRequest(getBalanceManageRecord: GetBalanceManageRecord) {
-            getBalanceManageRecord.status = "approved"
-            onUpdateRequest(getBalanceManageRecord,UpdateBalanceRequest("approved",getBalanceManageRecord.id,viewModel.getUserId()!!),
-                getString(R.string.you_want_to_approved))
+    private val balanceDetailScreenActionListener =
+        object : BalanceDetailScreenFragment.BottomDialogEvent {
+            override fun onAcceptRequest(getBalanceManageRecord: GetBalanceManageRecord) {
+                getBalanceManageRecord.status = "approved"
+                onUpdateRequest(
+                    getBalanceManageRecord,
+                    UpdateBalanceRequest(
+                        "approved",
+                        getBalanceManageRecord.id,
+                        viewModel.getUserId()!!
+                    ),
+                    getString(R.string.you_want_to_approved)
+                )
+            }
+
+            override fun onRejectedRequest(getBalanceManageRecord: GetBalanceManageRecord) {
+                onUpdateRequest(
+                    getBalanceManageRecord,
+                    UpdateBalanceRequest(
+                        "rejected",
+                        getBalanceManageRecord.id,
+                        viewModel.getUserId()!!
+                    ),
+                    getString(R.string.you_want_to_rejected)
+                )
+            }
+
         }
 
-        override fun onRejectedRequest(getBalanceManageRecord: GetBalanceManageRecord) {
-            onUpdateRequest(getBalanceManageRecord,UpdateBalanceRequest("rejected",getBalanceManageRecord.id,viewModel.getUserId()!!),
-                getString(R.string.you_want_to_rejected))
-        }
-
-    }
-
-    private fun onUpdateRequest(getBalanceManageRecord: GetBalanceManageRecord,updateBalanceRequest: UpdateBalanceRequest,message: String) {
+    private fun onUpdateRequest(
+        getBalanceManageRecord: GetBalanceManageRecord,
+        updateBalanceRequest: UpdateBalanceRequest,
+        message: String
+    ) {
         val mBuilder = android.app.AlertDialog.Builder(activity)
             .setTitle("Are you sure?")
             .setMessage(message)
@@ -165,30 +185,36 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
         val mPositiveButton = mBuilder.getButton(android.app.AlertDialog.BUTTON_POSITIVE)
         mPositiveButton.setOnClickListener {
             mBuilder.dismiss()
-            updateBLStatusApi(getBalanceManageRecord,updateBalanceRequest)
+            updateBLStatusApi(getBalanceManageRecord, updateBalanceRequest)
         }
     }
 
-    private fun updateBLStatusApi(getBalanceManageRecord: GetBalanceManageRecord, updateBalanceRequest: UpdateBalanceRequest){
+    private fun updateBLStatusApi(
+        getBalanceManageRecord: GetBalanceManageRecord,
+        updateBalanceRequest: UpdateBalanceRequest
+    ) {
         //Api calling
-        if (networkHelper.isNetworkConnected()){
-            Log.d("updateBalanceRequest","::${Gson().toJson(updateBalanceRequest)}")
+        if (networkHelper.isNetworkConnected()) {
+            Log.d("updateBalanceRequest", "::${Gson().toJson(updateBalanceRequest)}")
             viewModel.updateBLStatus(updateBalanceRequest)
             viewModel.updateBLStatusResponseModel.observe(viewLifecycleOwner) {
-                when(it.status){
+                when (it.status) {
                     Status.SUCCESS -> {
                         progressBar.dismiss()
                         it.data?.let {
                             viewModel.updateLocalBalanceManager(getBalanceManageRecord)
                             bleManagerListAdapter?.notifyDataSetChanged()
                         }
-                        Toast.makeText(activity,"Status updated successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, "Status updated successfully", Toast.LENGTH_SHORT)
+                            .show()
                         getStatusCount()
                     }
+
                     Status.ERROR -> {
                         progressBar.dismiss()
-                        if(it.message == "Invalid access token"){
-                            Toast.makeText(activity,"Invalid access token", Toast.LENGTH_SHORT).show()
+                        if (it.message == "Invalid access token") {
+                            Toast.makeText(activity, "Invalid access token", Toast.LENGTH_SHORT)
+                                .show()
                         }
                     }
 
@@ -197,8 +223,9 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
                     }
                 }
             }
-        }else{
-            Toast.makeText(activity,getString(R.string.NO_INTERNET_CONNECTION),Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(activity, getString(R.string.NO_INTERNET_CONNECTION), Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
@@ -222,8 +249,9 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
 
                     Status.ERROR -> {
                         progressBar.dismiss()
-                        if(it.message == "Invalid access token"){
-                            Toast.makeText(activity,"Invalid access token", Toast.LENGTH_SHORT).show()
+                        if (it.message == "Invalid access token") {
+                            Toast.makeText(activity, "Invalid access token", Toast.LENGTH_SHORT)
+                                .show()
                         }
                     }
 
@@ -232,8 +260,9 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
                     }
                 }
             }
-        }else{
-            Toast.makeText(activity,getString(R.string.NO_INTERNET_CONNECTION),Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(activity, getString(R.string.NO_INTERNET_CONNECTION), Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
@@ -258,8 +287,9 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
                     Status.ERROR -> {
                         Log.i("Status Count", "Error")
                         progressBar.dismiss()
-                        if(it.message == "Invalid access token"){
-                            Toast.makeText(activity,"Invalid access token",Toast.LENGTH_SHORT).show()
+                        if (it.message == "Invalid access token") {
+                            Toast.makeText(activity, "Invalid access token", Toast.LENGTH_SHORT)
+                                .show()
                         }
                     }
 
@@ -275,14 +305,20 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
 
     private fun setBleFilterCount() {
         var totalCount = viewModel.getBLSuccess() + viewModel.getBLPending() +
-                viewModel.getBLApproved() + viewModel.getBLDanger()+
+                viewModel.getBLApproved() + viewModel.getBLDanger() +
                 viewModel.getBLRejected()
-        mDataBinding.chipAllTransactions.text = getString(R.string.bl_all_transactions) + " (" + totalCount + ")"
-        mDataBinding.chipSuccess.text = getString(R.string.bl_success) + " (" + viewModel.getBLSuccess() + ")"
-        mDataBinding.chipPending.text = getString(R.string.bl_pending) + " (" + viewModel.getBLPending() + ")"
-        mDataBinding.chipApproved.text = getString(R.string.bl_approved) + " (" + viewModel.getBLApproved() + ")"
-        mDataBinding.chipDanger.text = getString(R.string.bl_danger) + " (" + viewModel.getBLDanger() + ")"
-        mDataBinding.chipRejected.text = getString(R.string.bl_rejected) + " (" +viewModel.getBLRejected() + ")"
+        mDataBinding.chipAllTransactions.text =
+            getString(R.string.bl_all_transactions) + " (" + totalCount + ")"
+        mDataBinding.chipSuccess.text =
+            getString(R.string.bl_success) + " (" + viewModel.getBLSuccess() + ")"
+        mDataBinding.chipPending.text =
+            getString(R.string.bl_pending) + " (" + viewModel.getBLPending() + ")"
+        mDataBinding.chipApproved.text =
+            getString(R.string.bl_approved) + " (" + viewModel.getBLApproved() + ")"
+        mDataBinding.chipDanger.text =
+            getString(R.string.bl_danger) + " (" + viewModel.getBLDanger() + ")"
+        mDataBinding.chipRejected.text =
+            getString(R.string.bl_rejected) + " (" + viewModel.getBLRejected() + ")"
         if (mDataBinding.chipAllTransactions.isChecked) {
             getBalanceByFilterApi(Constant.BalanceManagerStatus.All.action)
         } else if (mDataBinding.chipSuccess.isChecked) {

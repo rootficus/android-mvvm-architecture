@@ -8,9 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.PendingModemResponse
-import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.databinding.ItemPendingRequestBinding
-import com.fionpay.agent.databinding.ItemTransactionManagerBinding
 import com.fionpay.agent.utils.Utility
 
 class PendingListAdapter(private var itemList: ArrayList<PendingModemResponse>) :

@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -62,12 +61,11 @@ abstract class BaseFragment<DB : ViewDataBinding>(@LayoutRes val layoutRes: Int)
         return mActivity.application as App?
     }
 
-    fun showMessage(message: String){
-        Toast.makeText(mActivity,message, Toast.LENGTH_SHORT).show()
+    fun showMessage(message: String) {
+        Toast.makeText(mActivity, message, Toast.LENGTH_SHORT).show()
     }
 
-    fun showSnackBar(layout : ConstraintLayout, context: Context, message: String)
-    {
+    fun showSnackBar(layout: View, context: Context, message: String) {
         val snackBar = Snackbar
             .make(
                 layout,
