@@ -16,6 +16,8 @@ import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
 import com.fionpay.agent.ui.main.adapter.BleManagerListAdapter
 import com.fionpay.agent.ui.main.adapter.TransactionListAdapter
+import com.fionpay.agent.ui.main.di.BalanceManageFragmentModule
+import com.fionpay.agent.ui.main.di.DaggerBalanceManagerFragmentComponent
 import com.fionpay.agent.ui.main.di.DaggerTransactionFragmentComponent
 import com.fionpay.agent.ui.main.di.TransactionFragmentModule
 import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
@@ -73,9 +75,10 @@ class BalanceManagerFragment :
     }
 
     private fun initializeDagger() {
-      /*  DaggerTransactionFragmentComponent.builder().appComponent(FionSDK.appComponent)
-            .transactionFragmentModule(TransactionFragmentModule())
-            .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)*/
+
+        DaggerBalanceManagerFragmentComponent.builder().appComponent(FionSDK.appComponent)
+            .balanceManageFragmentModule(BalanceManageFragmentModule())
+            .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
 
 

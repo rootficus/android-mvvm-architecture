@@ -10,6 +10,7 @@ import com.fionpay.agent.ui.base.BaseViewModelFactory
 import com.fionpay.agent.ui.main.fragment.AddModemBalanceFragment
 import com.fionpay.agent.ui.main.fragment.AddModemFragment
 import com.fionpay.agent.ui.main.fragment.BLManagerFragment
+import com.fionpay.agent.ui.main.fragment.BalanceManagerFragment
 import com.fionpay.agent.ui.main.fragment.ConfirmModemFragment
 import com.fionpay.agent.ui.main.fragment.DashBoardFragment
 import com.fionpay.agent.ui.main.fragment.EditProfileFragment
@@ -208,3 +209,14 @@ interface TransactionFragmentComponent {
 
 @Module(includes = [DashBoardFragmentModuleDi::class])
 class TransactionFragmentModule
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [BalanceManageFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface BalanceManagerFragmentComponent {
+    fun inject(balanceManagerFragment: BalanceManagerFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class BalanceManageFragmentModule

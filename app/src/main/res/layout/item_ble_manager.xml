@@ -4,148 +4,142 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutCard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_5sdp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelCustomerNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="Customer No."
+                android:textColor="@color/primaryBlue"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtSrNo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/sr_no"
-            android:textSize="@dimen/_10sdp"
-            android:textAlignment="center"
-            android:paddingTop="@dimen/_3sdp"
-            android:paddingBottom="@dimen/_3sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.09" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtCustomerNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:fontFamily="@font/poppins"
+                android:text="Akash Singh"
+                android:textColor="@color/primaryBlue"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/labelCustomerNumber"
+                app:layout_constraintTop_toTopOf="@id/labelCustomerNumber" />
 
-        <TextView
-            android:id="@+id/viewDivide1"
-            android:layout_width="1sp"
-            android:visibility="invisible"
-            android:layout_height="match_parent"
-            android:background="@color/divideColor"
-            app:layout_constraintStart_toEndOf="@id/txtSrNo"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:orientation="horizontal" />
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtCAccount"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/customer_no"
-            android:textSize="@dimen/_10sdp"
-            android:paddingTop="@dimen/_3sdp"
-            android:paddingBottom="@dimen/_3sdp"
-            android:textAlignment="center"
-            android:ellipsize="middle"
-            app:layout_constraintStart_toEndOf="@id/viewDivide1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.20" />
-        <TextView
-            android:id="@+id/viewDivide2"
-            android:layout_width="1sp"
-            android:layout_height="match_parent"
-            android:visibility="invisible"
-            android:background="@color/divideColor"
-            app:layout_constraintStart_toEndOf="@id/txtCAccount"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:orientation="horizontal" />
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtAmount"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/_10sdp"
-            android:text="@string/amount"
-            android:textAlignment="center"
-            android:ellipsize="middle"
-            android:paddingTop="@dimen/_3sdp"
-            android:paddingBottom="@dimen/_3sdp"
-            app:layout_constraintStart_toEndOf="@id/viewDivide2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.20" />
-        <TextView
-            android:id="@+id/viewDivide3"
-            android:layout_width="1sp"
-            android:visibility="invisible"
-            android:layout_height="match_parent"
-            android:background="@color/divideColor"
-            app:layout_constraintStart_toEndOf="@id/txtAmount"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:orientation="horizontal" />
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtTransactionId"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/_9sdp"
-            android:text="@string/transaction_id"
-            android:textAlignment="center"
-            android:ellipsize="middle"
-            android:paddingTop="@dimen/_3sdp"
-            android:paddingBottom="@dimen/_3sdp"
-            app:layout_constraintStart_toEndOf="@id/viewDivide3"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.20" />
-        <TextView
-            android:id="@+id/viewDivide4"
-            android:layout_width="1sp"
-            android:visibility="invisible"
-            android:layout_height="match_parent"
-            android:background="@color/divideColor"
-            app:layout_constraintStart_toEndOf="@id/txtTransactionId"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:orientation="horizontal" />
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/_10sdp"
-            android:text="@string/date"
-            android:textAlignment="center"
-            android:ellipsize="middle"
-            android:paddingTop="@dimen/_3sdp"
-            android:paddingBottom="@dimen/_3sdp"
-            app:layout_constraintStart_toEndOf="@id/viewDivide4"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.14" />
-        <TextView
-            android:id="@+id/viewDivide5"
-            android:layout_width="1sp"
-            android:visibility="invisible"
-            android:layout_height="match_parent"
-            android:background="@color/divideColor"
-            app:layout_constraintStart_toEndOf="@id/txtDate"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:orientation="horizontal" />
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txt_status"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/_10sdp"
-            android:text="@string/status"
-            android:paddingTop="@dimen/_3sdp"
-            android:paddingBottom="@dimen/_3sdp"
-            android:textAlignment="center"
-            app:layout_constraintStart_toEndOf="@id/viewDivide5"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.16" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/poppins"
+                android:text="Amount"
+                android:textColor="@color/primaryBlue"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelCustomerNumber" />
 
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="XXXX"
+                android:textColor="@color/primaryBlue"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/txtCustomerNumber"
+                app:layout_constraintTop_toTopOf="@id/labelAmount" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelOldBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/poppins"
+                android:text="Old balance"
+                android:textColor="@color/primaryBlue"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelAmount" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtOldBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="XXXX"
+                android:textColor="@color/primaryBlue"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/txtCustomerNumber"
+                app:layout_constraintTop_toTopOf="@id/labelOldBalance" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:fontFamily="@font/poppins"
+                android:text="00/00/00 00:00 PM"
+                android:textColor="@color/primaryBlue"
+                android:textSize="9sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/txtSuccess"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:src="@drawable/calendar_icon"
+                app:layout_constraintBottom_toBottomOf="@id/txtDate"
+                app:layout_constraintEnd_toStartOf="@id/txtDate" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtSuccess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:background="@drawable/rounded_corners"
+                android:backgroundTint="@color/activeGreenBg"
+                android:fontFamily="@font/poppins"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_3sdp"
+                android:text="Success"
+                android:textColor="@color/activeGreen"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/divideColor"
-        app:layout_constraintTop_toBottomOf="@id/layout"/>
+        app:layout_constraintTop_toBottomOf="@id/card_head"
+        android:background="@drawable/dotted_line"
+        android:backgroundTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

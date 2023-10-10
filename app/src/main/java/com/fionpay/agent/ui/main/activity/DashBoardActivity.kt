@@ -96,11 +96,11 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                 }
                 jumpToAnotherFragment(R.id.navigation_transactionFragment, bundle)
             }
-            R.id.navigation_supportFragment-> {
+            R.id.navigation_blFragment-> {
                 val bundle = Bundle().apply {
                     putString("Api", "Modem List")
                 }
-                jumpToAnotherFragment(R.id.navigation_supportFragment, bundle)
+                jumpToAnotherFragment(R.id.navigation_blFragment, bundle)
             }
             else -> return false
         }
