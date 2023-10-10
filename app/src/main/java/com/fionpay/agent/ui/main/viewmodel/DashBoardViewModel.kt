@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
 import com.fionpay.agent.data.model.request.GetBalanceByFilterRequest
 import com.fionpay.agent.data.model.request.GetMessageByFilterRequest
+import com.fionpay.agent.data.model.request.GetPendingModemRequest
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.SignInRequest
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
@@ -19,6 +20,7 @@ import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.GetStatusCountResponse
+import com.fionpay.agent.data.model.response.PendingModemResponse
 import com.fionpay.agent.data.model.response.SignInResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.data.repository.DashBoardRepository
@@ -80,6 +82,23 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
             },
                 { error -> blTransactionsDataResponseModel.setError(error) },
                 { message -> blTransactionsDataResponseModel.setError(message) })
+        }
+    }
+    val getPendingModemResponseModel =
+        MutableLiveData<ResponseData<ArrayList<PendingModemResponse>>>()
+
+    fun getPendingRequest(pendingModemRequest: GetPendingModemRequest) {
+        getPendingModemResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.getPendingRequest(
+                pendingModemRequest,
+                { success ->
+                    getPendingModemResponseModel.setSuccess(
+                    success
+                )
+            },
+                { error -> getPendingModemResponseModel.setError(error) },
+                { message -> getPendingModemResponseModel.setError(message) })
         }
     }
 

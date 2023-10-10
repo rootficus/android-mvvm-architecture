@@ -2,6 +2,7 @@ package com.fionpay.agent.data.remote
 
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
 import com.fionpay.agent.data.model.request.GetModemsByFilterRequest
+import com.fionpay.agent.data.model.request.GetPendingModemRequest
 import com.fionpay.agent.data.model.request.MessagesJsonModel
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.ModemJsonModel
@@ -19,6 +20,7 @@ import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.GetStatusCountResponse
+import com.fionpay.agent.data.model.response.PendingModemResponse
 import com.fionpay.agent.data.model.response.SignInResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.data.model.response.UserResponseResult
@@ -115,6 +117,9 @@ interface FionApiServices {
     @Headers("Content-Type:application/json")
     @PUT("api/v1/app/agents/update_login_status")
     fun updateLoginStatus(@Header("Authorization") authHeader: String?,@Body  updateLoginRequest: UpdateLoginRequest): Call<BaseResponseModel<Any>>
+    @Headers("Content-Type:application/json")
+    @POST("api/v1/app/agents/pending_deposit_requests")
+    fun getPendingRequest(@Header("Authorization") authHeader: String?,@Body  pendingModemRequest: GetPendingModemRequest): Call<BaseResponseModel2<PendingModemResponse>>
 
 
 }

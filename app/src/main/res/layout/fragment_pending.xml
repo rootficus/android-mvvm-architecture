@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="@string/pendings"
+                android:text="@string/pending"
                 android:textColor="@color/primaryBlue"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -38,25 +38,59 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/refreshButton"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@drawable/refresh_transaction_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
-            android:text="@string/no_data_found"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/searchView"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/round_search_corners"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:drawableTint="@color/black"
+            android:paddingStart="@dimen/_5sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/top_head_layout"
+            app:layout_constraintWidth_percent="0.9" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/searchButton"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_search_corners"
+            android:backgroundTint="@color/black"
+            android:fontFamily="@font/poppins"
+            android:text="@string/search"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/searchView"
+            app:layout_constraintEnd_toEndOf="@id/searchView"
+            app:layout_constraintTop_toTopOf="@id/searchView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pendingModemsList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchView"
+            tools:itemCount="10"
+            tools:listitem="@layout/item_transaction_manager" />
 
         <include
             android:id="@+id/progressView"
             layout="@layout/include_progress_bar" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -6,6 +6,7 @@ import com.fionpay.agent.data.model.UserInfo
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
 import com.fionpay.agent.data.model.request.GetBalanceByFilterRequest
 import com.fionpay.agent.data.model.request.GetMessageByFilterRequest
+import com.fionpay.agent.data.model.request.GetPendingModemRequest
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.SignInRequest
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
@@ -19,6 +20,7 @@ import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.GetStatusCountResponse
+import com.fionpay.agent.data.model.response.PendingModemResponse
 import com.fionpay.agent.data.model.response.SignInResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.data.remote.FionApiServices
@@ -75,6 +77,18 @@ class DashBoardRepository(
         apiServices.getBlTransactionsData().apply {
             execute2(this, success, fail, context, message)
         }
+    }
+
+    fun getPendingRequest(
+        pendingModemRequest: GetPendingModemRequest,
+        success: (transactionModemList: ArrayList<PendingModemResponse>) -> Unit,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.getPendingRequest("Bearer " + sharedPreference.getToken(), pendingModemRequest)
+            .apply {
+                execute2(this, success, fail, context, message)
+            }
     }
 
     fun getBalanceByFilter(

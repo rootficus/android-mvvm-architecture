@@ -53,20 +53,9 @@ class TransactionFragment :
     }
 
     private fun initialization() {
-        mDataBinding.searchView.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            if(s?.isEmpty() == true)
-            {
-                filter("")
-            }
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-            }
-        })
+        mDataBinding.refreshButton.setOnClickListener {
+            getTransactionRecord()
+        }
 
         mDataBinding.filterButton.setOnClickListener { showPopupMenu(it) }
 
@@ -98,6 +87,7 @@ class TransactionFragment :
             viewModel.blTransactionsDataResponseModel.observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.SUCCESS -> {
+                        arrayList.clear()
                         progressBar.dismiss()
                         it.data?.let { it1 -> arrayList.addAll(it1) }
                         transactionListAdapter.notifyDataSetChanged()
@@ -131,9 +121,15 @@ class TransactionFragment :
         // Set a click listener for menu item clicks
         popupMenu.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.menu_all -> {
+                    // Handle Menu Item 1 click
+                    filter("")
+                    true
+                }
+
                 R.id.menu_success -> {
                     // Handle Menu Item 1 click
-                    filter("Success",)
+                    filter("Success")
                     true
                 }
 
@@ -174,6 +170,9 @@ class TransactionFragment :
             ) {
                 // if the item is matched we are
                 filteredList.add(item)
+            }else if (text.isEmpty()) {
+                filteredList.clear()
+                filteredList.addAll(arrayList)
             }
         }
 

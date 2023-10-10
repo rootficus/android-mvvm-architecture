@@ -155,8 +155,7 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
     }
 
     private fun setMessageAdapter(filter: Int) {
-        smsManagerListAdapter?.notifyDataSetChanged()
-        var arrayList = viewModel.getMessageManageRecord(filter)
+        val arrayList = viewModel.getMessageManageRecord(filter)
         Log.d("getBalanceByFilterApi", "::${filter},${arrayList.size}")
         smsManagerListAdapter = SmsManagerListAdapter(arrayList)
         smsManagerListAdapter?.listener = cardListener

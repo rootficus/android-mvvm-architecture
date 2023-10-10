@@ -129,21 +129,6 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
     }
 
     private val cardListener = object : ModemsManagerListAdapter.ModemCardEvent {
-        /*     override fun onCardClicked(getModemsListResponse: GetModemsListResponse) {
-                 val bottomSheetFragment = ModemDetailScreenFragment()
-                 bottomSheetFragment.listener = modemDetailScreenActionListener
-                 val bundle = Bundle()
-                 bundle.putSerializable(GetMessageManageRecord::class.java.name, getModemsListResponse)
-                 bottomSheetFragment.arguments = bundle
-                 activity?.supportFragmentManager?.let {
-                     bottomSheetFragment.show(
-                         it,
-                         "ActionBottomDialogFragment"
-                     )
-                 }
-                 //showCustomDialog(getBalanceManageRecord)
-             }*/
-
         override fun onStatusClicked(updateActiveInActiveRequest: UpdateActiveInActiveRequest) {
             updateActiveInActiveStatusApi(updateActiveInActiveRequest)
         }
