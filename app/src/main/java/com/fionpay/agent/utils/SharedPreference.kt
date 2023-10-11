@@ -76,6 +76,13 @@ class SharedPreference(context: Context) {
     fun getFullName(): String? {
         return pref.getString(Constant.PREF_FULL_NAME, "Akash")
     }
+    fun setProfileImage(image: String) {
+        pref.edit().putString(Constant.PREF_IMAGE, image).apply()
+    }
+
+    fun getProfileImage(): String? {
+        return pref.getString(Constant.PREF_IMAGE, "Akash")
+    }
 
     fun setPinCode(userId: String) {
         pref.edit().putString(Constant.PREF_PIN_CODE, userId).apply()
@@ -231,6 +238,11 @@ class SharedPreference(context: Context) {
 
     fun getDashBoardDataModel(): String? {
         return pref.getString(PREF_DASHBOARD, "")
+    }
+
+    fun resetSharedPref()
+    {
+        pref.edit().clear().apply()
     }
 
 }

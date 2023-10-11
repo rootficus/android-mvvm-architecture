@@ -83,6 +83,7 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:divider="@android:color/darker_gray"
             android:dividerHeight="1dp"
+            android:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchView"
             tools:itemCount="10"

@@ -34,6 +34,8 @@ import com.fionpay.agent.utils.setSuccess
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 class DashBoardViewModel @Inject constructor(private val dashBoardRepository: DashBoardRepository) :
@@ -138,13 +140,15 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
                 { message -> generatePinCodeResponseModel.setError(message) })
         }
     }
+
     val getAgentProfileResponseModel =
         MutableLiveData<ResponseData<ProfileResponse>>()
 
-    fun getAgentProfile() {
+    fun getAgentProfile(agentId: String) {
         getAgentProfileResponseModel.setLoading(null)
         viewModelScope.launch(Dispatchers.IO) {
             dashBoardRepository.getAgentProfile(
+                agentId,
                 { success ->
                     getAgentProfileResponseModel.setSuccess(
                         success
@@ -152,6 +156,46 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
                 },
                 { error -> getAgentProfileResponseModel.setError(error) },
                 { message -> getAgentProfileResponseModel.setError(message) })
+        }
+    }
+
+    val updateAgentProfileResponseModel =
+        MutableLiveData<ResponseData<ProfileResponse>>()
+
+    fun updateAgentProfile(fullName: RequestBody, filePart: MultipartBody.Part, agentId: String) {
+        updateAgentProfileResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.updateAgentProfile(
+                agentId,
+                { success ->
+                    updateAgentProfileResponseModel.setSuccess(
+                        success
+                    )
+                },
+                fullName,
+                filePart,
+                { error -> updateAgentProfileResponseModel.setError(error) },
+                { message -> updateAgentProfileResponseModel.setError(message) })
+        }
+    }
+
+
+    val updateAgentWithoutProfileResponseModel =
+        MutableLiveData<ResponseData<ProfileResponse>>()
+
+    fun updateAgentWithoutProfile(fullName: RequestBody, agentId: String) {
+        updateAgentWithoutProfileResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.updateAgentWithoutProfile(
+                agentId,
+                { success ->
+                    updateAgentWithoutProfileResponseModel.setSuccess(
+                        success
+                    )
+                },
+                fullName,
+                { error -> updateAgentWithoutProfileResponseModel.setError(error) },
+                { message -> updateAgentWithoutProfileResponseModel.setError(message) })
         }
     }
 
@@ -370,6 +414,14 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
 
     fun getFullName(): String? {
         return dashBoardRepository.getFullName()
+    }
+
+    fun setProfileImage(fullName: String?) {
+        dashBoardRepository.setProfileImage(fullName)
+    }
+
+    fun getProfileImage(): String? {
+        return dashBoardRepository.getProfileImage()
     }
 
     fun setPinCode(pin_code: String?) {

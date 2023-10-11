@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="#EFEFEF"
-        app:cardCornerRadius="30dp"
+        app:cardCornerRadius="24dp"
         app:cardElevation="@dimen/_2sdp"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,13 +21,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#F1F5F9"
-            android:paddingHorizontal="@dimen/_15sdp"
-            android:paddingVertical="@dimen/_15sdp" >
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_6sdp" >
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/card_head_img"
-                android:layout_width="@dimen/_60sdp"
-                android:layout_height="@dimen/_60sdp"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
                 android:importantForAccessibility="no"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -38,9 +38,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:textColor="@color/primaryBlue"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_3sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/card_head_img" />
 

@@ -44,6 +44,7 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
     private lateinit var dashBoardListAdapter: DashBoardListAdapter
     private var arrayList: ArrayList<TransactionModel> = arrayListOf()
+    private var progress = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,7 +57,8 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
         arrayList.add(
             TransactionModel(
                 "Today’s Cash In",
-                "${responseData?.todayCashId}",
+              //  "${responseData?.todayCashId}",
+                "10,00,0000",
                 R.drawable.today_cash_in
             )
         )
@@ -69,16 +71,44 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
         )
         arrayList.add(
             TransactionModel(
-                "Total Cash In",
+                "Monthly Cash In",
                 "${responseData?.totalCashId}",
                 R.drawable.total_cash_in
             )
         )
         arrayList.add(
             TransactionModel(
-                "Total Cash Out",
+                "Monthly Cash Out",
                 "${responseData?.totalCashOut}",
                 R.drawable.total_cash_out
+            )
+        )
+        arrayList.add(
+            TransactionModel(
+                "Pending Request",
+                "${responseData?.totalCashId}",
+                R.drawable.home_pending_logo
+            )
+        )
+        arrayList.add(
+            TransactionModel(
+                "Transactions",
+                "${responseData?.totalCashOut}",
+                R.drawable.home_transaction_logo
+            )
+        )
+        arrayList.add(
+            TransactionModel(
+                "Total Setup Modems",
+                "${responseData?.totalCashOut}",
+                R.drawable.home_modem_logo
+            )
+        )
+        arrayList.add(
+            TransactionModel(
+                "Active Modems",
+                "${responseData?.totalCashOut}",
+                R.drawable.home_modem_logo
             )
         )
         dashBoardListAdapter = DashBoardListAdapter(arrayList)
@@ -92,8 +122,13 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
 
+    private fun updateProgressBar(progressValue: Int) {
+        mDataBinding.progressBar.progress = progressValue
+        mDataBinding.textViewProgress.text = "$progressValue%"
+    }
+
     private fun initializeView() {
-        val name = sharedPreference.getFullName() ?: "Akash"
+        val name = sharedPreference.getFullName() ?: "Agent"
         mDataBinding.textAgentFullName.text = getString(R.string.userName, name)
         mDataBinding.notificationButton.setOnClickListener {
             val mBuilder = AlertDialog.Builder(activity)
@@ -129,7 +164,9 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
                         val gson = Gson()
                         val json = gson.toJson(it.data)
                         viewModel.setDashBoardDataModel(json)
+                        updateProgressBar(45)
                         setAdapter(it.data)
+
                     }
 
                     Status.ERROR -> {
@@ -149,9 +186,7 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
                     }
                 }
             }
-        }
-        else
-        {
+        } else {
             val gson = Gson()
             val json: String? = viewModel.getDashBoardDataModel()
             val obj: DashBoardItemResponse =

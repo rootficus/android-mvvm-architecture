@@ -30,6 +30,8 @@ import com.fionpay.agent.roomDB.FionDatabase
 import com.fionpay.agent.ui.base.BaseRepository
 import com.fionpay.agent.utils.Constant
 import com.fionpay.agent.utils.SharedPreference
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class DashBoardRepository(
     val apiServices: FionApiServices,
@@ -119,11 +121,47 @@ class DashBoardRepository(
     }
 
     fun getAgentProfile(
+        agentId: String,
         success: (profileResponse: ProfileResponse) -> Unit,
         fail: (error: String) -> Unit,
         message: (msg: String) -> Unit
     ) {
-        apiServices.getAgentProfile("Bearer " + sharedPreference.getToken())
+        apiServices.getAgentProfile("Bearer " + sharedPreference.getToken(), agentId)
+            .apply {
+                execute(this, success, fail, context, message)
+            }
+    }
+
+    fun updateAgentProfile(
+        agentId: String,
+        success: (profileResponse: ProfileResponse) -> Unit,
+        fullName: RequestBody,
+        filePart: MultipartBody.Part,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.updateAgentProfile(
+            "Bearer " + sharedPreference.getToken(),
+            fullName,
+            filePart,
+            agentId
+        )
+            .apply {
+                execute(this, success, fail, context, message)
+            }
+    }
+    fun updateAgentWithoutProfile(
+        agentId: String,
+        success: (profileResponse: ProfileResponse) -> Unit,
+        fullName: RequestBody,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.updateAgentWithoutProfile(
+            "Bearer " + sharedPreference.getToken(),
+            fullName,
+            agentId
+        )
             .apply {
                 execute(this, success, fail, context, message)
             }
@@ -268,6 +306,14 @@ class DashBoardRepository(
 
     fun setFullName(full_name: String?) {
         full_name?.let { sharedPreference.setFullName(it) }
+    }
+
+    fun getProfileImage(): String? {
+        return sharedPreference.getProfileImage()
+    }
+
+    fun setProfileImage(image: String?) {
+        image?.let { sharedPreference.setProfileImage(it) }
     }
 
     fun setPinCode(pin_code: String?) {

@@ -1,5 +1,9 @@
 package com.fionpay.agent.utils
 
+import com.fionpay.agent.utils.Constant.MULTIPART_FORM_TEXT_DATA
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
+
 /**
  * Akash.Singh
  * RootFicus.
@@ -30,6 +34,8 @@ object Constant {
     const val PREF_PHONE_NUMBER = "phoneNumber"
 
     const val PREF_FULL_NAME = "fullName"
+
+    const val PREF_IMAGE = "profileImage"
 
     const val PREF_PIN_CODE = "pinCode"
 
@@ -71,6 +77,8 @@ object Constant {
 
     const val PREF_DASHBOARD = "DashBoardModel"
 
+    const val MULTIPART_FORM_TEXT_DATA = "text/plain"
+
     enum class BalanceManagerStatus(val action: Int) {
         SUCCESS(0),
         PENDING(1),
@@ -99,6 +107,11 @@ object Constant {
 
 }
 
+fun toRequestBody(s: String): RequestBody {
+    return RequestBody.create(
+        MULTIPART_FORM_TEXT_DATA.toMediaTypeOrNull(), s
+    )
+}
 
 enum class APIResponseCode(val codeValue: Int) {
     ResponseCode100(100),

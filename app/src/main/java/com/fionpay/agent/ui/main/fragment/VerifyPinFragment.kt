@@ -112,6 +112,7 @@ class VerifyPinFragment :
                     }
 
                     s?.toString()?.let { otpStringBuilder.append(it) }
+                    showMessage("${otpStringBuilder}")
                 }
 
                 override fun afterTextChanged(s: Editable?) {

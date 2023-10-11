@@ -11,7 +11,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.camera.core.ImageCapture
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
@@ -33,8 +32,12 @@ import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.PhotoUtils
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
+import com.fionpay.agent.utils.toRequestBody
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import java.io.File
 import javax.inject.Inject
 
@@ -87,14 +90,26 @@ class EditProfileFragment :
         }
 
         mDataBinding.btnUpdate.setOnClickListener {
-            Navigation.findNavController(requireView())
-                .navigate(R.id.action_navigation_editProfileFragment_to_navigation_settingFragment)
+            val name = mDataBinding.etFirstName.text.toString()
+            if (currentAttachmentPath.isNotEmpty()) {
+                val filePart: MultipartBody.Part = MultipartBody.Part.createFormData(
+                    "profile_image", "file.jpeg", RequestBody.create(
+                        "image/jpeg".toMediaTypeOrNull(), File(currentAttachmentPath)
+                    )
+                )
+
+                updateAgentProfile(toRequestBody(name), filePart)
+            } else {
+                updateAgentWithoutProfile(toRequestBody(name))
+            }
+
+
         }
     }
 
     private fun getAgentProfile() {
         if (networkHelper.isNetworkConnected()) {
-            viewModel.getAgentProfile()
+            viewModel.getAgentProfile(viewModel.getUserId().toString())
             viewModel.getAgentProfileResponseModel.observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.SUCCESS -> {
@@ -128,18 +143,76 @@ class EditProfileFragment :
 
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 101 && data != null) {
-            val selectedImageUri = data.data
+    private fun updateAgentProfile(fullName: RequestBody, filePart: MultipartBody.Part) {
+        if (networkHelper.isNetworkConnected()) {
+            viewModel.updateAgentProfile(fullName, filePart, viewModel.getUserId().toString())
+            viewModel.updateAgentProfileResponseModel.observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        progressBar.dismiss()
+                        mDataBinding.etFirstName.setText(it.data?.fullName)
+                        viewModel.setFullName(it.data?.fullName)
+                        viewModel.setProfileImage(it.data?.profileImageUrl)
+                        Navigation.findNavController(requireView())
+                            .navigate(R.id.navigation_settingFragment)
+                        Glide.with(this)
+                            .load(it.data?.profileImageUrl)
+                            .error(it.data?.profileImageUrl)
+                            .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE)) // Optional caching strategy
+                            .into(mDataBinding.userProfileImage)
+                    }
 
-            // Use Glide to load the image URI into the ImageView
-            Glide.with(this)
-                .load(selectedImageUri)
-                .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE)) // Optional caching strategy
-                .into(mDataBinding.userProfileImage)
+                    Status.ERROR -> {
+                        progressBar.dismiss()
+                        if (it.message == "Invalid access token") {
+                            sessionExpired()
+                        } else {
+                            showMessage(it.message.toString())
+                        }
+                    }
+
+                    Status.LOADING -> {
+                        progressBar.show()
+                    }
+                }
+            }
+        } else {
+            Snackbar.make(requireView(), "No Internet", Snackbar.LENGTH_LONG).show()
         }
+
+    }
+
+    private fun updateAgentWithoutProfile(fullName: RequestBody) {
+        if (networkHelper.isNetworkConnected()) {
+            viewModel.updateAgentWithoutProfile(fullName, viewModel.getUserId().toString())
+            viewModel.updateAgentWithoutProfileResponseModel.observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        progressBar.dismiss()
+                        mDataBinding.etFirstName.setText(it.data?.fullName)
+                        viewModel.setFullName(it.data?.fullName)
+                        Navigation.findNavController(requireView())
+                            .navigate(R.id.navigation_settingFragment)
+                    }
+
+                    Status.ERROR -> {
+                        progressBar.dismiss()
+                        if (it.message == "Invalid access token") {
+                            sessionExpired()
+                        } else {
+                            showMessage(it.message.toString())
+                        }
+                    }
+
+                    Status.LOADING -> {
+                        progressBar.show()
+                    }
+                }
+            }
+        } else {
+            Snackbar.make(requireView(), "No Internet", Snackbar.LENGTH_LONG).show()
+        }
+
     }
 
     private fun initializeDagger() {
@@ -222,6 +295,7 @@ class EditProfileFragment :
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 if (currentAttachmentPath.isNotEmpty()) {
+
                     setCameraAttachment(currentAttachmentPath)
                 } else {
                     Toast.makeText(activity, "Path not found", Toast.LENGTH_LONG).show()
@@ -236,12 +310,15 @@ class EditProfileFragment :
                     val INVENTORY_DOC_NAME = "InventoryImg_${System.currentTimeMillis()}.png"
                     val uri = result!!.data?.data
                     uri?.let {
+                        val image = PhotoUtils.savedFileImage(
+                            requireContext(),
+                            uri,
+                            INVENTORY_DOC_NAME
+                        )
+                        currentAttachmentPath = image
+                        Toast.makeText(requireContext(), "${image}", Toast.LENGTH_LONG).show()
                         setCameraAttachment(
-                            PhotoUtils.savedFileImage(
-                                requireContext(),
-                                uri,
-                                INVENTORY_DOC_NAME
-                            )
+                            image
                         )
                     }
                 }
@@ -249,6 +326,7 @@ class EditProfileFragment :
         }
 
     private fun setCameraAttachment(imagePath: String) {
+
         Glide.with(requireActivity())
             .load(imagePath)
             .error(imagePath)

@@ -28,6 +28,8 @@ import com.fionpay.agent.data.model.response.UserResponseResult
 import com.fionpay.agent.ui.base.BaseResponseModel
 import com.fionpay.agent.ui.base.BaseResponseModel2
 import com.fionpay.agent.ui.base.BaseResponseModelFilter
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.*
@@ -152,15 +154,40 @@ interface FionApiServices {
         @Header("Authorization") authHeader: String?
     ): Call<BaseResponseModel<Any>>
     @Headers("Content-Type:application/json")
-    @GET("api/v1/app/agents/89f867f1-5167-4f68-af4d-8d103e01fd33")
+    @GET("api/v1/app/agents/{agentId}")
     fun getAgentProfile(
-        @Header("Authorization") authHeader: String?
+        @Header("Authorization") authHeader: String?,
+        @Path("agentId") type: String,
     ): Call<BaseResponseModel<ProfileResponse>>
-    @Headers("Content-Type:application/json")
-    @PUT("api/v1/app/agents/89f867f1-5167-4f68-af4d-8d103e01fd33")
+
+    @PUT("api/v1/app/agents/{agentId}")
+    @Multipart
     fun updateAgentProfile(
-        @Header("Authorization") authHeader: String?
+        @Header("Authorization") authHeader: String?,
+        @Part("full_name") full_name: RequestBody?,
+        @Part filePart: MultipartBody.Part,
+        @Path("agentId") type: String,
     ): Call<BaseResponseModel<ProfileResponse>>
+    @PUT("api/v1/app/agents/{agentId}")
+    @Multipart
+    fun updateAgentWithoutProfile(
+        @Header("Authorization") authHeader: String?,
+        @Part("full_name") full_name: RequestBody?,
+        @Path("agentId") type: String,
+    ): Call<BaseResponseModel<ProfileResponse>>
+
+
+    @POST("/api/imagesUpload")   //imageVideoUpload
+    @Multipart
+    fun imageVideoUpload(
+        @Header("Authorization") authHeader: String?,
+        @Part("type") type: RequestBody,
+        @Part("file_type") fileType: RequestBody,
+        @Part("user_id") userId: RequestBody,
+        @Part("product_id") productId: RequestBody,
+        @Part filePart: MultipartBody.Part
+    ): Call<BaseResponseModel<Any>>
+
 
 
 }

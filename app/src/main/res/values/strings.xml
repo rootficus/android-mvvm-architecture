@@ -75,7 +75,7 @@
     <string name="PLEASE_ENTER_PIN">Please enter PinCode</string>
     <string name="PLEASE_ENTER_VALID">Please enter valid</string>
     <string name="dashboard">DashBoard</string>
-    <string name="balance_manager">Balance Manager</string>
+    <string name="balance_manager">Bl Manager</string>
     <string name="recent_transactions">Recent Transactions</string>
     <string name="sms_inbox">SMS Inbox</string>
     <string name="modems">Modems</string>

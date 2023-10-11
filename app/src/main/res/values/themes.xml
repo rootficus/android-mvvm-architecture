@@ -44,4 +44,9 @@
     <style name="PopupMenuStyle" parent="@style/Widget.AppCompat.PopupMenu">
         <item name="android:popupBackground">@color/customPopupBackground</item>
     </style>
+
+    <style name="CircularDeterminateProgressBar">
+        <item name="android:indeterminateOnly">false </item>
+        <item name="android:progressDrawable">@drawable/circle</item>
+    </style>
 </resources>
