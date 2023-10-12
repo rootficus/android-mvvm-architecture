@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
+import com.fionpay.agent.data.model.request.FilterResponse
 import com.fionpay.agent.data.model.request.GetBalanceByFilterRequest
 import com.fionpay.agent.data.model.request.GetMessageByFilterRequest
 import com.fionpay.agent.data.model.request.GetPendingModemRequest
@@ -24,6 +25,7 @@ import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.GetStatusCountResponse
 import com.fionpay.agent.data.model.response.PendingModemResponse
 import com.fionpay.agent.data.model.response.SignInResponse
+import com.fionpay.agent.data.model.response.TransactionModel
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.data.repository.DashBoardRepository
 import com.fionpay.agent.ui.base.BaseViewModel
@@ -156,6 +158,22 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
                 },
                 { error -> getAgentProfileResponseModel.setError(error) },
                 { message -> getAgentProfileResponseModel.setError(message) })
+        }
+    }
+    val getTransactionFiltersResponseModel =
+        MutableLiveData<ResponseData<FilterResponse>>()
+
+    fun getTransactionFilters() {
+        getTransactionFiltersResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.getTransactionFilters(
+                { success ->
+                    getTransactionFiltersResponseModel.setSuccess(
+                        success
+                    )
+                },
+                { error -> getTransactionFiltersResponseModel.setError(error) },
+                { message -> getTransactionFiltersResponseModel.setError(message) })
         }
     }
 

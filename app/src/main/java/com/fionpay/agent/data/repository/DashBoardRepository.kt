@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.fionpay.agent.data.model.UserInfo
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
+import com.fionpay.agent.data.model.request.FilterResponse
 import com.fionpay.agent.data.model.request.GetBalanceByFilterRequest
 import com.fionpay.agent.data.model.request.GetMessageByFilterRequest
 import com.fionpay.agent.data.model.request.GetPendingModemRequest
@@ -127,6 +128,17 @@ class DashBoardRepository(
         message: (msg: String) -> Unit
     ) {
         apiServices.getAgentProfile("Bearer " + sharedPreference.getToken(), agentId)
+            .apply {
+                execute(this, success, fail, context, message)
+            }
+    }
+
+    fun getTransactionFilters(
+        success: (filterResponse: FilterResponse) -> Unit,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.getTransactionFilters("Bearer " + sharedPreference.getToken())
             .apply {
                 execute(this, success, fail, context, message)
             }

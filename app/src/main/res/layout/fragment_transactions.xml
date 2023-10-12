@@ -81,20 +81,171 @@
             android:layout_width="@dimen/_22sdp"
             android:layout_height="@dimen/_22sdp"
             android:background="@drawable/filter_icon"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@id/searchView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/searchButton"
             app:layout_constraintTop_toTopOf="@id/searchView" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/searchView">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtStartDate"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:background="@drawable/spinner_border"
+                app:layout_constraintStart_toStartOf="@id/layoutModemSpinner"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.25" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtEndDate"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:background="@drawable/spinner_border"
+                app:layout_constraintEnd_toEndOf="@id/layoutModemSpinner"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.25" />
+
+            <RelativeLayout
+                android:id="@+id/layoutModemSpinner"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="3dp"
+                android:layout_weight=".28"
+                android:background="@drawable/spinner_border"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtStartDate"
+                app:layout_constraintWidth_percent="0.9">
+
+                <Spinner
+                    android:id="@+id/spnModem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:src="@android:drawable/arrow_down_float" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/layoutBankSpinner"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_weight=".28"
+                android:background="@drawable/spinner_border"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@id/layoutModemSpinner"
+                app:layout_constraintTop_toBottomOf="@id/layoutModemSpinner"
+                app:layout_constraintWidth_percent="0.42">
+
+                <Spinner
+                    android:id="@+id/spBank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:src="@android:drawable/arrow_down_float" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/layoutTransactionTypeSpinner"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_weight=".28"
+                android:background="@drawable/spinner_border"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@id/layoutModemSpinner"
+                app:layout_constraintTop_toBottomOf="@id/layoutModemSpinner"
+                app:layout_constraintWidth_percent="0.42">
+
+                <Spinner
+                    android:id="@+id/spTransactionType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:spinnerMode="dropdown" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:src="@android:drawable/arrow_down_float" />
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Apply"
+                android:background="@drawable/round_corners"
+                android:backgroundTint="@color/greenColor"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@id/layoutModemSpinner"
+                app:layout_constraintTop_toBottomOf="@id/layoutBankSpinner" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recentModemsList"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:divider="@android:color/darker_gray"
             android:dividerHeight="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchView"
+            app:layout_constraintTop_toBottomOf="@+id/layoutFilter"
             tools:itemCount="10"
             tools:listitem="@layout/item_transaction_manager" />
 

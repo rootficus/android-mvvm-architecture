@@ -1,6 +1,7 @@
 package com.fionpay.agent.data.remote
 
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
+import com.fionpay.agent.data.model.request.FilterResponse
 import com.fionpay.agent.data.model.request.GetPendingModemRequest
 import com.fionpay.agent.data.model.request.MessagesJsonModel
 import com.fionpay.agent.data.model.request.ModemItemModel
@@ -159,6 +160,12 @@ interface FionApiServices {
         @Header("Authorization") authHeader: String?,
         @Path("agentId") type: String,
     ): Call<BaseResponseModel<ProfileResponse>>
+
+    @Headers("Content-Type:application/json")
+    @GET("api/v1/app/agents/transaction_filters")
+    fun getTransactionFilters(
+        @Header("Authorization") authHeader: String?,
+    ): Call<BaseResponseModel<FilterResponse>>
 
     @PUT("api/v1/app/agents/{agentId}")
     @Multipart
