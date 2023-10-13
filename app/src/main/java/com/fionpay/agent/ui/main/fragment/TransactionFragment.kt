@@ -95,16 +95,6 @@ class TransactionFragment :
 
         mDataBinding.spnModem.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                if (i == 0) {
-                    Toast.makeText(requireContext(), "Please Select Modem", Toast.LENGTH_SHORT)
-                        .show()
-                } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "${modemList?.get(i)?.phoneNumber}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
 
             }
 
@@ -128,17 +118,7 @@ class TransactionFragment :
 
         mDataBinding.spBank.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                if (i == 0) {
-                    Toast.makeText(requireContext(), "Please Select Bank", Toast.LENGTH_SHORT)
-                        .show()
-                } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "${bankList?.get(i)?.bankName}",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                }
+
             }
 
             override fun onNothingSelected(adapterView: AdapterView<*>?) {}
@@ -162,21 +142,7 @@ class TransactionFragment :
                     i: Int,
                     l: Long
                 ) {
-                    if (i == 0) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Please Transaction Type",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                    } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "${transactionType[i]}",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                    }
+
                 }
 
                 override fun onNothingSelected(adapterView: AdapterView<*>?) {}
