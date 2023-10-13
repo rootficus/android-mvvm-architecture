@@ -9,6 +9,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.fionpay.agent.R
+import com.fionpay.agent.data.model.request.Bank
+import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.response.DashBoardItemResponse
 import com.fionpay.agent.data.model.response.TransactionModel
 import com.fionpay.agent.databinding.FragmentDashboardBinding
@@ -24,6 +26,7 @@ import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import javax.inject.Inject
 
@@ -45,6 +48,8 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
     private lateinit var dashBoardListAdapter: DashBoardListAdapter
     private var arrayList: ArrayList<TransactionModel> = arrayListOf()
     private var progress = 0
+    var modemList: ArrayList<Modem> = arrayListOf()
+    var bankList: ArrayList<Bank> = arrayListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,68 +58,6 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
 
     }
 
-    private fun setAdapter(responseData: DashBoardItemResponse?) {
-        arrayList.add(
-            TransactionModel(
-                "Today’s Cash In",
-              //  "${responseData?.todayCashId}",
-                "10,00,0000",
-                R.drawable.today_cash_in
-            )
-        )
-        arrayList.add(
-            TransactionModel(
-                "Today’s Cash Out",
-                "${responseData?.todayCashOut}",
-                R.drawable.today_cash_out
-            )
-        )
-        arrayList.add(
-            TransactionModel(
-                "Monthly Cash In",
-                "${responseData?.totalCashId}",
-                R.drawable.total_cash_in
-            )
-        )
-        arrayList.add(
-            TransactionModel(
-                "Monthly Cash Out",
-                "${responseData?.totalCashOut}",
-                R.drawable.total_cash_out
-            )
-        )
-        arrayList.add(
-            TransactionModel(
-                "Pending Request",
-                "${responseData?.totalCashId}",
-                R.drawable.home_pending_logo
-            )
-        )
-        arrayList.add(
-            TransactionModel(
-                "Transactions",
-                "${responseData?.totalCashOut}",
-                R.drawable.home_transaction_logo
-            )
-        )
-        arrayList.add(
-            TransactionModel(
-                "Total Setup Modems",
-                "${responseData?.totalCashOut}",
-                R.drawable.home_modem_logo
-            )
-        )
-        arrayList.add(
-            TransactionModel(
-                "Active Modems",
-                "${responseData?.totalCashOut}",
-                R.drawable.home_modem_logo
-            )
-        )
-        dashBoardListAdapter = DashBoardListAdapter(arrayList)
-        mDataBinding.homeCardListView.layoutManager = GridLayoutManager(context, 2)
-        mDataBinding.homeCardListView.adapter = dashBoardListAdapter
-    }
 
     private fun initializeDagger() {
         DaggerDashBoardFragmentComponent.builder().appComponent(FionSDK.appComponent)
@@ -143,7 +86,7 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
                 activity?.finishAffinity()
             }
         }
-
+        getTransactionFilters()
         mDataBinding.settingButton.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.navigation_settingFragment)
         }
@@ -158,13 +101,17 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
             viewModel.dashBoardItemResponseModel.observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.SUCCESS -> {
+                        val dashBoardItemResponse = it.data
                         progressBar.dismiss()
                         mDataBinding.currentBalanceAmount.text =
                             "৳${it.data?.currentBalance.toString()}"
                         val gson = Gson()
                         val json = gson.toJson(it.data)
                         viewModel.setDashBoardDataModel(json)
-                        updateProgressBar(45)
+                        val currentBalance = dashBoardItemResponse?.currentBalance
+                        val totalBalance =  dashBoardItemResponse?.totalBalance
+                        val progress = (totalBalance?.div(currentBalance!!))
+                        progress?.toInt()?.let { it1 -> updateProgressBar(it1) }
                         setAdapter(it.data)
 
                     }
@@ -194,5 +141,109 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
             setAdapter(obj)
         }
     }
+
+    private fun setAdapter(responseData: DashBoardItemResponse?) {
+        arrayList.add(
+            TransactionModel(
+                "Today’s Cash In",
+                "৳${responseData?.todayCashIn}",
+                R.drawable.today_cash_in
+            )
+        )
+        arrayList.add(
+            TransactionModel(
+                "Today’s Cash Out",
+                "৳${responseData?.todayCashOut}",
+                R.drawable.today_cash_out
+            )
+        )
+        arrayList.add(
+            TransactionModel(
+                "Monthly Cash In",
+                "৳${responseData?.monthlyCashIn}",
+                R.drawable.total_cash_in
+            )
+        )
+        arrayList.add(
+            TransactionModel(
+                "Monthly Cash Out",
+                "৳${responseData?.monthlyCashOut}",
+                R.drawable.total_cash_out
+            )
+        )
+        arrayList.add(
+            TransactionModel(
+                "Pending Request",
+                "${responseData?.numberOfPendingRequest}",
+                R.drawable.home_pending_logo
+            )
+        )
+        arrayList.add(
+            TransactionModel(
+                "Transactions",
+                "${responseData?.rejectedTransaction?.let {
+                    responseData?.approvedTransaction?.plus(
+                        it
+                    )
+                }}",
+                R.drawable.home_transaction_logo
+            )
+        )
+        arrayList.add(
+            TransactionModel(
+                "Total Setup Modems",
+                "${responseData?.totalSetupModems}",
+                R.drawable.home_modem_logo
+            )
+        )
+        arrayList.add(
+            TransactionModel(
+                "Active Modems",
+                "${responseData?.activeModems}",
+                R.drawable.home_modem_logo
+            )
+        )
+        dashBoardListAdapter = DashBoardListAdapter(arrayList)
+        mDataBinding.homeCardListView.layoutManager = GridLayoutManager(context, 2)
+        mDataBinding.homeCardListView.adapter = dashBoardListAdapter
+    }
+
+    private fun getTransactionFilters() {
+        if (networkHelper.isNetworkConnected()) {
+            viewModel.getTransactionFilters()
+            viewModel.getTransactionFiltersResponseModel.observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        progressBar.dismiss()
+                        it.data?.modems?.let { it1 -> modemList.addAll(it1) }
+                        it.data?.banks?.let { it1 -> bankList.addAll(it1) }
+                        modemList.forEach { modem ->
+                            viewModel.insertModems(modem)
+                        }
+                        bankList.forEach { bank ->
+                            viewModel.insertBanks(bank)
+                        }
+                    }
+
+                    Status.ERROR -> {
+                        progressBar.dismiss()
+                        if (it.message == "Invalid access token") {
+                            sessionExpired()
+                        } else {
+                            showMessage(it.message.toString())
+                        }
+                    }
+
+                    Status.LOADING -> {
+                        progressBar.show()
+                    }
+                }
+            }
+        } else {
+            Snackbar.make(requireView(), "No Internet", Snackbar.LENGTH_LONG).show()
+        }
+
+    }
+
 
 }

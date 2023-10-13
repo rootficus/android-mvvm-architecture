@@ -109,10 +109,16 @@ class VerifyPinFragment :
                     } else if (s?.isEmpty() == true && i > 0) {
                         // When the user clears the digit, move focus to the previous OTP box
                         otpBoxes[i - 1].requestFocus()
+                        if (otpStringBuilder.isNotEmpty()) {
+                            otpStringBuilder.deleteCharAt(i)
+                        }
+                    } else if (s?.isEmpty() == true) {
+                        if (otpStringBuilder.isNotEmpty()) {
+                            otpStringBuilder.clear()
+                        }
                     }
 
                     s?.toString()?.let { otpStringBuilder.append(it) }
-                    showMessage("${otpStringBuilder}")
                 }
 
                 override fun afterTextChanged(s: Editable?) {
@@ -123,7 +129,10 @@ class VerifyPinFragment :
 
         mDataBinding.btnVerifyButton.setOnClickListener {
             if (otpStringBuilder.toString().isEmpty()) {
-                Utility.callCustomToast(requireContext(),mActivity.getString(R.string.PLEASE_ENTER_PIN))
+                Utility.callCustomToast(
+                    requireContext(),
+                    mActivity.getString(R.string.PLEASE_ENTER_PIN)
+                )
             } else {
                 callPinVerification()
             }

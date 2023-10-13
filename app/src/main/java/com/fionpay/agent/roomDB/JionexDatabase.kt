@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.fionpay.agent.data.model.request.Bank
+import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.roomDB.model.ModemSetting
@@ -13,7 +15,7 @@ import com.fionpay.agent.roomDB.model.SMSRecord
 
 
 @Database(
-    entities = [SMSRecord::class, ModemSetting::class, OperatorRecord::class, GetBalanceManageRecord::class, GetMessageManageRecord::class],
+    entities = [SMSRecord::class, ModemSetting::class, OperatorRecord::class, GetBalanceManageRecord::class, GetMessageManageRecord::class, Modem::class, Bank::class],
     version = 1
 )
 abstract class FionDatabase : RoomDatabase() {

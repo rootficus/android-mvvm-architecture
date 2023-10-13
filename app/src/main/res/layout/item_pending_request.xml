@@ -18,13 +18,27 @@
             android:paddingHorizontal="@dimen/_10sdp"
             android:paddingVertical="@dimen/_12sdp">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgWithdraw"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardBank"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:elevation="10dp"
+                app:cardCornerRadius="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/reject" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imageBank"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:padding="@dimen/_5sdp"
+                    android:src="@drawable/bank_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.cardview.widget.CardView>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/labelCustomerNumber"
@@ -36,7 +50,7 @@
                 android:textColor="@color/primaryBlue"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/imgWithdraw"
+                app:layout_constraintStart_toEndOf="@id/cardBank"
                 app:layout_constraintTop_toTopOf="parent" />
 
 

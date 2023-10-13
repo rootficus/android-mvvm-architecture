@@ -2,12 +2,13 @@ package com.fionpay.agent.roomDB.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
+import com.fionpay.agent.data.model.request.Bank
+import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.roomDB.model.ModemSetting
@@ -19,6 +20,23 @@ interface FionDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSMSRecord(smsRecord: SMSRecord?)
+
+
+    //Modems
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertModems(modem: Modem?)
+
+    @Query("SELECT  * FROM  modems")
+    fun getModemsList(): List<Modem>
+
+
+
+    //Banks
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertBanks(bank: Bank?)
+
+    @Query("SELECT  * FROM  banks")
+    fun getBanksList(): List<Bank>
 
     @Update
     fun updateSMSRecord(smsRecord: SMSRecord?): Int

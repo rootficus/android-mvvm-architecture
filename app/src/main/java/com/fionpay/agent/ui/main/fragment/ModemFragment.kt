@@ -2,6 +2,8 @@ package com.fionpay.agent.ui.main.fragment
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -68,6 +70,22 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
 
     private fun initializeView() {
         getBundleData()
+        mDataBinding.searchView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s?.length == 0) {
+                    filter("", true)
+                }
+
+            }
+        })
+
         mDataBinding.filterButton.setOnClickListener { showPopupMenu(it) }
         mDataBinding.addModemButton.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.navigation_addModemFragment)
@@ -264,7 +282,10 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
             }
 
         }
-
+        if (text.isEmpty()) {
+            filteredList.clear()
+            filteredList.addAll(listGetModemsByFilter)
+        }
 
         if (filteredList.isEmpty()) {
             // if no item is added in filtered list we are

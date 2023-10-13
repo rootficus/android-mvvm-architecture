@@ -1,26 +1,28 @@
 package com.fionpay.agent.ui.main.activity
 
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import com.google.android.material.navigation.NavigationView
 import com.fionpay.agent.R
 import com.fionpay.agent.databinding.ActivityDashboardBinding
 import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseActivity
 import com.fionpay.agent.ui.base.BaseActivityModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
-import com.fionpay.agent.ui.main.adapter.DrawerAdapter
 import com.fionpay.agent.ui.main.di.DaggerDashBoardActivityComponent
 import com.fionpay.agent.ui.main.di.DashBoardActivityModule
+import com.fionpay.agent.ui.main.fragment.DashBoardFragment
 import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
+import com.fionpay.agent.utils.IOnBackPressed
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
-import com.fionpay.agent.utils.Status
+import com.google.android.material.navigation.NavigationView
 import javax.inject.Inject
 
 
@@ -38,6 +40,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     private val dashBoardViewModel: DashBoardViewModel by viewModels { dashBoardViewModelFactory }
 
     private lateinit var navController: NavController
+    var doubleBackToExitPressedOnce = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,40 +74,83 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.navigation_dashboard-> {
+            R.id.navigation_dashboard -> {
                 val bundle = Bundle()
                 jumpToAnotherFragment(R.id.navigation_dashboard, bundle)
             }
-            R.id.navigation_pendingFragment-> {
+
+            R.id.navigation_pendingFragment -> {
                 val bundle = Bundle().apply {
                     putString("Api", "All Transactions")
                     putInt("Filer", -1)
                 }
                 jumpToAnotherFragment(R.id.navigation_pendingFragment, bundle)
             }
-            R.id.navigation_modemFragment-> {
+
+            R.id.navigation_modemFragment -> {
                 val bundle = Bundle().apply {
                     putString("Api", "All Transactions")
                     putInt("Filer", -1)
                 }
                 jumpToAnotherFragment(R.id.navigation_modemFragment, bundle)
             }
-            R.id.navigation_transactionFragment-> {
+
+            R.id.navigation_transactionFragment -> {
                 val bundle = Bundle().apply {
                     putString("Api", "B2B")
                     putInt("Filer", 2)
                 }
                 jumpToAnotherFragment(R.id.navigation_transactionFragment, bundle)
             }
-            R.id.navigation_blFragment-> {
+
+            R.id.navigation_balanceFragment -> {
                 val bundle = Bundle().apply {
                     putString("Api", "Modem List")
                 }
-                jumpToAnotherFragment(R.id.navigation_blFragment, bundle)
+                jumpToAnotherFragment(R.id.navigation_balanceFragment, bundle)
             }
+
             else -> return false
         }
         return true
     }
+
+    override fun onBackPressed() {
+        val navHostFragment = supportFragmentManager.primaryNavigationFragment as NavHostFragment?
+        if (navHostFragment != null) {
+            // Getting the current fragment in the navGraph
+            val currentFragment = navHostFragment.childFragmentManager.fragments[0]
+            val nameOfCurrentFragment = currentFragment.javaClass.simpleName
+            val homeFragmentId = R.id.navigation_dashboard
+
+            if (currentFragment is IOnBackPressed) {
+                (currentFragment as IOnBackPressed).onBackPressed()
+                return
+            }
+            if (currentFragment != null && nameOfCurrentFragment == DashBoardFragment::class.java.simpleName) {
+                if (doubleBackToExitPressedOnce) {
+                    super.onBackPressed()
+                    return
+                }
+
+                this.doubleBackToExitPressedOnce = true
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    finish()
+                    doubleBackToExitPressedOnce = false
+                }, 500)
+                return
+            }
+
+            if (currentFragment != null && currentFragment.id != homeFragmentId) {
+                navController.popBackStack(homeFragmentId, false)
+                navController.navigate(homeFragmentId)
+                return
+            }
+
+        }
+        super.onBackPressed()
+    }
+
 }
 

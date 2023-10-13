@@ -2,7 +2,10 @@ package com.fionpay.agent.ui.main.fragment
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fionpay.agent.R
@@ -59,6 +62,22 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
 
     private fun initialization() {
 
+        mDataBinding.searchView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s?.length == 0) {
+                    filter("")
+                }
+
+            }
+        })
+
         mDataBinding.searchButton.setOnClickListener {
             filter(mDataBinding.searchView.text.toString())
         }
@@ -111,18 +130,30 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
     private fun filter(text: String) {
         // creating a new array list to filter our data.
         val filteredList: ArrayList<PendingModemResponse> = ArrayList()
-
         for (item in arrayList) {
             // checking if the entered string matched with any item of our recycler view.
 
-            if (item.customer?.contains(text) == true) {
-                // if the item is matched we are
-                filteredList.add(item)
+            if (text.isDigitsOnly()) {
+                if (item.customer?.contains(text) == true) {
+                    // if the item is matched we are
+                    filteredList.add(item)
+                }
             } else if (text.isEmpty()) {
                 filteredList.clear()
                 filteredList.addAll(arrayList)
+            } else {
+                if (item.transactionId?.contains(text) == true) {
+                    // if the item is matched we are
+                    filteredList.add(item)
+                }
             }
         }
+
+        if (text.isEmpty()) {
+            filteredList.clear()
+            filteredList.addAll(arrayList)
+        }
+
         if (filteredList.isEmpty()) {
             // if no item is added in filtered list we are
             Snackbar.make(requireView(), "No Data Found..", Snackbar.LENGTH_SHORT).show()

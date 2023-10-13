@@ -4,28 +4,47 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class DashBoardItemResponse(
-    @SerializedName("today_cash_id")
+    @SerializedName("current_balance")
     @Expose
-    val todayCashId: Double? = 0.0,
+    val currentBalance: Double? = 0.0,
+
+    @SerializedName("total_balance")
+    @Expose
+    val totalBalance: Double? = 0.0,
+
+    @SerializedName("today_cash_in")
+    @Expose
+    val todayCashIn: Double? = 0.0,
 
     @SerializedName("today_cash_out")
     @Expose
     val todayCashOut: Double? = 0.0,
 
-    @SerializedName("current_balance")
+    @SerializedName("monthly_cash_out")
     @Expose
-    val currentBalance: Double? = 0.0,
+    val monthlyCashOut: Int? = 0,
+    @SerializedName("monthly_cash_in")
+    @Expose
+    val monthlyCashIn: Int? = 0,
 
-    @SerializedName("number_of_modems")
+    @SerializedName("number_of_pending_request")
     @Expose
-    val numberOfModems: Int? = 0,
+    val numberOfPendingRequest: Long? = 0,
 
-    @SerializedName("total_cash_id")
+    @SerializedName("approved_transaction")
     @Expose
-    val totalCashId: Long? = 0,
+    val approvedTransaction: Long? = 0,
 
-    @SerializedName("total_cash_out")
+    @SerializedName("rejected_transaction")
     @Expose
-    val totalCashOut: Long? = 0,
+    val rejectedTransaction: Long? = 0,
+
+    @SerializedName("total_setup_modems")
+    @Expose
+    val totalSetupModems: Long? = 0,
+
+    @SerializedName("active_modems")
+    @Expose
+    val activeModems: Long? = 0,
 
     )

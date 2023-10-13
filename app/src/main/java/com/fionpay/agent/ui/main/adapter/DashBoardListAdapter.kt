@@ -28,7 +28,7 @@ class DashBoardListAdapter(private var itemList: ArrayList<TransactionModel>) :
         with(holder)
         {
             binding.cardHeadImg.setBackgroundResource(item.icon)
-            binding.txtAmount.text = "৳${item.amount}"
+            binding.txtAmount.text = "${item.amount}"
             binding.txtTitle.text = item.title
         }
     }

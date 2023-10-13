@@ -5,10 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.response.BLTransactionModemResponse
 import com.fionpay.agent.data.model.response.GetBalanceManageRecord
+import com.fionpay.agent.data.model.response.PendingModemResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
+import com.fionpay.agent.databinding.ItemPendingRequestBinding
 import com.fionpay.agent.databinding.ItemTransactionManagerBinding
 import com.fionpay.agent.utils.Utility
 
@@ -43,12 +46,20 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
         with(holder)
         {
             setCardBgColor(binding, position)
-            binding.txtCustomerNumber.text = item.customer
             binding.txtAmount.text = "৳${item.amount}"
-            binding.txtTransactionId.text = item.transactionId.toString()
+            binding.txtTransactionId.text = "#${item.transactionId.toString()}"
             binding.txtDate.text = Utility.convertTransactionDate(item.date)
             binding.txtSuccess.text = item.status
             setStatusView(item, binding)
+            setPaymentStatusView(item, binding)
+            if (!item.bankImage.isNullOrEmpty()) {
+                Glide.with(context)
+                    .asBitmap()
+                    .centerInside()
+                    .load(item.bankImage)
+                    .error(R.drawable.bank_icon)
+                    .into(binding.imageBank)
+            }
         }
     }
 
@@ -62,6 +73,33 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
             )
         } else {
             binding.layoutCard.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
+        }
+    }
+
+    private fun setPaymentStatusView(
+        item: TransactionModemResponse,
+        binding: ItemTransactionManagerBinding
+    ) {
+        when (item.paymentType) {
+            "Cash In" -> {
+                binding.labelWithdraw.text = item.paymentType.toString()
+                binding.txtAmount.setTextColor(
+                    ContextCompat.getColorStateList(
+                        context,
+                        R.color.reject
+                    )
+                )
+            }
+
+            "Cash Out" -> {
+                binding.labelWithdraw.text = item.paymentType.toString()
+                binding.txtAmount.setTextColor(
+                    ContextCompat.getColorStateList(
+                        context,
+                        R.color.greenColor
+                    )
+                )
+            }
         }
     }
 

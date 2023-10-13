@@ -8,9 +8,9 @@ data class PendingModemResponse(
     @Expose
     var id: Int? = null,
 
-    @SerializedName("modem")
+    @SerializedName("bank_image")
     @Expose
-    var modem: String? = null,
+    var bankImage: String? = null,
 
     @SerializedName("customer")
     @Expose
@@ -32,8 +32,8 @@ data class PendingModemResponse(
     @Expose
     var date: String? = null,
 
-    @SerializedName("status")
+    @SerializedName("payment_type")
     @Expose
-    var status: String? = null,
+    var paymentType: String? = null,
 
     )

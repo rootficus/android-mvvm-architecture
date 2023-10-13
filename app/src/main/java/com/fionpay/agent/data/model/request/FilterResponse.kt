@@ -1,6 +1,9 @@
 package com.fionpay.agent.data.model.request
 
-import com.google.gson.annotations.Expose
+import androidx.annotation.Keep
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
@@ -12,22 +15,28 @@ data class FilterResponse(
     var modems: List<Modem>? = null
 ) : Serializable
 
+@Keep
+@Entity(tableName = "banks")
 data class Bank(
+    @PrimaryKey
+    @ColumnInfo(name = "bank_id")
     @SerializedName("bank_id")
-    @Expose
-    var bankId: Int? = null,
+    val bankId: Int? = null,
 
+    @ColumnInfo(name = "bank_name")
     @SerializedName("bank_name")
-    @Expose
-    var bankName: String? = null
+    val bankName: String? = null
 )
 
+@Keep
+@Entity(tableName = "modems")
 data class Modem(
+    @PrimaryKey
+    @ColumnInfo(name = "modem_slot_id")
     @SerializedName("modem_slot_id")
-    @Expose
-    var modemSlotId: Int? = null,
+    val modemSlotId: Int? = null,
 
+    @ColumnInfo(name = "phone_number")
     @SerializedName("phone_number")
-    @Expose
-    var phoneNumber: String? = null
+    val phoneNumber: String? = null
 )

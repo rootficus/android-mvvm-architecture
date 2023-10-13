@@ -3,12 +3,14 @@ package com.fionpay.agent.ui.main.fragment
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.appcompat.widget.PopupMenu
+import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fionpay.agent.R
@@ -32,7 +34,6 @@ import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
-import java.util.Locale
 import javax.inject.Inject
 
 
@@ -62,19 +63,26 @@ class TransactionFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeDagger()
-        getTransactionFilters()
+
         initialization()
 
     }
 
-    private fun setSpinnerData(modemList: ArrayList<Modem>, bankList: ArrayList<Bank>) {
+    override fun onResume() {
+        super.onResume()
+        setSpinnerData()
+    }
+
+    private fun setSpinnerData() {
+        val modemList = viewModel.getModemsListDao()
+        val bankList = viewModel.getBanksListDao()
         val phoneNumbers = arrayListOf<String>()
         val bankNames = arrayListOf<String>()
         val transactionType = arrayListOf("All Types", "Cash in", "Cash Out")
 
         //Set Modem Adapter
         phoneNumbers.add(0, "All Modems")
-        modemList.forEach {
+        modemList?.forEach {
             phoneNumbers.add(it.phoneNumber.toString())
         }
         val modemAdapter = ArrayAdapter(
@@ -93,7 +101,7 @@ class TransactionFragment :
                 } else {
                     Toast.makeText(
                         requireContext(),
-                        "${modemList[i].phoneNumber}",
+                        "${modemList?.get(i)?.phoneNumber}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -106,7 +114,7 @@ class TransactionFragment :
 
         //Set Bank Adapter
         bankNames.add(0, "All Banks")
-        bankList.forEach {
+        bankList?.forEach {
             bankNames.add(it.bankName.toString())
         }
 
@@ -124,7 +132,11 @@ class TransactionFragment :
                     Toast.makeText(requireContext(), "Please Select Bank", Toast.LENGTH_SHORT)
                         .show()
                 } else {
-                    Toast.makeText(requireContext(), "${bankList[i].bankName}", Toast.LENGTH_SHORT)
+                    Toast.makeText(
+                        requireContext(),
+                        "${bankList?.get(i)?.bankName}",
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
                 }
             }
@@ -175,7 +187,7 @@ class TransactionFragment :
     private fun initialization() {
         mDataBinding.txtStartDate.setOnClickListener { showDatePickerDialog(mDataBinding.txtStartDate) }
         mDataBinding.txtEndDate.setOnClickListener { showDatePickerDialog(mDataBinding.txtEndDate) }
-
+        setSpinnerData()
         mDataBinding.refreshButton.setOnClickListener {
             getTransactionRecord()
         }
@@ -190,6 +202,22 @@ class TransactionFragment :
             }
             //showPopupMenu(it)
         }
+
+        mDataBinding.searchView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s?.length == 0) {
+                    filter("")
+                }
+
+            }
+        })
 
         mDataBinding.searchButton.setOnClickListener {
             filter(mDataBinding.searchView.text.toString())
@@ -219,9 +247,10 @@ class TransactionFragment :
                     // For now, I'll just clear the end date text view
                     endDate = null
                     mDataBinding.txtEndDate.text = ""
-                    Snackbar.make(requireView(), "Please Select Valid Date", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(requireView(), "Please Select Valid Date", Snackbar.LENGTH_LONG)
+                        .show()
                     // You can also show an error message here.
-                }else{
+                } else {
                     val dateFormat = SimpleDateFormat("yyyy-MM-dd")
                     textView.text = dateFormat.format(selectedDate)
                 }
@@ -244,38 +273,6 @@ class TransactionFragment :
         DaggerTransactionFragmentComponent.builder().appComponent(FionSDK.appComponent)
             .transactionFragmentModule(TransactionFragmentModule())
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
-    }
-
-    private fun getTransactionFilters() {
-        if (networkHelper.isNetworkConnected()) {
-            viewModel.getTransactionFilters()
-            viewModel.getTransactionFiltersResponseModel.observe(viewLifecycleOwner) {
-                when (it.status) {
-                    Status.SUCCESS -> {
-                        progressBar.dismiss()
-                        it.data?.modems?.let { it1 -> modemList.addAll(it1) }
-                        it.data?.banks?.let { it1 -> bankList.addAll(it1) }
-                        setSpinnerData(modemList, bankList)
-                    }
-
-                    Status.ERROR -> {
-                        progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        } else {
-                            showMessage(it.message.toString())
-                        }
-                    }
-
-                    Status.LOADING -> {
-                        progressBar.show()
-                    }
-                }
-            }
-        } else {
-            Snackbar.make(requireView(), "No Internet", Snackbar.LENGTH_LONG).show()
-        }
-
     }
 
 
@@ -311,67 +308,31 @@ class TransactionFragment :
 
     }
 
-    private fun showPopupMenu(view: View) {
-        val popupMenu = PopupMenu(requireContext(), view)
-        val inflater = popupMenu.menuInflater
-        inflater.inflate(R.menu.tansaction_menu, popupMenu.menu)
-
-        // Set a click listener for menu item clicks
-        popupMenu.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.menu_all -> {
-                    // Handle Menu Item 1 click
-                    filter("")
-                    true
-                }
-
-                R.id.menu_success -> {
-                    // Handle Menu Item 1 click
-                    filter("Success")
-                    true
-                }
-
-                R.id.menu_pending -> {
-                    // Handle Menu Item 1 click
-                    filter("Pending")
-                    true
-                }
-
-                R.id.menu_reject -> {
-                    // Handle Menu Item 1 click
-                    filter("Rejected")
-                    true
-                }
-
-                R.id.menu_danger -> {
-                    // Handle Menu Item 2 click
-                    filter("Danger")
-                    true
-                }
-
-                else -> false
-            }
-        }
-
-        // Show the pop-up menu
-        popupMenu.show()
-    }
-
     private fun filter(text: String) {
         // creating a new array list to filter our data.
         val filteredList: ArrayList<TransactionModemResponse> = ArrayList()
 
         for (item in arrayList) {
             // checking if the entered string matched with any item of our recycler view.
-            if (item.status?.lowercase().toString()
-                    .contains(text.lowercase(Locale.getDefault()))
-            ) {
-                // if the item is matched we are
-                filteredList.add(item)
+
+            if (text.isDigitsOnly()) {
+                if (item.customer?.contains(text) == true) {
+                    // if the item is matched we are
+                    filteredList.add(item)
+                }
             } else if (text.isEmpty()) {
                 filteredList.clear()
                 filteredList.addAll(arrayList)
+            } else {
+                if (item.transactionId?.contains(text) == true) {
+                    // if the item is matched we are
+                    filteredList.add(item)
+                }
             }
+        }
+        if (text.isEmpty()) {
+            filteredList.clear()
+            filteredList.addAll(arrayList)
         }
 
         if (filteredList.isEmpty()) {
@@ -382,5 +343,4 @@ class TransactionFragment :
             transactionListAdapter?.filterList(filteredList)
         }
     }
-
 }

@@ -4,10 +4,12 @@ import android.content.Context
 import android.util.Log
 import com.fionpay.agent.data.model.UserInfo
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
+import com.fionpay.agent.data.model.request.Bank
 import com.fionpay.agent.data.model.request.FilterResponse
 import com.fionpay.agent.data.model.request.GetBalanceByFilterRequest
 import com.fionpay.agent.data.model.request.GetMessageByFilterRequest
 import com.fionpay.agent.data.model.request.GetPendingModemRequest
+import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.ProfileResponse
 import com.fionpay.agent.data.model.request.SignInRequest
@@ -162,6 +164,7 @@ class DashBoardRepository(
                 execute(this, success, fail, context, message)
             }
     }
+
     fun updateAgentWithoutProfile(
         agentId: String,
         success: (profileResponse: ProfileResponse) -> Unit,
@@ -474,6 +477,21 @@ class DashBoardRepository(
 
     fun insertBalanceManagerRecord(it: GetBalanceManageRecord) {
         fionDatabase.rapidxDao()?.insertGetBalanceManageRecord(it)
+    }
+
+    fun insertModems(it: Modem) {
+        fionDatabase.rapidxDao()?.insertModems(it)
+    }
+
+    fun insertBanks(it: Bank) {
+        fionDatabase.rapidxDao()?.insertBanks(it)
+    }
+
+    fun getModemsListDao(): List<Modem>? {
+        return fionDatabase.rapidxDao()?.getModemsList()
+    }
+    fun getBanksListDao(): List<Bank>? {
+        return fionDatabase.rapidxDao()?.getBanksList()
     }
 
     fun getBalanceManageRecord(isBalanceManage: Int): ArrayList<GetBalanceManageRecord> {

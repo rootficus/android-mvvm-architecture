@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="@string/transactions"
+                android:text="Balance Manager"
                 android:textColor="@color/primaryBlue"
                 android:textSize="24sp"
                 android:textStyle="bold"

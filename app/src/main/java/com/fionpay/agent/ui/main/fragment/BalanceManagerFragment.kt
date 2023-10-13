@@ -2,13 +2,17 @@ package com.fionpay.agent.ui.main.fragment
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.response.BLTransactionModemResponse
+import com.fionpay.agent.databinding.FragmentBalanceManagerBinding
 import com.fionpay.agent.databinding.FragmentTransactionsBinding
 import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
@@ -30,7 +34,7 @@ import javax.inject.Inject
 
 
 class BalanceManagerFragment :
-    BaseFragment<FragmentTransactionsBinding>(R.layout.fragment_transactions) {
+    BaseFragment<FragmentBalanceManagerBinding>(R.layout.fragment_balance_manager) {
 
     @Inject
     lateinit var sharedPreference: SharedPreference
@@ -44,7 +48,7 @@ class BalanceManagerFragment :
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
-    private lateinit var transactionListAdapter: BleManagerListAdapter
+    private lateinit var bleManagerListAdapter: BleManagerListAdapter
     private var arrayList: ArrayList<BLTransactionModemResponse> = arrayListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,23 +59,39 @@ class BalanceManagerFragment :
 
     private fun initialization() {
         mDataBinding.refreshButton.setOnClickListener {
-            getTransactionRecord()
+            getBlTransactionsData()
         }
+
+        mDataBinding.searchView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s?.length == 0) {
+                    filter("", true)
+                }
+
+            }
+        })
 
         mDataBinding.filterButton.setOnClickListener { showPopupMenu(it) }
 
         mDataBinding.searchButton.setOnClickListener {
-            filter(mDataBinding.searchView.text.toString())
+            filter(mDataBinding.searchView.text.toString(), true)
         }
         setAdapter()
-        getTransactionRecord()
+        getBlTransactionsData()
 
     }
 
     private fun setAdapter() {
-        transactionListAdapter = BleManagerListAdapter(arrayList)
+        bleManagerListAdapter = BleManagerListAdapter(arrayList)
         mDataBinding.recentModemsList.layoutManager = LinearLayoutManager(context)
-        mDataBinding.recentModemsList.adapter = transactionListAdapter
+        mDataBinding.recentModemsList.adapter = bleManagerListAdapter
     }
 
     private fun initializeDagger() {
@@ -83,7 +103,7 @@ class BalanceManagerFragment :
 
 
 
-    private fun getTransactionRecord() {
+    private fun getBlTransactionsData() {
         if (networkHelper.isNetworkConnected()) {
             viewModel.getBlTransactionsData()
             viewModel.blTransactionsDataResponseModel.observe(viewLifecycleOwner) {
@@ -92,7 +112,7 @@ class BalanceManagerFragment :
                         arrayList.clear()
                         progressBar.dismiss()
                         it.data?.let { it1 -> arrayList.addAll(it1) }
-                        transactionListAdapter.notifyDataSetChanged()
+                        bleManagerListAdapter.notifyDataSetChanged()
                     }
 
                     Status.ERROR -> {
@@ -125,31 +145,31 @@ class BalanceManagerFragment :
             when (menuItem.itemId) {
                 R.id.menu_all -> {
                     // Handle Menu Item 1 click
-                    filter("")
+                    filter("", false)
                     true
                 }
 
                 R.id.menu_success -> {
                     // Handle Menu Item 1 click
-                    filter("Success")
+                    filter("Success", false)
                     true
                 }
 
                 R.id.menu_pending -> {
                     // Handle Menu Item 1 click
-                    filter("Pending")
+                    filter("Pending", false)
                     true
                 }
 
                 R.id.menu_reject -> {
                     // Handle Menu Item 1 click
-                    filter("Rejected")
+                    filter("Rejected", false)
                     true
                 }
 
                 R.id.menu_danger -> {
                     // Handle Menu Item 2 click
-                    filter("Danger")
+                    filter("Danger", false)
                     true
                 }
 
@@ -161,9 +181,12 @@ class BalanceManagerFragment :
         popupMenu.show()
     }
 
-    private fun filter(text: String) {
+    private fun filter(text: String, isSearching: Boolean) {
         // creating a new array list to filter our data.
         val filteredList: ArrayList<BLTransactionModemResponse> = ArrayList()
+
+        if (!isSearching) {
+
 
         for (item in arrayList) {
             // checking if the entered string matched with any item of our recycler view.
@@ -177,13 +200,34 @@ class BalanceManagerFragment :
                 filteredList.addAll(arrayList)
             }
         }
+        }else {
+            for (item in arrayList) {
+                if (text.isDigitsOnly()) {
+                    if (item.customerNumber
+                            ?.contains(text.lowercase(Locale.getDefault()), true) == true
+                    ) {
+                        // if the item is matched we are
+                        filteredList.add(item)
+                    }
+                } else if (text.isEmpty()) {
+                    filteredList.clear()
+                    filteredList.addAll(arrayList)
+                }
+            }
+
+        }
+
+        if (text.isEmpty()) {
+            filteredList.clear()
+            filteredList.addAll(arrayList)
+        }
 
         if (filteredList.isEmpty()) {
             // if no item is added in filtered list we are
             Toast.makeText(context, "No Data Found..", Toast.LENGTH_SHORT).show()
         } else {
             // at last we are passing that filtered
-            //transactionListAdapter?.filterList(filteredList)
+            bleManagerListAdapter?.filterList(filteredList)
         }
     }
 

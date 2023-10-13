@@ -18,7 +18,7 @@
         android:icon="@drawable/transaction_logo"
         android:title="@string/transaction" />
     <item
-        android:id="@id/navigation_blFragment"
+        android:id="@id/navigation_balanceFragment"
         android:icon="@drawable/transaction_logo"
         android:title="@string/balance_manager" />
 </menu>

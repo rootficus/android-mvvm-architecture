@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
+import com.fionpay.agent.data.model.request.Bank
 import com.fionpay.agent.data.model.request.FilterResponse
 import com.fionpay.agent.data.model.request.GetBalanceByFilterRequest
 import com.fionpay.agent.data.model.request.GetMessageByFilterRequest
 import com.fionpay.agent.data.model.request.GetPendingModemRequest
+import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.ProfileResponse
 import com.fionpay.agent.data.model.request.SignInRequest
@@ -25,7 +27,6 @@ import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.GetStatusCountResponse
 import com.fionpay.agent.data.model.response.PendingModemResponse
 import com.fionpay.agent.data.model.response.SignInResponse
-import com.fionpay.agent.data.model.response.TransactionModel
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.data.repository.DashBoardRepository
 import com.fionpay.agent.ui.base.BaseViewModel
@@ -160,6 +161,7 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
                 { message -> getAgentProfileResponseModel.setError(message) })
         }
     }
+
     val getTransactionFiltersResponseModel =
         MutableLiveData<ResponseData<FilterResponse>>()
 
@@ -261,6 +263,21 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
     }
 
     fun getBalanceManageRecord(it: Int) = dashBoardRepository.getBalanceManageRecord(it)
+
+    fun insertModems(modem: Modem) {
+        dashBoardRepository.insertModems(modem)
+    }
+
+    fun insertBanks(bank: Bank) {
+        dashBoardRepository.insertBanks(bank)
+    }
+
+    fun getModemsListDao(): List<Modem>? {
+        return dashBoardRepository?.getModemsListDao()
+    }
+    fun getBanksListDao(): List<Bank>? {
+        return dashBoardRepository?.getBanksListDao()
+    }
 
     fun getCountBalanceManageRecord(it: Int) = dashBoardRepository.getCountBalanceManageRecord(it)
 

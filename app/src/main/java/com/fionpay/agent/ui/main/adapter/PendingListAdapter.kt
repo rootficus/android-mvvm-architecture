@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.PendingModemResponse
@@ -40,9 +41,22 @@ class PendingListAdapter(private var itemList: ArrayList<PendingModemResponse>) 
         {
             setCardBgColor(binding, position)
             binding.txtAmount.text = "৳${item.amount}"
-            binding.txtTransactionId.text = "#${item.transactionId.toString()}"
+            if (item.paymentType == "Cash In") {
+                binding.txtTransactionId.text = "${item.customer.toString()}"
+            } else {
+                binding.txtTransactionId.text = "#${item.transactionId.toString()}"
+            }
+
             binding.txtDate.text = Utility.convertTransactionDate(item.date)
             setStatusView(item, binding)
+            if (!item.bankImage.isNullOrEmpty()) {
+                Glide.with(context)
+                    .asBitmap()
+                    .centerInside()
+                    .load(item.bankImage)
+                    .error(R.drawable.bank_icon)
+                    .into(binding.imageBank)
+            }
         }
     }
 
@@ -63,12 +77,9 @@ class PendingListAdapter(private var itemList: ArrayList<PendingModemResponse>) 
         item: PendingModemResponse,
         binding: ItemPendingRequestBinding
     ) {
-        when (item.status) {
-            "Success" -> {
-                binding.labelCustomerNumber.text = "Cash In"
-                binding.imgWithdraw.setBackgroundResource(R.drawable.arrow_left)
-                binding.imgWithdraw.backgroundTintList =
-                    ContextCompat.getColorStateList(context, R.color.reject)
+        when (item.paymentType) {
+            "Cash In" -> {
+                binding.labelCustomerNumber.text = item.paymentType
                 binding.txtAmount.setTextColor(
                     ContextCompat.getColorStateList(
                         context,
@@ -77,27 +88,14 @@ class PendingListAdapter(private var itemList: ArrayList<PendingModemResponse>) 
                 )
             }
 
-            "Pending" -> {
+            "Cash Out" -> {
                 binding.labelCustomerNumber.text = "Cash Out"
-                binding.imgWithdraw.setBackgroundResource(R.drawable.arrow_right)
-                binding.imgWithdraw.backgroundTintList =
-                    ContextCompat.getColorStateList(context, R.color.greenColor)
                 binding.txtAmount.setTextColor(
                     ContextCompat.getColorStateList(
                         context,
                         R.color.greenColor
                     )
                 )
-            }
-
-            "Danger" -> {
-                // binding.txtSuccess.setTextColor(ContextCompat.getColor(context, R.color.reject))
-                // binding.txtSuccess.backgroundTintList = (ContextCompat.getColorStateList(context, R.color.activeDangerBg))
-            }
-
-            "Rejected" -> {
-                // binding.txtSuccess.setTextColor(ContextCompat.getColor(context, R.color.reject))
-                // binding.txtSuccess.backgroundTintList = (ContextCompat.getColorStateList(context, R.color.activeDangerBg))
             }
         }
     }
