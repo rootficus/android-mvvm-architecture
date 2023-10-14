@@ -154,7 +154,7 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResp
 
         binding.txtBlock.setOnClickListener {
             val blockOrUnblocked: String =
-                if (binding.txtBlock.text.toString().contains("Blocked", true)) {
+                if (binding.txtBlock.text.toString() == "Blocked") {
                     "On"
                 } else {
                     "Off"
