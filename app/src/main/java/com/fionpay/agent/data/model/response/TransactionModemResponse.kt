@@ -35,9 +35,9 @@ data class TransactionModemResponse(
     @SerializedName("payment_type")
     @Expose
     var paymentType: String? = null,
+
     @SerializedName("status")
     @Expose
     var status: String? = null,
-
 
     )

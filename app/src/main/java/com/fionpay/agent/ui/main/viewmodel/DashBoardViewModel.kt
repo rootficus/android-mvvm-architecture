@@ -13,6 +13,7 @@ import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.ProfileResponse
 import com.fionpay.agent.data.model.request.SignInRequest
+import com.fionpay.agent.data.model.request.TransactionFilterRequest
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
 import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateBalanceRequest
@@ -95,7 +96,7 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
     val transactionsDataResponseModel =
         MutableLiveData<ResponseData<ArrayList<TransactionModemResponse>>>()
 
-    fun getTransactionsData(getPendingModemRequest: GetPendingModemRequest) {
+    fun getTransactionsData(transactionFilterRequest: TransactionFilterRequest) {
         transactionsDataResponseModel.setLoading(null)
         viewModelScope.launch(Dispatchers.IO) {
             dashBoardRepository.getTransactionsData({ success ->
@@ -103,9 +104,26 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
                     success
                 )
             },
-                getPendingModemRequest,
+                transactionFilterRequest,
                 { error -> transactionsDataResponseModel.setError(error) },
                 { message -> transactionsDataResponseModel.setError(message) })
+        }
+    }
+
+    val transactionsFilterDataResponseModel =
+        MutableLiveData<ResponseData<ArrayList<TransactionModemResponse>>>()
+
+    fun transactionFilterApi(transactionFilterRequest: TransactionFilterRequest) {
+        transactionsFilterDataResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.transactionFilterApi({ success ->
+                transactionsFilterDataResponseModel.setSuccess(
+                    success
+                )
+            },
+                transactionFilterRequest,
+                { error -> transactionsFilterDataResponseModel.setError(error) },
+                { message -> transactionsFilterDataResponseModel.setError(message) })
         }
     }
 

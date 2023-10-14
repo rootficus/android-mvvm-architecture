@@ -11,7 +11,7 @@ class DashBoardListAdapter(private var itemList: ArrayList<TransactionModel>) :
     RecyclerView.Adapter<DashBoardListAdapter.ItemViewHolder>() {
 
     interface CardEvent {
-        fun onCardClicked(title: GetBalanceManageRecord)
+        fun onCardClicked(title: TransactionModel)
     }
 
     var listener: CardEvent? = null
@@ -30,6 +30,9 @@ class DashBoardListAdapter(private var itemList: ArrayList<TransactionModel>) :
             binding.cardHeadImg.setBackgroundResource(item.icon)
             binding.txtAmount.text = "${item.amount}"
             binding.txtTitle.text = item.title
+            binding.cardHead1.setOnClickListener {
+                listener?.onCardClicked(item)
+            }
         }
     }
 

@@ -13,6 +13,7 @@ import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.ProfileResponse
 import com.fionpay.agent.data.model.request.SignInRequest
+import com.fionpay.agent.data.model.request.TransactionFilterRequest
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
 import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateBalanceRequest
@@ -88,13 +89,26 @@ class DashBoardRepository(
 
     fun getTransactionsData(
         success: (transactionModemList: ArrayList<TransactionModemResponse>) -> Unit,
-        getPendingModemRequest: GetPendingModemRequest,
+        transactionFilterRequest: TransactionFilterRequest,
         fail: (error: String) -> Unit,
         message: (msg: String) -> Unit
     ) {
         apiServices.getTransactionsData(
             "Bearer " + sharedPreference.getToken(),
-            getPendingModemRequest
+            transactionFilterRequest
+        ).apply {
+            execute2(this, success, fail, context, message)
+        }
+    }
+    fun transactionFilterApi(
+        success: (transactionFilterist: ArrayList<TransactionModemResponse>) -> Unit,
+        transactionFilterRequest: TransactionFilterRequest,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.transactionFilterApi(
+            "Bearer " + sharedPreference.getToken(),
+            transactionFilterRequest
         ).apply {
             execute2(this, success, fail, context, message)
         }

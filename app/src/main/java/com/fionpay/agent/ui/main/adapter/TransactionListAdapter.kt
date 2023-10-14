@@ -19,7 +19,7 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
     RecyclerView.Adapter<TransactionListAdapter.ItemViewHolder>() {
 
     interface CardEvent {
-        fun onCardClicked(title: GetBalanceManageRecord)
+        fun onCardClicked(title: TransactionModemResponse)
     }
 
     var listener: CardEvent? = null
@@ -59,6 +59,10 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
                     .load(item.bankImage)
                     .error(R.drawable.bank_icon)
                     .into(binding.imageBank)
+            }
+
+            binding.cardHead.setOnClickListener {
+                listener?.onCardClicked(item)
             }
         }
     }

@@ -7,16 +7,16 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fionpay.agent.R
-import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.PendingModemResponse
 import com.fionpay.agent.databinding.ItemPendingRequestBinding
 import com.fionpay.agent.utils.Utility
+
 
 class PendingListAdapter(private var itemList: ArrayList<PendingModemResponse>) :
     RecyclerView.Adapter<PendingListAdapter.ItemViewHolder>() {
 
     interface CardEvent {
-        fun onCardClicked(title: GetBalanceManageRecord)
+        fun onCardClicked(pendingModemResponse: PendingModemResponse)
     }
 
     var listener: CardEvent? = null
@@ -56,6 +56,9 @@ class PendingListAdapter(private var itemList: ArrayList<PendingModemResponse>) 
                     .load(item.bankImage)
                     .error(R.drawable.bank_icon)
                     .into(binding.imageBank)
+            }
+            binding.cardHead.setOnClickListener {
+                listener?.onCardClicked(item)
             }
         }
     }

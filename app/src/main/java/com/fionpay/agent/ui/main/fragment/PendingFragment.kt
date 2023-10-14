@@ -1,21 +1,33 @@
 package com.fionpay.agent.ui.main.fragment
 
+import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.request.GetPendingModemRequest
+import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.PendingModemResponse
+import com.fionpay.agent.data.model.response.TransactionModemResponse
+import com.fionpay.agent.databinding.AlterPendingDialogBinding
 import com.fionpay.agent.databinding.FragmentPendingBinding
+import com.fionpay.agent.databinding.ItemTransactionManagerBinding
 import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
+import com.fionpay.agent.ui.main.adapter.BleManagerListAdapter
 import com.fionpay.agent.ui.main.adapter.DashBoardListAdapter
 import com.fionpay.agent.ui.main.adapter.PendingListAdapter
 import com.fionpay.agent.ui.main.di.DaggerPendingFragmentComponent
@@ -24,6 +36,7 @@ import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
+import com.fionpay.agent.utils.Utility
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
@@ -90,10 +103,16 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
 
     private fun setAdapter() {
         pendingListAdapter = PendingListAdapter(arrayList)
+        pendingListAdapter?.listener = cardListener
         mDataBinding.pendingModemsList.layoutManager = LinearLayoutManager(context)
         mDataBinding.pendingModemsList.adapter = pendingListAdapter
     }
 
+    private val cardListener = object : PendingListAdapter.CardEvent {
+        override fun onCardClicked(pendingModemResponse: PendingModemResponse) {
+            showAlertDialog(pendingModemResponse)
+        }
+    }
 
     private fun getPendingModemRecord() {
         if (networkHelper.isNetworkConnected()) {
@@ -125,6 +144,69 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
             Snackbar.make(requireView(), "No Internet", Snackbar.LENGTH_LONG).show()
         }
 
+    }
+
+    private fun showAlertDialog(item: PendingModemResponse) {
+        val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        val binding =  AlterPendingDialogBinding.inflate(layoutInflater)
+        dialogBuilder.setView(binding.root)
+        val alertDialog: AlertDialog = dialogBuilder.create()
+        if (!item.bankImage.isNullOrEmpty()) {
+            Glide.with(requireContext())
+                .asBitmap()
+                .centerInside()
+                .load(item.bankImage)
+                .error(R.drawable.bank_icon)
+                .into(binding.imageBank)
+        }
+        setPaymentStatusView(item, binding)
+        binding.txtSuccess.visibility=  View.VISIBLE
+        binding.txtSuccess.text = "Pending"
+        binding.txtSuccess.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.pending
+            )
+        )
+        binding.txtSuccess.backgroundTintList =
+            (ContextCompat.getColorStateList(requireContext(), R.color.activePendingBg))
+        binding.txtAmount.text = "৳${item.amount}"
+        if (item.paymentType == "Cash In") {
+            binding.txtTransactionId.text = "${item.customer.toString()}"
+        } else {
+            binding.txtTransactionId.text = "#${item.transactionId.toString()}"
+        }
+        binding.txtDate.text = Utility.convertTransactionDate(item.date)
+        binding.txtBankType.text = item.bankType
+
+        alertDialog.show()
+    }
+
+    private fun setPaymentStatusView(
+        item: PendingModemResponse,
+        binding: AlterPendingDialogBinding
+    ) {
+        when (item.paymentType) {
+            "Cash In" -> {
+                binding.labelCustomerNumber.text = item.paymentType.toString()
+                binding.txtAmount.setTextColor(
+                    ContextCompat.getColorStateList(
+                        requireContext(),
+                        R.color.reject
+                    )
+                )
+            }
+
+            "Cash Out" -> {
+                binding.labelCustomerNumber.text = item.paymentType.toString()
+                binding.txtAmount.setTextColor(
+                    ContextCompat.getColorStateList(
+                        requireContext(),
+                        R.color.greenColor
+                    )
+                )
+            }
+        }
     }
 
     private fun filter(text: String) {

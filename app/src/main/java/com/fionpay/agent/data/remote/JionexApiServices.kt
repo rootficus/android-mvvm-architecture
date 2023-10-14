@@ -9,6 +9,7 @@ import com.fionpay.agent.data.model.request.ModemJsonModel
 import com.fionpay.agent.data.model.request.PinCodeJsonModel
 import com.fionpay.agent.data.model.request.ProfileResponse
 import com.fionpay.agent.data.model.request.SignInRequest
+import com.fionpay.agent.data.model.request.TransactionFilterRequest
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
 import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateBalanceRequest
@@ -118,7 +119,7 @@ interface FionApiServices {
     @POST("api/v1/app/agents/approved_deposit_requests")
     fun getTransactionsData(
         @Header("Authorization") authHeader: String?,
-        @Body getPendingModemRequest: GetPendingModemRequest
+        @Body transactionFilterRequest: TransactionFilterRequest?
     ): Call<BaseResponseModel2<TransactionModemResponse>>
 
     @Headers("Content-Type:application/json")
@@ -182,6 +183,12 @@ interface FionApiServices {
         @Part("full_name") full_name: RequestBody?,
         @Path("agentId") type: String,
     ): Call<BaseResponseModel<ProfileResponse>>
+
+    @POST("api/v1/app/agents/approved_deposit_requests")
+    fun transactionFilterApi(
+        @Header("Authorization") authHeader: String?,
+        @Body transactionFilterRequest: TransactionFilterRequest?,
+    ): Call<BaseResponseModel2<TransactionModemResponse>>
 
 
     @POST("/api/imagesUpload")   //imageVideoUpload

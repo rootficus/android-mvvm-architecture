@@ -226,6 +226,7 @@
             </RelativeLayout>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnApply"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_25sdp"
                 android:layout_marginTop="@dimen/_5sdp"

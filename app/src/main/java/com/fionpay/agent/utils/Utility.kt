@@ -11,6 +11,7 @@ import com.fionpay.agent.R
 import java.text.DecimalFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 import java.util.TimeZone
@@ -120,5 +121,25 @@ object Utility {
     fun callCustomToast(context: Context, message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
+
+    fun currentDate(): String {
+        return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+    }
+
+    fun dateBeforeOneMonth(): String? {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.MONTH, -1)
+        return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.time)
+    }
+    private fun getNewDayOfMonth(day: Int): String {
+        val calendar = Calendar.getInstance()
+        var dayOfMonth = day.toString()
+        val simpleDateFormat = SimpleDateFormat("dd")
+        calendar.time = simpleDateFormat.parse(dayOfMonth) as Date
+        calendar.add(Calendar.DATE, 7)
+        dayOfMonth = simpleDateFormat.format(calendar.time)
+        return dayOfMonth
+    }
+
 
 }

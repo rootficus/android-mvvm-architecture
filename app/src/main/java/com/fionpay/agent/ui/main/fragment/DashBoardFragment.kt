@@ -109,7 +109,7 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
                         val json = gson.toJson(it.data)
                         viewModel.setDashBoardDataModel(json)
                         val currentBalance = dashBoardItemResponse?.currentBalance
-                        val totalBalance =  dashBoardItemResponse?.totalBalance
+                        val totalBalance = dashBoardItemResponse?.totalBalance
                         val progress = (totalBalance?.div(currentBalance!!))
                         progress?.toInt()?.let { it1 -> updateProgressBar(it1) }
                         setAdapter(it.data)
@@ -181,11 +181,13 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
         arrayList.add(
             TransactionModel(
                 "Transactions",
-                "${responseData?.rejectedTransaction?.let {
-                    responseData?.approvedTransaction?.plus(
-                        it
-                    )
-                }}",
+                "${
+                    responseData?.rejectedTransaction?.let {
+                        responseData?.approvedTransaction?.plus(
+                            it
+                        )
+                    }
+                }",
                 R.drawable.home_transaction_logo
             )
         )
@@ -204,8 +206,28 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
             )
         )
         dashBoardListAdapter = DashBoardListAdapter(arrayList)
+        dashBoardListAdapter?.listener = cardListener
         mDataBinding.homeCardListView.layoutManager = GridLayoutManager(context, 2)
         mDataBinding.homeCardListView.adapter = dashBoardListAdapter
+    }
+
+    private val cardListener = object : DashBoardListAdapter.CardEvent {
+        override fun onCardClicked(transactionModel: TransactionModel) {
+            gotoNextFragment(transactionModel.title)
+        }
+    }
+
+    private fun gotoNextFragment(title: String) {
+        if (title.contains("Pending Request", true)) {
+            Navigation.findNavController(requireView()).navigate(R.id.navigation_pendingFragment)
+        } else if (title.contains("Transactions", true)) {
+            Navigation.findNavController(requireView())
+                .navigate(R.id.navigation_transactionFragment)
+        } else if (title.contains("Modems", true)) {
+            Navigation.findNavController(requireView()).navigate(R.id.navigation_modemFragment)
+        }
+
+
     }
 
     private fun getTransactionFilters() {
