@@ -3,6 +3,9 @@ package com.fionpay.agent.ui.main.fragment
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,7 +23,6 @@ import com.fionpay.agent.R
 import com.fionpay.agent.data.model.request.Bank
 import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.request.TransactionFilterRequest
-import com.fionpay.agent.data.model.response.PendingModemResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.databinding.AlterPendingDialogBinding
 import com.fionpay.agent.databinding.FragmentTransactionsBinding
@@ -28,7 +30,6 @@ import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
-import com.fionpay.agent.ui.main.adapter.PendingListAdapter
 import com.fionpay.agent.ui.main.adapter.TransactionListAdapter
 import com.fionpay.agent.ui.main.di.DaggerTransactionFragmentComponent
 import com.fionpay.agent.ui.main.di.TransactionFragmentModule
@@ -71,7 +72,7 @@ class TransactionFragment :
     private var paymentType: String = "All"
     private var bankType: String = "All"
     private var modemSlotId: Any = "All"
-    private  var calendar: Calendar? = null
+    private var calendar: Calendar? = null
     val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -275,8 +276,7 @@ class TransactionFragment :
             } catch (e: ParseException) {
                 e.printStackTrace()
             }
-        }else
-        {
+        } else {
             datePickerDialog.datePicker.maxDate = calendar.timeInMillis
         }
         datePickerDialog.show()
@@ -295,6 +295,7 @@ class TransactionFragment :
             showAlertDialog(transactionModemResponse)
         }
     }
+
     private fun initializeDagger() {
         DaggerTransactionFragmentComponent.builder().appComponent(FionSDK.appComponent)
             .transactionFragmentModule(TransactionFragmentModule())
@@ -340,9 +341,10 @@ class TransactionFragment :
         }
 
     }
+
     private fun showAlertDialog(item: TransactionModemResponse) {
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-        val binding =  AlterPendingDialogBinding.inflate(layoutInflater)
+        val binding = AlterPendingDialogBinding.inflate(layoutInflater)
         dialogBuilder.setView(binding.root)
         val alertDialog: AlertDialog = dialogBuilder.create()
         if (!item.bankImage.isNullOrEmpty()) {
@@ -355,12 +357,21 @@ class TransactionFragment :
         }
         setPaymentStatusView(item, binding)
         setStatusView(item, binding)
-        binding.txtAmount.text = "৳${item.amount}"
         if (item.paymentType == "Cash In") {
             binding.txtTransactionId.text = "${item.customer.toString()}"
         } else {
             binding.txtTransactionId.text = "#${item.transactionId.toString()}"
         }
+        binding.iconCopy.visibility = View.VISIBLE
+        binding.iconCopy.setOnClickListener {
+            val clipboard: ClipboardManager? =
+                requireActivity().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
+            val clip = ClipData.newPlainText("TxnId", "${binding.txtTransactionId.text.toString()}")
+            clipboard?.setPrimaryClip(clip)
+            showMessage("Text Copied Successfully")
+        }
+        binding.txtAmount.text = "৳${item.amount}"
+
         binding.txtDate.text = Utility.convertTransactionDate(item.date)
         binding.txtBankType.text = item.bankType
 
@@ -368,7 +379,7 @@ class TransactionFragment :
     }
 
     private fun setStatusView(item: TransactionModemResponse, binding: AlterPendingDialogBinding) {
-        binding.txtSuccess.visibility=  View.VISIBLE
+        binding.txtSuccess.visibility = View.VISIBLE
         binding.txtSuccess.text = item.status
         when (item.status) {
             "Approved" -> {
@@ -383,7 +394,12 @@ class TransactionFragment :
             }
 
             "Rejected" -> {
-                binding.txtSuccess.setTextColor(ContextCompat.getColor(requireContext(), R.color.reject))
+                binding.txtSuccess.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.reject
+                    )
+                )
                 binding.txtSuccess.backgroundTintList =
                     (ContextCompat.getColorStateList(requireContext(), R.color.activeDangerBg))
             }
@@ -396,7 +412,7 @@ class TransactionFragment :
     ) {
         when (item.paymentType) {
             "Cash In" -> {
-                binding.labelCustomerNumber.text = item.paymentType.toString()
+                binding.labelCustomerNumber.text = item.customer.toString()
                 binding.txtAmount.setTextColor(
                     ContextCompat.getColorStateList(
                         requireContext(),
@@ -406,7 +422,7 @@ class TransactionFragment :
             }
 
             "Cash Out" -> {
-                binding.labelCustomerNumber.text = item.paymentType.toString()
+                binding.labelCustomerNumber.text = item.customer.toString()
                 binding.txtAmount.setTextColor(
                     ContextCompat.getColorStateList(
                         requireContext(),

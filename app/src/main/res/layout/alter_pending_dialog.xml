@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:padding="@dimen/_5sdp"
     android:layout_height="wrap_content"
-    android:background="@android:color/transparent">
+    android:background="@android:color/transparent"
+    android:padding="@dimen/_5sdp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_head"
@@ -80,6 +80,18 @@
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@id/labelBankType"
                 app:layout_constraintTop_toTopOf="@id/cardBank" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iconCopy"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:visibility="gone"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:src="@drawable/copy_text"
+                app:layout_constraintStart_toEndOf="@id/txtTransactionId"
+                app:layout_constraintTop_toTopOf="@id/cardBank" />
+
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/labelBankType"
@@ -177,16 +189,16 @@
                 android:id="@+id/txtSuccess"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/round_corners"
                 android:backgroundTint="@color/activeGreenBg"
                 android:fontFamily="@font/poppins"
                 android:paddingHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:visibility="gone"
                 android:paddingVertical="@dimen/_5sdp"
                 android:text="Success"
                 android:textColor="@color/activeGreen"
                 android:textSize="14sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
