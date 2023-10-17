@@ -176,6 +176,7 @@
     <string name="upload_photo">Upload Photo</string>
     <string name="take_photo">Camera</string>
     <string name="choose_existing_photo">Gallery</string>
+    <string name="name">Name</string>
     <string-array name="bankList">
         <item>item1</item>
         <item>item2</item>

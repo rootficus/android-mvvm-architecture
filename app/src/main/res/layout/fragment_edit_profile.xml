@@ -8,137 +8,136 @@
             name="dashBoardViewModel"
             type="com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bgPrimaryColor">
 
-    <include
-        android:id="@+id/topHeader"
-        layout="@layout/header"
-        android:elevation="@dimen/_10sdp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bgPrimaryColor">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/labelUploadPicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:fontFamily="@font/poppins"
-        android:text="Upload your profile \npicture"
-        android:textColor="@color/primaryBlue"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topHeader" />
+        <include
+            android:id="@+id/topHeader"
+            layout="@layout/header"
+            android:elevation="@dimen/_10sdp" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelUploadPicture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/poppins"
+            android:text="Upload your profile picture"
+            android:textColor="@color/primaryBlue"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topHeader" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/editProfileIcon"
-        android:layout_width="@dimen/_25sdp"
-        android:layout_height="@dimen/_25sdp"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:src="@drawable/edit_profile_icon"
-        app:layout_constraintTop_toBottomOf="@id/imageCard"
-        app:layout_constraintEnd_toEndOf="@id/imageCard"
-        app:layout_constraintStart_toStartOf="@id/imageCard"/>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/imageCard"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="@dimen/_100sdp"
-        app:cardCornerRadius="15dp"
-        android:layout_marginTop="@dimen/_5sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/labelUploadPicture">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/userProfileImage"
-            android:scaleType="fitXY"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:id="@+id/editProfileIcon"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginBottom="-10dp"
+            android:src="@drawable/edit_profile_icon"
+            app:layout_constraintEnd_toEndOf="@id/imageCard"
+            app:layout_constraintStart_toStartOf="@id/imageCard"
+            app:layout_constraintTop_toBottomOf="@id/imageCard" />
 
-    </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imageCard"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/labelUploadPicture">
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/userProfileImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/labelEnterName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:fontFamily="@font/poppins"
-        android:text="Enter your first and last \nname"
-        android:textColor="@color/primaryBlue"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editProfileIcon" />
-
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/etFirstName"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/round_corners"
-        android:backgroundTint="#F5F5F5"
-        android:fontFamily="@font/poppins"
-        android:hint="@string/first_name"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:padding="15dp"
-        android:textColor="@color/primaryBlue"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/labelEnterName"
-        app:layout_constraintWidth_percent="0.85" />
+        </androidx.cardview.widget.CardView>
 
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/etLastName"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/round_corners"
-        android:backgroundTint="#F5F5F5"
-        android:fontFamily="@font/poppins"
-        android:hint="@string/last_name"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:padding="15dp"
-        android:textColor="@color/primaryBlue"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etFirstName"
-        app:layout_constraintWidth_percent="0.85" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelEnterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:fontFamily="@font/poppins"
+            android:text="Enter full name"
+            android:textColor="@color/primaryBlue"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editProfileIcon" />
 
 
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etFirstName"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="#F5F5F5"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/name"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:padding="15dp"
+            android:textColor="@color/primaryBlue"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/labelEnterName"
+            app:layout_constraintWidth_percent="0.85" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnUpdate"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="@dimen/_20sdp"
-        android:background="@drawable/button_gradient"
-        android:text="@string/update"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.85" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etLastName"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="#F5F5F5"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/last_name"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:padding="15dp"
+            android:textColor="@color/primaryBlue"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etFirstName"
+            app:layout_constraintWidth_percent="0.85" />
 
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnUpdate"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:background="@drawable/button_gradient"
+            android:text="@string/update"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etFirstName"
+            app:layout_constraintWidth_percent="0.85" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
