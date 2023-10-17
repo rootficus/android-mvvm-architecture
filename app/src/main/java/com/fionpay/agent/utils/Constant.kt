@@ -77,6 +77,8 @@ object Constant {
 
     const val PREF_DASHBOARD = "DashBoardModel"
 
+    const val PREF_DEVICE_TOKEN = "DeviceToken"
+
     const val MULTIPART_FORM_TEXT_DATA = "text/plain"
 
     enum class BalanceManagerStatus(val action: Int) {

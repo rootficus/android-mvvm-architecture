@@ -7,8 +7,6 @@ import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.fionpay.agent.R
@@ -78,11 +76,11 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                     mDataBinding.emailVerified.visibility = View.GONE
                 }
 
-               /* if (isEmailValid(mDataBinding.etName.text.toString()) && mDataBinding.etPassword.text!!.length > 8) {
-                    mDataBinding.btnSignIn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black))
-                } else {
-                    mDataBinding.btnSignIn.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.nonClickableButton)
-                }*/
+                /* if (isEmailValid(mDataBinding.etName.text.toString()) && mDataBinding.etPassword.text!!.length > 8) {
+                     mDataBinding.btnSignIn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black))
+                 } else {
+                     mDataBinding.btnSignIn.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.nonClickableButton)
+                 }*/
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -128,11 +126,11 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                 }
 
 
-             /*   if (isEmailValid(mDataBinding.etName.text.toString()) && mDataBinding.etPassword.text!!.length > 8) {
-                    mDataBinding.btnSignIn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black))
-                } else {
-                    mDataBinding.btnSignIn.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.nonClickableButton)
-                }*/
+                /*   if (isEmailValid(mDataBinding.etName.text.toString()) && mDataBinding.etPassword.text!!.length > 8) {
+                       mDataBinding.btnSignIn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black))
+                   } else {
+                       mDataBinding.btnSignIn.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.nonClickableButton)
+                   }*/
             }
         })
 
@@ -140,10 +138,16 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             name = mDataBinding.etName.text.toString()
             password = mDataBinding.etPassword.text.toString()
             if (name.isEmpty()) {
-                Utility.callCustomToast(requireContext(),mActivity.getString(R.string.PLEASE_ENTER_NAME))
+                Utility.callCustomToast(
+                    requireContext(),
+                    mActivity.getString(R.string.PLEASE_ENTER_NAME)
+                )
                 //mDataBinding.etName.error = mActivity.getString(R.string.PLEASE_ENTER_NAME)
             } else if (password.isEmpty()) {
-                Utility.callCustomToast(requireContext(),mActivity.getString(R.string.PLEASE_ENTER_PASSWORD))
+                Utility.callCustomToast(
+                    requireContext(),
+                    mActivity.getString(R.string.PLEASE_ENTER_PASSWORD)
+                )
                 //mDataBinding.etPhoneNumber.error = mActivity.getString(R.string.PLEASE_ENTER_PHONE_NUMBER)
             } else {
                 callSignInAPI(view)
@@ -151,8 +155,8 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
         }
         mDataBinding.etName.setText(viewmodel.getEmail().toString())
         mDataBinding.etPassword.setText(viewmodel.getPassword().toString())
-      /*  mDataBinding.etName.setText("jsn.orbit@gmail.com")
-        mDataBinding.etPassword.setText("Orb@1235")*/
+        /*  mDataBinding.etName.setText("jsn.orbit@gmail.com")
+          mDataBinding.etPassword.setText("Orb@1235")*/
     }
 
     private fun callSignInAPI(view: View) {
@@ -161,7 +165,8 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             viewmodel.signInNow(
                 SignInRequest(
                     email = name,
-                    password = password
+                    password = password,
+                    deviceToken = sharedPreference.getDeviceToken().toString()
                 )
             )
             viewmodel.signInResponseModel.observe(viewLifecycleOwner) {
@@ -204,11 +209,13 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
     private fun togglePasswordVisibility() {
         if (isPasswordVisible) {
             // Password is currently visible, so hide it
-            mDataBinding.etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+            mDataBinding.etPassword.transformationMethod =
+                PasswordTransformationMethod.getInstance()
             mDataBinding.passwordToggle.setImageResource(R.drawable.show_password)
         } else {
             // Password is currently hidden, so make it visible
-            mDataBinding.etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+            mDataBinding.etPassword.transformationMethod =
+                HideReturnsTransformationMethod.getInstance()
             mDataBinding.passwordToggle.setImageResource(R.drawable.hide_password)
         }
 

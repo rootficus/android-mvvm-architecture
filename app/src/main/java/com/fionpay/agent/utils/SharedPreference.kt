@@ -8,6 +8,7 @@ import com.fionpay.agent.utils.Constant.PREF_BL_PENDING
 import com.fionpay.agent.utils.Constant.PREF_BL_REJECTED
 import com.fionpay.agent.utils.Constant.PREF_BL_SUCCESS
 import com.fionpay.agent.utils.Constant.PREF_DASHBOARD
+import com.fionpay.agent.utils.Constant.PREF_DEVICE_TOKEN
 import com.fionpay.agent.utils.Constant.PREF_PASSWORD
 import com.fionpay.agent.utils.Constant.PREF_TODAY_TRANSACTIONS
 import com.fionpay.agent.utils.Constant.PREF_TODAY_TRX_AMOUNT
@@ -76,6 +77,7 @@ class SharedPreference(context: Context) {
     fun getFullName(): String? {
         return pref.getString(Constant.PREF_FULL_NAME, "Akash")
     }
+
     fun setProfileImage(image: String) {
         pref.edit().putString(Constant.PREF_IMAGE, image).apply()
     }
@@ -232,6 +234,14 @@ class SharedPreference(context: Context) {
         return pref.getInt(PREF_BL_DANGER, 0)
     }
 
+    fun setDeviceToken(deviceToken: String?) {
+        deviceToken?.let { pref.edit().putString(PREF_DEVICE_TOKEN, it).apply() }
+    }
+
+    fun getDeviceToken(): String? {
+        return pref.getString(PREF_DEVICE_TOKEN, "")
+    }
+
     fun setDashBoardDataModel(model: String?) {
         model?.let { pref.edit().putString(PREF_DASHBOARD, it).apply() }
     }
@@ -240,8 +250,7 @@ class SharedPreference(context: Context) {
         return pref.getString(PREF_DASHBOARD, "")
     }
 
-    fun resetSharedPref()
-    {
+    fun resetSharedPref() {
         pref.edit().clear().apply()
     }
 

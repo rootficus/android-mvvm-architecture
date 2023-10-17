@@ -11,5 +11,6 @@ data class SignInRequest(
 
     @SerializedName("password") var password: String,
 
+    @SerializedName("device_token") var deviceToken: String,
 
 ) : Serializable

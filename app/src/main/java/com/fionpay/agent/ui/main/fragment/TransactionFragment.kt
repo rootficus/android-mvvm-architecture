@@ -82,6 +82,12 @@ class TransactionFragment :
 
     }
 
+    private fun initializeDagger() {
+        DaggerTransactionFragmentComponent.builder().appComponent(FionSDK.appComponent)
+            .transactionFragmentModule(TransactionFragmentModule())
+            .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
+    }
+
     override fun onResume() {
         super.onResume()
         setSpinnerData()
@@ -282,7 +288,6 @@ class TransactionFragment :
         datePickerDialog.show()
     }
 
-
     private fun setAdapter() {
         transactionListAdapter = TransactionListAdapter(arrayList)
         transactionListAdapter?.listener = cardListener
@@ -296,11 +301,7 @@ class TransactionFragment :
         }
     }
 
-    private fun initializeDagger() {
-        DaggerTransactionFragmentComponent.builder().appComponent(FionSDK.appComponent)
-            .transactionFragmentModule(TransactionFragmentModule())
-            .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
-    }
+
 
 
     private fun getTransactionRecord() {
