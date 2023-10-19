@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:text="@string/transactions"
-                android:textColor="@color/primaryBlue"
+                android:textColor="@color/homeTextColor"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -56,6 +56,7 @@
             android:background="@drawable/round_search_corners"
             android:drawableLeft="@android:drawable/ic_menu_search"
             android:drawableTint="@color/black"
+            android:textColor="@color/homeTextColor"
             android:paddingLeft="@dimen/_5sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/top_head_layout"
@@ -247,10 +248,46 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:divider="@android:color/darker_gray"
             android:dividerHeight="1dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/layoutTotal"
             app:layout_constraintTop_toBottomOf="@+id/layoutFilter"
             tools:itemCount="10"
             tools:listitem="@layout/item_transaction_manager" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layoutTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recentModemsList">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelTotalBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="Total Balance : "
+                android:textColor="@color/primaryBlue"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTotalBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="৳100"
+                android:textColor="@color/primaryBlue"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <include
             android:id="@+id/progressView"

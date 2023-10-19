@@ -28,7 +28,7 @@
             android:layout_marginTop="@dimen/_30sdp"
             android:fontFamily="@font/poppins"
             android:text="@string/existing_balance"
-            android:textColor="@color/primaryBlue"
+            android:textColor="@color/homeTextColor"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/topHeader" />
@@ -42,7 +42,7 @@
             android:layout_marginTop="@dimen/_2sdp"
             android:fontFamily="@font/poppins"
             android:text="৳12,000.00"
-            android:textColor="@color/primaryBlue"
+            android:textColor="@color/homeTextColor"
             android:textSize="32sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/labelExistingBalance" />
@@ -56,7 +56,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:fontFamily="@font/poppins"
             android:text="@string/add_balance"
-            android:textColor="@color/primaryBlue"
+            android:textColor="@color/homeTextColor"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtExistingBalance" />
@@ -73,7 +73,7 @@
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:padding="15dp"
-            android:textColor="@color/primaryBlue"
+            android:textColor="@color/homeTextColor"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.49"
@@ -100,7 +100,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/poppins"
             android:text="New balance will be: ৳0.0"
-            android:textColor="@color/primaryBlue"
+            android:textColor="@color/homeTextColor"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etAddBalance" />

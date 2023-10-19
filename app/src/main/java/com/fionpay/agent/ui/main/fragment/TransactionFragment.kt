@@ -23,6 +23,7 @@ import com.fionpay.agent.R
 import com.fionpay.agent.data.model.request.Bank
 import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.request.TransactionFilterRequest
+import com.fionpay.agent.data.model.response.DashBoardItemResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.databinding.AlterPendingDialogBinding
 import com.fionpay.agent.databinding.FragmentTransactionsBinding
@@ -39,6 +40,7 @@ import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
 import com.fionpay.agent.utils.Utility
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -95,14 +97,17 @@ class TransactionFragment :
 
     private fun initialization() {
         setSpinnerData()
-
+        val gson = Gson()
+        val json: String? = viewModel.getDashBoardDataModel()
+        val obj: DashBoardItemResponse =
+            gson.fromJson(json, DashBoardItemResponse::class.java)
         mDataBinding.txtStartDate.text = Utility.dateBeforeOneMonth()
         mDataBinding.txtEndDate.text = Utility.currentDate()
         startDate = dateFormat.parse(mDataBinding.txtStartDate.text.toString())
         endDate = dateFormat.parse(mDataBinding.txtEndDate.text.toString())
         mDataBinding.txtStartDate.setOnClickListener { showDatePickerDialog(mDataBinding.txtStartDate) }
         mDataBinding.txtEndDate.setOnClickListener { showDatePickerDialog(mDataBinding.txtEndDate) }
-
+        mDataBinding.txtTotalBalance.text ="৳${obj.totalBalance.toString()}"
         mDataBinding.refreshButton.setOnClickListener {
             getTransactionRecord()
         }

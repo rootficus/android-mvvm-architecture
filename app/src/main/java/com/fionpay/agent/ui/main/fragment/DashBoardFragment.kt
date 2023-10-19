@@ -72,8 +72,6 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
 
     private fun initializeView() {
         val name = sharedPreference.getFullName() ?: "Agent"
-        showMessage("${sharedPreference.getDeviceToken()}")
-
         mDataBinding.textAgentFullName.text = getString(R.string.userName, name)
         mDataBinding.notificationButton.setOnClickListener {
             val mBuilder = AlertDialog.Builder(activity)

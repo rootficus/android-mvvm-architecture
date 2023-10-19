@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:text="@string/name_dot"
-                android:textColor="@color/primaryBlue"
+                android:textColor="@color/homeTextColor"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,7 +63,7 @@
                 android:layout_marginStart="@dimen/_30sdp"
                 android:fontFamily="@font/poppins"
                 android:text="Akash Singh"
-                android:textColor="@color/primaryBlue"
+                android:textColor="@color/homeTextColor"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/labelName" />
@@ -77,7 +77,7 @@
                 android:layout_marginEnd="@dimen/_30sdp"
                 android:fontFamily="@font/poppins"
                 android:text="@string/pin_code_dot"
-                android:textColor="@color/primaryBlue"
+                android:textColor="@color/homeTextColor"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/labelName" />
 
@@ -89,7 +89,7 @@
                 android:layout_marginStart="@dimen/_30sdp"
                 android:fontFamily="@font/poppins"
                 android:text="123456"
-                android:textColor="@color/primaryBlue"
+                android:textColor="@color/homeTextColor"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/labelPinCode" />
@@ -102,7 +102,7 @@
                 android:layout_marginEnd="@dimen/_30sdp"
                 android:fontFamily="@font/poppins"
                 android:text="@string/balance_added_dot"
-                android:textColor="@color/primaryBlue"
+                android:textColor="@color/homeTextColor"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/labelPinCode" />
 
@@ -114,7 +114,7 @@
                 android:layout_marginStart="@dimen/_30sdp"
                 android:fontFamily="@font/poppins"
                 android:text="৳‎1000.00"
-                android:textColor="@color/primaryBlue"
+                android:textColor="@color/homeTextColor"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/labelBalanceAdded" />

@@ -9,30 +9,32 @@
             name="dashBoardViewModel"
             type="com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel" />
     </data>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bgPrimaryColor">
 
-    <include
-        android:id="@+id/topHeader"
-        layout="@layout/header"
-        android:elevation="@dimen/_10sdp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recentModemsList"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"
-        tools:itemCount="3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/item_notification"
-        app:layout_constraintTop_toBottomOf="@+id/topHeader" />
-    <include
-        android:id="@+id/progressView"
-        layout="@layout/include_progress_bar" />
+        android:layout_height="match_parent"
+        android:background="@color/bgPrimaryColor">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            android:id="@+id/topHeader"
+            layout="@layout/header"
+            android:elevation="@dimen/_10sdp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recentModemsList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topHeader"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_notification" />
+
+        <include
+            android:id="@+id/progressView"
+            layout="@layout/include_progress_bar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

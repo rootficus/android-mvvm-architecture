@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <!-- OTP Box 1 -->
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/otpBox1"
         android:layout_width="0dp"
         android:layout_height="60dp"
@@ -15,10 +15,11 @@
         android:gravity="center"
         android:inputType="number"
         android:maxLength="1"
+        android:textColor="@color/textColor"
         android:textSize="24sp" />
 
     <!-- OTP Box 2 -->
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/otpBox2"
         android:layout_width="0dp"
         android:layout_height="60dp"
@@ -30,10 +31,11 @@
         android:gravity="center"
         android:inputType="number"
         android:maxLength="1"
+        android:textColor="@color/textColor"
         android:textSize="24sp" />
 
     <!-- OTP Box 3 -->
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/otpBox3"
         android:layout_width="0dp"
         android:layout_height="60dp"
@@ -45,10 +47,11 @@
         android:gravity="center"
         android:inputType="number"
         android:maxLength="1"
+        android:textColor="@color/textColor"
         android:textSize="24sp" />
 
     <!-- OTP Box 4 -->
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/otpBox4"
         android:layout_width="0dp"
         android:layout_height="60dp"
@@ -60,9 +63,10 @@
         android:gravity="center"
         android:inputType="number"
         android:maxLength="1"
+        android:textColor="@color/textColor"
         android:textSize="24sp" />
     <!-- OTP Box 5 -->
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/otpBox5"
         android:layout_width="0dp"
         android:layout_height="60dp"
@@ -74,9 +78,10 @@
         android:gravity="center"
         android:inputType="number"
         android:maxLength="1"
+        android:textColor="@color/textColor"
         android:textSize="24sp" />
     <!-- OTP Box 6 -->
-    <EditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/otpBox6"
         android:layout_width="0dp"
         android:layout_height="60dp"
@@ -88,6 +93,7 @@
         android:gravity="center"
         android:inputType="number"
         android:maxLength="1"
+        android:textColor="@color/textColor"
         android:textSize="24sp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
