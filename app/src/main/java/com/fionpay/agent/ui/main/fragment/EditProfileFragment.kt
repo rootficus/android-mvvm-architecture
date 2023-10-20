@@ -118,9 +118,9 @@ class EditProfileFragment :
 
                         Glide.with(this)
                             .load(it.data?.profileImageUrl)
-                            .error(it.data?.profileImageUrl)
+                            .error(R.drawable.demo_user_image)
                             .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE)) // Optional caching strategy
-                            .into(mDataBinding.userProfileImage)
+                            .into(mDataBinding.userImage)
                     }
 
                     Status.ERROR -> {
@@ -157,9 +157,9 @@ class EditProfileFragment :
                             .navigate(R.id.navigation_settingFragment)
                         Glide.with(this)
                             .load(it.data?.profileImageUrl)
-                            .error(it.data?.profileImageUrl)
+                            .error(R.drawable.demo_user_image)
                             .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE)) // Optional caching strategy
-                            .into(mDataBinding.userProfileImage)
+                            .into(mDataBinding.userImage)
                     }
 
                     Status.ERROR -> {
@@ -329,9 +329,9 @@ class EditProfileFragment :
 
         Glide.with(requireActivity())
             .load(imagePath)
-            .error(imagePath)
+            .error(R.drawable.demo_user_image)
             .skipMemoryCache(false).diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-            .into(mDataBinding.userProfileImage)
+            .into(mDataBinding.userImage)
     }
 
 }

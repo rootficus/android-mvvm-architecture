@@ -15,6 +15,7 @@
             android:id="@+id/layoutCard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/homeCardBackColor"
             android:paddingHorizontal="@dimen/_10sdp"
             android:paddingVertical="@dimen/_12sdp">
 

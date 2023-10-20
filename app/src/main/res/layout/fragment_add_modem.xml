@@ -27,13 +27,13 @@
         android:layout_marginTop="@dimen/_30sdp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/round_corners"
-        android:backgroundTint="#F5F5F5"
+        android:backgroundTint="@color/sigInEditTextBackColor"
+        android:textColor="@color/textColor"
         android:fontFamily="@font/poppins"
         android:hint="@string/first_name"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:padding="15dp"
-        android:textColor="@color/homeTextColor"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,13 +59,13 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/round_corners"
-        android:backgroundTint="#F5F5F5"
+        android:backgroundTint="@color/sigInEditTextBackColor"
+        android:textColor="@color/textColor"
         android:fontFamily="@font/poppins"
         android:hint="@string/last_name"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:padding="15dp"
-        android:textColor="@color/homeTextColor"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,13 +96,14 @@
         app:layout_constraintTop_toBottomOf="@id/etLastName" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_15sdp"
+        android:layout_width="@dimen/_18sdp"
+        android:layout_height="@dimen/_18sdp"
         android:src="@drawable/refresh"
+        android:tint="@color/homeTextColor"
         app:layout_constraintBottom_toBottomOf="@id/labelRefresh"
         app:layout_constraintEnd_toStartOf="@id/labelRefresh"
         app:layout_constraintTop_toTopOf="@id/labelRefresh"
-        app:tint="@color/primaryBlue" />
+        />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/labelRefresh"

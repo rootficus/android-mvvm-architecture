@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingHorizontal="@dimen/_10sdp"
-            android:background="@color/bgPrimaryColor"
+            android:background="@color/homeCardBackColor"
             android:paddingVertical="@dimen/_10sdp">
 
             <androidx.appcompat.widget.AppCompatImageView

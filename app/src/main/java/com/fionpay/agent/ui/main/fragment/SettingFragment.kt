@@ -68,7 +68,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_s
 
         Glide.with(this)
             .load(profileImage)
-            .error(profileImage)
+            .error(R.drawable.demo_user_image)
             .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE)) // Optional caching strategy
             .into(mDataBinding.userImage)
 

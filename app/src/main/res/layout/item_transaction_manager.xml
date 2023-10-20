@@ -14,6 +14,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutCard"
             android:layout_width="match_parent"
+            android:background="@color/homeCardBackColor"
             android:layout_height="match_parent"
             android:paddingHorizontal="@dimen/_10sdp"
             android:paddingTop="@dimen/_12sdp">

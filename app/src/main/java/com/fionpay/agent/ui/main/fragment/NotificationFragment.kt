@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.response.TransactionModel
 import com.fionpay.agent.databinding.FragmentNotificationBinding
@@ -46,6 +47,9 @@ class NotificationFragment :
 
     private fun initialization() {
         mDataBinding.topHeader.txtHeader.text = "Notifications"
+        mDataBinding.topHeader.backButton.setOnClickListener {
+            Navigation.findNavController(requireView()).navigateUp()
+        }
     }
 
     private fun initializeDagger() {

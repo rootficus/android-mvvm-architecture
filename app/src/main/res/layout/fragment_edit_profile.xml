@@ -33,32 +33,42 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/topHeader" />
 
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/editProfileIcon"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_marginBottom="-10dp"
-            android:src="@drawable/edit_profile_icon"
-            app:layout_constraintEnd_toEndOf="@id/imageCard"
-            app:layout_constraintStart_toStartOf="@id/imageCard"
-            app:layout_constraintTop_toBottomOf="@id/imageCard" />
-
         <androidx.cardview.widget.CardView
             android:id="@+id/imageCard"
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_100sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            app:cardCornerRadius="15dp"
+            android:layout_width="@dimen/_180sdp"
+            android:layout_height="@dimen/_180sdp"
+            android:layout_marginTop="@dimen/_25sdp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="115dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/labelUploadPicture">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/userProfileImage"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY" />
+                android:background="@android:color/transparent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/userImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/demo_user_image"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/editProfileIcon"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:src="@drawable/edit_profile_icon"
+                    app:layout_constraintBottom_toBottomOf="@id/userImage"
+                    app:layout_constraintEnd_toEndOf="@id/userImage"
+                    app:layout_constraintStart_toStartOf="@id/userImage" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -75,7 +85,7 @@
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editProfileIcon" />
+            app:layout_constraintTop_toBottomOf="@id/imageCard" />
 
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -86,13 +96,13 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/round_corners"
-            android:backgroundTint="#F5F5F5"
+            android:backgroundTint="@color/sigInEditTextBackColor"
             android:fontFamily="@font/poppins"
             android:hint="@string/name"
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:padding="15dp"
-            android:textColor="@color/homeTextColor"
+            android:textColor="@color/textColor"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

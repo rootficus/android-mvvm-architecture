@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <color name="bgPrimaryColor">#FF000000</color>
+   <color name="bgPrimaryColor">#33000000</color>
    <color name="homeTextColor">#FFFFFFFF</color>
    <color name="bottomNacColor">#1A000000</color>
+   <color name="homeCardBackColor">@color/black</color>
+
    <color name="textColor">@color/white</color>
+
+
+   <color name="sigInButtonTextColor">@color/black</color>
+   <color name="sigInEditTextBackColor">@color/black</color>
 
    <!-- <color name="black">#FF000000</color>
     <color name="textColor">#222121</color>

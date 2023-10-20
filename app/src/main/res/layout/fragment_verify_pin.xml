@@ -77,8 +77,8 @@
                     android:fontFamily="@font/roboto_medium"
                     android:text="@string/welcome_text"
                     android:textAlignment="center"
-                    android:textSize="22sp"
                     android:textColor="@color/textColor"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/txt_sub_heading"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -93,8 +93,8 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="@string/verify_sub_heading"
                     android:textAlignment="center"
-                    android:textSize="14sp"
                     android:textColor="@color/textColor"
+                    android:textSize="14sp"
                     app:layout_constraintBottom_toTopOf="@id/otp_layout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -102,16 +102,16 @@
 
 
                 <include
+                    android:id="@+id/otp_layout"
+                    layout="@layout/optview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp"
-                    android:id="@+id/otp_layout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
                     app:layout_constraintBottom_toTopOf="@id/btnVerifyButton"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    layout="@layout/optview"/>
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnVerifyButton"
@@ -120,19 +120,19 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/btn_inactive_back"
-                    android:backgroundTint="@color/black"
+                    android:backgroundTint="@color/textColor"
                     android:fontFamily="@font/roboto_medium"
                     android:padding="15dp"
                     android:text="@string/continues"
                     android:textAllCaps="false"
-                    android:textColor="@color/white"
                     android:textSize="14sp"
-                    app:layout_constraintWidth_percent="0.8"
+                    android:textColor="@color/sigInButtonTextColor"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/otp_layout"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.8" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

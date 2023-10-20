@@ -4,11 +4,11 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="600dp"
+    android:background="@drawable/round_corners"
+    android:backgroundTint="@color/bgPrimaryColor"
     android:elevation="2dp"
     android:maxHeight="600dp"
-    android:background="@drawable/round_corners"
     android:paddingVertical="@dimen/_20sdp"
-    android:backgroundTint="@color/bgPrimaryColor"
     app:behavior_hideable="true"
     app:behavior_peekHeight="100dp"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">

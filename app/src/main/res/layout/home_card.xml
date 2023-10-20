@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="#EFEFEF"
-        app:cardCornerRadius="24dp"
+        app:cardCornerRadius="22dp"
         app:cardElevation="@dimen/_2sdp"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +20,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F1F5F9"
+            android:background="@color/homeCardBackColor"
             android:paddingHorizontal="@dimen/_10sdp"
             android:paddingVertical="@dimen/_6sdp" >
 

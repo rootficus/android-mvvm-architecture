@@ -9,214 +9,241 @@
             type="com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel" />
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bgPrimaryColor">
-
-    <include
-        android:id="@+id/topHeader"
-        layout="@layout/header"
-        android:elevation="@dimen/_10sdp" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/profileCard"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        app:cardCornerRadius="15dp"
-        app:layout_constraintTop_toBottomOf="@id/topHeader">
+        android:layout_height="match_parent"
+        android:background="@color/bgPrimaryColor">
+
+        <include
+            android:id="@+id/topHeader"
+            layout="@layout/header"
+            android:elevation="@dimen/_10sdp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/profileCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintTop_toBottomOf="@id/topHeader">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bgPrimaryColor"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="@dimen/_10sdp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/imageCardView"
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="52dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/userImage"
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="@dimen/_80sdp"
+                            android:src="@drawable/demo_user_image"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/editProfileIcon"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:src="@drawable/edit_profile_icon"
+                            app:layout_constraintBottom_toBottomOf="@id/userImage"
+                            app:layout_constraintEnd_toEndOf="@id/userImage"
+                            app:layout_constraintStart_toStartOf="@id/userImage" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="@font/poppins"
+                    android:text="Akash Singh"
+                    android:textColor="@color/homeTextColor"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@id/imageCardView"
+                    app:layout_constraintTop_toTopOf="@id/imageCardView" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="akashficus@gmail.com"
+                    android:textColor="@color/textColor"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@id/textName"
+                    app:layout_constraintTop_toBottomOf="@id/textName" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/editProfileButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_24sdp"
+                    android:background="@drawable/round_corners"
+                    android:backgroundTint="@color/primaryBlue"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    android:text="Edit Profile"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/imageCardView"
+                    app:layout_constraintStart_toStartOf="@id/textEmail"
+                    app:layout_constraintTop_toBottomOf="@id/textEmail" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/notificationCard"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/homeCardBackColor"
             android:paddingHorizontal="@dimen/_10sdp"
-            android:paddingVertical="@dimen/_10sdp">
+            android:paddingVertical="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/profileCard">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/userImage"
-                android:layout_width="@dimen/_80sdp"
-                android:layout_height="@dimen/_80sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:src="@drawable/demo_user_image"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/editProfileIcon"
+                android:id="@+id/notificationIcon"
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_25sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:src="@drawable/edit_profile_icon"
-                app:layout_constraintBottom_toBottomOf="@id/userImage"
-                app:layout_constraintEnd_toEndOf="@id/userImage" />
+                android:src="@drawable/notification_setting_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/homeTextColor" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textName"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_5sdp"
                 android:fontFamily="@font/poppins"
-                android:text="Akash Singh"
+                android:text="@string/notifications"
                 android:textColor="@color/homeTextColor"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/userImage"
-                app:layout_constraintTop_toTopOf="@id/userImage" />
+                app:layout_constraintBottom_toBottomOf="@id/notificationIcon"
+                app:layout_constraintStart_toEndOf="@id/notificationIcon"
+                app:layout_constraintTop_toTopOf="@id/notificationIcon" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textEmail"
+            <androidx.appcompat.widget.SwitchCompat
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="akashficus@gmail.com"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@id/textName"
-                app:layout_constraintTop_toBottomOf="@id/textName" />
+                android:layout_height="@dimen/_25sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:thumbTint="@color/switch_thumb_selector"
+                app:trackTint="@color/switch_track_selector" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/editProfileButton"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_24sdp"
-                android:background="@drawable/round_corners"
-                android:backgroundTint="@color/primaryBlue"
-                android:paddingHorizontal="@dimen/_10sdp"
-                android:text="Edit Profile"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@id/userImage"
-                app:layout_constraintStart_toStartOf="@id/textEmail"
-                app:layout_constraintTop_toBottomOf="@id/textEmail" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/notificationCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:background="@drawable/round_corners"
-        android:backgroundTint="#F5F5F5"
-        android:paddingHorizontal="@dimen/_10sdp"
-        android:paddingVertical="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/profileCard">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/supportCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/homeCardBackColor"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/notificationCard">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/notificationIcon"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:src="@drawable/notification_setting_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/supportIcon"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:src="@drawable/support_setting_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/homeTextColor" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:fontFamily="@font/poppins"
-            android:text="@string/notifications"
-            android:textColor="@color/homeTextColor"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/notificationIcon"
-            app:layout_constraintStart_toEndOf="@id/notificationIcon"
-            app:layout_constraintTop_toTopOf="@id/notificationIcon" />
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_25sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:thumbTint="@color/switch_thumb_selector"
-            app:trackTint="@color/switch_track_selector" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/poppins"
+                android:text="@string/support"
+                android:textColor="@color/homeTextColor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/supportIcon"
+                app:layout_constraintStart_toEndOf="@id/supportIcon"
+                app:layout_constraintTop_toTopOf="@id/supportIcon" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/logOutCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/homeCardBackColor"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/supportCard">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/logOutIcon"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:src="@drawable/logout_setting_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/homeTextColor" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/poppins"
+                android:text="@string/log_out"
+                android:textColor="@color/homeTextColor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/logOutIcon"
+                app:layout_constraintStart_toEndOf="@id/logOutIcon"
+                app:layout_constraintTop_toTopOf="@id/logOutIcon" />
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/supportCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:background="@drawable/round_corners"
-        android:backgroundTint="#F5F5F5"
-        android:paddingHorizontal="@dimen/_10sdp"
-        android:paddingVertical="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/notificationCard">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/supportIcon"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:src="@drawable/support_setting_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:fontFamily="@font/poppins"
-            android:text="@string/support"
-            android:textColor="@color/homeTextColor"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/supportIcon"
-            app:layout_constraintStart_toEndOf="@id/supportIcon"
-            app:layout_constraintTop_toTopOf="@id/supportIcon" />
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/logOutCard"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:background="@drawable/round_corners"
-        android:backgroundTint="#F5F5F5"
-        android:paddingHorizontal="@dimen/_10sdp"
-        android:paddingVertical="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/supportCard">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/logOutIcon"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:src="@drawable/logout_setting_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:fontFamily="@font/poppins"
-            android:text="@string/log_out"
-            android:textColor="@color/homeTextColor"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/logOutIcon"
-            app:layout_constraintStart_toEndOf="@id/logOutIcon"
-            app:layout_constraintTop_toTopOf="@id/logOutIcon" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

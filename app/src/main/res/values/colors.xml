@@ -42,7 +42,12 @@
      <!--   Home-->
     <color name="homeTextColor">@color/primaryBlue</color>
     <color name="bottomNacColor">@color/white</color>
+    <color name="homeCardBackColor">@color/white</color>
 
     <color name="textColor">@color/black</color>
+    <color name="sigInButtonTextColor">@color/white</color>
+    <color name="sigInEditTextBackColor">@color/white</color>
+
+
 
 </resources>
