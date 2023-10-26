@@ -56,8 +56,8 @@
             android:background="@drawable/round_search_corners"
             android:backgroundTint="@color/sigInEditTextBackColor"
             android:textColor="@color/textColor"
-            android:drawableLeft="@android:drawable/ic_menu_search"
-            android:paddingLeft="@dimen/_5sdp"
+            android:drawableStart="@android:drawable/ic_menu_search"
+            android:paddingStart="@dimen/_5sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/top_head_layout"
             app:layout_constraintWidth_percent="0.8" />

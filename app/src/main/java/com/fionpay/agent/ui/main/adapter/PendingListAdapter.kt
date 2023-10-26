@@ -72,7 +72,7 @@ class PendingListAdapter(private var itemList: ArrayList<PendingModemResponse>) 
                 )
             )
         } else {
-            binding.layoutCard.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
+            binding.layoutCard.setBackgroundColor(ContextCompat.getColor(context, R.color.homeCardBackColor))
         }
     }
 

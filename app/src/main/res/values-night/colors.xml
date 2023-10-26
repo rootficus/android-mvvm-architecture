@@ -10,7 +10,7 @@
 
    <color name="sigInButtonTextColor">@color/black</color>
    <color name="sigInEditTextBackColor">@color/black</color>
-
+   <color name="activeCard">#1A000000</color>
    <!-- <color name="black">#FF000000</color>
     <color name="textColor">#222121</color>
     <color name="white">#FFFFFFFF</color>
