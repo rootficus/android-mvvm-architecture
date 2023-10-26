@@ -172,9 +172,9 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
             (ContextCompat.getColorStateList(requireContext(), R.color.activePendingBg))
         binding.txtAmount.text = "৳${item.amount}"
         if (item.paymentType == "Cash In") {
-            binding.txtTransactionId.text = "${item.customer.toString()}"
-        } else {
             binding.txtTransactionId.text = "#${item.transactionId.toString()}"
+        } else {
+            binding.txtTransactionId.text = "☎${item.customer.toString()}"
         }
         binding.txtDate.text = Utility.convertTransactionDate(item.date)
         binding.txtBankType.text = item.bankType

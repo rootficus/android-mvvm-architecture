@@ -138,7 +138,6 @@ class VerifyPinFragment :
             }
 
         }
-        /*  mDataBinding.editTextPin.setText("224951")*/
     }
 
     private fun openBottomDialog() {
