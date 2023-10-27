@@ -50,6 +50,7 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResp
             // Login Status
             binding.txtLoggedIn.text = item.loginStatus.toString()
             //Blocked Or Unblocked Status UI
+            binding.txtBlock.text = item.availability.toString()
             setBlockUnBlockUI(item, binding)
 
             //Active Or InActive Status UI
@@ -134,7 +135,6 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResp
 
     private fun setBlockUnBlockUI(item: GetModemsListResponse, binding: ItemModemsManagerBinding) {
         if (item.availability.toString() == "Off") {
-            binding.txtBlock.text = "Blocked"
             binding.txtBlock.setTextColor(ContextCompat.getColor(context, R.color.reject))
             binding.txtBlock.backgroundTintList =
                 ContextCompat.getColorStateList(
@@ -142,7 +142,6 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResp
                     R.color.activeDangerBg
                 )
         } else {
-            binding.txtBlock.text = "Unblocked"
             binding.txtBlock.setTextColor(ContextCompat.getColor(context, R.color.greenColor))
             binding.txtBlock.backgroundTintList =
                 ContextCompat.getColorStateList(
@@ -154,7 +153,7 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResp
 
         binding.txtBlock.setOnClickListener {
             val blockOrUnblocked: String =
-                if (binding.txtBlock.text.toString() == "Blocked") {
+                if (binding.txtBlock.text.toString() == "Off") {
                     "On"
                 } else {
                     "Off"
