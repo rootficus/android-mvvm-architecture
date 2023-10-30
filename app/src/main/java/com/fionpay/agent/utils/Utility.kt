@@ -2,6 +2,11 @@ package com.fionpay.agent.utils
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Typeface
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -139,6 +144,24 @@ object Utility {
         calendar.add(Calendar.DATE, 7)
         dayOfMonth = simpleDateFormat.format(calendar.time)
         return dayOfMonth
+    }
+
+    fun textAsBitmap(text: String): Bitmap {
+        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+        paint.textSize = 50f
+        paint.color = Color.WHITE
+        paint.textAlign = Paint.Align.LEFT
+        val textTypeface = Typeface.create(Typeface.DEFAULT, Typeface.NORMAL)
+        paint.typeface = textTypeface
+
+        val baseline = -paint.ascent() // ascent() is negative
+        val width = (paint.measureText(text) + 0.5f).toInt() // round
+        val height = (baseline + paint.descent() + 0.5f).toInt()
+
+        val image = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(image)
+        canvas.drawText(text, 0f, baseline, paint)
+        return image
     }
 
 

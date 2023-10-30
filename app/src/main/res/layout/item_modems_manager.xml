@@ -15,6 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/modemLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/homeCardBackColor"
@@ -36,9 +37,9 @@
                     android:layout_weight="0.3"
                     android:fontFamily="@font/poppins"
                     android:text="Akash"
+                    android:textColor="@color/textColor"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:textColor="@color/textColor"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,13 +47,13 @@
                     android:id="@+id/txtPinCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
                     android:layout_weight="0.1"
                     android:fontFamily="@font/poppins"
                     android:letterSpacing="1"
                     android:text="123456"
-                    android:textSize="12sp"
                     android:textColor="@color/textColor"
-                    android:layout_marginTop="@dimen/_3sdp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txtUserName" />
@@ -63,9 +64,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:text="৳‎12,000.00"
-                    android:textSize="18sp"
+                    android:text="৳12,000.00"
                     android:textColor="@color/textColor"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -80,8 +81,8 @@
                 android:id="@+id/viewSeparator"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:background="@color/gray"
                 android:layout_marginTop="@dimen/_5sdp"
+                android:background="@color/gray"
                 android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -200,55 +201,55 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtActive"
                 android:layout_width="0dp"
-                app:layout_constraintWidth_percent="0.3"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:textAlignment="center"
                 android:background="@drawable/rounded_corners"
                 android:fontFamily="@font/poppins"
                 android:paddingHorizontal="@dimen/_10sdp"
                 android:paddingVertical="@dimen/_3sdp"
-                android:textColor="@color/textColor"
                 android:text="Active"
+                android:textAlignment="center"
+                android:textColor="@color/textColor"
                 app:layout_constraintEnd_toStartOf="@id/txtBlock"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtTotalCashIn" />
+                app:layout_constraintTop_toBottomOf="@id/txtTotalCashIn"
+                app:layout_constraintWidth_percent="0.3" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtBlock"
                 android:layout_width="0dp"
-                app:layout_constraintWidth_percent="0.3"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/rounded_corners"
                 android:backgroundTint="@color/activeGreenBg"
                 android:fontFamily="@font/poppins"
                 android:paddingHorizontal="@dimen/_10sdp"
-                android:textAlignment="center"
                 android:paddingVertical="@dimen/_3sdp"
                 android:text="Unblocked"
+                android:textAlignment="center"
                 android:textColor="@color/textColor"
                 app:layout_constraintEnd_toStartOf="@id/txtLoggedIn"
                 app:layout_constraintStart_toEndOf="@id/txtActive"
-                app:layout_constraintTop_toBottomOf="@id/txtTotalCashIn" />
+                app:layout_constraintTop_toBottomOf="@id/txtTotalCashIn"
+                app:layout_constraintWidth_percent="0.3" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtLoggedIn"
                 android:layout_width="0dp"
-                app:layout_constraintWidth_percent="0.3"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@drawable/rounded_corners"
                 android:backgroundTint="@color/activeGreenBg"
                 android:fontFamily="@font/poppins"
                 android:paddingHorizontal="@dimen/_10sdp"
-                android:textAlignment="center"
                 android:paddingVertical="@dimen/_3sdp"
                 android:text="Logged In"
+                android:textAlignment="center"
                 android:textColor="@color/textColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/txtBlock"
-                app:layout_constraintTop_toBottomOf="@id/txtTotalCashIn" />
+                app:layout_constraintTop_toBottomOf="@id/txtTotalCashIn"
+                app:layout_constraintWidth_percent="0.3" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

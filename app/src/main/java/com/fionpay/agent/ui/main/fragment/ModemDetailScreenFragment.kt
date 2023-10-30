@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.fionpay.agent.data.model.response.GetMessageManageRecord
+import android.widget.Toast
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.databinding.ModemBottomSheetBinding
-import org.jetbrains.annotations.Nullable
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
 class ModemDetailScreenFragment : BottomSheetDialogFragment() {
@@ -30,23 +29,26 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val getModemsListResponse =
-            arguments?.getSerializable(GetMessageManageRecord::class.java.name) as GetModemsListResponse
-   /*     binding.textType?.text = getModemsListResponse.smsType.toString()
-        binding.textOperator?.text = getModemsListResponse.operator.toString()
-        binding.textDeviceId?.text = getModemsListResponse.deviceId.toString()
-        binding.textSimId?.text = getModemsListResponse.simId.toString()
-        binding.textDeviceInfo?.text = getModemsListResponse.deviceInfo.toString()
-        //binding.textAgent?.text =getModemsListResponse.a.toString()
-        if (getModemsListResponse.isActive == true) {
-            binding.textStatus?.text = "Active"
-        }else
-        {
-            binding.textStatus?.text = "Offline"
+            arguments?.getSerializable(GetModemsListResponse::class.java.name) as GetModemsListResponse
+        val totalBalance = arguments?.getString("TotalBalance")
+        binding.labelTitle.text =
+            "${getModemsListResponse.firstName} ${getModemsListResponse.lastName}"
+        binding.etCurrentBalance.setText("৳${getModemsListResponse.balance}")
+        val selectedId: Int = binding.radioGroup.checkedRadioButtonId
+
+        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                binding.btnAdd.id -> {
+                    Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show()
+                }
+
+                binding.btnRemove.id -> {
+                    Toast.makeText(context, "Remove", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
-
-        binding.textPhone?.text = getModemsListResponse.phoneNumber.toString()*/
-
         binding.imageClose.setOnClickListener {
             dismiss()
         }

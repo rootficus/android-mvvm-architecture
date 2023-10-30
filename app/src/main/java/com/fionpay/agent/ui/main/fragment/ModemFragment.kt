@@ -16,6 +16,7 @@ import com.fionpay.agent.R
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
 import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateLoginRequest
+import com.fionpay.agent.data.model.response.DashBoardItemResponse
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.databinding.FragmentModemBinding
 import com.fionpay.agent.sdkInit.FionSDK
@@ -29,6 +30,7 @@ import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
+import com.google.gson.Gson
 import java.util.Locale
 import javax.inject.Inject
 
@@ -53,6 +55,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
 
     private var apiCall: String = ""
     private var filter = 0
+    lateinit var obj: DashBoardItemResponse
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -70,6 +73,10 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
 
     private fun initializeView() {
         getBundleData()
+        val gson = Gson()
+        val json: String? = viewModel.getDashBoardDataModel()
+        obj =
+            gson.fromJson(json, DashBoardItemResponse::class.java)
         mDataBinding.searchView.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -146,6 +153,18 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         modemsManagerListAdapter?.notifyDataSetChanged()
     }
 
+    private val modemDetailScreenActionListener =
+        object : ModemDetailScreenFragment.BottomDialogEvent {
+
+            override fun onAcceptRequest(getModemsListResponse: GetModemsListResponse) {
+                showMessage("Accept")
+            }
+
+            override fun onRejectedRequest(getModemsListResponse: GetModemsListResponse) {
+                showMessage("Reject")
+            }
+
+        }
     private val cardListener = object : ModemsManagerListAdapter.ModemCardEvent {
         override fun onStatusClicked(updateActiveInActiveRequest: UpdateActiveInActiveRequest) {
             updateActiveInActiveStatusApi(updateActiveInActiveRequest)
@@ -157,6 +176,21 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
 
         override fun onLoginClicked(updateLoginRequest: UpdateLoginRequest) {
             updateLoginApi(updateLoginRequest)
+        }
+
+        override fun onCardClick(getModemsListResponse: GetModemsListResponse) {
+            var modemSheetFragment = ModemDetailScreenFragment()
+            modemSheetFragment.listener = modemDetailScreenActionListener
+            val bundle = Bundle()
+            bundle.putSerializable(GetModemsListResponse::class.java.name, getModemsListResponse)
+            bundle.putString("TotalBalance", "${obj.totalBalance.toString()}")
+            modemSheetFragment.arguments = bundle
+            activity?.supportFragmentManager?.let {
+                modemSheetFragment.show(
+                    it,
+                    "ActionBottomDialogFragment"
+                )
+            }
         }
     }
 

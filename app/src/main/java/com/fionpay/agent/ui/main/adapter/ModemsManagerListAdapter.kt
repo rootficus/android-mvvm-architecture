@@ -19,6 +19,7 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResp
         fun onStatusClicked(updateActiveInActiveRequest: UpdateActiveInActiveRequest)
         fun onAvailabilityClicked(updateAvailabilityRequest: UpdateAvailabilityRequest)
         fun onLoginClicked(updateLoginRequest: UpdateLoginRequest)
+        fun onCardClick(getModemsListResponse: GetModemsListResponse)
     }
 
     var listener: ModemCardEvent? = null
@@ -59,13 +60,14 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResp
             //Login Or Logout Status UI
             setLoginLogoutUI(item, binding)
 
+            binding.modemLayout.setOnClickListener {
+                listener?.onCardClick(item)
+            }
         }
 
     }
 
     private fun setLoginLogoutUI(item: GetModemsListResponse, binding: ItemModemsManagerBinding) {
-
-
         if (binding.txtLoggedIn.text.toString().contains("Logout", true)) {
             binding.txtLoggedIn.setTextColor(ContextCompat.getColor(context, R.color.reject))
             binding.txtLoggedIn.backgroundTintList =
