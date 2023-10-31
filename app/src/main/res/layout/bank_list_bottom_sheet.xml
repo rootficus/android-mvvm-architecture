@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bgPrimaryColor">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/labelHead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/select_bank"
+        android:textColor="@color/homeTextColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/bankList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bankList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/_25sdp"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:isScrollContainer="true"
+        android:padding="@dimen/_5sdp"
+        android:scrollbarSize="@dimen/_5sdp"
+        app:layout_constraintBottom_toTopOf="@id/labelHead"
+        tools:listitem="@layout/item_bank" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/sendBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:background="@drawable/round_corners"
+        android:backgroundTint="@color/sigInEditTextBackColor"
+        android:text="Next"
+        android:textColor="@color/textColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bankList" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

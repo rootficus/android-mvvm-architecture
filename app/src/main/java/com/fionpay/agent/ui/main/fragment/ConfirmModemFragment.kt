@@ -62,6 +62,7 @@ class ConfirmModemFragment :
         mDataBinding.txtName.text = "${modemItemModel.firstName} ${modemItemModel.lastName}"
         mDataBinding.txtBalanceAdded.text = "৳${modemBalance}"
         mDataBinding.txtPinCode.text = "${modemItemModel.pinCode}"
+        mDataBinding.txtPhoneNumber.text = "${modemItemModel.phoneNumber}"
         mDataBinding.topHeader.backButton.setOnClickListener {
             Navigation.findNavController(requireView()).navigateUp()
         }

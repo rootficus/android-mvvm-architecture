@@ -2,20 +2,25 @@ package com.fionpay.agent.ui.main.fragment
 
 import android.app.Dialog
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
 import com.fionpay.agent.R
+import com.fionpay.agent.data.model.request.Bank
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.response.TransactionModel
+import com.fionpay.agent.databinding.BankListBottomSheetBinding
 import com.fionpay.agent.databinding.FragmentAddModemBinding
 import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
+import com.fionpay.agent.ui.main.adapter.BankListAdapter
 import com.fionpay.agent.ui.main.adapter.DashBoardListAdapter
 import com.fionpay.agent.ui.main.di.AddModemFragmentModule
 import com.fionpay.agent.ui.main.di.DaggerAddModemFragmentComponent
@@ -24,6 +29,8 @@ import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
 import com.fionpay.agent.utils.Utility
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import javax.inject.Inject
 
@@ -45,6 +52,10 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
     private lateinit var dashBoardListAdapter: DashBoardListAdapter
     private var arrayList: ArrayList<TransactionModel> = arrayListOf()
     val otpStringBuilder = StringBuilder()
+    private var bankList: List<Bank>? = listOf()
+    private lateinit var bankListAdapter: BankListAdapter
+    private var selectedBankId: Int? = 0
+    var selectedBankList: ArrayList<Bank> = arrayListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,6 +72,8 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
 
     private fun initialization() {
         mDataBinding.topHeader.txtHeader.text = getString(R.string.add_modems)
+        // Bank List
+        bankList = viewModel.getBanksListDao()
 
         val otpBoxes = arrayOf(
             mDataBinding.otpLayout.otpBox1,
@@ -73,7 +86,7 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
         generatePinCode()
         disableOtpBoxes()
         mDataBinding.labelRefresh.setOnClickListener {
-           generatePinCode()
+            generatePinCode()
         }
 
         mDataBinding.etName.addTextChangedListener(object : TextWatcher {
@@ -93,6 +106,7 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
             override fun afterTextChanged(s: Editable?) {
             }
         })
+
         mDataBinding.etLastName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -111,38 +125,49 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
             }
         })
 
+        mDataBinding.etPhoneNumber.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val phoneNumber = s.toString()
+
+                if (phoneNumber.isNotEmpty() && phoneNumber.length >= 8) {
+                    mDataBinding.phoneNumberVerified.visibility = View.VISIBLE
+                } else {
+                    mDataBinding.phoneNumberVerified.visibility = View.GONE
+                }
+            }
+        })
+
         mDataBinding.btnNext.setOnClickListener {
             if (mDataBinding.etName.text.toString().isEmpty()) {
                 Utility.callCustomToast(
                     requireContext(),
                     mActivity.getString(R.string.PLEASE_ENTER_NAME)
                 )
-                //mDataBinding.etName.error = mActivity.getString(R.string.PLEASE_ENTER_NAME)
             } else if (mDataBinding.etLastName.text.toString().isEmpty()) {
                 Utility.callCustomToast(
                     requireContext(),
                     mActivity.getString(R.string.PLEASE_ENTER_LAST_NAME)
                 )
-                //mDataBinding.etPhoneNumber.error = mActivity.getString(R.string.PLEASE_ENTER_PHONE_NUMBER)
+            } else if (mDataBinding.etPhoneNumber.text.toString().isEmpty()) {
+                Utility.callCustomToast(
+                    requireContext(),
+                    mActivity.getString(R.string.PLEASE_ENTER_NUMBER)
+                )
             } else if (otpStringBuilder.toString().isEmpty()) {
                 Utility.callCustomToast(
                     requireContext(),
                     mActivity.getString(R.string.PLEASE_ENTER_PIN)
                 )
             } else {
-                val modemItemModel = ModemItemModel(
-                    mDataBinding.etName.text.toString(),
-                    mDataBinding.etLastName.text.toString(),
-                    otpStringBuilder.toString().toLong()
-                )
-                val bundle = Bundle().apply {
-                    putSerializable("modemItemModel", modemItemModel)
-                }
-                Navigation.findNavController(requireView())
-                    .navigate(
-                        R.id.action_navigation_addModemFragment_to_navigation_addModemBalanceFragment,
-                        bundle
-                    )
+                openBottomBankListDialog()
+
                 //addModemItem()
             }
 
@@ -210,8 +235,7 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
                     Status.SUCCESS -> {
                         progressBar.dismiss()
                         val pinCode = it.data.toString()
-                        if(pinCode.length == 6)
-                        {
+                        if (pinCode.length == 6) {
                             otpStringBuilder.clear()
                             mDataBinding.otpLayout.otpBox1.setText(pinCode[0].toString())
                             mDataBinding.otpLayout.otpBox2.setText(pinCode[1].toString())
@@ -243,6 +267,57 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
 
     }
 
+    private var dialogBankListDialog: BottomSheetDialog? = null
+    private fun openBottomBankListDialog() {
+        dialogBankListDialog = BottomSheetDialog(mActivity)
+        val binding = BankListBottomSheetBinding.inflate(layoutInflater)
+        bankListAdapter = BankListAdapter(bankList)
+        binding.bankList.layoutManager = GridLayoutManager(context, 2)
+        bankListAdapter.listener = cardListener
+        binding.bankList.adapter = bankListAdapter
+        dialogBankListDialog?.setContentView(binding.root)
+        dialogBankListDialog?.setOnShowListener {
+            Handler().postDelayed({
+                dialogBankListDialog?.let {
+                    val sheet = it
+                    sheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                }
+            }, 0)
+        }
+        binding.sendBtn.setOnClickListener {
+            dialogBankListDialog?.dismiss()
+            if (selectedBankId != 0) {
+                val modemItemModel = ModemItemModel(
+                    mDataBinding.etName.text.toString(),
+                    mDataBinding.etLastName.text.toString(),
+                    otpStringBuilder.toString().toLong(),
+                    mDataBinding.etPhoneNumber.text.toString(),
+                    selectedBankId
+                )
+                val bundle = Bundle().apply {
+                    putSerializable("modemItemModel", modemItemModel)
+                }
+                Navigation.findNavController(requireView())
+                    .navigate(
+                        R.id.action_navigation_addModemFragment_to_navigation_addModemBalanceFragment,
+                        bundle
+                    )
+            }
+            /*Toast.makeText(
+                  requireContext(),
+                  "Please enter valid bank pincode.",
+                  Toast.LENGTH_SHORT
+              ).show()*/
+        }
+        dialogBankListDialog?.show()
+    }
+
+    private val cardListener = object : BankListAdapter.BankCardEvent {
+        override fun onCardClick(bankId: Int?) {
+            selectedBankId = bankId
+            showMessage(selectedBankId.toString())
+        }
+    }
 
     private fun addModemItem() {
 

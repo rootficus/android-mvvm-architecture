@@ -86,7 +86,7 @@ class AddModemBalanceFragment :
                     totalBalance = obj.currentBalance?.minus(newVal)
                     if (totalBalance != null && totalBalance!! > 0.0) {
                         mDataBinding.labelTotalBalance.text = "New balance will be: ৳$totalBalance"
-                    }else{
+                    } else {
                         "New balance will be: ৳${obj.currentBalance}"
                     }
 

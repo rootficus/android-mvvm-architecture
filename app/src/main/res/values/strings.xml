@@ -70,6 +70,7 @@
     <string name="login_text">Login to your account</string>
     <string name="login_sub_heading"><![CDATA[Enter your username & password to login]]></string>
     <string name="PLEASE_ENTER_PASSWORD">Please enter password</string>
+    <string name="PLEASE_ENTER_NUMBER">Please enter phone number</string>
     <string name="verify_sub_heading">Please enter your Pin Code</string>
     <string name="pinCode">Pin Code</string>
     <string name="PLEASE_ENTER_PIN">Please enter PinCode</string>
@@ -177,6 +178,8 @@
     <string name="take_photo">Camera</string>
     <string name="choose_existing_photo">Gallery</string>
     <string name="name">Name</string>
+    <string name="mobile_number">Phone Number</string>
+    <string name="select_bank">Select Bank</string>
     <string-array name="bankList">
         <item>item1</item>
         <item>item2</item>

@@ -10,4 +10,8 @@ data class ModemItemModel(
     var lastName: String? = null,
     @field:SerializedName("pincode")
     var pinCode: Long? = null,
+    @field:SerializedName("phone_number")
+    var phoneNumber: String? = null,
+    @field:SerializedName("bank_id")
+    var bankId: Int? = null,
 ) : Serializable

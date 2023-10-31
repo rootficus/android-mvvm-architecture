@@ -9,138 +9,169 @@
             type="com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel" />
     </data>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bgPrimaryColor">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bgPrimaryColor">
 
-    <include
-        android:id="@+id/topHeader"
-        layout="@layout/header"
-        android:elevation="@dimen/_10sdp" />
+        <include
+            android:id="@+id/topHeader"
+            layout="@layout/header"
+            android:elevation="@dimen/_10sdp" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/etName"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="@dimen/_30sdp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/round_corners"
-        android:backgroundTint="@color/sigInEditTextBackColor"
-        android:textColor="@color/textColor"
-        android:fontFamily="@font/poppins"
-        android:hint="@string/first_name"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:padding="15dp"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topHeader"
-        app:layout_constraintWidth_percent="0.85" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etName"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/sigInEditTextBackColor"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/first_name"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:padding="15dp"
+            android:textColor="@color/textColor"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topHeader"
+            app:layout_constraintWidth_percent="0.85" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/name_verified"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_5sdp"
-        android:src="@drawable/check_circle"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/etName"
-        app:layout_constraintEnd_toEndOf="@id/etName"
-        app:layout_constraintTop_toTopOf="@id/etName" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/name_verified"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:src="@drawable/check_circle"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/etName"
+            app:layout_constraintEnd_toEndOf="@id/etName"
+            app:layout_constraintTop_toTopOf="@id/etName" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/etLastName"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/round_corners"
-        android:backgroundTint="@color/sigInEditTextBackColor"
-        android:textColor="@color/textColor"
-        android:fontFamily="@font/poppins"
-        android:hint="@string/last_name"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:padding="15dp"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etName"
-        app:layout_constraintWidth_percent="0.85" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etLastName"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/sigInEditTextBackColor"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/last_name"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:padding="15dp"
+            android:textColor="@color/textColor"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etName"
+            app:layout_constraintWidth_percent="0.85" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/lastName_verified"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_5sdp"
-        android:visibility="gone"
-        android:src="@drawable/check_circle"
-        app:layout_constraintBottom_toBottomOf="@id/etLastName"
-        app:layout_constraintEnd_toEndOf="@id/etLastName"
-        app:layout_constraintTop_toTopOf="@id/etLastName" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/lastName_verified"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:src="@drawable/check_circle"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/etLastName"
+            app:layout_constraintEnd_toEndOf="@id/etLastName"
+            app:layout_constraintTop_toTopOf="@id/etLastName" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/labelPinCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:fontFamily="@font/poppins"
-        android:text="@string/pin_code"
-        android:textColor="@color/homeTextColor"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/otp_layout"
-        app:layout_constraintTop_toBottomOf="@id/etLastName" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etPhoneNumber"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/sigInEditTextBackColor"
+            android:fontFamily="@font/poppins"
+            android:hint="@string/mobile_number"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:padding="15dp"
+            android:textColor="@color/textColor"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etLastName"
+            app:layout_constraintWidth_percent="0.85" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="@dimen/_18sdp"
-        android:layout_height="@dimen/_18sdp"
-        android:src="@drawable/refresh"
-        android:tint="@color/homeTextColor"
-        app:layout_constraintBottom_toBottomOf="@id/labelRefresh"
-        app:layout_constraintEnd_toStartOf="@id/labelRefresh"
-        app:layout_constraintTop_toTopOf="@id/labelRefresh"
-        />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/phoneNumberVerified"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:src="@drawable/check_circle"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/etPhoneNumber"
+            app:layout_constraintEnd_toEndOf="@id/etPhoneNumber"
+            app:layout_constraintTop_toTopOf="@id/etPhoneNumber" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/labelRefresh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins"
-        android:text="@string/refresh"
-        android:textColor="@color/homeTextColor"
-        android:textSize="11sp"
-        app:layout_constraintEnd_toEndOf="@id/otp_layout"
-        app:layout_constraintTop_toBottomOf="@id/etLastName"
-        app:layout_constraintTop_toTopOf="@id/labelPinCode" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelPinCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/pin_code"
+            android:textColor="@color/homeTextColor"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/otp_layout"
+            app:layout_constraintTop_toBottomOf="@id/etPhoneNumber" />
 
-    <include
-        android:id="@+id/otp_layout"
-        layout="@layout/optview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/labelPinCode"
-        app:layout_constraintWidth_percent="0.85" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:src="@drawable/refresh"
+            android:tint="@color/homeTextColor"
+            app:layout_constraintBottom_toBottomOf="@id/labelRefresh"
+            app:layout_constraintEnd_toStartOf="@id/labelRefresh"
+            app:layout_constraintTop_toTopOf="@id/labelRefresh" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_next"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="@dimen/_20sdp"
-        android:background="@drawable/button_gradient"
-        android:text="@string/next"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.85" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:text="@string/refresh"
+            android:textColor="@color/homeTextColor"
+            android:textSize="11sp"
+            app:layout_constraintEnd_toEndOf="@id/otp_layout"
+            app:layout_constraintTop_toBottomOf="@id/etLastName"
+            app:layout_constraintTop_toTopOf="@id/labelPinCode" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            android:id="@+id/otp_layout"
+            layout="@layout/optview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/labelPinCode"
+            app:layout_constraintWidth_percent="0.85" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_next"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:background="@drawable/button_gradient"
+            android:text="@string/next"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.85" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

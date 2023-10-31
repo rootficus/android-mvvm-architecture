@@ -119,12 +119,38 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/labelBalanceAdded" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:fontFamily="@font/poppins"
+                android:text="@string/mobile_number"
+                android:textColor="@color/homeTextColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/labelBalanceAdded" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:fontFamily="@font/poppins"
+                android:text="987654321"
+                android:textColor="@color/homeTextColor"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/labelPhoneNumber" />
+
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:background="@color/gray"
-                app:layout_constraintTop_toBottomOf="@id/txtBalanceAdded" />
+                app:layout_constraintTop_toBottomOf="@id/labelPhoneNumber" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
