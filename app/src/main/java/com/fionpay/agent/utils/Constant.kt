@@ -124,6 +124,7 @@ enum class APIResponseCode(val codeValue: Int) {
     ResponseCode400(400),
     ResponseCode401(401),
     ResponseCode403(403),
+    ResponseCode422(422),
     ResponseCode404(404),
     ResponseCode500(500)
 }

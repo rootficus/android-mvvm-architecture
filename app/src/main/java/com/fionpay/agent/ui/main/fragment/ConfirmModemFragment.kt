@@ -61,7 +61,6 @@ class ConfirmModemFragment :
         mDataBinding.txtName.text = "${modemItemModel.firstName} ${modemItemModel.lastName}"
         mDataBinding.txtBalanceAdded.text = "৳${modemBalance}"
         mDataBinding.txtPinCode.text = "${modemItemModel.pinCode}"
-        mDataBinding.txtPhoneNumber.text = "${modemItemModel.phoneNumber}"
         mDataBinding.topHeader.backButton.setOnClickListener {
             Navigation.findNavController(requireView()).navigateUp()
         }
@@ -88,9 +87,11 @@ class ConfirmModemFragment :
 
         if (networkHelper.isNetworkConnected()) {
             val modemItemModel = ModemItemModel(
-                modemItemModel.firstName,
-                modemItemModel.lastName,
-                modemItemModel.pinCode
+                firstName = modemItemModel.firstName,
+                lastName = modemItemModel.lastName,
+                pinCode = modemItemModel.pinCode,
+                balance = modemBalance,
+                modemSlots = modemItemModel.modemSlots
             )
             viewModel.addModemItem(modemItemModel)
             viewModel.getAddModemItemResponseModel.observe(viewLifecycleOwner) {

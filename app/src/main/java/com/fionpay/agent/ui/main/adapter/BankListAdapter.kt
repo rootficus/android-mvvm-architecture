@@ -46,15 +46,13 @@ class BankListAdapter(
                 .load(item?.bankImage)
                 .error(R.drawable.bank_icon)
                 .into(binding.bankImage)
-            ///setPermissionStatus(item, binding)
+
             if (item?.phoneNumber?.isNotEmpty() == true && item?.phoneNumber?.isDigitsOnly()!!) {
-                //binding.bankImage.setBackgroundResource(R.drawable.selected_bank)
                 binding.txtBankName.setTextColor(ContextCompat.getColor(context, R.color.white))
                 binding.txtMobile.setTextColor(ContextCompat.getColor(context, R.color.white))
                 binding.bankLayout.setBackgroundResource(R.drawable.button_continue_gradient)
 
             } else {
-                //binding.bankImage.setBackgroundResource(R.drawable.non_selected_bank)
                 binding.txtBankName.setTextColor(
                     ContextCompat.getColor(
                         context,
@@ -70,19 +68,11 @@ class BankListAdapter(
                 binding.bankLayout.setBackgroundResource(R.drawable.round_bank_card_corners)
             }
             binding.cardHead.setOnClickListener {
-
                 if (item != null) {
                     listener?.onCardClick(item)
                 }
-                // notifyDataSetChanged()
             }
         }
-    }
-
-
-    fun filterList(filterList: ArrayList<Bank>) {
-        itemList = filterList
-        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {

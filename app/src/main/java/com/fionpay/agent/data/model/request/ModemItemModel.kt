@@ -10,8 +10,15 @@ data class ModemItemModel(
     var lastName: String? = null,
     @field:SerializedName("pincode")
     var pinCode: Long? = null,
+    @field:SerializedName("balance")
+    var balance: String? = null,
+    @field:SerializedName("modem_slots")
+    var modemSlots: List<ModelSlots>? = null,
+) : Serializable
+
+data class ModelSlots (
     @field:SerializedName("phone_number")
     var phoneNumber: String? = null,
-    @field:SerializedName("bank_id")
-    var bankId: Int? = null,
-) : Serializable
+    @field:SerializedName("mobile_banking_id")
+    var mobileBankingId: Int? = null,
+)

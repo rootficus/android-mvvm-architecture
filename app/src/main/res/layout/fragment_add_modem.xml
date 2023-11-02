@@ -94,7 +94,7 @@
             android:backgroundTint="@color/sigInEditTextBackColor"
             android:fontFamily="@font/poppins"
             android:hint="@string/mobile_number"
-            android:inputType="textEmailAddress"
+            android:inputType="number"
             android:maxLines="1"
             android:padding="15dp"
             android:textColor="@color/textColor"

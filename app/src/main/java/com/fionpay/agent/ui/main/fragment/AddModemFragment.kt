@@ -6,7 +6,6 @@ import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
@@ -14,6 +13,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.request.Bank
+import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
+import com.fionpay.agent.data.model.request.ModelSlots
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.response.TransactionModel
 import com.fionpay.agent.databinding.BankListBottomSheetBinding
@@ -57,7 +58,7 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
     val otpStringBuilder = StringBuilder()
     private var bankList: List<Bank>? = listOf()
     private lateinit var bankListAdapter: BankListAdapter
-    private var selectedBankId: Int? = 0
+    private var selectedBankId: Boolean? = false
     var selectedBankList: ArrayList<Bank> = arrayListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -289,13 +290,19 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
         }
         binding.sendBtn.setOnClickListener {
             dialogBankListDialog?.dismiss()
-            if (selectedBankId != 0) {
+            val modelSlotsList: ArrayList<ModelSlots> = arrayListOf()
+            bankList?.forEach {
+                if (it.phoneNumber?.isNotEmpty() == true) {
+                    modelSlotsList.add(ModelSlots(it.phoneNumber, it.bankId))
+                }
+            }
+            if (modelSlotsList.isNotEmpty()) {
                 val modemItemModel = ModemItemModel(
                     mDataBinding.etName.text.toString(),
                     mDataBinding.etLastName.text.toString(),
                     otpStringBuilder.toString().toLong(),
                     mDataBinding.etPhoneNumber.text.toString(),
-                    selectedBankId
+                    modelSlotsList
                 )
                 val bundle = Bundle().apply {
                     putSerializable("modemItemModel", modemItemModel)
@@ -305,19 +312,16 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
                         R.id.action_navigation_addModemFragment_to_navigation_addModemBalanceFragment,
                         bundle
                     )
+            }else
+            {
+                showMessage("Please Select Bank")
             }
-            /*Toast.makeText(
-                  requireContext(),
-                  "Please enter valid bank pincode.",
-                  Toast.LENGTH_SHORT
-              ).show()*/
         }
         dialogBankListDialog?.show()
     }
 
     private val cardListener = object : BankListAdapter.BankCardEvent {
         override fun onCardClick(bank: Bank) {
-            //selectedBankId = bankId
             showMessage(selectedBankId.toString())
             getPhoneNumber(bank)
         }
@@ -325,7 +329,6 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
 
     private fun getPhoneNumber(bank: Bank) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-        val inflater: LayoutInflater = layoutInflater
         val binding: ItemPhoneBottomSheetBinding =
             ItemPhoneBottomSheetBinding.inflate(layoutInflater)
         builder.setView(binding.root)
@@ -333,19 +336,58 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
         val dialog: AlertDialog = builder.create()
         dialog.show()
         binding.btnContinue.setOnClickListener {
-            dialog.dismiss()
-            bank.phoneNumber = binding.etModemPhoneNumber.text.toString()
-            bankListAdapter.notifyDataSetChanged()
+            checkNumberBankAvailability(
+                CheckNumberAvailabilityRequest(
+                    binding.etModemPhoneNumber.text.toString(),
+                    bank.bankId
+                ),
+                dialog,
+                binding,
+                bank
+            )
         }
+    }
 
-        // Create and show the AlertDialog
+    private fun checkNumberBankAvailability(
+        checkNumberAvailabilityRequest: CheckNumberAvailabilityRequest,
+        dialog: AlertDialog,
+        binding: ItemPhoneBottomSheetBinding,
+        bank: Bank
+    ) {
+        if (networkHelper.isNetworkConnected()) {
+            viewModel.checkNumberBankAvailability(checkNumberAvailabilityRequest)
+            viewModel.checkNumberBankAvailabilityResponseModel.observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        progressBar.dismiss()
+                        if (dialog.isShowing) {
+                            dialog.dismiss()
+                        }
+                        bank.phoneNumber = binding.etModemPhoneNumber.text.toString()
+                        bankListAdapter.notifyDataSetChanged()
+                    }
 
+                    Status.ERROR -> {
+                        progressBar.dismiss()
+                        if (it.message == "Invalid access token") {
+                            sessionExpired()
+                        } else {
+                            showMessage(it.message.toString())
+                        }
+                    }
 
+                    Status.LOADING -> {
+                        progressBar.show()
+                    }
+                }
+            }
+        } else {
+            Snackbar.make(requireView(), "No Internet", Snackbar.LENGTH_LONG).show()
+        }
 
     }
 
     private fun addModemItem() {
-
         if (networkHelper.isNetworkConnected()) {
             val modemItemModel = ModemItemModel(
                 mDataBinding.etName.text.toString(),

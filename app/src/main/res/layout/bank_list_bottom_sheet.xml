@@ -16,21 +16,22 @@
         android:textColor="@color/homeTextColor"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/bankList"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bankList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/_25sdp"
+        android:layout_marginVertical="@dimen/_5sdp"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp"
         android:isScrollContainer="true"
         android:padding="@dimen/_5sdp"
         android:scrollbarSize="@dimen/_5sdp"
-        app:layout_constraintBottom_toTopOf="@id/labelHead"
+        app:layout_constraintTop_toBottomOf="@id/labelHead"
+        tools:itemCount="4"
         tools:listitem="@layout/item_bank" />
 
     <androidx.appcompat.widget.AppCompatButton

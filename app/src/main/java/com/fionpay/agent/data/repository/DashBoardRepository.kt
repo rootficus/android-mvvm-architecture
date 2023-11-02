@@ -5,6 +5,7 @@ import android.util.Log
 import com.fionpay.agent.data.model.UserInfo
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
 import com.fionpay.agent.data.model.request.Bank
+import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
 import com.fionpay.agent.data.model.request.FilterResponse
 import com.fionpay.agent.data.model.request.GetBalanceByFilterRequest
 import com.fionpay.agent.data.model.request.GetMessageByFilterRequest
@@ -190,6 +191,20 @@ class DashBoardRepository(
             "Bearer " + sharedPreference.getToken(),
             fullName,
             agentId
+        )
+            .apply {
+                execute(this, success, fail, context, message)
+            }
+    }
+    fun checkNumberBankAvailability(
+        success: (any : Any) -> Unit,
+        checkNumberAvailabilityRequest: CheckNumberAvailabilityRequest,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.checkNumberBankAvailability(
+            "Bearer " + sharedPreference.getToken(),
+            checkNumberAvailabilityRequest
         )
             .apply {
                 execute(this, success, fail, context, message)

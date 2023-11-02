@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
 import com.fionpay.agent.data.model.request.Bank
+import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
 import com.fionpay.agent.data.model.request.FilterResponse
 import com.fionpay.agent.data.model.request.GetBalanceByFilterRequest
 import com.fionpay.agent.data.model.request.GetMessageByFilterRequest
@@ -234,6 +235,24 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
                 fullName,
                 { error -> updateAgentWithoutProfileResponseModel.setError(error) },
                 { message -> updateAgentWithoutProfileResponseModel.setError(message) })
+        }
+    }
+
+    val checkNumberBankAvailabilityResponseModel =
+        MutableLiveData<ResponseData<Any>>()
+
+    fun checkNumberBankAvailability(checkNumberAvailabilityRequest: CheckNumberAvailabilityRequest) {
+        checkNumberBankAvailabilityResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.checkNumberBankAvailability(
+                { success ->
+                    checkNumberBankAvailabilityResponseModel.setSuccess(
+                        success
+                    )
+                },
+                checkNumberAvailabilityRequest,
+                { error -> checkNumberBankAvailabilityResponseModel.setError(error) },
+                { message -> checkNumberBankAvailabilityResponseModel.setError(message) })
         }
     }
 

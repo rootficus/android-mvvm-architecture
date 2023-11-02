@@ -1,6 +1,7 @@
 package com.fionpay.agent.data.remote
 
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
+import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
 import com.fionpay.agent.data.model.request.FilterResponse
 import com.fionpay.agent.data.model.request.GetPendingModemRequest
 import com.fionpay.agent.data.model.request.MessagesJsonModel
@@ -189,6 +190,12 @@ interface FionApiServices {
         @Header("Authorization") authHeader: String?,
         @Body transactionFilterRequest: TransactionFilterRequest?,
     ): Call<BaseResponseModel2<TransactionModemResponse>>
+
+    @POST("api/v1/app/agents/check_number_bank_availability")
+    fun checkNumberBankAvailability(
+        @Header("Authorization") authHeader: String?,
+        @Body checkNumberAvailabilityRequest: CheckNumberAvailabilityRequest,
+    ): Call<BaseResponseModel<Any>>
 
 
     @POST("/api/imagesUpload")   //imageVideoUpload

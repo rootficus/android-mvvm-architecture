@@ -274,6 +274,11 @@ abstract class BaseRepository {
                                 fail.invoke(it)
                             }
                         }
+                        APIResponseCode.ResponseCode422.codeValue -> {
+                            getErrorMessage(response_)?.let {
+                                fail.invoke(it)
+                            }
+                        }
                         APIResponseCode.ResponseCode500.codeValue -> {
                             getErrorMessage(response_)?.let {
                                 fail.invoke(it)
