@@ -25,7 +25,15 @@ data class Bank(
 
     @ColumnInfo(name = "bank_name")
     @SerializedName("bank_name")
-    val bankName: String? = null
+    val bankName: String? = null,
+
+    @ColumnInfo(name = "phone_number")
+    @SerializedName("phone_number")
+    var phoneNumber: String? = null,
+
+    @ColumnInfo(name = "bank_image")
+    @SerializedName("bank_image")
+    var bankImage: String? = null
 )
 
 @Keep

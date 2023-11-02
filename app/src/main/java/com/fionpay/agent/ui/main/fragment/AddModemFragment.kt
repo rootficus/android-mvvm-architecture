@@ -6,7 +6,9 @@ import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,6 +18,7 @@ import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.response.TransactionModel
 import com.fionpay.agent.databinding.BankListBottomSheetBinding
 import com.fionpay.agent.databinding.FragmentAddModemBinding
+import com.fionpay.agent.databinding.ItemPhoneBottomSheetBinding
 import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
@@ -313,10 +316,32 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
     }
 
     private val cardListener = object : BankListAdapter.BankCardEvent {
-        override fun onCardClick(bankId: Int?) {
-            selectedBankId = bankId
+        override fun onCardClick(bank: Bank) {
+            //selectedBankId = bankId
             showMessage(selectedBankId.toString())
+            getPhoneNumber(bank)
         }
+    }
+
+    private fun getPhoneNumber(bank: Bank) {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        val inflater: LayoutInflater = layoutInflater
+        val binding: ItemPhoneBottomSheetBinding =
+            ItemPhoneBottomSheetBinding.inflate(layoutInflater)
+        builder.setView(binding.root)
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+        binding.btnContinue.setOnClickListener {
+            dialog.dismiss()
+            bank.phoneNumber = binding.etModemPhoneNumber.text.toString()
+            bankListAdapter.notifyDataSetChanged()
+        }
+
+        // Create and show the AlertDialog
+
+
+
     }
 
     private fun addModemItem() {

@@ -10,7 +10,6 @@
         android:id="@+id/card_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="35dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -24,8 +23,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/bankImage"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,11 +39,24 @@
                 android:text="Bank Name 1"
                 android:textColor="@color/primaryBlue"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@id/bankImage"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@id/bankImage"
                 app:layout_constraintTop_toTopOf="@id/bankImage" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/poppins"
+                android:text="Not Linked"
+                android:textColor="@color/textColor"
+                android:textSize="12sp"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintBottom_toBottomOf="@id/bankImage"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/bankImage"
+                app:layout_constraintTop_toBottomOf="@id/txtBankName"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

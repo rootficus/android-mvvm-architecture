@@ -53,7 +53,6 @@ class ConfirmModemFragment :
         initializeDagger()
         getBundleData()
         initialization()
-
     }
 
     private fun initialization() {
