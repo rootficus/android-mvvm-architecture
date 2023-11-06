@@ -90,7 +90,7 @@ class ConfirmModemFragment :
                 firstName = modemItemModel.firstName,
                 lastName = modemItemModel.lastName,
                 pinCode = modemItemModel.pinCode,
-                balance = modemBalance,
+                balance = modemBalance.toDouble(),
                 modemSlots = modemItemModel.modemSlots
             )
             viewModel.addModemItem(modemItemModel)
@@ -99,7 +99,7 @@ class ConfirmModemFragment :
                     Status.SUCCESS -> {
                         progressBar.dismiss()
                         Log.i("Data", "::${it.data}")
-                        val modemId = it.data?.id
+                        val modemId = it.data?.modem?.id
                         addModemBalance(modemId)
                     }
 
@@ -125,8 +125,8 @@ class ConfirmModemFragment :
     private fun addModemBalance(modemId: String?) {
         if (networkHelper.isNetworkConnected()) {
             val addModemBalanceModel = AddModemBalanceModel(
-                modemId.toString(),
-                modemBalance,
+                modemId = modemId.toString(),
+                amount = modemBalance.toDouble(),
             )
             viewModel.addModemBalance(addModemBalanceModel)
             viewModel.getAddModemBalanceResponseModel.observe(viewLifecycleOwner) {
@@ -174,6 +174,7 @@ class ConfirmModemFragment :
 
         Handler(Looper.getMainLooper()).postDelayed(
             {
+                dialog.dismiss()
                 Navigation.findNavController(requireView())
                     .navigate(R.id.action_navigation_confirmModemFragment_to_navigation_modemFragment)
             }, 2000

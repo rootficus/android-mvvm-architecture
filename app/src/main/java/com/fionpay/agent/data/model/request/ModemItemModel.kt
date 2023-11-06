@@ -11,7 +11,7 @@ data class ModemItemModel(
     @field:SerializedName("pincode")
     var pinCode: Long? = null,
     @field:SerializedName("balance")
-    var balance: String? = null,
+    var balance: Double? = null,
     @field:SerializedName("modem_slots")
     var modemSlots: List<ModelSlots>? = null,
 ) : Serializable

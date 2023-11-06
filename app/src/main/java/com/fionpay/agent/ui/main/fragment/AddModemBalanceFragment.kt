@@ -146,7 +146,7 @@ class AddModemBalanceFragment :
         if (networkHelper.isNetworkConnected()) {
             val addModemBalanceModel = AddModemBalanceModel(
                 modemId,
-                mDataBinding.etAddBalance.text.toString(),
+                mDataBinding.etAddBalance.text.toString().toDouble(),
             )
             viewModel.addModemBalance(addModemBalanceModel)
             viewModel.getAddModemBalanceResponseModel.observe(viewLifecycleOwner) {

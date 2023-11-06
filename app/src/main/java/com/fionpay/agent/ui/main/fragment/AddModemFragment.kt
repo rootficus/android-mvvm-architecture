@@ -129,25 +129,6 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
             }
         })
 
-        mDataBinding.etPhoneNumber.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                val phoneNumber = s.toString()
-
-                if (phoneNumber.isNotEmpty() && phoneNumber.length >= 8) {
-                    mDataBinding.phoneNumberVerified.visibility = View.VISIBLE
-                } else {
-                    mDataBinding.phoneNumberVerified.visibility = View.GONE
-                }
-            }
-        })
-
         mDataBinding.btnNext.setOnClickListener {
             if (mDataBinding.etName.text.toString().isEmpty()) {
                 Utility.callCustomToast(
@@ -158,11 +139,6 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
                 Utility.callCustomToast(
                     requireContext(),
                     mActivity.getString(R.string.PLEASE_ENTER_LAST_NAME)
-                )
-            } else if (mDataBinding.etPhoneNumber.text.toString().isEmpty()) {
-                Utility.callCustomToast(
-                    requireContext(),
-                    mActivity.getString(R.string.PLEASE_ENTER_NUMBER)
                 )
             } else if (otpStringBuilder.toString().isEmpty()) {
                 Utility.callCustomToast(
@@ -301,7 +277,7 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
                     mDataBinding.etName.text.toString(),
                     mDataBinding.etLastName.text.toString(),
                     otpStringBuilder.toString().toLong(),
-                    mDataBinding.etPhoneNumber.text.toString(),
+                    0.0,
                     modelSlotsList
                 )
                 val bundle = Bundle().apply {
@@ -312,8 +288,7 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
                         R.id.action_navigation_addModemFragment_to_navigation_addModemBalanceFragment,
                         bundle
                     )
-            }else
-            {
+            } else {
                 showMessage("Please Select Bank")
             }
         }
@@ -400,7 +375,7 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
                     Status.SUCCESS -> {
                         progressBar.dismiss()
                         Log.i("Data", "::${it.data}")
-                        val modemId = it.data?.id
+                        val modemId = it.data?.modem?.id
                         val bundle = Bundle().apply {
                             putString("modem_id", modemId)
                             putSerializable("modemItemModel", modemItemModel)

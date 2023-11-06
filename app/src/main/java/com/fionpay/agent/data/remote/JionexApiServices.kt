@@ -190,14 +190,14 @@ interface FionApiServices {
         @Header("Authorization") authHeader: String?,
         @Body transactionFilterRequest: TransactionFilterRequest?,
     ): Call<BaseResponseModel2<TransactionModemResponse>>
-
+    @Headers("Content-Type:application/json")
     @POST("api/v1/app/agents/check_number_bank_availability")
     fun checkNumberBankAvailability(
         @Header("Authorization") authHeader: String?,
         @Body checkNumberAvailabilityRequest: CheckNumberAvailabilityRequest,
     ): Call<BaseResponseModel<Any>>
 
-
+    @Headers("Content-Type:application/json")
     @POST("/api/imagesUpload")   //imageVideoUpload
     @Multipart
     fun imageVideoUpload(
