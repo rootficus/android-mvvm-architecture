@@ -344,6 +344,9 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
 
                     Status.ERROR -> {
                         progressBar.dismiss()
+                        if (dialog.isShowing) {
+                            dialog.dismiss()
+                        }
                         if (it.message == "Invalid access token") {
                             sessionExpired()
                         } else {
