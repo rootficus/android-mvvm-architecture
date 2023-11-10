@@ -277,6 +277,17 @@ class DashBoardRepository(
                 execute(this, success, fail, context, message)
             }
     }
+    fun removeModemBalance(
+        success: (getAddModemBalanceResponse: GetAddModemBalanceResponse) -> Unit,
+        fail: (error: String) -> Unit,
+        addModemBalanceModel: AddModemBalanceModel,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.removeModemBalance("Bearer " + sharedPreference.getToken(), addModemBalanceModel)
+            .apply {
+                execute(this, success, fail, context, message)
+            }
+    }
 
     fun getStatusCount(
         success: (getStatusCountResponse: GetStatusCountResponse) -> Unit,

@@ -13,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fionpay.agent.R
+import com.fionpay.agent.data.model.request.AddModemBalanceModel
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
 import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateLoginRequest
@@ -56,6 +57,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
     private var apiCall: String = ""
     private var filter = 0
     lateinit var obj: DashBoardItemResponse
+    lateinit var modemSheetFragment: ModemDetailScreenFragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -73,6 +75,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
 
     private fun initializeView() {
         getBundleData()
+        modemSheetFragment = ModemDetailScreenFragment()
         val gson = Gson()
         val json: String? = viewModel.getDashBoardDataModel()
         obj =
@@ -156,14 +159,13 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
     private val modemDetailScreenActionListener =
         object : ModemDetailScreenFragment.BottomDialogEvent {
 
-            override fun onAcceptRequest(getModemsListResponse: GetModemsListResponse) {
-                showMessage("Accept")
+            override fun onAddRequest(addModemBalanceModel: AddModemBalanceModel) {
+                addModemBalance(addModemBalanceModel)
             }
 
-            override fun onRejectedRequest(getModemsListResponse: GetModemsListResponse) {
-                showMessage("Reject")
+            override fun onRemoveRequest(removeModemBalanceModel: AddModemBalanceModel) {
+                removeModemBalance(removeModemBalanceModel)
             }
-
         }
     private val cardListener = object : ModemsManagerListAdapter.ModemCardEvent {
         override fun onStatusClicked(updateActiveInActiveRequest: UpdateActiveInActiveRequest) {
@@ -179,11 +181,11 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         }
 
         override fun onCardClick(getModemsListResponse: GetModemsListResponse) {
-            var modemSheetFragment = ModemDetailScreenFragment()
+            modemSheetFragment.isCancelable = false
             modemSheetFragment.listener = modemDetailScreenActionListener
             val bundle = Bundle()
             bundle.putSerializable(GetModemsListResponse::class.java.name, getModemsListResponse)
-            bundle.putString("TotalBalance", "${obj.totalBalance.toString()}")
+            bundle.putString("CurrentBalance", "${obj.currentBalance.toString()}")
             modemSheetFragment.arguments = bundle
             activity?.supportFragmentManager?.let {
                 modemSheetFragment.show(
@@ -420,5 +422,78 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         }
     }
 
+    private fun addModemBalance(modemBalance: AddModemBalanceModel) {
+        if (networkHelper.isNetworkConnected()) {
+            viewModel.addModemBalance(modemBalance)
+            viewModel.getAddModemBalanceResponseModel.observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        progressBar.dismiss()
+                        Log.i("Data", "::${it.data}")
+                        if (modemSheetFragment.isVisible) {
+                            modemSheetFragment.dismiss()
+                        }
+                    }
+
+                    Status.ERROR -> {
+                        progressBar.dismiss()
+                        if (it.message == "Invalid access token") {
+                            sessionExpired()
+                        } else {
+                            showMessage(
+                                "Amount should be less the Agent balance"
+                            )
+                        }
+                    }
+
+                    Status.LOADING -> {
+                        progressBar.show()
+                    }
+                }
+            }
+        } else {
+            progressBar.dismiss()
+            showMessage(
+                mActivity.getString(R.string.NO_INTERNET_CONNECTION)
+            )
+        }
+    }
+
+    private fun removeModemBalance(getModemsListResponse: AddModemBalanceModel) {
+        if (networkHelper.isNetworkConnected()) {
+            viewModel.removeModemBalance(getModemsListResponse)
+            viewModel.getRemoveModemBalanceResponseModel.observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        progressBar.dismiss()
+                        Log.i("Data", "::${it.data}")
+                        if (modemSheetFragment.isVisible) {
+                            modemSheetFragment.dismiss()
+                        }
+                    }
+
+                    Status.ERROR -> {
+                        progressBar.dismiss()
+                        if (it.message == "Invalid access token") {
+                            sessionExpired()
+                        } else {
+                            showMessage(
+                                "Amount should not be greater the Agent balance"
+                            )
+                        }
+                    }
+
+                    Status.LOADING -> {
+                        progressBar.show()
+                    }
+                }
+            }
+        } else {
+            progressBar.dismiss()
+            showMessage(
+                mActivity.getString(R.string.NO_INTERNET_CONNECTION)
+            )
+        }
+    }
 
 }

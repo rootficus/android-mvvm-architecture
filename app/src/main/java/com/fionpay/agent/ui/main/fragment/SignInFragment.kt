@@ -155,10 +155,10 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
         }
         mDataBinding.etName.setText(viewmodel.getEmail().toString())
         mDataBinding.etPassword.setText(viewmodel.getPassword().toString())
-        if(mDataBinding.etName.text.toString().isEmpty()){
+      /*  if(mDataBinding.etName.text.toString().isEmpty()){
             mDataBinding.etName.setText("jim@example.com")
             mDataBinding.etPassword.setText("password")
-        }
+        }*/
 
     }
 

@@ -94,6 +94,13 @@ interface FionApiServices {
         @Body addModemBalanceModel: AddModemBalanceModel
     ): Call<BaseResponseModel<GetAddModemBalanceResponse>>
 
+    @Headers("Content-Type:application/json")
+    @POST("api/v1/app/agents/remove_modem_balance")
+    fun removeModemBalance(
+        @Header("Authorization") authHeader: String?,
+        @Body addModemBalanceModel: AddModemBalanceModel
+    ): Call<BaseResponseModel<GetAddModemBalanceResponse>>
+
 
     @Headers("Content-Type:application/json")
     @POST("api/v1/balance_manager/update_status")
@@ -208,7 +215,4 @@ interface FionApiServices {
         @Part("product_id") productId: RequestBody,
         @Part filePart: MultipartBody.Part
     ): Call<BaseResponseModel<Any>>
-
-
-
 }

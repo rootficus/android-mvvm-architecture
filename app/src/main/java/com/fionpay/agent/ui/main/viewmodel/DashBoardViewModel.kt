@@ -396,6 +396,23 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
         }
     }
 
+    val getRemoveModemBalanceResponseModel =
+        MutableLiveData<ResponseData<GetAddModemBalanceResponse>>()
+
+    fun removeModemBalance(addModemBalanceModel: AddModemBalanceModel) {
+        getRemoveModemBalanceResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.removeModemBalance({ success ->
+                getRemoveModemBalanceResponseModel.setSuccess(
+                    success
+                )
+            },
+                { error -> getRemoveModemBalanceResponseModel.setError(error) },
+                addModemBalanceModel,
+                { message -> getRemoveModemBalanceResponseModel.setError(message) })
+        }
+    }
+
     val getStatusCountResponseModel = MutableLiveData<ResponseData<GetStatusCountResponse>>()
     fun getStatusCount() {
         getStatusCountResponseModel.setLoading(null)

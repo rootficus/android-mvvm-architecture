@@ -11,11 +11,15 @@ data class GetAddModemBalanceResponse(
 
     @SerializedName("amount")
     @Expose
-    val amount: Long? = null,
+    val amount: String? = null,
 
     @SerializedName("balance")
     @Expose
     val balance: String? = null,
+
+    @SerializedName("agent_balance")
+    @Expose
+    val agentBalance: String? = null,
 
     ) : Serializable
 

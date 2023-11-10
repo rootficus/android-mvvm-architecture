@@ -142,54 +142,5 @@ class AddModemBalanceFragment :
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
 
-    private fun addModemBalance() {
-        if (networkHelper.isNetworkConnected()) {
-            val addModemBalanceModel = AddModemBalanceModel(
-                modemId,
-                mDataBinding.etAddBalance.text.toString().toDouble(),
-            )
-            viewModel.addModemBalance(addModemBalanceModel)
-            viewModel.getAddModemBalanceResponseModel.observe(viewLifecycleOwner) {
-                when (it.status) {
-                    Status.SUCCESS -> {
-                        progressBar.dismiss()
-                        Log.i("Data", "::${it.data}")
-                        val bundle = Bundle().apply {
-                            putString("modemBalance", it.data?.balance.toString())
-                            putSerializable("modemItemModel", modemItemModel)
-                        }
-                        Navigation.findNavController(requireView())
-                            .navigate(
-                                R.id.action_navigation_addModemBalanceFragment_to_navigation_confirmModemFragment,
-                                bundle
-                            )
-                    }
 
-                    Status.ERROR -> {
-                        progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        } else {
-                            showSnackBar(
-                                mDataBinding.mainLayout,
-                                requireContext(),
-                                "Amount should be less the Agent balance"
-                            )
-                        }
-                    }
-
-                    Status.LOADING -> {
-                        progressBar.show()
-                    }
-                }
-            }
-        } else {
-            progressBar.dismiss()
-            showSnackBar(
-                mDataBinding.mainLayout,
-                requireContext(),
-                mActivity.getString(R.string.NO_INTERNET_CONNECTION)
-            )
-        }
-    }
 }
