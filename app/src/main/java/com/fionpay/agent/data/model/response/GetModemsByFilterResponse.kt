@@ -17,32 +17,13 @@ data class GetModemsListResponse(
     @Expose
     val lastName: String? = null,
 
-    @SerializedName("status")
-    @Expose
-    val status: String? = null,
-
-    @SerializedName("sim_type")
-    @Expose
-    val simType: String? = null,
-
-    @SerializedName("operator")
-    @Expose
-    val operator: String? = null,
-
-    @SerializedName("phone_number")
-    @Expose val phoneNumber: String? = null,
-
-    @SerializedName("pincode")
-    @Expose
-    val pinCode: Long? = null,
-
-    @SerializedName("created_at")
-    @Expose
-    val createdAt: String? = null,
-
     @SerializedName("balance")
     @Expose
     val balance: String? = null,
+
+    @SerializedName("status")
+    @Expose
+    val status: String? = null,
 
     @SerializedName("availablity")
     @Expose
@@ -68,6 +49,36 @@ data class GetModemsListResponse(
     @Expose
     val todayCashOut: Long? = null,
 
+    @SerializedName("slots")
+    @Expose
+    val slots: List<Slots>? = null,
+
+    @SerializedName("pincode")
+    @Expose
+    val pinCode: Long? = null,
 
     ) : Serializable
+
+data class Slots (
+    @SerializedName("status")
+    @Expose
+    val status: String? = null,
+
+    @SerializedName("operator")
+    @Expose
+    val operator: String? = null,
+
+    @SerializedName("bank_name")
+    @Expose
+    val bankName: String? = null,
+
+    @SerializedName("phone_number")
+    @Expose
+    val phoneNumber: String? = null,
+
+    @SerializedName("modem_slot_id")
+    @Expose
+    val modemSlotId: String? = null,
+
+    )
 

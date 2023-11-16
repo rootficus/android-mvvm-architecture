@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
@@ -53,12 +54,14 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResp
             //Blocked Or Unblocked Status UI
             binding.txtBlock.text = item.availability.toString()
             setBlockUnBlockUI(item, binding)
-
             //Active Or InActive Status UI
             setActiveInActiveUI(item, binding)
-
             //Login Or Logout Status UI
             setLoginLogoutUI(item, binding)
+
+            val itemBankListAdapter = item.slots?.let { ItemBankListAdapter(it) }
+            binding.bankList.layoutManager = LinearLayoutManager(context)
+            binding.bankList.adapter = itemBankListAdapter
 
             binding.modemLayout.setOnClickListener {
                 listener?.onCardClick(item)
