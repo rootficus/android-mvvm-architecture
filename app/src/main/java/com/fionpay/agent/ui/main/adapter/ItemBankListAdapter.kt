@@ -31,7 +31,7 @@ class ItemBankListAdapter(private var itemList: List<Slots>) :
             Glide.with(context)
                 .asBitmap()
                 .centerInside()
-                .load(R.drawable.bank_icon)
+                .load(item.bankImage)
                 .error(R.drawable.bank_icon)
                 .into(binding.imageBank)
             binding.txtBankName.text = item.bankName

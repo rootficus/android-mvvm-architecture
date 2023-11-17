@@ -72,6 +72,10 @@ data class Slots (
     @Expose
     val bankName: String? = null,
 
+    @SerializedName("bank_image")
+    @Expose
+    val bankImage: String? = null,
+
     @SerializedName("phone_number")
     @Expose
     val phoneNumber: String? = null,
