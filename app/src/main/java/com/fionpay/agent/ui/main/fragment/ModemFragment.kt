@@ -432,6 +432,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                         Log.i("Data", "::${it.data}")
                         if (modemSheetFragment.isVisible) {
                             modemSheetFragment.dismiss()
+                            getModemsListApi()
                         }
                     }
 
@@ -469,6 +470,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                         Log.i("Data", "::${it.data}")
                         if (modemSheetFragment.isVisible) {
                             modemSheetFragment.dismiss()
+                            getModemsListApi()
                         }
                     }
 
