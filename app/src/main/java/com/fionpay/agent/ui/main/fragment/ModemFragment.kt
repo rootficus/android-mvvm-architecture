@@ -1,5 +1,6 @@
 package com.fionpay.agent.ui.main.fragment
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
@@ -169,15 +170,19 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         }
     private val cardListener = object : ModemsManagerListAdapter.ModemCardEvent {
         override fun onStatusClicked(updateActiveInActiveRequest: UpdateActiveInActiveRequest) {
-            updateActiveInActiveStatusApi(updateActiveInActiveRequest)
+            changeActiveRequest(updateActiveInActiveRequest)
         }
 
         override fun onAvailabilityClicked(updateAvailabilityRequest: UpdateAvailabilityRequest) {
-            updateAvailabilityApi(updateAvailabilityRequest)
+            changeAvailabilityRequest(updateAvailabilityRequest)
         }
 
         override fun onLoginClicked(updateLoginRequest: UpdateLoginRequest) {
-            updateLoginApi(updateLoginRequest)
+           if(updateLoginRequest.loginStatus== "Logout") {
+               changeLoginRequest(updateLoginRequest)
+           }else{
+               showMessage("Device successfully logged out from the modem.")
+           }
         }
 
         override fun onCardClick(getModemsListResponse: GetModemsListResponse) {
@@ -194,6 +199,52 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                 )
             }
         }
+    }
+    private fun changeLoginRequest(updateLoginRequest: UpdateLoginRequest) {
+        val message = "Are you sure you want to Logout?"
+        val alertDialogActive = AlertDialog.Builder(requireContext())
+            .setMessage(message)
+            .setPositiveButton("Yes") { dialog, _ ->
+                dialog.dismiss()
+                updateLoginApi(updateLoginRequest)
+            }.setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }.create()
+        alertDialogActive.show()
+    }
+
+    private fun changeAvailabilityRequest(updateAvailabilityRequest: UpdateAvailabilityRequest) {
+        val message = if (updateAvailabilityRequest.availablity == "On") {
+            "Are you sure you want to turn on modem service?"
+        } else {
+            "Are you sure you want to turn off modem service?"
+        }
+        val alertDialogActive = AlertDialog.Builder(requireContext())
+            .setMessage(message)
+            .setPositiveButton("Yes") { dialog, _ ->
+                dialog.dismiss()
+                updateAvailabilityApi(updateAvailabilityRequest)
+            }.setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }.create()
+        alertDialogActive.show()
+    }
+
+    private fun changeActiveRequest(updateActiveInActiveRequest: UpdateActiveInActiveRequest) {
+        val message = if (updateActiveInActiveRequest.status == "Active") {
+            "Are you sure you want to active modem service?"
+        } else {
+            "Are you sure you want to inactive modem service?"
+        }
+        val alertDialogActive = AlertDialog.Builder(requireContext())
+            .setMessage(message)
+            .setPositiveButton("Yes") { dialog, _ ->
+                dialog.dismiss()
+                updateActiveInActiveStatusApi(updateActiveInActiveRequest)
+            }.setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }.create()
+        alertDialogActive.show()
     }
 
     private fun showPopupMenu(view: View) {
