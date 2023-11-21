@@ -160,12 +160,15 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
     private val modemDetailScreenActionListener =
         object : ModemDetailScreenFragment.BottomDialogEvent {
 
-            override fun onAddRequest(addModemBalanceModel: AddModemBalanceModel) {
-                addModemBalance(addModemBalanceModel)
+            override fun onAddRequest(getModemsListResponse: GetModemsListResponse, amount: Double) {
+                addModemBalance(getModemsListResponse, amount)
             }
 
-            override fun onRemoveRequest(removeModemBalanceModel: AddModemBalanceModel) {
-                removeModemBalance(removeModemBalanceModel)
+            override fun onRemoveRequest(
+                getModemsListResponse: GetModemsListResponse,
+                amount: Double
+            ) {
+                removeModemBalance(getModemsListResponse, amount)
             }
         }
     private val cardListener = object : ModemsManagerListAdapter.ModemCardEvent {
@@ -391,6 +394,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                     Status.SUCCESS -> {
                         progressBar.dismiss()
                         Log.i("Data", "::${it.data}")
+                        listGetModemsByFilter
                         getModemsListApi()
                     }
 
@@ -473,9 +477,9 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         }
     }
 
-    private fun addModemBalance(modemBalance: AddModemBalanceModel) {
+    private fun addModemBalance(getModemsListResponse: GetModemsListResponse, amount: Double) {
         if (networkHelper.isNetworkConnected()) {
-            viewModel.addModemBalance(modemBalance)
+            viewModel.addModemBalance(AddModemBalanceModel(getModemsListResponse.id, amount))
             viewModel.getAddModemBalanceResponseModel.observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.SUCCESS -> {
@@ -483,7 +487,9 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                         Log.i("Data", "::${it.data}")
                         if (modemSheetFragment.isVisible) {
                             modemSheetFragment.dismiss()
-                            getModemsListApi()
+                            getModemsListResponse.balance = it.data?.balance
+                            modemsManagerListAdapter?.notifyDataSetChanged()
+                           // getModemsListApi()
                         }
                     }
 
@@ -511,9 +517,9 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         }
     }
 
-    private fun removeModemBalance(getModemsListResponse: AddModemBalanceModel) {
+    private fun removeModemBalance(getModemsListResponse: GetModemsListResponse, amount: Double) {
         if (networkHelper.isNetworkConnected()) {
-            viewModel.removeModemBalance(getModemsListResponse)
+            viewModel.removeModemBalance(AddModemBalanceModel(getModemsListResponse.id, amount))
             viewModel.getRemoveModemBalanceResponseModel.observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.SUCCESS -> {
@@ -521,7 +527,8 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                         Log.i("Data", "::${it.data}")
                         if (modemSheetFragment.isVisible) {
                             modemSheetFragment.dismiss()
-                            getModemsListApi()
+                            getModemsListResponse.balance = it.data?.balance
+                            modemsManagerListAdapter?.notifyDataSetChanged()
                         }
                     }
 

@@ -19,7 +19,7 @@ data class GetModemsListResponse(
 
     @SerializedName("balance")
     @Expose
-    val balance: String? = null,
+    var balance: String? = null,
 
     @SerializedName("status")
     @Expose

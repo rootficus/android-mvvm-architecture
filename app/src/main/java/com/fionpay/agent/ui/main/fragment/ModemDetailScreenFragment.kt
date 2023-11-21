@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.fionpay.agent.data.model.request.AddModemBalanceModel
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.databinding.ModemBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -15,8 +14,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class ModemDetailScreenFragment : BottomSheetDialogFragment() {
     interface BottomDialogEvent {
-        fun onAddRequest(addModemBalanceModel: AddModemBalanceModel)
-        fun onRemoveRequest(addModemBalanceModel: AddModemBalanceModel)
+        fun onAddRequest(getModemsListResponse: GetModemsListResponse, amount: Double)
+        fun onRemoveRequest(getModemsListResponse: GetModemsListResponse, amount: Double)
     }
 
     var listener: BottomDialogEvent? = null
@@ -93,14 +92,11 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
             } else {
                 val amount = binding.etUpdateBalance.text.toString().toDouble()
                 if (balanceStatus == "Add") {
-                    listener?.onAddRequest(AddModemBalanceModel(getModemsListResponse.id, amount))
+                    listener?.onAddRequest(getModemsListResponse, amount)   //AddModemBalanceModel(getModemsListResponse.id, amount)
                 } else if (balanceStatus == "Remove") {
                     listener?.onRemoveRequest(
-                        AddModemBalanceModel(
-                            getModemsListResponse.id,
-                            amount
-                        )
-                    )
+                      getModemsListResponse, amount
+                    )     //  AddModemBalanceModel( getModemsListResponse.id, amount )
                 }
             }
         }
