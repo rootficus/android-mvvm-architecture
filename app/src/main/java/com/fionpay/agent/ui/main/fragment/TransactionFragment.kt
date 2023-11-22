@@ -364,7 +364,7 @@ class TransactionFragment :
         setPaymentStatusView(item, binding)
         setStatusView(item, binding)
         if (item.paymentType == "Cash In") {
-            binding.txtTransactionId.text = "${item.customer.toString()}"
+            binding.txtTransactionId.text = "☎ ${item.customer.toString()}"
         } else {
             binding.txtTransactionId.text = "#${item.transactionId.toString()}"
         }
@@ -418,7 +418,13 @@ class TransactionFragment :
     ) {
         when (item.paymentType) {
             "Cash In" -> {
-                binding.labelCustomerNumber.text = item.customer.toString()
+                binding.labelPaymentType.text = item.paymentType.toString()
+                binding.labelPaymentType.setTextColor(
+                    ContextCompat.getColorStateList(
+                        requireContext(),
+                        R.color.reject
+                    )
+                )
                 binding.txtAmount.setTextColor(
                     ContextCompat.getColorStateList(
                         requireContext(),
@@ -428,7 +434,13 @@ class TransactionFragment :
             }
 
             "Cash Out" -> {
-                binding.labelCustomerNumber.text = item.customer.toString()
+                binding.labelPaymentType.text = item.paymentType.toString()
+                binding.labelPaymentType.setTextColor(
+                    ContextCompat.getColorStateList(
+                        requireContext(),
+                        R.color.greenColor
+                    )
+                )
                 binding.txtAmount.setTextColor(
                     ContextCompat.getColorStateList(
                         requireContext(),

@@ -55,7 +55,6 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
-    private lateinit var dashBoardListAdapter: DashBoardListAdapter
     private lateinit var pendingListAdapter: PendingListAdapter
     private var arrayList: ArrayList<PendingModemResponse> = arrayListOf()
 
@@ -161,6 +160,7 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
         }
         setPaymentStatusView(item, binding)
         binding.txtSuccess.visibility=  View.VISIBLE
+        binding.txtTransactionId.text = item.transactionId
         binding.txtSuccess.text = "Pending"
         binding.txtSuccess.setTextColor(
             ContextCompat.getColor(
@@ -172,9 +172,9 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
             (ContextCompat.getColorStateList(requireContext(), R.color.activePendingBg))
         binding.txtAmount.text = "৳${item.amount}"
         if (item.paymentType == "Cash In") {
-            binding.txtTransactionId.text = "#${item.transactionId.toString()}"
+            binding.txtTransactionId.text = "☎ ${item.customer.toString()}"
         } else {
-            binding.txtTransactionId.text = "☎${item.customer.toString()}"
+            binding.txtTransactionId.text = "#${item.transactionId.toString()}"
         }
         binding.txtDate.text = Utility.convertTransactionDate(item.date)
         binding.txtBankType.text = item.bankType
@@ -188,7 +188,13 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
     ) {
         when (item.paymentType) {
             "Cash In" -> {
-                binding.labelCustomerNumber.text = item.paymentType.toString()
+                binding.labelPaymentType.text = item.paymentType.toString()
+                binding.labelPaymentType.setTextColor(
+                    ContextCompat.getColorStateList(
+                        requireContext(),
+                        R.color.reject
+                    )
+                )
                 binding.txtAmount.setTextColor(
                     ContextCompat.getColorStateList(
                         requireContext(),
@@ -198,7 +204,13 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
             }
 
             "Cash Out" -> {
-                binding.labelCustomerNumber.text = item.paymentType.toString()
+                binding.labelPaymentType.text = item.paymentType.toString()
+                binding.labelPaymentType.setTextColor(
+                    ContextCompat.getColorStateList(
+                        requireContext(),
+                        R.color.greenColor
+                    )
+                )
                 binding.txtAmount.setTextColor(
                     ContextCompat.getColorStateList(
                         requireContext(),

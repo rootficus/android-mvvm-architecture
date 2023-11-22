@@ -42,7 +42,7 @@ class PendingListAdapter(private var itemList: ArrayList<PendingModemResponse>) 
             setCardBgColor(binding, position)
             binding.txtAmount.text = "৳${item.amount}"
             if (item.paymentType == "Cash In") {
-                binding.txtTransactionId.text = "${item.customer.toString()}"
+                binding.txtTransactionId.text = "☎ ${item.customer.toString()}"
             } else {
                 binding.txtTransactionId.text = "#${item.transactionId.toString()}"
             }
@@ -72,7 +72,7 @@ class PendingListAdapter(private var itemList: ArrayList<PendingModemResponse>) 
                 )
             )
         } else {
-            binding.layoutCard.setBackgroundColor(ContextCompat.getColor(context, R.color.homeCardBackColor))
+            binding.layoutCard.setBackgroundColor(ContextCompat.getColor(context, R.color.sigInEditTextBackColor))
         }
     }
 
@@ -82,7 +82,7 @@ class PendingListAdapter(private var itemList: ArrayList<PendingModemResponse>) 
     ) {
         when (item.paymentType) {
             "Cash In" -> {
-                binding.labelCustomerNumber.text = item.paymentType
+                binding.labelCustomerNumber.text = "Cash In"
                 binding.txtAmount.setTextColor(
                     ContextCompat.getColorStateList(
                         context,

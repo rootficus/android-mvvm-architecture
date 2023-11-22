@@ -151,25 +151,25 @@ class BalanceManagerFragment :
 
                 R.id.menu_success -> {
                     // Handle Menu Item 1 click
-                    filter("Success", false)
+                    filter("success", false)
                     true
                 }
 
                 R.id.menu_pending -> {
                     // Handle Menu Item 1 click
-                    filter("Pending", false)
+                    filter("pending", false)
                     true
                 }
 
                 R.id.menu_reject -> {
                     // Handle Menu Item 1 click
-                    filter("Rejected", false)
+                    filter("rejected", false)
                     true
                 }
 
                 R.id.menu_danger -> {
                     // Handle Menu Item 2 click
-                    filter("Danger", false)
+                    filter("danger", false)
                     true
                 }
 

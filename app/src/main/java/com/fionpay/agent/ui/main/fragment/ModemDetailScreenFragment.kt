@@ -3,6 +3,7 @@ package com.fionpay.agent.ui.main.fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.Toast
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.databinding.ModemBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlin.concurrent.thread
 
 
 class ModemDetailScreenFragment : BottomSheetDialogFragment() {
@@ -24,6 +26,8 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
     var currentBalance: Double? = 0.0
     var totalBalance: Double? = 0.0
 
+    lateinit var getModemsListResponse  : GetModemsListResponse
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,21 +38,22 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val getModemsListResponse =
+        getModemsListResponse =
             arguments?.getSerializable(GetModemsListResponse::class.java.name) as GetModemsListResponse
         currentBalance = arguments?.getString("CurrentBalance")?.toDouble()
         binding.labelTotalBalance.text = "New balance will be: ৳${currentBalance}"
         binding.labelTitle.text =
             "${getModemsListResponse.firstName} ${getModemsListResponse.lastName}"
-        binding.etCurrentBalance.setText("৳${getModemsListResponse.balance}")
+        binding.etCurrentBalance.setText( "৳${getModemsListResponse.balance.toString()}")
+
+        Log.i("Current:","${binding.etCurrentBalance.text.toString()}")
 
         binding.etUpdateBalance.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val lastName = s.toString()
+                s.toString()
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -74,10 +79,12 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
             when (checkedId) {
                 binding.btnAdd.id -> {
                     balanceStatus = "Add"
+                    binding.etUpdateBalance.setText("")
                 }
 
                 binding.btnRemove.id -> {
                     balanceStatus = "Remove"
+                    binding.etUpdateBalance.setText("")
                 }
             }
         }
@@ -92,8 +99,10 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
             } else {
                 val amount = binding.etUpdateBalance.text.toString().toDouble()
                 if (balanceStatus == "Add") {
+                    binding.etUpdateBalance.setText("")
                     listener?.onAddRequest(getModemsListResponse, amount)   //AddModemBalanceModel(getModemsListResponse.id, amount)
                 } else if (balanceStatus == "Remove") {
+                    binding.etUpdateBalance.setText("")
                     listener?.onRemoveRequest(
                       getModemsListResponse, amount
                     )     //  AddModemBalanceModel( getModemsListResponse.id, amount )
@@ -101,4 +110,5 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
             }
         }
     }
+
 }

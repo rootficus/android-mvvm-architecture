@@ -47,7 +47,6 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
         {
             setCardBgColor(binding, position)
             binding.txtAmount.text = "৳${item.amount}"
-            binding.txtTransactionId.text = "#${item.transactionId.toString()}"
             binding.txtDate.text = Utility.convertTransactionDate(item.date)
             binding.txtSuccess.text = item.status
             setStatusView(item, binding)
@@ -76,7 +75,7 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
                 )
             )
         } else {
-            binding.layoutCard.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
+            binding.layoutCard.setBackgroundColor(ContextCompat.getColor(context, R.color.sigInEditTextBackColor))
         }
     }
 
@@ -87,6 +86,7 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
         when (item.paymentType) {
             "Cash In" -> {
                 binding.labelWithdraw.text = item.paymentType.toString()
+                binding.txtTransactionId.text = "☎ ${item.customer.toString()}"
                 binding.txtAmount.setTextColor(
                     ContextCompat.getColorStateList(
                         context,
@@ -97,6 +97,7 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
 
             "Cash Out" -> {
                 binding.labelWithdraw.text = item.paymentType.toString()
+                binding.txtTransactionId.text = "#${item.transactionId.toString()}"
                 binding.txtAmount.setTextColor(
                     ContextCompat.getColorStateList(
                         context,

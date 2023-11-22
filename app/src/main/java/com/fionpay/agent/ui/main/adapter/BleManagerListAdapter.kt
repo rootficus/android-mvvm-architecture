@@ -56,29 +56,33 @@ class BleManagerListAdapter(private var itemList: ArrayList<BLTransactionModemRe
                 )
             )
         } else {
-            binding.layoutCard.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
+            binding.layoutCard.setBackgroundColor(ContextCompat.getColor(context, R.color.sigInEditTextBackColor))
         }
     }
     private fun setStatusView(
         item: BLTransactionModemResponse,
         binding: ItemBleManagerBinding
     ) {
-        when(item.status)
+        when(item.status.toString().toLowerCase())
         {
-            "Success" -> {
+            "success" -> {
                 binding.txtSuccess.setTextColor(ContextCompat.getColor(context, R.color.activeGreen))
+                binding.txtCustomerNumber.setTextColor(ContextCompat.getColor(context, R.color.activeGreen))
                 binding.txtSuccess.backgroundTintList = (ContextCompat.getColorStateList(context, R.color.activeGreenBg))
             }
-            "Pending" -> {
+            "pending" -> {
                 binding.txtSuccess.setTextColor(ContextCompat.getColor(context, R.color.pending))
+                binding.txtCustomerNumber.setTextColor(ContextCompat.getColor(context, R.color.pending))
                 binding.txtSuccess.backgroundTintList = (ContextCompat.getColorStateList(context, R.color.activePendingBg))
             }
-            "Danger" -> {
+            "danger" -> {
                 binding.txtSuccess.setTextColor(ContextCompat.getColor(context, R.color.reject))
+                binding.txtCustomerNumber.setTextColor(ContextCompat.getColor(context, R.color.reject))
                 binding.txtSuccess.backgroundTintList = (ContextCompat.getColorStateList(context, R.color.activeDangerBg))
             }
-            "Rejected" ->{
+            "rejected" ->{
                 binding.txtSuccess.setTextColor(ContextCompat.getColor(context, R.color.reject))
+                binding.txtCustomerNumber.setTextColor(ContextCompat.getColor(context, R.color.reject))
                 binding.txtSuccess.backgroundTintList = (ContextCompat.getColorStateList(context, R.color.activeDangerBg))
             }
         }

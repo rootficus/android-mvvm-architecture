@@ -34,8 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:padding="@dimen/_5sdp"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                     android:src="@drawable/bank_icon"
                     android:tint="@color/homeTextColor"
                     app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +43,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/labelCustomerNumber"
+                android:id="@+id/labelPaymentType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
@@ -90,6 +89,7 @@
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:src="@drawable/copy_text"
+                android:tint="@color/homeTextColor"
                 app:layout_constraintStart_toEndOf="@id/txtTransactionId"
                 app:layout_constraintTop_toTopOf="@id/cardBank" />
 

@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:cardBackgroundColor="@color/homeCardBackColor"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,8 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"
-                    android:padding="@dimen/_5sdp"
+                    android:scaleType="fitXY"
                     android:src="@drawable/bank_icon"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -100,6 +98,7 @@
                 android:layout_height="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:src="@drawable/calendar_icon"
+                android:tint="@color/homeTextColor"
                 android:layout_marginBottom="@dimen/_2sdp"
                 app:layout_constraintBottom_toBottomOf="@id/txtDate"
                 app:layout_constraintEnd_toStartOf="@id/txtDate" />

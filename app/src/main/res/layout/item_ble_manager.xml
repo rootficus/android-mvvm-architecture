@@ -114,6 +114,7 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_2sdp"
                 android:src="@drawable/calendar_icon"
+                android:tint="@color/homeTextColor"
                 app:layout_constraintBottom_toBottomOf="@id/txtDate"
                 app:layout_constraintEnd_toStartOf="@id/txtDate" />
 

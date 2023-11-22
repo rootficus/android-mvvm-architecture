@@ -260,48 +260,41 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
             when (menuItem.itemId) {
                 R.id.all -> {
                     // Handle Menu Item 1 click
-                    mDataBinding.txtListTitle.text = menuItem.title
-                    filter("", false)
+                    filter("All", false)
                     true
                 }
 
                 R.id.menu_active -> {
                     // Handle Menu Item 1 click
-                    mDataBinding.txtListTitle.text = menuItem.title
                     filter("Active", false)
                     true
                 }
 
                 R.id.menu_in_active -> {
                     // Handle Menu Item 1 click
-                    mDataBinding.txtListTitle.text = menuItem.title
                     filter("Inactive", false)
                     true
                 }
 
                 R.id.menu_unblocked -> {
                     // Handle Menu Item 2 click
-                    mDataBinding.txtListTitle.text = menuItem.title
                     filter("On", false)
                     true
                 }
 
                 R.id.menu_blocked -> {
-                    mDataBinding.txtListTitle.text = menuItem.title
                     filter("Off", false)
                     // Handle Menu Item 3 click
                     true
                 }
 
                 R.id.log_in -> {
-                    mDataBinding.txtListTitle.text = menuItem.title
                     filter("Login", false)
                     // Handle Menu Item 3 click
                     true
                 }
 
                 R.id.log_out -> {
-                    mDataBinding.txtListTitle.text = menuItem.title
                     filter("Logout", false)
                     // Handle Menu Item 3 click
                     true
@@ -345,7 +338,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                         // if the item is matched we are
                         filteredList.add(item)
                     }
-                } else if (text.isEmpty()) {
+                } else if (text.isEmpty() || text == "All") {
                     filteredList.clear()
                     filteredList.addAll(listGetModemsByFilter)
                 }
@@ -381,6 +374,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
             // if no item is added in filtered list we are
             Toast.makeText(context, "No Data Found..", Toast.LENGTH_SHORT).show()
         } else {
+            mDataBinding.txtListTitle.text = text
             // at last we are passing that filtered
             modemsManagerListAdapter?.updateListFilter(filteredList)
         }

@@ -110,7 +110,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
     }
 
     private fun setBleAdapter(filter: Int) {
-        var arrayList: ArrayList<BLTransactionModemResponse> = arrayListOf<BLTransactionModemResponse>()
+        var arrayList: ArrayList<BLTransactionModemResponse> = arrayListOf()
         bleManagerListAdapter = BleManagerListAdapter(arrayList)
         bleManagerListAdapter?.listener = cardListener
         mDataBinding.recentTrendingView.layoutManager = LinearLayoutManager(context)
@@ -127,7 +127,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
 
     private val cardListener = object : BleManagerListAdapter.CardEvent {
         override fun onCardClicked(getBalanceManageRecord: GetBalanceManageRecord) {
-            var bottomSheetFragment = BalanceDetailScreenFragment()
+            val bottomSheetFragment = BalanceDetailScreenFragment()
             bottomSheetFragment.listener = balanceDetailScreenActionListener
             val bundle = Bundle()
             bundle.putSerializable(GetBalanceManageRecord::class.java.name, getBalanceManageRecord)
@@ -304,7 +304,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
     }
 
     private fun setBleFilterCount() {
-        var totalCount = viewModel.getBLSuccess() + viewModel.getBLPending() +
+        val totalCount = viewModel.getBLSuccess() + viewModel.getBLPending() +
                 viewModel.getBLApproved() + viewModel.getBLDanger() +
                 viewModel.getBLRejected()
         mDataBinding.chipAllTransactions.text =
