@@ -73,7 +73,7 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
                     if (totalBalance != null && totalBalance!! > 0.0) {
                         binding.labelTotalBalance.text = "New balance will be: ৳$totalBalance"
                     } else {
-                        Toast.makeText(context, "Enter a valid amount", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Entered amount should be less than agent balance", Toast.LENGTH_SHORT).show()
                         "New balance will be: ৳${currentBalance}"
                         binding.etUpdateBalance.setText("")
                     }
