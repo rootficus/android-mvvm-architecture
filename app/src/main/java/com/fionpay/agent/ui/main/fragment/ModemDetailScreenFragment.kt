@@ -10,8 +10,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.databinding.ModemBottomSheetBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlin.concurrent.thread
 
 
 class ModemDetailScreenFragment : BottomSheetDialogFragment() {
@@ -32,12 +33,21 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = ModemBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        dialog!!.setOnShowListener { dialog ->
+            val d = dialog as BottomSheetDialog
+            val bottomSheetInternal =
+                d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+            BottomSheetBehavior.from(bottomSheetInternal!!).state =
+                BottomSheetBehavior.STATE_EXPANDED
+        }
         getModemsListResponse =
             arguments?.getSerializable(GetModemsListResponse::class.java.name) as GetModemsListResponse
         currentBalance = arguments?.getString("CurrentBalance")?.toDouble()
