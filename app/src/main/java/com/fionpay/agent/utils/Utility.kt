@@ -11,8 +11,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatTextView
 import com.fionpay.agent.R
+import com.fionpay.agent.roomDB.dao.FionDao
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import java.text.DecimalFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -44,6 +49,11 @@ object Utility {
     fun getFormatTimeWithTZ(currentTime: Date?): String? {
         val timeZoneDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
         return timeZoneDate.format(currentTime)
+    }
+
+    fun getCurrentDateTimeFormat(): String? {
+        val timeZoneDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+        return timeZoneDate.format(Date())
     }
 
     fun logs(tag: String, s: String) {
@@ -109,6 +119,10 @@ object Utility {
         return time
     }
 
+    fun isNotificationExits(fioDao: FionDao?, id: String): Boolean? {
+        return fioDao?.isNotificationExits(id)
+    }
+
     fun convertCurrencyFormat(currency: Double): String {
         Log.d("convertCurrencyFormat", "::${currency}")
         val formatter = DecimalFormat("###,###,##0.00")
@@ -121,6 +135,25 @@ object Utility {
         val pattern = Pattern.compile(regex)
         val matcher = pattern.matcher(email)
         return matcher.matches()
+    }
+
+    fun getPushToken(activity: Context) {
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener(OnCompleteListener<String?> { task ->
+                if (!task.isSuccessful) {
+                    Log.w(Utility::class.java.name, "Fetching FCM registration token failed", task.exception)
+                    return@OnCompleteListener
+                }
+
+                // Get new FCM registration token
+                val token = task.result
+
+                // Log and toast
+                val msg = "FCM TOKEN: $token"
+                Log.d(Utility::class.java.name, msg)
+                var sharedPreference = SharedPreference(activity)
+                sharedPreference.setPushToken(token)
+            })
     }
 
     fun callCustomToast(context: Context, message: String) {

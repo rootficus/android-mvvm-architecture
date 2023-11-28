@@ -52,10 +52,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-
         <service
-            android:name=".data.remote.MyFirebaseMessagingService"
+            android:name=".service.FionpayFCMService"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

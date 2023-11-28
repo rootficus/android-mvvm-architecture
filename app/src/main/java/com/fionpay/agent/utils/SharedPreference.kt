@@ -10,6 +10,7 @@ import com.fionpay.agent.utils.Constant.PREF_BL_SUCCESS
 import com.fionpay.agent.utils.Constant.PREF_DASHBOARD
 import com.fionpay.agent.utils.Constant.PREF_DEVICE_TOKEN
 import com.fionpay.agent.utils.Constant.PREF_PASSWORD
+import com.fionpay.agent.utils.Constant.PREF_PUSH_TOKEN
 import com.fionpay.agent.utils.Constant.PREF_TODAY_TRANSACTIONS
 import com.fionpay.agent.utils.Constant.PREF_TODAY_TRX_AMOUNT
 import com.fionpay.agent.utils.Constant.PREF_TOKEN
@@ -134,6 +135,16 @@ class SharedPreference(context: Context) {
         return pref.getString(PREF_TOKEN, "")
     }
 
+    fun setPushToken(token: String) {
+        pref.edit().putString(PREF_PUSH_TOKEN, token).apply()
+    }
+
+    fun getPushToken(): String? {
+        return pref.getString(
+            PREF_PUSH_TOKEN,""
+        )
+    }
+
     fun setIsLogin(isLogin: Boolean) {
         pref.edit().putBoolean(PREFS_IS_LOGIN, isLogin).apply()
     }
@@ -234,14 +245,6 @@ class SharedPreference(context: Context) {
         return pref.getInt(PREF_BL_DANGER, 0)
     }
 
-    fun setDeviceToken(deviceToken: String?) {
-        deviceToken?.let { pref.edit().putString(PREF_DEVICE_TOKEN, it).apply() }
-    }
-
-    fun getDeviceToken(): String? {
-        return pref.getString(PREF_DEVICE_TOKEN, "")
-    }
-
     fun setDashBoardDataModel(model: String?) {
         model?.let { pref.edit().putString(PREF_DASHBOARD, it).apply() }
     }
@@ -252,6 +255,46 @@ class SharedPreference(context: Context) {
 
     fun resetSharedPref() {
         pref.edit().clear().apply()
+    }
+
+    fun setModemChangeStatusNotificationCount(count: Int) {
+        pref.edit().putInt(Constant.PREF_MODEM_CHANGE_STATUS_NOTIFICATION_COUNT,count).apply()
+    }
+
+    fun getModemChangeStatusNotificationCount():Int{
+        return pref.getInt(Constant.PREF_MODEM_CHANGE_STATUS_NOTIFICATION_COUNT,0)
+    }
+
+    fun setAddBalanceModemNotificationCount(count: Int) {
+        pref.edit().putInt(Constant.PREF_ADD_BALANCE_MODEM_NOTIFICATION_COUNT,count).apply()
+    }
+
+    fun getAddBalanceModemNotificationCount():Int{
+        return pref.getInt(Constant.PREF_ADD_BALANCE_MODEM_NOTIFICATION_COUNT,0)
+    }
+
+    fun setDepositRequestModemNotificationCount(count: Int) {
+        pref.edit().putInt(Constant.PREF_DEPOSIT_REQUEST_MODEM_NOTIFICATION_COUNT,count).apply()
+    }
+
+    fun getDepositRequestModemNotificationCount():Int{
+        return pref.getInt(Constant.PREF_DEPOSIT_REQUEST_MODEM_NOTIFICATION_COUNT,0)
+    }
+
+    fun setWithdrawalRequestModemNotificationCount(count: Int) {
+        pref.edit().putInt(Constant.PREF_WITHDRAWAL_REQUEST_MODEM_NOTIFICATION_COUNT,count).apply()
+    }
+
+    fun getWithdrawalRequestModemNotificationCount():Int{
+        return pref.getInt(Constant.PREF_WITHDRAWAL_REQUEST_MODEM_NOTIFICATION_COUNT,0)
+    }
+
+    fun setRefundRequestModemNotificationCount(count: Int) {
+        pref.edit().putInt(Constant.PREF_REFUND_REQUEST_MODEM_NOTIFICATION_COUNT,count).apply()
+    }
+
+    fun getRefundRequestModemNotificationCount():Int{
+        return pref.getInt(Constant.PREF_REFUND_REQUEST_MODEM_NOTIFICATION_COUNT,0)
     }
 
 }

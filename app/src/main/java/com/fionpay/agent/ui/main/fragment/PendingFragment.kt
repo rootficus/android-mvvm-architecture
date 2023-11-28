@@ -2,7 +2,10 @@ package com.fionpay.agent.ui.main.fragment
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -33,6 +36,7 @@ import com.fionpay.agent.ui.main.adapter.PendingListAdapter
 import com.fionpay.agent.ui.main.di.DaggerPendingFragmentComponent
 import com.fionpay.agent.ui.main.di.PendingFragmentModule
 import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
+import com.fionpay.agent.utils.Constant
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
@@ -59,11 +63,28 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
     private var arrayList: ArrayList<PendingModemResponse> = arrayListOf()
 
 
+    private val onFionPendingRequestActionsReceiver: BroadcastReceiver =
+        object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent) {
+                if (intent.extras != null) {
+                    getPendingModemRecord()
+                }
+            }
+        }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeDagger()
         initialization()
+        activity?.registerReceiver(
+            onFionPendingRequestActionsReceiver,
+            IntentFilter(Constant.MODEM_STATUS_CHANGE_ACTIONS)
+        )
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        activity?.unregisterReceiver(onFionPendingRequestActionsReceiver)
     }
 
     private fun initializeDagger() {

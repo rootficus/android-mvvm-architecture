@@ -8,5 +8,19 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         FionSDK.initialize(this)
+        isAppRunning = true
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        isAppRunning = false
+    }
+
+    fun isAppRunning(): Boolean {
+        return isAppRunning
+    }
+
+    companion object {
+        var isAppRunning = false
     }
 }

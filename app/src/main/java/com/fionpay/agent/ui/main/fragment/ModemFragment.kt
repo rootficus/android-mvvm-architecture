@@ -2,6 +2,10 @@ package com.fionpay.agent.ui.main.fragment
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -29,6 +33,7 @@ import com.fionpay.agent.ui.main.adapter.ModemsManagerListAdapter
 import com.fionpay.agent.ui.main.di.DaggerModemFragmentComponent
 import com.fionpay.agent.ui.main.di.ModemFragmentModule
 import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
+import com.fionpay.agent.utils.Constant
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
@@ -60,12 +65,30 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
     lateinit var obj: DashBoardItemResponse
     lateinit var modemSheetFragment: ModemDetailScreenFragment
 
+    private val onFionModemStatusChangeRequestActionsReceiver: BroadcastReceiver =
+        object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent) {
+                if (intent.extras != null) {
+                    getModemsListApi()
+                }
+            }
+        }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initializeDagger()
         initializeView()
 
+        activity?.registerReceiver(
+            onFionModemStatusChangeRequestActionsReceiver,
+            IntentFilter(Constant.MODEM_STATUS_CHANGE_ACTIONS)
+        )
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        activity?.unregisterReceiver(onFionModemStatusChangeRequestActionsReceiver)
     }
 
     private fun initializeDagger() {

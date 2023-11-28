@@ -516,27 +516,27 @@ class DashBoardRepository(
     }
 
     fun insertBalanceManagerRecord(it: GetBalanceManageRecord) {
-        fionDatabase.rapidxDao()?.insertGetBalanceManageRecord(it)
+        fionDatabase.fioDao()?.insertGetBalanceManageRecord(it)
     }
 
     fun insertModems(it: Modem) {
-        fionDatabase.rapidxDao()?.insertModems(it)
+        fionDatabase.fioDao()?.insertModems(it)
     }
 
     fun insertBanks(it: Bank) {
-        fionDatabase.rapidxDao()?.insertBanks(it)
+        fionDatabase.fioDao()?.insertBanks(it)
     }
 
     fun getModemsListDao(): List<Modem>? {
-        return fionDatabase.rapidxDao()?.getModemsList()
+        return fionDatabase.fioDao()?.getModemsList()
     }
     fun getBanksListDao(): List<Bank>? {
-        return fionDatabase.rapidxDao()?.getBanksList()
+        return fionDatabase.fioDao()?.getBanksList()
     }
 
     fun getBalanceManageRecord(isBalanceManage: Int): ArrayList<GetBalanceManageRecord> {
         return when (isBalanceManage) {
-            -1 -> fionDatabase.rapidxDao()
+            -1 -> fionDatabase.fioDao()
                 ?.getBalanceTransaction() as ArrayList<GetBalanceManageRecord>
 
             Constant.BalanceManagerStatus.SUCCESS.action -> {
@@ -544,7 +544,7 @@ class DashBoardRepository(
                     "getBalanceManagerRecord",
                     "::${isBalanceManage},${Constant.BalanceManagerStatus.SUCCESS.toString()}"
                 )
-                fionDatabase.rapidxDao()
+                fionDatabase.fioDao()
                     ?.getBalanceTransaction(Constant.BalanceManagerStatus.SUCCESS.toString()) as ArrayList<GetBalanceManageRecord>
             }
 
@@ -553,7 +553,7 @@ class DashBoardRepository(
                     "getBalanceManagerRecord",
                     "::${isBalanceManage},${Constant.BalanceManagerStatus.PENDING.toString()}"
                 )
-                fionDatabase.rapidxDao()
+                fionDatabase.fioDao()
                     ?.getBalanceTransaction(Constant.BalanceManagerStatus.PENDING.toString()) as ArrayList<GetBalanceManageRecord>
             }
 
@@ -562,7 +562,7 @@ class DashBoardRepository(
                     "getBalanceManagerRecord",
                     "::${isBalanceManage},${Constant.BalanceManagerStatus.APPROVED.toString()}"
                 )
-                fionDatabase.rapidxDao()
+                fionDatabase.fioDao()
                     ?.getBalanceTransaction(Constant.BalanceManagerStatus.APPROVED.toString()) as ArrayList<GetBalanceManageRecord>
             }
 
@@ -571,7 +571,7 @@ class DashBoardRepository(
                     "getBalanceManagerRecord",
                     "::${isBalanceManage},${Constant.BalanceManagerStatus.REJECTED.toString()}"
                 )
-                fionDatabase.rapidxDao()
+                fionDatabase.fioDao()
                     ?.getBalanceTransaction(Constant.BalanceManagerStatus.REJECTED.toString()) as ArrayList<GetBalanceManageRecord>
             }
 
@@ -580,7 +580,7 @@ class DashBoardRepository(
                     "getBalanceManagerRecord",
                     "::${isBalanceManage},${Constant.BalanceManagerStatus.DANGER.toString()}"
                 )
-                fionDatabase.rapidxDao()
+                fionDatabase.fioDao()
                     ?.getBalanceTransaction(Constant.BalanceManagerStatus.DANGER.toString()) as ArrayList<GetBalanceManageRecord>
             }
 
@@ -589,7 +589,7 @@ class DashBoardRepository(
                     "getBalanceManagerRecord",
                     ":else:${isBalanceManage},${Constant.BalanceManagerStatus.DANGER.toString()}"
                 )
-                fionDatabase.rapidxDao()
+                fionDatabase.fioDao()
                     ?.getBalanceTransaction() as ArrayList<GetBalanceManageRecord>
             }
         }
@@ -597,36 +597,36 @@ class DashBoardRepository(
 
     fun getCountBalanceManageRecord(isBalanceManage: Int): Int {
         return when (isBalanceManage) {
-            -1 -> fionDatabase.rapidxDao()?.getCountBalanceTransaction() as Int
-            Constant.BalanceManagerStatus.SUCCESS.action -> fionDatabase.rapidxDao()
+            -1 -> fionDatabase.fioDao()?.getCountBalanceTransaction() as Int
+            Constant.BalanceManagerStatus.SUCCESS.action -> fionDatabase.fioDao()
                 ?.getCountBalanceTransaction(Constant.BalanceManagerStatus.SUCCESS.toString()) as Int
 
-            Constant.BalanceManagerStatus.PENDING.action -> fionDatabase.rapidxDao()
+            Constant.BalanceManagerStatus.PENDING.action -> fionDatabase.fioDao()
                 ?.getCountBalanceTransaction(Constant.BalanceManagerStatus.PENDING.toString()) as Int
 
-            Constant.BalanceManagerStatus.APPROVED.action -> fionDatabase.rapidxDao()
+            Constant.BalanceManagerStatus.APPROVED.action -> fionDatabase.fioDao()
                 ?.getCountBalanceTransaction(Constant.BalanceManagerStatus.APPROVED.toString()) as Int
 
-            Constant.BalanceManagerStatus.REJECTED.action -> fionDatabase.rapidxDao()
+            Constant.BalanceManagerStatus.REJECTED.action -> fionDatabase.fioDao()
                 ?.getCountBalanceTransaction(Constant.BalanceManagerStatus.REJECTED.toString()) as Int
 
-            Constant.BalanceManagerStatus.DANGER.action -> fionDatabase.rapidxDao()
+            Constant.BalanceManagerStatus.DANGER.action -> fionDatabase.fioDao()
                 ?.getCountBalanceTransaction(Constant.BalanceManagerStatus.DANGER.toString()) as Int
 
             else -> {
-                fionDatabase.rapidxDao()?.getCountBalanceTransaction() as Int
+                fionDatabase.fioDao()?.getCountBalanceTransaction() as Int
             }
         }
     }
 
     fun insertGetMessageManageRecord(it: GetMessageManageRecord) {
-        fionDatabase.rapidxDao()?.insertGetMessageManageRecord(it)
+        fionDatabase.fioDao()?.insertGetMessageManageRecord(it)
     }
 
     fun getMessageManageRecord(isBalanceManage: Int): ArrayList<GetMessageManageRecord> {
         return when (isBalanceManage) {
             Log.d("getMessageManageRecord", ":All:${isBalanceManage},${Constant.SMSType.All.value}")
-                    - 1 -> fionDatabase.rapidxDao()
+                    - 1 -> fionDatabase.fioDao()
                 ?.getMessageTransaction() as ArrayList<GetMessageManageRecord>
 
             Constant.SMSType.CashOut.value -> {
@@ -634,7 +634,7 @@ class DashBoardRepository(
                     "getMessageManageRecord",
                     ":CashOut:${isBalanceManage},${Constant.SMSType.CashOut.value}"
                 )
-                fionDatabase.rapidxDao()
+                fionDatabase.fioDao()
                     ?.getMessageTransaction(Constant.SMSType.CashOut.value) as ArrayList<GetMessageManageRecord>
             }
 
@@ -643,7 +643,7 @@ class DashBoardRepository(
                     "getMessageManageRecord",
                     ":CashIn:${isBalanceManage},${Constant.SMSType.CashIn.value}"
                 )
-                fionDatabase.rapidxDao()
+                fionDatabase.fioDao()
                     ?.getMessageTransaction(Constant.SMSType.CashIn.value) as ArrayList<GetMessageManageRecord>
             }
 
@@ -652,7 +652,7 @@ class DashBoardRepository(
                     "getMessageManageRecord",
                     ":B2B:${isBalanceManage},${Constant.SMSType.B2B.value}"
                 )
-                fionDatabase.rapidxDao()
+                fionDatabase.fioDao()
                     ?.getMessageTransaction(Constant.SMSType.B2B.value) as ArrayList<GetMessageManageRecord>
             }
 
@@ -661,7 +661,7 @@ class DashBoardRepository(
                     "getMessageManageRecord",
                     ":UNKNOWN:${isBalanceManage},${Constant.SMSType.UNKNOWN.value}"
                 )
-                fionDatabase.rapidxDao()
+                fionDatabase.fioDao()
                     ?.getMessageTransaction(Constant.SMSType.UNKNOWN.value) as ArrayList<GetMessageManageRecord>
             }
 
@@ -670,7 +670,7 @@ class DashBoardRepository(
                     "getMessageManageRecord",
                     ":AllElse:${isBalanceManage},${Constant.SMSType.All.value}"
                 )
-                fionDatabase.rapidxDao()
+                fionDatabase.fioDao()
                     ?.getMessageTransaction() as ArrayList<GetMessageManageRecord>
             }
         }
@@ -678,35 +678,35 @@ class DashBoardRepository(
 
     fun getCountMessageManageRecord(isBalanceManage: Int): Int {
         return when (isBalanceManage) {
-            -1 -> fionDatabase.rapidxDao()?.getCountMessageTransaction() as Int
-            Constant.SMSType.CashOut.value -> fionDatabase.rapidxDao()
+            -1 -> fionDatabase.fioDao()?.getCountMessageTransaction() as Int
+            Constant.SMSType.CashOut.value -> fionDatabase.fioDao()
                 ?.getCountMessageTransaction(Constant.SMSType.CashOut.value) as Int
 
-            Constant.SMSType.CashIn.value -> fionDatabase.rapidxDao()
+            Constant.SMSType.CashIn.value -> fionDatabase.fioDao()
                 ?.getCountMessageTransaction(Constant.SMSType.CashIn.value) as Int
 
-            Constant.SMSType.B2B.value -> fionDatabase.rapidxDao()
+            Constant.SMSType.B2B.value -> fionDatabase.fioDao()
                 ?.getCountMessageTransaction(Constant.SMSType.B2B.value) as Int
 
-            Constant.SMSType.UNKNOWN.value -> fionDatabase.rapidxDao()
+            Constant.SMSType.UNKNOWN.value -> fionDatabase.fioDao()
                 ?.getCountMessageTransaction(Constant.SMSType.UNKNOWN.value) as Int
 
             else -> {
-                fionDatabase.rapidxDao()?.getCountMessageTransaction() as Int
+                fionDatabase.fioDao()?.getCountMessageTransaction() as Int
             }
         }
     }
 
     fun deleteLocalBlManager() {
-        fionDatabase.rapidxDao()?.deleteGetBalanceManageRecord()
+        fionDatabase.fioDao()?.deleteGetBalanceManageRecord()
     }
 
     fun deleteLocalMessageManager() {
-        fionDatabase.rapidxDao()?.deleteGetMessageManageRecord()
+        fionDatabase.fioDao()?.deleteGetMessageManageRecord()
     }
 
     fun updateLocalBalanceManager(balanceManageRecord: GetBalanceManageRecord) {
-        fionDatabase.rapidxDao()?.updateLocalBalanceManager(balanceManageRecord)
+        fionDatabase.fioDao()?.updateLocalBalanceManager(balanceManageRecord)
     }
 
 }

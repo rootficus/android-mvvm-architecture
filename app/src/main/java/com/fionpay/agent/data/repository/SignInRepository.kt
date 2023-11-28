@@ -98,11 +98,11 @@ class SignInRepository (val apiServices: FionApiServices,
     }
 
     fun setDeviceToken(deviceToken: String?) {
-        deviceToken?.let { sharedPreference.setDeviceToken(it) }
+        deviceToken?.let { sharedPreference.setPushToken(it) }
     }
 
     fun getDeviceToken(): String? {
-        return sharedPreference.getDeviceToken()
+        return sharedPreference.getPushToken()
     }
     fun getFullName(): String? {
         return sharedPreference.getFullName()

@@ -169,7 +169,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                 SignInRequest(
                     email = name,
                     password = password,
-                    deviceToken = sharedPreference.getDeviceToken().toString()
+                    deviceToken = sharedPreference.getPushToken().toString()
                 )
             )
             viewmodel.signInResponseModel.observe(viewLifecycleOwner) {

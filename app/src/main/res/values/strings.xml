@@ -186,4 +186,9 @@
         <item>item3</item>
         <item>item4</item>
     </string-array>
+    <string name="modem_status_change">Agent Status Change</string>
+    <string name="balance_change">Balance Change</string>
+    <string name="deposit_request">Deposit Request</string>
+    <string name="withdrawal_request">Withdrawal Request</string>
+    <string name="refund_request">Refund Request</string>
 </resources>

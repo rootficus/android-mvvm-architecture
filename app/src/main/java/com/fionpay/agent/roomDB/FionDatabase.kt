@@ -10,16 +10,17 @@ import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.roomDB.model.ModemSetting
 import com.fionpay.agent.roomDB.dao.FionDao
+import com.fionpay.agent.roomDB.model.NotificationRecord
 import com.fionpay.agent.roomDB.model.OperatorRecord
 import com.fionpay.agent.roomDB.model.SMSRecord
 
 
 @Database(
-    entities = [SMSRecord::class, ModemSetting::class, OperatorRecord::class, GetBalanceManageRecord::class, GetMessageManageRecord::class, Modem::class, Bank::class],
+    entities = [SMSRecord::class, ModemSetting::class, OperatorRecord::class, NotificationRecord::class, GetBalanceManageRecord::class, GetMessageManageRecord::class, Modem::class, Bank::class],
     version = 1
 )
 abstract class FionDatabase : RoomDatabase() {
-    abstract fun rapidxDao(): FionDao?
+    abstract fun fioDao(): FionDao?
     companion object {
         @Volatile
         private var INSTANCE: FionDatabase? = null

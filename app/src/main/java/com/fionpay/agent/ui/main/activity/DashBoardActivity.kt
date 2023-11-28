@@ -1,9 +1,16 @@
 package com.fionpay.agent.ui.main.activity
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewPropertyAnimator
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -19,9 +26,11 @@ import com.fionpay.agent.ui.main.di.DaggerDashBoardActivityComponent
 import com.fionpay.agent.ui.main.di.DashBoardActivityModule
 import com.fionpay.agent.ui.main.fragment.DashBoardFragment
 import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
+import com.fionpay.agent.utils.Constant
 import com.fionpay.agent.utils.IOnBackPressed
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
+import com.fionpay.agent.utils.Utility
 import com.google.android.material.navigation.NavigationView
 import javax.inject.Inject
 
@@ -42,14 +51,82 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     private lateinit var navController: NavController
     var doubleBackToExitPressedOnce = false
 
+    private val headerMessageTextView: TextView by lazy {
+        findViewById(R.id.headerMessageTextView)
+    }
+
+    private var isShowing = false
+
+    private val handler = Handler(Looper.getMainLooper())
+
+    private val animationDuration: Long = 300 // Adjust the duration as needed
+
+    private val hideDelay: Long = 2000 // Adjust the delay before hiding as needed
+
+    fun showHeaderMessage(message: String) {
+        if (isShowing) {
+            // Message is already showing, let's hide it first
+            hideHeaderMessage()
+        }
+
+        headerMessageTextView.text = message
+        headerMessageTextView.visibility = View.VISIBLE
+
+        val animator: ViewPropertyAnimator = headerMessageTextView.animate()
+            .translationY(0f)
+            .setDuration(animationDuration)
+
+        animator.start()
+
+        isShowing = true
+
+        // Schedule a task to hide the message after a delay
+        handler.postDelayed({
+            hideHeaderMessage()
+        }, hideDelay)
+    }
+
+    private fun hideHeaderMessage() {
+        val animator: ViewPropertyAnimator = headerMessageTextView.animate()
+            .translationY(-headerMessageTextView.height.toFloat())
+            .setDuration(animationDuration)
+
+        animator.withEndAction {
+            headerMessageTextView.visibility = View.GONE
+            isShowing = false
+        }
+
+        animator.start()
+    }
+
+    private val onDashBoardActivityActionsReceiver: BroadcastReceiver =
+        object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent) {
+                if (intent.extras != null) {
+                    var message = intent.extras?.getString(Constant.FIONPAY_ACTION,"")
+                    if (!message.isNullOrEmpty()){
+                        setNotificationCount(message)
+                    }
+
+                }
+            }
+        }
+
+    private fun setNotificationCount(message:String) {
+        showHeaderMessage(message)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Utility.getPushToken(this@DashBoardActivity)
         initializationDagger()
-        //dashBoardViewModel.checkNightTheme(true)
         initializationView()
+        registerReceiver(onDashBoardActivityActionsReceiver, IntentFilter(Constant.HOME_REQUEST_NOTIFICATION_COUNT))
+    }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(onDashBoardActivityActionsReceiver)
     }
 
     private fun initializationDagger() {

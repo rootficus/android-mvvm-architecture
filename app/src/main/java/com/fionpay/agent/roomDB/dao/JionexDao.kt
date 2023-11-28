@@ -12,6 +12,7 @@ import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.roomDB.model.ModemSetting
+import com.fionpay.agent.roomDB.model.NotificationRecord
 import com.fionpay.agent.roomDB.model.OperatorRecord
 import com.fionpay.agent.roomDB.model.SMSRecord
 
@@ -118,4 +119,10 @@ interface FionDao {
 
     @Update
     fun updateLocalBalanceManager(balanceManageRecord: GetBalanceManageRecord)
+
+    @Query("SELECT EXISTS (SELECT * FROM notificationRecord WHERE id = :id)")
+    fun isNotificationExits(id: String?): Boolean?
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertNotification(notificationRecord: NotificationRecord?)
+
 }

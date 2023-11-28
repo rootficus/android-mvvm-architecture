@@ -2,7 +2,10 @@ package com.fionpay.agent.ui.main.fragment
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -23,6 +26,7 @@ import com.fionpay.agent.ui.main.adapter.DashBoardListAdapter
 import com.fionpay.agent.ui.main.di.DaggerDashBoardFragmentComponent
 import com.fionpay.agent.ui.main.di.DashBoardFragmentModule
 import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
+import com.fionpay.agent.utils.Constant
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
@@ -51,11 +55,28 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
     var modemList: ArrayList<Modem> = arrayListOf()
     var bankList: ArrayList<Bank> = arrayListOf()
 
+    private val onFionModemStatusChangeActionsReceiver: BroadcastReceiver =
+        object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent) {
+                if (intent.extras != null) {
+                    getDashBoardData()
+                }
+            }
+        }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeDagger()
         initializeView()
+        activity?.registerReceiver(
+            onFionModemStatusChangeActionsReceiver,
+            IntentFilter(Constant.MODEM_STATUS_CHANGE_ACTIONS)
+        )
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        activity?.unregisterReceiver(onFionModemStatusChangeActionsReceiver)
     }
 
 
@@ -95,7 +116,10 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
             Navigation.findNavController(requireView())
                 .navigate(R.id.navigation_notificationFragment)
         }
+        getDashBoardData()
+    }
 
+    private fun getDashBoardData() {
         if (networkHelper.isNetworkConnected()) {
             viewModel.dashBoardData()
             viewModel.dashBoardItemResponseModel.observe(viewLifecycleOwner) {

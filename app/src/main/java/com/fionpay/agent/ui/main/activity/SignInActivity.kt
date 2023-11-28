@@ -14,6 +14,7 @@ import com.fionpay.agent.ui.main.di.SignInModule
 import com.fionpay.agent.ui.main.viewmodel.SignInViewModel
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
+import com.fionpay.agent.utils.Utility
 import javax.inject.Inject
 
 
@@ -46,5 +47,6 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
 
     override fun onResume() {
         super.onResume()
+        Utility.getPushToken(this@SignInActivity)
     }
 }
