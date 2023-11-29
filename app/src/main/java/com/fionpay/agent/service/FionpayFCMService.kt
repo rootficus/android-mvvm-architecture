@@ -132,25 +132,18 @@ open class FionpayFCMService : FirebaseMessagingService() {
             context.sendBroadcast(intent)
         }
         else {
-            var title = getString(R.string.app_name)
-            when(notificationRecord.notificationType){
-                Constant.NotificationType.MODEM_STATUS_CHANGE.param->{
-                    title = getString(R.string.modem_status_change)
-                }
-                Constant.NotificationType.ADD_BALANCE_AGENT.param->{
-                    title = getString(R.string.balance_change)
-                }
-                Constant.NotificationType.DEPOSIT_REQUEST.param->{
-                    title = getString(R.string.deposit_request)
-                }
-                Constant.NotificationType.WITHDRAWAL_REQUEST.param->{
-                    title = getString(R.string.withdrawal_request)
-                }
-                Constant.NotificationType.REFUND_REQUEST.param->{
-                    title = getString(R.string.refund_request)
-                }
-            }
-            NotificationUtils.showNotification(applicationContext,title,notificationRecord.messageBody!!, notificationRecord.id)
+            NotificationUtils.showNotification(applicationContext,getTitle(notificationRecord.notificationType!!),notificationRecord.messageBody!!, notificationRecord.id)
+        }
+    }
+
+    private fun getTitle(notificationType: String): String {
+        return when(notificationType){
+            Constant.NotificationType.MODEM_STATUS_CHANGE.param-> getString(R.string.modem_status_change)
+            Constant.NotificationType.ADD_BALANCE_AGENT.param->getString(R.string.balance_change)
+            Constant.NotificationType.DEPOSIT_REQUEST.param->getString(R.string.deposit_request)
+            Constant.NotificationType.WITHDRAWAL_REQUEST.param-> getString(R.string.withdrawal_request)
+            Constant.NotificationType.REFUND_REQUEST.param-> getString(R.string.refund_request)
+            else -> getString(R.string.app_name)
         }
     }
 }
