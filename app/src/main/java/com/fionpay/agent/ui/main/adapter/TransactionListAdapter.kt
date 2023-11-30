@@ -1,17 +1,14 @@
 package com.fionpay.agent.ui.main.adapter
 
 import android.content.Context
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fionpay.agent.R
-import com.fionpay.agent.data.model.response.BLTransactionModemResponse
-import com.fionpay.agent.data.model.response.GetBalanceManageRecord
-import com.fionpay.agent.data.model.response.PendingModemResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
-import com.fionpay.agent.databinding.ItemPendingRequestBinding
 import com.fionpay.agent.databinding.ItemTransactionManagerBinding
 import com.fionpay.agent.utils.Utility
 
@@ -46,7 +43,7 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
         with(holder)
         {
             setCardBgColor(binding, position)
-            binding.txtAmount.text = "৳${item.amount}"
+
             binding.txtDate.text = Utility.convertTransactionDate(item.date)
             binding.txtSuccess.text = item.status
             setStatusView(item, binding)
@@ -75,7 +72,12 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
                 )
             )
         } else {
-            binding.layoutCard.setBackgroundColor(ContextCompat.getColor(context, R.color.sigInEditTextBackColor))
+            binding.layoutCard.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.sigInEditTextBackColor
+                )
+            )
         }
     }
 
@@ -85,25 +87,58 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
     ) {
         when (item.paymentType) {
             "Cash In" -> {
-                binding.labelWithdraw.text = item.paymentType.toString()
-                binding.txtTransactionId.text = "☎ ${item.customer.toString()}"
-                binding.txtAmount.setTextColor(
-                    ContextCompat.getColorStateList(
-                        context,
-                        R.color.reject
+                if (item.status == "Approved") {
+                    binding.txtAmount.text = "- ৳${item.amount}"
+                    binding.txtAmount.setTextColor(
+                        ContextCompat.getColorStateList(
+                            context,
+                            R.color.reject
+                        )
                     )
-                )
+                    binding.txtAmount.paintFlags = binding.txtAmount.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                    binding.txtTransactionId.text = "#${item.transactionId.toString()}"
+                } else {
+                    binding.txtAmount.text = "৳${item.amount}"
+                    binding.txtAmount.paintFlags =
+                        binding.txtAmount.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                    binding.txtAmount.setTextColor(
+                        ContextCompat.getColorStateList(
+                            context,
+                            R.color.textColor
+                        )
+                    )
+                    binding.txtTransactionId.text = "☎ ${item.customer.toString()}"
+                }
+
+                binding.labelWithdraw.text = item.paymentType.toString()
+
+
             }
 
             "Cash Out" -> {
-                binding.labelWithdraw.text = item.paymentType.toString()
-                binding.txtTransactionId.text = "#${item.transactionId.toString()}"
-                binding.txtAmount.setTextColor(
-                    ContextCompat.getColorStateList(
-                        context,
-                        R.color.greenColor
+                if (item.status == "Approved") {
+                    binding.txtAmount.text = "+ ৳${item.amount}"
+                    binding.txtAmount.setTextColor(
+                        ContextCompat.getColorStateList(
+                            context,
+                            R.color.approve
+                        )
                     )
-                )
+                    binding.txtAmount.paintFlags = binding.txtAmount.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+
+                } else {
+                    binding.txtAmount.text = "৳${item.amount}"
+                    binding.txtAmount.paintFlags =
+                        binding.txtAmount.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                    binding.txtAmount.setTextColor(
+                        ContextCompat.getColorStateList(
+                            context,
+                            R.color.textColor
+                        )
+                    )
+                }
+                binding.txtTransactionId.text = "#${item.transactionId.toString()}"
+                binding.labelWithdraw.text = item.paymentType.toString()
             }
         }
     }
@@ -114,6 +149,7 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
     ) {
         when (item.status) {
             "Approved" -> {
+
                 binding.txtSuccess.setTextColor(
                     ContextCompat.getColor(
                         context,

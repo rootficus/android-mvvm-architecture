@@ -515,6 +515,14 @@ class DashBoardRepository(
         return sharedPreference.getDashBoardDataModel()
     }
 
+    fun setCurrentAgentBalance(balance: String) {
+        sharedPreference.setCurrentAgentBalance(balance)
+    }
+
+    fun getCurrentAgentBalance(): String? {
+        return sharedPreference.getCurrentAgentBalance()
+    }
+
     fun insertBalanceManagerRecord(it: GetBalanceManageRecord) {
         fionDatabase.fioDao()?.insertGetBalanceManageRecord(it)
     }

@@ -18,16 +18,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class ModemDetailScreenFragment : BottomSheetDialogFragment() {
     interface BottomDialogEvent {
         fun onAddRequest(getModemsListResponse: GetModemsListResponse, amount: Double)
-        fun onRemoveRequest(getModemsListResponse: GetModemsListResponse, amount: Double)
     }
 
     var listener: BottomDialogEvent? = null
     private lateinit var binding: ModemBottomSheetBinding
-    private var balanceStatus = ""
     var currentBalance: Double? = 0.0
     var totalBalance: Double? = 0.0
 
-    lateinit var getModemsListResponse  : GetModemsListResponse
+    lateinit var getModemsListResponse: GetModemsListResponse
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,9 +52,9 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
         binding.labelTotalBalance.text = "New balance will be: ৳${currentBalance}"
         binding.labelTitle.text =
             "${getModemsListResponse.firstName} ${getModemsListResponse.lastName}"
-        binding.etCurrentBalance.setText( "৳${getModemsListResponse.balance.toString()}")
+        binding.etCurrentBalance.setText("৳${getModemsListResponse.balance.toString()}")
 
-        Log.i("Current:","${binding.etCurrentBalance.text.toString()}")
+        Log.i("Current:", "${binding.etCurrentBalance.text.toString()}")
 
         binding.etUpdateBalance.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -73,7 +71,11 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
                     if (totalBalance != null && totalBalance!! > 0.0) {
                         binding.labelTotalBalance.text = "New balance will be: ৳$totalBalance"
                     } else {
-                        Toast.makeText(context, "Entered amount should be less than agent balance", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            "Entered amount should be less than agent balance",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         "New balance will be: ৳${currentBalance}"
                         binding.etUpdateBalance.setText("")
                     }
@@ -85,38 +87,23 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
 
             }
         })
-        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
-                binding.btnAdd.id -> {
-                    balanceStatus = "Add"
-                    binding.etUpdateBalance.setText("")
-                }
 
-                binding.btnRemove.id -> {
-                    balanceStatus = "Remove"
-                    binding.etUpdateBalance.setText("")
-                }
-            }
-        }
         binding.imageClose.setOnClickListener {
             dismiss()
         }
         binding.btnUpdate.setOnClickListener {
-            if (balanceStatus.isEmpty()) {
-                Toast.makeText(context, "Please choose balance type ", Toast.LENGTH_SHORT).show()
-            } else if (binding.etUpdateBalance.text.toString().isEmpty()) {
+            if (binding.etUpdateBalance.text.toString().isEmpty()) {
                 binding.etUpdateBalance.error = "Please enter amount"
             } else {
+
                 val amount = binding.etUpdateBalance.text.toString().toDouble()
-                if (balanceStatus == "Add") {
-                    binding.etUpdateBalance.setText("")
-                    listener?.onAddRequest(getModemsListResponse, amount)   //AddModemBalanceModel(getModemsListResponse.id, amount)
-                } else if (balanceStatus == "Remove") {
-                    binding.etUpdateBalance.setText("")
-                    listener?.onRemoveRequest(
-                      getModemsListResponse, amount
-                    )     //  AddModemBalanceModel( getModemsListResponse.id, amount )
-                }
+                listener?.onAddRequest(
+                    getModemsListResponse,
+                    amount
+                )
+                binding.etUpdateBalance.setText("")
+            //AddModemBalanceModel(getModemsListResponse.id, amount)
+
             }
         }
     }

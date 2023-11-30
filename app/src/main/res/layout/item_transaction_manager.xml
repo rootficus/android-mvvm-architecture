@@ -112,6 +112,7 @@
                 android:fontFamily="@font/poppins"
                 android:paddingStart="@dimen/_5sdp"
                 android:text="Success"
+                android:visibility="gone"
                 android:textColor="@color/activeGreen"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"

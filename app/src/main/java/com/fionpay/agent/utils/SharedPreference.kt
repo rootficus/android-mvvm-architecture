@@ -7,6 +7,7 @@ import com.fionpay.agent.utils.Constant.PREF_BL_DANGER
 import com.fionpay.agent.utils.Constant.PREF_BL_PENDING
 import com.fionpay.agent.utils.Constant.PREF_BL_REJECTED
 import com.fionpay.agent.utils.Constant.PREF_BL_SUCCESS
+import com.fionpay.agent.utils.Constant.PREF_CURRENT_BALANCE
 import com.fionpay.agent.utils.Constant.PREF_DASHBOARD
 import com.fionpay.agent.utils.Constant.PREF_DEVICE_TOKEN
 import com.fionpay.agent.utils.Constant.PREF_PASSWORD
@@ -252,6 +253,14 @@ class SharedPreference(context: Context) {
     fun getDashBoardDataModel(): String? {
         return pref.getString(PREF_DASHBOARD, "")
     }
+    fun setCurrentAgentBalance(balance: String) {
+        pref.edit().putString(PREF_CURRENT_BALANCE, balance).apply()
+    }
+
+    fun getCurrentAgentBalance(): String? {
+        return pref.getString(PREF_CURRENT_BALANCE, "0.0")
+    }
+
 
     fun resetSharedPref() {
         pref.edit().clear().apply()

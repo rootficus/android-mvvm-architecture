@@ -191,4 +191,5 @@
     <string name="deposit_request">Deposit Request</string>
     <string name="withdrawal_request">Withdrawal Request</string>
     <string name="refund_request">Refund Request</string>
+    <string name="add_amount">Add Amount</string>
 </resources>

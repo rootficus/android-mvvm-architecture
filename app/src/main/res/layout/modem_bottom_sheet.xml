@@ -76,51 +76,6 @@
         app:layout_constraintTop_toBottomOf="@id/labelCurrentBalance"
         app:layout_constraintWidth_percent="0.85" />
 
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/labelType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:fontFamily="@font/poppins"
-        android:text="@string/type"
-        android:textColor="@color/homeTextColor"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etCurrentBalance" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/labelType">
-
-        <RadioButton
-            android:id="@+id/btnAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_weight="0.5"
-            android:text="Add"
-            android:textColor="@color/homeTextColor"
-            android:textSize="16sp" />
-
-        <RadioButton
-            android:id="@+id/btnRemove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_weight="0.5"
-            android:text="Remove"
-            android:textColor="@color/homeTextColor"
-            android:textSize="16sp" />
-
-    </RadioGroup>
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/labelAmount"
         android:layout_width="wrap_content"
@@ -132,7 +87,7 @@
         android:textColor="@color/homeTextColor"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@id/etCurrentBalance" />
 
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -145,7 +100,7 @@
         android:background="@drawable/round_corners"
         android:backgroundTint="@color/sigInEditTextBackColor"
         android:fontFamily="@font/roboto_medium"
-        android:hint="@string/amount"
+        android:hint="@string/add_amount"
         android:inputType="numberDecimal"
         android:maxLines="1"
         android:padding="15dp"

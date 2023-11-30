@@ -107,7 +107,7 @@ class TransactionFragment :
         endDate = dateFormat.parse(mDataBinding.txtEndDate.text.toString())
         mDataBinding.txtStartDate.setOnClickListener { showDatePickerDialog(mDataBinding.txtStartDate) }
         mDataBinding.txtEndDate.setOnClickListener { showDatePickerDialog(mDataBinding.txtEndDate) }
-        mDataBinding.txtTotalBalance.text ="৳${obj.totalBalance.toString()}"
+        //mDataBinding.txtTotalBalance.text = "৳${obj.totalBalance.toString()}"
         mDataBinding.refreshButton.setOnClickListener {
             getTransactionRecord()
         }
@@ -124,6 +124,7 @@ class TransactionFragment :
         }
 
         mDataBinding.btnApply.setOnClickListener {
+            mDataBinding.layoutFilter.visibility = View.GONE
             getTransactionRecord()
         }
 
@@ -325,6 +326,7 @@ class TransactionFragment :
                         arrayList.clear()
                         progressBar.dismiss()
                         it.data?.let { it1 -> arrayList.addAll(it1) }
+                        totalCalculation(arrayList)
                         transactionListAdapter.notifyDataSetChanged()
                     }
 
@@ -348,6 +350,16 @@ class TransactionFragment :
 
     }
 
+    private fun totalCalculation(arrayList: java.util.ArrayList<TransactionModemResponse>) {
+        var totalAmount = 0.0;
+        arrayList.forEach {
+            if(it.status == "Approved"){
+                totalAmount = totalAmount.plus(it.amount.toString().toDouble())
+            }
+        }
+        mDataBinding.txtTotalBalance.text = "৳$totalAmount"
+    }
+
     private fun showAlertDialog(item: TransactionModemResponse) {
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         val binding = AlterPendingDialogBinding.inflate(layoutInflater)
@@ -363,12 +375,20 @@ class TransactionFragment :
         }
         setPaymentStatusView(item, binding)
         setStatusView(item, binding)
-        if (item.paymentType == "Cash In") {
-            binding.txtTransactionId.text = "☎ ${item.customer.toString()}"
-        } else {
-            binding.txtTransactionId.text = "#${item.transactionId.toString()}"
+        if(item.transactionId.isNullOrEmpty())
+        {
+            binding.txtTransactionId.visibility = View.GONE
+            binding.labelTransactionId.visibility = View.GONE
+            binding.iconCopy.visibility = View.GONE
+        }else
+        {
+            binding.txtTransactionId.visibility = View.VISIBLE
+            binding.labelTransactionId.visibility = View.VISIBLE
+            binding.iconCopy.visibility = View.VISIBLE
         }
-        binding.iconCopy.visibility = View.VISIBLE
+        binding.txtTransactionId.text = "#${item.transactionId.toString()}"
+        binding.txtPayeeNumber.text = "☎ ${item.customer.toString()}"
+
         binding.iconCopy.setOnClickListener {
             val clipboard: ClipboardManager? =
                 requireActivity().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?

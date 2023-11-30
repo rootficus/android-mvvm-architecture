@@ -73,6 +73,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                 }
             }
         }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -183,16 +184,13 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
     private val modemDetailScreenActionListener =
         object : ModemDetailScreenFragment.BottomDialogEvent {
 
-            override fun onAddRequest(getModemsListResponse: GetModemsListResponse, amount: Double) {
-                addModemBalance(getModemsListResponse, amount)
-            }
-
-            override fun onRemoveRequest(
+            override fun onAddRequest(
                 getModemsListResponse: GetModemsListResponse,
                 amount: Double
             ) {
-                removeModemBalance(getModemsListResponse, amount)
+                addModemBalance(getModemsListResponse, amount)
             }
+
         }
     private val cardListener = object : ModemsManagerListAdapter.ModemCardEvent {
         override fun onStatusClicked(updateActiveInActiveRequest: UpdateActiveInActiveRequest) {
@@ -204,11 +202,11 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         }
 
         override fun onLoginClicked(updateLoginRequest: UpdateLoginRequest) {
-           if(updateLoginRequest.loginStatus== "Logout") {
-               changeLoginRequest(updateLoginRequest)
-           }else{
-               showMessage("Device successfully logged out from the modem.")
-           }
+            if (updateLoginRequest.loginStatus == "Logout") {
+                changeLoginRequest(updateLoginRequest)
+            } else {
+                showMessage("Device successfully logged out from the modem.")
+            }
         }
 
         override fun onCardClick(getModemsListResponse: GetModemsListResponse) {
@@ -216,7 +214,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
             modemSheetFragment.listener = modemDetailScreenActionListener
             val bundle = Bundle()
             bundle.putSerializable(GetModemsListResponse::class.java.name, getModemsListResponse)
-            bundle.putString("CurrentBalance", "${obj.currentBalance.toString()}")
+            bundle.putString("CurrentBalance", "${viewModel.getCurrentAgentBalance().toString()}")
             modemSheetFragment.arguments = bundle
             activity?.supportFragmentManager?.let {
                 modemSheetFragment.show(
@@ -226,6 +224,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
             }
         }
     }
+
     private fun changeLoginRequest(updateLoginRequest: UpdateLoginRequest) {
         val message = "Are you sure you want to Logout?"
         val alertDialogActive = AlertDialog.Builder(requireContext())
@@ -505,8 +504,9 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                         if (modemSheetFragment.isVisible) {
                             modemSheetFragment.dismiss()
                             getModemsListResponse.balance = it.data?.balance
+                            viewModel.setCurrentAgentBalance(it.data?.agentBalance.toString())
                             modemsManagerListAdapter?.notifyDataSetChanged()
-                           // getModemsListApi()
+                            // getModemsListApi()
                         }
                     }
 
@@ -533,44 +533,4 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
             )
         }
     }
-
-    private fun removeModemBalance(getModemsListResponse: GetModemsListResponse, amount: Double) {
-        if (networkHelper.isNetworkConnected()) {
-            viewModel.removeModemBalance(AddModemBalanceModel(getModemsListResponse.id, amount))
-            viewModel.getRemoveModemBalanceResponseModel.observe(viewLifecycleOwner) {
-                when (it.status) {
-                    Status.SUCCESS -> {
-                        progressBar.dismiss()
-                        Log.i("Data", "::${it.data}")
-                        if (modemSheetFragment.isVisible) {
-                            modemSheetFragment.dismiss()
-                            getModemsListResponse.balance = it.data?.balance
-                            modemsManagerListAdapter?.notifyDataSetChanged()
-                        }
-                    }
-
-                    Status.ERROR -> {
-                        progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        } else {
-                            showMessage(
-                                "Amount should not be greater the Agent balance"
-                            )
-                        }
-                    }
-
-                    Status.LOADING -> {
-                        progressBar.show()
-                    }
-                }
-            }
-        } else {
-            progressBar.dismiss()
-            showMessage(
-                mActivity.getString(R.string.NO_INTERNET_CONNECTION)
-            )
-        }
-    }
-
 }

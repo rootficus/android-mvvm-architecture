@@ -656,6 +656,13 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
     fun getDashBoardDataModel(): String? {
         return dashBoardRepository.getDashBoardDataModel()
     }
+    fun setCurrentAgentBalance(balance: String) {
+        dashBoardRepository.setCurrentAgentBalance(balance)
+    }
+
+    fun getCurrentAgentBalance(): String? {
+        return dashBoardRepository.getCurrentAgentBalance()
+    }
 
     fun setBLDanger(danger: Int?) {
         dashBoardRepository.setBLDanger(danger)

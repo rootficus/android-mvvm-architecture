@@ -132,6 +132,7 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
                         val gson = Gson()
                         val json = gson.toJson(it.data)
                         viewModel.setDashBoardDataModel(json)
+                        viewModel.setCurrentAgentBalance(dashBoardItemResponse?.currentBalance.toString())
                         val currentBalance = dashBoardItemResponse?.currentBalance
                         val totalBalance = dashBoardItemResponse?.totalBalance
                         val progress = (totalBalance?.div(currentBalance!!))

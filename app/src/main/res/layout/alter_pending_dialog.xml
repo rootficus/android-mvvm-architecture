@@ -61,38 +61,37 @@
                 android:id="@+id/labelTransactionId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
                 android:fontFamily="@font/poppins"
                 android:text="Txn Id"
                 android:textColor="@color/homeTextColor"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@id/cardBank"
+                app:layout_constraintStart_toStartOf="@id/labelPayeeNumber"
                 app:layout_constraintTop_toTopOf="@id/cardBank" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtTransactionId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_15sdp"
                 android:fontFamily="@font/poppins"
                 android:text="XXXXXXX"
                 android:textColor="@color/homeTextColor"
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@id/labelBankType"
+                app:layout_constraintStart_toStartOf="@id/txtPayeeNumber"
                 app:layout_constraintTop_toTopOf="@id/cardBank" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iconCopy"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:visibility="gone"
-                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:src="@drawable/copy_text"
                 android:tint="@color/homeTextColor"
+                android:visibility="gone"
                 app:layout_constraintStart_toEndOf="@id/txtTransactionId"
                 app:layout_constraintTop_toTopOf="@id/cardBank" />
-
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/labelBankType"
@@ -113,11 +112,36 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:textColor="@color/homeTextColor"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@id/labelAmount"
-                app:layout_constraintStart_toStartOf="@id/txtTransactionId"
+                app:layout_constraintStart_toStartOf="@id/txtPayeeNumber"
                 app:layout_constraintTop_toBottomOf="@id/labelTransactionId"
                 app:layout_constraintTop_toTopOf="@id/labelBankType" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelPayeeNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/poppins"
+                android:text="Payee Number"
+                android:textColor="@color/homeTextColor"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/cardBank"
+                app:layout_constraintTop_toBottomOf="@id/labelBankType" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtPayeeNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/homeTextColor"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@id/labelPayeeNumber"
+                app:layout_constraintTop_toBottomOf="@id/txtBankType"
+                app:layout_constraintTop_toTopOf="@id/labelPayeeNumber" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -131,7 +155,7 @@
                 android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@id/cardBank"
                 app:layout_constraintStart_toStartOf="@id/labelTransactionId"
-                app:layout_constraintTop_toBottomOf="@id/labelBankType" />
+                app:layout_constraintTop_toBottomOf="@id/labelPayeeNumber" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtAmount"
@@ -140,11 +164,11 @@
                 android:fontFamily="@font/poppins"
                 android:text="৳‎1000.00"
                 android:textColor="@color/reject"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/labelAmount"
-                app:layout_constraintStart_toStartOf="@id/txtTransactionId"
-                app:layout_constraintTop_toBottomOf="@id/labelBankType"
+                app:layout_constraintStart_toStartOf="@id/txtPayeeNumber"
+                app:layout_constraintTop_toBottomOf="@id/labelPayeeNumber"
                 app:layout_constraintTop_toTopOf="@id/labelAmount" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -180,11 +204,12 @@
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_2sdp"
                 android:src="@drawable/calendar_icon"
-                android:visibility="gone"
+                android:tint="@color/homeTextColor"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="@id/txtDate"
                 app:layout_constraintEnd_toStartOf="@id/txtDate"
                 app:layout_constraintStart_toEndOf="@id/labelDate"
-                app:layout_constraintStart_toStartOf="@id/txtTransactionId" />
+                app:layout_constraintStart_toStartOf="@id/txtPayeeNumber" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtSuccess"
