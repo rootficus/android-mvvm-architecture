@@ -212,10 +212,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
 
                     Status.ERROR -> {
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            Toast.makeText(activity, "Invalid access token", Toast.LENGTH_SHORT)
-                                .show()
-                        }
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {
@@ -249,10 +246,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
 
                     Status.ERROR -> {
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            Toast.makeText(activity, "Invalid access token", Toast.LENGTH_SHORT)
-                                .show()
-                        }
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {
@@ -287,10 +281,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
                     Status.ERROR -> {
                         Log.i("Status Count", "Error")
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            Toast.makeText(activity, "Invalid access token", Toast.LENGTH_SHORT)
-                                .show()
-                        }
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {

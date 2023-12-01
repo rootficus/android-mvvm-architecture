@@ -177,9 +177,7 @@ class VerifyPinFragment :
 
                     Status.ERROR -> {
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        }
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {

@@ -90,4 +90,16 @@ abstract class BaseFragment<DB : ViewDataBinding>(@LayoutRes val layoutRes: Int)
         }
     }
 
+    fun showErrorMessage(message: String?) {
+        if (message == getString(R.string.invalid_access_token)) {
+            //Show Toast
+            showMessage(
+                getString(R.string.invalid_access_token)
+            )
+            sessionExpired()
+        } else {
+            showMessage(message.toString())
+        }
+    }
+
 }

@@ -148,9 +148,7 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
                         val obj: DashBoardItemResponse =
                             gson.fromJson(json, DashBoardItemResponse::class.java)
                         setAdapter(obj)
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        }
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {
@@ -274,11 +272,7 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
 
                     Status.ERROR -> {
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        } else {
-                            showMessage(it.message.toString())
-                        }
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {

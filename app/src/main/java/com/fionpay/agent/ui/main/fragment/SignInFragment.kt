@@ -192,9 +192,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
 
                     Status.ERROR -> {
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        }
+                        showErrorMessage(it.message)
 
                     }
 

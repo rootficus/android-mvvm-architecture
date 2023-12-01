@@ -117,11 +117,8 @@ class BalanceManagerFragment :
 
                     Status.ERROR -> {
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        } else {
-                            showMessage(it.message.toString())
-                        }
+                        showErrorMessage(it.message)
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {

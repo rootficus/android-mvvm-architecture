@@ -106,9 +106,7 @@ class ConfirmModemFragment :
                     Status.ERROR -> {
                         // startActivity(Intent(requireContext(), SignInActivity::class.java))
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        }
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {

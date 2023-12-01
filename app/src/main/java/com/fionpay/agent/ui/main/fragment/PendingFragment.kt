@@ -148,11 +148,7 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
 
                     Status.ERROR -> {
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        } else {
-                            showMessage(it.message.toString())
-                        }
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {

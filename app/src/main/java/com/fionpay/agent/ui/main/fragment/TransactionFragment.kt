@@ -175,7 +175,7 @@ class TransactionFragment :
         mDataBinding.spnModem.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
                 modemSlotId = if (i == 0) {
-                    "All"
+                    getString(R.string.all)
                 } else {
                     modemList?.get(i - 1)?.modemSlotId.toString()
                 }
@@ -202,7 +202,7 @@ class TransactionFragment :
         mDataBinding.spBank.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
                 bankType = if (i == 0) {
-                    "All"
+                    getString(R.string.all)
                 } else {
                     bankList?.get(i - 1)?.bankName.toString()
                 }
@@ -231,7 +231,7 @@ class TransactionFragment :
                     l: Long
                 ) {
                     paymentType = if (i == 0) {
-                        "All"
+                        getString(R.string.all)
                     } else {
                         transactionType?.get(i).toString()
                     }
@@ -308,8 +308,6 @@ class TransactionFragment :
     }
 
 
-
-
     private fun getTransactionRecord() {
         if (networkHelper.isNetworkConnected()) {
             val transactionFilterRequest = TransactionFilterRequest(
@@ -332,11 +330,7 @@ class TransactionFragment :
 
                     Status.ERROR -> {
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        } else {
-                            showMessage(it.message.toString())
-                        }
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {
@@ -345,15 +339,15 @@ class TransactionFragment :
                 }
             }
         } else {
-            Snackbar.make(requireView(), "No Internet", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(requireView(), getString(R.string.NO_INTERNET_CONNECTION), Snackbar.LENGTH_LONG).show()
         }
 
     }
 
     private fun totalCalculation(arrayList: java.util.ArrayList<TransactionModemResponse>) {
-        var totalAmount = 0.0;
+        var totalAmount = 0.0
         arrayList.forEach {
-            if(it.status == "Approved"){
+            if (it.status == getString(R.string.bl_approved)) {
                 totalAmount = totalAmount.plus(it.amount.toString().toDouble())
             }
         }
@@ -365,6 +359,7 @@ class TransactionFragment :
         val binding = AlterPendingDialogBinding.inflate(layoutInflater)
         dialogBuilder.setView(binding.root)
         val alertDialog: AlertDialog = dialogBuilder.create()
+
         if (!item.bankImage.isNullOrEmpty()) {
             Glide.with(requireContext())
                 .asBitmap()
@@ -373,63 +368,82 @@ class TransactionFragment :
                 .error(R.drawable.bank_icon)
                 .into(binding.imageBank)
         }
-        setPaymentStatusView(item, binding)
-        setStatusView(item, binding)
-        if(item.transactionId.isNullOrEmpty())
-        {
-            binding.txtTransactionId.visibility = View.GONE
-            binding.labelTransactionId.visibility = View.GONE
-            binding.iconCopy.visibility = View.GONE
-        }else
-        {
-            binding.txtTransactionId.visibility = View.VISIBLE
-            binding.labelTransactionId.visibility = View.VISIBLE
-            binding.iconCopy.visibility = View.VISIBLE
-        }
+
+        binding.labelPaymentType.text = item.paymentType.toString()
+        binding.txtAmount.text = "৳${item.amount}"
+        binding.txtDate.text = Utility.convertTransactionDate(item.date)
+        binding.txtBankType.text = item.bankType
         binding.txtTransactionId.text = "#${item.transactionId.toString()}"
         binding.txtPayeeNumber.text = "☎ ${item.customer.toString()}"
+
+        //UI View
+        setPaymentStatusView(item, binding)
+        setStatusView(item, binding)
+        if (item.transactionId.isNullOrEmpty()) {
+            setTransactionVisibility(binding, visible = false)
+
+        } else {
+            setTransactionVisibility(binding, visible = true)
+        }
 
         binding.iconCopy.setOnClickListener {
             val clipboard: ClipboardManager? =
                 requireActivity().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
-            val clip = ClipData.newPlainText("TxnId", "${binding.txtTransactionId.text.toString()}")
+            val clip = ClipData.newPlainText("TxnId", "${binding.txtTransactionId.text}")
             clipboard?.setPrimaryClip(clip)
             showMessage("Text Copied Successfully")
         }
-        binding.txtAmount.text = "৳${item.amount}"
-
-        binding.txtDate.text = Utility.convertTransactionDate(item.date)
-        binding.txtBankType.text = item.bankType
 
         alertDialog.show()
+    }
+
+    private fun setTransactionVisibility(binding: AlterPendingDialogBinding, visible: Boolean) {
+        if (visible) {
+            binding.txtTransactionId.visibility = View.VISIBLE
+            binding.labelTransactionId.visibility = View.VISIBLE
+            binding.iconCopy.visibility = View.VISIBLE
+        } else {
+            binding.txtTransactionId.visibility = View.GONE
+            binding.labelTransactionId.visibility = View.GONE
+            binding.iconCopy.visibility = View.GONE
+        }
     }
 
     private fun setStatusView(item: TransactionModemResponse, binding: AlterPendingDialogBinding) {
         binding.txtSuccess.visibility = View.VISIBLE
         binding.txtSuccess.text = item.status
         when (item.status) {
-            "Approved" -> {
-                binding.txtSuccess.setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.activeGreen
-                    )
+            getString(R.string.bl_approved) -> {
+                setTextView(
+                    binding,
+                    textColor = R.color.activeGreen,
+                    textColorBg = R.color.activeGreenBg
                 )
-                binding.txtSuccess.backgroundTintList =
-                    (ContextCompat.getColorStateList(requireContext(), R.color.activeGreenBg))
             }
 
-            "Rejected" -> {
-                binding.txtSuccess.setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.reject
-                    )
+            getString(R.string.bl_rejected) -> {
+                setTextView(
+                    binding,
+                    textColor = R.color.reject,
+                    textColorBg = R.color.activeDangerBg
                 )
-                binding.txtSuccess.backgroundTintList =
-                    (ContextCompat.getColorStateList(requireContext(), R.color.activeDangerBg))
             }
         }
+    }
+
+    private fun setTextView(
+        binding: AlterPendingDialogBinding,
+        textColor: Int,
+        textColorBg: Int
+    ) {
+        binding.txtSuccess.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                textColor
+            )
+        )
+        binding.txtSuccess.backgroundTintList =
+            (ContextCompat.getColorStateList(requireContext(), textColorBg))
     }
 
     private fun setPaymentStatusView(
@@ -437,38 +451,29 @@ class TransactionFragment :
         binding: AlterPendingDialogBinding
     ) {
         when (item.paymentType) {
-            "Cash In" -> {
-                binding.labelPaymentType.text = item.paymentType.toString()
-                binding.labelPaymentType.setTextColor(
-                    ContextCompat.getColorStateList(
-                        requireContext(),
-                        R.color.reject
-                    )
-                )
-                binding.txtAmount.setTextColor(
-                    ContextCompat.getColorStateList(
-                        requireContext(),
-                        R.color.reject
-                    )
-                )
+            getString(R.string.cash_in) -> {
+                setPaymentStatusUIView(binding, R.color.reject)
             }
 
-            "Cash Out" -> {
-                binding.labelPaymentType.text = item.paymentType.toString()
-                binding.labelPaymentType.setTextColor(
-                    ContextCompat.getColorStateList(
-                        requireContext(),
-                        R.color.greenColor
-                    )
-                )
-                binding.txtAmount.setTextColor(
-                    ContextCompat.getColorStateList(
-                        requireContext(),
-                        R.color.greenColor
-                    )
-                )
+            getString(R.string.cash_out)  -> {
+                setPaymentStatusUIView(binding, R.color.greenColor)
             }
         }
+    }
+
+    private fun setPaymentStatusUIView(binding: AlterPendingDialogBinding, textColor: Int) {
+        binding.labelPaymentType.setTextColor(
+            ContextCompat.getColorStateList(
+                requireContext(),
+                textColor
+            )
+        )
+        binding.txtAmount.setTextColor(
+            ContextCompat.getColorStateList(
+                requireContext(),
+                textColor
+            )
+        )
     }
 
     private fun filter(text: String) {
@@ -500,7 +505,7 @@ class TransactionFragment :
 
         if (filteredList.isEmpty()) {
             // if no item is added in filtered list we are
-            Toast.makeText(context, "No Data Found..", Toast.LENGTH_SHORT).show()
+            showMessage(getString(R.string.no_data_found))
         } else {
             // at last we are passing that filtered
             transactionListAdapter?.filterList(filteredList)

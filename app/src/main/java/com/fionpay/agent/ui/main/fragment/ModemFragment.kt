@@ -157,9 +157,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                     Status.ERROR -> {
                         // startActivity(Intent(requireContext(), SignInActivity::class.java))
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        }
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {
@@ -417,9 +415,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                     Status.ERROR -> {
                         // startActivity(Intent(requireContext(), SignInActivity::class.java))
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        }
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {
@@ -447,9 +443,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                     Status.ERROR -> {
                         // startActivity(Intent(requireContext(), SignInActivity::class.java))
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        }
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {
@@ -477,9 +471,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                     Status.ERROR -> {
                         // startActivity(Intent(requireContext(), SignInActivity::class.java))
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        }
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {

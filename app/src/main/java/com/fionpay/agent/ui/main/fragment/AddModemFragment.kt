@@ -229,11 +229,7 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
 
                     Status.ERROR -> {
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        } else {
-                            showMessage(it.message.toString())
-                        }
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {
@@ -347,11 +343,7 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
                         if (dialog.isShowing) {
                             dialog.dismiss()
                         }
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        } else {
-                            showMessage(it.message.toString())
-                        }
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {
@@ -394,9 +386,7 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
                     Status.ERROR -> {
                         // startActivity(Intent(requireContext(), SignInActivity::class.java))
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        }
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {
