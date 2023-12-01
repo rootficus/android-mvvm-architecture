@@ -18,13 +18,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.fionpay.agent.R
-import com.fionpay.agent.data.model.response.TransactionModel
 import com.fionpay.agent.databinding.FragmentEditProfileBinding
 import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
-import com.fionpay.agent.ui.main.adapter.DashBoardListAdapter
 import com.fionpay.agent.ui.main.di.DaggerEditProfileFragmentComponent
 import com.fionpay.agent.ui.main.di.EditProfileFragmentModule
 import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel

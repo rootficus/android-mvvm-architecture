@@ -1,22 +1,16 @@
 package com.fionpay.agent.ui.main.fragment
 
-import android.app.AlertDialog
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.Navigation
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.response.TransactionModel
-import com.fionpay.agent.databinding.FragmentPendingBinding
-import com.fionpay.agent.databinding.FragmentSettingBinding
 import com.fionpay.agent.databinding.FragmentSupportBinding
 import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
-import com.fionpay.agent.ui.main.activity.SignInActivity
 import com.fionpay.agent.ui.main.adapter.DashBoardListAdapter
 import com.fionpay.agent.ui.main.di.DaggerSupportFragmentComponent
 import com.fionpay.agent.ui.main.di.SupportFragmentModule

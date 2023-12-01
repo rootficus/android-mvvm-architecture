@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.databinding.BlBottomSheetBinding
 import com.fionpay.agent.utils.Constant
 import com.fionpay.agent.utils.Utility
-import org.jetbrains.annotations.Nullable
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
 class BalanceDetailScreenFragment: BottomSheetDialogFragment() {
@@ -20,10 +19,9 @@ class BalanceDetailScreenFragment: BottomSheetDialogFragment() {
 
     var listener: BottomDialogEvent? = null
     private lateinit var binding: BlBottomSheetBinding
-    @Nullable
     override fun onCreateView(
-        inflater: LayoutInflater, @Nullable container: ViewGroup?,
-        @Nullable savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = BlBottomSheetBinding.inflate(inflater,container,false)
         return binding.root

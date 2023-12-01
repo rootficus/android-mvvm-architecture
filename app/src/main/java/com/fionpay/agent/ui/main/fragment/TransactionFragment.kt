@@ -12,7 +12,6 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.text.isDigitsOnly
@@ -20,8 +19,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.fionpay.agent.R
-import com.fionpay.agent.data.model.request.Bank
-import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.request.TransactionFilterRequest
 import com.fionpay.agent.data.model.response.DashBoardItemResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse

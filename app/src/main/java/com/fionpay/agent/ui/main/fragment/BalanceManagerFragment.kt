@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.activityViewModels
@@ -13,17 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.response.BLTransactionModemResponse
 import com.fionpay.agent.databinding.FragmentBalanceManagerBinding
-import com.fionpay.agent.databinding.FragmentTransactionsBinding
 import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
 import com.fionpay.agent.ui.main.adapter.BleManagerListAdapter
-import com.fionpay.agent.ui.main.adapter.TransactionListAdapter
 import com.fionpay.agent.ui.main.di.BalanceManageFragmentModule
 import com.fionpay.agent.ui.main.di.DaggerBalanceManagerFragmentComponent
-import com.fionpay.agent.ui.main.di.DaggerTransactionFragmentComponent
-import com.fionpay.agent.ui.main.di.TransactionFragmentModule
 import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference

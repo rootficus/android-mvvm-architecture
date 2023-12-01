@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.databinding.SmsBottomSheetBinding
-import com.fionpay.agent.utils.Constant
 import com.fionpay.agent.utils.Utility
-import org.jetbrains.annotations.Nullable
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
 class SmsDetailScreenFragment: BottomSheetDialogFragment() {

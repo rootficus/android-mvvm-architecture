@@ -7,17 +7,14 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.chip.Chip
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.request.GetMessageByFilterRequest
-import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.databinding.FragmentSmsInboxBinding
 import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
-import com.fionpay.agent.ui.main.adapter.BleManagerListAdapter
 import com.fionpay.agent.ui.main.adapter.SmsManagerListAdapter
 import com.fionpay.agent.ui.main.di.DaggerSMSInboxFragmentComponent
 import com.fionpay.agent.ui.main.di.SMSInboxFragmentModule
@@ -26,8 +23,6 @@ import com.fionpay.agent.utils.Constant
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 

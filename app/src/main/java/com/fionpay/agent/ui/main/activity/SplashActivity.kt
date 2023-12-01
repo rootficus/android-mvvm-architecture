@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import com.fionpay.agent.R
@@ -15,7 +14,6 @@ import com.fionpay.agent.ui.base.BaseActivityModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
 import com.fionpay.agent.ui.main.di.DaggerSplashComponent
 import com.fionpay.agent.ui.main.di.SplashModule
-import com.fionpay.agent.ui.main.fragment.DashBoardFragment
 import com.fionpay.agent.ui.main.viewmodel.SignInViewModel
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
