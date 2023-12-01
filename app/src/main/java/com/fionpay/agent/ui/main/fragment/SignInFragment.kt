@@ -76,11 +76,6 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                     mDataBinding.emailVerified.visibility = View.GONE
                 }
 
-                /* if (isEmailValid(mDataBinding.etName.text.toString()) && mDataBinding.etPassword.text!!.length > 8) {
-                     mDataBinding.btnSignIn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black))
-                 } else {
-                     mDataBinding.btnSignIn.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.nonClickableButton)
-                 }*/
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -125,12 +120,6 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                     mDataBinding.btnSignIn.isEnabled = true
                 }
 
-
-                /*   if (isEmailValid(mDataBinding.etName.text.toString()) && mDataBinding.etPassword.text!!.length > 8) {
-                       mDataBinding.btnSignIn.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black))
-                   } else {
-                       mDataBinding.btnSignIn.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.nonClickableButton)
-                   }*/
             }
         })
 
@@ -142,23 +131,17 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                     requireContext(),
                     mActivity.getString(R.string.PLEASE_ENTER_NAME)
                 )
-                //mDataBinding.etName.error = mActivity.getString(R.string.PLEASE_ENTER_NAME)
             } else if (password.isEmpty()) {
                 Utility.callCustomToast(
                     requireContext(),
                     mActivity.getString(R.string.PLEASE_ENTER_PASSWORD)
                 )
-                //mDataBinding.etPhoneNumber.error = mActivity.getString(R.string.PLEASE_ENTER_PHONE_NUMBER)
             } else {
                 callSignInAPI(view)
             }
         }
         mDataBinding.etName.setText(viewmodel.getEmail().toString())
         mDataBinding.etPassword.setText(viewmodel.getPassword().toString())
-      /*  if(mDataBinding.etName.text.toString().isEmpty()){
-            mDataBinding.etName.setText("jim@example.com")
-            mDataBinding.etPassword.setText("password")
-        }*/
 
     }
 

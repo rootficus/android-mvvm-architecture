@@ -57,8 +57,6 @@ class EditProfileFragment :
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
-    private lateinit var dashBoardListAdapter: DashBoardListAdapter
-    private var arrayList: ArrayList<TransactionModel> = arrayListOf()
     private var currentAttachmentPath: String = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -78,15 +76,6 @@ class EditProfileFragment :
         mDataBinding.topHeader.txtHeader.text = getString(R.string.edit_profile)
         mDataBinding.topHeader.backButton.setOnClickListener {
             Navigation.findNavController(requireView()).navigateUp()
-        }
-        val fullName = viewModel.getFullName()
-        if (fullName?.contains(' ') == true) {
-            val firstName = fullName.split(' ')[0]
-            val lastName = fullName.split(' ')[1]
-            //mDataBinding.etFirstName.setText(firstName)
-            //mDataBinding.etLastName.setText(lastName)
-        } else {
-            //mDataBinding.etFirstName.setText(fullName)
         }
 
         mDataBinding.btnUpdate.setOnClickListener {
@@ -134,7 +123,7 @@ class EditProfileFragment :
                 }
             }
         } else {
-            Snackbar.make(requireView(), "No Internet", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG).show()
         }
 
     }
@@ -169,7 +158,7 @@ class EditProfileFragment :
                 }
             }
         } else {
-            Snackbar.make(requireView(), "No Internet", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG).show()
         }
 
     }
@@ -198,7 +187,7 @@ class EditProfileFragment :
                 }
             }
         } else {
-            Snackbar.make(requireView(), "No Internet", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG).show()
         }
 
     }

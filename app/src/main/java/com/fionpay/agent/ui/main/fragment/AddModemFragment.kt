@@ -16,7 +16,6 @@ import com.fionpay.agent.data.model.request.Bank
 import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
 import com.fionpay.agent.data.model.request.ModelSlots
 import com.fionpay.agent.data.model.request.ModemItemModel
-import com.fionpay.agent.data.model.response.TransactionModel
 import com.fionpay.agent.databinding.BankListBottomSheetBinding
 import com.fionpay.agent.databinding.FragmentAddModemBinding
 import com.fionpay.agent.databinding.ItemPhoneBottomSheetBinding
@@ -25,7 +24,6 @@ import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
 import com.fionpay.agent.ui.main.adapter.BankListAdapter
-import com.fionpay.agent.ui.main.adapter.DashBoardListAdapter
 import com.fionpay.agent.ui.main.di.AddModemFragmentModule
 import com.fionpay.agent.ui.main.di.DaggerAddModemFragmentComponent
 import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
@@ -53,13 +51,10 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
-    private lateinit var dashBoardListAdapter: DashBoardListAdapter
-    private var arrayList: ArrayList<TransactionModel> = arrayListOf()
     val otpStringBuilder = StringBuilder()
     private var bankList: List<Bank>? = listOf()
     private lateinit var bankListAdapter: BankListAdapter
     private var selectedBankId: Boolean? = false
-    var selectedBankList: ArrayList<Bank> = arrayListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -238,7 +233,8 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
                 }
             }
         } else {
-            Snackbar.make(requireView(), "No Internet", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG)
+                .show()
         }
 
     }
@@ -352,7 +348,7 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
                 }
             }
         } else {
-            Snackbar.make(requireView(), "No Internet", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG).show()
         }
 
     }

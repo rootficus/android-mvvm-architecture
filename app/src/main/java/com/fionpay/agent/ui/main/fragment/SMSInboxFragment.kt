@@ -115,12 +115,6 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
             val getMessageByFilterRequest = GetMessageByFilterRequest(
                 page_size = 50,
                 page_number = 1,
-                /* sender = "",
-                 agent_account_no = 0,
-                 transaction_id = "",
-                 type = "",
-                 from = "",
-                 to = "",*/
                 message_type = filter
 
             )
@@ -135,7 +129,6 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
                     }
 
                     Status.ERROR -> {
-                        //startActivity(Intent(requireContext(), SignInActivity::class.java))
                         progressBar.dismiss()
                         showErrorMessage(it.message)
 
@@ -193,7 +186,6 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
         }
 
         override fun onRejectedRequest(getMessageManageRecord: GetMessageManageRecord) {
-            TODO("Not yet implemented")
         }
 
     }
@@ -214,11 +206,11 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
     }
 
     private fun setMessageCountValue() {
-        var totalCount = viewModel.getCountMessageManageRecord(Constant.SMSType.All.value);
-        var cashInCount = viewModel.getCountMessageManageRecord(Constant.SMSType.CashIn.value);
-        var cashOutCount = viewModel.getCountMessageManageRecord(Constant.SMSType.CashOut.value);
-        var b2b = viewModel.getCountMessageManageRecord(Constant.SMSType.B2B.value)
-        var unKnown = viewModel.getCountMessageManageRecord(Constant.SMSType.UNKNOWN.value)
+        val totalCount = viewModel.getCountMessageManageRecord(Constant.SMSType.All.value);
+        val cashInCount = viewModel.getCountMessageManageRecord(Constant.SMSType.CashIn.value);
+        val cashOutCount = viewModel.getCountMessageManageRecord(Constant.SMSType.CashOut.value);
+        val b2b = viewModel.getCountMessageManageRecord(Constant.SMSType.B2B.value)
+        val unKnown = viewModel.getCountMessageManageRecord(Constant.SMSType.UNKNOWN.value)
         mDataBinding.chipAllSMS.text = getString(R.string.sms_all_sms) + " (" + totalCount + ")"
         mDataBinding.chipCashIn.text = getString(R.string.cash_in) + " (" + cashInCount + ")"
         mDataBinding.chipCashOut.text = getString(R.string.cash_out) + " (" + cashOutCount + ")"

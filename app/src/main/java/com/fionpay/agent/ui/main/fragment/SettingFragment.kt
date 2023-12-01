@@ -40,8 +40,6 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_s
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
-    private lateinit var dashBoardListAdapter: DashBoardListAdapter
-    private var arrayList: ArrayList<TransactionModel> = arrayListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -83,10 +81,10 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_s
 
     private fun verifyLogout() {
         val mBuilder = android.app.AlertDialog.Builder(activity)
-            .setTitle("Log Out")
+            .setTitle(getString(R.string.log_out))
             .setMessage("Are you sure you want to Logout?")
-            .setPositiveButton("Yes", null)
-            .setNegativeButton("No", null)
+            .setPositiveButton(getString(R.string.yes), null)
+            .setNegativeButton(getString(R.string.no), null)
             .show()
         val mPositiveButton = mBuilder.getButton(android.app.AlertDialog.BUTTON_POSITIVE)
         mPositiveButton.setOnClickListener {

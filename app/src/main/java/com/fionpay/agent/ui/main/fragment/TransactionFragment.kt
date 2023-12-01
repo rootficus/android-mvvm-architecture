@@ -67,21 +67,17 @@ class TransactionFragment :
     private lateinit var transactionListAdapter: TransactionListAdapter
     private var arrayList: ArrayList<TransactionModemResponse> = arrayListOf()
     var filterLayoutVisible = true
-    var modemList: ArrayList<Modem> = arrayListOf()
-    var bankList: ArrayList<Bank> = arrayListOf()
     private var startDate: Date? = null
     private var endDate: Date? = null
     private var paymentType: String = "All"
     private var bankType: String = "All"
     private var modemSlotId: Any = "All"
-    private var calendar: Calendar? = null
     val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initializeDagger()
-
         initialization()
-
     }
 
     private fun initializeDagger() {

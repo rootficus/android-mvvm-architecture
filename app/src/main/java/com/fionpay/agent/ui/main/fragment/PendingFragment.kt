@@ -157,7 +157,7 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
                 }
             }
         } else {
-            Snackbar.make(requireView(), "No Internet", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG).show()
         }
 
     }
@@ -178,7 +178,7 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
         setPaymentStatusView(item, binding)
         binding.txtSuccess.visibility=  View.VISIBLE
         binding.txtTransactionId.text = item.transactionId
-        binding.txtSuccess.text = "Pending"
+        binding.txtSuccess.text = getString(R.string.pending)
         binding.txtSuccess.setTextColor(
             ContextCompat.getColor(
                 requireContext(),
@@ -188,7 +188,7 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
         binding.txtSuccess.backgroundTintList =
             (ContextCompat.getColorStateList(requireContext(), R.color.activePendingBg))
         binding.txtAmount.text = "৳${item.amount}"
-        if (item.paymentType == "Cash In") {
+        if (item.paymentType == getString(R.string.cash_in)) {
             binding.txtTransactionId.text = "☎ ${item.customer.toString()}"
         } else {
             binding.txtTransactionId.text = "#${item.transactionId.toString()}"
@@ -204,7 +204,7 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
         binding: AlterPendingDialogBinding
     ) {
         when (item.paymentType) {
-            "Cash In" -> {
+            getString(R.string.cash_in) -> {
                 binding.labelPaymentType.text = item.paymentType.toString()
                 binding.labelPaymentType.setTextColor(
                     ContextCompat.getColorStateList(
@@ -220,7 +220,7 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
                 )
             }
 
-            "Cash Out" -> {
+            getString(R.string.cash_out) -> {
                 binding.labelPaymentType.text = item.paymentType.toString()
                 binding.labelPaymentType.setTextColor(
                     ContextCompat.getColorStateList(
@@ -267,7 +267,7 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
 
         if (filteredList.isEmpty()) {
             // if no item is added in filtered list we are
-            Snackbar.make(requireView(), "No Data Found..", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(requireView(), getString(R.string.no_data_found), Snackbar.LENGTH_SHORT).show()
         } else {
             // at last we are passing that filtered
             pendingListAdapter?.filterList(filteredList)

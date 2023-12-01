@@ -104,7 +104,6 @@ class ConfirmModemFragment :
                     }
 
                     Status.ERROR -> {
-                        // startActivity(Intent(requireContext(), SignInActivity::class.java))
                         progressBar.dismiss()
                         showErrorMessage(it.message)
                     }
@@ -137,7 +136,7 @@ class ConfirmModemFragment :
 
                     Status.ERROR -> {
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
+                        if (it.message == getString(R.string.invalid_access_token)) {
                             sessionExpired()
                         } else {
                             showSnackBar(

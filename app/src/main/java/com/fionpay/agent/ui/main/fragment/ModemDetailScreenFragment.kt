@@ -25,7 +25,7 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
     var currentBalance: Double? = 0.0
     var totalBalance: Double? = 0.0
 
-    lateinit var getModemsListResponse: GetModemsListResponse
+    private lateinit var getModemsListResponse: GetModemsListResponse
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -102,8 +102,6 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
                     amount
                 )
                 binding.etUpdateBalance.setText("")
-            //AddModemBalanceModel(getModemsListResponse.id, amount)
-
             }
         }
     }

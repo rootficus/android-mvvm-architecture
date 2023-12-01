@@ -45,9 +45,6 @@ class AddModemBalanceFragment :
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
-    private lateinit var dashBoardListAdapter: DashBoardListAdapter
-    private var arrayList: ArrayList<TransactionModel> = arrayListOf()
-    private var modemId = ""
     private var modemItemModel = ModemItemModel()
     var totalBalance: Double? = 0.0
 

@@ -118,7 +118,6 @@ class BalanceManagerFragment :
                     Status.ERROR -> {
                         progressBar.dismiss()
                         showErrorMessage(it.message)
-                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {
@@ -127,7 +126,7 @@ class BalanceManagerFragment :
                 }
             }
         } else {
-            Snackbar.make(requireView(), "No Internet", Snackbar.LENGTH_LONG).show()
+            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG).show()
         }
 
     }
@@ -221,7 +220,7 @@ class BalanceManagerFragment :
 
         if (filteredList.isEmpty()) {
             // if no item is added in filtered list we are
-            Toast.makeText(context, "No Data Found..", Toast.LENGTH_SHORT).show()
+            showMessage(getString(R.string.no_data_found))
         } else {
             // at last we are passing that filtered
             bleManagerListAdapter?.filterList(filteredList)

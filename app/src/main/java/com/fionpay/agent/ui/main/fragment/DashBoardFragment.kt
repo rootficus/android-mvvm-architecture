@@ -98,8 +98,8 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
             val mBuilder = AlertDialog.Builder(activity)
                 .setTitle(getString(R.string.app_name))
                 .setMessage("Do you want to logout?")
-                .setPositiveButton("Yes", null)
-                .setNegativeButton("No", null)
+                .setPositiveButton(getString(R.string.yes), null)
+                .setNegativeButton(getString(R.string.no), null)
                 .show()
             val mPositiveButton = mBuilder.getButton(AlertDialog.BUTTON_POSITIVE)
             mPositiveButton.setOnClickListener {

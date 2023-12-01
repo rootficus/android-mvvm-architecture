@@ -31,19 +31,19 @@ class BalanceDetailScreenFragment: BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var getBalanceManageRecord = arguments?.getSerializable(GetBalanceManageRecord::class.java.name) as GetBalanceManageRecord
-        binding?.textAAccount?.text = getBalanceManageRecord.agentAccountNo.toString()
-        binding?.textAmount?.text = getBalanceManageRecord.amount.toString()
-        binding?.textCAccount?.text = getBalanceManageRecord.customerAccountNo.toString()
-        binding?.textCommission?.text = getBalanceManageRecord.commision.toString()
-        binding?.textDate?.text =
+        val getBalanceManageRecord = arguments?.getSerializable(GetBalanceManageRecord::class.java.name) as GetBalanceManageRecord
+        binding.textAAccount.text = getBalanceManageRecord.agentAccountNo.toString()
+        binding.textAmount.text = getBalanceManageRecord.amount.toString()
+        binding.textCAccount.text = getBalanceManageRecord.customerAccountNo.toString()
+        binding.textCommission.text = getBalanceManageRecord.commision.toString()
+        binding.textDate.text =
             Utility.convertUtc2Local(getBalanceManageRecord.date.toString())
-        binding?.textSender?.text = getBalanceManageRecord.sender.toString()
-        binding?.textLastBalance?.text = getBalanceManageRecord.lastBalance.toString()
-        binding?.textOldBalance?.text = getBalanceManageRecord.oldBalance.toString()
-        binding?.textType?.text = getBalanceManageRecord.bType.toString()
-        binding?.textStatus?.text = getBalanceManageRecord.status.toString()
-        binding?.textLastTransactionId?.text = getBalanceManageRecord.transactionId.toString()
+        binding.textSender.text = getBalanceManageRecord.sender.toString()
+        binding.textLastBalance.text = getBalanceManageRecord.lastBalance.toString()
+        binding.textOldBalance.text = getBalanceManageRecord.oldBalance.toString()
+        binding.textType.text = getBalanceManageRecord.bType.toString()
+        binding.textStatus.text = getBalanceManageRecord.status.toString()
+        binding.textLastTransactionId.text = getBalanceManageRecord.transactionId
         if (getBalanceManageRecord.status.equals(Constant.BalanceManagerStatus.PENDING.toString(),true)) {
             binding.btnReject.visibility = View.VISIBLE
             binding.btnAccept.visibility = View.VISIBLE

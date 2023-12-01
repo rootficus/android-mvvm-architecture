@@ -227,10 +227,10 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         val message = "Are you sure you want to Logout?"
         val alertDialogActive = AlertDialog.Builder(requireContext())
             .setMessage(message)
-            .setPositiveButton("Yes") { dialog, _ ->
+            .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
                 dialog.dismiss()
                 updateLoginApi(updateLoginRequest)
-            }.setNegativeButton("No") { dialog, _ ->
+            }.setNegativeButton(getString(R.string.no)) { dialog, _ ->
                 dialog.dismiss()
             }.create()
         alertDialogActive.show()
@@ -244,10 +244,10 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         }
         val alertDialogActive = AlertDialog.Builder(requireContext())
             .setMessage(message)
-            .setPositiveButton("Yes") { dialog, _ ->
+            .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
                 dialog.dismiss()
                 updateAvailabilityApi(updateAvailabilityRequest)
-            }.setNegativeButton("No") { dialog, _ ->
+            }.setNegativeButton(getString(R.string.no)) { dialog, _ ->
                 dialog.dismiss()
             }.create()
         alertDialogActive.show()
@@ -261,10 +261,10 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         }
         val alertDialogActive = AlertDialog.Builder(requireContext())
             .setMessage(message)
-            .setPositiveButton("Yes") { dialog, _ ->
+            .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
                 dialog.dismiss()
                 updateActiveInActiveStatusApi(updateActiveInActiveRequest)
-            }.setNegativeButton("No") { dialog, _ ->
+            }.setNegativeButton(getString(R.string.no)) { dialog, _ ->
                 dialog.dismiss()
             }.create()
         alertDialogActive.show()
@@ -280,42 +280,42 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
             when (menuItem.itemId) {
                 R.id.all -> {
                     // Handle Menu Item 1 click
-                    filter("All", false)
+                    filter(getString(R.string.all), false)
                     true
                 }
 
                 R.id.menu_active -> {
                     // Handle Menu Item 1 click
-                    filter("Active", false)
+                    filter(getString(R.string.active), false)
                     true
                 }
 
                 R.id.menu_in_active -> {
                     // Handle Menu Item 1 click
-                    filter("Inactive", false)
+                    filter(getString(R.string.in_active), false)
                     true
                 }
 
                 R.id.menu_unblocked -> {
                     // Handle Menu Item 2 click
-                    filter("On", false)
+                    filter(getString(R.string.on), false)
                     true
                 }
 
                 R.id.menu_blocked -> {
-                    filter("Off", false)
+                    filter(getString(R.string.off), false)
                     // Handle Menu Item 3 click
                     true
                 }
 
                 R.id.log_in -> {
-                    filter("Login", false)
+                    filter(getString(R.string.login), false)
                     // Handle Menu Item 3 click
                     true
                 }
 
                 R.id.log_out -> {
-                    filter("Logout", false)
+                    filter(getString(R.string.logout), false)
                     // Handle Menu Item 3 click
                     true
                 }
@@ -348,9 +348,9 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                         filteredList.add(item)
                     }
                 } else if (text.lowercase(Locale.getDefault())
-                        .contains("Off", true) || text.lowercase(
+                        .contains(getString(R.string.off), true) || text.lowercase(
                         Locale.getDefault()
-                    ).contains("On", true)
+                    ).contains(getString(R.string.on), true)
                 ) {
                     if (item.availability?.lowercase()
                             .toString() == text.lowercase(Locale.getDefault())
@@ -358,7 +358,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                         // if the item is matched we are
                         filteredList.add(item)
                     }
-                } else if (text.isEmpty() || text == "All") {
+                } else if (text.isEmpty() || text == getString(R.string.all)) {
                     filteredList.clear()
                     filteredList.addAll(listGetModemsByFilter)
                 }
@@ -392,7 +392,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
 
         if (filteredList.isEmpty()) {
             // if no item is added in filtered list we are
-            Toast.makeText(context, "No Data Found..", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, getString(R.string.no_data_found), Toast.LENGTH_SHORT).show()
         } else {
             mDataBinding.txtListTitle.text = text
             // at last we are passing that filtered
@@ -504,13 +504,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
 
                     Status.ERROR -> {
                         progressBar.dismiss()
-                        if (it.message == "Invalid access token") {
-                            sessionExpired()
-                        } else {
-                            showMessage(
-                                "Amount should be less the Agent balance"
-                            )
-                        }
+                        showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {
