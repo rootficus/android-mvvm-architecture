@@ -36,7 +36,6 @@
                     android:layout_gravity="center"
                     android:scaleType="fitXY"
                     android:src="@drawable/bank_icon"
-                    android:tint="@color/homeTextColor"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

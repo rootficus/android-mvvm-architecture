@@ -45,6 +45,7 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
                 d.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
             BottomSheetBehavior.from(bottomSheetInternal!!).state =
                 BottomSheetBehavior.STATE_EXPANDED
+            d.setCanceledOnTouchOutside(true)
         }
         getModemsListResponse =
             arguments?.getSerializable(GetModemsListResponse::class.java.name) as GetModemsListResponse
