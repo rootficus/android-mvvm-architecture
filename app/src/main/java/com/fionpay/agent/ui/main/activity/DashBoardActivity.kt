@@ -187,6 +187,14 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                 jumpToAnotherFragment(R.id.navigation_balanceFragment, bundle)
             }
 
+            R.id.navigation_b2bFragment-> {
+                val bundle = Bundle().apply {
+                    putString("Api", "All Transactions")
+                    putInt("Filer", -1)
+                }
+                jumpToAnotherFragment(R.id.navigation_b2bFragment, bundle)
+            }
+
             else -> return false
         }
         return true

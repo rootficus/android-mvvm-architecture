@@ -142,6 +142,11 @@
         android:name="com.fionpay.agent.ui.main.fragment.SupportFragment"
         android:label="SupportFragment"
         tools:layout="@layout/fragment_support" />
+    <fragment
+        android:id="@+id/navigation_b2bFragment"
+        android:name="com.fionpay.agent.ui.main.fragment.B2BFragment"
+        android:label="B2BFragment"
+        tools:layout="@layout/fragment_b2b" />
 
 
 </navigation>

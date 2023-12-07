@@ -9,6 +9,7 @@ import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
 import com.fionpay.agent.ui.main.fragment.AddModemBalanceFragment
 import com.fionpay.agent.ui.main.fragment.AddModemFragment
+import com.fionpay.agent.ui.main.fragment.B2BFragment
 import com.fionpay.agent.ui.main.fragment.BLManagerFragment
 import com.fionpay.agent.ui.main.fragment.BalanceManagerFragment
 import com.fionpay.agent.ui.main.fragment.ConfirmModemFragment
@@ -220,3 +221,15 @@ interface BalanceManagerFragmentComponent {
 
 @Module(includes = [DashBoardFragmentModuleDi::class])
 class BalanceManageFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [B2BFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface B2BFragmentComponent {
+    fun inject(b2BFragment: B2BFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class B2BFragmentModule

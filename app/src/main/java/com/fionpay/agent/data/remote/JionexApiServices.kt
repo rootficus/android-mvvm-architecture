@@ -9,6 +9,7 @@ import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.ModemJsonModel
 import com.fionpay.agent.data.model.request.PinCodeJsonModel
 import com.fionpay.agent.data.model.request.ProfileResponse
+import com.fionpay.agent.data.model.request.RefundRequest
 import com.fionpay.agent.data.model.request.SignInRequest
 import com.fionpay.agent.data.model.request.TransactionFilterRequest
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
@@ -16,6 +17,7 @@ import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateBalanceRequest
 import com.fionpay.agent.data.model.request.UpdateLoginRequest
 import com.fionpay.agent.data.model.request.VerifyPinRequest
+import com.fionpay.agent.data.model.response.B2BResponse
 import com.fionpay.agent.data.model.response.BLTransactionModemResponse
 import com.fionpay.agent.data.model.response.DashBoardItemResponse
 import com.fionpay.agent.data.model.response.GetAddModemBalanceResponse
@@ -25,6 +27,7 @@ import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.GetStatusCountResponse
 import com.fionpay.agent.data.model.response.PendingModemResponse
+import com.fionpay.agent.data.model.response.RefundResponse
 import com.fionpay.agent.data.model.response.SignInResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.data.model.response.UserResponseResult
@@ -215,4 +218,18 @@ interface FionApiServices {
         @Part("product_id") productId: RequestBody,
         @Part filePart: MultipartBody.Part
     ): Call<BaseResponseModel<Any>>
+
+    @Headers("Content-Type:application/json")
+    @GET("api/v1/app/agents/{modemId}/get_agent_b2b")
+    fun getB2BRecord(
+        @Header("Authorization") authHeader: String?,
+        @Path("modemId") type: String,
+    ): Call<BaseResponseModel2<B2BResponse>>
+
+    @Headers("Content-Type:application/json")
+    @POST("api/v1/app/agents/return_agent_balance")
+    fun returnModemBalance(
+        @Header("Authorization") authHeader: String?,
+        @Body refundRequest: RefundRequest,
+    ): Call<BaseResponseModel<RefundResponse>>
 }

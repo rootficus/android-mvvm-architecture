@@ -13,12 +13,14 @@ import com.fionpay.agent.data.model.request.GetPendingModemRequest
 import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.ProfileResponse
+import com.fionpay.agent.data.model.request.RefundRequest
 import com.fionpay.agent.data.model.request.SignInRequest
 import com.fionpay.agent.data.model.request.TransactionFilterRequest
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
 import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateBalanceRequest
 import com.fionpay.agent.data.model.request.UpdateLoginRequest
+import com.fionpay.agent.data.model.response.B2BResponse
 import com.fionpay.agent.data.model.response.BLTransactionModemResponse
 import com.fionpay.agent.data.model.response.DashBoardItemResponse
 import com.fionpay.agent.data.model.response.GetAddModemBalanceResponse
@@ -28,6 +30,7 @@ import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.GetStatusCountResponse
 import com.fionpay.agent.data.model.response.PendingModemResponse
+import com.fionpay.agent.data.model.response.RefundResponse
 import com.fionpay.agent.data.model.response.SignInResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.data.remote.FionApiServices
@@ -338,6 +341,28 @@ class DashBoardRepository(
                 execute(this, success, fail, context, message)
             }
     }
+    fun getB2BRecord(
+        success: (b2BResponse: List<B2BResponse>) -> Unit,
+        modemId: String,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.getB2BRecord("Bearer " + sharedPreference.getToken(), modemId).apply {
+            execute2(this, success, fail, context, message)
+        }
+    }
+
+    fun returnModemBalance(
+        success: (refundResponse: RefundResponse) -> Unit,
+        refundRequest: RefundRequest,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.returnModemBalance("Bearer " + sharedPreference.getToken(), refundRequest).apply {
+            execute(this, success, fail, context, message)
+        }
+    }
+
 
     fun setUserId(userId: String?) {
         userId?.let { sharedPreference.setUserId(it) }

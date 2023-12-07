@@ -200,4 +200,6 @@
     <string name="in_active">Inactive</string>
     <string name="on">On</string>
     <string name="off">Off</string>
+    <string name="b2b">B2B</string>
+    <string name="refund_amount">Refund Amount</string>
 </resources>
