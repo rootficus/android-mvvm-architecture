@@ -1,6 +1,5 @@
 package com.fionpay.agent.ui.main.viewmodel
 
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
@@ -15,7 +14,6 @@ import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.ProfileResponse
 import com.fionpay.agent.data.model.request.ReturnBalanceRequest
-import com.fionpay.agent.data.model.request.SignInRequest
 import com.fionpay.agent.data.model.request.TransactionFilterRequest
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
 import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
@@ -33,7 +31,6 @@ import com.fionpay.agent.data.model.response.GetStatusCountResponse
 import com.fionpay.agent.data.model.response.ModemPinCodeResponse
 import com.fionpay.agent.data.model.response.PendingModemResponse
 import com.fionpay.agent.data.model.response.ReturnBalanceResponse
-import com.fionpay.agent.data.model.response.SignInResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.data.repository.DashBoardRepository
 import com.fionpay.agent.ui.base.BaseViewModel
@@ -51,23 +48,6 @@ import javax.inject.Inject
 class DashBoardViewModel @Inject constructor(private val dashBoardRepository: DashBoardRepository) :
     BaseViewModel() {
 
-
-    enum class DarkModeConfig {
-        YES,
-        NO
-    }
-
-    val signInResponseModel = MutableLiveData<ResponseData<SignInResponse>>()
-    fun signInNow(signInRequest: SignInRequest) {
-        signInResponseModel.setLoading(null)
-        viewModelScope.launch(Dispatchers.IO) {
-            dashBoardRepository.signInNow({ success -> signInResponseModel.setSuccess(success) },
-                { error -> signInResponseModel.setError(error) },
-                signInRequest,
-                { message -> signInResponseModel.setError(message) })
-        }
-    }
-
     val dashBoardItemResponseModel = MutableLiveData<ResponseData<DashBoardItemResponse>>()
     fun dashBoardData() {
         dashBoardItemResponseModel.setLoading(null)
@@ -81,7 +61,6 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
                 { message -> dashBoardItemResponseModel.setError(message) })
         }
     }
-
 
     val blTransactionsDataResponseModel =
         MutableLiveData<ResponseData<ArrayList<BLTransactionModemResponse>>>()
@@ -113,23 +92,6 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
                 transactionFilterRequest,
                 { error -> transactionsDataResponseModel.setError(error) },
                 { message -> transactionsDataResponseModel.setError(message) })
-        }
-    }
-
-    val transactionsFilterDataResponseModel =
-        MutableLiveData<ResponseData<ArrayList<TransactionModemResponse>>>()
-
-    fun transactionFilterApi(transactionFilterRequest: TransactionFilterRequest) {
-        transactionsFilterDataResponseModel.setLoading(null)
-        viewModelScope.launch(Dispatchers.IO) {
-            dashBoardRepository.transactionFilterApi({ success ->
-                transactionsFilterDataResponseModel.setSuccess(
-                    success
-                )
-            },
-                transactionFilterRequest,
-                { error -> transactionsFilterDataResponseModel.setError(error) },
-                { message -> transactionsFilterDataResponseModel.setError(message) })
         }
     }
 
@@ -266,7 +228,7 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
         getBalanceManageRecordModel.setLoading(null)
 
         if (dashBoardRepository.getCountBalanceManageRecord(-1) > 0) {
-            var arrayList = getBalanceByFilterRequest.balance_manager_filter?.let {
+            val arrayList = getBalanceByFilterRequest.balance_manager_filter?.let {
                 getBalanceManageRecord(it)
             }
             getBalanceManageRecordModel.setSuccess(arrayList)
@@ -315,11 +277,11 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
     }
 
     fun getModemsListDao(): List<Modem>? {
-        return dashBoardRepository?.getModemsListDao()
+        return dashBoardRepository.getModemsListDao()
     }
 
     fun getBanksListDao(): List<Bank>? {
-        return dashBoardRepository?.getBanksListDao()
+        return dashBoardRepository.getBanksListDao()
     }
 
 
@@ -328,7 +290,7 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
         getMessageManageRecordModel.setLoading(null)
 
         if (dashBoardRepository.getCountMessageManageRecord(-1) > 0) {
-            var arrayList = getMessageByFilterRequest.message_type?.let {
+            val arrayList = getMessageByFilterRequest.message_type?.let {
                 getMessageManageRecord(it)
             }
             getMessageManageRecordModel.setSuccess(arrayList)
@@ -343,9 +305,8 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
                         }
                         getMessageManageRecordModel.setSuccess(success)
                     },
-                    { error -> getMessageManageRecordModel.setError(error) },
-                    getMessageByFilterRequest,
-                    { message -> getMessageManageRecordModel.setError(message) })
+                    { error -> getMessageManageRecordModel.setError(error) }
+                ) { message -> getMessageManageRecordModel.setError(message) }
             }
         }
     }
@@ -397,23 +358,6 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
                 { error -> getAddModemBalanceResponseModel.setError(error) },
                 addModemBalanceModel,
                 { message -> getAddModemBalanceResponseModel.setError(message) })
-        }
-    }
-
-    val getRemoveModemBalanceResponseModel =
-        MutableLiveData<ResponseData<GetAddModemBalanceResponse>>()
-
-    fun removeModemBalance(addModemBalanceModel: AddModemBalanceModel) {
-        getRemoveModemBalanceResponseModel.setLoading(null)
-        viewModelScope.launch(Dispatchers.IO) {
-            dashBoardRepository.removeModemBalance({ success ->
-                getRemoveModemBalanceResponseModel.setSuccess(
-                    success
-                )
-            },
-                { error -> getRemoveModemBalanceResponseModel.setError(error) },
-                addModemBalanceModel,
-                { message -> getRemoveModemBalanceResponseModel.setError(message) })
         }
     }
 
@@ -523,32 +467,6 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
         }
     }
 
-
-    fun checkNightTheme(mode: Boolean) {
-        if (mode) {
-            shouldEnableDarkMode(DarkModeConfig.YES)
-        } else {
-            shouldEnableDarkMode(DarkModeConfig.NO)
-        }
-
-    }
-
-    private fun shouldEnableDarkMode(config: DarkModeConfig) {
-        when (config) {
-            DarkModeConfig.YES -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            DarkModeConfig.NO -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
-        //delegate.applyDayNight()
-    }
-
-    fun setUserId(userId: String?) {
-        dashBoardRepository.setUserId(userId)
-    }
-
-    fun setEmail(email: String?) {
-        dashBoardRepository.setEmail(email)
-    }
-
     fun setFullName(fullName: String?) {
         dashBoardRepository.setFullName(fullName)
     }
@@ -565,108 +483,12 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
         return dashBoardRepository.getProfileImage()
     }
 
-    fun setPinCode(pin_code: String?) {
-        dashBoardRepository.setPinCode(pin_code)
-    }
-
-    fun setCountry(country: String?) {
-        dashBoardRepository.setCountry(country)
-    }
-
-    fun setParentId(parent_id: String?) {
-        dashBoardRepository.setParentId(parent_id)
-    }
-
-    fun setPhoneNumber(phone: String?) {
-        dashBoardRepository.setPhoneNumber(phone)
-    }
-
-    fun setUserName(user_name: String?) {
-        dashBoardRepository.setUserName(user_name)
-    }
-
-    fun setUserRole(role_id: String?) {
-        dashBoardRepository.setUserRole(role_id)
-    }
-
-    fun isLogin(): Boolean {
-        return dashBoardRepository.isLogin()
-    }
-
-    fun setToken(token: String) {
-        dashBoardRepository.setToken(token)
-    }
-
-    fun setPassword(password: String) {
-        dashBoardRepository.setPassword(password)
-    }
-
     fun getEmail(): String? {
         return dashBoardRepository.getEmail()
     }
 
-    fun getPassword(): String? {
-        return dashBoardRepository.getPassword()
-    }
-
-    fun setIsLogin(isLogin: Boolean) {
-        dashBoardRepository.setIsLogin(isLogin)
-    }
-
     fun getUserId(): String? {
         return dashBoardRepository.getUserId()
-    }
-
-    fun getPinCode(): Int? {
-        return dashBoardRepository.getPinCode()
-    }
-
-    fun setTotalPending(totalPending: Long) {
-        dashBoardRepository.setTotalPending(totalPending)
-    }
-
-    fun getTotalPending(): Long {
-        return dashBoardRepository.getTotalPending()
-    }
-
-    fun setTotalTransactions(totalTransactions: String) {
-        dashBoardRepository.setTotalTransactions(totalTransactions)
-    }
-
-    fun getTotalTransactions(): String? {
-        return dashBoardRepository.getTotalTransactions()
-    }
-
-    fun setTodayTransactions(todayTransactions: Long) {
-        dashBoardRepository.setTodayTransactions(todayTransactions)
-    }
-
-    fun getTodayTransactions(): Long {
-        return dashBoardRepository.getTodayTransactions()
-    }
-
-    fun setTotalTrxAmount(totalTrxAmount: String) {
-        dashBoardRepository.setTotalTrxAmount(totalTrxAmount)
-    }
-
-    fun getTotalTrxAmount(): String? {
-        return dashBoardRepository.getTotalTrxAmount()
-    }
-
-    fun setTodayTrxAmount(todayTrxAmount: String) {
-        dashBoardRepository.setTodayTrxAmount(todayTrxAmount)
-    }
-
-    fun getTodayTrxAmount(): String? {
-        return dashBoardRepository.getTodayTrxAmount()
-    }
-
-    fun setTotalModem(totalModem: Int) {
-        dashBoardRepository.setTotalModem(totalModem)
-    }
-
-    fun getTotalModem(): Int {
-        return dashBoardRepository.getTotalModem()
     }
 
     fun setBLSuccess(success: Int?) {

@@ -7,11 +7,12 @@ import com.fionpay.agent.utils.Utility
 
 @Keep
 @Entity(tableName = "notificationRecord")
-class NotificationRecord (
+class NotificationRecord(
     @PrimaryKey
-    var id : String,
+    var id: String,
     var notificationType: String? = null,
     var messageBody: String? = null,
-    var isRead:Boolean = false,
-    var isSend:Boolean = false,
-    var createdAt: String? = Utility.getCurrentDateTimeFormat())
+    var isRead: Boolean = false,
+    var isSend: Boolean = false,
+    var createdAt: String? = Utility.getCurrentDateTimeFormat()
+)

@@ -40,11 +40,14 @@ class PendingListAdapter(private var itemList: ArrayList<PendingModemResponse>) 
         with(holder)
         {
             setCardBgColor(binding, position)
-            binding.txtAmount.text = "৳${item.amount}"
-            if (item.paymentType == "Cash In") {
-                binding.txtTransactionId.text = "☎ ${item.customer.toString()}"
+            val amount = "৳${item.amount}"
+            val customer = "☎ ${item.customer.toString()}"
+            val transactionId = "#${item.transactionId.toString()}"
+            binding.txtAmount.text = amount
+            if (item.paymentType == context.getString(R.string.cash_in)) {
+                binding.txtTransactionId.text = customer
             } else {
-                binding.txtTransactionId.text = "#${item.transactionId.toString()}"
+                binding.txtTransactionId.text = transactionId
             }
 
             binding.txtDate.text = Utility.convertTransactionDate(item.date)
@@ -72,7 +75,12 @@ class PendingListAdapter(private var itemList: ArrayList<PendingModemResponse>) 
                 )
             )
         } else {
-            binding.layoutCard.setBackgroundColor(ContextCompat.getColor(context, R.color.sigInEditTextBackColor))
+            binding.layoutCard.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.sigInEditTextBackColor
+                )
+            )
         }
     }
 
@@ -81,8 +89,8 @@ class PendingListAdapter(private var itemList: ArrayList<PendingModemResponse>) 
         binding: ItemPendingRequestBinding
     ) {
         when (item.paymentType) {
-            "Cash In" -> {
-                binding.labelCustomerNumber.text = "Cash In"
+            context.getString(R.string.cash_in) -> {
+                binding.labelCustomerNumber.text = context.getString(R.string.cash_in)
                 binding.txtAmount.setTextColor(
                     ContextCompat.getColorStateList(
                         context,
@@ -91,8 +99,8 @@ class PendingListAdapter(private var itemList: ArrayList<PendingModemResponse>) 
                 )
             }
 
-            "Cash Out" -> {
-                binding.labelCustomerNumber.text = "Cash Out"
+            context.getString(R.string.cash_out) -> {
+                binding.labelCustomerNumber.text = context.getString(R.string.cash_out)
                 binding.txtAmount.setTextColor(
                     ContextCompat.getColorStateList(
                         context,

@@ -104,7 +104,7 @@
                 android:background="@drawable/spinner_border"
                 android:backgroundTint="@color/sigInEditTextBackColor"
                 android:gravity="center"
-                android:hint="Start Date"
+                android:hint="@string/start_date"
                 android:textAlignment="center"
                 android:textColor="@color/textColor"
                 app:layout_constraintStart_toStartOf="@id/layoutModemSpinner"
@@ -118,7 +118,7 @@
                 android:background="@drawable/spinner_border"
                 android:backgroundTint="@color/sigInEditTextBackColor"
                 android:gravity="center"
-                android:hint="End Date"
+                android:hint="@string/end_date"
                 android:textAlignment="center"
                 android:textColor="@color/textColor"
                 app:layout_constraintEnd_toEndOf="@id/layoutModemSpinner"
@@ -151,7 +151,7 @@
                     android:gravity="center"
                     android:spinnerMode="dropdown" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -181,12 +181,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:background="@android:color/transparent"
                     android:gravity="center"
                     android:spinnerMode="dropdown" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -217,12 +217,12 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
                     android:background="@android:color/transparent"
                     android:gravity="center"
                     android:spinnerMode="dropdown" />
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -274,7 +274,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="Total Balance : "
+                android:text="@string/total_balance"
                 android:textColor="@color/homeTextColor"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -286,7 +286,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="৳100"
                 android:textColor="@color/homeTextColor"
                 android:textSize="18sp"
                 android:textStyle="bold"

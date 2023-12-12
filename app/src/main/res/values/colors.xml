@@ -36,10 +36,11 @@
     <color name="nonClickableButton">#33000000</color>
     <color name="activeCard">#F4F8FF</color>
 
-    <color name="customPopupBackground">@color/white</color> <!-- Replace with your desired background color -->
+    <color name="customPopupBackground">@color/white
+    </color> <!-- Replace with your desired background color -->
     <color name="customMenuItemSelected">@color/primaryBlue</color>
 
-     <!--   Home-->
+    <!--   Home-->
     <color name="homeTextColor">@color/primaryBlue</color>
     <color name="bottomNacColor">@color/white</color>
     <color name="homeCardBackColor">@color/white</color>
@@ -47,7 +48,6 @@
     <color name="textColor">@color/black</color>
     <color name="sigInButtonTextColor">@color/white</color>
     <color name="sigInEditTextBackColor">@color/white</color>
-
 
 
 </resources>

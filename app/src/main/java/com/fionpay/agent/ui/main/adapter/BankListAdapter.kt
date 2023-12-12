@@ -47,7 +47,7 @@ class BankListAdapter(
                 .error(R.drawable.bank_icon)
                 .into(binding.bankImage)
 
-            if (item?.phoneNumber?.isNotEmpty() == true && item?.phoneNumber?.isDigitsOnly()!!) {
+            if (item?.phoneNumber?.isNotEmpty() == true && item.phoneNumber?.isDigitsOnly()!!) {
                 binding.txtBankName.setTextColor(ContextCompat.getColor(context, R.color.white))
                 binding.txtMobile.setTextColor(ContextCompat.getColor(context, R.color.white))
                 binding.bankLayout.setBackgroundResource(R.drawable.button_continue_gradient)

@@ -8,4 +8,4 @@ data class GetPendingModemRequest(
     @field:SerializedName("page_number")
     var page_number: Int? = null,
 
-)
+    )

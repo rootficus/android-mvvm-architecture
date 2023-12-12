@@ -3,7 +3,7 @@ package com.fionpay.agent.data.model.request
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class GetAgentB2BRequest (
+data class GetAgentB2BRequest(
     @SerializedName("id")
     @Expose
     var id: String?,

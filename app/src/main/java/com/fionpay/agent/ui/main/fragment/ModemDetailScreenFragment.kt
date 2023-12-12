@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.fionpay.agent.R
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.databinding.ModemBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -30,7 +31,7 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = ModemBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
@@ -50,12 +51,14 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
         getModemsListResponse =
             arguments?.getSerializable(GetModemsListResponse::class.java.name) as GetModemsListResponse
         currentBalance = arguments?.getString("CurrentBalance")?.toDouble()
-        binding.labelTotalBalance.text = "New balance will be: ৳${currentBalance}"
-        binding.labelTitle.text =
-            "${getModemsListResponse.firstName} ${getModemsListResponse.lastName}"
-        binding.etCurrentBalance.setText("৳${getModemsListResponse.balance.toString()}")
+        val fullName = "${getModemsListResponse.firstName} ${getModemsListResponse.lastName}"
+        val balance = "৳${getModemsListResponse.balance.toString()}"
+        binding.labelTotalBalance.text =
+            getString(R.string.new_balance_will, currentBalance.toString())
+        binding.labelTitle.text = fullName
+        binding.etCurrentBalance.text = balance
 
-        Log.i("Current:", "${binding.etCurrentBalance.text.toString()}")
+        Log.i("Current:", "${binding.etCurrentBalance.text}")
 
         binding.etUpdateBalance.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -70,20 +73,21 @@ class ModemDetailScreenFragment : BottomSheetDialogFragment() {
                     val newVal = s.toString().toDouble()
                     totalBalance = currentBalance?.minus(newVal)
                     if (totalBalance != null && totalBalance!! > 0.0) {
-                        binding.labelTotalBalance.text = "New balance will be: ৳$totalBalance"
+                        binding.labelTotalBalance.text =
+                            getString(R.string.new_balance_will, totalBalance.toString())
                     } else {
                         Toast.makeText(
                             context,
                             "Entered amount should be less than agent balance",
                             Toast.LENGTH_SHORT
                         ).show()
-                        "New balance will be: ৳${currentBalance}"
+                        getString(R.string.new_balance_will, currentBalance.toString())
                         binding.etUpdateBalance.setText("")
                     }
 
                 } else {
                     binding.labelTotalBalance.text =
-                        "New balance will be: ৳${currentBalance}"
+                        getString(R.string.new_balance_will, currentBalance.toString())
                 }
 
             }

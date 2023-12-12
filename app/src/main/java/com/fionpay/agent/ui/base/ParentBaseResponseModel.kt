@@ -8,9 +8,9 @@ import com.google.gson.annotations.SerializedName
  */
 open class ParentBaseResponseModel(
     @field:SerializedName("code")
-    val code: Int?=null,
+    val code: Int? = null,
     @field:SerializedName("msg")
-    val msg: String?=null,
+    val msg: String? = null,
     @field:SerializedName("message")
-    val message: String?=null
+    val message: String? = null
 )

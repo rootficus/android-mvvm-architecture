@@ -30,5 +30,5 @@ data class BaseResponseModelFilter<P>(
     val data: ArrayList<P>? = null,
     @field:SerializedName("total_rows")
     @Expose
-    val total_rows: Long? = null,
+    val totalRows: Long? = null,
 ) : ParentBaseModelResponse()

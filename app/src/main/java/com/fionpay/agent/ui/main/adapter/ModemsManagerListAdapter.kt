@@ -40,14 +40,20 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResp
         val item: GetModemsListResponse = itemList[position]
         with(holder)
         {
-            binding.txtUserName.text =
-                "${item.firstName.toString()} ${item.lastName.toString()}"
+            val fullName = "${item.firstName.toString()} ${item.lastName.toString()}"
+            val balance = "৳${item.balance.toString()}"
+            val totalCashOut = "৳${item.totalCashOut.toString()}"
+            val todayCashOut = "৳${item.todayCashOut.toString()}"
+            val totalCashIn = "৳${item.totalCashIn.toString()}"
+            val todayCashIn = "৳${item.todayCashIn.toString()}"
+            binding.txtUserName.text = fullName
             binding.txtPinCode.text = item.pinCode.toString()
-            binding.currentBalanceAmount.text = "৳${item.balance.toString()}"
-            binding.txtTotalCashOut.text = "৳${item.totalCashOut.toString()}"
-            binding.txtTodayCashOut.text = "৳${item.todayCashOut.toString()}"
-            binding.txtTotalCashIn.text = "৳${item.totalCashIn.toString()}"
-            binding.txtTodayCashIn.text = "৳${item.todayCashIn.toString()}"
+            binding.txtPinCode.text = item.pinCode.toString()
+            binding.currentBalanceAmount.text = balance
+            binding.txtTotalCashOut.text = totalCashOut
+            binding.txtTodayCashOut.text = todayCashOut
+            binding.txtTotalCashIn.text = totalCashIn
+            binding.txtTodayCashIn.text = todayCashIn
             binding.txtActive.text = item.status.toString()
             // Login Status
             binding.txtLoggedIn.text = item.loginStatus.toString()

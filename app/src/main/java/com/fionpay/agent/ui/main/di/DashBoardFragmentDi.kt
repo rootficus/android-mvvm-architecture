@@ -188,6 +188,7 @@ interface PendingFragmentComponent {
 
 @Module(includes = [DashBoardFragmentModuleDi::class])
 class PendingFragmentModule
+
 @FragmentScope
 @Component(
     dependencies = [AppComponent::class],
@@ -199,6 +200,7 @@ interface SupportFragmentComponent {
 
 @Module(includes = [DashBoardFragmentModuleDi::class])
 class SupportFragmentModule
+
 @FragmentScope
 @Component(
     dependencies = [AppComponent::class],
@@ -210,6 +212,7 @@ interface TransactionFragmentComponent {
 
 @Module(includes = [DashBoardFragmentModuleDi::class])
 class TransactionFragmentModule
+
 @FragmentScope
 @Component(
     dependencies = [AppComponent::class],

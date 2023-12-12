@@ -201,9 +201,9 @@ class SMSInboxFragment : BaseFragment<FragmentSmsInboxBinding>(R.layout.fragment
     }
 
     private fun setMessageCountValue() {
-        val totalCount = viewModel.getCountMessageManageRecord(Constant.SMSType.All.value);
-        val cashInCount = viewModel.getCountMessageManageRecord(Constant.SMSType.CashIn.value);
-        val cashOutCount = viewModel.getCountMessageManageRecord(Constant.SMSType.CashOut.value);
+        val totalCount = viewModel.getCountMessageManageRecord(Constant.SMSType.All.value)
+        val cashInCount = viewModel.getCountMessageManageRecord(Constant.SMSType.CashIn.value)
+        val cashOutCount = viewModel.getCountMessageManageRecord(Constant.SMSType.CashOut.value)
         val b2b = viewModel.getCountMessageManageRecord(Constant.SMSType.B2B.value)
         val unKnown = viewModel.getCountMessageManageRecord(Constant.SMSType.UNKNOWN.value)
         mDataBinding.chipAllSMS.text = getString(R.string.sms_all_sms) + " (" + totalCount + ")"

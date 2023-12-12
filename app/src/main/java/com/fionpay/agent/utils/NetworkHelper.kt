@@ -3,8 +3,8 @@ package com.fionpay.agent.utils
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import javax.inject.Inject
 import android.os.Build
+import javax.inject.Inject
 
 /**
  * Akash.Singh

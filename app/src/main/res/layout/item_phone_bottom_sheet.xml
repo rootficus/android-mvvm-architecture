@@ -12,9 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_15sdp"
         android:fontFamily="@font/roboto_medium"
-        android:text="Add Number"
+        android:text="@string/add_number"
         android:textColor="@color/homeTextColor"
-        android:textSize="@dimen/_15sdp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -59,7 +59,7 @@ data class GetModemsListResponse(
 
     ) : Serializable
 
-data class Slots (
+data class Slots(
     @SerializedName("status")
     @Expose
     val status: String? = null,

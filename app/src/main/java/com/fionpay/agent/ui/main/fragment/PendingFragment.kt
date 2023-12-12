@@ -115,7 +115,7 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
 
     private fun setAdapter() {
         pendingListAdapter = PendingListAdapter(arrayList)
-        pendingListAdapter?.listener = cardListener
+        pendingListAdapter.listener = cardListener
         mDataBinding.pendingModemsList.layoutManager = LinearLayoutManager(context)
         mDataBinding.pendingModemsList.adapter = pendingListAdapter
     }
@@ -149,14 +149,15 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
                 }
             }
         } else {
-            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG).show()
+            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG)
+                .show()
         }
 
     }
 
     private fun showAlertDialog(item: PendingModemResponse) {
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-        val binding =  AlterPendingDialogBinding.inflate(layoutInflater)
+        val binding = AlterPendingDialogBinding.inflate(layoutInflater)
         dialogBuilder.setView(binding.root)
         val alertDialog: AlertDialog = dialogBuilder.create()
         if (!item.bankImage.isNullOrEmpty()) {
@@ -168,7 +169,7 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
                 .into(binding.imageBank)
         }
         setPaymentStatusView(item, binding)
-        binding.txtSuccess.visibility=  View.VISIBLE
+        binding.txtSuccess.visibility = View.VISIBLE
         binding.txtTransactionId.text = item.transactionId
         binding.txtSuccess.text = getString(R.string.pending)
         binding.txtSuccess.setTextColor(
@@ -179,11 +180,15 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
         )
         binding.txtSuccess.backgroundTintList =
             (ContextCompat.getColorStateList(requireContext(), R.color.activePendingBg))
-        binding.txtAmount.text = "৳${item.amount}"
+
+        val amount = "৳${item.amount}"
+        val customer = "☎ ${item.customer.toString()}"
+        val transactionId = "#${item.transactionId.toString()}"
+        binding.txtAmount.text = amount
         if (item.paymentType == getString(R.string.cash_in)) {
-            binding.txtTransactionId.text = "☎ ${item.customer.toString()}"
+            binding.txtTransactionId.text = customer
         } else {
-            binding.txtTransactionId.text = "#${item.transactionId.toString()}"
+            binding.txtTransactionId.text = transactionId
         }
         binding.txtDate.text = Utility.convertTransactionDate(item.date)
         binding.txtBankType.text = item.bankType
@@ -259,10 +264,11 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
 
         if (filteredList.isEmpty()) {
             // if no item is added in filtered list we are
-            Snackbar.make(requireView(), getString(R.string.no_data_found), Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(requireView(), getString(R.string.no_data_found), Snackbar.LENGTH_SHORT)
+                .show()
         } else {
             // at last we are passing that filtered
-            pendingListAdapter?.filterList(filteredList)
+            pendingListAdapter.filterList(filteredList)
         }
     }
 

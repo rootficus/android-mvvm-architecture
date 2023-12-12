@@ -20,7 +20,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.request.TransactionFilterRequest
-import com.fionpay.agent.data.model.response.DashBoardItemResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.databinding.AlterPendingDialogBinding
 import com.fionpay.agent.databinding.FragmentTransactionsBinding
@@ -37,7 +36,6 @@ import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
 import com.fionpay.agent.utils.Utility
 import com.google.android.material.snackbar.Snackbar
-import com.google.gson.Gson
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -222,7 +220,7 @@ class TransactionFragment :
                     paymentType = if (i == 0) {
                         getString(R.string.all)
                     } else {
-                        transactionType?.get(i).toString()
+                        transactionType.get(i).toString()
                     }
                 }
 
@@ -285,7 +283,7 @@ class TransactionFragment :
 
     private fun setAdapter() {
         transactionListAdapter = TransactionListAdapter(arrayList)
-        transactionListAdapter?.listener = cardListener
+        transactionListAdapter.listener = cardListener
         mDataBinding.recentModemsList.layoutManager = LinearLayoutManager(context)
         mDataBinding.recentModemsList.adapter = transactionListAdapter
     }
@@ -328,7 +326,11 @@ class TransactionFragment :
                 }
             }
         } else {
-            Snackbar.make(requireView(), getString(R.string.NO_INTERNET_CONNECTION), Snackbar.LENGTH_LONG).show()
+            Snackbar.make(
+                requireView(),
+                getString(R.string.NO_INTERNET_CONNECTION),
+                Snackbar.LENGTH_LONG
+            ).show()
         }
 
     }
@@ -340,7 +342,8 @@ class TransactionFragment :
                 totalAmount = totalAmount.plus(it.amount.toString().toDouble())
             }
         }
-        mDataBinding.txtTotalBalance.text = "৳$totalAmount"
+        val amount = "৳${totalAmount}"
+        mDataBinding.txtTotalBalance.text = amount
     }
 
     private fun showAlertDialog(item: TransactionModemResponse) {
@@ -357,13 +360,15 @@ class TransactionFragment :
                 .error(R.drawable.bank_icon)
                 .into(binding.imageBank)
         }
-
+        val amount = "৳${item.amount}"
+        val customer = "☎ ${item.customer.toString()}"
+        val transactionId = "#${item.transactionId.toString()}"
         binding.labelPaymentType.text = item.paymentType.toString()
-        binding.txtAmount.text = "৳${item.amount}"
+        binding.txtAmount.text = amount
         binding.txtDate.text = Utility.convertTransactionDate(item.date)
         binding.txtBankType.text = item.bankType
-        binding.txtTransactionId.text = "#${item.transactionId.toString()}"
-        binding.txtPayeeNumber.text = "☎ ${item.customer.toString()}"
+        binding.txtTransactionId.text = transactionId
+        binding.txtPayeeNumber.text = customer
 
         //UI View
         setPaymentStatusView(item, binding)
@@ -444,7 +449,7 @@ class TransactionFragment :
                 setPaymentStatusUIView(binding, R.color.reject)
             }
 
-            getString(R.string.cash_out)  -> {
+            getString(R.string.cash_out) -> {
                 setPaymentStatusUIView(binding, R.color.greenColor)
             }
         }
@@ -497,7 +502,8 @@ class TransactionFragment :
             showMessage(getString(R.string.no_data_found))
         } else {
             // at last we are passing that filtered
-            transactionListAdapter?.filterList(filteredList)
+            transactionListAdapter
+                .filterList(filteredList)
         }
     }
 }

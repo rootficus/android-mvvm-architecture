@@ -3,7 +3,6 @@ package com.fionpay.agent.ui.main.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.TransactionModel
 import com.fionpay.agent.databinding.HomeCardBinding
 
@@ -27,8 +26,9 @@ class DashBoardListAdapter(private var itemList: ArrayList<TransactionModel>) :
         val item: TransactionModel = itemList[position]
         with(holder)
         {
+            val amount = "৳ ${item.amount}"
             binding.cardHeadImg.setBackgroundResource(item.icon)
-            binding.txtAmount.text = "${item.amount}"
+            binding.txtAmount.text = amount
             binding.txtTitle.text = item.title
             binding.cardHead1.setOnClickListener {
                 listener?.onCardClicked(item)

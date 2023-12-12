@@ -103,8 +103,8 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent) {
                 if (intent.extras != null) {
-                    var message = intent.extras?.getString(Constant.FIONPAY_ACTION,"")
-                    if (!message.isNullOrEmpty()){
+                    val message = intent.extras?.getString(Constant.FIONPAY_ACTION, "")
+                    if (!message.isNullOrEmpty()) {
                         setNotificationCount(message)
                     }
 
@@ -112,7 +112,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
             }
         }
 
-    private fun setNotificationCount(message:String) {
+    private fun setNotificationCount(message: String) {
         showHeaderMessage(message)
     }
 
@@ -121,7 +121,10 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         Utility.getPushToken(this@DashBoardActivity)
         initializationDagger()
         initializationView()
-        registerReceiver(onDashBoardActivityActionsReceiver, IntentFilter(Constant.HOME_REQUEST_NOTIFICATION_COUNT))
+        registerReceiver(
+            onDashBoardActivityActionsReceiver,
+            IntentFilter(Constant.HOME_REQUEST_NOTIFICATION_COUNT)
+        )
     }
 
     override fun onDestroy() {
@@ -138,7 +141,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
 
     private fun initializationView() {
         navController = Navigation.findNavController(this, R.id.navHostOnDashBoardFragment)
-        NavigationUI.setupWithNavController(viewDataBinding?.bottomNavigation!!, navController);
+        NavigationUI.setupWithNavController(viewDataBinding?.bottomNavigation!!, navController)
 
         viewDataBinding?.bottomNavigation!!.setOnItemSelectedListener {
             onNavigationItemSelected(it)
@@ -187,7 +190,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                 jumpToAnotherFragment(R.id.navigation_balanceFragment, bundle)
             }
 
-            R.id.navigation_b2bFragment-> {
+            R.id.navigation_b2bFragment -> {
                 val bundle = Bundle().apply {
                     putString("Api", "All Transactions")
                     putInt("Filer", -1)

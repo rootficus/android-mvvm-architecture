@@ -31,7 +31,6 @@ interface FionDao {
     fun getModemsList(): List<Modem>
 
 
-
     //Banks
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertBanks(bank: Bank?)
@@ -122,6 +121,7 @@ interface FionDao {
 
     @Query("SELECT EXISTS (SELECT * FROM notificationRecord WHERE id = :id)")
     fun isNotificationExits(id: String?): Boolean?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertNotification(notificationRecord: NotificationRecord?)
 

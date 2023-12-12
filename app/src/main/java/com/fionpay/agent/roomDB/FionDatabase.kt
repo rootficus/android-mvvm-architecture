@@ -8,8 +8,8 @@ import com.fionpay.agent.data.model.request.Bank
 import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
-import com.fionpay.agent.roomDB.model.ModemSetting
 import com.fionpay.agent.roomDB.dao.FionDao
+import com.fionpay.agent.roomDB.model.ModemSetting
 import com.fionpay.agent.roomDB.model.NotificationRecord
 import com.fionpay.agent.roomDB.model.OperatorRecord
 import com.fionpay.agent.roomDB.model.SMSRecord
@@ -21,6 +21,7 @@ import com.fionpay.agent.roomDB.model.SMSRecord
 )
 abstract class FionDatabase : RoomDatabase() {
     abstract fun fioDao(): FionDao?
+
     companion object {
         @Volatile
         private var INSTANCE: FionDatabase? = null

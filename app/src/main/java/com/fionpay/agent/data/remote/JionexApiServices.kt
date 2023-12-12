@@ -168,6 +168,7 @@ interface FionApiServices {
     fun generatePinCode(
         @Header("Authorization") authHeader: String?
     ): Call<BaseResponseModel<Any>>
+
     @Headers("Content-Type:application/json")
     @GET("api/v1/app/agents/{agentId}")
     fun getAgentProfile(
@@ -185,15 +186,16 @@ interface FionApiServices {
     @Multipart
     fun updateAgentProfile(
         @Header("Authorization") authHeader: String?,
-        @Part("full_name") full_name: RequestBody?,
+        @Part("full_name") fullName: RequestBody?,
         @Part filePart: MultipartBody.Part,
         @Path("agentId") type: String,
     ): Call<BaseResponseModel<ProfileResponse>>
+
     @PUT("api/v1/app/agents/{agentId}")
     @Multipart
     fun updateAgentWithoutProfile(
         @Header("Authorization") authHeader: String?,
-        @Part("full_name") full_name: RequestBody?,
+        @Part("full_name") fullName: RequestBody?,
         @Path("agentId") type: String,
     ): Call<BaseResponseModel<ProfileResponse>>
 
@@ -202,6 +204,7 @@ interface FionApiServices {
         @Header("Authorization") authHeader: String?,
         @Body transactionFilterRequest: TransactionFilterRequest?,
     ): Call<BaseResponseModel2<TransactionModemResponse>>
+
     @Headers("Content-Type:application/json")
     @POST("api/v1/app/agents/check_number_bank_availability")
     fun checkNumberBankAvailability(

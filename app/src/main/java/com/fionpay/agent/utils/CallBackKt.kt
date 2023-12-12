@@ -8,7 +8,7 @@ import retrofit2.Response
  * Akash.Singh
  * RootFicus.
  */
-class CallBackKt<T>: Callback<T> {
+class CallBackKt<T> : Callback<T> {
 
     var onResponse: ((Response<T>) -> Unit)? = null
     var onFailure: ((t: Throwable?) -> Unit)? = null

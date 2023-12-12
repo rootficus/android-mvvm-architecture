@@ -36,8 +36,6 @@ class NotificationFragment :
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
-    private lateinit var dashBoardListAdapter: DashBoardListAdapter
-    private var arrayList: ArrayList<TransactionModel> = arrayListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,7 +44,7 @@ class NotificationFragment :
     }
 
     private fun initialization() {
-        mDataBinding.topHeader.txtHeader.text = "Notifications"
+        mDataBinding.topHeader.txtHeader.text = getString(R.string.notifications)
         mDataBinding.topHeader.backButton.setOnClickListener {
             Navigation.findNavController(requireView()).navigateUp()
         }

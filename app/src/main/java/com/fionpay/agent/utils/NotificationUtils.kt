@@ -9,11 +9,16 @@ import com.fionpay.agent.R
 
 object NotificationUtils {
 
-    fun showNotification(context: Context, title: String, content: String,notificationId : String) {
-        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    fun showNotification(context: Context, title: String, content: String, notificationId: String) {
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(Constant.CHANNEL_ID, Constant.CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
+            val channel = NotificationChannel(
+                Constant.CHANNEL_ID,
+                Constant.CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
             notificationManager.createNotificationChannel(channel)
         }
         val builder = NotificationCompat.Builder(context, Constant.CHANNEL_ID)

@@ -2,20 +2,17 @@ package com.fionpay.agent.data.repository
 
 import android.content.Context
 import android.util.Log
-import com.fionpay.agent.data.model.UserInfo
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
 import com.fionpay.agent.data.model.request.Bank
 import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
 import com.fionpay.agent.data.model.request.FilterResponse
 import com.fionpay.agent.data.model.request.GetAgentB2BRequest
 import com.fionpay.agent.data.model.request.GetBalanceByFilterRequest
-import com.fionpay.agent.data.model.request.GetMessageByFilterRequest
 import com.fionpay.agent.data.model.request.GetPendingModemRequest
 import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.ProfileResponse
 import com.fionpay.agent.data.model.request.ReturnBalanceRequest
-import com.fionpay.agent.data.model.request.SignInRequest
 import com.fionpay.agent.data.model.request.TransactionFilterRequest
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
 import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
@@ -33,7 +30,6 @@ import com.fionpay.agent.data.model.response.GetStatusCountResponse
 import com.fionpay.agent.data.model.response.ModemPinCodeResponse
 import com.fionpay.agent.data.model.response.PendingModemResponse
 import com.fionpay.agent.data.model.response.ReturnBalanceResponse
-import com.fionpay.agent.data.model.response.SignInResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.data.remote.FionApiServices
 import com.fionpay.agent.roomDB.FionDatabase
@@ -50,28 +46,6 @@ class DashBoardRepository(
     val fionDatabase: FionDatabase
 ) : BaseRepository() {
 
-
-    fun checkOnVerificationAPI(
-        success: (loginResponse: UserInfo) -> Unit,
-        fail: (error: String) -> Unit,
-        pinCode: String,
-        message: (msg: String) -> Unit,
-    ) {
-        /*apiServices.verifyUserByPincode(pinCode).apply {
-            execute(this, success, fail, context, message)
-        }*/
-    }
-
-    fun signInNow(
-        success: (signInResponse: SignInResponse) -> Unit,
-        fail: (error: String) -> Unit,
-        signInRequest: SignInRequest,
-        message: (msg: String) -> Unit
-    ) {
-        apiServices.signInNow(signInRequest).apply {
-            execute(this, success, fail, context, message)
-        }
-    }
 
     fun dashBoardData(
         success: (dashBoardItemResponse: DashBoardItemResponse) -> Unit,
@@ -100,19 +74,6 @@ class DashBoardRepository(
         message: (msg: String) -> Unit
     ) {
         apiServices.getTransactionsData(
-            "Bearer " + sharedPreference.getToken(),
-            transactionFilterRequest
-        ).apply {
-            execute2(this, success, fail, context, message)
-        }
-    }
-    fun transactionFilterApi(
-        success: (transactionFilterist: ArrayList<TransactionModemResponse>) -> Unit,
-        transactionFilterRequest: TransactionFilterRequest,
-        fail: (error: String) -> Unit,
-        message: (msg: String) -> Unit
-    ) {
-        apiServices.transactionFilterApi(
             "Bearer " + sharedPreference.getToken(),
             transactionFilterRequest
         ).apply {
@@ -201,8 +162,9 @@ class DashBoardRepository(
                 execute(this, success, fail, context, message)
             }
     }
+
     fun checkNumberBankAvailability(
-        success: (any : Any) -> Unit,
+        success: (any: Any) -> Unit,
         checkNumberAvailabilityRequest: CheckNumberAvailabilityRequest,
         fail: (error: String) -> Unit,
         message: (msg: String) -> Unit
@@ -242,7 +204,6 @@ class DashBoardRepository(
     fun getMessageByFilter(
         success: (getMessageManageRecord: List<GetMessageManageRecord>) -> Unit,
         fail: (error: String) -> Unit,
-        getMessageByFilterRequest: GetMessageByFilterRequest,
         message: (msg: String) -> Unit
     ) {
         apiServices.getMessageByFilter("Bearer " + sharedPreference.getToken()).apply {
@@ -278,17 +239,6 @@ class DashBoardRepository(
         message: (msg: String) -> Unit
     ) {
         apiServices.addModemBalance("Bearer " + sharedPreference.getToken(), addModemBalanceModel)
-            .apply {
-                execute(this, success, fail, context, message)
-            }
-    }
-    fun removeModemBalance(
-        success: (getAddModemBalanceResponse: GetAddModemBalanceResponse) -> Unit,
-        fail: (error: String) -> Unit,
-        addModemBalanceModel: AddModemBalanceModel,
-        message: (msg: String) -> Unit
-    ) {
-        apiServices.removeModemBalance("Bearer " + sharedPreference.getToken(), addModemBalanceModel)
             .apply {
                 execute(this, success, fail, context, message)
             }
@@ -343,16 +293,19 @@ class DashBoardRepository(
                 execute(this, success, fail, context, message)
             }
     }
+
     fun getB2BRecord(
         success: (b2BResponse: List<B2BResponse>) -> Unit,
         getAgentB2BRequest: GetAgentB2BRequest,
         fail: (error: String) -> Unit,
         message: (msg: String) -> Unit
     ) {
-        apiServices.getB2BRecord("Bearer " + sharedPreference.getToken(), getAgentB2BRequest).apply {
-            execute2(this, success, fail, context, message)
-        }
+        apiServices.getB2BRecord("Bearer " + sharedPreference.getToken(), getAgentB2BRequest)
+            .apply {
+                execute2(this, success, fail, context, message)
+            }
     }
+
     fun getModemPinCodes(
         success: (b2BResponse: List<ModemPinCodeResponse>) -> Unit,
         fail: (error: String) -> Unit,
@@ -369,34 +322,20 @@ class DashBoardRepository(
         fail: (error: String) -> Unit,
         message: (msg: String) -> Unit
     ) {
-        apiServices.returnBalanceToDistributor("Bearer " + sharedPreference.getToken(), returnBalanceRequest).apply {
+        apiServices.returnBalanceToDistributor(
+            "Bearer " + sharedPreference.getToken(),
+            returnBalanceRequest
+        ).apply {
             execute(this, success, fail, context, message)
         }
-    }
-
-
-    fun setUserId(userId: String?) {
-        userId?.let { sharedPreference.setUserId(it) }
     }
 
     fun getUserId(): String? {
         return sharedPreference.getUserId()
     }
 
-    fun setEmail(email: String?) {
-        email?.let { sharedPreference.setEmail(it) }
-    }
-
-    fun setPassword(password: String?) {
-        password?.let { sharedPreference.setPassword(password) }
-    }
-
-    fun getPassword(): String? {
-        return sharedPreference.getPassword()
-    }
-
-    fun setFullName(full_name: String?) {
-        full_name?.let { sharedPreference.setFullName(it) }
+    fun setFullName(fullName: String?) {
+        fullName?.let { sharedPreference.setFullName(it) }
     }
 
     fun getProfileImage(): String? {
@@ -407,100 +346,12 @@ class DashBoardRepository(
         image?.let { sharedPreference.setProfileImage(it) }
     }
 
-    fun setPinCode(pin_code: String?) {
-        pin_code?.let { sharedPreference.setPinCode(it) }
-    }
-
-    fun setCountry(country: String?) {
-        country?.let { sharedPreference.setCountry(it) }
-    }
-
-    fun setParentId(parent_id: String?) {
-        parent_id?.let { sharedPreference.setParentId(it) }
-    }
-
-    fun setPhoneNumber(phone: String?) {
-        phone?.let { sharedPreference.setPhoneNumber(it) }
-    }
-
-    fun setUserName(user_name: String?) {
-        user_name?.let { sharedPreference.setUserName(it) }
-    }
-
-    fun setUserRole(role_id: String?) {
-        role_id?.let { sharedPreference.setUserRole(it) }
-    }
-
-    fun isLogin(): Boolean {
-        return sharedPreference.isLogin()
-    }
-
-    fun setIsLogin(isLogin: Boolean?) {
-        isLogin?.let { sharedPreference.setIsLogin(it) }
-    }
-
-    fun setToken(token: String?) {
-        token?.let { sharedPreference.setToken(it) }
-    }
-
     fun getFullName(): String? {
         return sharedPreference.getFullName()
     }
 
     fun getEmail(): String? {
         return sharedPreference.getEmail()
-    }
-
-    fun getPinCode(): Int? {
-        return sharedPreference.getPinCode()
-    }
-
-    fun setTotalPending(totalPending: Long) {
-        sharedPreference.setTotalPending(totalPending)
-    }
-
-    fun getTotalPending(): Long {
-        return sharedPreference.getTotalPending()
-    }
-
-    fun setTotalTransactions(totalTransactions: String) {
-        sharedPreference.setTotalTransactions(totalTransactions)
-    }
-
-    fun getTotalTransactions(): String? {
-        return sharedPreference.getTotalTransactions()
-    }
-
-    fun setTodayTransactions(todayTransactions: Long) {
-        sharedPreference.setTodayTransactions(todayTransactions)
-    }
-
-    fun getTodayTransactions(): Long {
-        return sharedPreference.getTodayTransactions()
-    }
-
-    fun setTotalTrxAmount(totalTrxAmount: String) {
-        sharedPreference.setTotalTrxAmount(totalTrxAmount)
-    }
-
-    fun getTotalTrxAmount(): String? {
-        return sharedPreference.getTotalTrxAmount()
-    }
-
-    fun setTodayTrxAmount(todayTrxAmount: String) {
-        sharedPreference.setTodayTrxAmount(todayTrxAmount)
-    }
-
-    fun getTodayTrxAmount(): String? {
-        return sharedPreference.getTodayTrxAmount()
-    }
-
-    fun setTotalModem(totalModem: Int) {
-        sharedPreference.setTotalModem(totalModem)
-    }
-
-    fun getTotalModem(): Int {
-        return sharedPreference.getTotalModem()
     }
 
     fun setBLSuccess(success: Int?) {
@@ -574,6 +425,7 @@ class DashBoardRepository(
     fun getModemsListDao(): List<Modem>? {
         return fionDatabase.fioDao()?.getModemsList()
     }
+
     fun getBanksListDao(): List<Bank>? {
         return fionDatabase.fioDao()?.getBanksList()
     }
@@ -586,7 +438,7 @@ class DashBoardRepository(
             Constant.BalanceManagerStatus.SUCCESS.action -> {
                 Log.d(
                     "getBalanceManagerRecord",
-                    "::${isBalanceManage},${Constant.BalanceManagerStatus.SUCCESS.toString()}"
+                    "::${isBalanceManage},${Constant.BalanceManagerStatus.SUCCESS}"
                 )
                 fionDatabase.fioDao()
                     ?.getBalanceTransaction(Constant.BalanceManagerStatus.SUCCESS.toString()) as ArrayList<GetBalanceManageRecord>
@@ -595,7 +447,7 @@ class DashBoardRepository(
             Constant.BalanceManagerStatus.PENDING.action -> {
                 Log.d(
                     "getBalanceManagerRecord",
-                    "::${isBalanceManage},${Constant.BalanceManagerStatus.PENDING.toString()}"
+                    "::${isBalanceManage},${Constant.BalanceManagerStatus.PENDING}"
                 )
                 fionDatabase.fioDao()
                     ?.getBalanceTransaction(Constant.BalanceManagerStatus.PENDING.toString()) as ArrayList<GetBalanceManageRecord>
@@ -604,7 +456,7 @@ class DashBoardRepository(
             Constant.BalanceManagerStatus.APPROVED.action -> {
                 Log.d(
                     "getBalanceManagerRecord",
-                    "::${isBalanceManage},${Constant.BalanceManagerStatus.APPROVED.toString()}"
+                    "::${isBalanceManage},${Constant.BalanceManagerStatus.APPROVED}"
                 )
                 fionDatabase.fioDao()
                     ?.getBalanceTransaction(Constant.BalanceManagerStatus.APPROVED.toString()) as ArrayList<GetBalanceManageRecord>
@@ -613,7 +465,7 @@ class DashBoardRepository(
             Constant.BalanceManagerStatus.REJECTED.action -> {
                 Log.d(
                     "getBalanceManagerRecord",
-                    "::${isBalanceManage},${Constant.BalanceManagerStatus.REJECTED.toString()}"
+                    "::${isBalanceManage},${Constant.BalanceManagerStatus.REJECTED}"
                 )
                 fionDatabase.fioDao()
                     ?.getBalanceTransaction(Constant.BalanceManagerStatus.REJECTED.toString()) as ArrayList<GetBalanceManageRecord>
@@ -622,7 +474,7 @@ class DashBoardRepository(
             Constant.BalanceManagerStatus.DANGER.action -> {
                 Log.d(
                     "getBalanceManagerRecord",
-                    "::${isBalanceManage},${Constant.BalanceManagerStatus.DANGER.toString()}"
+                    "::${isBalanceManage},${Constant.BalanceManagerStatus.DANGER}"
                 )
                 fionDatabase.fioDao()
                     ?.getBalanceTransaction(Constant.BalanceManagerStatus.DANGER.toString()) as ArrayList<GetBalanceManageRecord>
@@ -631,7 +483,7 @@ class DashBoardRepository(
             else -> {
                 Log.d(
                     "getBalanceManagerRecord",
-                    ":else:${isBalanceManage},${Constant.BalanceManagerStatus.DANGER.toString()}"
+                    ":else:${isBalanceManage},${Constant.BalanceManagerStatus.DANGER}"
                 )
                 fionDatabase.fioDao()
                     ?.getBalanceTransaction() as ArrayList<GetBalanceManageRecord>

@@ -66,7 +66,7 @@ fun AppCompatActivity.showBottomSheet(fragment: BottomSheetDialogFragment) {
 }
 
 fun AppCompatActivity.hideBottomSheet(fragment: BottomSheetDialogFragment) {
-     fragment.dismiss()
+    fragment.dismiss()
 }
 
 fun AppCompatActivity.addFragments(fragment: Fragment, frameId: Int, addToStack: Boolean? = false) {
@@ -113,7 +113,7 @@ fun AppCompatActivity.isFragmentAvailableInStack(fragment: Fragment): Boolean {
 fun AppCompatTextView.setHtmlToTextView(html: String) {
     var sequence: CharSequence = HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_LEGACY)
     sequence = sequence.trim()
-    var strSpannableString = SpannableStringBuilder(sequence)
+    val strSpannableString = SpannableStringBuilder(sequence)
     var urlSpan: Array<URLSpan> =
         strSpannableString.getSpans(0, sequence.length, URLSpan::class.java)
     /*urlSpan.forEach {
@@ -162,8 +162,11 @@ fun AppCompatActivity.getCurrentFragment(): Fragment? {
  * Edit text listener
  */
 fun AppCompatEditText.onChange(cb: (String) -> Unit) {
-    this.addTextChangedListener(object: TextWatcher {
-        override fun afterTextChanged(s: Editable?) { cb(s.toString()) }
+    this.addTextChangedListener(object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+            cb(s.toString())
+        }
+
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
     })
@@ -172,14 +175,16 @@ fun AppCompatEditText.onChange(cb: (String) -> Unit) {
 /**
  * Seekbar listener
  */
-fun SeekBar.onChangeSeekbar(progress: (Int)->Unit){
-    this.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
-        override fun onProgressChanged(seekBar: SeekBar?, progressCount: Int, fromUser: Boolean) {progress(progressCount)}
+fun SeekBar.onChangeSeekbar(progress: (Int) -> Unit) {
+    this.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+        override fun onProgressChanged(seekBar: SeekBar?, progressCount: Int, fromUser: Boolean) {
+            progress(progressCount)
+        }
+
         override fun onStartTrackingTouch(seekBar: SeekBar?) {}
         override fun onStopTrackingTouch(seekBar: SeekBar?) {}
     })
 }
-
 
 
 /**
@@ -291,7 +296,8 @@ fun <T> Call<T>.enqueue(callback: CallBackKt<T>.() -> Unit) {
 /**
  * Create Plain requestBody
  */
-fun String.createPlainRequestBody(): RequestBody = RequestBody.create("text/plain".toMediaTypeOrNull(), this)
+fun String.createPlainRequestBody(): RequestBody =
+    RequestBody.create("text/plain".toMediaTypeOrNull(), this)
 
 
 /***
@@ -317,26 +323,27 @@ fun String.showLast4DigitWithMask(): String {
  */
 
 fun String.addCommaSeparatorAmount(): String {
-    val actualAmount=this.substringBefore(".")
-    var decimalAmount= this.substringAfterLast(".")
-    when(decimalAmount.length){
-        0->{
-            decimalAmount= decimalAmount.plus("00")
+    val actualAmount = this.substringBefore(".")
+    var decimalAmount = this.substringAfterLast(".")
+    when (decimalAmount.length) {
+        0 -> {
+            decimalAmount = decimalAmount.plus("00")
         }
-        1->{
-            decimalAmount= decimalAmount.plus("0")
+
+        1 -> {
+            decimalAmount = decimalAmount.plus("0")
         }
     }
     if (this.isNotEmpty()) {
-        return if(actualAmount.length<=3){
-            if(this.contains(".")){
+        return if (actualAmount.length <= 3) {
+            if (this.contains(".")) {
                 actualAmount.plus(".").plus(decimalAmount)
-            }else{
+            } else {
                 actualAmount.plus(".00")
             }
-        }else{
-            val formatter=actualAmount.takeLast(3)
-            if(this.contains(".")){
+        } else {
+            val formatter = actualAmount.takeLast(3)
+            if (this.contains(".")) {
                 DecimalFormat("##,##,##").format(
                     BigDecimal(
                         actualAmount.substring(
@@ -345,7 +352,7 @@ fun String.addCommaSeparatorAmount(): String {
                         )
                     )
                 ).plus(",").plus(formatter).plus(".").plus(decimalAmount)
-            }else{
+            } else {
                 DecimalFormat("##,##,##").format(
                     BigDecimal(
                         actualAmount.substring(
@@ -356,14 +363,10 @@ fun String.addCommaSeparatorAmount(): String {
                 ).plus(",").plus(formatter).plus(".00")
             }
         }
-    }
-    else
-    {
+    } else {
         return this
     }
 }
-
-
 
 
 fun AppCompatImageView.rotateNiddle(angle: Float) {
@@ -382,21 +385,23 @@ fun AppCompatImageView.rotateNiddle(angle: Float) {
     this.animation = animation
     animation.fillAfter = true
 }
+
 fun AppCompatTextView.leftDrawable(@DrawableRes id: Int = 0) {
     this.setCompoundDrawablesWithIntrinsicBounds(id, 0, 0, 0)
 }
+
 //Round the decimal value
-fun roundDecimal(number:Double): Double {
-    return  DecimalFormat("#.##").format(number).toDouble()
+fun roundDecimal(number: Double): Double {
+    return DecimalFormat("#.##").format(number).toDouble()
 }
 
 //round decimal for string
-fun roundDecimalWithoutPercent(number : String) : String{
+fun roundDecimalWithoutPercent(number: String): String {
     number?.let {
         try {
             val d = it.toDouble()
-            return  DecimalFormat("#.##").format(d).toDouble().toString()
-        } catch (e:Exception){
+            return DecimalFormat("#.##").format(d).toDouble().toString()
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
@@ -404,20 +409,20 @@ fun roundDecimalWithoutPercent(number : String) : String{
 }
 
 //round decimal for string
-fun roundDecimal(number : String) : String{
+fun roundDecimal(number: String): String {
     number?.let {
         try {
             val d = it.toDouble()
-            return  DecimalFormat("#.##").format(d).toDouble().toString().plus("%")
-        } catch (e:Exception){
+            return DecimalFormat("#.##").format(d).toDouble().toString().plus("%")
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
     return ""
 }
 
-fun Int.toDp(context: Context):Int = TypedValue.applyDimension(
-    TypedValue.COMPLEX_UNIT_DIP,this.toFloat(),context.resources.displayMetrics
+fun Int.toDp(context: Context): Int = TypedValue.applyDimension(
+    TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), context.resources.displayMetrics
 ).toInt()
 
 

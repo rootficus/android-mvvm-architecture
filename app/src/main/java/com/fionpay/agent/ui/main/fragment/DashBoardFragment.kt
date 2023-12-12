@@ -51,9 +51,8 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
     private lateinit var dashBoardListAdapter: DashBoardListAdapter
     private var arrayList: ArrayList<TransactionModel> = arrayListOf()
-    private var progress = 0
-    var modemList: ArrayList<Modem> = arrayListOf()
-    var bankList: ArrayList<Bank> = arrayListOf()
+    private var modemList: ArrayList<Modem> = arrayListOf()
+    private var bankList: ArrayList<Bank> = arrayListOf()
 
     private val onFionModemStatusChangeActionsReceiver: BroadcastReceiver =
         object : BroadcastReceiver() {
@@ -87,8 +86,9 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
     }
 
     private fun updateProgressBar(progressValue: Int) {
+        val labelProgress = "$progressValue%"
         mDataBinding.progressBar.progress = progressValue
-        mDataBinding.textViewProgress.text = "$progressValue%"
+        mDataBinding.textViewProgress.text = labelProgress
     }
 
     private fun initializeView() {
@@ -126,9 +126,9 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
                 when (it.status) {
                     Status.SUCCESS -> {
                         val dashBoardItemResponse = it.data
+                        val currentBal = "৳${dashBoardItemResponse?.currentBalance.toString()}"
                         progressBar.dismiss()
-                        mDataBinding.currentBalanceAmount.text =
-                            "৳${it.data?.currentBalance.toString()}"
+                        mDataBinding.currentBalanceAmount.text = currentBal
                         val gson = Gson()
                         val json = gson.toJson(it.data)
                         viewModel.setDashBoardDataModel(json)
@@ -206,7 +206,7 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
                 "Transactions",
                 "${
                     responseData?.rejectedTransaction?.let {
-                        responseData?.approvedTransaction?.plus(
+                        responseData.approvedTransaction?.plus(
                             it
                         )
                     }
@@ -229,7 +229,7 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
             )
         )
         dashBoardListAdapter = DashBoardListAdapter(arrayList)
-        dashBoardListAdapter?.listener = cardListener
+        dashBoardListAdapter.listener = cardListener
         mDataBinding.homeCardListView.layoutManager = GridLayoutManager(context, 2)
         mDataBinding.homeCardListView.adapter = dashBoardListAdapter
     }

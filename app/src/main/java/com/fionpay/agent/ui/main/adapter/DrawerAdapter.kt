@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.TextView
 import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import com.fionpay.agent.R
 
 
@@ -19,9 +18,8 @@ class DrawerAdapter(
 ) :
     BaseExpandableListAdapter() {
 
-    interface OnClickListener
-    {
-        fun click(text : String)
+    interface OnClickListener {
+        fun click(text: String)
     }
 
     var listener: OnClickListener? = null
@@ -35,11 +33,11 @@ class DrawerAdapter(
     }
 
     override fun getGroup(listPosition: Int): Any {
-        return this.expandableListTitle[listPosition];
+        return this.expandableListTitle[listPosition]
     }
 
     override fun getChild(listPosition: Int, expandedListPosition: Int): Any {
-        return this.drawerHash[this.expandableListTitle[listPosition]]!![expandedListPosition];
+        return this.drawerHash[this.expandableListTitle[listPosition]]!![expandedListPosition]
     }
 
     override fun getGroupId(listPosition: Int): Long {
@@ -54,12 +52,18 @@ class DrawerAdapter(
         return false
     }
 
-    override fun getGroupView(listPosition: Int, b: Boolean, view: View?, viewGroup: ViewGroup): View? {
+    override fun getGroupView(
+        listPosition: Int,
+        b: Boolean,
+        view: View?,
+        viewGroup: ViewGroup
+    ): View? {
         var convertView = view
         val listTitle = getGroup(listPosition) as String
         if (convertView == null) {
-            val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = layoutInflater.inflate(R.layout.adapter_header, null)
+            val layoutInflater =
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            convertView = layoutInflater.inflate(R.layout.adapter_header, viewGroup, false)
         }
         val listTitleTextView = convertView?.findViewById<TextView>(R.id.tv_name)
         listTitleTextView?.setTypeface(null, Typeface.BOLD)
@@ -67,39 +71,46 @@ class DrawerAdapter(
         return convertView
     }
 
-    override fun getChildView(listPosition: Int, expandedListPosition: Int, b: Boolean, view: View?, viewGroup: ViewGroup): View? {
+    override fun getChildView(
+        listPosition: Int,
+        expandedListPosition: Int,
+        b: Boolean,
+        view: View?,
+        viewGroup: ViewGroup
+    ): View? {
         var convertView = view
         val expandedListText = getChild(listPosition, expandedListPosition) as String
         if (convertView == null) {
-            val layoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            convertView = layoutInflater.inflate(R.layout.adapter_childview, null)
+            val layoutInflater =
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            convertView = layoutInflater.inflate(R.layout.adapter_childview, viewGroup, false)
         }
         val textView = convertView?.findViewById<TextView>(R.id.tv_name)
         val textCount = convertView?.findViewById<TextView>(R.id.txt_count)
         val cardCount = convertView?.findViewById<CardView>(R.id.card_count)
-       /* if(textView?.equals("Success") == true)
-        {
-            cardCount?.visibility = View.VISIBLE
-            cardCount?.setBackgroundColor(ContextCompat.getColor(context, R.color.success))
-        }else if(textView?.equals("Pending") == true)
-        {
-            cardCount?.visibility = View.VISIBLE
-            cardCount?.setBackgroundColor(ContextCompat.getColor(context, R.color.pending))
-        }else if(textView?.equals("Rejected") == true)
-        {
-            cardCount?.visibility = View.VISIBLE
-            cardCount?.setBackgroundColor(ContextCompat.getColor(context, R.color.reject))
-        } else{
-            cardCount?.visibility = View.GONE
-        }
-        if(expandedListText.contains(',')) {
-            textView?.text = expandedListText.split(',')[0]
-            textCount?.text = expandedListText.split(',')[1]
-        }
-        else {*/
-            textView?.text = expandedListText
+        /* if(textView?.equals("Success") == true)
+         {
+             cardCount?.visibility = View.VISIBLE
+             cardCount?.setBackgroundColor(ContextCompat.getColor(context, R.color.success))
+         }else if(textView?.equals("Pending") == true)
+         {
+             cardCount?.visibility = View.VISIBLE
+             cardCount?.setBackgroundColor(ContextCompat.getColor(context, R.color.pending))
+         }else if(textView?.equals("Rejected") == true)
+         {
+             cardCount?.visibility = View.VISIBLE
+             cardCount?.setBackgroundColor(ContextCompat.getColor(context, R.color.reject))
+         } else{
+             cardCount?.visibility = View.GONE
+         }
+         if(expandedListText.contains(',')) {
+             textView?.text = expandedListText.split(',')[0]
+             textCount?.text = expandedListText.split(',')[1]
+         }
+         else {*/
+        textView?.text = expandedListText
         //}
-        textView?.setOnClickListener{
+        textView?.setOnClickListener {
             listener?.click(expandedListText)
         }
         return convertView

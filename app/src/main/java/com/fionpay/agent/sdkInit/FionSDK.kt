@@ -3,8 +3,8 @@ package com.fionpay.agent.sdkInit
 import android.app.Application
 import com.fionpay.agent.sdkInit.di.AppComponent
 import com.fionpay.agent.sdkInit.di.AppModule
-import com.fionpay.agent.ui.base.BaseSdk
 import com.fionpay.agent.sdkInit.di.DaggerAppComponent
+import com.fionpay.agent.ui.base.BaseSdk
 
 object FionSDK : BaseSdk() {
     private var mApplication: Application? = null

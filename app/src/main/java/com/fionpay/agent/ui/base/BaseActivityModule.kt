@@ -16,15 +16,16 @@ import dagger.Provides
 @Module
 open class BaseActivityModule(private val context: Context) {
 
-        /**
-         * common progressbar dependency
-         */
-        @Provides
-        @ActivityScope
-        fun getProgressBar(@ApplicationContext context: Context):Dialog= Utility.showCommonProgressDialog(context)
+    /**
+     * common progressbar dependency
+     */
+    @Provides
+    @ActivityScope
+    fun getProgressBar(@ApplicationContext context: Context): Dialog =
+        Utility.showCommonProgressDialog(context)
 
-       @ActivityContext
-       @Provides
-       @ActivityScope
-       fun getActivityContext()=context
+    @ActivityContext
+    @Provides
+    @ActivityScope
+    fun getActivityContext() = context
 }

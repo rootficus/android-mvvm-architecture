@@ -16,7 +16,7 @@ data class ModemItemModel(
     var modemSlots: List<ModelSlots>? = null,
 ) : Serializable
 
-data class ModelSlots (
+data class ModelSlots(
     @field:SerializedName("phone_number")
     var phoneNumber: String? = null,
     @field:SerializedName("mobile_banking_id")

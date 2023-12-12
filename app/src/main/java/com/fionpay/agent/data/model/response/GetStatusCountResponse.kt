@@ -25,5 +25,5 @@ data class GetStatusCountResponse(
     @Expose
     val danger: Int? = null,
 
-): Serializable
+    ) : Serializable
 

@@ -9,10 +9,11 @@ import com.fionpay.agent.roomDB.FionDatabase
 import com.fionpay.agent.ui.base.BaseRepository
 import com.fionpay.agent.utils.SharedPreference
 
-class SignInRepository (val apiServices: FionApiServices,
-                        val context: Context,
-                        val sharedPreference: SharedPreference,
-                        val fionDatabase: FionDatabase
+class SignInRepository(
+    val apiServices: FionApiServices,
+    val context: Context,
+    val sharedPreference: SharedPreference,
+    val fionDatabase: FionDatabase
 ) : BaseRepository() {
 
     fun signInNow(
@@ -25,15 +26,17 @@ class SignInRepository (val apiServices: FionApiServices,
             execute(this, success, fail, context, message)
         }
     }
+
     fun verifyUserByPinCode(
         success: (verifyPinResponse: Any) -> Unit,
         fail: (error: String) -> Unit,
         verifyPinRequest: VerifyPinRequest,
         message: (msg: String) -> Unit
     ) {
-        apiServices.verifyUserByPinCode("Bearer " + sharedPreference.getToken(),verifyPinRequest).apply {
-            execute(this, success, fail, context, message)
-        }
+        apiServices.verifyUserByPinCode("Bearer " + sharedPreference.getToken(), verifyPinRequest)
+            .apply {
+                execute(this, success, fail, context, message)
+            }
     }
 
 
@@ -41,15 +44,11 @@ class SignInRepository (val apiServices: FionApiServices,
         userId?.let { sharedPreference.setUserId(it) }
     }
 
-    fun getUserId(): String? {
-        return sharedPreference.getUserId()
-    }
-
     fun setEmail(email: String?) {
         email?.let { sharedPreference.setEmail(it) }
     }
 
-    fun setPassword(password:String?){
+    fun setPassword(password: String?) {
         password?.let { sharedPreference.setPassword(password) }
     }
 
@@ -57,32 +56,16 @@ class SignInRepository (val apiServices: FionApiServices,
         return sharedPreference.getPassword()
     }
 
-    fun setFullName(full_name: String?) {
-        full_name?.let { sharedPreference.setFullName(it) }
+    fun setFullName(fullName: String?) {
+        fullName?.let { sharedPreference.setFullName(it) }
     }
 
-    fun setPinCode(pin_code: String?) {
-        pin_code?.let { sharedPreference.setPinCode(it) }
-    }
-
-    fun setCountry(country: String?) {
-        country?.let { sharedPreference.setCountry(it) }
-    }
-
-    fun setParentId(parent_id: String?) {
-        parent_id?.let { sharedPreference.setParentId(it) }
+    fun setPinCode(pinCode: String?) {
+        pinCode?.let { sharedPreference.setPinCode(it) }
     }
 
     fun setPhoneNumber(phone: String?) {
         phone?.let { sharedPreference.setPhoneNumber(it) }
-    }
-
-    fun setUserName(user_name: String?) {
-        user_name?.let { sharedPreference.setUserName(it) }
-    }
-
-    fun setUserRole(role_id: String?) {
-        role_id?.let { sharedPreference.setUserRole(it) }
     }
 
     fun isLogin(): Boolean {
@@ -97,22 +80,7 @@ class SignInRepository (val apiServices: FionApiServices,
         token?.let { sharedPreference.setToken(it) }
     }
 
-    fun setDeviceToken(deviceToken: String?) {
-        deviceToken?.let { sharedPreference.setPushToken(it) }
-    }
-
-    fun getDeviceToken(): String? {
-        return sharedPreference.getPushToken()
-    }
-    fun getFullName(): String? {
-        return sharedPreference.getFullName()
-    }
-
-    fun getEmail():String?{
+    fun getEmail(): String? {
         return sharedPreference.getEmail()
-    }
-
-    fun getPinCode(): Int? {
-        return sharedPreference.getPinCode()
     }
 }

@@ -11,7 +11,7 @@ import com.fionpay.agent.utils.Utility
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
-class BalanceDetailScreenFragment: BottomSheetDialogFragment() {
+class BalanceDetailScreenFragment : BottomSheetDialogFragment() {
     interface BottomDialogEvent {
         fun onAcceptRequest(getBalanceManageRecord: GetBalanceManageRecord)
         fun onRejectedRequest(getBalanceManageRecord: GetBalanceManageRecord)
@@ -22,14 +22,15 @@ class BalanceDetailScreenFragment: BottomSheetDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = BlBottomSheetBinding.inflate(inflater,container,false)
+    ): View {
+        binding = BlBottomSheetBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val getBalanceManageRecord = arguments?.getSerializable(GetBalanceManageRecord::class.java.name) as GetBalanceManageRecord
+        val getBalanceManageRecord =
+            arguments?.getSerializable(GetBalanceManageRecord::class.java.name) as GetBalanceManageRecord
         binding.textAAccount.text = getBalanceManageRecord.agentAccountNo.toString()
         binding.textAmount.text = getBalanceManageRecord.amount.toString()
         binding.textCAccount.text = getBalanceManageRecord.customerAccountNo.toString()
@@ -42,7 +43,11 @@ class BalanceDetailScreenFragment: BottomSheetDialogFragment() {
         binding.textType.text = getBalanceManageRecord.bType.toString()
         binding.textStatus.text = getBalanceManageRecord.status.toString()
         binding.textLastTransactionId.text = getBalanceManageRecord.transactionId
-        if (getBalanceManageRecord.status.equals(Constant.BalanceManagerStatus.PENDING.toString(),true)) {
+        if (getBalanceManageRecord.status.equals(
+                Constant.BalanceManagerStatus.PENDING.toString(),
+                true
+            )
+        ) {
             binding.btnReject.visibility = View.VISIBLE
             binding.btnAccept.visibility = View.VISIBLE
         } else {

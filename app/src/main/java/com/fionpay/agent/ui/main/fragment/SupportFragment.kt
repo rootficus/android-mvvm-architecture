@@ -34,13 +34,10 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>(R.layout.fragment_s
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
-    private lateinit var dashBoardListAdapter : DashBoardListAdapter
-    private var arrayList : ArrayList<TransactionModel> = arrayListOf()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeDagger()
-        initialization()
     }
 
     private fun initializeDagger() {
@@ -49,7 +46,4 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>(R.layout.fragment_s
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
 
-    private fun initialization() {
-
-    }
 }

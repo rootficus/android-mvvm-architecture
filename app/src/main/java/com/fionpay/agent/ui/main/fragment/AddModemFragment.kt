@@ -348,51 +348,10 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
                 }
             }
         } else {
-            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG).show()
+            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG)
+                .show()
         }
 
     }
 
-    private fun addModemItem() {
-        if (networkHelper.isNetworkConnected()) {
-            val modemItemModel = ModemItemModel(
-                mDataBinding.etName.text.toString(),
-                mDataBinding.etLastName.text.toString(),
-                otpStringBuilder.toString().toLong()
-            )
-            viewModel.addModemItem(modemItemModel)
-            viewModel.getAddModemItemResponseModel.observe(viewLifecycleOwner) {
-                when (it.status) {
-                    Status.SUCCESS -> {
-                        progressBar.dismiss()
-                        Log.i("Data", "::${it.data}")
-                        val modemId = it.data?.modem?.id
-                        val bundle = Bundle().apply {
-                            putString("modem_id", modemId)
-                            putSerializable("modemItemModel", modemItemModel)
-                        }
-                        Navigation.findNavController(requireView())
-                            .navigate(
-                                R.id.action_navigation_addModemFragment_to_navigation_addModemBalanceFragment,
-                                bundle
-                            )
-                        // bleManagerListAdapter?.notifyDataSetChanged()
-                    }
-
-                    Status.ERROR -> {
-                        // startActivity(Intent(requireContext(), SignInActivity::class.java))
-                        progressBar.dismiss()
-                        showErrorMessage(it.message)
-                    }
-
-                    Status.LOADING -> {
-                        progressBar.show()
-                    }
-                }
-            }
-        } else {
-            progressBar.dismiss()
-            showMessage(mActivity.getString(R.string.NO_INTERNET_CONNECTION))
-        }
-    }
 }

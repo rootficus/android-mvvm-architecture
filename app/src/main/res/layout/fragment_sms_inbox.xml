@@ -12,23 +12,26 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.cardview.widget.CardView
             android:id="@+id/app_bar_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            app:cardBackgroundColor="@color/white"
             app:cardElevation="@dimen/_5sdp"
-            app:cardBackgroundColor="@color/white">
+            app:layout_constraintTop_toTopOf="parent">
+
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/chipGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_2sdp"
-                    app:singleSelection="true"
-                    app:checkedChip="@id/chipAllSMS">
+                    app:checkedChip="@id/chipAllSMS"
+                    app:singleSelection="true">
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipAllSMS"
@@ -57,6 +60,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/sms_b2b" />
+
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chipUnKnown"
                         style="@style/customChipChoice"
@@ -66,50 +70,53 @@
                 </com.google.android.material.chip.ChipGroup>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.cardview.widget.CardView>
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/titleTodaySMS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/today_sms"
             android:layout_margin="@dimen/_3sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/today_sms"
             android:textColor="@color/textColor"
-            android:textSize="@dimen/_11sdp"
-            app:layout_constraintTop_toBottomOf="@+id/app_bar_home"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            android:fontFamily="@font/roboto_medium" />
+            app:layout_constraintTop_toBottomOf="@+id/app_bar_home" />
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/refreshLinear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/app_bar_home"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:background="@drawable/refresh_bg"
             android:gravity="center"
             android:orientation="horizontal"
-            android:background="@drawable/refresh_bg"
             android:padding="@dimen/_3sdp"
-            android:layout_marginBottom="@dimen/_2sdp"
-            >
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar_home">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_10sdp"
+                android:fontFamily="@font/roboto_medium"
                 android:text="@string/refresh_sms"
                 android:textColor="@color/white"
-                android:fontFamily="@font/roboto_medium" />
-            <ImageView
+                android:textSize="12sp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/refreshIcon"
                 android:layout_width="@dimen/_12sdp"
                 android:layout_height="@dimen/_12sdp"
                 android:background="@drawable/refresh"
                 android:backgroundTint="@color/white">
 
-            </ImageView>
+            </androidx.appcompat.widget.AppCompatImageView>
         </androidx.appcompat.widget.LinearLayoutCompat>
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/header_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/header_card"
             app:cardBackgroundColor="@color/white"
             app:cardElevation="@dimen/_5sdp"
             app:layout_constraintTop_toBottomOf="@+id/refreshLinear">
@@ -123,12 +130,12 @@
                     android:id="@+id/txtSrNo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/sr_no"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_10sdp"
-                    android:textAlignment="center"
                     android:paddingTop="@dimen/_3sdp"
                     android:paddingBottom="@dimen/_3sdp"
+                    android:text="@string/sr_no"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.09" />
@@ -138,110 +145,117 @@
                     android:layout_width="1sp"
                     android:layout_height="match_parent"
                     android:background="@color/divideColor"
-                    app:layout_constraintStart_toEndOf="@id/txtSrNo"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:orientation="horizontal" />
+                    app:layout_constraintStart_toEndOf="@id/txtSrNo"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtSender"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/sender"
-                    android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold"
+                    android:ellipsize="middle"
                     android:paddingTop="@dimen/_3sdp"
                     android:paddingBottom="@dimen/_3sdp"
+                    android:text="@string/sender"
                     android:textAlignment="center"
-                    android:ellipsize="middle"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/viewDivide1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.19" />
+
                 <TextView
                     android:id="@+id/viewDivide2"
                     android:layout_width="1sp"
                     android:layout_height="match_parent"
                     android:background="@color/divideColor"
-                    app:layout_constraintStart_toEndOf="@id/txtSender"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:orientation="horizontal" />
+                    app:layout_constraintStart_toEndOf="@id/txtSender"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtMessage"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_10sdp"
-                    android:text="@string/message"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
                     android:ellipsize="middle"
                     android:paddingTop="@dimen/_3sdp"
                     android:paddingBottom="@dimen/_3sdp"
+                    android:text="@string/message"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/viewDivide2"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.37" />
+
                 <TextView
                     android:id="@+id/viewDivide3"
                     android:layout_width="1sp"
                     android:layout_height="match_parent"
                     android:background="@color/divideColor"
-                    app:layout_constraintStart_toEndOf="@id/txtMessage"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:orientation="horizontal" />
+                    app:layout_constraintStart_toEndOf="@id/txtMessage"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtReceiver"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold"
-                    android:text="@string/receiver"
-                    android:textAlignment="center"
                     android:ellipsize="middle"
                     android:paddingTop="@dimen/_3sdp"
                     android:paddingBottom="@dimen/_3sdp"
+                    android:text="@string/receiver"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/viewDivide3"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.19" />
+
                 <TextView
                     android:id="@+id/viewDivide4"
                     android:layout_width="1sp"
                     android:layout_height="match_parent"
                     android:background="@color/divideColor"
-                    app:layout_constraintStart_toEndOf="@id/txtReceiver"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:orientation="horizontal" />
+                    app:layout_constraintStart_toEndOf="@id/txtReceiver"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtDate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/_10sdp"
-                    android:text="@string/date"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
                     android:ellipsize="middle"
                     android:paddingTop="@dimen/_3sdp"
                     android:paddingBottom="@dimen/_3sdp"
+                    android:text="@string/date"
+                    android:textAlignment="center"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/viewDivide4"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.14" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textNoTransactions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_10sdp"
-            android:text="No Transaction"
-            android:visibility="invisible"
+            android:text="@string/no_transaction"
             android:textColor="@color/divideColor"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="12sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recentFilteredMessage"
             android:layout_width="match_parent"
@@ -250,6 +264,7 @@
             android:dividerHeight="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header_card" />
+
         <include
             android:id="@+id/progressView"
             layout="@layout/include_progress_bar" />

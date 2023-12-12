@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -27,11 +26,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:fontFamily="@font/poppins"
-                android:text="Cash In"
+                android:text="@string/cash_in"
                 android:textColor="@color/homeTextColor"
                 android:textSize="14sp"
-                android:visibility="gone"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,7 +52,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="৳1000.00"
                 android:textColor="@color/reject"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -66,7 +64,6 @@
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="00/00/00 00:00 PM"
                 android:textAlignment="center"
                 android:textColor="@color/homeTextColor"
                 android:textSize="12sp"
@@ -93,10 +90,10 @@
                 android:backgroundTint="@color/activeGreenBg"
                 android:fontFamily="@font/poppins"
                 android:paddingStart="@dimen/_5sdp"
-                android:text="Success"
-                android:visibility="gone"
+                android:text="@string/success"
                 android:textColor="@color/activeGreen"
                 android:textSize="14sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txtDate" />

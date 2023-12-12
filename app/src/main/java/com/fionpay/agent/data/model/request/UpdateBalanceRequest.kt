@@ -2,7 +2,6 @@ package com.fionpay.agent.data.model.request
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
 @Keep
 data class UpdateBalanceRequest(
@@ -11,5 +10,5 @@ data class UpdateBalanceRequest(
     @field:SerializedName("id")
     var id: String,
     @field:SerializedName("user_id")
-    var user_id:String
+    var user_id: String
 )

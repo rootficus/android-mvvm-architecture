@@ -43,8 +43,6 @@ class ConfirmModemFragment :
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
-    private lateinit var dashBoardListAdapter: DashBoardListAdapter
-    private var arrayList: ArrayList<TransactionModel> = arrayListOf()
     private var modemBalance = ""
     private var modemItemModel = ModemItemModel()
     lateinit var dialog: BottomSheetDialog
@@ -57,9 +55,11 @@ class ConfirmModemFragment :
 
     private fun initialization() {
         dialog = BottomSheetDialog(requireActivity())
+        val fullName = "${modemItemModel.firstName} ${modemItemModel.lastName}"
+        val modemBalance = "৳${modemBalance}"
         mDataBinding.topHeader.txtHeader.text = getString(R.string.confirm_modems)
-        mDataBinding.txtName.text = "${modemItemModel.firstName} ${modemItemModel.lastName}"
-        mDataBinding.txtBalanceAdded.text = "৳${modemBalance}"
+        mDataBinding.txtName.text = fullName
+        mDataBinding.txtBalanceAdded.text = modemBalance
         mDataBinding.txtPinCode.text = "${modemItemModel.pinCode}"
         mDataBinding.topHeader.backButton.setOnClickListener {
             Navigation.findNavController(requireView()).navigateUp()

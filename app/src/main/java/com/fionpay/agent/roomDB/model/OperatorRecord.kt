@@ -9,5 +9,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "operatorRecord")
 data class OperatorRecord(
     @PrimaryKey
-    var operatorName:String,
-    var operatorPhoneNumberUSSD: String? = null)
+    var operatorName: String,
+    var operatorPhoneNumberUSSD: String? = null
+)

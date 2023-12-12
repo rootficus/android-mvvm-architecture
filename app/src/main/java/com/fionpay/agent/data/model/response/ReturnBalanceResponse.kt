@@ -5,10 +5,10 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 @Keep
-class ReturnBalanceResponse (
+class ReturnBalanceResponse(
     @SerializedName("current_balance")
     @Expose
     var currentBalance: Double?,
 
-)
+    )
 

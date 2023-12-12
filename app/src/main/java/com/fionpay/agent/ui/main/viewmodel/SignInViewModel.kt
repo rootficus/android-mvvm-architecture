@@ -2,11 +2,9 @@ package com.fionpay.agent.ui.main.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.fionpay.agent.data.model.UserInfo
 import com.fionpay.agent.data.model.request.SignInRequest
 import com.fionpay.agent.data.model.request.VerifyPinRequest
 import com.fionpay.agent.data.model.response.SignInResponse
-import com.fionpay.agent.data.model.response.VerifyPinResponse
 import com.fionpay.agent.data.repository.SignInRepository
 import com.fionpay.agent.ui.base.BaseViewModel
 import com.fionpay.agent.utils.ResponseData
@@ -17,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class SignInViewModel@Inject constructor(private val signInRepository: SignInRepository) :
+class SignInViewModel @Inject constructor(private val signInRepository: SignInRepository) :
     BaseViewModel() {
 
     val signInResponseModel = MutableLiveData<ResponseData<SignInResponse>>()
@@ -30,11 +28,16 @@ class SignInViewModel@Inject constructor(private val signInRepository: SignInRep
                 { message -> signInResponseModel.setError(message) })
         }
     }
+
     val verifyUserByPinCodeResponseModel = MutableLiveData<ResponseData<Any>>()
     fun verifyUserByPinCode(verifyPinRequest: VerifyPinRequest) {
         verifyUserByPinCodeResponseModel.setLoading(null)
         viewModelScope.launch(Dispatchers.IO) {
-            signInRepository.verifyUserByPinCode({ success -> verifyUserByPinCodeResponseModel.setSuccess(success) },
+            signInRepository.verifyUserByPinCode({ success ->
+                verifyUserByPinCodeResponseModel.setSuccess(
+                    success
+                )
+            },
                 { error -> verifyUserByPinCodeResponseModel.setError(error) },
                 verifyPinRequest,
                 { message -> verifyUserByPinCodeResponseModel.setError(message) })
@@ -50,39 +53,19 @@ class SignInViewModel@Inject constructor(private val signInRepository: SignInRep
         signInRepository.setEmail(email)
     }
 
-    fun setFullName(full_name: String?) {
-        signInRepository.setFullName(full_name)
+    fun setFullName(fullName: String?) {
+        signInRepository.setFullName(fullName)
     }
 
-    fun getFullName(): String? {
-        return signInRepository.getFullName()
-    }
-
-    fun setPinCode(pin_code: String?) {
-        signInRepository.setPinCode(pin_code)
-    }
-
-    fun setCountry(country: String?) {
-        signInRepository.setCountry(country)
-    }
-
-    fun setParentId(parent_id: String?) {
-        signInRepository.setParentId(parent_id)
+    fun setPinCode(pinCode: String?) {
+        signInRepository.setPinCode(pinCode)
     }
 
     fun setPhoneNumber(phone: String?) {
         signInRepository.setPhoneNumber(phone)
     }
 
-    fun setUserName(user_name: String?) {
-        signInRepository.setUserName(user_name)
-    }
-
-    fun setUserRole(role_id: String?) {
-        signInRepository.setUserRole(role_id)
-    }
-
-    fun isLogin() : Boolean{
+    fun isLogin(): Boolean {
         return signInRepository.isLogin()
     }
 
@@ -105,14 +88,5 @@ class SignInViewModel@Inject constructor(private val signInRepository: SignInRep
     fun setIsLogin(isLogin: Boolean) {
         signInRepository.setIsLogin(isLogin)
     }
-
-    fun getUserId(): String? {
-        return signInRepository.getUserId()
-    }
-
-    fun getPinCode(): Int? {
-        return signInRepository.getPinCode()
-    }
-
 
 }

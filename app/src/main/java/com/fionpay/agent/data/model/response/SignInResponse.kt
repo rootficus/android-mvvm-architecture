@@ -27,4 +27,4 @@ data class SignInResponse(
     @Expose
     var phone: String?,
 
-) : Serializable
+    ) : Serializable

@@ -14,4 +14,4 @@ data class TransactionFilterRequest(
     @SerializedName("modem_slot_id")
     var modemSlotId: Any? = null,
 
-)
+    )

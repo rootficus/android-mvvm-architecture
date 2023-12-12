@@ -79,11 +79,6 @@ class B2BFragment :
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
 
-    override fun onResume() {
-        super.onResume()
-        //getModemPinCodes()
-    }
-
     private fun initialization() {
         mDataBinding.txtStartDate.text = Utility.dateBeforeOneMonth()
         mDataBinding.txtEndDate.text = Utility.currentDate()
@@ -302,7 +297,8 @@ class B2BFragment :
 
 
         currentBalance = viewModel.getCurrentAgentBalance()?.toDouble()
-        refundBottomSheetBinding.etCurrentBalance.text = "৳${currentBalance.toString()}"
+        val currentBal = "৳${currentBalance.toString()}"
+        refundBottomSheetBinding.etCurrentBalance.text = currentBal
         refundBottomSheetBinding.labelTotalBalance.text =
             getString(R.string.new_balance_will, "$currentBalance")
         Log.i("Current:", "${refundBottomSheetBinding.etCurrentBalance.text}")

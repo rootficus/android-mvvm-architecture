@@ -61,7 +61,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
 
     private fun initializeView() {
         mDataBinding.chipAllTransactions.isClickable = true
-        setBleAdapter(-1)
+        setBleAdapter()
         setBleFilterCount()
         getStatusCount()
         mDataBinding.chipGroup.setOnCheckedStateChangeListener { group, checkedIds ->
@@ -109,8 +109,8 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
         }
     }
 
-    private fun setBleAdapter(filter: Int) {
-        var arrayList: ArrayList<BLTransactionModemResponse> = arrayListOf()
+    private fun setBleAdapter() {
+        val arrayList: ArrayList<BLTransactionModemResponse> = arrayListOf()
         bleManagerListAdapter = BleManagerListAdapter(arrayList)
         bleManagerListAdapter?.listener = cardListener
         mDataBinding.recentTrendingView.layoutManager = LinearLayoutManager(context)
@@ -241,7 +241,7 @@ class BLManagerFragment : BaseFragment<FragmentBlManagerBinding>(R.layout.fragme
                 when (it.status) {
                     Status.SUCCESS -> {
                         progressBar.dismiss()
-                        setBleAdapter(filter)
+                        setBleAdapter()
                     }
 
                     Status.ERROR -> {

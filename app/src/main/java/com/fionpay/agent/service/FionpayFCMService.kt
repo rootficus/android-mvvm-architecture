@@ -21,9 +21,9 @@ import com.google.firebase.messaging.RemoteMessage
 import com.google.gson.Gson
 
 open class FionpayFCMService : FirebaseMessagingService() {
-    var TAG = FionpayFCMService::class.java.name
+    var TAG: String = FionpayFCMService::class.java.name
 
-    lateinit var fionDatabase : FionDatabase
+    lateinit var fionDatabase: FionDatabase
 
     override fun onCreate() {
         super.onCreate()
@@ -37,24 +37,29 @@ open class FionpayFCMService : FirebaseMessagingService() {
         // Check if the message contains data payload.
         remoteMessage.data.isNotEmpty().let {
             Log.d(TAG, "Message data payload: " + remoteMessage.data)
-            if (remoteMessage.data.isNotEmpty()){
-                var notificationType = remoteMessage.data.getOrDefault("notification_type","Unknown")
+            if (remoteMessage.data.isNotEmpty()) {
+                val notificationType =
+                    remoteMessage.data.getOrDefault("notification_type", "Unknown")
                 setNotificationCount(notificationType)
-                when(notificationType){
-                    Constant.NotificationType.MODEM_STATUS_CHANGE.param->{
-                        insertNotificationMessage(remoteMessage,notificationType)
+                when (notificationType) {
+                    Constant.NotificationType.MODEM_STATUS_CHANGE.param -> {
+                        insertNotificationMessage(remoteMessage, notificationType)
                     }
-                    Constant.NotificationType.ADD_BALANCE_AGENT.param->{
-                        insertNotificationMessage(remoteMessage,notificationType)
+
+                    Constant.NotificationType.ADD_BALANCE_AGENT.param -> {
+                        insertNotificationMessage(remoteMessage, notificationType)
                     }
-                    Constant.NotificationType.DEPOSIT_REQUEST.param->{
-                        insertNotificationMessage(remoteMessage,notificationType)
+
+                    Constant.NotificationType.DEPOSIT_REQUEST.param -> {
+                        insertNotificationMessage(remoteMessage, notificationType)
                     }
-                    Constant.NotificationType.WITHDRAWAL_REQUEST.param->{
-                        insertNotificationMessage(remoteMessage,notificationType)
+
+                    Constant.NotificationType.WITHDRAWAL_REQUEST.param -> {
+                        insertNotificationMessage(remoteMessage, notificationType)
                     }
-                    Constant.NotificationType.REFUND_REQUEST.param->{
-                        insertNotificationMessage(remoteMessage,notificationType)
+
+                    Constant.NotificationType.REFUND_REQUEST.param -> {
+                        insertNotificationMessage(remoteMessage, notificationType)
                     }
                 }
             }
@@ -63,49 +68,64 @@ open class FionpayFCMService : FirebaseMessagingService() {
     }
 
     private fun setNotificationCount(notificationType: String) {
-        var sharedPreference = SharedPreference(applicationContext)
-        when(notificationType){
-            Constant.NotificationType.MODEM_STATUS_CHANGE.param->{
-                var notificationCount = sharedPreference.getModemChangeStatusNotificationCount()+1
+        val sharedPreference = SharedPreference(applicationContext)
+        when (notificationType) {
+            Constant.NotificationType.MODEM_STATUS_CHANGE.param -> {
+                val notificationCount = sharedPreference.getModemChangeStatusNotificationCount() + 1
                 sharedPreference.setModemChangeStatusNotificationCount(notificationCount)
             }
-            Constant.NotificationType.ADD_BALANCE_AGENT.param->{
-                var notificationCount = sharedPreference.getAddBalanceModemNotificationCount()+1
+
+            Constant.NotificationType.ADD_BALANCE_AGENT.param -> {
+                val notificationCount = sharedPreference.getAddBalanceModemNotificationCount() + 1
                 sharedPreference.setAddBalanceModemNotificationCount(notificationCount)
             }
-            Constant.NotificationType.DEPOSIT_REQUEST.param->{
-                var notificationCount = sharedPreference.getDepositRequestModemNotificationCount()+1
+
+            Constant.NotificationType.DEPOSIT_REQUEST.param -> {
+                val notificationCount =
+                    sharedPreference.getDepositRequestModemNotificationCount() + 1
                 sharedPreference.setDepositRequestModemNotificationCount(notificationCount)
             }
-            Constant.NotificationType.WITHDRAWAL_REQUEST.param->{
-                var notificationCount = sharedPreference.getWithdrawalRequestModemNotificationCount()+1
+
+            Constant.NotificationType.WITHDRAWAL_REQUEST.param -> {
+                val notificationCount =
+                    sharedPreference.getWithdrawalRequestModemNotificationCount() + 1
                 sharedPreference.setWithdrawalRequestModemNotificationCount(notificationCount)
             }
-            Constant.NotificationType.REFUND_REQUEST.param->{
-                var notificationCount = sharedPreference.getRefundRequestModemNotificationCount()+1
+
+            Constant.NotificationType.REFUND_REQUEST.param -> {
+                val notificationCount =
+                    sharedPreference.getRefundRequestModemNotificationCount() + 1
                 sharedPreference.setRefundRequestModemNotificationCount(notificationCount)
             }
         }
     }
 
     private fun insertNotificationMessage(remoteMessage: RemoteMessage, notificationType: String) {
-        var notificationMessageBody = Gson().fromJson(remoteMessage.data.getValue("message"),NotificationMessageBody::class.java)
-        if (Utility.isNotificationExits(fionDatabase.fioDao(),notificationMessageBody.id)!=true){
+        val notificationMessageBody = Gson().fromJson(
+            remoteMessage.data.getValue("message"),
+            NotificationMessageBody::class.java
+        )
+        if (Utility.isNotificationExits(
+                fionDatabase.fioDao(),
+                notificationMessageBody.id
+            ) != true
+        ) {
             notificationMessageBody.let {
-                var notificationRecord = NotificationRecord(id = it.id,notificationType = notificationType, messageBody = it.messageBody,
+                val notificationRecord = NotificationRecord(
+                    id = it.id, notificationType = notificationType, messageBody = it.messageBody,
                     isRead = false,
                     isSend = false,
                     createdAt = it.date
                 )
                 fionDatabase.fioDao()?.insertNotification(notificationRecord)
-                sendBroadCast(applicationContext,notificationRecord)
+                sendBroadCast(applicationContext, notificationRecord)
             }
         }
     }
 
     override fun onNewToken(token: String) {
         Log.d(TAG, "Refreshed token: $token")
-        val sharedPreference  = SharedPreference(applicationContext)
+        val sharedPreference = SharedPreference(applicationContext)
         sharedPreference.setPushToken(token)
     }
 
@@ -114,14 +134,14 @@ open class FionpayFCMService : FirebaseMessagingService() {
     }
 
     private fun sendBroadCast(context: Context, notificationRecord: NotificationRecord) {
-        if(App.isAppRunning)
-        {
+        if (App.isAppRunning) {
             if (notificationRecord.notificationType == Constant.NotificationType.MODEM_STATUS_CHANGE.param
-                || notificationRecord.notificationType == Constant.NotificationType.ADD_BALANCE_AGENT.param){
+                || notificationRecord.notificationType == Constant.NotificationType.ADD_BALANCE_AGENT.param
+            ) {
                 val intent = Intent(MODEM_STATUS_CHANGE_ACTIONS)
                 intent.putExtra(FIONPAY_ACTION, notificationRecord.messageBody)
                 context.sendBroadcast(intent)
-            }else{
+            } else {
                 val intent = Intent(AGENT_REQUEST_TRANSACTION_BOTS)
                 intent.putExtra(FIONPAY_ACTION, notificationRecord.messageBody)
                 context.sendBroadcast(intent)
@@ -130,19 +150,23 @@ open class FionpayFCMService : FirebaseMessagingService() {
             val intent = Intent(HOME_REQUEST_NOTIFICATION_COUNT)
             intent.putExtra(FIONPAY_ACTION, notificationRecord.messageBody)
             context.sendBroadcast(intent)
-        }
-        else {
-            NotificationUtils.showNotification(applicationContext,getTitle(notificationRecord.notificationType!!),notificationRecord.messageBody!!, notificationRecord.id)
+        } else {
+            NotificationUtils.showNotification(
+                applicationContext,
+                getTitle(notificationRecord.notificationType!!),
+                notificationRecord.messageBody!!,
+                notificationRecord.id
+            )
         }
     }
 
     private fun getTitle(notificationType: String): String {
-        return when(notificationType){
-            Constant.NotificationType.MODEM_STATUS_CHANGE.param-> getString(R.string.modem_status_change)
-            Constant.NotificationType.ADD_BALANCE_AGENT.param->getString(R.string.balance_change)
-            Constant.NotificationType.DEPOSIT_REQUEST.param->getString(R.string.deposit_request)
-            Constant.NotificationType.WITHDRAWAL_REQUEST.param-> getString(R.string.withdrawal_request)
-            Constant.NotificationType.REFUND_REQUEST.param-> getString(R.string.refund_request)
+        return when (notificationType) {
+            Constant.NotificationType.MODEM_STATUS_CHANGE.param -> getString(R.string.modem_status_change)
+            Constant.NotificationType.ADD_BALANCE_AGENT.param -> getString(R.string.balance_change)
+            Constant.NotificationType.DEPOSIT_REQUEST.param -> getString(R.string.deposit_request)
+            Constant.NotificationType.WITHDRAWAL_REQUEST.param -> getString(R.string.withdrawal_request)
+            Constant.NotificationType.REFUND_REQUEST.param -> getString(R.string.refund_request)
             else -> getString(R.string.app_name)
         }
     }

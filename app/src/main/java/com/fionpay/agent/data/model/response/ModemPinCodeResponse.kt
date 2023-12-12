@@ -10,4 +10,4 @@ data class ModemPinCodeResponse(
     @field:SerializedName("pincode")
     var pincode: Int? = null,
 
-) : Serializable
+    ) : Serializable

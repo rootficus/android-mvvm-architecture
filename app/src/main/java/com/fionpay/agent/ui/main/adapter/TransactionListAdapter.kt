@@ -88,17 +88,22 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
         when (item.paymentType) {
             "Cash In" -> {
                 if (item.status == "Approved") {
-                    binding.txtAmount.text = "- ৳${item.amount}"
+                    val amount = "- ৳${item.amount}"
+                    val transactionId = "#${item.transactionId.toString()}"
+                    binding.txtAmount.text = amount
                     binding.txtAmount.setTextColor(
                         ContextCompat.getColorStateList(
                             context,
                             R.color.reject
                         )
                     )
-                    binding.txtAmount.paintFlags = binding.txtAmount.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-                    binding.txtTransactionId.text = "#${item.transactionId.toString()}"
+                    binding.txtAmount.paintFlags =
+                        binding.txtAmount.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                    binding.txtTransactionId.text = transactionId
                 } else {
-                    binding.txtAmount.text = "৳${item.amount}"
+                    val amount = "৳${item.amount}"
+                    val customer = "☎ ${item.customer.toString()}"
+                    binding.txtAmount.text = amount
                     binding.txtAmount.paintFlags =
                         binding.txtAmount.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                     binding.txtAmount.setTextColor(
@@ -107,7 +112,7 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
                             R.color.textColor
                         )
                     )
-                    binding.txtTransactionId.text = "☎ ${item.customer.toString()}"
+                    binding.txtTransactionId.text = customer
                 }
 
                 binding.labelWithdraw.text = item.paymentType.toString()
@@ -117,17 +122,19 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
 
             "Cash Out" -> {
                 if (item.status == "Approved") {
-                    binding.txtAmount.text = "+ ৳${item.amount}"
+                    val amount = "+ ৳${item.amount}"
+                    binding.txtAmount.text = amount
                     binding.txtAmount.setTextColor(
                         ContextCompat.getColorStateList(
                             context,
                             R.color.approve
                         )
                     )
-                    binding.txtAmount.paintFlags = binding.txtAmount.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-
+                    binding.txtAmount.paintFlags =
+                        binding.txtAmount.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG
                 } else {
-                    binding.txtAmount.text = "৳${item.amount}"
+                    val amount =  "৳${item.amount}"
+                    binding.txtAmount.text = amount
                     binding.txtAmount.paintFlags =
                         binding.txtAmount.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                     binding.txtAmount.setTextColor(
@@ -137,7 +144,8 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
                         )
                     )
                 }
-                binding.txtTransactionId.text = "#${item.transactionId.toString()}"
+                val transactionId =  "#${item.transactionId.toString()}"
+                binding.txtTransactionId.text = transactionId
                 binding.labelWithdraw.text = item.paymentType.toString()
             }
         }

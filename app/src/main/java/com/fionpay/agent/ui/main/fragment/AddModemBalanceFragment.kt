@@ -56,8 +56,9 @@ class AddModemBalanceFragment :
         val json: String? = viewModel.getDashBoardDataModel()
         val obj: DashBoardItemResponse =
             gson.fromJson(json, DashBoardItemResponse::class.java)
-        mDataBinding.txtExistingBalance.text = "৳${obj.currentBalance.toString()}"
-        mDataBinding.labelTotalBalance.text = "New balance will be: ৳${obj.currentBalance}"
+        val currentBal = "৳${obj.currentBalance.toString()}"
+        mDataBinding.txtExistingBalance.text = currentBal
+        mDataBinding.labelTotalBalance.text = getString(R.string.new_balance_will, currentBal)
         mDataBinding.etAddBalance.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -77,14 +78,14 @@ class AddModemBalanceFragment :
                     val newVal = s.toString().toDouble()
                     totalBalance = obj.currentBalance?.minus(newVal)
                     if (totalBalance != null && totalBalance!! > 0.0) {
-                        mDataBinding.labelTotalBalance.text = "New balance will be: ৳$totalBalance"
+                        mDataBinding.labelTotalBalance.text = getString(R.string.new_balance_will, totalBalance.toString())
                     } else {
-                        "New balance will be: ৳${obj.currentBalance}"
+                        getString(R.string.new_balance_will, currentBal)
                     }
 
                 } else {
                     mDataBinding.labelTotalBalance.text =
-                        "New balance will be: ৳${obj.currentBalance}"
+                        getString(R.string.new_balance_will, currentBal)
                 }
 
             }

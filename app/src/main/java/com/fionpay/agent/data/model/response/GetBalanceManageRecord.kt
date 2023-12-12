@@ -85,5 +85,5 @@ data class GetBalanceManageRecord(
     @SerializedName("date_in_words")
     @Expose
     val dateInWords: String? = null
-): Serializable
+) : Serializable
 

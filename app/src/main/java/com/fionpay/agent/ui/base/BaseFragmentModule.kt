@@ -12,7 +12,7 @@ import dagger.Provides
  * RootFicus.
  */
 @Module
- class BaseFragmentModule(private val context: Context){
+class BaseFragmentModule(private val context: Context) {
     /**
      * common progressbar dependency
      */

@@ -7,7 +7,6 @@ import com.fionpay.agent.roomDB.FionDatabase
 import com.fionpay.agent.sdkInit.di.AppComponent
 import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
-import com.fionpay.agent.ui.main.fragment.AddModemFragment
 import com.fionpay.agent.ui.main.fragment.SignInFragment
 import com.fionpay.agent.ui.main.fragment.VerifyPinFragment
 import com.fionpay.agent.ui.main.viewmodel.SignInViewModel

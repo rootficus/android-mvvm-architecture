@@ -11,9 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.widget.AppCompatTextView
 import com.fionpay.agent.R
 import com.fionpay.agent.roomDB.dao.FionDao
 import com.google.android.gms.tasks.OnCompleteListener
@@ -60,7 +58,7 @@ object Utility {
         Log.d(tag, s)
     }
 
-    fun convertUtc2Local(utcTime: String?): String? {
+    fun convertUtc2Local(utcTime: String?): String {
         var time = ""
         if (utcTime != null) {
             val utcFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
@@ -79,7 +77,7 @@ object Utility {
         return time
     }
 
-    fun convertTransactionDate(utcTime: String?): String? {
+    fun convertTransactionDate(utcTime: String?): String {
         var utcTimestamp = ""
         val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault())
         dateFormat.timeZone = TimeZone.getTimeZone("UTC")
@@ -100,7 +98,7 @@ object Utility {
         return utcTimestamp
     }
 
-    fun convertTodayUtc2Local(utcTime: String?): String? {
+    fun convertTodayUtc2Local(utcTime: String?): String {
         var time = ""
         if (utcTime != null) {
             val utcFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
@@ -139,9 +137,13 @@ object Utility {
 
     fun getPushToken(activity: Context) {
         FirebaseMessaging.getInstance().token
-            .addOnCompleteListener(OnCompleteListener<String?> { task ->
+            .addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
-                    Log.w(Utility::class.java.name, "Fetching FCM registration token failed", task.exception)
+                    Log.w(
+                        Utility::class.java.name,
+                        "Fetching FCM registration token failed",
+                        task.exception
+                    )
                     return@OnCompleteListener
                 }
 
@@ -151,7 +153,7 @@ object Utility {
                 // Log and toast
                 val msg = "FCM TOKEN: $token"
                 Log.d(Utility::class.java.name, msg)
-                var sharedPreference = SharedPreference(activity)
+                val sharedPreference = SharedPreference(activity)
                 sharedPreference.setPushToken(token)
             })
     }
@@ -169,10 +171,11 @@ object Utility {
         calendar.add(Calendar.MONTH, -1)
         return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.time)
     }
+
     private fun getNewDayOfMonth(day: Int): String {
         val calendar = Calendar.getInstance()
         var dayOfMonth = day.toString()
-        val simpleDateFormat = SimpleDateFormat("dd")
+        val simpleDateFormat = SimpleDateFormat("dd", Locale.getDefault())
         calendar.time = simpleDateFormat.parse(dayOfMonth) as Date
         calendar.add(Calendar.DATE, 7)
         dayOfMonth = simpleDateFormat.format(calendar.time)

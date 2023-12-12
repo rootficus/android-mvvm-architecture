@@ -9,16 +9,9 @@ import com.fionpay.agent.utils.Constant.PREF_BL_REJECTED
 import com.fionpay.agent.utils.Constant.PREF_BL_SUCCESS
 import com.fionpay.agent.utils.Constant.PREF_CURRENT_BALANCE
 import com.fionpay.agent.utils.Constant.PREF_DASHBOARD
-import com.fionpay.agent.utils.Constant.PREF_DEVICE_TOKEN
 import com.fionpay.agent.utils.Constant.PREF_PASSWORD
 import com.fionpay.agent.utils.Constant.PREF_PUSH_TOKEN
-import com.fionpay.agent.utils.Constant.PREF_TODAY_TRANSACTIONS
-import com.fionpay.agent.utils.Constant.PREF_TODAY_TRX_AMOUNT
 import com.fionpay.agent.utils.Constant.PREF_TOKEN
-import com.fionpay.agent.utils.Constant.PREF_TOTAL_MODEM
-import com.fionpay.agent.utils.Constant.PREF_TOTAL_PENDING
-import com.fionpay.agent.utils.Constant.PREF_TOTAL_TRANSACTIONS
-import com.fionpay.agent.utils.Constant.PREF_TOTAL_TRX_AMOUNT
 
 /**
  * Akash.Singh
@@ -44,14 +37,6 @@ class SharedPreference(context: Context) {
         return pref.getString(Constant.PREF_USER_ID, "")
     }
 
-    fun setUserName(userName: String) {
-        pref.edit().putString(Constant.PREF_USER_NAME, userName).apply()
-    }
-
-    fun getUserName(): String? {
-        return pref.getString(Constant.PREF_USER_NAME, "")
-    }
-
     fun setEmail(email: String) {
         pref.edit().putString(Constant.PREF_EMAIL, email).apply()
     }
@@ -61,15 +46,11 @@ class SharedPreference(context: Context) {
     }
 
     fun getPassword(): String? {
-        return pref.getString(Constant.PREF_PASSWORD, "")
+        return pref.getString(PREF_PASSWORD, "")
     }
 
     fun setPhoneNumber(phoneNumber: String) {
         pref.edit().putString(Constant.PREF_PHONE_NUMBER, phoneNumber).apply()
-    }
-
-    fun getPhoneNumber(): String? {
-        return pref.getString(Constant.PREF_PHONE_NUMBER, "")
     }
 
     fun setFullName(fullName: String) {
@@ -92,42 +73,6 @@ class SharedPreference(context: Context) {
         pref.edit().putString(Constant.PREF_PIN_CODE, userId).apply()
     }
 
-    fun getPinCode(): Int? {
-        return pref.getInt(Constant.PREF_PIN_CODE, 0)
-    }
-
-    fun setCountry(userId: String) {
-        pref.edit().putString(Constant.PREF_COUNTRY, userId).apply()
-    }
-
-    fun getCountry(): String? {
-        return pref.getString(Constant.PREF_COUNTRY, "")
-    }
-
-    fun setParentId(parentId: String) {
-        pref.edit().putString(Constant.PREF_PARENT_ID, parentId).apply()
-    }
-
-    fun getParentId(): String? {
-        return pref.getString(Constant.PREF_PARENT_ID, "")
-    }
-
-    fun setUserRole(userRole: String) {
-        pref.edit().putString(Constant.PREF_USER_ROLE, userRole).apply()
-    }
-
-    fun getUserRole(): String? {
-        return pref.getString(Constant.PREF_USER_ROLE, "")
-    }
-
-    fun getModemSetupConfirmation(): Boolean {
-        return pref.getBoolean(Constant.PREF_MODEM_SETUP, false)
-    }
-
-    fun setModemSetupConfirmation(modemSetup: Boolean) {
-        pref.edit().putBoolean(Constant.PREF_MODEM_SETUP, modemSetup).apply()
-    }
-
     fun setToken(token: String) {
         pref.edit().putString(PREF_TOKEN, token).apply()
     }
@@ -142,7 +87,7 @@ class SharedPreference(context: Context) {
 
     fun getPushToken(): String? {
         return pref.getString(
-            PREF_PUSH_TOKEN,""
+            PREF_PUSH_TOKEN, ""
         )
     }
 
@@ -156,54 +101,6 @@ class SharedPreference(context: Context) {
 
     fun setPassword(password: String?) {
         pref.edit().putString(PREF_PASSWORD, password).apply()
-    }
-
-    fun setTotalPending(totalPending: Long) {
-        pref.edit().putLong(PREF_TOTAL_PENDING, totalPending).apply()
-    }
-
-    fun getTotalPending(): Long {
-        return pref.getLong(PREF_TOTAL_PENDING, 0)
-    }
-
-    fun setTotalTransactions(totalTransactions: String) {
-        pref.edit().putString(PREF_TOTAL_TRANSACTIONS, totalTransactions).apply()
-    }
-
-    fun getTotalTransactions(): String? {
-        return pref.getString(PREF_TOTAL_TRANSACTIONS, "0.0")
-    }
-
-    fun setTodayTransactions(todayTransactions: Long) {
-        pref.edit().putLong(PREF_TODAY_TRANSACTIONS, todayTransactions).apply()
-    }
-
-    fun getTodayTransactions(): Long {
-        return pref.getLong(PREF_TODAY_TRANSACTIONS, 0)
-    }
-
-    fun setTotalTrxAmount(totalTrxAmount: String) {
-        pref.edit().putString(PREF_TOTAL_TRX_AMOUNT, totalTrxAmount).apply()
-    }
-
-    fun getTotalTrxAmount(): String? {
-        return pref.getString(PREF_TOTAL_TRX_AMOUNT, "0.0")
-    }
-
-    fun setTodayTrxAmount(todayTrxAmount: String) {
-        pref.edit().putString(PREF_TODAY_TRX_AMOUNT, todayTrxAmount).apply()
-    }
-
-    fun getTodayTrxAmount(): String? {
-        return pref.getString(PREF_TODAY_TRX_AMOUNT, "0.0")
-    }
-
-    fun setTotalModem(totalModem: Int) {
-        pref.edit().putInt(PREF_TOTAL_MODEM, totalModem).apply()
-    }
-
-    fun getTotalModem(): Int {
-        return pref.getInt(PREF_TOTAL_MODEM, 0)
     }
 
     fun setBLSuccess(success: Int?) {
@@ -253,6 +150,7 @@ class SharedPreference(context: Context) {
     fun getDashBoardDataModel(): String? {
         return pref.getString(PREF_DASHBOARD, "")
     }
+
     fun setCurrentAgentBalance(balance: String) {
         pref.edit().putString(PREF_CURRENT_BALANCE, balance).apply()
     }
@@ -267,43 +165,43 @@ class SharedPreference(context: Context) {
     }
 
     fun setModemChangeStatusNotificationCount(count: Int) {
-        pref.edit().putInt(Constant.PREF_MODEM_CHANGE_STATUS_NOTIFICATION_COUNT,count).apply()
+        pref.edit().putInt(Constant.PREF_MODEM_CHANGE_STATUS_NOTIFICATION_COUNT, count).apply()
     }
 
-    fun getModemChangeStatusNotificationCount():Int{
-        return pref.getInt(Constant.PREF_MODEM_CHANGE_STATUS_NOTIFICATION_COUNT,0)
+    fun getModemChangeStatusNotificationCount(): Int {
+        return pref.getInt(Constant.PREF_MODEM_CHANGE_STATUS_NOTIFICATION_COUNT, 0)
     }
 
     fun setAddBalanceModemNotificationCount(count: Int) {
-        pref.edit().putInt(Constant.PREF_ADD_BALANCE_MODEM_NOTIFICATION_COUNT,count).apply()
+        pref.edit().putInt(Constant.PREF_ADD_BALANCE_MODEM_NOTIFICATION_COUNT, count).apply()
     }
 
-    fun getAddBalanceModemNotificationCount():Int{
-        return pref.getInt(Constant.PREF_ADD_BALANCE_MODEM_NOTIFICATION_COUNT,0)
+    fun getAddBalanceModemNotificationCount(): Int {
+        return pref.getInt(Constant.PREF_ADD_BALANCE_MODEM_NOTIFICATION_COUNT, 0)
     }
 
     fun setDepositRequestModemNotificationCount(count: Int) {
-        pref.edit().putInt(Constant.PREF_DEPOSIT_REQUEST_MODEM_NOTIFICATION_COUNT,count).apply()
+        pref.edit().putInt(Constant.PREF_DEPOSIT_REQUEST_MODEM_NOTIFICATION_COUNT, count).apply()
     }
 
-    fun getDepositRequestModemNotificationCount():Int{
-        return pref.getInt(Constant.PREF_DEPOSIT_REQUEST_MODEM_NOTIFICATION_COUNT,0)
+    fun getDepositRequestModemNotificationCount(): Int {
+        return pref.getInt(Constant.PREF_DEPOSIT_REQUEST_MODEM_NOTIFICATION_COUNT, 0)
     }
 
     fun setWithdrawalRequestModemNotificationCount(count: Int) {
-        pref.edit().putInt(Constant.PREF_WITHDRAWAL_REQUEST_MODEM_NOTIFICATION_COUNT,count).apply()
+        pref.edit().putInt(Constant.PREF_WITHDRAWAL_REQUEST_MODEM_NOTIFICATION_COUNT, count).apply()
     }
 
-    fun getWithdrawalRequestModemNotificationCount():Int{
-        return pref.getInt(Constant.PREF_WITHDRAWAL_REQUEST_MODEM_NOTIFICATION_COUNT,0)
+    fun getWithdrawalRequestModemNotificationCount(): Int {
+        return pref.getInt(Constant.PREF_WITHDRAWAL_REQUEST_MODEM_NOTIFICATION_COUNT, 0)
     }
 
     fun setRefundRequestModemNotificationCount(count: Int) {
-        pref.edit().putInt(Constant.PREF_REFUND_REQUEST_MODEM_NOTIFICATION_COUNT,count).apply()
+        pref.edit().putInt(Constant.PREF_REFUND_REQUEST_MODEM_NOTIFICATION_COUNT, count).apply()
     }
 
-    fun getRefundRequestModemNotificationCount():Int{
-        return pref.getInt(Constant.PREF_REFUND_REQUEST_MODEM_NOTIFICATION_COUNT,0)
+    fun getRefundRequestModemNotificationCount(): Int {
+        return pref.getInt(Constant.PREF_REFUND_REQUEST_MODEM_NOTIFICATION_COUNT, 0)
     }
 
 }

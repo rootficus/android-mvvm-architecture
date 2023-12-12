@@ -15,9 +15,15 @@ class SmsManagerListAdapter(private var itemList: ArrayList<GetMessageManageReco
 
     var listener: SmsCardEvent? = null
 
-    inner class ItemViewHolder(val binding: ItemTransactionManagerBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ItemViewHolder(val binding: ItemTransactionManagerBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val binding = ItemTransactionManagerBinding.inflate(LayoutInflater.from(parent.context),parent, false)
+        val binding = ItemTransactionManagerBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return ItemViewHolder(binding)
     }
 

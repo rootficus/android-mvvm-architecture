@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
+
 @Keep
 @Entity(tableName = "GetMessageManageRecord")
 data class GetMessageManageRecord(
@@ -80,5 +81,5 @@ data class GetMessageManageRecord(
     @SerializedName("date_in_words")
     @Expose
     val dateInWords: String? = null
-): Serializable
+) : Serializable
 

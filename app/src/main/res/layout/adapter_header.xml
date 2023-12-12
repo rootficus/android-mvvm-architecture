@@ -16,14 +16,14 @@
 
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/arrow_down_icon"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:id="@+id/arrow_down_icon"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginEnd="10dp"
-        android:tint="@color/primaryTextColor"
         android:rotation="270"
+        android:src="@drawable/arrow_left"
+        android:tint="@color/primaryTextColor"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/arrow_left"/>
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

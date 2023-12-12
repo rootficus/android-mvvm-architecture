@@ -2,14 +2,14 @@ package com.fionpay.agent.sdkInit.di
 
 import android.app.Application
 import android.content.Context
-import com.google.gson.GsonBuilder
+import com.fionpay.agent.BuildConfig
 import com.fionpay.agent.roomDB.FionDatabase
+import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.utils.ApplicationContext
 import com.fionpay.agent.utils.AuthInterceptor
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
-import com.fionpay.agent.BuildConfig
-import com.fionpay.agent.sdkInit.FionSDK
+import com.google.gson.GsonBuilder
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -70,7 +70,7 @@ class AppModule(private val mApplication: Application) {
 
     @Provides
     @Singleton
-    fun providesRetrofit(okHttpClient: OkHttpClient, BASE_URL: String): Retrofit =
+    fun providesRetrofit(okHttpClient: OkHttpClient, BASEURL: String): Retrofit =
         Retrofit.Builder()
             .addConverterFactory(
                 GsonConverterFactory.create(
@@ -80,7 +80,7 @@ class AppModule(private val mApplication: Application) {
                 )
             )
             .client(okHttpClient)
-            .baseUrl(BASE_URL)
+            .baseUrl(BASEURL)
             .build()
 
     @Provides

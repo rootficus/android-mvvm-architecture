@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <color name="bgPrimaryColor">#33000000</color>
-   <color name="homeTextColor">#FFFFFFFF</color>
-   <color name="bottomNacColor">#1A000000</color>
-   <color name="homeCardBackColor">@color/black</color>
+    <color name="bgPrimaryColor">#33000000</color>
+    <color name="homeTextColor">#FFFFFFFF</color>
+    <color name="bottomNacColor">#1A000000</color>
+    <color name="homeCardBackColor">@color/black</color>
 
-   <color name="textColor">@color/white</color>
-
-
-   <color name="sigInButtonTextColor">@color/black</color>
-   <color name="sigInEditTextBackColor">@color/black</color>
-   <color name="activeCard">#1A000000</color>
-   <!-- <color name="black">#FF000000</color>
-    <color name="textColor">#222121</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="primaryColor">#19222c</color>
-    <color name="primaryDarkColor">#19222c</color>
-    <color name="primaryAccent">#19222c</color>
-    <color name="darkPrimary">#FFD778</color>
-    <color name="greenColor">#4CAF50</color>
-    <color name="orangeColor">#FF5722</color>
-    <color name="teal_700">#FF018786</color>
-
-    <color name="gray">#3B6C6C6C</color>
-    <color name="text_gray">#57D3D3D3</color>
+    <color name="textColor">@color/white</color>
     <color name="card_gray">#f7f7f7</color>
 
-    <color name="bgPrimaryColor">#19222c</color>
-    <color name="cardBgColor">#222e3c</color>
-    <color name="headerText">@color/white</color>
-    <color name="primaryTextColor">@color/white</color>-->
+    <color name="sigInButtonTextColor">@color/black</color>
+    <color name="sigInEditTextBackColor">@color/black</color>
+    <color name="activeCard">#1A000000</color>
+    <!-- <color name="black">#FF000000</color>
+     <color name="textColor">#222121</color>
+     <color name="white">#FFFFFFFF</color>
+     <color name="primaryColor">#19222c</color>
+     <color name="primaryDarkColor">#19222c</color>
+     <color name="primaryAccent">#19222c</color>
+     <color name="darkPrimary">#FFD778</color>
+     <color name="greenColor">#4CAF50</color>
+     <color name="orangeColor">#FF5722</color>
+     <color name="teal_700">#FF018786</color>
+
+     <color name="gray">#3B6C6C6C</color>
+     <color name="text_gray">#57D3D3D3</color>
+     <color name="card_gray">#f7f7f7</color>
+
+     <color name="bgPrimaryColor">#19222c</color>
+     <color name="cardBgColor">#222e3c</color>
+     <color name="headerText">@color/white</color>
+     <color name="primaryTextColor">@color/white</color>-->
 </resources>

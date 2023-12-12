@@ -6,4 +6,4 @@ import androidx.lifecycle.ViewModel
  * Akash.Singh
  * RootFicus.
  */
-open class BaseViewModel: ViewModel()
+open class BaseViewModel : ViewModel()

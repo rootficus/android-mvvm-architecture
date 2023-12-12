@@ -57,10 +57,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     }
 
     private fun goToNextScreen() {
-        if(viewmodel.isLogin()){
+        if (viewmodel.isLogin()) {
             startActivity(Intent(this@SplashActivity, DashBoardActivity::class.java))
             finishAffinity()
-        }else{
+        } else {
             startActivity(Intent(this@SplashActivity, SignInActivity::class.java))
             finishAffinity()
         }

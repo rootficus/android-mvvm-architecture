@@ -121,7 +121,8 @@ class EditProfileFragment :
                 }
             }
         } else {
-            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG).show()
+            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG)
+                .show()
         }
 
     }
@@ -156,7 +157,8 @@ class EditProfileFragment :
                 }
             }
         } else {
-            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG).show()
+            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG)
+                .show()
         }
 
     }
@@ -185,7 +187,8 @@ class EditProfileFragment :
                 }
             }
         } else {
-            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG).show()
+            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG)
+                .show()
         }
 
     }
@@ -291,7 +294,7 @@ class EditProfileFragment :
                             INVENTORY_DOC_NAME
                         )
                         currentAttachmentPath = image
-                        Toast.makeText(requireContext(), "${image}", Toast.LENGTH_LONG).show()
+                        showMessage("${image}",)
                         setCameraAttachment(
                             image
                         )

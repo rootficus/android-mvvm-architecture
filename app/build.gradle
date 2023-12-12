@@ -15,7 +15,7 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-        setProperty("archivesBaseName", "FionPayAgent" + "12_12_2023"+ "_ProdV" + versionName + "." + versionCode + "")
+        setProperty("archivesBaseName", "FionPayAgent" + "12_12_2023" + "_ProdV" + versionName + "." + versionCode + "")
         //setProperty("archivesBaseName", "FionPayAgent" + "11_12_2023"+ "_DebugV" + versionName + "." + versionCode + "")
 
         vectorDrawables.useSupportLibrary = true

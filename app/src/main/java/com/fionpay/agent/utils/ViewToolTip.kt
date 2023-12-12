@@ -5,7 +5,14 @@ import android.animation.AnimatorListenerAdapter
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.Point
+import android.graphics.Rect
+import android.graphics.RectF
+import android.graphics.Typeface
 import android.text.Html
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +25,7 @@ import androidx.annotation.StringRes
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import java.util.*
+import java.util.Arrays
 
 /**
  * Akash.Singh
@@ -27,25 +34,25 @@ import java.util.*
 class ViewToolTip {
     private var rootView: View? = null
     private var view: View? = null
-    private var tooltip_view: TooltipView? = null
+    private var tooltipView: TooltipView? = null
 
     constructor(myContext: MyContext, view: View) {
         this.view = view
-        tooltip_view = TooltipView(myContext.getContext())
+        tooltipView = TooltipView(myContext.getContext())
         val scrollParent = findScrollParent(view)
-        scrollParent?.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
-            tooltip_view!!.setTranslationY(
-                tooltip_view!!.translationY - (scrollY - oldScrollY)
-            )
-        })
+        scrollParent?.setOnScrollChangeListener { _: NestedScrollView?, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
+            tooltipView!!.translationY = tooltipView!!.translationY - (scrollY - oldScrollY)
+        }
     }
 
     constructor(myContext: MyContext, rootView: View, view: View) {
         this.rootView = rootView
         this.view = view
-        tooltip_view = TooltipView(myContext.getContext())
+        tooltipView = TooltipView(myContext.getContext())
         val scrollParent = findScrollParent(view)
-        scrollParent?.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY -> tooltip_view!!.setTranslationY(tooltip_view!!.translationY - (scrollY - oldScrollY)) })
+        scrollParent?.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            tooltipView!!.translationY = tooltipView!!.translationY - (scrollY - oldScrollY)
+        })
     }
 
     companion object {
@@ -93,9 +100,11 @@ class ViewToolTip {
             null, !is View -> {
                 null
             }
+
             is NestedScrollView -> {
                 (view.parent as NestedScrollView)
             }
+
             else -> {
                 findScrollParent((view.parent as View))
             }
@@ -103,57 +112,57 @@ class ViewToolTip {
     }
 
     fun position(position: Position): ViewToolTip {
-        tooltip_view!!.setPosition(position)
+        tooltipView!!.setPosition(position)
         return this
     }
 
     fun withShadow(withShadow: Boolean): ViewToolTip {
-        tooltip_view!!.setWithShadow(withShadow)
+        tooltipView!!.setWithShadow(withShadow)
         return this
     }
 
     fun shadowColor(@ColorInt shadowColor: Int): ViewToolTip {
-        tooltip_view!!.setShadowColor(shadowColor)
+        tooltipView!!.setShadowColor(shadowColor)
         return this
     }
 
     fun customView(customView: View): ViewToolTip {
-        tooltip_view!!.setCustomView(customView)
+        tooltipView!!.setCustomView(customView)
         return this
     }
 
     fun customView(viewId: Int): ViewToolTip {
-        tooltip_view!!.setCustomView((view!!.context as Activity).findViewById(viewId))
+        tooltipView!!.setCustomView((view!!.context as Activity).findViewById(viewId))
         return this
     }
 
     fun arrowWidth(arrowWidth: Int): ViewToolTip {
-        tooltip_view!!.setArrowWidth(arrowWidth)
+        tooltipView!!.setArrowWidth(arrowWidth)
         return this
     }
 
     fun arrowHeight(arrowHeight: Int): ViewToolTip {
-        tooltip_view!!.setArrowHeight(arrowHeight)
+        tooltipView!!.setArrowHeight(arrowHeight)
         return this
     }
 
     fun arrowSourceMargin(arrowSourceMargin: Int): ViewToolTip {
-        tooltip_view!!.setArrowSourceMargin(arrowSourceMargin)
+        tooltipView!!.setArrowSourceMargin(arrowSourceMargin)
         return this
     }
 
     fun arrowTargetMargin(arrowTargetMargin: Int): ViewToolTip {
-        tooltip_view!!.setArrowTargetMargin(arrowTargetMargin)
+        tooltipView!!.setArrowTargetMargin(arrowTargetMargin)
         return this
     }
 
     fun align(align: ALIGN?): ViewToolTip {
-        tooltip_view!!.setAlign(align)
+        tooltipView!!.setAlign(align)
         return this
     }
 
     fun show(): TooltipView? {
-        val activityContext = tooltip_view!!.context
+        val activityContext = tooltipView!!.context
         if (activityContext != null && activityContext is Activity) {
             val decorView =
                 if (rootView != null) rootView as ViewGroup else (activityContext.window.decorView as ViewGroup)
@@ -161,7 +170,7 @@ class ViewToolTip {
                 val rect = Rect()
                 view!!.getGlobalVisibleRect(rect)
                 val rootGlobalRect = Rect()
-                val rootGlobalOffset: Point = Point()
+                val rootGlobalOffset = Point()
                 decorView.getGlobalVisibleRect(rootGlobalRect, rootGlobalOffset)
                 val location = IntArray(2)
                 view!!.getLocationOnScreen(location)
@@ -173,49 +182,49 @@ class ViewToolTip {
                     rect.right -= rootGlobalOffset.x
                 }
                 decorView.addView(
-                    tooltip_view,
+                    tooltipView,
                     ViewGroup.LayoutParams.WRAP_CONTENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT
                 )
-                tooltip_view!!.viewTreeObserver.addOnPreDrawListener(object :
+                tooltipView!!.viewTreeObserver.addOnPreDrawListener(object :
                     ViewTreeObserver.OnPreDrawListener {
                     override fun onPreDraw(): Boolean {
-                        tooltip_view!!.setup(rect, decorView.width)
-                        tooltip_view!!.viewTreeObserver.removeOnPreDrawListener(this)
+                        tooltipView!!.setup(rect, decorView.width)
+                        tooltipView!!.viewTreeObserver.removeOnPreDrawListener(this)
                         return false
                     }
                 })
             }, 100)
         }
-        return tooltip_view
+        return tooltipView
     }
 
     fun close() {
-        tooltip_view!!.close()
+        tooltipView!!.close()
     }
 
     fun duration(duration: Long): ViewToolTip {
-        tooltip_view!!.setDuration(duration)
+        tooltipView!!.setDuration(duration)
         return this
     }
 
     fun color(color: Int): ViewToolTip {
-        tooltip_view!!.setColor(color)
+        tooltipView!!.setColor(color)
         return this
     }
 
     fun color(paint: Paint): ViewToolTip {
-        tooltip_view!!.setPaint(paint)
+        tooltipView!!.setPaint(paint)
         return this
     }
 
     fun onDisplay(listener: ListenerDisplay?): ViewToolTip {
-        tooltip_view!!.setListenerDisplay(listener)
+        tooltipView!!.setListenerDisplay(listener)
         return this
     }
 
     fun onHide(listener: ListenerHide?): ViewToolTip {
-        tooltip_view!!.setListenerHide(listener)
+        tooltipView!!.setListenerHide(listener)
         return this
     }
 
@@ -225,42 +234,42 @@ class ViewToolTip {
         right: Int,
         bottom: Int
     ): ViewToolTip {
-        tooltip_view!!.setPadding(left, top, right, bottom)
+        tooltipView!!.setPadding(left, top, right, bottom)
         return this
     }
 
-    fun animation(tooltipAnimation: TooltipAnimation): ViewToolTip? {
-        tooltip_view!!.setTooltipAnimation(tooltipAnimation)
+    fun animation(tooltipAnimation: TooltipAnimation): ViewToolTip {
+        tooltipView!!.setTooltipAnimation(tooltipAnimation)
         return this
     }
 
     fun text(text: String?): ViewToolTip {
-        tooltip_view!!.setText(text)
+        tooltipView!!.setText(text)
         return this
     }
 
     fun text(@StringRes text: Int): ViewToolTip {
-        tooltip_view!!.setText(text)
+        tooltipView!!.setText(text)
         return this
     }
 
     fun corner(corner: Int): ViewToolTip {
-        tooltip_view!!.setCorner(corner)
+        tooltipView!!.setCorner(corner)
         return this
     }
 
     fun textColor(textColor: Int): ViewToolTip {
-        tooltip_view!!.setTextColor(textColor)
+        tooltipView!!.setTextColor(textColor)
         return this
     }
 
     fun textTypeFace(typeface: Typeface?): ViewToolTip {
-        tooltip_view!!.setTextTypeFace(typeface)
+        tooltipView!!.setTextTypeFace(typeface)
         return this
     }
 
     fun textSize(unit: Int, textSize: Float): ViewToolTip {
-        tooltip_view!!.setTextSize(unit, textSize)
+        tooltipView!!.setTextSize(unit, textSize)
         return this
     }
 
@@ -270,42 +279,42 @@ class ViewToolTip {
         right: Int,
         bottom: Int
     ): ViewToolTip {
-        tooltip_view!!.setMargin(left, top, right, bottom)
+        tooltipView!!.setMargin(left, top, right, bottom)
         return this
     }
 
     fun setTextGravity(textGravity: Int): ViewToolTip {
-        tooltip_view!!.setTextGravity(textGravity)
+        tooltipView!!.setTextGravity(textGravity)
         return this
     }
 
     fun clickToHide(clickToHide: Boolean): ViewToolTip {
-        tooltip_view!!.setClickToHide(clickToHide)
+        tooltipView!!.setClickToHide(clickToHide)
         return this
     }
 
     fun autoHide(autoHide: Boolean, duration: Long): ViewToolTip {
-        tooltip_view!!.setAutoHide(autoHide)
-        tooltip_view!!.setDuration(duration)
+        tooltipView!!.setAutoHide(autoHide)
+        tooltipView!!.setDuration(duration)
         return this
     }
 
-    fun autoHide(autoHide: Boolean): ViewToolTip? {
-        tooltip_view!!.setAutoHide(autoHide)
+    fun autoHide(autoHide: Boolean): ViewToolTip {
+        tooltipView!!.setAutoHide(autoHide)
         return this
     }
 
-    fun distanceWithView(distance: Int): ViewToolTip? {
-        tooltip_view!!.setDistanceWithView(distance)
+    fun distanceWithView(distance: Int): ViewToolTip {
+        tooltipView!!.setDistanceWithView(distance)
         return this
     }
 
-    fun border(color: Int, width: Float): ViewToolTip? {
+    fun border(color: Int, width: Float): ViewToolTip {
         val borderPaint = Paint(Paint.ANTI_ALIAS_FLAG)
         borderPaint.color = color
         borderPaint.style = Paint.Style.STROKE
         borderPaint.strokeWidth = width
-        tooltip_view!!.setBorderPaint(borderPaint)
+        tooltipView!!.setBorderPaint(borderPaint)
         return this
     }
 
@@ -330,13 +339,8 @@ class ViewToolTip {
         fun onHide(view: View?)
     }
 
-    class FadeTooltipAnimation : TooltipAnimation {
+    class FadeTooltipAnimation() : TooltipAnimation {
         private var fadeDuration: Long = 400
-
-        constructor() {}
-        constructor(fadeDuration: Long) {
-            this.fadeDuration = fadeDuration
-        }
 
         override fun animateEnter(view: View?, animatorListener: Animator.AnimatorListener?) {
             view?.alpha = 0f
@@ -367,7 +371,8 @@ class ViewToolTip {
         private var listenerHide: ListenerHide? = null
         private var tooltipAnimation: TooltipAnimation = FadeTooltipAnimation()
         private var corner = 30
-//        private var paddingTop = 20
+
+        //        private var paddingTop = 20
 //        private var paddingBottom = 30
 //        private var paddingRight = 30
 //        private var paddingLeft = 30
@@ -430,18 +435,21 @@ class ViewToolTip {
                     paddingRight,
                     paddingBottom + arrowHeight
                 )
+
                 Position.BOTTOM -> setPadding(
                     paddingLeft,
                     paddingTop + arrowHeight,
                     paddingRight,
                     paddingBottom
                 )
+
                 Position.LEFT -> setPadding(
                     paddingLeft,
                     paddingTop,
                     paddingRight + arrowHeight,
                     paddingBottom
                 )
+
                 Position.RIGHT -> setPadding(
                     paddingLeft + arrowHeight,
                     paddingTop,

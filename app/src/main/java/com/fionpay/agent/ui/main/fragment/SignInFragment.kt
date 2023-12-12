@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.fionpay.agent.R
@@ -83,11 +84,11 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                         .isNotEmpty() && mDataBinding.etPassword.text!!.isNotEmpty() && mDataBinding.etPassword.text!!.length > 8
                 ) {
                     mDataBinding.btnSignIn.background =
-                        mActivity.getDrawable(R.drawable.btn_active_back)
+                        AppCompatResources.getDrawable(requireContext(), R.drawable.btn_active_back)
                     mDataBinding.btnSignIn.isEnabled = true
                 } else {
                     mDataBinding.btnSignIn.background =
-                        mActivity.getDrawable(R.drawable.btn_inactive_back)
+                        AppCompatResources.getDrawable(requireContext(),R.drawable.btn_inactive_back)
                     mDataBinding.btnSignIn.isEnabled = true
                 }
             }
@@ -112,11 +113,11 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                         .isNotEmpty()
                 ) {
                     mDataBinding.btnSignIn.background =
-                        mActivity.getDrawable(R.drawable.btn_active_back)
+                        AppCompatResources.getDrawable(requireContext(), R.drawable.btn_active_back)
                     mDataBinding.btnSignIn.isEnabled = true
                 } else {
                     mDataBinding.btnSignIn.background =
-                        mActivity.getDrawable(R.drawable.btn_inactive_back)
+                        AppCompatResources.getDrawable(requireContext(), R.drawable.btn_inactive_back)
                     mDataBinding.btnSignIn.isEnabled = true
                 }
 

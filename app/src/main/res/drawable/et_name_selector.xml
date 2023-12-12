@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:state_focused="false"
-        android:drawable="@drawable/user_inactive_vector"
-        /> <!-- not focused -->
-    <item
-        android:state_focused="true"
-        android:drawable="@drawable/user_active_vector"
-        /> <!-- focused -->
+    <item android:drawable="@drawable/user_inactive_vector" android:state_focused="false" /> <!-- not focused -->
+    <item android:drawable="@drawable/user_active_vector" android:state_focused="true" /> <!-- focused -->
 </selector>

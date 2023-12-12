@@ -13,4 +13,4 @@ data class SignInRequest(
 
     @SerializedName("device_token") var deviceToken: String,
 
-) : Serializable
+    ) : Serializable

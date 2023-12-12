@@ -18,8 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/round_bank_card_corners"
-            android:paddingVertical="@dimen/_8sdp"
-            android:paddingHorizontal="@dimen/_10sdp">
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingVertical="@dimen/_8sdp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/bankImage"
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:fontFamily="@font/poppins"
-                android:text="Bank Name 1"
+                android:text="@string/bank_name_1"
                 android:textColor="@color/primaryBlue"
                 android:textSize="14sp"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -48,15 +48,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:fontFamily="@font/poppins"
-                android:text="Not Linked"
+                android:text="@string/not_linked"
                 android:textColor="@color/textColor"
                 android:textSize="12sp"
-                android:layout_marginTop="@dimen/_8sdp"
                 app:layout_constraintBottom_toBottomOf="@id/bankImage"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@id/bankImage"
-                app:layout_constraintTop_toBottomOf="@id/txtBankName"/>
+                app:layout_constraintTop_toBottomOf="@id/txtBankName" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

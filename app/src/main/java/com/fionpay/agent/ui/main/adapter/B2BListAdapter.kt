@@ -45,13 +45,16 @@ class B2BListAdapter(private var itemList: ArrayList<B2BResponse>) :
             binding.labelEmail.text = item.modem
 
             if (item.paymentType == "Return" && item.modem?.contains("Distributor") == false) {
-                binding.txtAmount.text = "+ ৳${item.amount}"
+                val amount = "+ ৳${item.amount}"
+                binding.txtAmount.text = amount
                 binding.txtAmount.setTextColor(context.getColor(R.color.greenColor))
             } else if (item.modem?.contains("Distributor") == true) {
-                binding.txtAmount.text = "- ৳${item.amount}"
+                val amount = "- ৳${item.amount}"
+                binding.txtAmount.text = amount
                 binding.txtAmount.setTextColor(context.getColor(R.color.reject))
             } else {
-                binding.txtAmount.text = "- ৳${item.amount}"
+                val amount = "- ৳${item.amount}"
+                binding.txtAmount.text = amount
                 binding.txtAmount.setTextColor(context.getColor(R.color.reject))
             }
             binding.txtModemType.text = item.modem
