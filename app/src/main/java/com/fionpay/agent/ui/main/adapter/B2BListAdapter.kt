@@ -44,16 +44,17 @@ class B2BListAdapter(private var itemList: ArrayList<B2BResponse>) :
             binding.txtDate.text = Utility.convertTransactionDate(item.date)
             binding.labelEmail.text = item.modem
 
-            if(item.paymentType == "Add")
-            {
+            if (item.paymentType == "Return" && item.modem?.contains("Distributor") == false) {
                 binding.txtAmount.text = "+ ৳${item.amount}"
                 binding.txtAmount.setTextColor(context.getColor(R.color.greenColor))
-            }else
-            {
+            } else if (item.modem?.contains("Distributor") == true) {
+                binding.txtAmount.text = "- ৳${item.amount}"
+                binding.txtAmount.setTextColor(context.getColor(R.color.reject))
+            } else {
                 binding.txtAmount.text = "- ৳${item.amount}"
                 binding.txtAmount.setTextColor(context.getColor(R.color.reject))
             }
-            binding.txtPaymentType.text = item.paymentType
+            binding.txtModemType.text = item.modem
 
         }
     }

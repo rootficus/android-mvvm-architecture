@@ -3,13 +3,14 @@ package com.fionpay.agent.data.remote
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
 import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
 import com.fionpay.agent.data.model.request.FilterResponse
+import com.fionpay.agent.data.model.request.GetAgentB2BRequest
 import com.fionpay.agent.data.model.request.GetPendingModemRequest
 import com.fionpay.agent.data.model.request.MessagesJsonModel
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.ModemJsonModel
 import com.fionpay.agent.data.model.request.PinCodeJsonModel
 import com.fionpay.agent.data.model.request.ProfileResponse
-import com.fionpay.agent.data.model.request.RefundRequest
+import com.fionpay.agent.data.model.request.ReturnBalanceRequest
 import com.fionpay.agent.data.model.request.SignInRequest
 import com.fionpay.agent.data.model.request.TransactionFilterRequest
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
@@ -26,8 +27,9 @@ import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.GetStatusCountResponse
+import com.fionpay.agent.data.model.response.ModemPinCodeResponse
 import com.fionpay.agent.data.model.response.PendingModemResponse
-import com.fionpay.agent.data.model.response.RefundResponse
+import com.fionpay.agent.data.model.response.ReturnBalanceResponse
 import com.fionpay.agent.data.model.response.SignInResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.data.model.response.UserResponseResult
@@ -220,16 +222,22 @@ interface FionApiServices {
     ): Call<BaseResponseModel<Any>>
 
     @Headers("Content-Type:application/json")
-    @GET("api/v1/app/agents/{modemId}/get_agent_b2b")
+    @POST("api/v1/app/agents/get_agent_b2b")
     fun getB2BRecord(
         @Header("Authorization") authHeader: String?,
-        @Path("modemId") type: String,
+        @Body getAgentB2BRequest: GetAgentB2BRequest,
     ): Call<BaseResponseModel2<B2BResponse>>
 
     @Headers("Content-Type:application/json")
-    @POST("api/v1/app/agents/return_agent_balance")
-    fun returnModemBalance(
+    @GET("api/v1/app/agents/modems_pincodes")
+    fun getModemPinCodes(
         @Header("Authorization") authHeader: String?,
-        @Body refundRequest: RefundRequest,
-    ): Call<BaseResponseModel<RefundResponse>>
+    ): Call<BaseResponseModel2<ModemPinCodeResponse>>
+
+    @Headers("Content-Type:application/json")
+    @POST("api/v1/app/agents/return_balance_to_dist")
+    fun returnBalanceToDistributor(
+        @Header("Authorization") authHeader: String?,
+        @Body returnBalanceRequest: ReturnBalanceRequest,
+    ): Call<BaseResponseModel<ReturnBalanceResponse>>
 }

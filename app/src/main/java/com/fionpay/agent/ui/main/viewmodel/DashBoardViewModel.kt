@@ -7,13 +7,14 @@ import com.fionpay.agent.data.model.request.AddModemBalanceModel
 import com.fionpay.agent.data.model.request.Bank
 import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
 import com.fionpay.agent.data.model.request.FilterResponse
+import com.fionpay.agent.data.model.request.GetAgentB2BRequest
 import com.fionpay.agent.data.model.request.GetBalanceByFilterRequest
 import com.fionpay.agent.data.model.request.GetMessageByFilterRequest
 import com.fionpay.agent.data.model.request.GetPendingModemRequest
 import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.ProfileResponse
-import com.fionpay.agent.data.model.request.RefundRequest
+import com.fionpay.agent.data.model.request.ReturnBalanceRequest
 import com.fionpay.agent.data.model.request.SignInRequest
 import com.fionpay.agent.data.model.request.TransactionFilterRequest
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
@@ -29,8 +30,9 @@ import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.GetStatusCountResponse
+import com.fionpay.agent.data.model.response.ModemPinCodeResponse
 import com.fionpay.agent.data.model.response.PendingModemResponse
-import com.fionpay.agent.data.model.response.RefundResponse
+import com.fionpay.agent.data.model.response.ReturnBalanceResponse
 import com.fionpay.agent.data.model.response.SignInResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.data.repository.DashBoardRepository
@@ -315,11 +317,10 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
     fun getModemsListDao(): List<Modem>? {
         return dashBoardRepository?.getModemsListDao()
     }
+
     fun getBanksListDao(): List<Bank>? {
         return dashBoardRepository?.getBanksListDao()
     }
-
-    fun getCountBalanceManageRecord(it: Int) = dashBoardRepository.getCountBalanceManageRecord(it)
 
 
     val getMessageManageRecordModel = MutableLiveData<ResponseData<List<GetMessageManageRecord>>>()
@@ -476,7 +477,7 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
     }
 
     val getB2BRecordResponseModel = MutableLiveData<ResponseData<List<B2BResponse>>>()
-    fun getB2BRecord(modemId: String) {
+    fun getB2BRecord(getAgentB2BRequest: GetAgentB2BRequest) {
         getB2BRecordResponseModel.setLoading(null)
         viewModelScope.launch(Dispatchers.IO) {
             dashBoardRepository.getB2BRecord({ success ->
@@ -484,25 +485,41 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
                     success
                 )
             },
-                modemId,
+                getAgentB2BRequest,
                 { error -> getB2BRecordResponseModel.setError(error) },
                 { message -> getB2BRecordResponseModel.setError(message) })
         }
     }
 
-    val returnModemBalanceResponseResponseModem = MutableLiveData<ResponseData<RefundResponse>>()
-    fun returnModemBalance(refundRequest: RefundRequest) {
-        returnModemBalanceResponseResponseModem.setLoading(null)
+    val getModemPinCodesResponseModel = MutableLiveData<ResponseData<List<ModemPinCodeResponse>>>()
+    fun getModemPinCodes() {
+        getModemPinCodesResponseModel.setLoading(null)
         viewModelScope.launch(Dispatchers.IO) {
-            dashBoardRepository.returnModemBalance(
+            dashBoardRepository.getModemPinCodes({ success ->
+                getModemPinCodesResponseModel.setSuccess(
+                    success
+                )
+            },
+                { error -> getModemPinCodesResponseModel.setError(error) },
+                { message -> getModemPinCodesResponseModel.setError(message) })
+        }
+    }
+
+    val returnBalanceToDistributorResponseModem =
+        MutableLiveData<ResponseData<ReturnBalanceResponse>>()
+
+    fun returnBalanceToDistributor(returnBalanceRequest: ReturnBalanceRequest) {
+        returnBalanceToDistributorResponseModem.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.returnBalanceToDistributor(
                 { success ->
-                    returnModemBalanceResponseResponseModem.setSuccess(
+                    returnBalanceToDistributorResponseModem.setSuccess(
                         success
                     )
                 },
-                refundRequest,
-                { error -> returnModemBalanceResponseResponseModem.setError(error) },
-                { message -> returnModemBalanceResponseResponseModem.setError(message) })
+                returnBalanceRequest,
+                { error -> returnBalanceToDistributorResponseModem.setError(error) },
+                { message -> returnBalanceToDistributorResponseModem.setError(message) })
         }
     }
 
@@ -691,6 +708,7 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
     fun getDashBoardDataModel(): String? {
         return dashBoardRepository.getDashBoardDataModel()
     }
+
     fun setCurrentAgentBalance(balance: String) {
         dashBoardRepository.setCurrentAgentBalance(balance)
     }

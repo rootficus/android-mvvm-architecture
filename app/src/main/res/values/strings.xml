@@ -201,5 +201,11 @@
     <string name="on">On</string>
     <string name="off">Off</string>
     <string name="b2b">B2B</string>
+    <string name="new_balance_will">New balance will be: ৳%1$s</string>
     <string name="refund_amount">Refund Amount</string>
+    <string name="amount_error">Please enter amount</string>
+    <string name="note">Note</string>
+    <string name="enter_note">Enter Note</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
 </resources>

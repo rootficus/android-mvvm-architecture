@@ -63,13 +63,13 @@ class TransactionFragment :
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
     private lateinit var transactionListAdapter: TransactionListAdapter
     private var arrayList: ArrayList<TransactionModemResponse> = arrayListOf()
-    var filterLayoutVisible = true
+    private var filterLayoutVisible = true
     private var startDate: Date? = null
     private var endDate: Date? = null
     private var paymentType: String = "All"
     private var bankType: String = "All"
     private var modemSlotId: Any = "All"
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    private val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -90,17 +90,13 @@ class TransactionFragment :
 
     private fun initialization() {
         setSpinnerData()
-        val gson = Gson()
-        val json: String? = viewModel.getDashBoardDataModel()
-        val obj: DashBoardItemResponse =
-            gson.fromJson(json, DashBoardItemResponse::class.java)
+
         mDataBinding.txtStartDate.text = Utility.dateBeforeOneMonth()
         mDataBinding.txtEndDate.text = Utility.currentDate()
         startDate = dateFormat.parse(mDataBinding.txtStartDate.text.toString())
         endDate = dateFormat.parse(mDataBinding.txtEndDate.text.toString())
         mDataBinding.txtStartDate.setOnClickListener { showDatePickerDialog(mDataBinding.txtStartDate) }
         mDataBinding.txtEndDate.setOnClickListener { showDatePickerDialog(mDataBinding.txtEndDate) }
-        //mDataBinding.txtTotalBalance.text = "৳${obj.totalBalance.toString()}"
         mDataBinding.refreshButton.setOnClickListener {
             getTransactionRecord()
         }

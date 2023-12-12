@@ -7,13 +7,14 @@ import com.fionpay.agent.data.model.request.AddModemBalanceModel
 import com.fionpay.agent.data.model.request.Bank
 import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
 import com.fionpay.agent.data.model.request.FilterResponse
+import com.fionpay.agent.data.model.request.GetAgentB2BRequest
 import com.fionpay.agent.data.model.request.GetBalanceByFilterRequest
 import com.fionpay.agent.data.model.request.GetMessageByFilterRequest
 import com.fionpay.agent.data.model.request.GetPendingModemRequest
 import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.ProfileResponse
-import com.fionpay.agent.data.model.request.RefundRequest
+import com.fionpay.agent.data.model.request.ReturnBalanceRequest
 import com.fionpay.agent.data.model.request.SignInRequest
 import com.fionpay.agent.data.model.request.TransactionFilterRequest
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
@@ -29,8 +30,9 @@ import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.GetStatusCountResponse
+import com.fionpay.agent.data.model.response.ModemPinCodeResponse
 import com.fionpay.agent.data.model.response.PendingModemResponse
-import com.fionpay.agent.data.model.response.RefundResponse
+import com.fionpay.agent.data.model.response.ReturnBalanceResponse
 import com.fionpay.agent.data.model.response.SignInResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.data.remote.FionApiServices
@@ -343,22 +345,31 @@ class DashBoardRepository(
     }
     fun getB2BRecord(
         success: (b2BResponse: List<B2BResponse>) -> Unit,
-        modemId: String,
+        getAgentB2BRequest: GetAgentB2BRequest,
         fail: (error: String) -> Unit,
         message: (msg: String) -> Unit
     ) {
-        apiServices.getB2BRecord("Bearer " + sharedPreference.getToken(), modemId).apply {
+        apiServices.getB2BRecord("Bearer " + sharedPreference.getToken(), getAgentB2BRequest).apply {
+            execute2(this, success, fail, context, message)
+        }
+    }
+    fun getModemPinCodes(
+        success: (b2BResponse: List<ModemPinCodeResponse>) -> Unit,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.getModemPinCodes("Bearer " + sharedPreference.getToken()).apply {
             execute2(this, success, fail, context, message)
         }
     }
 
-    fun returnModemBalance(
-        success: (refundResponse: RefundResponse) -> Unit,
-        refundRequest: RefundRequest,
+    fun returnBalanceToDistributor(
+        success: (returnBalanceResponse: ReturnBalanceResponse) -> Unit,
+        returnBalanceRequest: ReturnBalanceRequest,
         fail: (error: String) -> Unit,
         message: (msg: String) -> Unit
     ) {
-        apiServices.returnModemBalance("Bearer " + sharedPreference.getToken(), refundRequest).apply {
+        apiServices.returnBalanceToDistributor("Bearer " + sharedPreference.getToken(), returnBalanceRequest).apply {
             execute(this, success, fail, context, message)
         }
     }
