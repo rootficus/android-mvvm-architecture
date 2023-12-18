@@ -239,4 +239,6 @@
     <string name="otp_box_4">OTP Box 4</string>
     <string name="otp_box_5">OTP Box 5</string>
     <string name="otp_box_6">OTP Box 6</string>
+    <string name="enter_valid_number">Please enter valid phone number</string>
+
 </resources>

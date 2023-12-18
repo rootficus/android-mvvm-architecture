@@ -100,7 +100,8 @@ class ConfirmModemFragment :
                         progressBar.dismiss()
                         Log.i("Data", "::${it.data}")
                         val modemId = it.data?.modem?.id
-                        addModemBalance(modemId)
+                        //addModemBalance(modemId)
+                        openBottomDialog()
                     }
 
                     Status.ERROR -> {

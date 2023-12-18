@@ -4,10 +4,11 @@ import android.app.Dialog
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
@@ -289,7 +290,7 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
 
     private val cardListener = object : BankListAdapter.BankCardEvent {
         override fun onCardClick(bank: Bank) {
-            showMessage(selectedBankId.toString())
+            //showMessage(selectedBankId.toString())
             getPhoneNumber(bank)
         }
     }
@@ -299,19 +300,52 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
         val binding: ItemPhoneBottomSheetBinding =
             ItemPhoneBottomSheetBinding.inflate(layoutInflater)
         builder.setView(binding.root)
+        binding.etModemPhoneNumber.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val maxLength: Int = if (s?.startsWith("0") == true) {
+                    11
+                } else {
+                    10
+                }
+                val inputFilterArray = arrayOf<InputFilter>(InputFilter.LengthFilter(maxLength))
+                binding.etModemPhoneNumber.filters = inputFilterArray
+            }
+        })
 
         val dialog: AlertDialog = builder.create()
         dialog.show()
         binding.btnContinue.setOnClickListener {
-            checkNumberBankAvailability(
-                CheckNumberAvailabilityRequest(
-                    binding.etModemPhoneNumber.text.toString(),
-                    bank.bankId
-                ),
-                dialog,
-                binding,
-                bank
-            )
+            if (validationPhoneNumber(binding.etModemPhoneNumber)) {
+                checkNumberBankAvailability(
+                    CheckNumberAvailabilityRequest(
+                        binding.etModemPhoneNumber.text.toString(),
+                        bank.bankId
+                    ),
+                    dialog,
+                    binding,
+                    bank
+                )
+            } else {
+                showMessage(getString(R.string.enter_valid_number))
+            }
+        }
+    }
+
+
+    private fun validationPhoneNumber(etModemPhoneNumber: AppCompatEditText): Boolean {
+        val number = etModemPhoneNumber.text.toString()
+        return if (number.startsWith("0") && number.length == 11) {
+            true
+        } else if (!number.startsWith("0") && number.length == 10) {
+            true
+        } else {
+            false
         }
     }
 

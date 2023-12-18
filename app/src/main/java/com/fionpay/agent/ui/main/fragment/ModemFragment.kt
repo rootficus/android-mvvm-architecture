@@ -151,11 +151,11 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                         Log.i("Data", "::${it.data}")
                         it.data?.let { it1 -> listGetModemsByFilter.addAll(it1) }
                         setModemsAdapter()
-                        // bleManag erListAdapter?.notifyDataSetChanged()
+                        //bleManag erListAdapter?.notifyDataSetChanged()
                     }
 
                     Status.ERROR -> {
-                        // startActivity(Intent(requireContext(), SignInActivity::class.java))
+                        // tartActivity(Intent(requireContext(), SignInActivity::class.java))
                         progressBar.dismiss()
                         showErrorMessage(it.message)
                     }

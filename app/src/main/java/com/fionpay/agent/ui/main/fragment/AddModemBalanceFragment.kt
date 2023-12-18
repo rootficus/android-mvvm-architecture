@@ -56,7 +56,7 @@ class AddModemBalanceFragment :
         val json: String? = viewModel.getDashBoardDataModel()
         val obj: DashBoardItemResponse =
             gson.fromJson(json, DashBoardItemResponse::class.java)
-        val currentBal = "৳${obj.currentBalance.toString()}"
+        val currentBal = "${obj.currentBalance.toString()}"
         mDataBinding.txtExistingBalance.text = currentBal
         mDataBinding.labelTotalBalance.text = getString(R.string.new_balance_will, currentBal)
         mDataBinding.etAddBalance.addTextChangedListener(object : TextWatcher {
