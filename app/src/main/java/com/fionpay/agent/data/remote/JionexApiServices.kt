@@ -1,6 +1,7 @@
 package com.fionpay.agent.data.remote
 
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
+import com.fionpay.agent.data.model.request.AddModemSlotsModel
 import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
 import com.fionpay.agent.data.model.request.FilterResponse
 import com.fionpay.agent.data.model.request.GetAgentB2BRequest
@@ -23,6 +24,7 @@ import com.fionpay.agent.data.model.response.BLTransactionModemResponse
 import com.fionpay.agent.data.model.response.DashBoardItemResponse
 import com.fionpay.agent.data.model.response.GetAddModemBalanceResponse
 import com.fionpay.agent.data.model.response.GetAddModemResponse
+import com.fionpay.agent.data.model.response.GetModemSlotsResponse
 import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.data.model.response.GetModemsListResponse
@@ -91,6 +93,15 @@ interface FionApiServices {
         @Header("Authorization") authHeader: String?,
         @Body modemItemModel: ModemItemModel
     ): Call<BaseResponseModel<GetAddModemResponse>>
+
+
+
+    @Headers("Content-Type:application/json")
+    @POST("/api/v1/app/agents/add_modem_slots")
+    fun addModemSlots(
+        @Header("Authorization") authHeader: String?,
+        @Body addModemSlotsModel: AddModemSlotsModel
+    ): Call<BaseResponseModel2<GetModemSlotsResponse>>
 
     @Headers("Content-Type:application/json")
     @POST("api/v1/app/agents/add_modem_balance")

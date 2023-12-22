@@ -3,6 +3,7 @@ package com.fionpay.agent.ui.main.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
+import com.fionpay.agent.data.model.request.AddModemSlotsModel
 import com.fionpay.agent.data.model.request.Bank
 import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
 import com.fionpay.agent.data.model.request.FilterResponse
@@ -26,6 +27,7 @@ import com.fionpay.agent.data.model.response.GetAddModemBalanceResponse
 import com.fionpay.agent.data.model.response.GetAddModemResponse
 import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
+import com.fionpay.agent.data.model.response.GetModemSlotsResponse
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.GetStatusCountResponse
 import com.fionpay.agent.data.model.response.ModemPinCodeResponse
@@ -358,6 +360,21 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
                 { error -> getAddModemBalanceResponseModel.setError(error) },
                 addModemBalanceModel,
                 { message -> getAddModemBalanceResponseModel.setError(message) })
+        }
+    }
+
+    val getModemSlotsResponseModel = MutableLiveData<ResponseData<List<GetModemSlotsResponse>>>()
+    fun addModemSlots(addModemSlotsModel: AddModemSlotsModel) {
+        getModemSlotsResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.addModemSlots({ success ->
+                getModemSlotsResponseModel.setSuccess(
+                    success
+                )
+            },
+                { error -> getModemSlotsResponseModel.setError(error) },
+                addModemSlotsModel,
+                { message -> getModemSlotsResponseModel.setError(message) })
         }
     }
 

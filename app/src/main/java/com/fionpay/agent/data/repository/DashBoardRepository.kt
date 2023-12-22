@@ -3,6 +3,7 @@ package com.fionpay.agent.data.repository
 import android.content.Context
 import android.util.Log
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
+import com.fionpay.agent.data.model.request.AddModemSlotsModel
 import com.fionpay.agent.data.model.request.Bank
 import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
 import com.fionpay.agent.data.model.request.FilterResponse
@@ -25,6 +26,7 @@ import com.fionpay.agent.data.model.response.GetAddModemBalanceResponse
 import com.fionpay.agent.data.model.response.GetAddModemResponse
 import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
+import com.fionpay.agent.data.model.response.GetModemSlotsResponse
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.GetStatusCountResponse
 import com.fionpay.agent.data.model.response.ModemPinCodeResponse
@@ -241,6 +243,18 @@ class DashBoardRepository(
         apiServices.addModemBalance("Bearer " + sharedPreference.getToken(), addModemBalanceModel)
             .apply {
                 execute(this, success, fail, context, message)
+            }
+    }
+
+    fun addModemSlots(
+        success: (getModemSlotsResponse : List<GetModemSlotsResponse>) -> Unit,
+        fail: (error: String) -> Unit,
+        addModemSlotsModel : AddModemSlotsModel,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.addModemSlots("Bearer " + sharedPreference.getToken(), addModemSlotsModel)
+            .apply {
+                execute2(this, success, fail, context, message)
             }
     }
 

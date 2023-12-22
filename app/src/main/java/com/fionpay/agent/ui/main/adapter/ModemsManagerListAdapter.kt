@@ -21,6 +21,8 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResp
         fun onAvailabilityClicked(updateAvailabilityRequest: UpdateAvailabilityRequest)
         fun onLoginClicked(updateLoginRequest: UpdateLoginRequest)
         fun onCardClick(getModemsListResponse: GetModemsListResponse)
+
+        fun onBankClick(getModemsListResponse: GetModemsListResponse)
     }
 
     var listener: ModemCardEvent? = null
@@ -64,13 +66,16 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResp
             setActiveInActiveUI(item, binding)
             //Login Or Logout Status UI
             setLoginLogoutUI(item, binding)
-
             val itemBankListAdapter = item.slots?.let { ItemBankListAdapter(it) }
             binding.bankList.layoutManager = LinearLayoutManager(context)
             binding.bankList.adapter = itemBankListAdapter
 
-            binding.modemLayout.setOnClickListener {
+            binding.btnAddBalance.setOnClickListener {
                 listener?.onCardClick(item)
+            }
+
+            binding.btnAddBank.setOnClickListener {
+                listener?.onBankClick(item)
             }
         }
 

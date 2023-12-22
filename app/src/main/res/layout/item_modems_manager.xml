@@ -10,9 +10,10 @@
         android:id="@+id/card_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
+        android:layout_margin="@dimen/_5sdp"
+        app:cardElevation="@dimen/_2sdp"
+        app:cardUseCompatPadding="true"
         android:layout_marginBottom="@dimen/_5sdp"
-        app:cardCornerRadius="12dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -260,23 +261,42 @@
                 android:layout_marginTop="@dimen/_5sdp"
                 app:layout_constraintTop_toBottomOf="@id/txtLoggedIn"
                 tools:itemCount="3" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btnAddBank"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_marginRight="@dimen/_1sdp"
+                android:background="@color/selectChipColorBG"
+                android:fontFamily="@font/poppins"
+                android:text="@string/add_Bank"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnAddBalance"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bankList" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:id="@+id/btnAddBalance"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:background="@color/approve"
                 android:fontFamily="@font/poppins"
-                android:paddingVertical="@dimen/_2sdp"
                 android:text="@string/add_balance"
-                android:textAlignment="center"
+                android:layout_marginLeft="@dimen/_1sdp"
+                android:gravity="center"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btnAddBank"
                 app:layout_constraintTop_toBottomOf="@id/bankList" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

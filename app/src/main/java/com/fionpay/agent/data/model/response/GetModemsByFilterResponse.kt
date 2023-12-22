@@ -68,6 +68,10 @@ data class Slots(
     @Expose
     val operator: String? = null,
 
+    @field:SerializedName("mobile_banking_id")
+    @Expose
+    var mobileBankingId: Int? = null,
+
     @SerializedName("bank_name")
     @Expose
     val bankName: String? = null,

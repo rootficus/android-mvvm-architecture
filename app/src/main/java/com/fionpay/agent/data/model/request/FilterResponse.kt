@@ -33,7 +33,11 @@ data class Bank(
 
     @ColumnInfo(name = "bank_image")
     @SerializedName("bank_image")
-    var bankImage: String? = null
+    var bankImage: String? = null,
+
+    @ColumnInfo(name = "status")
+    @SerializedName("status")
+    var status: Boolean = true
 )
 
 @Keep

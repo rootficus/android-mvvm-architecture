@@ -7,28 +7,43 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.text.isDigitsOnly
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fionpay.agent.R
+import com.fionpay.agent.data.model.request.AddModelSlot
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
+import com.fionpay.agent.data.model.request.AddModemSlotsModel
+import com.fionpay.agent.data.model.request.Bank
+import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
+import com.fionpay.agent.data.model.request.ModelSlots
+import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
 import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateLoginRequest
 import com.fionpay.agent.data.model.response.DashBoardItemResponse
 import com.fionpay.agent.data.model.response.GetModemsListResponse
+import com.fionpay.agent.data.model.response.ModemSlot
+import com.fionpay.agent.data.model.response.Slots
+import com.fionpay.agent.databinding.BankListBottomSheetBinding
 import com.fionpay.agent.databinding.FragmentModemBinding
+import com.fionpay.agent.databinding.ItemPhoneBottomSheetBinding
 import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
 import com.fionpay.agent.ui.base.BaseViewModelFactory
+import com.fionpay.agent.ui.main.adapter.BankListAdapter
 import com.fionpay.agent.ui.main.adapter.ModemsManagerListAdapter
 import com.fionpay.agent.ui.main.di.DaggerModemFragmentComponent
 import com.fionpay.agent.ui.main.di.ModemFragmentModule
@@ -37,6 +52,9 @@ import com.fionpay.agent.utils.Constant
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import java.util.Locale
 import javax.inject.Inject
@@ -59,6 +77,9 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
 
     private var modemsManagerListAdapter: ModemsManagerListAdapter? = null
     private var listGetModemsByFilter: ArrayList<GetModemsListResponse> = arrayListOf()
+
+    private var bankList: List<Bank>? = listOf()
+    private lateinit var bankListAdapter: BankListAdapter
 
     private var apiCall: String = ""
     private var filter = 0
@@ -100,6 +121,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
 
     private fun initializeView() {
         getBundleData()
+        bankList = viewModel.getBanksListDao()
         modemSheetFragment = ModemDetailScreenFragment()
         val gson = Gson()
         val json: String? = viewModel.getDashBoardDataModel()
@@ -220,6 +242,10 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                     "ActionBottomDialogFragment"
                 )
             }
+        }
+
+        override fun onBankClick(getModemsListResponse: GetModemsListResponse) {
+            openBottomBankListDialog(getModemsListResponse)
         }
     }
 
@@ -518,5 +544,190 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                 mActivity.getString(R.string.NO_INTERNET_CONNECTION)
             )
         }
+    }
+
+    private var dialogBankListDialog: BottomSheetDialog? = null
+    private fun openBottomBankListDialog(getModemsListResponse: GetModemsListResponse) {
+        dialogBankListDialog = BottomSheetDialog(mActivity)
+        val binding = BankListBottomSheetBinding.inflate(layoutInflater)
+        var bankListTemp: ArrayList<Bank>? = arrayListOf()
+        bankList?.forEach {
+            if (!containsObjectWithBankId(getModemsListResponse.slots,it)){
+                bankListTemp?.add(it)
+            }
+        }
+        if(bankListTemp.isNullOrEmpty()){
+            Toast.makeText(context,"No more bank there",Toast.LENGTH_SHORT).show()
+            return
+        }else if (bankListTemp.size == 0){
+            Toast.makeText(context,"No more bank there",Toast.LENGTH_SHORT).show()
+            return
+        }
+        bankListAdapter = BankListAdapter(bankListTemp)
+        binding.bankList.layoutManager = GridLayoutManager(context, 2)
+        bankListAdapter.listener = cardPhoneNumberListener
+        binding.bankList.adapter = bankListAdapter
+        dialogBankListDialog?.setContentView(binding.root)
+        dialogBankListDialog?.setOnShowListener {
+            Handler().postDelayed({
+                dialogBankListDialog?.let {
+                    val sheet = it
+                    sheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                }
+            }, 0)
+        }
+        binding.sendBtn.text = context?.getString(R.string.add_Bank)
+        binding.sendBtn.setOnClickListener {
+            dialogBankListDialog?.dismiss()
+            val modelSlotsList: ArrayList<AddModelSlot> = arrayListOf()
+            bankList?.forEach {
+                if (it.phoneNumber?.isNotEmpty() == true) {
+                    modelSlotsList.add(AddModelSlot(it.phoneNumber, it.bankId))
+                }
+            }
+            if (modelSlotsList.isNotEmpty()) {
+                addModemSlots(getModemsListResponse.id,modelSlotsList)
+            } else {
+                showMessage("Please Select Bank")
+            }
+        }
+        dialogBankListDialog?.show()
+    }
+
+    private fun containsObjectWithBankId(slots: List<Slots>?, bank: Bank) : Boolean{
+        slots?.forEach {
+            if (it.mobileBankingId == bank.bankId)
+                return true
+        }
+        return false
+    }
+
+    fun  addModemSlots(modemId: String?, listAddModeSlots :  List<AddModelSlot>){
+        if (networkHelper.isNetworkConnected()) {
+            viewModel.addModemSlots(AddModemSlotsModel(modemId, listAddModeSlots))
+            viewModel.getAddModemItemResponseModel.removeObservers(viewLifecycleOwner)
+            viewModel.getModemSlotsResponseModel.observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        progressBar.dismiss()
+                        Log.i("Data", "::${it.data}")
+                        if (modemSheetFragment.isVisible) {
+                            modemSheetFragment.dismiss()
+                        }
+                        getModemsListApi()
+                    }
+
+                    Status.ERROR -> {
+                        progressBar.dismiss()
+                        showErrorMessage(it.message)
+                    }
+
+                    Status.LOADING -> {
+                        progressBar.show()
+                    }
+                }
+            }
+        } else {
+            progressBar.dismiss()
+            showMessage(
+                mActivity.getString(R.string.NO_INTERNET_CONNECTION)
+            )
+        }
+    }
+
+    private val cardPhoneNumberListener = object : BankListAdapter.BankCardEvent {
+        override fun onCardClick(bank: Bank) {
+            //showMessage(selectedBankId.toString())
+            getPhoneNumber(bank)
+        }
+    }
+
+    private fun getPhoneNumber(bank: Bank) {
+        val builder: androidx.appcompat.app.AlertDialog.Builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+        val binding: ItemPhoneBottomSheetBinding =
+            ItemPhoneBottomSheetBinding.inflate(layoutInflater)
+        builder.setView(binding.root)
+        binding.etModemPhoneNumber.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val maxLength: Int = if (s?.startsWith("0") == true) {
+                    11
+                } else {
+                    10
+                }
+                val inputFilterArray = arrayOf<InputFilter>(InputFilter.LengthFilter(maxLength))
+                binding.etModemPhoneNumber.filters = inputFilterArray
+            }
+        })
+
+        val dialog: androidx.appcompat.app.AlertDialog = builder.create()
+        dialog.show()
+        binding.btnContinue.setOnClickListener {
+            if (validationPhoneNumber(binding.etModemPhoneNumber)) {
+                checkNumberBankAvailability(
+                    CheckNumberAvailabilityRequest(
+                        binding.etModemPhoneNumber.text.toString(),
+                        bank.bankId
+                    ),
+                    dialog,
+                    binding,
+                    bank
+                )
+            } else {
+                showMessage(getString(R.string.enter_valid_number))
+            }
+        }
+    }
+
+
+    private fun validationPhoneNumber(etModemPhoneNumber: AppCompatEditText): Boolean {
+        val number = etModemPhoneNumber.text.toString()
+        return if (number.startsWith("0") && number.length == 11) {
+            true
+        } else !number.startsWith("0") && number.length == 10
+    }
+
+    private fun checkNumberBankAvailability(
+        checkNumberAvailabilityRequest: CheckNumberAvailabilityRequest,
+        dialog: androidx.appcompat.app.AlertDialog,
+        binding: ItemPhoneBottomSheetBinding,
+        bank: Bank
+    ) {
+        if (networkHelper.isNetworkConnected()) {
+            viewModel.checkNumberBankAvailability(checkNumberAvailabilityRequest)
+            viewModel.checkNumberBankAvailabilityResponseModel.observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        progressBar.dismiss()
+                        if (dialog.isShowing) {
+                            dialog.dismiss()
+                        }
+                        bank.phoneNumber = binding.etModemPhoneNumber.text.toString()
+                        bankListAdapter.notifyDataSetChanged()
+                    }
+
+                    Status.ERROR -> {
+                        progressBar.dismiss()
+                        if (dialog.isShowing) {
+                            dialog.dismiss()
+                        }
+                        showErrorMessage(it.message)
+                    }
+
+                    Status.LOADING -> {
+                        progressBar.show()
+                    }
+                }
+            }
+        } else {
+            Snackbar.make(requireView(), getString(R.string.no_network), Snackbar.LENGTH_LONG)
+                .show()
+        }
+
     }
 }

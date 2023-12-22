@@ -35,7 +35,7 @@ interface FionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertBanks(bank: Bank?)
 
-    @Query("SELECT  * FROM  banks")
+    @Query("SELECT  * FROM  banks where status='1'")
     fun getBanksList(): List<Bank>
 
     @Update
