@@ -19,7 +19,7 @@ class BankListAdapter(
     lateinit var context: Context
 
     interface BankCardEvent {
-        fun onCardClick(bank: Bank)
+        fun onCardClick(bank: Bank, position: Int)
     }
 
     var listener: BankCardEvent? = null
@@ -69,7 +69,7 @@ class BankListAdapter(
             }
             binding.cardHead.setOnClickListener {
                 if (item != null) {
-                    listener?.onCardClick(item)
+                    listener?.onCardClick(item, position)
                 }
             }
         }

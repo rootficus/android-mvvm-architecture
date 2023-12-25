@@ -27,14 +27,11 @@ import com.fionpay.agent.data.model.request.AddModemBalanceModel
 import com.fionpay.agent.data.model.request.AddModemSlotsModel
 import com.fionpay.agent.data.model.request.Bank
 import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
-import com.fionpay.agent.data.model.request.ModelSlots
-import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
 import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateLoginRequest
 import com.fionpay.agent.data.model.response.DashBoardItemResponse
 import com.fionpay.agent.data.model.response.GetModemsListResponse
-import com.fionpay.agent.data.model.response.ModemSlot
 import com.fionpay.agent.data.model.response.Slots
 import com.fionpay.agent.databinding.BankListBottomSheetBinding
 import com.fionpay.agent.databinding.FragmentModemBinding
@@ -550,17 +547,17 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
     private fun openBottomBankListDialog(getModemsListResponse: GetModemsListResponse) {
         dialogBankListDialog = BottomSheetDialog(mActivity)
         val binding = BankListBottomSheetBinding.inflate(layoutInflater)
-        var bankListTemp: ArrayList<Bank>? = arrayListOf()
-        bankList?.forEach {
-            if (!containsObjectWithBankId(getModemsListResponse.slots,it)){
-                bankListTemp?.add(it)
-            }
-        }
-        if(bankListTemp.isNullOrEmpty()){
-            Toast.makeText(context,"No more bank there",Toast.LENGTH_SHORT).show()
+        var bankListTemp: List<Bank>? = bankList
+        /*  bankList?.forEach {
+              if (!containsObjectWithBankId(getModemsListResponse.slots,it)){
+                  bankListTemp?.add(it)
+              }
+          }*/
+        if (bankListTemp.isNullOrEmpty()) {
+            Toast.makeText(context, "No more bank there", Toast.LENGTH_SHORT).show()
             return
-        }else if (bankListTemp.size == 0){
-            Toast.makeText(context,"No more bank there",Toast.LENGTH_SHORT).show()
+        } else if (bankListTemp.size == 0) {
+            Toast.makeText(context, "No more bank there", Toast.LENGTH_SHORT).show()
             return
         }
         bankListAdapter = BankListAdapter(bankListTemp)
@@ -586,7 +583,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                 }
             }
             if (modelSlotsList.isNotEmpty()) {
-                addModemSlots(getModemsListResponse.id,modelSlotsList)
+                addModemSlots(getModemsListResponse.id, modelSlotsList)
             } else {
                 showMessage("Please Select Bank")
             }
@@ -594,7 +591,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         dialogBankListDialog?.show()
     }
 
-    private fun containsObjectWithBankId(slots: List<Slots>?, bank: Bank) : Boolean{
+    private fun containsObjectWithBankId(slots: List<Slots>?, bank: Bank): Boolean {
         slots?.forEach {
             if (it.mobileBankingId == bank.bankId)
                 return true
@@ -602,7 +599,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         return false
     }
 
-    fun  addModemSlots(modemId: String?, listAddModeSlots :  List<AddModelSlot>){
+    fun addModemSlots(modemId: String?, listAddModeSlots: List<AddModelSlot>) {
         if (networkHelper.isNetworkConnected()) {
             viewModel.addModemSlots(AddModemSlotsModel(modemId, listAddModeSlots))
             viewModel.getAddModemItemResponseModel.removeObservers(viewLifecycleOwner)
@@ -636,14 +633,15 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
     }
 
     private val cardPhoneNumberListener = object : BankListAdapter.BankCardEvent {
-        override fun onCardClick(bank: Bank) {
+        override fun onCardClick(bank: Bank, position: Int) {
             //showMessage(selectedBankId.toString())
-            getPhoneNumber(bank)
+            getPhoneNumber(bank, position)
         }
     }
 
-    private fun getPhoneNumber(bank: Bank) {
-        val builder: androidx.appcompat.app.AlertDialog.Builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+    private fun getPhoneNumber(bank: Bank, position: Int) {
+        val builder: androidx.appcompat.app.AlertDialog.Builder =
+            androidx.appcompat.app.AlertDialog.Builder(requireContext())
         val binding: ItemPhoneBottomSheetBinding =
             ItemPhoneBottomSheetBinding.inflate(layoutInflater)
         builder.setView(binding.root)
@@ -676,7 +674,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                     ),
                     dialog,
                     binding,
-                    bank
+                    bank, position
                 )
             } else {
                 showMessage(getString(R.string.enter_valid_number))
@@ -696,7 +694,8 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         checkNumberAvailabilityRequest: CheckNumberAvailabilityRequest,
         dialog: androidx.appcompat.app.AlertDialog,
         binding: ItemPhoneBottomSheetBinding,
-        bank: Bank
+        bank: Bank,
+        position: Int
     ) {
         if (networkHelper.isNetworkConnected()) {
             viewModel.checkNumberBankAvailability(checkNumberAvailabilityRequest)
@@ -708,7 +707,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                             dialog.dismiss()
                         }
                         bank.phoneNumber = binding.etModemPhoneNumber.text.toString()
-                        bankListAdapter.notifyDataSetChanged()
+                        bankListAdapter.notifyItemChanged(position)
                     }
 
                     Status.ERROR -> {
