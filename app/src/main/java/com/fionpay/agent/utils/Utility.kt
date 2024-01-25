@@ -120,12 +120,12 @@ object Utility {
     fun isNotificationExits(fioDao: FionDao?, id: String): Boolean? {
         return fioDao?.isNotificationExits(id)
     }
-
+    private val currencySymbolBD = "৳"
     fun convertCurrencyFormat(currency: Float): String {
         Log.d("convertCurrencyFormat", "::${currency}")
         val formatter = DecimalFormat("###,###,##0.00")
         Log.d("convertCurrencyFormat", "::${formatter.format(currency)}")
-        return formatter.format(currency)
+        return currencySymbolBD+formatter.format(currency)
     }
 
     fun isEmailValid(email: String): Boolean {
