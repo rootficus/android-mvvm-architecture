@@ -289,13 +289,13 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
     }
 
     private val cardListener = object : BankListAdapter.BankCardEvent {
-        override fun onCardClick(bank: Bank) {
+        override fun onCardClick(bank: Bank, position: Int) {
             //showMessage(selectedBankId.toString())
-            getPhoneNumber(bank)
+            getPhoneNumber(bank, position)
         }
     }
 
-    private fun getPhoneNumber(bank: Bank) {
+    private fun getPhoneNumber(bank: Bank, position: Int) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         val binding: ItemPhoneBottomSheetBinding =
             ItemPhoneBottomSheetBinding.inflate(layoutInflater)
@@ -329,7 +329,8 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
                     ),
                     dialog,
                     binding,
-                    bank
+                    bank,
+                    position
                 )
             } else {
                 showMessage(getString(R.string.enter_valid_number))
@@ -353,7 +354,8 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
         checkNumberAvailabilityRequest: CheckNumberAvailabilityRequest,
         dialog: AlertDialog,
         binding: ItemPhoneBottomSheetBinding,
-        bank: Bank
+        bank: Bank,
+        position: Int
     ) {
         if (networkHelper.isNetworkConnected()) {
             viewModel.checkNumberBankAvailability(checkNumberAvailabilityRequest)
@@ -365,7 +367,7 @@ class AddModemFragment : BaseFragment<FragmentAddModemBinding>(R.layout.fragment
                             dialog.dismiss()
                         }
                         bank.phoneNumber = binding.etModemPhoneNumber.text.toString()
-                        bankListAdapter.notifyDataSetChanged()
+                        bankListAdapter.notifyItemChanged(position)
                     }
 
                     Status.ERROR -> {
