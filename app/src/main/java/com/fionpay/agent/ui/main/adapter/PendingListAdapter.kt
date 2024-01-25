@@ -1,5 +1,6 @@
 package com.fionpay.agent.ui.main.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -40,10 +41,9 @@ class PendingListAdapter(private var itemList: ArrayList<PendingModemResponse>) 
         with(holder)
         {
             setCardBgColor(binding, position)
-            val amount = "৳${item.amount}"
+            binding.txtAmount.text = item.amount?.let { Utility.convertCurrencyFormat(it) }
             val customer = "☎ ${item.customer.toString()}"
             val transactionId = "#${item.transactionId.toString()}"
-            binding.txtAmount.text = amount
             if (item.paymentType == context.getString(R.string.cash_in)) {
                 binding.txtTransactionId.text = customer
             } else {
@@ -115,6 +115,7 @@ class PendingListAdapter(private var itemList: ArrayList<PendingModemResponse>) 
         return itemList.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun filterList(filterList: ArrayList<PendingModemResponse>) {
         itemList = filterList
         notifyDataSetChanged()

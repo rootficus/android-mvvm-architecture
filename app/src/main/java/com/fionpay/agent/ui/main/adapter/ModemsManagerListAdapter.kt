@@ -12,6 +12,7 @@ import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateLoginRequest
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.databinding.ItemModemsManagerBinding
+import com.fionpay.agent.utils.Utility
 
 class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResponse>) :
     RecyclerView.Adapter<ModemsManagerListAdapter.ItemViewHolder>() {
@@ -43,11 +44,11 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResp
         with(holder)
         {
             val fullName = "${item.firstName.toString()} ${item.lastName.toString()}"
-            val balance = "৳${item.balance.toString()}"
-            val totalCashOut = "৳${item.totalCashOut.toString()}"
-            val todayCashOut = "৳${item.todayCashOut.toString()}"
-            val totalCashIn = "৳${item.totalCashIn.toString()}"
-            val todayCashIn = "৳${item.todayCashIn.toString()}"
+            val balance = item.balance?.let { Utility.convertCurrencyFormat(it) }
+            val totalCashOut = item.totalCashOut?.let { Utility.convertCurrencyFormat(it) }
+            val todayCashOut = item.todayCashOut?.let { Utility.convertCurrencyFormat(it) }
+            val totalCashIn = item.totalCashIn?.let { Utility.convertCurrencyFormat(it) }
+            val todayCashIn = item.todayCashIn?.let { Utility.convertCurrencyFormat(it) }
             binding.txtUserName.text = fullName
             binding.txtPinCode.text = item.pinCode.toString()
             binding.txtPinCode.text = item.pinCode.toString()

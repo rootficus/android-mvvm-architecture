@@ -1,5 +1,6 @@
 package com.fionpay.agent.ui.main.fragment
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.BroadcastReceiver
@@ -39,6 +40,7 @@ import com.fionpay.agent.data.model.response.Slots
 import com.fionpay.agent.databinding.BankListBottomSheetBinding
 import com.fionpay.agent.databinding.FragmentModemBinding
 import com.fionpay.agent.databinding.ItemPhoneBottomSheetBinding
+import com.fionpay.agent.databinding.ModemBottomSheetBinding
 import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
@@ -84,8 +86,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
     private var apiCall: String = ""
     private var filter = 0
     lateinit var obj: DashBoardItemResponse
-    lateinit var modemSheetFragment: ModemDetailScreenFragment
-
+    lateinit var dialogNumberEditSheetDialog : BottomSheetDialog
     private val onFionModemStatusChangeRequestActionsReceiver: BroadcastReceiver =
         object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent) {
@@ -120,9 +121,9 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
     }
 
     private fun initializeView() {
+        dialogNumberEditSheetDialog = BottomSheetDialog(mActivity)
         getBundleData()
         bankList = viewModel.getBanksListDao()
-        modemSheetFragment = ModemDetailScreenFragment()
         val gson = Gson()
         val json: String? = viewModel.getDashBoardDataModel()
         obj =
@@ -201,17 +202,6 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         modemsManagerListAdapter?.notifyDataSetChanged()
     }
 
-    private val modemDetailScreenActionListener =
-        object : ModemDetailScreenFragment.BottomDialogEvent {
-
-            override fun onAddRequest(
-                getModemsListResponse: GetModemsListResponse,
-                amount: Double
-            ) {
-                addModemBalance(getModemsListResponse, amount)
-            }
-
-        }
     private val cardListener = object : ModemsManagerListAdapter.ModemCardEvent {
         override fun onStatusClicked(updateActiveInActiveRequest: UpdateActiveInActiveRequest) {
             changeActiveRequest(updateActiveInActiveRequest)
@@ -230,17 +220,67 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         }
 
         override fun onCardClick(getModemsListResponse: GetModemsListResponse) {
-            modemSheetFragment.isCancelable = false
-            modemSheetFragment.listener = modemDetailScreenActionListener
-            val bundle = Bundle()
-            bundle.putSerializable(GetModemsListResponse::class.java.name, getModemsListResponse)
-            bundle.putString("CurrentBalance", "${viewModel.getCurrentAgentBalance().toString()}")
-            modemSheetFragment.arguments = bundle
-            activity?.supportFragmentManager?.let {
-                modemSheetFragment.show(
-                    it,
-                    "ActionBottomDialogFragment"
-                )
+
+            val binding = ModemBottomSheetBinding.inflate(layoutInflater)
+            dialogNumberEditSheetDialog.setContentView(binding.root)
+            dialogNumberEditSheetDialog.setCanceledOnTouchOutside(true)
+            dialogNumberEditSheetDialog.setCancelable(true)
+            dialogNumberEditSheetDialog.show()
+
+            val fullName = "${getModemsListResponse.firstName} ${getModemsListResponse.lastName}"
+            val balance = "৳${getModemsListResponse.balance.toString()}"
+            binding.labelTotalBalance.text =
+                getString(R.string.new_balance_will,viewModel.getAvailableBalance().toString())
+            binding.labelTitle.text = fullName
+            binding.etCurrentBalance.text = balance
+
+            Log.i("Current:", "${binding.etCurrentBalance.text}")
+
+            binding.etUpdateBalance.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    s.toString()
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    if (s?.isNotEmpty() == true) {
+                        val newVal = s.toString().toDouble()
+                        val totalBalance = viewModel.getAvailableBalance().minus(newVal)
+                        if (totalBalance > 0.0) {
+                            binding.labelTotalBalance.text =
+                                getString(R.string.new_balance_will, totalBalance.toString())
+                        } else {
+                            Toast.makeText(
+                                context,
+                                "Entered amount should be less than agent balance",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            getString(R.string.new_balance_will, viewModel.getAvailableBalance().toString())
+                            binding.etUpdateBalance.setText("")
+                        }
+
+                    } else {
+                        binding.labelTotalBalance.text =
+                            getString(R.string.new_balance_will, viewModel.getAvailableBalance().toString())
+                    }
+
+                }
+            })
+
+            binding.imageClose.setOnClickListener {
+                dialogNumberEditSheetDialog.dismiss()
+            }
+            binding.btnUpdate.setOnClickListener {
+                if (binding.etUpdateBalance.text.toString().isEmpty()) {
+                    binding.etUpdateBalance.error = "Please enter amount"
+                } else {
+
+                    val amount = binding.etUpdateBalance.text.toString().toDouble()
+                    addModemBalance(getModemsListResponse, amount)
+                    //binding.etUpdateBalance.setText("")
+                }
             }
         }
 
@@ -511,6 +551,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun addModemBalance(getModemsListResponse: GetModemsListResponse, amount: Double) {
         if (networkHelper.isNetworkConnected()) {
             viewModel.addModemBalance(AddModemBalanceModel(getModemsListResponse.id, amount))
@@ -519,10 +560,12 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                     Status.SUCCESS -> {
                         progressBar.dismiss()
                         Log.i("Data", "::${it.data}")
-                        if (modemSheetFragment.isVisible) {
-                            modemSheetFragment.dismiss()
+                        if (dialogNumberEditSheetDialog.isShowing) {
+                            dialogNumberEditSheetDialog.dismiss()
                             getModemsListResponse.balance = it.data?.balance
-                            viewModel.setCurrentAgentBalance(it.data?.agentBalance.toString())
+                            getModemsListResponse.availableBalance = it.data?.availableBalance
+                            getModemsListResponse.holdBalance = it.data?.holdBalance
+                            it.data?.agentBalance?.let { it1 -> viewModel.setAvailableBalance(it1) }
                             modemsManagerListAdapter?.notifyDataSetChanged()
                             // getModemsListApi()
                         }
@@ -611,8 +654,8 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                     Status.SUCCESS -> {
                         progressBar.dismiss()
                         Log.i("Data", "::${it.data}")
-                        if (modemSheetFragment.isVisible) {
-                            modemSheetFragment.dismiss()
+                        if (dialogNumberEditSheetDialog.isShowing) {
+                            dialogNumberEditSheetDialog.dismiss()
                         }
                         getModemsListApi()
                     }

@@ -41,7 +41,6 @@ class AddModemBalanceFragment :
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
     private var modemItemModel = ModemItemModel()
-    var totalBalance: Double? = 0.0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,13 +51,8 @@ class AddModemBalanceFragment :
     private fun initialization() {
         getBundleData()
         mDataBinding.topHeader.txtHeader.text = getString(R.string.add_modems)
-        val gson = Gson()
-        val json: String? = viewModel.getDashBoardDataModel()
-        val obj: DashBoardItemResponse =
-            gson.fromJson(json, DashBoardItemResponse::class.java)
-        val currentBal = "${obj.currentBalance.toString()}"
-        mDataBinding.txtExistingBalance.text = currentBal
-        mDataBinding.labelTotalBalance.text = getString(R.string.new_balance_will, currentBal)
+        mDataBinding.txtExistingBalance.text = viewModel.getAvailableBalance().toString()
+        mDataBinding.labelTotalBalance.text = getString(R.string.new_balance_will, viewModel.getAvailableBalance().toString())
         mDataBinding.etAddBalance.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -76,16 +70,18 @@ class AddModemBalanceFragment :
             override fun afterTextChanged(s: Editable?) {
                 if (s?.isNotEmpty() == true) {
                     val newVal = s.toString().toDouble()
-                    totalBalance = obj.currentBalance?.minus(newVal)
-                    if (totalBalance != null && totalBalance!! > 0.0) {
+                    val totalBalance = viewModel.getAvailableBalance().minus(newVal)
+                    if (totalBalance > 0.0) {
                         mDataBinding.labelTotalBalance.text = getString(R.string.new_balance_will, totalBalance.toString())
                     } else {
-                        getString(R.string.new_balance_will, currentBal)
+                        showMessage("Entered amount should be less than agent balance")
+                        mDataBinding.labelTotalBalance.text = getString(R.string.new_balance_will, viewModel.getAvailableBalance().toString())
+                        mDataBinding.etAddBalance.setText("")
                     }
 
                 } else {
                     mDataBinding.labelTotalBalance.text =
-                        getString(R.string.new_balance_will, currentBal)
+                        getString(R.string.new_balance_will, viewModel.getAvailableBalance().toString())
                 }
 
             }
@@ -97,26 +93,11 @@ class AddModemBalanceFragment :
 
         mDataBinding.btnNext.setOnClickListener {
             if (mDataBinding.etAddBalance.text.toString().isEmpty()) {
-                Utility.callCustomToast(
-                    requireContext(),
-                    mActivity.getString(R.string.PLEASE_ENTER_BALANCE)
-                )
+                Utility.callCustomToast(requireContext(), mActivity.getString(R.string.PLEASE_ENTER_BALANCE))
             } else {
-                if (totalBalance != null && totalBalance!! > 0.0) {
-                    val bundle = Bundle().apply {
-                        putString("modemBalance", mDataBinding.etAddBalance.text.toString())
-                        putSerializable("modemItemModel", modemItemModel)
-                    }
-                    Navigation.findNavController(requireView())
-                        .navigate(
-                            R.id.action_navigation_addModemBalanceFragment_to_navigation_confirmModemFragment,
-                            bundle
-                        )
-                    //addModemBalance()
-                } else {
-                    Snackbar.make(requireView(), "Not a valid amount", Snackbar.LENGTH_LONG).show()
-                }
-
+                Navigation.findNavController(requireView())
+                    .navigate(
+                        R.id.action_navigation_addModemBalanceFragment_to_navigation_confirmModemFragment)
             }
         }
     }

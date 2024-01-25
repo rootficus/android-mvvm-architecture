@@ -548,12 +548,28 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
         return dashBoardRepository.getDashBoardDataModel()
     }
 
-    fun setCurrentAgentBalance(balance: String) {
-        dashBoardRepository.setCurrentAgentBalance(balance)
+    fun setBalance(balance: Float) {
+        return dashBoardRepository.setBalance(balance)
     }
 
-    fun getCurrentAgentBalance(): String? {
-        return dashBoardRepository.getCurrentAgentBalance()
+    fun getBalance(): Float {
+        return dashBoardRepository.getBalance()
+    }
+
+    fun setAvailableBalance(balance: Float) {
+        return dashBoardRepository.setAvailableBalance(balance)
+    }
+
+    fun getAvailableBalance(): Float {
+        return dashBoardRepository.getAvailableBalance()
+    }
+
+    fun setHoldBalance(balance: Float) {
+        return dashBoardRepository.setHoldBalance(balance)
+    }
+
+    fun getHoldBalance(): Float {
+        return dashBoardRepository.getHoldBalance()
     }
 
     fun setBLDanger(danger: Int?) {

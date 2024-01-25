@@ -17,6 +17,8 @@ import com.fionpay.agent.ui.main.di.SplashModule
 import com.fionpay.agent.ui.main.viewmodel.SignInViewModel
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
 import javax.inject.Inject
 
 
@@ -34,7 +36,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        FirebaseApp.initializeApp(this@SplashActivity)
+        FirebaseMessaging.getInstance().isAutoInitEnabled = true;
         initializationDagger()
         initialization()
     }

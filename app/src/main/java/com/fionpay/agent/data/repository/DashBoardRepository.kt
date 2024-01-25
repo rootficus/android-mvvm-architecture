@@ -416,12 +416,28 @@ class DashBoardRepository(
         return sharedPreference.getDashBoardDataModel()
     }
 
-    fun setCurrentAgentBalance(balance: String) {
-        sharedPreference.setCurrentAgentBalance(balance)
+    fun setBalance(balance: Float) {
+        return sharedPreference.setBalance(balance)
     }
 
-    fun getCurrentAgentBalance(): String? {
-        return sharedPreference.getCurrentAgentBalance()
+    fun getBalance(): Float {
+        return sharedPreference.getBalance()
+    }
+
+    fun setAvailableBalance(balance: Float) {
+        return sharedPreference.setAvailableBalance(balance)
+    }
+
+    fun getAvailableBalance(): Float {
+        return sharedPreference.getAvailableBalance()
+    }
+
+    fun setHoldBalance(balance: Float) {
+        return sharedPreference.setHoldBalance(balance)
+    }
+
+    fun getHoldBalance(): Float {
+        return sharedPreference.getHoldBalance()
     }
 
     fun insertBalanceManagerRecord(it: GetBalanceManageRecord) {

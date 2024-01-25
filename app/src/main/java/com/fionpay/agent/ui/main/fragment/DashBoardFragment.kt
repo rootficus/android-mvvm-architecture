@@ -85,12 +85,6 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
 
-    private fun updateProgressBar(progressValue: Int) {
-        val labelProgress = "$progressValue%"
-        mDataBinding.progressBar.progress = progressValue
-        mDataBinding.textViewProgress.text = labelProgress
-    }
-
     private fun initializeView() {
         val name = sharedPreference.getFullName() ?: "Agent"
         mDataBinding.textAgentFullName.text = getString(R.string.userName, name)
@@ -125,18 +119,14 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
             viewModel.dashBoardItemResponseModel.observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.SUCCESS -> {
-                        val dashBoardItemResponse = it.data
-                        val currentBal = "৳${dashBoardItemResponse?.currentBalance.toString()}"
                         progressBar.dismiss()
-                        mDataBinding.currentBalanceAmount.text = currentBal
                         val gson = Gson()
                         val json = gson.toJson(it.data)
                         viewModel.setDashBoardDataModel(json)
-                        viewModel.setCurrentAgentBalance(dashBoardItemResponse?.currentBalance.toString())
-                        val currentBalance = dashBoardItemResponse?.currentBalance
-                        val totalBalance = dashBoardItemResponse?.totalBalance
-                        val progress = (totalBalance?.div(currentBalance!!))
-                        progress?.toInt()?.let { it1 -> updateProgressBar(it1) }
+                        it.data?.balance?.let { it1 -> viewModel.setBalance(it1) }
+                        it.data?.availableBalance?.let { it1 -> viewModel.setAvailableBalance(it1) }
+                        it.data?.holdBalance?.let { it1 -> viewModel.setHoldBalance(it1) }
+                        setDashBalanceUI()
                         setAdapter(it.data)
 
                     }
@@ -165,66 +155,65 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
         }
     }
 
+    private fun setDashBalanceUI() {
+        mDataBinding.availableBalanceEdit.text = viewModel.getAvailableBalance().toString()
+        mDataBinding.totalBalanceEdit.text = viewModel.getBalance().toString()
+        mDataBinding.holdBalanceEdit.text = viewModel.getHoldBalance().toString()
+    }
+
     private fun setAdapter(responseData: DashBoardItemResponse?) {
         arrayList.add(
             TransactionModel(
                 "Today’s Cash In",
-                "৳${responseData?.todayCashIn}",
+                responseData?.todayCashIn,
                 R.drawable.today_cash_in
             )
         )
         arrayList.add(
             TransactionModel(
                 "Today’s Cash Out",
-                "৳${responseData?.todayCashOut}",
+                responseData?.todayCashOut,
                 R.drawable.today_cash_out
             )
         )
         arrayList.add(
             TransactionModel(
                 "Monthly Cash In",
-                "৳${responseData?.monthlyCashIn}",
+                responseData?.monthlyCashIn,
                 R.drawable.total_cash_in
             )
         )
         arrayList.add(
             TransactionModel(
                 "Monthly Cash Out",
-                "৳${responseData?.monthlyCashOut}",
+                responseData?.monthlyCashOut,
                 R.drawable.total_cash_out
             )
         )
         arrayList.add(
             TransactionModel(
                 "Pending Request",
-                "${responseData?.numberOfPendingRequest}",
+                responseData?.numberOfPendingRequest?.toFloat(),
                 R.drawable.home_pending_logo
             )
         )
         arrayList.add(
             TransactionModel(
-                "Transactions",
-                "${
-                    responseData?.rejectedTransaction?.let {
-                        responseData.approvedTransaction?.plus(
-                            it
-                        )
-                    }
-                }",
+                "Transactions", responseData?.rejectedTransaction?.toFloat(),
                 R.drawable.home_transaction_logo
             )
         )
         arrayList.add(
             TransactionModel(
                 "Total Setup Modems",
-                "${responseData?.totalSetupModems}",
+                responseData?.totalSetupModems?.toFloat(),
                 R.drawable.home_modem_logo
             )
         )
         arrayList.add(
             TransactionModel(
                 "Active Modems",
-                "${responseData?.activeModems}",
+                responseData?.activeModems?.toFloat(),
                 R.drawable.home_modem_logo
             )
         )

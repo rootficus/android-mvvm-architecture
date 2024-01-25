@@ -6,9 +6,16 @@ import com.google.gson.annotations.SerializedName
 
 @Keep
 class ReturnBalanceResponse(
-    @SerializedName("current_balance")
+    @SerializedName("balance")
     @Expose
-    var currentBalance: Double?,
+    val balance: Float? = null,
 
+    @SerializedName("hold_balance")
+    @Expose
+    val holdBalance: Float? = null,
+
+    @SerializedName("available_balance")
+    @Expose
+    val availableBalance: Float? = null
     )
 

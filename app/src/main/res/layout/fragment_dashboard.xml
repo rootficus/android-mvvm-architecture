@@ -59,77 +59,92 @@
             android:id="@+id/currentBalanceLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:paddingHorizontal="@dimen/_20sdp"
             app:layout_constraintTop_toBottomOf="@id/top_head_layout">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/currentBalancetxt"
-                android:layout_width="wrap_content"
+                android:id="@+id/totalBalanceTxt"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="@string/current_balance"
-                android:textAllCaps="true"
+                android:text="@string/total_balance_label"
                 android:textColor="@color/homeTextColor"
-                android:textSize="14sp"
+                android:textSize="11sp"
+                android:gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/currentBalanceAmount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:textColor="@color/homeTextColor"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/currentBalancetxt" />
-
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                style="@style/CircularDeterminateProgressBar"
-                android:layout_width="@dimen/_42sdp"
-                android:layout_height="@dimen/_42sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:indeterminateOnly="false"
-                android:progress="60"
-                android:progressDrawable="@drawable/circle"
-                android:rotation="-90"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/txtUsed"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:progress="60" />
+                app:layout_constraintWidth_percent=".33"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewProgress"
-                android:layout_width="wrap_content"
+                android:id="@+id/availableBalanceTxt"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:text="@string/available_balance"
                 android:textColor="@color/homeTextColor"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
-                app:layout_constraintEnd_toEndOf="@+id/progress_bar"
-                app:layout_constraintStart_toStartOf="@+id/progress_bar"
-                app:layout_constraintTop_toTopOf="@+id/progress_bar"
-                tools:text="60%" />
+                android:textSize="11sp"
+                android:gravity="center"
+                app:layout_constraintStart_toEndOf="@+id/totalBalanceTxt"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent=".33" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/holdBalanceTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="@string/hold_balance"
+                android:textColor="@color/homeTextColor"
+                android:textSize="11sp"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/availableBalanceTxt"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent=".33" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/totalBalanceEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="0.0"
+                android:textColor="@color/textColor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/totalBalanceTxt"
+                app:layout_constraintWidth_percent=".33"
+                />
 
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtUsed"
-                android:layout_width="wrap_content"
+                android:id="@+id/availableBalanceEdit"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@string/used"
-                android:textAllCaps="true"
-                android:textColor="@color/homeTextColor"
-                android:textSize="14sp"
+                android:fontFamily="@font/poppins"
+                android:text="0.0"
+                android:textColor="@color/textColor"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@id/progress_bar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/progress_bar" />
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="@id/availableBalanceTxt"
+                app:layout_constraintTop_toBottomOf="@id/availableBalanceTxt"
+                app:layout_constraintWidth_percent=".33"
+                />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/holdBalanceEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="0.0"
+                android:textColor="@color/textColor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="@id/holdBalanceTxt"
+                app:layout_constraintTop_toBottomOf="@id/holdBalanceTxt"
+                app:layout_constraintWidth_percent=".33"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

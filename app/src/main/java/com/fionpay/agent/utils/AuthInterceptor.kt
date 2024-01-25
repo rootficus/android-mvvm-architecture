@@ -1,5 +1,6 @@
 package com.fionpay.agent.utils
 
+import com.fionpay.agent.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -14,6 +15,7 @@ class AuthInterceptor(private val sharedPreference: SharedPreference) : Intercep
         val requestBuilder = originalRequest.newBuilder().apply {
             header("Content-Type", "application/json")
             header("Authorization", "Bearer ${sharedPreference.getToken()}")
+            header("App-Version", BuildConfig.VERSION_NAME)
             header("Connection", "close")
         }
 

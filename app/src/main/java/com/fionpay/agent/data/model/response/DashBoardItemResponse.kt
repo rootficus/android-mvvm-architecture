@@ -4,28 +4,32 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class DashBoardItemResponse(
-    @SerializedName("current_balance")
+    @SerializedName("balance")
     @Expose
-    val currentBalance: Double? = 0.0,
+    val balance: Float? = 0f,
 
-    @SerializedName("total_balance")
+    @SerializedName("hold_balance")
     @Expose
-    val totalBalance: Double? = 0.0,
+    val holdBalance: Float? = 0f,
+
+    @SerializedName("available_balance")
+    @Expose
+    val availableBalance: Float? = null,
 
     @SerializedName("today_cash_in")
     @Expose
-    val todayCashIn: Double? = 0.0,
+    val todayCashIn: Float? = 0f,
 
     @SerializedName("today_cash_out")
     @Expose
-    val todayCashOut: Double? = 0.0,
+    val todayCashOut: Float? = 0f,
 
     @SerializedName("monthly_cash_out")
     @Expose
-    val monthlyCashOut: Int? = 0,
+    val monthlyCashOut: Float? = 0f,
     @SerializedName("monthly_cash_in")
     @Expose
-    val monthlyCashIn: Int? = 0,
+    val monthlyCashIn: Float? = 0f,
 
     @SerializedName("number_of_pending_request")
     @Expose

@@ -241,5 +241,8 @@
     <string name="otp_box_6">OTP Box 6</string>
     <string name="enter_valid_number">Please enter valid phone number</string>
     <string name="add_Bank">Add Bank</string>
-
+    <string name="total_balance_label">Total Balance</string>
+    <string name="amount_balance">Amount Balance</string>
+    <string name="available_balance">Available Balance</string>
+    <string name="hold_balance">Hold Balance</string>
 </resources>

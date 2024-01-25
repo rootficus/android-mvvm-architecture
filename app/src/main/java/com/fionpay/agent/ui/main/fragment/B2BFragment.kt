@@ -59,8 +59,6 @@ class B2BFragment :
     private lateinit var b2BListAdapter: B2BListAdapter
     private var arrayList: ArrayList<B2BResponse> = arrayListOf()
     private var modemPinCodeList: ArrayList<ModemPinCodeResponse> = arrayListOf()
-    var currentBalance: Double? = 0.0
-    var totalBalance: Double? = 0.0
     private var startDate: Date? = null
     private var endDate: Date? = null
     private var filterLayoutVisible = true
@@ -296,11 +294,9 @@ class B2BFragment :
         refundBottomSheetBinding.etNotes.visibility = View.VISIBLE
 
 
-        currentBalance = viewModel.getCurrentAgentBalance()?.toDouble()
-        val currentBal = "৳${currentBalance.toString()}"
-        refundBottomSheetBinding.etCurrentBalance.text = currentBal
+        refundBottomSheetBinding.etCurrentBalance.text = viewModel.getAvailableBalance().toString()
         refundBottomSheetBinding.labelTotalBalance.text =
-            getString(R.string.new_balance_will, "$currentBalance")
+            getString(R.string.new_balance_will, viewModel.getAvailableBalance().toString())
         Log.i("Current:", "${refundBottomSheetBinding.etCurrentBalance.text}")
 
         refundBottomSheetBinding.etUpdateBalance.hint = getText(R.string.refund_amount)
@@ -315,19 +311,19 @@ class B2BFragment :
             override fun afterTextChanged(s: Editable?) {
                 if (s?.isNotEmpty() == true) {
                     val newVal = s.toString().toDouble()
-                    totalBalance = currentBalance?.minus(newVal)
-                    if (totalBalance != null && totalBalance!! >= 0.0) {
+                    val totalBalance = viewModel.getAvailableBalance().minus(newVal)
+                    if (totalBalance >= 0.0) {
                         refundBottomSheetBinding.labelTotalBalance.text =
                             getString(R.string.new_balance_will, "$totalBalance")
                     } else {
                         showMessage("Entered amount should be less than agent balance")
-                        getString(R.string.new_balance_will, "$currentBalance")
+                        refundBottomSheetBinding.labelTotalBalance.text = getString(R.string.new_balance_will, viewModel.getAvailableBalance().toString())
                         refundBottomSheetBinding.etUpdateBalance.setText("")
                     }
 
                 } else {
                     refundBottomSheetBinding.labelTotalBalance.text =
-                        getString(R.string.new_balance_will, "$currentBalance")
+                        getString(R.string.new_balance_will, viewModel.getAvailableBalance().toString())
                 }
 
             }
@@ -343,7 +339,7 @@ class B2BFragment :
             } else {
 
                 val amount = refundBottomSheetBinding.etUpdateBalance.text.toString().toDouble()
-                refundBottomSheetBinding.etUpdateBalance.setText("")
+                //refundBottomSheetBinding.etUpdateBalance.setText("")
                 refundBottomSheetBinding.etNotes.setText("")
                 //Api Call
                 returnBalanceToDistributor(
@@ -369,7 +365,9 @@ class B2BFragment :
                         Log.i("Data", "::${it.data}")
                         if (dialog.isShowing) {
                             dialog.dismiss()
-                            viewModel.setCurrentAgentBalance(it.data?.currentBalance.toString())
+                            it.data?.balance?.let { it1 -> viewModel.setBalance(it1) }
+                            it.data?.availableBalance?.let { it1 -> viewModel.setAvailableBalance(it1) }
+                            it.data?.holdBalance?.let { it1 -> viewModel.setHoldBalance(it1) }
                             getRefundRecord()
                         }
                     }

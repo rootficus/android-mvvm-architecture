@@ -1,5 +1,7 @@
 package com.fionpay.agent.data.model.response
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
@@ -19,7 +21,15 @@ data class GetModemsListResponse(
 
     @SerializedName("balance")
     @Expose
-    var balance: String? = null,
+    var balance: Float? = null,
+
+    @SerializedName("hold_balance")
+    @Expose
+    var holdBalance: Float? = null,
+
+    @SerializedName("available_balance")
+    @Expose
+    var availableBalance: Float? = null,
 
     @SerializedName("status")
     @Expose
@@ -35,19 +45,19 @@ data class GetModemsListResponse(
 
     @SerializedName("total_cash_in")
     @Expose
-    val totalCashIn: Long? = null,
+    val totalCashIn: Float? = null,
 
     @SerializedName("total_cash_out")
     @Expose
-    val totalCashOut: Long? = null,
+    val totalCashOut: Float? = null,
 
     @SerializedName("today_cash_in")
     @Expose
-    val todayCashIn: Long? = null,
+    val todayCashIn: Float? = null,
 
     @SerializedName("today_cash_out")
     @Expose
-    val todayCashOut: Long? = null,
+    val todayCashOut: Float? = null,
 
     @SerializedName("slots")
     @Expose
@@ -55,9 +65,9 @@ data class GetModemsListResponse(
 
     @SerializedName("pincode")
     @Expose
-    val pinCode: Long? = null,
+    val pinCode: Long? = null
 
-    ) : Serializable
+    )
 
 data class Slots(
     @SerializedName("status")

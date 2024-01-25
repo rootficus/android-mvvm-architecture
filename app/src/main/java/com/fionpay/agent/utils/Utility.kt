@@ -121,7 +121,7 @@ object Utility {
         return fioDao?.isNotificationExits(id)
     }
 
-    fun convertCurrencyFormat(currency: Double): String {
+    fun convertCurrencyFormat(currency: Float): String {
         Log.d("convertCurrencyFormat", "::${currency}")
         val formatter = DecimalFormat("###,###,##0.00")
         Log.d("convertCurrencyFormat", "::${formatter.format(currency)}")

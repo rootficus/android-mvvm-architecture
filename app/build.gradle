@@ -10,14 +10,13 @@ android {
     compileSdk 33
 
     defaultConfig {
+        final BUILD_DATE = new Date().format('dd-MM-YYYY')
         applicationId "com.fionpay.agent"
         minSdk 26
         targetSdk 33
         versionCode 1
-        versionName "1.0"
-        setProperty("archivesBaseName", "FionPayAgent" + "12_12_2023" + "_ProdV" + versionName + "." + versionCode + "")
-        //setProperty("archivesBaseName", "FionPayAgent" + "11_12_2023"+ "_DebugV" + versionName + "." + versionCode + "")
-
+        versionName "1.0.0"
+        setProperty("archivesBaseName", "FionPay-Agent_" + BUILD_DATE+ "_V" + versionName)
         vectorDrawables.useSupportLibrary = true
 
         javaCompileOptions {
@@ -71,7 +70,7 @@ android {
         uat {
             dimension "default"
             buildConfigField("String", "VERSION", "\"UAT\"")
-            buildConfigField("String", "BASE_URL", "\"http://192.168.1.77:3000/\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.1.69:3000/\"")
         }
         prod {
             dimension "default"

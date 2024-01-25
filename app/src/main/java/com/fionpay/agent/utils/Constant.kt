@@ -57,7 +57,11 @@ object Constant {
 
     const val PREF_DASHBOARD = "DashBoardModel"
 
-    const val PREF_CURRENT_BALANCE = "CurrentBalance"
+    const val PREF_AVAILABLE_BALANCE = "currentBalance"
+
+    const val PREF_BALANCE = "Balance"
+
+    const val PREF_HOLD_BALANCE = "holdBalance"
 
     const val MULTIPART_FORM_TEXT_DATA = "text/plain"
 

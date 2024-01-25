@@ -22,7 +22,7 @@ data class PendingModemResponse(
 
     @SerializedName("amount")
     @Expose
-    var amount: String? = null,
+    var amount: Float? = null,
 
     @SerializedName("bank_type")
     @Expose

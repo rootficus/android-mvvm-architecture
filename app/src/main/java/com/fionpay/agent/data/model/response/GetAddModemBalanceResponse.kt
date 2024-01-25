@@ -15,11 +15,18 @@ data class GetAddModemBalanceResponse(
 
     @SerializedName("balance")
     @Expose
-    val balance: String? = null,
+    val balance: Float? = null,
+
+    @SerializedName("hold_balance")
+    @Expose
+    val holdBalance: Float? = null,
+
+    @SerializedName("available_balance")
+    @Expose
+    val availableBalance: Float? = null,
 
     @SerializedName("agent_balance")
     @Expose
-    val agentBalance: String? = null,
-
-    ) : Serializable
+    val agentBalance: Float? = null
+) : Serializable
 

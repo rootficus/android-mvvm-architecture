@@ -7,7 +7,6 @@ import com.fionpay.agent.utils.Constant.PREF_BL_DANGER
 import com.fionpay.agent.utils.Constant.PREF_BL_PENDING
 import com.fionpay.agent.utils.Constant.PREF_BL_REJECTED
 import com.fionpay.agent.utils.Constant.PREF_BL_SUCCESS
-import com.fionpay.agent.utils.Constant.PREF_CURRENT_BALANCE
 import com.fionpay.agent.utils.Constant.PREF_DASHBOARD
 import com.fionpay.agent.utils.Constant.PREF_PASSWORD
 import com.fionpay.agent.utils.Constant.PREF_PUSH_TOKEN
@@ -151,12 +150,28 @@ class SharedPreference(context: Context) {
         return pref.getString(PREF_DASHBOARD, "")
     }
 
-    fun setCurrentAgentBalance(balance: String) {
-        pref.edit().putString(PREF_CURRENT_BALANCE, balance).apply()
+    fun setAvailableBalance(currentBalance: Float) {
+        pref.edit().putFloat(Constant.PREF_AVAILABLE_BALANCE,currentBalance).apply()
     }
 
-    fun getCurrentAgentBalance(): String? {
-        return pref.getString(PREF_CURRENT_BALANCE, "0.0")
+    fun getAvailableBalance(): Float {
+        return pref.getFloat(Constant.PREF_AVAILABLE_BALANCE,0f)
+    }
+
+    fun setBalance(currentBalance: Float) {
+        pref.edit().putFloat(Constant.PREF_BALANCE,currentBalance).apply()
+    }
+
+    fun getBalance(): Float {
+        return pref.getFloat(Constant.PREF_BALANCE,0f)
+    }
+
+    fun setHoldBalance(currentBalance: Float) {
+        pref.edit().putFloat(Constant.PREF_HOLD_BALANCE,currentBalance).apply()
+    }
+
+    fun getHoldBalance(): Float {
+        return pref.getFloat(Constant.PREF_HOLD_BALANCE,0f)
     }
 
 

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.fionpay.agent.data.model.response.TransactionModel
 import com.fionpay.agent.databinding.HomeCardBinding
+import com.fionpay.agent.utils.Utility
 
 class DashBoardListAdapter(private var itemList: ArrayList<TransactionModel>) :
     RecyclerView.Adapter<DashBoardListAdapter.ItemViewHolder>() {
@@ -26,9 +27,13 @@ class DashBoardListAdapter(private var itemList: ArrayList<TransactionModel>) :
         val item: TransactionModel = itemList[position]
         with(holder)
         {
-            val amount = "৳ ${item.amount}"
+            if (item.title == "Pending Request" || item.title == "Transactions"
+                || item.title == "Total Setup Modems" || item.title == "Active Modems"){
+                binding.txtAmount.text = item.amount?.toInt().toString()
+            }else{
+                binding.txtAmount.text = item.amount?.let { Utility.convertCurrencyFormat(it) }
+            }
             binding.cardHeadImg.setBackgroundResource(item.icon)
-            binding.txtAmount.text = amount
             binding.txtTitle.text = item.title
             binding.cardHead1.setOnClickListener {
                 listener?.onCardClicked(item)
