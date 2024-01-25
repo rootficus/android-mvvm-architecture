@@ -95,9 +95,15 @@ class AddModemBalanceFragment :
             if (mDataBinding.etAddBalance.text.toString().isEmpty()) {
                 Utility.callCustomToast(requireContext(), mActivity.getString(R.string.PLEASE_ENTER_BALANCE))
             } else {
+                val bundle = Bundle().apply {
+                    putString("modemBalance", mDataBinding.etAddBalance.text.toString())
+                    putSerializable("modemItemModel", modemItemModel)
+                }
                 Navigation.findNavController(requireView())
                     .navigate(
-                        R.id.action_navigation_addModemBalanceFragment_to_navigation_confirmModemFragment)
+                        R.id.action_navigation_addModemBalanceFragment_to_navigation_confirmModemFragment,
+                        bundle
+                    )
             }
         }
     }
