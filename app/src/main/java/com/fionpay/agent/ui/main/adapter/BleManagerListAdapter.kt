@@ -37,8 +37,8 @@ class BleManagerListAdapter(private var itemList: ArrayList<BLTransactionModemRe
         with(holder)
         {
             setCardBgColor(binding, position)
-            val amount = "৳${item.amount}"
-            val oldBalance = "৳${item.oldBalance.toString()}"
+            val amount = "${Utility.currencySymbolBD}${item.amount}"
+            val oldBalance = "${Utility.currencySymbolBD}${item.oldBalance.toString()}"
             binding.txtCustomerNumber.text = item.customerNumber
             binding.txtAmount.text = amount
             binding.txtOldBalance.text = oldBalance

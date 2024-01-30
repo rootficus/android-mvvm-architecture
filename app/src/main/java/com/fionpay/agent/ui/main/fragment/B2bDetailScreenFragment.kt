@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.fionpay.agent.R
 import com.fionpay.agent.databinding.ModemBottomSheetBinding
+import com.fionpay.agent.utils.Utility
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -43,9 +44,9 @@ class B2bDetailScreenFragment : BottomSheetDialogFragment() {
         }
         //getModemsListResponse = arguments?.getSerializable(GetModemsByFilterResponse::class.java.name) as GetModemsByFilterResponse
         currentBalance = arguments?.getString("CurrentBalance")?.toDouble()
-        // binding.labelTotalBalance.text = "New balance will be: ৳${currentBalance}"
+        // binding.labelTotalBalance.text = "New balance will be: ${Utility.currencySymbolBD}${currentBalance}"
         // binding.labelTitle.text = "${getModemsListResponse.modemAction} ${getModemsListResponse.modemAction}"
-        val currentBal = "৳${currentBalance.toString()}"
+        val currentBal = "${Utility.currencySymbolBD}${currentBalance.toString()}"
         binding.etCurrentBalance.text = currentBal
         binding.labelTotalBalance.text = getString(R.string.new_balance_will, currentBal)
         Log.i("Current:", "${binding.etCurrentBalance.text}")
@@ -70,7 +71,7 @@ class B2bDetailScreenFragment : BottomSheetDialogFragment() {
                             "Entered amount should be less than agent balance",
                             Toast.LENGTH_SHORT
                         ).show()
-                        "New balance will be: ৳${currentBalance}"
+                        "New balance will be: ${Utility.currencySymbolBD}${currentBalance}"
                         binding.etUpdateBalance.setText("")
                     }
 

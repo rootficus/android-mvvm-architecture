@@ -27,9 +27,7 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_navigation_notificationFragment"
             app:destination="@id/navigation_notificationFragment" />
-        <action
-            android:id="@+id/action_navigation_dashboard_to_navigation_supportFragment"
-            app:destination="@id/navigation_supportFragment" />
+
         <action
             android:id="@+id/action_navigation_dashboard_to_navigation_pendingFragment"
             app:destination="@id/navigation_pendingFragment" />
@@ -122,6 +120,9 @@
         <action
             android:id="@+id/action_navigation_settingFragment_to_navigation_editProfileFragment"
             app:destination="@id/navigation_editProfileFragment" />
+        <action
+            android:id="@+id/action_navigation_settingFragment_to_navigation_supportFragment"
+            app:destination="@id/navigation_supportFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_editProfileFragment"

@@ -181,7 +181,7 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
         binding.txtSuccess.backgroundTintList =
             (ContextCompat.getColorStateList(requireContext(), R.color.activePendingBg))
 
-        val amount = "৳${item.amount}"
+        val amount = "${Utility.currencySymbolBD}${item.amount}"
         val customer = "☎ ${item.customer.toString()}"
         val transactionId = "#${item.transactionId.toString()}"
         binding.txtAmount.text = amount

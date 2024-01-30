@@ -310,20 +310,34 @@ class B2BFragment :
 
             override fun afterTextChanged(s: Editable?) {
                 if (s?.isNotEmpty() == true) {
-                    val newVal = s.toString().toDouble()
-                    val totalBalance = viewModel.getAvailableBalance().minus(newVal)
-                    if (totalBalance >= 0.0) {
-                        refundBottomSheetBinding.labelTotalBalance.text =
-                            getString(R.string.new_balance_will, "$totalBalance")
+                    val text = s.toString()
+                    if (text.isNotEmpty() && (text[0] == '0' || text[0] == '.')) {
+                        // If it is, do something (e.g., display a message, remove the character, etc.)
+                        refundBottomSheetBinding.etUpdateBalance.error =
+                            "Invalid input. '0' and '.' are not allowed as the first character.";
+                        // You can also remove the invalid character if needed
+                        // editable.replace(0, 1, ""); // Remove the first character
                     } else {
-                        showMessage("Entered amount should be less than agent balance")
-                        refundBottomSheetBinding.labelTotalBalance.text = getString(R.string.new_balance_will, viewModel.getAvailableBalance().toString())
-                        refundBottomSheetBinding.etUpdateBalance.setText("")
+                        val newVal = s.toString().toDouble()
+                        val totalBalance = viewModel.getAvailableBalance().minus(newVal)
+                        if (totalBalance >= 0.0) {
+                            refundBottomSheetBinding.labelTotalBalance.text =
+                                getString(R.string.new_balance_will, "$totalBalance")
+                        } else {
+                            showMessage("Entered amount should be less than agent balance")
+                            refundBottomSheetBinding.labelTotalBalance.text = getString(
+                                R.string.new_balance_will,
+                                viewModel.getAvailableBalance().toString()
+                            )
+                            refundBottomSheetBinding.etUpdateBalance.setText("")
+                        }
                     }
-
                 } else {
                     refundBottomSheetBinding.labelTotalBalance.text =
-                        getString(R.string.new_balance_will, viewModel.getAvailableBalance().toString())
+                        getString(
+                            R.string.new_balance_will,
+                            viewModel.getAvailableBalance().toString()
+                        )
                 }
 
             }
@@ -334,17 +348,19 @@ class B2BFragment :
         }
 
         refundBottomSheetBinding.btnUpdate.setOnClickListener {
-            if (refundBottomSheetBinding.etUpdateBalance.text.toString().isEmpty()) {
+            val editedBalance = refundBottomSheetBinding.etUpdateBalance.text.toString()
+            if (editedBalance.isEmpty()) {
+                refundBottomSheetBinding.etUpdateBalance.error = getString(R.string.amount_error)
+            } else if (editedBalance.startsWith("0") || editedBalance[0] == '.') {
                 refundBottomSheetBinding.etUpdateBalance.error = getString(R.string.amount_error)
             } else {
-
-                val amount = refundBottomSheetBinding.etUpdateBalance.text.toString().toDouble()
+                val amount = editedBalance.toDouble()
                 //refundBottomSheetBinding.etUpdateBalance.setText("")
                 refundBottomSheetBinding.etNotes.setText("")
                 //Api Call
                 returnBalanceToDistributor(
                     amount = amount,
-                    notes = refundBottomSheetBinding.etNotes.text.toString(),
+                    notes = editedBalance,
                     dialog
                 )
             }
@@ -366,7 +382,11 @@ class B2BFragment :
                         if (dialog.isShowing) {
                             dialog.dismiss()
                             it.data?.balance?.let { it1 -> viewModel.setBalance(it1) }
-                            it.data?.availableBalance?.let { it1 -> viewModel.setAvailableBalance(it1) }
+                            it.data?.availableBalance?.let { it1 ->
+                                viewModel.setAvailableBalance(
+                                    it1
+                                )
+                            }
                             it.data?.holdBalance?.let { it1 -> viewModel.setHoldBalance(it1) }
                             getRefundRecord()
                         }

@@ -25,6 +25,7 @@ import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
+import com.fionpay.agent.utils.Utility
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import javax.inject.Inject
 
@@ -56,7 +57,7 @@ class ConfirmModemFragment :
     private fun initialization() {
         dialog = BottomSheetDialog(requireActivity())
         val fullName = "${modemItemModel.firstName} ${modemItemModel.lastName}"
-        val modemBalance = "৳${modemBalance}"
+        val modemBalance = "${Utility.currencySymbolBD}$modemBalance"
         mDataBinding.topHeader.txtHeader.text = getString(R.string.confirm_modems)
         mDataBinding.txtName.text = fullName
         mDataBinding.txtBalanceAdded.text = modemBalance

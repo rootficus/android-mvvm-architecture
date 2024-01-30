@@ -120,7 +120,10 @@ object Utility {
     fun isNotificationExits(fioDao: FionDao?, id: String): Boolean? {
         return fioDao?.isNotificationExits(id)
     }
-    private val currencySymbolBD = "৳"
+
+    //Remove Currency Symbol
+    //private val currencySymbolBD = "৳"
+    val currencySymbolBD = ""
     fun convertCurrencyFormat(currency: Float): String {
         Log.d("convertCurrencyFormat", "::${currency}")
         val formatter = DecimalFormat("###,###,##0.00")

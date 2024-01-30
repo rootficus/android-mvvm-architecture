@@ -72,6 +72,10 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_s
             Navigation.findNavController(requireView())
                 .navigate(R.id.navigation_editProfileFragment)
         }
+        mDataBinding.supportCard.setOnClickListener {
+            Navigation.findNavController(requireView())
+                .navigate(R.id.action_navigation_settingFragment_to_navigation_supportFragment)
+        }
         mDataBinding.logOutCard.setOnClickListener {
             verifyLogout()
         }

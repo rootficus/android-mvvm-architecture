@@ -4,9 +4,12 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import com.fionpay.agent.R
 import com.fionpay.agent.data.model.response.TransactionModel
 import com.fionpay.agent.databinding.FragmentSupportBinding
+import com.fionpay.agent.databinding.ModemBottomSheetBinding
+import com.fionpay.agent.databinding.SupportBottomSheetBinding
 import com.fionpay.agent.sdkInit.FionSDK
 import com.fionpay.agent.ui.base.BaseFragment
 import com.fionpay.agent.ui.base.BaseFragmentModule
@@ -17,6 +20,7 @@ import com.fionpay.agent.ui.main.di.SupportFragmentModule
 import com.fionpay.agent.ui.main.viewmodel.DashBoardViewModel
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import javax.inject.Inject
 
 
@@ -38,6 +42,7 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>(R.layout.fragment_s
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeDagger()
+        initialization()
     }
 
     private fun initializeDagger() {
@@ -45,5 +50,23 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>(R.layout.fragment_s
             .supportFragmentModule(SupportFragmentModule())
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
+    private fun initialization() {
+        mDataBinding.addSupport.setOnClickListener {
+            val dialog = BottomSheetDialog(requireActivity())
+            val refundBottomSheetBinding = SupportBottomSheetBinding.inflate(layoutInflater)
+            setBottomSheetUI(refundBottomSheetBinding, dialog)
+            dialog.setCancelable(true)
+            dialog.setCanceledOnTouchOutside(true)
+            dialog.setContentView(refundBottomSheetBinding.root)
+            dialog.show()
+        }
+    }
 
+
+    private fun setBottomSheetUI(
+        refundBottomSheetBinding: SupportBottomSheetBinding,
+        dialog: BottomSheetDialog
+    ) {
+
+    }
 }

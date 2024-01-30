@@ -162,6 +162,7 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
     }
 
     private fun setAdapter(responseData: DashBoardItemResponse?) {
+        arrayList.clear()
         arrayList.add(
             TransactionModel(
                 "Today’s Cash In",

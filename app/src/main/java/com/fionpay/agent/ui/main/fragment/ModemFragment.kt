@@ -51,6 +51,7 @@ import com.fionpay.agent.utils.Constant
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
+import com.fionpay.agent.utils.Utility
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
@@ -225,7 +226,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
             dialogNumberEditSheetDialog.show()
 
             val fullName = "${getModemsListResponse.firstName} ${getModemsListResponse.lastName}"
-            val balance = "৳${getModemsListResponse.balance.toString()}"
+            val balance = "${Utility.currencySymbolBD}${getModemsListResponse.balance.toString()}"
             binding.labelTotalBalance.text =
                 getString(R.string.new_balance_will,viewModel.getAvailableBalance().toString())
             binding.labelTitle.text = fullName

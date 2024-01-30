@@ -88,7 +88,7 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
         when (item.paymentType) {
             "Cash In" -> {
                 if (item.status == "Approved") {
-                    val amount = "- ৳${item.amount}"
+                    val amount = "- ${Utility.currencySymbolBD}${item.amount}"
                     val transactionId = "#${item.transactionId.toString()}"
                     binding.txtAmount.text = amount
                     binding.txtAmount.setTextColor(
@@ -101,7 +101,7 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
                         binding.txtAmount.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                     binding.txtTransactionId.text = transactionId
                 } else {
-                    val amount = "৳${item.amount}"
+                    val amount = "${Utility.currencySymbolBD}${item.amount}"
                     val customer = "☎ ${item.customer.toString()}"
                     binding.txtAmount.text = amount
                     binding.txtAmount.paintFlags =
@@ -122,7 +122,7 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
 
             "Cash Out" -> {
                 if (item.status == "Approved") {
-                    val amount = "+ ৳${item.amount}"
+                    val amount = "+ ${Utility.currencySymbolBD}${item.amount}"
                     binding.txtAmount.text = amount
                     binding.txtAmount.setTextColor(
                         ContextCompat.getColorStateList(
@@ -133,7 +133,7 @@ class TransactionListAdapter(private var itemList: ArrayList<TransactionModemRes
                     binding.txtAmount.paintFlags =
                         binding.txtAmount.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG
                 } else {
-                    val amount =  "৳${item.amount}"
+                    val amount =  "${Utility.currencySymbolBD}${item.amount}"
                     binding.txtAmount.text = amount
                     binding.txtAmount.paintFlags =
                         binding.txtAmount.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG

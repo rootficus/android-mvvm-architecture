@@ -342,7 +342,7 @@ class TransactionFragment :
                 totalAmount = totalAmount.plus(it.amount.toString().toDouble())
             }
         }
-        val amount = "৳${totalAmount}"
+        val amount = "${Utility.currencySymbolBD}${totalAmount}"
         mDataBinding.txtTotalBalance.text = amount
     }
 
@@ -360,7 +360,7 @@ class TransactionFragment :
                 .error(R.drawable.bank_icon)
                 .into(binding.imageBank)
         }
-        val amount = "৳${item.amount}"
+        val amount = "${Utility.currencySymbolBD}${item.amount}"
         val customer = "☎ ${item.customer.toString()}"
         val transactionId = "#${item.transactionId.toString()}"
         binding.labelPaymentType.text = item.paymentType.toString()
