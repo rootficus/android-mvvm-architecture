@@ -3,9 +3,11 @@ package com.fionpay.agent.data.remote
 import com.fionpay.agent.data.model.request.AddModemBalanceModel
 import com.fionpay.agent.data.model.request.AddModemSlotsModel
 import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
+import com.fionpay.agent.data.model.request.CreateSupportRequest
 import com.fionpay.agent.data.model.request.FilterResponse
 import com.fionpay.agent.data.model.request.GetAgentB2BRequest
 import com.fionpay.agent.data.model.request.GetPendingModemRequest
+import com.fionpay.agent.data.model.request.GetSupportRequest
 import com.fionpay.agent.data.model.request.MessagesJsonModel
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.ModemJsonModel
@@ -33,6 +35,7 @@ import com.fionpay.agent.data.model.response.ModemPinCodeResponse
 import com.fionpay.agent.data.model.response.PendingModemResponse
 import com.fionpay.agent.data.model.response.ReturnBalanceResponse
 import com.fionpay.agent.data.model.response.SignInResponse
+import com.fionpay.agent.data.model.response.SupportResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.data.model.response.UserResponseResult
 import com.fionpay.agent.ui.base.BaseResponseModel
@@ -254,4 +257,23 @@ interface FionApiServices {
         @Header("Authorization") authHeader: String?,
         @Body returnBalanceRequest: ReturnBalanceRequest,
     ): Call<BaseResponseModel<ReturnBalanceResponse>>
+
+    @Headers("Content-Type:application/json")
+    @POST("api/v1/member_support_tickets/custom_filter")
+    fun getSupportData(
+        @Header("Authorization") authHeader: String?,
+        @Body getSupportRequest: GetSupportRequest,
+    ): Call<BaseResponseModel2<SupportResponse>>
+    @Headers("Content-Type:application/json")
+    @POST("api/v1/member_support_tickets")
+    fun createSupportTicket(
+        @Header("Authorization") authHeader: String?,
+        @Body createSupportRequest: CreateSupportRequest,
+    ): Call<BaseResponseModel<SupportResponse>>
+    @Headers("Content-Type:application/json")
+    @POST("api/v1/member_support_tickets/2")
+    fun memberSupportTicket(
+        @Header("Authorization") authHeader: String?,
+        @Body createSupportRequest: CreateSupportRequest,
+    ): Call<BaseResponseModel<SupportResponse>>
 }

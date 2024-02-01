@@ -54,8 +54,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header_card" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/etCurrentBalance"
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etSupport"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -63,8 +63,6 @@
         android:layout_marginEnd="10dp"
         android:background="@drawable/round_corners"
         android:backgroundTint="@color/sigInEditTextBackColor"
-        android:clickable="false"
-        android:focusable="false"
         android:fontFamily="@font/roboto_medium"
         android:hint="@string/enter_subject"
         android:maxLines="1"
@@ -88,7 +86,7 @@
         android:textSize="14sp"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etCurrentBalance" />
+        app:layout_constraintTop_toBottomOf="@id/etSupport" />
 
 
     <androidx.appcompat.widget.AppCompatEditText

@@ -6,10 +6,12 @@ import com.fionpay.agent.data.model.request.AddModemBalanceModel
 import com.fionpay.agent.data.model.request.AddModemSlotsModel
 import com.fionpay.agent.data.model.request.Bank
 import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
+import com.fionpay.agent.data.model.request.CreateSupportRequest
 import com.fionpay.agent.data.model.request.FilterResponse
 import com.fionpay.agent.data.model.request.GetAgentB2BRequest
 import com.fionpay.agent.data.model.request.GetBalanceByFilterRequest
 import com.fionpay.agent.data.model.request.GetPendingModemRequest
+import com.fionpay.agent.data.model.request.GetSupportRequest
 import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.ProfileResponse
@@ -32,6 +34,7 @@ import com.fionpay.agent.data.model.response.GetStatusCountResponse
 import com.fionpay.agent.data.model.response.ModemPinCodeResponse
 import com.fionpay.agent.data.model.response.PendingModemResponse
 import com.fionpay.agent.data.model.response.ReturnBalanceResponse
+import com.fionpay.agent.data.model.response.SupportResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.data.remote.FionApiServices
 import com.fionpay.agent.roomDB.FionDatabase
@@ -317,6 +320,40 @@ class DashBoardRepository(
         apiServices.getB2BRecord("Bearer " + sharedPreference.getToken(), getAgentB2BRequest)
             .apply {
                 execute2(this, success, fail, context, message)
+            }
+    }
+
+    fun getSupportData(
+        success: (b2BResponse: List<SupportResponse>) -> Unit,
+        getSupportRequest: GetSupportRequest,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.getSupportData("Bearer " + sharedPreference.getToken(), getSupportRequest)
+            .apply {
+                execute2(this, success, fail, context, message)
+            }
+    }
+    fun createSupportTicket(
+        success: (supportResponse: SupportResponse) -> Unit,
+        createSupportRequest: CreateSupportRequest,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.createSupportTicket("Bearer " + sharedPreference.getToken(), createSupportRequest)
+            .apply {
+                execute(this, success, fail, context, message)
+            }
+    }
+    fun memberSupportTicket(
+        success: (supportResponse: SupportResponse) -> Unit,
+        createSupportRequest: CreateSupportRequest,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.memberSupportTicket("Bearer " + sharedPreference.getToken(), createSupportRequest)
+            .apply {
+                execute(this, success, fail, context, message)
             }
     }
 

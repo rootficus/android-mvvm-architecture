@@ -6,11 +6,13 @@ import com.fionpay.agent.data.model.request.AddModemBalanceModel
 import com.fionpay.agent.data.model.request.AddModemSlotsModel
 import com.fionpay.agent.data.model.request.Bank
 import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
+import com.fionpay.agent.data.model.request.CreateSupportRequest
 import com.fionpay.agent.data.model.request.FilterResponse
 import com.fionpay.agent.data.model.request.GetAgentB2BRequest
 import com.fionpay.agent.data.model.request.GetBalanceByFilterRequest
 import com.fionpay.agent.data.model.request.GetMessageByFilterRequest
 import com.fionpay.agent.data.model.request.GetPendingModemRequest
+import com.fionpay.agent.data.model.request.GetSupportRequest
 import com.fionpay.agent.data.model.request.Modem
 import com.fionpay.agent.data.model.request.ModemItemModel
 import com.fionpay.agent.data.model.request.ProfileResponse
@@ -33,6 +35,7 @@ import com.fionpay.agent.data.model.response.GetStatusCountResponse
 import com.fionpay.agent.data.model.response.ModemPinCodeResponse
 import com.fionpay.agent.data.model.response.PendingModemResponse
 import com.fionpay.agent.data.model.response.ReturnBalanceResponse
+import com.fionpay.agent.data.model.response.SupportResponse
 import com.fionpay.agent.data.model.response.TransactionModemResponse
 import com.fionpay.agent.data.repository.DashBoardRepository
 import com.fionpay.agent.ui.base.BaseViewModel
@@ -449,6 +452,50 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
                 getAgentB2BRequest,
                 { error -> getB2BRecordResponseModel.setError(error) },
                 { message -> getB2BRecordResponseModel.setError(message) })
+        }
+    }
+
+    val getSupportDataResponseModel = MutableLiveData<ResponseData<List<SupportResponse>>>()
+    fun getSupportData(getSupportRequest: GetSupportRequest) {
+        getSupportDataResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.getSupportData({ success ->
+                getSupportDataResponseModel.setSuccess(
+                    success
+                )
+            },
+                getSupportRequest,
+                { error -> getSupportDataResponseModel.setError(error) },
+                { message -> getSupportDataResponseModel.setError(message) })
+        }
+    }
+    val createSupportDataResponseModel = MutableLiveData<ResponseData<SupportResponse>>()
+    fun createSupportTicket(createSupportRequest: CreateSupportRequest) {
+        createSupportDataResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.createSupportTicket({ success ->
+                createSupportDataResponseModel.setSuccess(
+                    success
+                )
+            },
+                createSupportRequest,
+                { error -> createSupportDataResponseModel.setError(error) },
+                { message -> createSupportDataResponseModel.setError(message) })
+        }
+    }
+
+    val memberSupportDataResponseModel = MutableLiveData<ResponseData<SupportResponse>>()
+    fun memberSupportTicket(createSupportRequest: CreateSupportRequest) {
+        memberSupportDataResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.memberSupportTicket({ success ->
+                memberSupportDataResponseModel.setSuccess(
+                    success
+                )
+            },
+                createSupportRequest,
+                { error -> memberSupportDataResponseModel.setError(error) },
+                { message -> memberSupportDataResponseModel.setError(message) })
         }
     }
 

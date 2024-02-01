@@ -25,6 +25,16 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="0dp">
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:tint="@color/homeTextColor"
+                android:src="@drawable/arrow_left"/>
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/headerSupport"
                 android:layout_width="wrap_content"
@@ -33,9 +43,10 @@
                 android:text="@string/support"
                 android:textColor="@color/homeTextColor"
                 android:textSize="22sp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/img_back"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -49,8 +60,10 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/supportHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_marginTop="@dimen/_8sdp"
             app:layout_constraintTop_toBottomOf="@id/topHeadLayout">
 
@@ -97,7 +110,7 @@
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@id/txtDescription"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.15" />
+                app:layout_constraintWidth_percent="0.13" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtDate"
@@ -108,11 +121,24 @@
                 android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@id/txtStatus"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.17" />
+                app:layout_constraintWidth_percent="0.19" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/supportList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/supportHeader"
+            tools:itemCount="10"
+            android:paddingTop="@dimen/_8sdp"
+            tools:listitem="@layout/item_support_manager" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtNoData"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
