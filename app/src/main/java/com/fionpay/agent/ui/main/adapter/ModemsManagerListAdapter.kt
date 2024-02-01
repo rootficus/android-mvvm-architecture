@@ -52,6 +52,8 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResp
             binding.txtUserName.text = fullName
             binding.txtPinCode.text = item.pinCode.toString()
             binding.txtPinCode.text = item.pinCode.toString()
+            binding.txtHoldBal.text = item.holdBalance.toString()
+            binding.txtAvailBal.text = item.availableBalance.toString()
             binding.currentBalanceAmount.text = balance
             binding.txtTotalCashOut.text = totalCashOut
             binding.txtTodayCashOut.text = todayCashOut

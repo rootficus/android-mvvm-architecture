@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/_5sdp"
-            android:paddingVertical="@dimen/_2sdp"
+            android:paddingVertical="@dimen/_4sdp"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -28,6 +28,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:text="Ticket No."
+                android:textStyle="bold"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -40,6 +41,7 @@
                 android:fontFamily="@font/poppins"
                 android:text="Subject :"
                 android:textSize="14sp"
+                android:layout_marginTop="@dimen/_3sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txtTicketNumber"
                 app:layout_constraintWidth_percent="0.18" />
@@ -50,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:textSize="14sp"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 app:layout_constraintStart_toEndOf="@id/lableSubject"
                 app:layout_constraintTop_toBottomOf="@id/txtTicketNumber"
@@ -61,6 +64,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:text="Description :"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/txtSubject"/>
@@ -71,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:textSize="14sp"
+                android:layout_marginTop="@dimen/_3sdp"
                 android:layout_marginStart="@dimen/_5sdp"
                 app:layout_constraintStart_toEndOf="@id/lableDescription"
                 app:layout_constraintTop_toBottomOf="@id/txtSubject"

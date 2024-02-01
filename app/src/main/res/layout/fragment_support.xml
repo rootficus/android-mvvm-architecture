@@ -27,8 +27,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_back"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -42,7 +42,7 @@
                 android:fontFamily="@font/poppins"
                 android:text="@string/support"
                 android:textColor="@color/homeTextColor"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@id/img_back"
@@ -133,7 +133,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/supportHeader"
             tools:itemCount="10"
-            android:paddingTop="@dimen/_8sdp"
             tools:listitem="@layout/item_support_manager" />
 
 

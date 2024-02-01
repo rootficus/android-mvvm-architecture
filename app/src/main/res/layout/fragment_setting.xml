@@ -64,15 +64,6 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.0" />
 
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/editProfileIcon"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:src="@drawable/edit_profile_icon"
-                            app:layout_constraintBottom_toBottomOf="@id/userImage"
-                            app:layout_constraintEnd_toEndOf="@id/userImage"
-                            app:layout_constraintStart_toStartOf="@id/userImage" />
-
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -127,6 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_20sdp"
+            android:visibility="gone"
             android:background="@drawable/round_corners"
             android:backgroundTint="@color/homeCardBackColor"
             android:paddingHorizontal="@dimen/_10sdp"
