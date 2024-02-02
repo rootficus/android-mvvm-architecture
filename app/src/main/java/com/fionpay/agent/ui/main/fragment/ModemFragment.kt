@@ -31,6 +31,7 @@ import com.fionpay.agent.data.model.request.CheckNumberAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
 import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateLoginRequest
+import com.fionpay.agent.data.model.request.UpdateModemHoldBalanceModel
 import com.fionpay.agent.data.model.response.DashBoardItemResponse
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.Slots
@@ -504,13 +505,12 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                         Log.i("Data", "::${it.data}")
                         if (dialogNumberEditSheetDialog.isShowing) {
                             dialogNumberEditSheetDialog.dismiss()
-                            getModemsListResponse.balance = it.data?.balance
-                            getModemsListResponse.availableBalance = it.data?.availableBalance
-                            getModemsListResponse.holdBalance = it.data?.holdBalance
-                            it.data?.agentBalance?.let { it1 -> viewModel.setAvailableBalance(it1) }
-                            modemsManagerListAdapter?.notifyDataSetChanged()
-                            // getModemsListApi()
                         }
+                        getModemsListResponse.balance = it.data?.balance
+                        getModemsListResponse.availableBalance = it.data?.availableBalance
+                        getModemsListResponse.holdBalance = it.data?.holdBalance
+                        it.data?.agentBalance?.let { it1 -> viewModel.setAvailableBalance(it1) }
+                        modemsManagerListAdapter?.notifyDataSetChanged()
                     }
 
                     Status.ERROR -> {
@@ -590,9 +590,9 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun updateModemBalance(getModemsListResponse: GetModemsListResponse, amount: Double) {
+    private fun updateModemBalance(getModemsListResponse: GetModemsListResponse, holdBalance: Double) =
         if (networkHelper.isNetworkConnected()) {
-            viewModel.holdModemBalance(AddModemBalanceModel(getModemsListResponse.id, amount))
+            viewModel.holdModemBalance(UpdateModemHoldBalanceModel(getModemsListResponse.id, holdBalance))
             viewModel.getHoldModemBalanceResponseModel.observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.SUCCESS -> {
@@ -600,11 +600,11 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                         Log.i("Data", "::${it.data}")
                         if (holdBottomSheetDialog.isShowing) {
                             holdBottomSheetDialog.dismiss()
-                            getModemsListResponse.balance = it.data?.balance
-                            getModemsListResponse.availableBalance = it.data?.availableBalance
-                            getModemsListResponse.holdBalance = it.data?.holdBalance
-                            modemsManagerListAdapter?.notifyDataSetChanged()
                         }
+                        getModemsListResponse.balance = it.data?.balance
+                        getModemsListResponse.availableBalance = it.data?.availableBalance
+                        getModemsListResponse.holdBalance = it.data?.holdBalance
+                        modemsManagerListAdapter?.notifyDataSetChanged()
                     }
 
                     Status.ERROR -> {
@@ -623,7 +623,6 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                 mActivity.getString(R.string.NO_INTERNET_CONNECTION)
             )
         }
-    }
 
     private fun addBalanceBottomSheetDialog(getModemsListResponse: GetModemsListResponse) {
         val binding = ModemBottomSheetBinding.inflate(layoutInflater)

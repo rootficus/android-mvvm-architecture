@@ -21,6 +21,7 @@ import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
 import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateBalanceRequest
 import com.fionpay.agent.data.model.request.UpdateLoginRequest
+import com.fionpay.agent.data.model.request.UpdateModemHoldBalanceModel
 import com.fionpay.agent.data.model.response.B2BResponse
 import com.fionpay.agent.data.model.response.BLTransactionModemResponse
 import com.fionpay.agent.data.model.response.DashBoardItemResponse
@@ -31,6 +32,7 @@ import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.data.model.response.GetModemSlotsResponse
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.GetStatusCountResponse
+import com.fionpay.agent.data.model.response.GetUpdateModemHoldBalanceResponse
 import com.fionpay.agent.data.model.response.ModemPinCodeResponse
 import com.fionpay.agent.data.model.response.PendingModemResponse
 import com.fionpay.agent.data.model.response.ReturnBalanceResponse
@@ -250,12 +252,12 @@ class DashBoardRepository(
     }
 
     fun holdModemBalance(
-        success: (getAddModemBalanceResponse: GetAddModemBalanceResponse) -> Unit,
+        success: (getUpdateModemHoldBalanceResponse: GetUpdateModemHoldBalanceResponse) -> Unit,
         fail: (error: String) -> Unit,
-        addModemBalanceModel: AddModemBalanceModel,
+        updateModemHoldBalanceModel: UpdateModemHoldBalanceModel,
         message: (msg: String) -> Unit
     ) {
-        apiServices.holdModemBalance("Bearer " + sharedPreference.getToken(), addModemBalanceModel)
+        apiServices.holdModemBalance("Bearer " + sharedPreference.getToken(), updateModemHoldBalanceModel)
             .apply {
                 execute(this, success, fail, context, message)
             }

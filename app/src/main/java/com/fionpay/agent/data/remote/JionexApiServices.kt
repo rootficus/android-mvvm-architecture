@@ -20,6 +20,7 @@ import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
 import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateBalanceRequest
 import com.fionpay.agent.data.model.request.UpdateLoginRequest
+import com.fionpay.agent.data.model.request.UpdateModemHoldBalanceModel
 import com.fionpay.agent.data.model.request.VerifyPinRequest
 import com.fionpay.agent.data.model.response.B2BResponse
 import com.fionpay.agent.data.model.response.BLTransactionModemResponse
@@ -31,6 +32,7 @@ import com.fionpay.agent.data.model.response.GetBalanceManageRecord
 import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.GetStatusCountResponse
+import com.fionpay.agent.data.model.response.GetUpdateModemHoldBalanceResponse
 import com.fionpay.agent.data.model.response.ModemPinCodeResponse
 import com.fionpay.agent.data.model.response.PendingModemResponse
 import com.fionpay.agent.data.model.response.ReturnBalanceResponse
@@ -114,11 +116,11 @@ interface FionApiServices {
     ): Call<BaseResponseModel<GetAddModemBalanceResponse>>
 
     @Headers("Content-Type:application/json")
-    @POST("api/v1/app/agents/hold_modem_balance")
+    @PUT("api/v1/app/agents/update_modem_hold_balance")
     fun holdModemBalance(
         @Header("Authorization") authHeader: String?,
-        @Body addModemBalanceModel: AddModemBalanceModel
-    ): Call<BaseResponseModel<GetAddModemBalanceResponse>>
+        @Body updateModemHoldBalanceModel: UpdateModemHoldBalanceModel
+    ): Call<BaseResponseModel<GetUpdateModemHoldBalanceResponse>>
 
     @Headers("Content-Type:application/json")
     @POST("api/v1/app/agents/remove_modem_balance")

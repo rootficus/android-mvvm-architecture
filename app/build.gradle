@@ -13,6 +13,7 @@ android {
         final BUILD_DATE = new Date().format('dd-MM-YYYY')
         applicationId "com.fionpay.agent"
         minSdk 26
+        //noinspection OldTargetApi
         targetSdk 33
         versionCode 1
         versionName "1.0.1"
@@ -69,17 +70,17 @@ android {
     productFlavors {
         uat {
             dimension "default"
-            buildConfigField("String", "VERSION", "\"PROD\"")
+            buildConfigField("String", "VERSION", "\"UAT\"")
             buildConfigField("String", "BASE_URL", "\"https://testapi.fionpay.com/\"")
         }
         stage {
             dimension "default"
-            buildConfigField("String", "VERSION", "\"UAT\"")
+            buildConfigField("String", "VERSION", "\"STAGING\"")
             buildConfigField("String", "BASE_URL", "\"http://192.168.1.69:3000/\"")
         }
         prod {
             dimension "default"
-            buildConfigField("String", "VERSION", "\"UAT\"")
+            buildConfigField("String", "VERSION", "\"PROD\"")
             buildConfigField("String", "BASE_URL", "\"https://api.fionpay.com/\"")
         }
 

@@ -22,6 +22,7 @@ import com.fionpay.agent.data.model.request.UpdateActiveInActiveRequest
 import com.fionpay.agent.data.model.request.UpdateAvailabilityRequest
 import com.fionpay.agent.data.model.request.UpdateBalanceRequest
 import com.fionpay.agent.data.model.request.UpdateLoginRequest
+import com.fionpay.agent.data.model.request.UpdateModemHoldBalanceModel
 import com.fionpay.agent.data.model.response.B2BResponse
 import com.fionpay.agent.data.model.response.BLTransactionModemResponse
 import com.fionpay.agent.data.model.response.DashBoardItemResponse
@@ -32,6 +33,7 @@ import com.fionpay.agent.data.model.response.GetMessageManageRecord
 import com.fionpay.agent.data.model.response.GetModemSlotsResponse
 import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.GetStatusCountResponse
+import com.fionpay.agent.data.model.response.GetUpdateModemHoldBalanceResponse
 import com.fionpay.agent.data.model.response.ModemPinCodeResponse
 import com.fionpay.agent.data.model.response.PendingModemResponse
 import com.fionpay.agent.data.model.response.ReturnBalanceResponse
@@ -367,9 +369,9 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
     }
 
     val getHoldModemBalanceResponseModel =
-        MutableLiveData<ResponseData<GetAddModemBalanceResponse>>()
+        MutableLiveData<ResponseData<GetUpdateModemHoldBalanceResponse>>()
 
-    fun holdModemBalance(addModemBalanceModel: AddModemBalanceModel) {
+    fun holdModemBalance(updateModemHoldBalanceModel: UpdateModemHoldBalanceModel) {
         getHoldModemBalanceResponseModel.setLoading(null)
         viewModelScope.launch(Dispatchers.IO) {
             dashBoardRepository.holdModemBalance({ success ->
@@ -378,7 +380,7 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
                 )
             },
                 { error -> getHoldModemBalanceResponseModel.setError(error) },
-                addModemBalanceModel,
+                updateModemHoldBalanceModel,
                 { message -> getHoldModemBalanceResponseModel.setError(message) })
         }
     }
