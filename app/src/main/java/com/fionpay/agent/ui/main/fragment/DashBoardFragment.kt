@@ -30,6 +30,7 @@ import com.fionpay.agent.utils.Constant
 import com.fionpay.agent.utils.NetworkHelper
 import com.fionpay.agent.utils.SharedPreference
 import com.fionpay.agent.utils.Status
+import com.fionpay.agent.utils.Utility
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import javax.inject.Inject
@@ -156,9 +157,9 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
     }
 
     private fun setDashBalanceUI() {
-        mDataBinding.availableBalanceEdit.text = viewModel.getAvailableBalance().toString()
-        mDataBinding.totalBalanceEdit.text = viewModel.getBalance().toString()
-        mDataBinding.holdBalanceEdit.text = viewModel.getHoldBalance().toString()
+        mDataBinding.availableBalanceEdit.text = viewModel.getAvailableBalance().let { Utility.convertDigitalCurrencyFormat(it) }
+        mDataBinding.totalBalanceEdit.text =viewModel.getBalance().let { Utility.convertDigitalCurrencyFormat(it) }
+        mDataBinding.holdBalanceEdit.text =viewModel.getHoldBalance().let { Utility.convertDigitalCurrencyFormat(it) }
     }
 
     private fun setAdapter(responseData: DashBoardItemResponse?) {

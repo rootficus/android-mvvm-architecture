@@ -15,7 +15,7 @@ android {
         minSdk 26
         targetSdk 33
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0.1"
         setProperty("archivesBaseName", "FionPay-Agent_" + BUILD_DATE+ "_V" + versionName)
         vectorDrawables.useSupportLibrary = true
 
@@ -69,12 +69,17 @@ android {
     productFlavors {
         uat {
             dimension "default"
+            buildConfigField("String", "VERSION", "\"PROD\"")
+            buildConfigField("String", "BASE_URL", "\"https://testapi.fionpay.com/\"")
+        }
+        stage {
+            dimension "default"
             buildConfigField("String", "VERSION", "\"UAT\"")
             buildConfigField("String", "BASE_URL", "\"http://192.168.1.69:3000/\"")
         }
         prod {
             dimension "default"
-            buildConfigField("String", "VERSION", "\"PROD\"")
+            buildConfigField("String", "VERSION", "\"UAT\"")
             buildConfigField("String", "BASE_URL", "\"https://api.fionpay.com/\"")
         }
 
@@ -103,6 +108,9 @@ android {
     }
     kapt {
         correctErrorTypes true
+    }
+    lint {
+        baseline = file("lint-baseline.xml")
     }
 }
 

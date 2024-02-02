@@ -36,6 +36,7 @@ import com.fionpay.agent.data.model.response.GetModemsListResponse
 import com.fionpay.agent.data.model.response.Slots
 import com.fionpay.agent.databinding.BankListBottomSheetBinding
 import com.fionpay.agent.databinding.FragmentModemBinding
+import com.fionpay.agent.databinding.HoldBottomSheetBinding
 import com.fionpay.agent.databinding.ItemPhoneBottomSheetBinding
 import com.fionpay.agent.databinding.ModemBottomSheetBinding
 import com.fionpay.agent.sdkInit.FionSDK
@@ -78,13 +79,13 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
     private var modemsManagerListAdapter: ModemsManagerListAdapter? = null
     private var listGetModemsByFilter: ArrayList<GetModemsListResponse> = arrayListOf()
 
-    private var bankList: List<Bank>? = listOf()
     private lateinit var bankListAdapter: BankListAdapter
 
     private var apiCall: String = ""
     private var filter = 0
     lateinit var obj: DashBoardItemResponse
     lateinit var dialogNumberEditSheetDialog : BottomSheetDialog
+    lateinit var holdBottomSheetDialog : BottomSheetDialog
     private val onFionModemStatusChangeRequestActionsReceiver: BroadcastReceiver =
         object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent) {
@@ -121,7 +122,6 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
     private fun initializeView() {
         dialogNumberEditSheetDialog = BottomSheetDialog(mActivity)
         getBundleData()
-        bankList = viewModel.getBanksListDao()
         val gson = Gson()
         val json: String? = viewModel.getDashBoardDataModel()
         obj =
@@ -217,75 +217,19 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
             }
         }
 
-        override fun onCardClick(getModemsListResponse: GetModemsListResponse) {
-
-            val binding = ModemBottomSheetBinding.inflate(layoutInflater)
-            dialogNumberEditSheetDialog.setContentView(binding.root)
-            dialogNumberEditSheetDialog.setCanceledOnTouchOutside(true)
-            dialogNumberEditSheetDialog.setCancelable(true)
-            dialogNumberEditSheetDialog.show()
-
-            val fullName = "${getModemsListResponse.firstName} ${getModemsListResponse.lastName}"
-            val balance = "${Utility.currencySymbolBD}${getModemsListResponse.balance.toString()}"
-            binding.labelTotalBalance.text =
-                getString(R.string.new_balance_will,viewModel.getAvailableBalance().toString())
-            binding.labelTitle.text = fullName
-            binding.etCurrentBalance.text = balance
-
-            Log.i("Current:", "${binding.etCurrentBalance.text}")
-
-            binding.etUpdateBalance.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    s.toString()
-                }
-
-                override fun afterTextChanged(s: Editable?) {
-                    if (s?.isNotEmpty() == true) {
-                        val newVal = s.toString().toDouble()
-                        val totalBalance = viewModel.getAvailableBalance().minus(newVal)
-                        if (totalBalance > 0.0) {
-                            binding.labelTotalBalance.text =
-                                getString(R.string.new_balance_will, totalBalance.toString())
-                        } else {
-                            Toast.makeText(
-                                context,
-                                "Entered amount should be less than agent balance",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            getString(R.string.new_balance_will, viewModel.getAvailableBalance().toString())
-                            binding.etUpdateBalance.setText("")
-                        }
-
-                    } else {
-                        binding.labelTotalBalance.text =
-                            getString(R.string.new_balance_will, viewModel.getAvailableBalance().toString())
-                    }
-
-                }
-            })
-
-            binding.imageClose.setOnClickListener {
-                dialogNumberEditSheetDialog.dismiss()
-            }
-            binding.btnUpdate.setOnClickListener {
-                if (binding.etUpdateBalance.text.toString().isEmpty()) {
-                    binding.etUpdateBalance.error = "Please enter amount"
-                } else {
-
-                    val amount = binding.etUpdateBalance.text.toString().toDouble()
-                    addModemBalance(getModemsListResponse, amount)
-                    //binding.etUpdateBalance.setText("")
-                }
-            }
+        override fun onAddBalanceEdit(getModemsListResponse: GetModemsListResponse) {
+            addBalanceBottomSheetDialog(getModemsListResponse)
         }
 
         override fun onBankClick(getModemsListResponse: GetModemsListResponse) {
             openBottomBankListDialog(getModemsListResponse)
         }
+
+        override fun onHoldBalanceEdit(getModemsListResponse: GetModemsListResponse) {
+            updateHoldBalanceBottomSheetDialog(getModemsListResponse)
+        }
     }
+
 
     private fun changeLoginRequest(updateLoginRequest: UpdateLoginRequest) {
         val message = "Are you sure you want to Logout?"
@@ -587,20 +531,173 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         }
     }
 
-    private var dialogBankListDialog: BottomSheetDialog? = null
+    private fun updateHoldBalanceBottomSheetDialog(modemsListResponse: GetModemsListResponse) {
+        holdBottomSheetDialog = BottomSheetDialog(mActivity)
+        val binding = HoldBottomSheetBinding.inflate(layoutInflater)
+        holdBottomSheetDialog.setContentView(binding.root)
+        holdBottomSheetDialog.setCanceledOnTouchOutside(true)
+        holdBottomSheetDialog.setCancelable(true)
+        holdBottomSheetDialog.show()
+        binding.labelTotalBalance.text =
+            getString(R.string.new_balance_will,modemsListResponse.availableBalance.toString())
+        binding.etUpdateBalance.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                s.toString()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s?.isNotEmpty() == true) {
+                    val newVal = s.toString().toDouble()
+                    val totalBalance = modemsListResponse.availableBalance?.minus(newVal)
+                    if (totalBalance!! > 0.0) {
+                        binding.labelTotalBalance.text =
+                            getString(R.string.new_balance_will, totalBalance.toString())
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "Entered amount should be less than modem available balance",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        getString(R.string.new_balance_will, modemsListResponse.availableBalance.toString())
+                        binding.etUpdateBalance.setText("")
+                    }
+
+                } else {
+                    binding.labelTotalBalance.text =
+                        getString(R.string.new_balance_will, modemsListResponse.availableBalance.toString())
+                }
+
+            }
+        })
+
+        binding.imageClose.setOnClickListener {
+            holdBottomSheetDialog.dismiss()
+        }
+
+        binding.btnUpdate.setOnClickListener {
+            if (binding.etUpdateBalance.text.toString().isEmpty()) {
+                binding.etUpdateBalance.error = "Please enter hold amount"
+            } else {
+
+                val amount = binding.etUpdateBalance.text.toString().toDouble()
+                updateModemBalance(modemsListResponse, amount)
+                //binding.etUpdateBalance.setText("")
+            }
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun updateModemBalance(getModemsListResponse: GetModemsListResponse, amount: Double) {
+        if (networkHelper.isNetworkConnected()) {
+            viewModel.holdModemBalance(AddModemBalanceModel(getModemsListResponse.id, amount))
+            viewModel.getHoldModemBalanceResponseModel.observe(viewLifecycleOwner) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        progressBar.dismiss()
+                        Log.i("Data", "::${it.data}")
+                        if (holdBottomSheetDialog.isShowing) {
+                            holdBottomSheetDialog.dismiss()
+                            getModemsListResponse.balance = it.data?.balance
+                            getModemsListResponse.availableBalance = it.data?.availableBalance
+                            getModemsListResponse.holdBalance = it.data?.holdBalance
+                            modemsManagerListAdapter?.notifyDataSetChanged()
+                        }
+                    }
+
+                    Status.ERROR -> {
+                        progressBar.dismiss()
+                        showErrorMessage(it.message)
+                    }
+
+                    Status.LOADING -> {
+                        progressBar.show()
+                    }
+                }
+            }
+        } else {
+            progressBar.dismiss()
+            showMessage(
+                mActivity.getString(R.string.NO_INTERNET_CONNECTION)
+            )
+        }
+    }
+
+    private fun addBalanceBottomSheetDialog(getModemsListResponse: GetModemsListResponse) {
+        val binding = ModemBottomSheetBinding.inflate(layoutInflater)
+        dialogNumberEditSheetDialog.setContentView(binding.root)
+        dialogNumberEditSheetDialog.setCanceledOnTouchOutside(true)
+        dialogNumberEditSheetDialog.setCancelable(true)
+        dialogNumberEditSheetDialog.show()
+
+        val fullName = "${getModemsListResponse.firstName} ${getModemsListResponse.lastName}"
+        val balance = "${Utility.currencySymbolBD}${getModemsListResponse.balance.toString()}"
+        binding.labelTotalBalance.text =
+            getString(R.string.new_balance_will,viewModel.getAvailableBalance().toString())
+        binding.labelTitle.text = fullName
+        binding.etCurrentBalance.text = balance
+
+        Log.i("Current:", "${binding.etCurrentBalance.text}")
+
+        binding.etUpdateBalance.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                s.toString()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s?.isNotEmpty() == true) {
+                    val newVal = s.toString().toDouble()
+                    val totalBalance = viewModel.getAvailableBalance().minus(newVal)
+                    if (totalBalance > 0.0) {
+                        binding.labelTotalBalance.text =
+                            getString(R.string.new_balance_will, totalBalance.toString())
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "Entered amount should be less than agent available balance",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        getString(R.string.new_balance_will, viewModel.getAvailableBalance().toString())
+                        binding.etUpdateBalance.setText("")
+                    }
+
+                } else {
+                    binding.labelTotalBalance.text =
+                        getString(R.string.new_balance_will, viewModel.getAvailableBalance().toString())
+                }
+
+            }
+        })
+
+        binding.imageClose.setOnClickListener {
+            dialogNumberEditSheetDialog.dismiss()
+        }
+        binding.btnUpdate.setOnClickListener {
+            if (binding.etUpdateBalance.text.toString().isEmpty()) {
+                binding.etUpdateBalance.error = "Please enter amount"
+            } else {
+
+                val amount = binding.etUpdateBalance.text.toString().toDouble()
+                addModemBalance(getModemsListResponse, amount)
+                //binding.etUpdateBalance.setText("")
+            }
+        }
+    }
+
     private fun openBottomBankListDialog(getModemsListResponse: GetModemsListResponse) {
-        dialogBankListDialog = BottomSheetDialog(mActivity)
+        val dialogBankListDialog = BottomSheetDialog(mActivity)
         val binding = BankListBottomSheetBinding.inflate(layoutInflater)
-        var bankListTemp: List<Bank>? = bankList
-        /*  bankList?.forEach {
-              if (!containsObjectWithBankId(getModemsListResponse.slots,it)){
-                  bankListTemp?.add(it)
-              }
-          }*/
+        val bankList = viewModel.getBanksListDao()
+        val bankListTemp: List<Bank>? = bankList
         if (bankListTemp.isNullOrEmpty()) {
             Toast.makeText(context, "No more bank there", Toast.LENGTH_SHORT).show()
             return
-        } else if (bankListTemp.size == 0) {
+        } else if (bankListTemp.isEmpty()) {
             Toast.makeText(context, "No more bank there", Toast.LENGTH_SHORT).show()
             return
         }
@@ -608,10 +705,10 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         binding.bankList.layoutManager = GridLayoutManager(context, 2)
         bankListAdapter.listener = cardPhoneNumberListener
         binding.bankList.adapter = bankListAdapter
-        dialogBankListDialog?.setContentView(binding.root)
-        dialogBankListDialog?.setOnShowListener {
+        dialogBankListDialog.setContentView(binding.root)
+        dialogBankListDialog.setOnShowListener {
             Handler().postDelayed({
-                dialogBankListDialog?.let {
+                dialogBankListDialog.let {
                     val sheet = it
                     sheet.behavior.state = BottomSheetBehavior.STATE_EXPANDED
                 }
@@ -619,9 +716,9 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         }
         binding.sendBtn.text = context?.getString(R.string.add_Bank)
         binding.sendBtn.setOnClickListener {
-            dialogBankListDialog?.dismiss()
+            dialogBankListDialog.dismiss()
             val modelSlotsList: ArrayList<AddModelSlot> = arrayListOf()
-            bankList?.forEach {
+            bankList.forEach {
                 if (it.phoneNumber?.isNotEmpty() == true) {
                     modelSlotsList.add(AddModelSlot(it.phoneNumber, it.bankId))
                 }
@@ -632,15 +729,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
                 showMessage("Please Select Bank")
             }
         }
-        dialogBankListDialog?.show()
-    }
-
-    private fun containsObjectWithBankId(slots: List<Slots>?, bank: Bank): Boolean {
-        slots?.forEach {
-            if (it.mobileBankingId == bank.bankId)
-                return true
-        }
-        return false
+        dialogBankListDialog.show()
     }
 
     fun addModemSlots(modemId: String?, listAddModeSlots: List<AddModelSlot>) {

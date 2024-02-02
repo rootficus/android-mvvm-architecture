@@ -121,14 +121,19 @@ object Utility {
         return fioDao?.isNotificationExits(id)
     }
 
-    //Remove Currency Symbol
-    //private val currencySymbolBD = "৳"
-    val currencySymbolBD = ""
+    val currencySymbolBD = "৳"
     fun convertCurrencyFormat(currency: Float): String {
         Log.d("convertCurrencyFormat", "::${currency}")
         val formatter = DecimalFormat("###,###,##0.00")
         Log.d("convertCurrencyFormat", "::${formatter.format(currency)}")
         return currencySymbolBD+formatter.format(currency)
+    }
+
+    fun convertDigitalCurrencyFormat(currency: Float): String {
+        Log.d("convertCurrencyFormat", "::${currency}")
+        val formatter = DecimalFormat("###,###,##0.00")
+        Log.d("convertCurrencyFormat", "::${formatter.format(currency)}")
+        return formatter.format(currency)
     }
 
     fun isEmailValid(email: String): Boolean {

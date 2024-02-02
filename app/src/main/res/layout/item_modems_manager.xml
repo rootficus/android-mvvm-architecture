@@ -10,9 +10,8 @@
         android:id="@+id/card_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_5sdp"
-        android:layout_marginBottom="@dimen/_5sdp"
         app:cardElevation="@dimen/_2sdp"
+        android:layout_margin="@dimen/_2sdp"
         app:cardUseCompatPadding="true"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -20,15 +19,17 @@
             android:id="@+id/modemLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/homeCardBackColor"
-            android:paddingTop="10dp">
+            android:background="@color/homeCardBackColor">
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/userDetailLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/_10sdp"
+                android:background="@color/primaryBlue"
+                android:paddingHorizontal="@dimen/_3sdp"
+                android:paddingVertical="@dimen/_3sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -38,8 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
                     android:fontFamily="@font/poppins"
-                    android:text="@string/dot"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -53,226 +53,108 @@
                     android:layout_weight="0.1"
                     android:fontFamily="@font/poppins"
                     android:letterSpacing="1"
-                    android:text="@string/dot"
-                    android:textColor="@color/textColor"
+                    android:textColor="@color/white"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                      app:layout_constraintTop_toTopOf="parent" />
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/currentBalanceAmount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:text="@string/dot"
-                    android:textColor="@color/textColor"
-                    android:textSize="18sp"
-                    android:visibility="gone"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.5" />
-
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <View
-                android:id="@+id/viewSeparator"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:background="@color/gray"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/userDetailLayout"
-                app:layout_constraintWidth_percent="0.9" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/balanceLayout"
+                android:id="@+id/currentBalanceLayout"
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:background="@drawable/border"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/viewSeparator">
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/userDetailLayout">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/labelAvailBal"
+                    android:id="@+id/totalBalanceTxt"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:text="Avail Bal."
-                    android:textAlignment="center"
-                    android:gravity="center"
+                    android:text="@string/total_balance_label"
+                    android:textColor="@color/homeTextColor"
                     android:textSize="12sp"
-                    android:textStyle="bold"
+                    android:gravity="center"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.18" />
+                    app:layout_constraintWidth_percent=".33"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtAvailBal"
+                    android:id="@+id/availableBalanceTxt"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:textAlignment="center"
+                    android:text="@string/available_balance"
+                    android:textColor="@color/homeTextColor"
                     android:textSize="12sp"
                     android:gravity="center"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@id/labelAvailBal"
+                    app:layout_constraintStart_toEndOf="@+id/totalBalanceTxt"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.32" />
-
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/gray"
-                    app:layout_constraintBottom_toBottomOf="@id/balanceLayout"
-                    app:layout_constraintStart_toEndOf="@id/txtAvailBal"
-                    app:layout_constraintTop_toTopOf="@id/balanceLayout" />
+                    app:layout_constraintWidth_percent=".33" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/labelHoldBal"
+                    android:id="@+id/holdBalanceTxt"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:text="Hold Bal."
-                    android:gravity="center"
-                    android:textAlignment="center"
+                    android:text="@string/hold_balance"
+                    android:textColor="@color/homeTextColor"
                     android:textSize="12sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@id/txtAvailBal"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/availableBalanceTxt"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.18" />
+                    app:layout_constraintWidth_percent=".33" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/txtHoldBal"
+                    android:id="@+id/totalBalanceEdit"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:textAlignment="center"
-                    android:gravity="center"
-                    android:textSize="12sp"
+                    android:text="@string/_0_00"
+                    android:textColor="@color/textColor"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@id/labelHoldBal"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.32" />
+                    android:gravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/totalBalanceTxt"
+                    app:layout_constraintWidth_percent=".33"
+                    />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/availableBalanceEdit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/_0_00"
+                    android:textColor="@color/textColor"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    app:layout_constraintStart_toStartOf="@id/availableBalanceTxt"
+                    app:layout_constraintTop_toBottomOf="@id/availableBalanceTxt"
+                    app:layout_constraintWidth_percent=".33"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/holdBalanceEdit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/_0_00"
+                    android:textColor="@color/textColor"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:drawablePadding="@dimen/_minus10sdp"
+                    android:drawableEnd="@drawable/hold_edit_icon"
+                    app:layout_constraintStart_toStartOf="@id/holdBalanceTxt"
+                    app:layout_constraintTop_toBottomOf="@id/holdBalanceTxt"
+                    app:layout_constraintWidth_percent=".33"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgBalance"
-                android:layout_width="@dimen/_22sdp"
-                android:layout_height="@dimen/_22sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:scaleType="fitXY"
-                android:src="@drawable/today_cash_in"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/viewSeparator" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtTodayCashIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_weight="0.2"
-                android:fontFamily="@font/poppins"
-                android:paddingStart="@dimen/_5sdp"
-                android:text="@string/dot"
-                android:textColor="@color/homeTextColor"
-                android:textSize="16sp"
-                android:visibility="gone"
-                app:layout_constraintStart_toEndOf="@id/imgBalance"
-                app:layout_constraintTop_toTopOf="@id/imgBalance" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgTodayCashOut"
-                android:layout_width="@dimen/_22sdp"
-                android:layout_height="@dimen/_22sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:scaleType="fitXY"
-                android:src="@drawable/today_cash_out"
-                android:visibility="gone"
-                app:layout_constraintEnd_toStartOf="@id/txtTodayCashOut"
-                app:layout_constraintTop_toBottomOf="@id/viewSeparator" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtTodayCashOut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:layout_weight="0.2"
-                android:fontFamily="@font/poppins"
-                android:paddingStart="@dimen/_5sdp"
-                android:text="@string/dot"
-                android:textColor="@color/primaryBlue"
-                android:textSize="16sp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/imgBalance" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgCashIn"
-                android:layout_width="@dimen/_22sdp"
-                android:layout_height="@dimen/_22sdp"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:scaleType="fitXY"
-                android:src="@drawable/total_cash_in"
-                android:visibility="gone"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtTodayCashIn" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtTotalCashIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_weight="0.2"
-                android:fontFamily="@font/poppins"
-                android:paddingStart="@dimen/_5sdp"
-                android:text="@string/dot"
-                android:textColor="@color/primaryBlue"
-                android:textSize="16sp"
-                android:visibility="gone"
-                app:layout_constraintStart_toEndOf="@id/imgCashIn"
-                app:layout_constraintTop_toTopOf="@id/imgCashIn" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgTotalCashOut"
-                android:layout_width="@dimen/_22sdp"
-                android:layout_height="@dimen/_22sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:scaleType="fitXY"
-                android:src="@drawable/total_cash_out"
-                android:visibility="gone"
-                app:layout_constraintEnd_toStartOf="@id/txtTodayCashOut"
-                app:layout_constraintTop_toBottomOf="@id/txtTodayCashIn" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txtTotalCashOut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:layout_weight="0.2"
-                android:fontFamily="@font/poppins"
-                android:paddingStart="@dimen/_5sdp"
-                android:text="@string/dot"
-                android:textColor="@color/primaryBlue"
-                android:textSize="16sp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/imgTotalCashOut" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtActive"
@@ -288,7 +170,7 @@
                 android:textColor="@color/textColor"
                 app:layout_constraintEnd_toStartOf="@id/txtBlock"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/balanceLayout"
+                app:layout_constraintTop_toBottomOf="@id/currentBalanceLayout"
                 app:layout_constraintWidth_percent="0.3" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -306,7 +188,7 @@
                 android:textColor="@color/textColor"
                 app:layout_constraintEnd_toStartOf="@id/txtLoggedIn"
                 app:layout_constraintStart_toEndOf="@id/txtActive"
-                app:layout_constraintTop_toBottomOf="@id/balanceLayout"
+                app:layout_constraintTop_toBottomOf="@id/currentBalanceLayout"
                 app:layout_constraintWidth_percent="0.3" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -324,7 +206,7 @@
                 android:textColor="@color/textColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/txtBlock"
-                app:layout_constraintTop_toBottomOf="@id/balanceLayout"
+                app:layout_constraintTop_toBottomOf="@id/currentBalanceLayout"
                 app:layout_constraintWidth_percent="0.3" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -335,37 +217,31 @@
                 app:layout_constraintTop_toBottomOf="@id/txtLoggedIn"
                 tools:itemCount="3" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnAddBank"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_30sdp"
-                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/_1sdp"
-                android:background="@color/selectChipColorBG"
                 android:fontFamily="@font/poppins"
                 android:gravity="center"
                 android:text="@string/add_Bank"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textStyle="bold"
+                android:textColor="@color/textColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btnAddBalance"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/bankList" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnAddBalance"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_1sdp"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:background="@color/approve"
                 android:fontFamily="@font/poppins"
                 android:gravity="center"
                 android:text="@string/add_balance"
                 android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textStyle="bold"
+                android:textColor="@color/textColor"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/btnAddBank"

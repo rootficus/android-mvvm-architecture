@@ -366,6 +366,23 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
         }
     }
 
+    val getHoldModemBalanceResponseModel =
+        MutableLiveData<ResponseData<GetAddModemBalanceResponse>>()
+
+    fun holdModemBalance(addModemBalanceModel: AddModemBalanceModel) {
+        getHoldModemBalanceResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.holdModemBalance({ success ->
+                getHoldModemBalanceResponseModel.setSuccess(
+                    success
+                )
+            },
+                { error -> getHoldModemBalanceResponseModel.setError(error) },
+                addModemBalanceModel,
+                { message -> getHoldModemBalanceResponseModel.setError(message) })
+        }
+    }
+
     val getModemSlotsResponseModel = MutableLiveData<ResponseData<List<GetModemSlotsResponse>>>()
     fun addModemSlots(addModemSlotsModel: AddModemSlotsModel) {
         getModemSlotsResponseModel.setLoading(null)

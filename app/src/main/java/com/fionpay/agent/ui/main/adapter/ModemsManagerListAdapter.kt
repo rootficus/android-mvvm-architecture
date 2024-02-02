@@ -21,9 +21,10 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResp
         fun onStatusClicked(updateActiveInActiveRequest: UpdateActiveInActiveRequest)
         fun onAvailabilityClicked(updateAvailabilityRequest: UpdateAvailabilityRequest)
         fun onLoginClicked(updateLoginRequest: UpdateLoginRequest)
-        fun onCardClick(getModemsListResponse: GetModemsListResponse)
+        fun onAddBalanceEdit(getModemsListResponse: GetModemsListResponse)
 
         fun onBankClick(getModemsListResponse: GetModemsListResponse)
+        fun onHoldBalanceEdit(getModemsListResponse: GetModemsListResponse)
     }
 
     var listener: ModemCardEvent? = null
@@ -44,21 +45,12 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResp
         with(holder)
         {
             val fullName = "${item.firstName.toString()} ${item.lastName.toString()}"
-            val balance = item.balance?.let { Utility.convertCurrencyFormat(it) }
-            val totalCashOut = item.totalCashOut?.let { Utility.convertCurrencyFormat(it) }
-            val todayCashOut = item.todayCashOut?.let { Utility.convertCurrencyFormat(it) }
-            val totalCashIn = item.totalCashIn?.let { Utility.convertCurrencyFormat(it) }
-            val todayCashIn = item.todayCashIn?.let { Utility.convertCurrencyFormat(it) }
             binding.txtUserName.text = fullName
             binding.txtPinCode.text = item.pinCode.toString()
             binding.txtPinCode.text = item.pinCode.toString()
-            binding.txtHoldBal.text = item.holdBalance.toString()
-            binding.txtAvailBal.text = item.availableBalance.toString()
-            binding.currentBalanceAmount.text = balance
-            binding.txtTotalCashOut.text = totalCashOut
-            binding.txtTodayCashOut.text = todayCashOut
-            binding.txtTotalCashIn.text = totalCashIn
-            binding.txtTodayCashIn.text = todayCashIn
+            binding.holdBalanceEdit.text = item.holdBalance?.let { Utility.convertDigitalCurrencyFormat(it) }
+            binding.availableBalanceEdit.text = item.availableBalance?.let { Utility.convertDigitalCurrencyFormat(it) }
+            binding.totalBalanceEdit.text = item.balance?.let { Utility.convertDigitalCurrencyFormat(it) }
             binding.txtActive.text = item.status.toString()
             // Login Status
             binding.txtLoggedIn.text = item.loginStatus.toString()
@@ -74,11 +66,15 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResp
             binding.bankList.adapter = itemBankListAdapter
 
             binding.btnAddBalance.setOnClickListener {
-                listener?.onCardClick(item)
+                listener?.onAddBalanceEdit(item)
             }
 
             binding.btnAddBank.setOnClickListener {
                 listener?.onBankClick(item)
+            }
+
+            binding.holdBalanceEdit.setOnClickListener{
+                listener?.onHoldBalanceEdit(item)
             }
         }
 

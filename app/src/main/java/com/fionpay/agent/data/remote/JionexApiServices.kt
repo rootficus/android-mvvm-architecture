@@ -114,6 +114,13 @@ interface FionApiServices {
     ): Call<BaseResponseModel<GetAddModemBalanceResponse>>
 
     @Headers("Content-Type:application/json")
+    @POST("api/v1/app/agents/hold_modem_balance")
+    fun holdModemBalance(
+        @Header("Authorization") authHeader: String?,
+        @Body addModemBalanceModel: AddModemBalanceModel
+    ): Call<BaseResponseModel<GetAddModemBalanceResponse>>
+
+    @Headers("Content-Type:application/json")
     @POST("api/v1/app/agents/remove_modem_balance")
     fun removeModemBalance(
         @Header("Authorization") authHeader: String?,

@@ -249,6 +249,18 @@ class DashBoardRepository(
             }
     }
 
+    fun holdModemBalance(
+        success: (getAddModemBalanceResponse: GetAddModemBalanceResponse) -> Unit,
+        fail: (error: String) -> Unit,
+        addModemBalanceModel: AddModemBalanceModel,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.holdModemBalance("Bearer " + sharedPreference.getToken(), addModemBalanceModel)
+            .apply {
+                execute(this, success, fail, context, message)
+            }
+    }
+
     fun addModemSlots(
         success: (getModemSlotsResponse : List<GetModemSlotsResponse>) -> Unit,
         fail: (error: String) -> Unit,

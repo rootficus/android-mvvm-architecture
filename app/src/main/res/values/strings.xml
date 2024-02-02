@@ -201,7 +201,7 @@
     <string name="on">On</string>
     <string name="off">Off</string>
     <string name="b2b">B2B</string>
-    <string name="new_balance_will">New balance will be: %1$s</string>
+    <string name="new_balance_will">Available balance will be: %1$s</string>
     <string name="refund_amount">Refund Amount</string>
     <string name="amount_error">Please enter valid amount</string>
     <string name="note">Note</string>
@@ -248,4 +248,7 @@
     <string name="new_ticket">New Ticket</string>
     <string name="subject">Subject</string>
     <string name="enter_subject">Enter Subject</string>
+    <string name="_0_00">0.00</string>
+    <string name="add_hold_amount">Add hold amount</string>
+    <string name="hold_amount">Hold Amount</string>
 </resources>
