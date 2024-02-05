@@ -75,8 +75,8 @@ android {
         }
         stage {
             dimension "default"
-            buildConfigField("String", "VERSION", "\"STAGING\"")
-            buildConfigField("String", "BASE_URL", "\"http://192.168.1.69:3000/\"")
+            buildConfigField("String", "VERSION", "\"STAGE\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.1.74:3000/\"")
         }
         prod {
             dimension "default"

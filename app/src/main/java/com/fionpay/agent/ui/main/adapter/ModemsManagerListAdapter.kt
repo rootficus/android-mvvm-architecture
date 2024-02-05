@@ -74,7 +74,7 @@ class ModemsManagerListAdapter(private var itemList: ArrayList<GetModemsListResp
             }
 
             binding.holdBalanceEdit.setOnClickListener{
-                listener?.onHoldBalanceEdit(item)
+               // listener?.onHoldBalanceEdit(item)
             }
         }
 

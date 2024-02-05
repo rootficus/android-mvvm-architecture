@@ -632,7 +632,8 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         dialogNumberEditSheetDialog.show()
 
         val fullName = "${getModemsListResponse.firstName} ${getModemsListResponse.lastName}"
-        val balance = "${Utility.currencySymbolBD}${getModemsListResponse.balance.toString()}"
+        val balance = getModemsListResponse.balance?.let { Utility.convertDigitalCurrencyFormat(it) }
+
         binding.labelTotalBalance.text =
             getString(R.string.new_balance_will,viewModel.getAvailableBalance().toString())
         binding.labelTitle.text = fullName
@@ -692,7 +693,13 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         val dialogBankListDialog = BottomSheetDialog(mActivity)
         val binding = BankListBottomSheetBinding.inflate(layoutInflater)
         val bankList = viewModel.getBanksListDao()
-        val bankListTemp: List<Bank>? = bankList
+        val bankListTemp: ArrayList<Bank> = arrayListOf()
+        bankList?.forEach loop1@{ bank->
+           if (isNotContain(bank,getModemsListResponse)){
+               bankListTemp.add(bank)
+           }
+        }
+
         if (bankListTemp.isNullOrEmpty()) {
             Toast.makeText(context, "No more bank there", Toast.LENGTH_SHORT).show()
             return
@@ -717,7 +724,7 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
         binding.sendBtn.setOnClickListener {
             dialogBankListDialog.dismiss()
             val modelSlotsList: ArrayList<AddModelSlot> = arrayListOf()
-            bankList.forEach {
+            bankList!!.forEach {
                 if (it.phoneNumber?.isNotEmpty() == true) {
                     modelSlotsList.add(AddModelSlot(it.phoneNumber, it.bankId))
                 }
@@ -729,6 +736,14 @@ class ModemFragment : BaseFragment<FragmentModemBinding>(R.layout.fragment_modem
             }
         }
         dialogBankListDialog.show()
+    }
+
+    private fun isNotContain(bank: Bank,getModemsListResponse: GetModemsListResponse): Boolean {
+        getModemsListResponse.slots?.forEach{
+            if (it.mobileBankingId!=0 && it.mobileBankingId == bank.bankId)
+                return false
+        }
+        return true
     }
 
     fun addModemSlots(modemId: String?, listAddModeSlots: List<AddModelSlot>) {
