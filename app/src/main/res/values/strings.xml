@@ -113,6 +113,9 @@
     <string name="bl_pending">Pending</string>
     <string name="bl_rejected">Rejected</string>
     <string name="bl_approved">Approved</string>
+    <string name="menu_approved">Approved</string>
+    <string name="text_copied">Text Copied Successfully</string>
+    <string name="reject_note">Reject Note</string>
     <string name="bl_danger">Danger</string>
     <string name="sms_all_sms">All sms</string>
     <string name="sms_cash_out">Cash Out</string>
@@ -212,7 +215,7 @@
     <string name="prev">Prev</string>
     <string name="add_number">Add Number</string>
     <string name="notification_message">Notification Message</string>
-    <string name="txn_id">Txn Id</string>
+    <string name="txn_id">TrxID</string>
     <string name="banktype">BankType</string>
     <string name="payee_number">Payee Number</string>
     <string name="success">Success</string>

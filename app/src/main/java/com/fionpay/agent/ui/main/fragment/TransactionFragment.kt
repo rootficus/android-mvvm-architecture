@@ -5,7 +5,9 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
+import android.graphics.Paint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -351,7 +353,6 @@ class TransactionFragment :
         val binding = AlterPendingDialogBinding.inflate(layoutInflater)
         dialogBuilder.setView(binding.root)
         val alertDialog: AlertDialog = dialogBuilder.create()
-
         if (!item.bankImage.isNullOrEmpty()) {
             Glide.with(requireContext())
                 .asBitmap()
@@ -360,32 +361,56 @@ class TransactionFragment :
                 .error(R.drawable.bank_icon)
                 .into(binding.imageBank)
         }
-        val amount = "${Utility.currencySymbolBD}${item.amount}"
-        val customer = "☎ ${item.customer.toString()}"
-        val transactionId = "#${item.transactionId.toString()}"
-        binding.labelPaymentType.text = item.paymentType.toString()
-        binding.txtAmount.text = amount
-        binding.txtDate.text = Utility.convertTransactionDate(item.date)
-        binding.txtBankType.text = item.bankType
-        binding.txtTransactionId.text = transactionId
-        binding.txtPayeeNumber.text = customer
-
-        //UI View
         setPaymentStatusView(item, binding)
         setStatusView(item, binding)
         if (item.transactionId.isNullOrEmpty()) {
-            setTransactionVisibility(binding, visible = false)
-
+            binding.txtTransactionId.visibility = View.GONE
+            binding.labelTransactionId.visibility = View.GONE
+            binding.iconCopy.visibility = View.GONE
         } else {
-            setTransactionVisibility(binding, visible = true)
+            binding.txtTransactionId.visibility = View.VISIBLE
+            binding.labelTransactionId.visibility = View.VISIBLE
+            binding.iconCopy.visibility = View.GONE
+        }
+        binding.txtTransactionId.text = "#${item.transactionId.toString()}"
+        binding.txtPayeeNumber.text = "☎ ${item.customer.toString()}"
+
+        binding.iconTransactionCopy.setOnClickListener {
+            val clipboard: ClipboardManager? =
+                requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
+            val clip = ClipData.newPlainText("Transaction id", item.transactionId.toString())
+            clipboard?.setPrimaryClip(clip)
+            showMessage(getString(R.string.text_copied))
+        }
+        if (item.status == context?.getString(R.string.menu_approved)) {
+            binding.txtAmount.text = "+ ৳${item.amount}"
+            binding.txtAmount.setTextColor(
+                ContextCompat.getColorStateList(
+                    requireContext(),
+                    R.color.approve
+                )
+            )
+        } else {
+            binding.txtAmount.text = "৳${item.amount}"
+            binding.txtAmount.paintFlags =
+                binding.txtAmount.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            binding.txtAmount.setTextColor(
+                ContextCompat.getColorStateList(
+                    requireContext(),
+                    R.color.textColor
+                )
+            )
         }
 
-        binding.iconCopy.setOnClickListener {
-            val clipboard: ClipboardManager? =
-                requireActivity().getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
-            val clip = ClipData.newPlainText("TxnId", "${binding.txtTransactionId.text}")
-            clipboard?.setPrimaryClip(clip)
-            showMessage("Text Copied Successfully")
+        binding.txtDate.text = Utility.convertTransactionDate(item.date)
+        binding.txtBankType.text = item.bankType
+        if (item.status == context?.getString(R.string.menu_approved)) {
+            binding.txtNote.visibility = View.GONE
+            binding.labelNote.visibility = View.GONE
+        } else {
+            binding.txtNote.visibility = View.VISIBLE
+            binding.labelNote.visibility = View.VISIBLE
+            binding.txtNote.text = item.notes
         }
 
         alertDialog.show()
@@ -446,28 +471,25 @@ class TransactionFragment :
     ) {
         when (item.paymentType) {
             getString(R.string.cash_in) -> {
-                setPaymentStatusUIView(binding, R.color.reject)
+                binding.labelCustomerNumber.text = item.paymentType.toString()
+                binding.txtAmount.setTextColor(
+                    ContextCompat.getColorStateList(
+                        requireContext(),
+                        R.color.reject
+                    )
+                )
             }
 
             getString(R.string.cash_out) -> {
-                setPaymentStatusUIView(binding, R.color.greenColor)
+                binding.labelCustomerNumber.text = item.paymentType.toString()
+                binding.txtAmount.setTextColor(
+                    ContextCompat.getColorStateList(
+                        requireContext(),
+                        R.color.greenColor
+                    )
+                )
             }
         }
-    }
-
-    private fun setPaymentStatusUIView(binding: AlterPendingDialogBinding, textColor: Int) {
-        binding.labelPaymentType.setTextColor(
-            ContextCompat.getColorStateList(
-                requireContext(),
-                textColor
-            )
-        )
-        binding.txtAmount.setTextColor(
-            ContextCompat.getColorStateList(
-                requireContext(),
-                textColor
-            )
-        )
     }
 
     private fun filter(text: String) {

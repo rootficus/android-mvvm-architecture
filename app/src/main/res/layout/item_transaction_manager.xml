@@ -16,8 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/homeCardBackColor"
-            android:paddingHorizontal="@dimen/_10sdp"
-            android:paddingTop="@dimen/_12sdp">
+            android:paddingHorizontal="@dimen/_2sdp"
+            android:paddingTop="@dimen/_2sdp">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardBank"

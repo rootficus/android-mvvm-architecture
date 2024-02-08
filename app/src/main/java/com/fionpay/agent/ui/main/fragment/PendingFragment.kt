@@ -3,6 +3,8 @@ package com.fionpay.agent.ui.main.fragment
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.BroadcastReceiver
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
@@ -181,18 +183,24 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
         binding.txtSuccess.backgroundTintList =
             (ContextCompat.getColorStateList(requireContext(), R.color.activePendingBg))
 
-        val amount = "${Utility.currencySymbolBD}${item.amount}"
+        val amount = item.amount?.let { Utility.convertCurrencyFormat(it) }
         val customer = "☎ ${item.customer.toString()}"
         val transactionId = "#${item.transactionId.toString()}"
         binding.txtAmount.text = amount
-        if (item.paymentType == getString(R.string.cash_in)) {
-            binding.txtTransactionId.text = customer
-        } else {
-            binding.txtTransactionId.text = transactionId
-        }
+        binding.txtTransactionId.text = transactionId
+        binding.txtPayeeNumber.text = customer
         binding.txtDate.text = Utility.convertTransactionDate(item.date)
         binding.txtBankType.text = item.bankType
-
+        binding.txtNote.visibility = View.GONE
+        binding.labelNote.visibility = View.GONE
+        binding.iconCopy.visibility = View.GONE
+        binding.iconTransactionCopy.setOnClickListener {
+            val clipboard: ClipboardManager? =
+                requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager?
+            val clip = ClipData.newPlainText("Transaction id", item.transactionId.toString())
+            clipboard?.setPrimaryClip(clip)
+            showMessage(getString(R.string.text_copied))
+        }
         alertDialog.show()
     }
 
@@ -202,13 +210,7 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
     ) {
         when (item.paymentType) {
             getString(R.string.cash_in) -> {
-                binding.labelPaymentType.text = item.paymentType.toString()
-                binding.labelPaymentType.setTextColor(
-                    ContextCompat.getColorStateList(
-                        requireContext(),
-                        R.color.reject
-                    )
-                )
+                binding.labelCustomerNumber.text = item.paymentType.toString()
                 binding.txtAmount.setTextColor(
                     ContextCompat.getColorStateList(
                         requireContext(),
@@ -218,13 +220,7 @@ class PendingFragment : BaseFragment<FragmentPendingBinding>(R.layout.fragment_p
             }
 
             getString(R.string.cash_out) -> {
-                binding.labelPaymentType.text = item.paymentType.toString()
-                binding.labelPaymentType.setTextColor(
-                    ContextCompat.getColorStateList(
-                        requireContext(),
-                        R.color.greenColor
-                    )
-                )
+                binding.labelCustomerNumber.text = item.paymentType.toString()
                 binding.txtAmount.setTextColor(
                     ContextCompat.getColorStateList(
                         requireContext(),

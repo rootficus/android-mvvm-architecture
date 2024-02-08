@@ -39,5 +39,8 @@ data class TransactionModemResponse(
     @SerializedName("status")
     @Expose
     var status: String? = null,
+    @SerializedName("notes")
+    @Expose
+    var notes: String? = null,
 
     )
