@@ -13,7 +13,7 @@ import android.view.View
 import android.view.Window
 import android.widget.Toast
 import com.rf.utellRestaurant.R
-import com.rf.utellRestaurant.roomDB.dao.FionDao
+import com.rf.utellRestaurant.roomDB.dao.UtellDao
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import java.text.DecimalFormat
@@ -117,8 +117,8 @@ object Utility {
         return time
     }
 
-    fun isNotificationExits(fioDao: FionDao?, id: String): Boolean? {
-        return fioDao?.isNotificationExits(id)
+    fun isNotificationExits(utellDao: UtellDao?, id: String): Boolean? {
+        return utellDao?.isNotificationExits(id)
     }
 
     val currencySymbolBD = "৳"

@@ -12,6 +12,7 @@ import com.rf.utellRestaurant.ui.base.BaseFragmentModule
 import com.rf.utellRestaurant.ui.base.BaseViewModelFactory
 import com.rf.utellRestaurant.ui.main.di.DaggerDashBoardFragmentComponent
 import com.rf.utellRestaurant.ui.main.di.DashBoardFragmentModule
+import com.rf.utellRestaurant.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.utellRestaurant.ui.main.viewmodel.DashBoardViewModel
 import com.rf.utellRestaurant.utils.NetworkHelper
 import com.rf.utellRestaurant.utils.SharedPreference
@@ -46,7 +47,7 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
 
     private fun initializeDagger() {
         DaggerDashBoardFragmentComponent.builder().appComponent(UtellSDK.appComponent)
-            .dashBoardFragmentModule(DashBoardFragmentModule())
+            .dashBoardFragmentModuleDi(DashBoardFragmentModuleDi())
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
 

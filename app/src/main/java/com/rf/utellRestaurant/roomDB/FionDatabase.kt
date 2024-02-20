@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.rf.utellRestaurant.roomDB.dao.FionDao
+import com.rf.utellRestaurant.roomDB.dao.UtellDao
 import com.rf.utellRestaurant.roomDB.model.ModemSetting
 import com.rf.utellRestaurant.roomDB.model.NotificationRecord
 import com.rf.utellRestaurant.roomDB.model.OperatorRecord
@@ -16,7 +16,7 @@ import com.rf.utellRestaurant.roomDB.model.SMSRecord
     version = 1
 )
 abstract class FionDatabase : RoomDatabase() {
-    abstract fun fioDao(): FionDao?
+    abstract fun fioDao(): UtellDao?
 
     companion object {
         @Volatile

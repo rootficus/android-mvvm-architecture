@@ -62,7 +62,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Utility.getPushToken(this@DashBoardActivity)
+        //Utility.getPushToken(this@DashBoardActivity)
         initializationDagger()
         initializationView()
 

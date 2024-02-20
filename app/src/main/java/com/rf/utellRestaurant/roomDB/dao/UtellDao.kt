@@ -13,13 +13,13 @@ import com.rf.utellRestaurant.roomDB.model.OperatorRecord
 import com.rf.utellRestaurant.roomDB.model.SMSRecord
 
 @Dao
-interface FionDao {
+interface UtellDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertSMSRecord(smsRecord: SMSRecord?)
+    fun insertSMSRecord(smsRecord: SMSRecord)
 
     @Update
-    fun updateSMSRecord(smsRecord: SMSRecord?): Int
+    fun updateSMSRecord(smsRecord: SMSRecord): Int
 
     @Transaction
     @Query("SELECT * FROM SMSRecord WHERE syncStatus != :syncStatus ")
@@ -39,31 +39,31 @@ interface FionDao {
     fun updateSyncResultRecord(syncStats: Int, messageId: String)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertModemSetting(modemSetting: ModemSetting?)
+    fun insertModemSetting(modemSetting: ModemSetting)
 
     @Transaction
     @Query("SELECT * FROM modemSetting")
-    fun getModemSetting(): List<ModemSetting?>?
+    fun getModemSetting(): List<ModemSetting>?
 
     @Transaction
     @Query("SELECT * FROM modemSetting where simId =:simId")
-    fun getModemSetting(simId: Int): ModemSetting?
+    fun getModemSetting(simId: Int): ModemSetting
 
     @Query("SELECT  COUNT(simId) FROM  modemSetting")
     fun getModemRegisterCountValue(): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertOperatorRecord(operatorRecord: OperatorRecord?)
+    fun insertOperatorRecord(operatorRecord: OperatorRecord)
 
     @Transaction
     @Query("SELECT * FROM operatorRecord where operatorName =:operatorName")
-    fun getOperatorUSSD(operatorName: String): OperatorRecord?
+    fun getOperatorUSSD(operatorName: String): OperatorRecord
 
 
     @Query("SELECT EXISTS (SELECT * FROM notificationRecord WHERE id = :id)")
     fun isNotificationExits(id: String?): Boolean?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertNotification(notificationRecord: NotificationRecord?)
+    fun insertNotification(notificationRecord: NotificationRecord)
 
 }

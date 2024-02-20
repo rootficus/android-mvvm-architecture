@@ -1,6 +1,7 @@
 package com.rf.utellRestaurant.ui.main.fragment
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -17,8 +18,11 @@ import com.rf.utellRestaurant.sdkInit.UtellSDK
 import com.rf.utellRestaurant.ui.base.BaseFragment
 import com.rf.utellRestaurant.ui.base.BaseFragmentModule
 import com.rf.utellRestaurant.ui.base.BaseViewModelFactory
+import com.rf.utellRestaurant.ui.main.activity.DashBoardActivity
 import com.rf.utellRestaurant.ui.main.di.DaggerSignInFragmentComponent
+import com.rf.utellRestaurant.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.utellRestaurant.ui.main.di.SignInFragmentModule
+import com.rf.utellRestaurant.ui.main.di.SignInFragmentModuleDi
 import com.rf.utellRestaurant.ui.main.viewmodel.SignInViewModel
 import com.rf.utellRestaurant.utils.NetworkHelper
 import com.rf.utellRestaurant.utils.SharedPreference
@@ -58,7 +62,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
     private fun initializeDagger() {
 
         DaggerSignInFragmentComponent.builder().appComponent(UtellSDK.appComponent)
-            .signInFragmentModule(SignInFragmentModule())
+            .signInFragmentModuleDi(SignInFragmentModuleDi())
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
 
@@ -125,7 +129,8 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
         })
 
         mDataBinding.btnSignIn.setOnClickListener {
-            name = mDataBinding.etName.text.toString()
+            startActivity(Intent(requireContext(), DashBoardActivity::class.java))
+            /*name = mDataBinding.etName.text.toString()
             password = mDataBinding.etPassword.text.toString()
             if (name.isEmpty()) {
                 Utility.callCustomToast(
@@ -139,7 +144,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                 )
             } else {
                 callSignInAPI(view)
-            }
+            }*/
         }
         mDataBinding.etName.setText(viewmodel.getEmail().toString())
         mDataBinding.etPassword.setText(viewmodel.getPassword().toString())

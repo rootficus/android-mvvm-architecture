@@ -45,6 +45,6 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
 
     override fun onResume() {
         super.onResume()
-        Utility.getPushToken(this@SignInActivity)
+        //Utility.getPushToken(this@SignInActivity)
     }
 }

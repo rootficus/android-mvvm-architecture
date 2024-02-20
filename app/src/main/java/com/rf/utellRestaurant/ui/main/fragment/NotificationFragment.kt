@@ -12,6 +12,7 @@ import com.rf.utellRestaurant.ui.base.BaseFragment
 import com.rf.utellRestaurant.ui.base.BaseFragmentModule
 import com.rf.utellRestaurant.ui.base.BaseViewModelFactory
 import com.rf.utellRestaurant.ui.main.di.DaggerNotificationFragmentComponent
+import com.rf.utellRestaurant.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.utellRestaurant.ui.main.di.NotificationFragmentModule
 import com.rf.utellRestaurant.ui.main.viewmodel.DashBoardViewModel
 import com.rf.utellRestaurant.utils.NetworkHelper
@@ -50,7 +51,7 @@ class NotificationFragment :
 
     private fun initializeDagger() {
         DaggerNotificationFragmentComponent.builder().appComponent(UtellSDK.appComponent)
-            .notificationFragmentModule(NotificationFragmentModule())
+            .dashBoardFragmentModuleDi(DashBoardFragmentModuleDi())
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
 

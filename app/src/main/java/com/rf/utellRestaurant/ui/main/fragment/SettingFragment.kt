@@ -20,6 +20,7 @@ import com.rf.utellRestaurant.ui.base.BaseFragment
 import com.rf.utellRestaurant.ui.base.BaseFragmentModule
 import com.rf.utellRestaurant.ui.base.BaseViewModelFactory
 import com.rf.utellRestaurant.ui.main.activity.SignInActivity
+import com.rf.utellRestaurant.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.utellRestaurant.ui.main.di.SettingFragmentModule
 import javax.inject.Inject
 
@@ -47,7 +48,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_s
 
     private fun initializeDagger() {
         DaggerSettingFragmentComponent.builder().appComponent(UtellSDK.appComponent)
-            .settingFragmentModule(SettingFragmentModule())
+            .dashBoardFragmentModuleDi(DashBoardFragmentModuleDi())
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
 
