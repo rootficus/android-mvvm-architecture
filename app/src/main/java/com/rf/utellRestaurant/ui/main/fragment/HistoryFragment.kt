@@ -14,18 +14,21 @@ import com.rf.utellRestaurant.ui.main.viewmodel.DashBoardViewModel
 import com.rf.utellRestaurant.utils.NetworkHelper
 import com.rf.utellRestaurant.utils.SharedPreference
 import com.rf.utellRestaurant.R
+import com.rf.utellRestaurant.databinding.FragmentHistoryBinding
+import com.rf.utellRestaurant.databinding.FragmentOderBinding
 import com.rf.utellRestaurant.databinding.FragmentSettingBinding
 import com.rf.utellRestaurant.sdkInit.UtellSDK
 import com.rf.utellRestaurant.ui.base.BaseFragment
 import com.rf.utellRestaurant.ui.base.BaseFragmentModule
 import com.rf.utellRestaurant.ui.base.BaseViewModelFactory
 import com.rf.utellRestaurant.ui.main.activity.SignInActivity
+import com.rf.utellRestaurant.ui.main.di.DaggerHistoryFragmentComponent
 import com.rf.utellRestaurant.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.utellRestaurant.ui.main.di.SettingFragmentModule
 import javax.inject.Inject
 
 
-class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_setting) {
+class HistoryFragment : BaseFragment<FragmentHistoryBinding>(R.layout.fragment_history) {
 
     @Inject
     lateinit var sharedPreference: SharedPreference
@@ -47,7 +50,7 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_s
     }
 
     private fun initializeDagger() {
-        DaggerSettingFragmentComponent.builder().appComponent(UtellSDK.appComponent)
+        DaggerHistoryFragmentComponent.builder().appComponent(UtellSDK.appComponent)
             .dashBoardFragmentModuleDi(DashBoardFragmentModuleDi())
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }

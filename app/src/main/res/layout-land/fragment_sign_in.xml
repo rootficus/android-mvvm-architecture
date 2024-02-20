@@ -35,7 +35,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_heading"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:fontFamily="@font/roboto_medium"
@@ -62,7 +62,7 @@
                 app:layout_constraintBottom_toTopOf="@id/etName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintWidth_percent="0.7" />
+                app:layout_constraintWidth_percent="0.3" />
 
 
             <androidx.appcompat.widget.AppCompatEditText
@@ -84,7 +84,7 @@
                 app:layout_constraintBottom_toTopOf="@id/etPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintWidth_percent="0.85" />
+                app:layout_constraintWidth_percent="0.4" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/email_verified"
@@ -139,7 +139,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/etPassword"
-                app:layout_constraintWidth_percent="0.85" />
+                app:layout_constraintWidth_percent="0.25" />
 
             <ProgressBar
                 android:id="@+id/progressBar"

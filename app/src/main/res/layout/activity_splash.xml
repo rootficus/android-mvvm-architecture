@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:padding="25dp"
-            android:src="@drawable/splash_logo"
+            android:src="@drawable/app_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.4"
@@ -39,18 +39,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_onboard_logo" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtModem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/agent"
-            android:textColor="@color/secondaryBlue"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtUtell" />
 
         <ProgressBar
             android:id="@+id/progressView"

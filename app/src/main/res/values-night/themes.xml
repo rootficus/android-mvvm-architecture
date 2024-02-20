@@ -4,5 +4,6 @@
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryAccent</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 </resources>

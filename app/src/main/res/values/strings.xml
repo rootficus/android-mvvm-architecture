@@ -254,4 +254,6 @@
     <string name="_0_00">0.00</string>
     <string name="add_hold_amount">Add hold amount</string>
     <string name="hold_amount">Hold Amount</string>
+    <string name="orders">Orders</string>
+    <string name="hisory">History</string>
 </resources>

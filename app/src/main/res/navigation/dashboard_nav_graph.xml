@@ -27,6 +27,22 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/navigation_orderFragment"
+        android:name="com.rf.utellRestaurant.ui.main.fragment.OrderFragment"
+        android:label="OrderFragment"
+        tools:layout="@layout/fragment_oder">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_historyFragment"
+        android:name="com.rf.utellRestaurant.ui.main.fragment.HistoryFragment"
+        android:label="HistoryFragment"
+        tools:layout="@layout/fragment_history">
+
+    </fragment>
+
 
 
 
