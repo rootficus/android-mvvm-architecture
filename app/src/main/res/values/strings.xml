@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FionPay-Agent</string>
+    <string name="app_name">Utell Restaurant</string>
     <string name="error_something_went_wrong">Something Went Wrong !!</string>
     <string name="no_network">No Internet.</string>
     <string name="login">Login</string>
@@ -160,7 +160,7 @@
     <string name="transactions">Transactions</string>
     <string name="userName">Hello, <b>%1$s</b></string>
 
-    <string name="welcome_text">Welcome to Fionpay</string>
+    <string name="welcome_text">Welcome to Utell Restaurant</string>
     <string name="continues">Continue</string>
     <string name="account_verified">Your Account \nis now Verified!</string>
     <string name="account_verified_sub">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
@@ -177,7 +177,7 @@
     <string name="blocked_modems">Blocked Modems</string>
     <string name="pending_modems">Pending Modems</string>
     <string name="all">All</string>
-    <string name="fionpay">Fionpay</string>
+    <string name="utell">Utell</string>
     <string name="upload_photo">Upload Photo</string>
     <string name="take_photo">Camera</string>
     <string name="choose_existing_photo">Gallery</string>

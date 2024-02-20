@@ -6,7 +6,7 @@
 
         <variable
             name="splashModel"
-            type="com.fionpay.agent.ui.main.viewmodel.SignInViewModel" />
+            type="com.rf.utellRestaurant.ui.main.viewmodel.SignInViewModel" />
     </data>
 
 
@@ -29,10 +29,10 @@
             app:layout_constraintWidth_percent="0.5" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtFionpay"
+            android:id="@+id/txtUtell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/fionpay"
+            android:text="@string/utell"
             android:textColor="@color/primaryBlue"
             android:textSize="38sp"
             android:textStyle="bold"
@@ -50,7 +50,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtFionpay" />
+            app:layout_constraintTop_toBottomOf="@id/txtUtell" />
 
         <ProgressBar
             android:id="@+id/progressView"

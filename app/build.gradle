@@ -2,22 +2,22 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'com.google.gms.google-services'
+    //id 'com.google.gms.google-services'
 }
 
 android {
-    namespace 'com.fionpay.agent'
+    namespace 'com.rf.utellRestaurant'
     compileSdk 33
 
     defaultConfig {
         final BUILD_DATE = new Date().format('dd-MM-YYYY')
-        applicationId "com.fionpay.agent"
+        applicationId "com.rf.utellRestaurant"
         minSdk 26
         //noinspection OldTargetApi
         targetSdk 33
         versionCode 1
         versionName "1.0.1"
-        setProperty("archivesBaseName", "FionPay-Agent_" + BUILD_DATE+ "_V" + versionName)
+        setProperty("archivesBaseName", "Utell-Restaurant_" + BUILD_DATE+ "_V" + versionName)
         vectorDrawables.useSupportLibrary = true
 
         javaCompileOptions {
@@ -71,7 +71,7 @@ android {
         uat {
             dimension "default"
             buildConfigField("String", "VERSION", "\"UAT\"")
-            buildConfigField("String", "BASE_URL", "\"https://testapi.fionpay.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://abc.abc.com/\"")
         }
         stage {
             dimension "default"
@@ -81,7 +81,7 @@ android {
         prod {
             dimension "default"
             buildConfigField("String", "VERSION", "\"PROD\"")
-            buildConfigField("String", "BASE_URL", "\"https://api.fionpay.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://abc.abc.com/\"")
         }
 
     }
@@ -100,6 +100,7 @@ android {
         viewBinding true
         buildConfig true
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17

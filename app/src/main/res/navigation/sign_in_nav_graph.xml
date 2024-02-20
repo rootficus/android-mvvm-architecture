@@ -7,23 +7,10 @@
 
     <fragment
         android:id="@+id/navigation_signin"
-        android:name="com.fionpay.agent.ui.main.fragment.SignInFragment"
+        android:name="com.rf.utellRestaurant.ui.main.fragment.SignInFragment"
         android:label="SignInFragment"
         tools:layout="@layout/fragment_sign_in">
 
-        <action
-            android:id="@+id/action_navigation_signin_to_navigation_verifyPin"
-            app:destination="@id/navigation_verifyPin" />
-    </fragment>
-    <fragment
-        android:id="@+id/navigation_verifyPin"
-        android:name="com.fionpay.agent.ui.main.fragment.VerifyPinFragment"
-        android:label="VerifyNumberFragment"
-        tools:layout="@layout/fragment_verify_pin">
-
-        <action
-            android:id="@+id/action_navigation_verifyPin_to_navigation_signin"
-            app:destination="@id/navigation_signin" />
     </fragment>
 
 </navigation>

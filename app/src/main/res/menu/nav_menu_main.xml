@@ -5,22 +5,8 @@
         android:icon="@drawable/dashboard_logo"
         android:title="@string/dashboard" />
     <item
-        android:id="@id/navigation_pendingFragment"
-        android:icon="@drawable/pending_logo"
+        android:id="@id/navigation_notificationFragment"
+        android:icon="@drawable/notification_icon"
         android:title="@string/pending" />
-    <item
-        android:id="@id/navigation_modemFragment"
-        android:icon="@drawable/modem_logo"
-        android:title="@string/modem" />
-
-    <item
-        android:id="@id/navigation_transactionFragment"
-        android:icon="@drawable/transaction_logo"
-        android:title="@string/transaction" />
-
-    <item
-        android:id="@id/navigation_b2bFragment"
-        android:icon="@drawable/connection"
-        android:title="@string/b2b" />
 
 </menu>
