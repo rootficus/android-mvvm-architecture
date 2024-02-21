@@ -55,10 +55,11 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
 
     private fun initializeView() {
         val dataList = listOf(
-            Triple("Paneer Tikka", "$2", "completed"),
-            Triple("Soya Chaap", "$3", "rejected"),
-            Triple("Soya Chaap", "$3", "completed"),
-            Triple("Soya Chaap", "$3", "rejected")
+            Triple("Paneer Tikka", "$2", "Completed"),
+            Triple("Soya Chaap", "$3", "Completed"),
+            Triple("Soya Chaap", "$3", "Completed"),
+            Triple("Soya Chaap", "$3", "Completed"),
+            Triple("Soya Chaap", "$3", "Completed")
         )
 
         val adapter = DashBoardOrderItemAdapter(dataList)

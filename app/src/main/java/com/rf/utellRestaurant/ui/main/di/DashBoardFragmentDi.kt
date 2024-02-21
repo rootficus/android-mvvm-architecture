@@ -11,6 +11,7 @@ import com.rf.utellRestaurant.ui.main.fragment.DashBoardFragment
 import com.rf.utellRestaurant.ui.main.fragment.HistoryFragment
 import com.rf.utellRestaurant.ui.main.fragment.NotificationFragment
 import com.rf.utellRestaurant.ui.main.fragment.OrderFragment
+import com.rf.utellRestaurant.ui.main.fragment.OrderHistoryDescFragment
 import com.rf.utellRestaurant.ui.main.fragment.OrdetDescFragment
 import com.rf.utellRestaurant.ui.main.fragment.OrdetListFragment
 import com.rf.utellRestaurant.ui.main.fragment.SettingFragment
@@ -129,4 +130,16 @@ interface OrderDescFragmentComponent {
 
 @Module(includes = [DashBoardFragmentModuleDi::class])
 class OrderDescFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [OrderHistoryDescFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface OrderHistoryDescFragmentComponent {
+    fun inject(orderHistoryDescFragment: OrderHistoryDescFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class OrderHistoryDescFragmentModule
 

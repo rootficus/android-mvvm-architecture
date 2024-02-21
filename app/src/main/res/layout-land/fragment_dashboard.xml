@@ -19,25 +19,26 @@
             android:id="@+id/Constraint1_Label"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_margin="5dp"
+            android:padding="5dp"
             app:layout_constraintHeight_percent=".55"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_margin="10dp"
-            android:padding="10dp">
+            app:layout_constraintTop_toTopOf="parent">
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/overview_graph"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintWidth_percent="0.65"
-                android:layout_marginHorizontal="15dp"
-                app:layout_constraintHeight_percent="0.65"
-                app:cardElevation="25dp"
-                app:cardCornerRadius="10dp"
                 android:layout_margin="10dp"
+                android:layout_marginHorizontal="15dp"
                 android:padding="5dp"
-                android:paddingHorizontal="10dp">
+                android:paddingHorizontal="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:layout_constraintHeight_percent="0.65"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.65">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -45,15 +46,16 @@
                     android:background="@color/primaryBlue"
                     android:orientation="vertical">
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
+                        android:fontFamily="@font/poppins"
                         android:text="Sales OverView"
                         android:textColor="@color/white"
-                        android:textSize="25sp" />
+                        android:textSize="20sp" />
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
@@ -64,285 +66,314 @@
 
 
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
+                android:id="@+id/pie_graph"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/pie_graph"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/overview_graph"
-                app:layout_constraintWidth_percent="0.34"
-                android:layout_marginEnd="15dp"
                 android:layout_margin="10dp"
+                android:layout_marginEnd="15dp"
                 android:padding="10dp"
-                app:cardElevation="25dp"
+                android:paddingHorizontal="10dp"
                 app:cardCornerRadius="10dp"
-                android:paddingHorizontal="10dp">
+                app:cardElevation="5dp"
+                app:layout_constraintLeft_toRightOf="@+id/overview_graph"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.32">
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/primaryBlue"
                     android:orientation="vertical">
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginTop="15dp"
+                        android:fontFamily="@font/poppins"
                         android:text="Today's Statistics"
                         android:textColor="@color/white"
-                        android:textSize="25dp" />
-                    <ImageView
+                        android:textSize="20sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-
+                        android:padding="10dp"
+                        android:scaleType="fitCenter"
                         android:src="@drawable/pie_chart_representation_1625735541_1__1_" />
 
-                </LinearLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
             </androidx.cardview.widget.CardView>
-            <LinearLayout
+
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/orders_layout"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/overview_graph"
-                app:layout_constraintRight_toLeftOf="@id/pie_graph"
-                android:orientation="horizontal"
-                app:layout_constraintHeight_percent="0.3"
-                app:layout_constraintWidth_percent="0.65"
-                android:weightSum="3"
                 android:layout_margin="10dp"
-                android:padding="5dp">
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:weightSum="3"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/pie_graph"
+                app:layout_constraintTop_toBottomOf="@id/overview_graph"
+                app:layout_constraintWidth_percent="0.65">
 
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/today_order"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:cardElevation="25dp"
-                    app:cardCornerRadius="10dp"
+                    android:layout_margin="5dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_margin="5dp">
+                    android:layout_weight="1"
+                    app:cardCornerRadius="10dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/todayTextLabel"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            android:textSize="20sp"
-                            android:text="Today's orders"
-                            android:layout_margin="7dp"
-                            android:textColor="@color/black"/>
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/todayTextLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="7dp"
-                            android:text="53000"
-                            android:textStyle="bold"
-                            android:textSize="20sp"
+                            android:fontFamily="@font/poppins"
+                            android:text="Today's orders"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="7dp"
                             android:layout_marginTop="2dp"
+                            android:fontFamily="@font/poppins"
+                            android:text="53000"
                             android:textColor="#083473"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/todayTextLabel" />
-                        <ImageView
+
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toRightOf="@id/todayTextLabel"
+                            android:layout_marginHorizontal="10dp"
                             android:contentDescription="image"
-                            android:src="@drawable/dish_649457_2__1_"
-
                             android:scaleType="centerInside"
-                            android:layout_marginHorizontal="10dp"/>
+                            android:src="@drawable/dish_649457_2__1_"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintLeft_toRightOf="@id/todayTextLabel"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
+
                 <androidx.cardview.widget.CardView
                     android:id="@+id/active_order"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    app:cardElevation="25dp"
-                    app:cardCornerRadius="10dp"
-                    android:layout_margin="5dp">
+                    app:cardCornerRadius="10dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TextView
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/ActiveTextLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/ActiveTextLabel"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            android:text="Active orders"
                             android:layout_margin="7dp"
+                            android:fontFamily="@font/poppins"
+                            android:text="Active orders"
                             android:textColor="@color/black"
-                            android:textSize="20sp"/>
+                            android:textSize="18sp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="7dp"
                             android:layout_marginTop="2dp"
+                            android:fontFamily="@font/poppins"
                             android:text="2700"
-                            android:textStyle="bold"
-                            android:textSize="20sp"
                             android:textColor="#083473"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/ActiveTextLabel" />
-                        <ImageView
+
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toRightOf="@id/ActiveTextLabel"
+                            android:layout_marginHorizontal="10dp"
                             android:contentDescription="image"
-                            android:src="@drawable/dish_649457_2__1_"
                             android:scaleType="centerInside"
-                            android:layout_marginHorizontal="10dp"/>
+                            android:src="@drawable/dish_649457_2__1_"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintLeft_toRightOf="@id/ActiveTextLabel"
+                            app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/completed_order"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/completed_order"
-                    android:layout_weight="1"
-                    app:cardElevation="25dp"
-                    app:cardCornerRadius="10dp"
+                    android:layout_margin="5dp"
                     android:layout_marginStart="10dp"
-                    android:layout_margin="5dp">
+                    android:layout_weight="1"
+                    app:cardCornerRadius="10dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/CompletedTextLabel"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            android:text="Completed orders"
-                            android:textColor="@color/black"
-                            android:layout_marginVertical="7dp"
-                            android:textSize="20sp"/>
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/CompletedTextLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="7dp"
-                            android:text="3000"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
+                            android:fontFamily="@font/poppins"
+                            android:text="Completed orders"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="7dp"
                             android:layout_marginTop="2dp"
+                            android:fontFamily="@font/poppins"
+                            android:text="3000"
                             android:textColor="#083473"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/CompletedTextLabel" />
-                        <ImageView
+
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintLeft_toRightOf="@id/CompletedTextLabel"
-                            android:contentDescription="image"
-                            android:src="@drawable/vector__1_"
-                            android:scaleType="centerInside"
                             android:layout_marginHorizontal="10dp"
-                            />
+                            android:contentDescription="image"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/vector__1_"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintLeft_toRightOf="@id/CompletedTextLabel"
+                            app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
-            </LinearLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.45"
-            app:layout_constraintTop_toBottomOf="@id/Constraint1_Label"
+            android:layout_margin="5dp"
+            android:paddingHorizontal="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_margin="10dp"
-            android:padding="10dp">
+            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Constraint1_Label">
+
             <androidx.cardview.widget.CardView
+                android:id="@+id/order_history"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:id="@+id/order_history"
-                app:layout_constraintWidth_percent="0.73"
-                app:cardElevation="25dp"
-                app:cardCornerRadius="10dp"
                 android:layout_marginHorizontal="10dp"
+                android:padding="5dp"
+                app:cardCornerRadius="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:padding="5dp">
-                <LinearLayout
+                app:layout_constraintWidth_percent="0.7">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_margin="15dp">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Order History"
-                        android:textSize="25sp"
-                        android:textColor="@color/black"/>
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
 
-                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:orientation="horizontal"
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/labelOrderHostory"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:weightSum="3">
-                        <TextView
-                            android:id="@+id/item_heading"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textSize="20sp"
-                            android:text="Item"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:layout_marginHorizontal="10dp"/>
-                        <TextView
-                            android:id="@+id/price_heading"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textSize="20sp"
-                            android:text="Price"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:layout_marginHorizontal="10dp"/>
-                        <TextView
-                            android:id="@+id/status_heading"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textSize="20sp"
-                            android:text="Status"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:layout_marginHorizontal="10dp"/>
-                    </LinearLayout>
+                        android:fontFamily="@font/poppins"
+                        android:text="Order History"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/item_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins"
+                        android:paddingStart="15dp"
+                        android:text="Item"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/labelOrderHostory"
+                        app:layout_constraintWidth_percent="0.68" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/price_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="Price"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/item_label"
+                        app:layout_constraintTop_toTopOf="@id/item_label"
+                        app:layout_constraintWidth_percent="0.16" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/status_label"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:text="Status"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/price_label"
+                        app:layout_constraintTop_toTopOf="@id/item_label"
+                        app:layout_constraintWidth_percent="0.15" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerViewId"
-                        tools:itemCount="5"
-                        tools:listitem="@layout/item_row"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="0dp"
+                        android:paddingHorizontal="5dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/item_label"
+                        tools:itemCount="5"
+                        tools:listitem="@layout/item_row" />
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </androidx.cardview.widget.CardView>
@@ -354,7 +385,7 @@
                 android:padding="5dp"
                 android:paddingHorizontal="10dp"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="25dp"
+                app:cardElevation="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/order_history"
                 app:layout_constraintTop_toTopOf="parent"
@@ -365,29 +396,33 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:fontFamily="@font/poppins"
                         android:text="Upcoming"
                         android:textColor="#083473"
-                        android:textSize="45sp"
+                        android:textSize="32sp"
                         android:textStyle="bold" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginBottom="5dp"
+                        android:fontFamily="@font/poppins"
                         android:text="Orders"
-                        android:textColor="#083473"
-                        android:textSize="30sp" />
+                        android:textColor="@color/primaryBlue"
+                        android:textSize="28sp" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/poppins"
                         android:gravity="end"
                         android:text="2"
                         android:textColor="#083473"
