@@ -27,7 +27,7 @@
         android:fontFamily="@font/poppins"
         android:text="@string/dashboard"
         android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

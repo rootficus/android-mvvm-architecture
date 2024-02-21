@@ -256,4 +256,10 @@
     <string name="hold_amount">Hold Amount</string>
     <string name="orders">Orders</string>
     <string name="hisory">History</string>
+    <string name="order_no">Order number :</string>
+    <string name="items">Items</string>
+    <string name="qty">Qty</string>
+    <string name="price">Price</string>
+    <string name="total">Total</string>
+    <string name="customerRemark">Customer Remarking:</string>
 </resources>

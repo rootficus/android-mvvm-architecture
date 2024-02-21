@@ -12,10 +12,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import android.widget.Toast
-import com.rf.utellRestaurant.R
-import com.rf.utellRestaurant.roomDB.dao.UtellDao
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
+import com.rf.utellRestaurant.R
+import com.rf.utellRestaurant.data.model.Menus
+import com.rf.utellRestaurant.data.model.Order
+import com.rf.utellRestaurant.roomDB.dao.UtellDao
 import java.text.DecimalFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -126,7 +128,7 @@ object Utility {
         Log.d("convertCurrencyFormat", "::${currency}")
         val formatter = DecimalFormat("###,###,##0.00")
         Log.d("convertCurrencyFormat", "::${formatter.format(currency)}")
-        return currencySymbolBD+formatter.format(currency)
+        return currencySymbolBD + formatter.format(currency)
     }
 
     fun convertDigitalCurrencyFormat(currency: Float): String {
@@ -206,6 +208,183 @@ object Utility {
         val canvas = Canvas(image)
         canvas.drawText(text, 0f, baseline, paint)
         return image
+    }
+
+    fun generateSampleOrders(): ArrayList<Order> {
+        val orders: ArrayList<Order> = arrayListOf()
+        orders.add(
+            Order(
+                name = "Akash Singh",
+                orderNumber = "12345",
+                date = "02 Jan 2024 06:38 AM",
+                email = "Akash@gmail.com",
+                address = "RootFicus",
+                mobile = "9876543210",
+                type = "Dine",
+                status = "Completed",
+                total = "\$500",
+                comment = "No Comment",
+                menus = arrayListOf(Menus(itemName = "Burger", quantity = "5", price = "$25"),
+                    Menus(itemName = "Sandwitch", quantity = "1", price = "$5"),
+                    Menus(itemName = "Malai Tikka ", quantity = "2", price = "$15"),
+                    Menus(itemName = "Soyea Chap", quantity = "3", price = "$22"),
+                    Menus(itemName = "French Fires", quantity = "4", price = "$28"))
+            )
+        )
+        orders.add(
+            Order(
+                name = "Shehbaz Ali",
+                orderNumber = "12345",
+                date = "02 Jan 2024 06:38 AM",
+                email = "Shehbaz@gmail.com",
+                address = "RootFicus",
+                mobile = "9876543210",
+                type = "Dine",
+                status = "Preparing",
+                total = "\$400",
+                comment = "No Comment",
+                menus = arrayListOf(Menus(itemName = "Burger", quantity = "5", price = "$25"),
+                    Menus(itemName = "Sandwitch", quantity = "1", price = "$5"),
+                    Menus(itemName = "Malai Tikka ", quantity = "2", price = "$15"),
+                    Menus(itemName = "Soyea Chap", quantity = "3", price = "$22"),
+                    Menus(itemName = "French Fires", quantity = "4", price = "$28"))
+            )
+        )
+        orders.add(
+            Order(
+                name = "Javed Khan",
+                orderNumber = "12345",
+                date = "02 Jan 2024 06:38 AM",
+                email = "Javed@gmail.com",
+                address = "RootFicus",
+                mobile = "9876543210",
+                type = "Dine",
+                status = "Completed",
+                total = "\$540",
+                comment = "No Comment",
+                menus = arrayListOf(Menus(itemName = "Burger", quantity = "5", price = "$25"),
+                    Menus(itemName = "Sandwitch", quantity = "1", price = "$5"),
+                    Menus(itemName = "Malai Tikka ", quantity = "2", price = "$15"),
+                    Menus(itemName = "Soyea Chap", quantity = "3", price = "$22"),
+                    Menus(itemName = "French Fires", quantity = "4", price = "$28"))
+            )
+        )
+        orders.add(
+            Order(
+                name = "Rizwan",
+                orderNumber = "12345",
+                date = "02 Jan 2024 06:38 AM",
+                email = "Rizwan@gmail.com",
+                address = "RootFicus",
+                mobile = "9876543210",
+                type = "Dine",
+                status = "Preparing",
+                total = "\$504",
+                comment = "No Comment",
+                menus = arrayListOf(Menus(itemName = "Burger", quantity = "5", price = "$25"),
+                    Menus(itemName = "Sandwitch", quantity = "1", price = "$5"),
+                    Menus(itemName = "Malai Tikka ", quantity = "2", price = "$15"),
+                    Menus(itemName = "Soyea Chap", quantity = "3", price = "$22"),
+                    Menus(itemName = "French Fires", quantity = "4", price = "$28"))
+            )
+        )
+        orders.add(
+            Order(
+                name = "Simran",
+                orderNumber = "12345",
+                date = "02 Jan 2024 06:38 AM",
+                email = "Simran@gmail.com",
+                address = "RootFicus",
+                mobile = "9876543210",
+                type = "Dine",
+                status = "Completed",
+                total = "\$600",
+                comment = "No Comment",
+                menus = arrayListOf(Menus(itemName = "Burger", quantity = "5", price = "$25"),
+                    Menus(itemName = "Sandwitch", quantity = "1", price = "$5"),
+                    Menus(itemName = "Malai Tikka ", quantity = "2", price = "$15"),
+                    Menus(itemName = "Soyea Chap", quantity = "3", price = "$22"),
+                    Menus(itemName = "French Fires", quantity = "4", price = "$28"))
+            )
+        )
+        orders.add(
+            Order(
+                name = "Vibhuti",
+                orderNumber = "12345",
+                date = "02 Jan 2024 06:38 AM",
+                email = "Vibhuti@gmail.com",
+                address = "RootFicus",
+                mobile = "9876543210",
+                type = "Dine",
+                status = "Completed",
+                total = "\$560",
+                comment = "No Comment",
+                menus = arrayListOf(Menus(itemName = "Burger", quantity = "5", price = "$25"),
+                    Menus(itemName = "Sandwitch", quantity = "1", price = "$5"),
+                    Menus(itemName = "Malai Tikka ", quantity = "2", price = "$15"),
+                    Menus(itemName = "Soyea Chap", quantity = "3", price = "$22"),
+                    Menus(itemName = "French Fires", quantity = "4", price = "$28"))
+            )
+        )
+        orders.add(
+            Order(
+                name = "Harshal",
+                orderNumber = "12345",
+                date = "02 Jan 2024 06:38 AM",
+                email = "Harshal@gmail.com",
+                address = "RootFicus",
+                mobile = "9876543210",
+                type = "Dine",
+                status = "Preparing",
+                total = "\$505",
+                comment = "No Comment",
+                menus = arrayListOf(Menus(itemName = "Burger", quantity = "5", price = "$25"),
+                    Menus(itemName = "Sandwitch", quantity = "1", price = "$5"),
+                    Menus(itemName = "Malai Tikka ", quantity = "2", price = "$15"),
+                    Menus(itemName = "Soyea Chap", quantity = "3", price = "$22"),
+                    Menus(itemName = "French Fires", quantity = "4", price = "$28"))
+            )
+        )
+        orders.add(
+            Order(
+                name = "Rohan",
+                orderNumber = "12345",
+                date = "02 Jan 2024 06:38 AM",
+                email = "Rohan@gmail.com",
+                address = "RootFicus",
+                mobile = "9876543210",
+                type = "Dine",
+                status = "Completed",
+                total = "\$550",
+                comment = "No Comment",
+                menus = arrayListOf(Menus(itemName = "Burger", quantity = "5", price = "$25"),
+                    Menus(itemName = "Sandwitch", quantity = "1", price = "$5"),
+                    Menus(itemName = "Malai Tikka ", quantity = "2", price = "$15"),
+                    Menus(itemName = "Soyea Chap", quantity = "3", price = "$22"),
+                    Menus(itemName = "French Fires", quantity = "4", price = "$28"))
+            )
+        )
+        orders.add(
+            Order(
+                name = "Manav",
+                orderNumber = "12345",
+                date = "02 Jan 2024 06:38 AM",
+                email = "Manav@gmail.com",
+                address = "RootFicus",
+                mobile = "9876543210",
+                type = "Dine",
+                status = "Preparing",
+                total = "\$506",
+                comment = "No Comment",
+                menus = arrayListOf(Menus(itemName = "Burger", quantity = "5", price = "$25"),
+                    Menus(itemName = "Sandwitch", quantity = "1", price = "$5"),
+                    Menus(itemName = "Malai Tikka ", quantity = "2", price = "$15"),
+                    Menus(itemName = "Soyea Chap", quantity = "3", price = "$22"),
+                    Menus(itemName = "French Fires", quantity = "4", price = "$28"))
+            )
+        )
+
+        return orders
     }
 
 

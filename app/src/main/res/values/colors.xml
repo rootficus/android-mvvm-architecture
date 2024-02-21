@@ -48,6 +48,7 @@
     <color name="textColor">@color/black</color>
     <color name="sigInButtonTextColor">@color/white</color>
     <color name="sigInEditTextBackColor">@color/white</color>
+    <color name="selected_color">#F4F4F4</color>
 
 
 </resources>

@@ -28,6 +28,7 @@ import com.rf.utellRestaurant.ui.main.adapter.CustomSpinnerAdapter
 import com.rf.utellRestaurant.ui.main.di.DaggerDashBoardActivityComponent
 import com.rf.utellRestaurant.ui.main.di.DashBoardActivityModule
 import com.rf.utellRestaurant.ui.main.fragment.DashBoardFragment
+import com.rf.utellRestaurant.ui.main.fragment.OrdetDescFragment
 import com.rf.utellRestaurant.ui.main.viewmodel.DashBoardViewModel
 import com.rf.utellRestaurant.utils.IOnBackPressed
 import com.rf.utellRestaurant.utils.NetworkHelper
@@ -36,7 +37,7 @@ import javax.inject.Inject
 
 
 class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activity_dashboard),
-    NavigationView.OnNavigationItemSelectedListener {
+    NavigationView.OnNavigationItemSelectedListener{
 
     @Inject
     lateinit var networkHelper: NetworkHelper
@@ -47,6 +48,8 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewmodel: DashBoardViewModel by viewModels { dashBoardViewModelFactory }
+
+    private lateinit var orderDescFragment: OrdetDescFragment
 
     private lateinit var navController: NavController
     var doubleBackToExitPressedOnce = false
@@ -86,6 +89,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     private fun initializationView() {
         // Sample data
         // Sample data
+        orderDescFragment = OrdetDescFragment()
         val items: MutableList<String> = ArrayList()
         items.add("Online")
         items.add("Offline")
@@ -379,5 +383,6 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
             finishAffinity()
         }
     }
+
 }
 
