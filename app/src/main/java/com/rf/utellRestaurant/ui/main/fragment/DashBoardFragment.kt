@@ -4,12 +4,14 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.rf.utellRestaurant.R
 import com.rf.utellRestaurant.databinding.FragmentDashboardBinding
 import com.rf.utellRestaurant.sdkInit.UtellSDK
 import com.rf.utellRestaurant.ui.base.BaseFragment
 import com.rf.utellRestaurant.ui.base.BaseFragmentModule
 import com.rf.utellRestaurant.ui.base.BaseViewModelFactory
+import com.rf.utellRestaurant.ui.main.adapter.DashBoardOrderItemAdapter
 import com.rf.utellRestaurant.ui.main.di.DaggerDashBoardFragmentComponent
 import com.rf.utellRestaurant.ui.main.di.DashBoardFragmentModule
 import com.rf.utellRestaurant.ui.main.di.DashBoardFragmentModuleDi
@@ -52,7 +54,16 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
     }
 
     private fun initializeView() {
+        val dataList = listOf(
+            Triple("Paneer Tikka", "$2", "completed"),
+            Triple("Soya Chaap", "$3", "rejected"),
+            Triple("Soya Chaap", "$3", "completed"),
+            Triple("Soya Chaap", "$3", "rejected")
+        )
 
+        val adapter = DashBoardOrderItemAdapter(dataList)
+        mDataBinding.recyclerViewId?.layoutManager = LinearLayoutManager(requireActivity())
+        mDataBinding.recyclerViewId?.adapter = adapter
     }
 
 
