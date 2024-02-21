@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
@@ -20,6 +21,9 @@ import com.rf.utellRestaurant.ui.base.BaseFragment
 import com.rf.utellRestaurant.ui.base.BaseFragmentModule
 import com.rf.utellRestaurant.ui.base.BaseViewModelFactory
 import com.rf.utellRestaurant.ui.main.activity.SignInActivity
+import com.rf.utellRestaurant.ui.main.adapter.DashBoardOrderItemAdapter
+import com.rf.utellRestaurant.ui.main.adapter.ListItem
+import com.rf.utellRestaurant.ui.main.adapter.SettingsPrinterListAdapter
 import com.rf.utellRestaurant.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.utellRestaurant.ui.main.di.SettingFragmentModule
 import javax.inject.Inject
@@ -53,5 +57,17 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_s
     }
 
     private fun initialization() {
+
+        val dataList = listOf(
+            ListItem("Printer 1",  "Connected"),
+            ListItem("Printer 2",  "Disconnected"),
+            ListItem("Printer 3",  "Connected"),
+            ListItem("Printer 4",  "Disconnected")
+        )
+
+        val adapter = SettingsPrinterListAdapter(dataList)
+        mDataBinding.PrinterRecyclerView?.layoutManager = LinearLayoutManager(requireActivity())
+        mDataBinding.PrinterRecyclerView?.adapter = adapter
     }
+
 }
