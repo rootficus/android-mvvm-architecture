@@ -21,6 +21,7 @@ import com.google.android.material.navigation.NavigationView
 import com.rf.utellRestaurant.R
 import com.rf.utellRestaurant.databinding.ActivityDashboardBinding
 import com.rf.utellRestaurant.databinding.LogoutAlertBinding
+import com.rf.utellRestaurant.databinding.NewOrderAlertBinding
 import com.rf.utellRestaurant.databinding.SideNavBinding
 import com.rf.utellRestaurant.sdkInit.UtellSDK
 import com.rf.utellRestaurant.ui.base.BaseActivity
@@ -130,6 +131,11 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         navController = Navigation.findNavController(this, R.id.navHostOnDashBoardFragment)
         NavigationUI.setupWithNavController(viewDataBinding?.navigationRail!!, navController)
 
+        val headerNav = viewDataBinding?.headerLayout
+        headerNav?.printerButton?.setOnClickListener{
+            newOrderAlert()
+        }
+
 
     }
 
@@ -197,6 +203,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         sideNav?.layoutLogout?.setOnClickListener {
             verifyLogout()
         }
+
         sideNav?.layoutSetting?.setOnClickListener {
             setHeaderText(getString(R.string.settings))
 
@@ -391,6 +398,17 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         view.YesButtonLabel.setOnClickListener{
 
         }
+        val dialog: android.app.AlertDialog? = mBuilder.create()
+        dialog?.show()
+
+    }
+
+    private fun newOrderAlert() {
+        val mBuilder = android.app.AlertDialog.Builder(this)
+
+        val view = NewOrderAlertBinding.inflate(layoutInflater)
+        mBuilder.setView(view.root);
+
         val dialog: android.app.AlertDialog? = mBuilder.create()
         dialog?.show()
 

@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.rf.utellRestaurant.R
 import com.rf.utellRestaurant.data.model.Order
 import com.rf.utellRestaurant.databinding.FragmentOrderDescBinding
+import com.rf.utellRestaurant.databinding.LogoutAlertBinding
+import com.rf.utellRestaurant.databinding.OrderCancellationAlertBinding
 import com.rf.utellRestaurant.sdkInit.UtellSDK
 import com.rf.utellRestaurant.ui.base.BaseFragment
 import com.rf.utellRestaurant.ui.base.BaseFragmentModule
@@ -81,6 +83,9 @@ class OrdetDescFragment : BaseFragment<FragmentOrderDescBinding>(R.layout.fragme
         mDataBinding.txtStatus?.text = selectedItem?.status
         mDataBinding.txtRemark?.text = selectedItem?.comment
         mDataBinding.textOrderNum?.text = "Order number : ${selectedItem?.orderNumber}"
+        mDataBinding.btnReject?.setOnClickListener{
+            confirmReject()
+        }
     }
 
     fun updateDetails(order: Order?) {
@@ -96,4 +101,22 @@ class OrdetDescFragment : BaseFragment<FragmentOrderDescBinding>(R.layout.fragme
         mDataBinding.textOrderNum?.text = "Order number : ${selectedItem?.orderNumber}"
         Log.i("Order", "${order?.name}")
     }
+
+    private fun confirmReject() {
+        val mBuilder = android.app.AlertDialog.Builder(requireActivity())
+
+        val view = OrderCancellationAlertBinding.inflate(layoutInflater)
+        mBuilder.setView(view.root);
+        view.NoButtonLabel.setOnClickListener{
+
+        }
+        view.YesButtonLabel.setOnClickListener{
+
+        }
+        val dialog: android.app.AlertDialog? = mBuilder.create()
+        dialog?.show()
+
+    }
+
+
 }
