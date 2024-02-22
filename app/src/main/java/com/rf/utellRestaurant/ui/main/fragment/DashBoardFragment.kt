@@ -13,7 +13,6 @@ import com.rf.utellRestaurant.ui.base.BaseFragmentModule
 import com.rf.utellRestaurant.ui.base.BaseViewModelFactory
 import com.rf.utellRestaurant.ui.main.adapter.DashBoardOrderItemAdapter
 import com.rf.utellRestaurant.ui.main.di.DaggerDashBoardFragmentComponent
-import com.rf.utellRestaurant.ui.main.di.DashBoardFragmentModule
 import com.rf.utellRestaurant.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.utellRestaurant.ui.main.viewmodel.DashBoardViewModel
 import com.rf.utellRestaurant.utils.NetworkHelper

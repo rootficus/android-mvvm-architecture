@@ -7,6 +7,7 @@ import com.rf.utellRestaurant.roomDB.FionDatabase
 import com.rf.utellRestaurant.sdkInit.di.AppComponent
 import com.rf.utellRestaurant.ui.base.BaseFragmentModule
 import com.rf.utellRestaurant.ui.base.BaseViewModelFactory
+import com.rf.utellRestaurant.ui.main.fragment.ActiveOrderFragment
 import com.rf.utellRestaurant.ui.main.fragment.DashBoardFragment
 import com.rf.utellRestaurant.ui.main.fragment.HistoryFragment
 import com.rf.utellRestaurant.ui.main.fragment.NotificationFragment
@@ -15,6 +16,7 @@ import com.rf.utellRestaurant.ui.main.fragment.OrderHistoryDescFragment
 import com.rf.utellRestaurant.ui.main.fragment.OrdetDescFragment
 import com.rf.utellRestaurant.ui.main.fragment.OrdetListFragment
 import com.rf.utellRestaurant.ui.main.fragment.SettingFragment
+import com.rf.utellRestaurant.ui.main.fragment.UpcomingOrderFragment
 import com.rf.utellRestaurant.ui.main.viewmodel.DashBoardViewModel
 import com.rf.utellRestaurant.utils.ApplicationContext
 import com.rf.utellRestaurant.utils.FragmentScope
@@ -142,4 +144,27 @@ interface OrderHistoryDescFragmentComponent {
 
 @Module(includes = [DashBoardFragmentModuleDi::class])
 class OrderHistoryDescFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [UpcomingOrderFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface UpcomingOrderFragmentComponent {
+    fun inject(upcomingOrderFragment: UpcomingOrderFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class UpcomingOrderFragmentModule
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [ActiveOrderFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface ActiveOrderFragmentComponent {
+    fun inject(activeOrderFragment: ActiveOrderFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class ActiveOrderFragmentModule
 

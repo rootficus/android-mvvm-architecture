@@ -42,6 +42,13 @@
         tools:layout="@layout/fragment_history">
 
     </fragment>
+    <fragment
+        android:id="@+id/navigation_upcomingOrderFragment"
+        android:name="com.rf.utellRestaurant.ui.main.fragment.UpcomingOrderFragment"
+        android:label="UpcomingOrderFragment"
+        tools:layout="@layout/fragment_upcoming_oders">
+
+    </fragment>
 
 
 

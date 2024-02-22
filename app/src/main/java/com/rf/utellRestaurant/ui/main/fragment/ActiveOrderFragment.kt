@@ -7,13 +7,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rf.utellRestaurant.R
 import com.rf.utellRestaurant.data.model.Order
-import com.rf.utellRestaurant.databinding.FragmentHistoryBinding
+import com.rf.utellRestaurant.databinding.FragmentActiveOderBinding
 import com.rf.utellRestaurant.sdkInit.UtellSDK
 import com.rf.utellRestaurant.ui.base.BaseFragment
 import com.rf.utellRestaurant.ui.base.BaseFragmentModule
 import com.rf.utellRestaurant.ui.base.BaseViewModelFactory
 import com.rf.utellRestaurant.ui.main.adapter.OrderListAdapter
-import com.rf.utellRestaurant.ui.main.di.DaggerHistoryFragmentComponent
+import com.rf.utellRestaurant.ui.main.di.DaggerActiveOrderFragmentComponent
+import com.rf.utellRestaurant.ui.main.di.DaggerOrderFragmentComponent
 import com.rf.utellRestaurant.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.utellRestaurant.ui.main.viewmodel.DashBoardViewModel
 import com.rf.utellRestaurant.utils.NetworkHelper
@@ -22,7 +23,7 @@ import com.rf.utellRestaurant.utils.Utility
 import javax.inject.Inject
 
 
-class HistoryFragment : BaseFragment<FragmentHistoryBinding>(R.layout.fragment_history) {
+class ActiveOrderFragment : BaseFragment<FragmentActiveOderBinding>(R.layout.fragment_active_oder){
 
     @Inject
     lateinit var sharedPreference: SharedPreference
@@ -36,7 +37,9 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>(R.layout.fragment_h
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
-    lateinit var childFragment: OrderHistoryDescFragment
+    lateinit var childFragment: OrdetDescFragment
+    lateinit var childUpcomingFragment: UpcomingOrderFragment
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeDagger()
@@ -44,25 +47,25 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>(R.layout.fragment_h
     }
 
     private fun initializeDagger() {
-        DaggerHistoryFragmentComponent.builder().appComponent(UtellSDK.appComponent)
+        DaggerActiveOrderFragmentComponent.builder().appComponent(UtellSDK.appComponent)
             .dashBoardFragmentModuleDi(DashBoardFragmentModuleDi())
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
 
     private fun initialization() {
+
         val transaction = childFragmentManager.beginTransaction()
-        childFragment = OrderHistoryDescFragment()
+        childFragment = OrdetDescFragment()
         transaction.replace(R.id.detail_container, childFragment)
         transaction.commit()
-
         loadBothFragments()
+
     }
 
     private fun loadBothFragments() {
         val orders: ArrayList<Order> = Utility.generateSampleOrders()
         val orderItem: ArrayList<String> = arrayListOf()
         // Populate ListView with orders
-
         val adapter = OrderListAdapter(orders)
         mDataBinding.listView?.layoutManager = LinearLayoutManager(context)
         adapter.listener = cardListener
@@ -72,15 +75,12 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>(R.layout.fragment_h
         if (orders.isNotEmpty()) {
             val firstItem = orders[0]// Get the first item from your list
             childFragment =
-                OrderHistoryDescFragment.newInstance(firstItem) // Pass the selected item to the child fragment
+                OrdetDescFragment.newInstance(firstItem) // Pass the selected item to the child fragment
             val transaction = childFragmentManager.beginTransaction()
             transaction.replace(R.id.detail_container, childFragment)
             transaction.commit()
         }
 
-        /* requireActivity().supportFragmentManager.beginTransaction()
-             .replace(R.id.detail_container, OrdetDescFragment())
-             .commit()*/
     }
 
     private val cardListener = object : OrderListAdapter.CardEvent {
@@ -90,4 +90,5 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>(R.layout.fragment_h
             }
         }
     }
+
 }
