@@ -13,16 +13,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bgPrimaryColor">
+        android:background="@color/bgPrimaryColor"
+        android:layout_margin="20dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -31,162 +25,175 @@
                 android:text="Store Setting"
                 android:textColor="@color/black"
                 android:fontFamily="@font/poppins"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_MarginTop="30dp"
+                android:layout_marginVertical="25dp"
+                android:id="@+id/settingsHeadingLabel"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:background="#F4F4F4"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:weightSum="2">
-
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
-                    android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:fontFamily="@font/poppins"
                     android:text="Store Enable"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="25sp"
+                    android:background="#F4F4F4"
+                    android:id="@+id/StoreEnableText"
+                    app:layout_constraintTop_toBottomOf="@id/settingsHeadingLabel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintWidth_percent="0.5"
+                    android:layout_marginVertical="15dp"
+                    android:paddingHorizontal="15dp"
+                    app:layout_constraintTop_toTopOf="@id/StoreEnableSwitch"
+                    app:layout_constraintBottom_toBottomOf="@id/StoreEnableSwitch"/>
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
-                    android:layout_weight="1"
                     android:padding="5dp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:background="#F4F4F4"
+                    android:id="@+id/StoreEnableSwitch"
+                    app:layout_constraintTop_toBottomOf="@id/settingsHeadingLabel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintWidth_percent="0.5"
+                    app:layout_constraintLeft_toRightOf="@id/StoreEnableText"/>
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:background="#F4F4F4"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:weightSum="2">
-
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
-                    android:layout_weight="1"
                     android:fontFamily="@font/poppins"
                     android:gravity="center_vertical"
                     android:text="New Order Alert"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="25sp"
+                    android:id="@+id/OrderAlertText"
+                    app:layout_constraintTop_toBottomOf="@id/StoreEnableText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="#F4F4F4"
+                    app:layout_constraintWidth_percent="0.5"
+                    android:layout_marginVertical="15dp"
+                    android:paddingHorizontal="15dp"
+                    app:layout_constraintTop_toTopOf="@id/orderAlertSwitch"
+                    app:layout_constraintBottom_toBottomOf="@id/orderAlertSwitch"/>
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
-                    android:layout_weight="1"
                     android:padding="5dp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:id="@+id/orderAlertSwitch"
+                    android:background="#F4F4F4"
+                    app:layout_constraintTop_toBottomOf="@id/StoreEnableSwitch"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintWidth_percent="0.5"
+                    app:layout_constraintLeft_toRightOf="@id/OrderAlertText"/>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:background="#F4F4F4"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:weightSum="2">
-
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
-                    android:layout_weight="1"
                     android:fontFamily="@font/poppins"
                     android:gravity="center_vertical"
                     android:text="Auto Confirm New order"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="25sp"
+                    android:id="@+id/ConfirmOrderText"
+                    android:background="#F4F4F4"
+                    app:layout_constraintTop_toBottomOf="@id/OrderAlertText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintWidth_percent="0.5"
+                    android:layout_marginVertical="15dp"
+                    android:paddingHorizontal="15dp"
+                    app:layout_constraintTop_toTopOf="@id/confirmOrderSwitch"
+                    app:layout_constraintBottom_toBottomOf="@id/confirmOrderSwitch"/>
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
-                    android:layout_weight="1"
                     android:padding="5dp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:id="@+id/confirmOrderSwitch"
+                    android:background="#F4F4F4"
+                    app:layout_constraintTop_toBottomOf="@id/orderAlertSwitch"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintWidth_percent="0.5"/>
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:background="#F4F4F4"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:weightSum="2">
-
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="25dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/poppins"
                     android:gravity="center_vertical"
                     android:text="Low Battery Alert"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    android:textSize="25sp"
+                    android:id="@+id/batteryAlertText"
+                    android:background="#F4F4F4"
+                    app:layout_constraintTop_toBottomOf="@id/ConfirmOrderText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintWidth_percent="0.5"
+                    android:layout_marginVertical="15dp"
+                    android:paddingHorizontal="15dp"
+                    app:layout_constraintTop_toTopOf="@id/batteryAlertSwitch"
+                    app:layout_constraintBottom_toBottomOf="@id/batteryAlertSwitch"/>
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
-                    android:layout_weight="1"
                     android:padding="5dp"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:id="@+id/batteryAlertSwitch"
+                    android:background="#F4F4F4"
+                    app:layout_constraintTop_toBottomOf="@id/confirmOrderSwitch"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintWidth_percent="0.5"/>
 
-            </LinearLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="30dp"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:weightSum="2">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:text="Printer Settings"
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins"
-                    android:textSize="18sp"
+                    android:textSize="30sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    android:id="@+id/printerSettings"
+                    android:layout_marginTop="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/batteryAlertText"
+                    app:layout_constraintWidth_percent="0.5"
+                    android:layout_marginHorizontal="15dp"/>
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/addPrinter"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                         android:elevation="15dp"
                     app:cardBackgroundColor="#074909"
                     app:cardCornerRadius="5dp"
+                    android:layout_marginHorizontal="15dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@id/batteryAlertSwitch"
+                    app:layout_constraintTop_toTopOf="@id/printerSettings"
+                    app:layout_constraintBottom_toBottomOf="@id/printerSettings">
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/status_label"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -198,7 +205,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold" />
                 </androidx.cardview.widget.CardView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/PrinterRecyclerView"
@@ -209,9 +216,10 @@
                 android:background="#F4F4F4"
                 android:padding="5dp"
                 tools:itemCount="5"
-                tools:listitem="@layout/printer_list_settings" />
+                tools:listitem="@layout/printer_list_settings"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/printerSettings"/>
 
 
-        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

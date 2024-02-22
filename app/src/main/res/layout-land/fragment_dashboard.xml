@@ -40,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.65">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/primaryBlue"
@@ -49,20 +49,25 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/salesOverview"
                         android:layout_margin="5dp"
                         android:fontFamily="@font/poppins"
                         android:text="Sales OverView"
                         android:textColor="@color/white"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
-                        android:src="@drawable/graph" />
+                        android:src="@drawable/graph"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/salesOverview"/>
 
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </androidx.cardview.widget.CardView>
@@ -81,7 +86,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.32">
 
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/primaryBlue"
@@ -89,26 +94,33 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
+                        app:layout_constraintHeight_percent="0.1"
+                        android:id="@+id/StatisticsLabel"
                         android:layout_marginHorizontal="10dp"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="10dp"
                         android:fontFamily="@font/poppins"
                         android:text="Today's Statistics"
                         android:textColor="@color/white"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="0dp"
+                        app:layout_constraintHeight_percent="0.9"
                         android:padding="10dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/pie_chart_representation_1625735541_1__1_" />
+                        android:src="@drawable/pie_chart_representation_1625735541_1__1_"
+                        app:layout_constraintTop_toBottomOf="@id/StatisticsLabel"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
-                </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/orders_layout"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -125,12 +137,14 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/today_order"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="10dp">
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintWidth_percent="0.33"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -179,11 +193,13 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/active_order"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="10dp">
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintWidth_percent="0.33"
+                    app:layout_constraintStart_toEndOf="@id/today_order"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -231,12 +247,14 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/completed_order"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
                     android:layout_marginStart="10dp"
-                    android:layout_weight="1"
-                    app:cardCornerRadius="10dp">
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintWidth_percent="0.33"
+                    app:layout_constraintStart_toEndOf="@id/active_order"
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -280,7 +298,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -310,7 +328,7 @@
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/labelOrderHostory"
+                        android:id="@+id/labelOrderHistory"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins"
@@ -321,19 +339,19 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/item_label"
+                        android:id="@+id/customername_label"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:layout_weight="1"
                         android:fontFamily="@font/poppins"
-                        android:paddingStart="15dp"
-                        android:text="Item"
+                        android:paddingStart="5dp"
+                        android:text="Customer Name"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/labelOrderHostory"
+                        app:layout_constraintTop_toBottomOf="@id/labelOrderHistory"
                         app:layout_constraintWidth_percent="0.68" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -345,8 +363,8 @@
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@id/item_label"
-                        app:layout_constraintTop_toTopOf="@id/item_label"
+                        app:layout_constraintStart_toEndOf="@id/customername_label"
+                        app:layout_constraintTop_toTopOf="@id/customername_label"
                         app:layout_constraintWidth_percent="0.16" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -360,7 +378,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toEndOf="@id/price_label"
-                        app:layout_constraintTop_toTopOf="@id/item_label"
+                        app:layout_constraintTop_toTopOf="@id/customername_label"
                         app:layout_constraintWidth_percent="0.15" />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -369,7 +387,8 @@
                         android:layout_height="0dp"
                         android:paddingHorizontal="5dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/item_label"
+                        app:layout_constraintTop_toBottomOf="@id/customername_label"
+                        app:layout_constraintStart_toStartOf="parent"
                         tools:itemCount="5"
                         tools:listitem="@layout/item_row" />
 
@@ -391,7 +410,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.26">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -405,29 +424,37 @@
                         android:text="Upcoming"
                         android:textColor="#083473"
                         android:textSize="32sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:id="@+id/upcomingTxtLabel"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/orderTxtLabel"
                         android:layout_marginStart="10dp"
                         android:layout_marginBottom="5dp"
                         android:fontFamily="@font/poppins"
                         android:text="Orders"
                         android:textColor="@color/primaryBlue"
-                        android:textSize="28sp" />
+                        android:textSize="28sp"
+                        app:layout_constraintTop_toBottomOf="@id/upcomingTxtLabel"
+                        app:layout_constraintStart_toStartOf="parent"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:layout_marginBottom="10dp"
                         android:fontFamily="@font/poppins"
                         android:gravity="end"
                         android:text="2"
                         android:textColor="#083473"
-                        android:textSize="100sp" />
-                </LinearLayout>
+                        android:textSize="100sp"
+                        app:layout_constraintTop_toBottomOf="@id/orderTxtLabel"
+                        app:layout_constraintStart_toStartOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

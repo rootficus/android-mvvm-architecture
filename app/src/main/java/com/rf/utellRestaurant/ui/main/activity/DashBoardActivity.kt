@@ -1,6 +1,5 @@
 package com.rf.utellRestaurant.ui.main.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,6 +7,7 @@ import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.LinearLayoutCompat
@@ -19,6 +19,7 @@ import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationView
 import com.rf.utellRestaurant.R
 import com.rf.utellRestaurant.databinding.ActivityDashboardBinding
+import com.rf.utellRestaurant.databinding.LogoutAlertBinding
 import com.rf.utellRestaurant.databinding.SideNavBinding
 import com.rf.utellRestaurant.sdkInit.UtellSDK
 import com.rf.utellRestaurant.ui.base.BaseActivity
@@ -370,18 +371,18 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
 
     private fun verifyLogout() {
         val mBuilder = android.app.AlertDialog.Builder(this)
-            .setTitle(getString(R.string.log_out))
-            .setMessage("Are you sure you want to Logout?")
-            .setPositiveButton(getString(R.string.yes), null)
-            .setNegativeButton(getString(R.string.no), null)
-            .show()
-        val mPositiveButton = mBuilder.getButton(android.app.AlertDialog.BUTTON_POSITIVE)
-        mPositiveButton.setOnClickListener {
-            mBuilder.dismiss()
-            //sharedPreference.resetSharedPref()
-            startActivity(Intent(this, SignInActivity::class.java))
-            finishAffinity()
+
+        val view = LogoutAlertBinding.inflate(layoutInflater)
+        mBuilder.setView(view.root);
+        view.NoButtonLabel.setOnClickListener{
+
         }
+        view.YesButtonLabel.setOnClickListener{
+
+        }
+        val dialog: android.app.AlertDialog? = mBuilder.create()
+        dialog?.show()
+
     }
 
 }
