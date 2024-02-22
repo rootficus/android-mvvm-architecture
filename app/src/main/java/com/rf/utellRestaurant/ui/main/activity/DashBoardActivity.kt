@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -37,7 +38,7 @@ import javax.inject.Inject
 
 
 class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activity_dashboard),
-    NavigationView.OnNavigationItemSelectedListener{
+    NavigationView.OnNavigationItemSelectedListener {
 
     @Inject
     lateinit var networkHelper: NetworkHelper
@@ -49,7 +50,6 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewmodel: DashBoardViewModel by viewModels { dashBoardViewModelFactory }
 
-    private lateinit var orderDescFragment: OrdetDescFragment
 
     private lateinit var navController: NavController
     var doubleBackToExitPressedOnce = false
@@ -66,6 +66,13 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
 
     private val hideDelay: Long = 2000 // Adjust the delay before hiding as needed
 
+    // Interface to communicate with the fragment
+    interface OnChangeFragmentButtonClickListener {
+        fun onChangeFragmentButtonClicked()
+    }
+
+
+    private val mListener: OnChangeFragmentButtonClickListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,8 +95,6 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
 
     private fun initializationView() {
         // Sample data
-        // Sample data
-        orderDescFragment = OrdetDescFragment()
         val items: MutableList<String> = ArrayList()
         items.add("Online")
         items.add("Offline")
@@ -173,7 +178,8 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
             )
         }
         sideNav?.layoutOrders?.setOnClickListener {
-            setHeaderText(getString(R.string.orders))
+            viewDataBinding?.headerLayout?.headerLayout?.visibility = View.GONE
+
 
             val bundle = Bundle()
             jumpToAnotherFragment(R.id.navigation_orderFragment, bundle)
@@ -210,6 +216,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     }
 
     private fun setHeaderText(headerText: String) {
+        viewDataBinding?.headerLayout?.headerLayout?.visibility = View.VISIBLE
         viewDataBinding?.headerLayout?.txtHeader?.text = headerText
     }
 
@@ -239,7 +246,11 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         }
     }
 
-    private fun unSelectedUI(layout: LinearLayoutCompat, txtHead: AppCompatTextView, icon: AppCompatImageView) {
+    private fun unSelectedUI(
+        layout: LinearLayoutCompat,
+        txtHead: AppCompatTextView,
+        icon: AppCompatImageView
+    ) {
         layout.setBackgroundColor(
             ContextCompat.getColor(
                 applicationContext,

@@ -1,30 +1,28 @@
 package com.rf.utellRestaurant.ui.main.fragment
 
+import SolatViewPagerAdapter
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayoutMediator
 import com.rf.utellRestaurant.R
-import com.rf.utellRestaurant.data.model.Order
 import com.rf.utellRestaurant.databinding.FragmentOderBinding
 import com.rf.utellRestaurant.sdkInit.UtellSDK
 import com.rf.utellRestaurant.ui.base.BaseFragment
 import com.rf.utellRestaurant.ui.base.BaseFragmentModule
 import com.rf.utellRestaurant.ui.base.BaseViewModelFactory
-import com.rf.utellRestaurant.ui.main.adapter.OrderListAdapter
+import com.rf.utellRestaurant.ui.main.adapter.CustomSpinnerAdapter
 import com.rf.utellRestaurant.ui.main.di.DaggerOrderFragmentComponent
 import com.rf.utellRestaurant.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.utellRestaurant.ui.main.viewmodel.DashBoardViewModel
 import com.rf.utellRestaurant.utils.NetworkHelper
 import com.rf.utellRestaurant.utils.SharedPreference
-import com.rf.utellRestaurant.utils.Utility
 import javax.inject.Inject
 
 
-class OrderFragment : BaseFragment<FragmentOderBinding>(R.layout.fragment_oder) {
+class OrderFragment : BaseFragment<FragmentOderBinding>(R.layout.fragment_oder){
 
     @Inject
     lateinit var sharedPreference: SharedPreference
@@ -38,7 +36,7 @@ class OrderFragment : BaseFragment<FragmentOderBinding>(R.layout.fragment_oder) 
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
-    lateinit var childFragment: OrdetDescFragment
+    private lateinit var solatViewPagerAdapter: SolatViewPagerAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,62 +51,46 @@ class OrderFragment : BaseFragment<FragmentOderBinding>(R.layout.fragment_oder) 
     }
 
     private fun initialization() {
-        val transaction = childFragmentManager.beginTransaction()
-        childFragment = OrdetDescFragment()
-        transaction.replace(R.id.detail_container, childFragment)
-        transaction.commit()
 
-        loadBothFragments()
-    }
+        val items: MutableList<String> = ArrayList()
+        items.add("Online")
+        items.add("Offline")
+        items.add("Pause")
 
-    private fun loadBothFragments() {
-        val orders: ArrayList<Order> = Utility.generateSampleOrders()
-        val orderItem: ArrayList<String> = arrayListOf()
-        // Populate ListView with orders
+        val icons = intArrayOf(R.drawable.online, R.drawable.offline, R.drawable.pause)
 
-        val adapter = OrderListAdapter(orders)
-        mDataBinding.listView?.layoutManager = LinearLayoutManager(context)
-        adapter.listener = cardListener
-        mDataBinding.listView?.adapter = adapter
+        // Create and set custom adapter
+        val adapter = CustomSpinnerAdapter(requireActivity(), items, icons)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        mDataBinding.spinner?.adapter = adapter
 
-        // Handle item click
-     /*   mDataBinding.listView?.onItemClickListener =
-            AdapterView.OnItemClickListener { parent, view, position, id ->
 
-                val selectedOrder = orders[position]
-                if (childFragment != null) {
-                    childFragment.updateDetails(selectedOrder);
-                }
-            }*/
+        solatViewPagerAdapter =
+            SolatViewPagerAdapter(requireActivity().supportFragmentManager, lifecycle)
+        solatViewPagerAdapter.addFragment(ActiveOrderFragment())
+        solatViewPagerAdapter.addFragment(UpcomingOrderFragment())
+        mDataBinding.viewPagerQuran?.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        mDataBinding.viewPagerQuran?.adapter = solatViewPagerAdapter
+        mDataBinding.viewPagerQuran?.let { solatViewPagerAdapter.removeSwipeFunctionality(it) }
+        //Tabs Layout
+        mDataBinding?.tabLayoutQuran?.let {
+            mDataBinding.viewPagerQuran?.let { it1 ->
+                TabLayoutMediator(
+                    it,
+                    it1
+                ) { tab, position ->
+                    when (position) {
+                        0 -> {
+                            tab.text = context?.getString(R.string.active_order)
+                        }
 
-        // Automatically select the first item
-        if (orders.isNotEmpty()) {
-            val firstItem = orders[0]// Get the first item from your list
-            childFragment = OrdetDescFragment.newInstance(firstItem) // Pass the selected item to the child fragment
-            val transaction = childFragmentManager.beginTransaction()
-            transaction.replace(R.id.detail_container, childFragment)
-            transaction.commit()
-        }
-
-        /* requireActivity().supportFragmentManager.beginTransaction()
-             .replace(R.id.detail_container, OrdetDescFragment())
-             .commit()*/
-    }
-
-    private val cardListener = object : OrderListAdapter.CardEvent {
-        override fun onCardClicked(order: Order) {
-            if (childFragment != null) {
-                childFragment.updateDetails(order);
+                        1 -> {
+                            tab.text = context?.getString(R.string.upcoming_order)
+                        }
+                    }
+                }.attach()
             }
         }
+
     }
-
-   /* fun onItemSelected(order: Order?) {
-        val detailFragment: OrdetDescFragment =
-            requireActivity().supportFragmentManager.findFragmentById(R.id.detail_container) as OrdetDescFragment
-        if (detailFragment != null) {
-            detailFragment.updateDetails(order)
-        }
-    }*/
-
 }

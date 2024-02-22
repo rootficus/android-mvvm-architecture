@@ -7,13 +7,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rf.utellRestaurant.R
 import com.rf.utellRestaurant.data.model.Order
-import com.rf.utellRestaurant.databinding.FragmentHistoryBinding
+import com.rf.utellRestaurant.databinding.FragmentOderBinding
+import com.rf.utellRestaurant.databinding.FragmentUpcomingOdersBinding
 import com.rf.utellRestaurant.sdkInit.UtellSDK
 import com.rf.utellRestaurant.ui.base.BaseFragment
 import com.rf.utellRestaurant.ui.base.BaseFragmentModule
 import com.rf.utellRestaurant.ui.base.BaseViewModelFactory
 import com.rf.utellRestaurant.ui.main.adapter.OrderListAdapter
-import com.rf.utellRestaurant.ui.main.di.DaggerHistoryFragmentComponent
+import com.rf.utellRestaurant.ui.main.di.DaggerOrderFragmentComponent
+import com.rf.utellRestaurant.ui.main.di.DaggerUpcomingOrderFragmentComponent
 import com.rf.utellRestaurant.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.utellRestaurant.ui.main.viewmodel.DashBoardViewModel
 import com.rf.utellRestaurant.utils.NetworkHelper
@@ -22,7 +24,7 @@ import com.rf.utellRestaurant.utils.Utility
 import javax.inject.Inject
 
 
-class HistoryFragment : BaseFragment<FragmentHistoryBinding>(R.layout.fragment_history) {
+class UpcomingOrderFragment : BaseFragment<FragmentUpcomingOdersBinding>(R.layout.fragment_upcoming_oders) {
 
     @Inject
     lateinit var sharedPreference: SharedPreference
@@ -36,7 +38,8 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>(R.layout.fragment_h
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by activityViewModels { dashBoardViewModelFactory }
-    lateinit var childFragment: OrderHistoryDescFragment
+    lateinit var childFragment: OrdetDescFragment
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initializeDagger()
@@ -44,14 +47,14 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>(R.layout.fragment_h
     }
 
     private fun initializeDagger() {
-        DaggerHistoryFragmentComponent.builder().appComponent(UtellSDK.appComponent)
+        DaggerUpcomingOrderFragmentComponent.builder().appComponent(UtellSDK.appComponent)
             .dashBoardFragmentModuleDi(DashBoardFragmentModuleDi())
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
 
     private fun initialization() {
         val transaction = childFragmentManager.beginTransaction()
-        childFragment = OrderHistoryDescFragment()
+        childFragment = OrdetDescFragment()
         transaction.replace(R.id.detail_container, childFragment)
         transaction.commit()
 
@@ -68,11 +71,21 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>(R.layout.fragment_h
         adapter.listener = cardListener
         mDataBinding.listView?.adapter = adapter
 
+        // Handle item click
+        /*   mDataBinding.listView?.onItemClickListener =
+               AdapterView.OnItemClickListener { parent, view, position, id ->
+
+                   val selectedOrder = orders[position]
+                   if (childFragment != null) {
+                       childFragment.updateDetails(selectedOrder);
+                   }
+               }*/
+
         // Automatically select the first item
         if (orders.isNotEmpty()) {
             val firstItem = orders[0]// Get the first item from your list
             childFragment =
-                OrderHistoryDescFragment.newInstance(firstItem) // Pass the selected item to the child fragment
+                OrdetDescFragment.newInstance(firstItem) // Pass the selected item to the child fragment
             val transaction = childFragmentManager.beginTransaction()
             transaction.replace(R.id.detail_container, childFragment)
             transaction.commit()
@@ -90,4 +103,13 @@ class HistoryFragment : BaseFragment<FragmentHistoryBinding>(R.layout.fragment_h
             }
         }
     }
+
+    /* fun onItemSelected(order: Order?) {
+         val detailFragment: OrdetDescFragment =
+             requireActivity().supportFragmentManager.findFragmentById(R.id.detail_container) as OrdetDescFragment
+         if (detailFragment != null) {
+             detailFragment.updateDetails(order)
+         }
+     }*/
+
 }
