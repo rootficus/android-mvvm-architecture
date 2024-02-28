@@ -83,33 +83,28 @@ abstract class BaseRepository {
                         APIResponseCode.ResponseCode200.codeValue -> {
                             response_.body()?.let { body_ ->
                                 body_.data?.let { results_ ->
-                                    if (body_.status != null) {
-                                        when (body_.status) {
-                                            200.0 -> {
-                                                success.invoke(results_)
-                                            }
-
-                                            200 -> {
-                                                success.invoke(results_)
-                                                // message.invoke(body_.message.toString())
-                                            }
-
-                                            true -> {
-                                                success.invoke(results_)
-                                            }
-
-                                            else -> {
-                                                fail.invoke(
-                                                    body_.message
-                                                        ?: context.getString(R.string.error_something_went_wrong)
-                                                )
-                                            }
+                                    success.invoke(results_)
+                                  /*  when (body_.status) {
+                                        200.0 -> {
+                                            success.invoke(results_)
                                         }
-                                    } else if (body_.message.equals("success")) {
-                                        success.invoke(results_)
-                                    } else if (body_.message!!.contains("Status")) {
-                                        success.invoke(results_)
-                                    }
+
+                                        200 -> {
+                                            success.invoke(results_)
+                                            // message.invoke(body_.message.toString())
+                                        }
+
+                                        true -> {
+                                            success.invoke(results_)
+                                        }
+
+                                        else -> {
+                                            fail.invoke(
+                                                body_.message
+                                                    ?: context.getString(R.string.error_something_went_wrong)
+                                            )
+                                        }
+                                    }*/
                                 } ?: kotlin.run {
                                     fail.invoke(
                                         body_.message

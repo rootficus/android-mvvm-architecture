@@ -1,11 +1,44 @@
 package com.rf.utellRestaurant.ui.main.viewmodel
 
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.rf.utellRestaurant.data.model.request.SignInRequest
+import com.rf.utellRestaurant.data.model.response.SignInResponse
+import com.rf.utellRestaurant.data.model.response.StatusResponse
 import com.rf.utellRestaurant.data.repository.DashBoardRepository
 import com.rf.utellRestaurant.ui.base.BaseViewModel
+import com.rf.utellRestaurant.utils.ResponseData
+import com.rf.utellRestaurant.utils.setError
+import com.rf.utellRestaurant.utils.setLoading
+import com.rf.utellRestaurant.utils.setSuccess
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class DashBoardViewModel @Inject constructor(private val dashBoardRepository: DashBoardRepository) :
     BaseViewModel() {
+
+    val getVendorStatusResponseModel = MutableLiveData<ResponseData<StatusResponse>>()
+    fun getVendorStatus() {
+        getVendorStatusResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.getVendorStatus({ success -> getVendorStatusResponseModel.setSuccess(success) },
+                { error -> getVendorStatusResponseModel.setError(error) },
+                { message -> getVendorStatusResponseModel.setError(message) })
+        }
+    }
+
+    val setVendorStatusResponseModel = MutableLiveData<ResponseData<StatusResponse>>()
+    fun setVendorStatus(statusResponse: StatusResponse) {
+        setVendorStatusResponseModel.setLoading(null)
+        viewModelScope.launch(Dispatchers.IO) {
+            dashBoardRepository.setVendorStatus({ success -> setVendorStatusResponseModel.setSuccess(success) },
+                statusResponse,
+                { error -> setVendorStatusResponseModel.setError(error) },
+                { message -> setVendorStatusResponseModel.setError(message) })
+        }
+    }
+
 
     fun setFullName(fullName: String?) {
         dashBoardRepository.setFullName(fullName)

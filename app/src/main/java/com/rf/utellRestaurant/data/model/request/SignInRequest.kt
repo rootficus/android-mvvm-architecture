@@ -7,10 +7,12 @@ import java.io.Serializable
 @Keep
 data class SignInRequest(
 
+    @SerializedName("user") var user: UserRequest,
+
+    ) : Serializable
+
+data class UserRequest(
     @SerializedName("email") var email: String,
-
     @SerializedName("password") var password: String,
-
-    @SerializedName("device_token") var deviceToken: String,
 
     ) : Serializable

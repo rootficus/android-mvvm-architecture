@@ -13,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.rf.utellRestaurant.R
 import com.rf.utellRestaurant.data.model.request.SignInRequest
+import com.rf.utellRestaurant.data.model.request.UserRequest
 import com.rf.utellRestaurant.databinding.FragmentSignInBinding
 import com.rf.utellRestaurant.sdkInit.UtellSDK
 import com.rf.utellRestaurant.ui.base.BaseFragment
@@ -129,8 +130,8 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
         })
 
         mDataBinding.btnSignIn.setOnClickListener {
-            startActivity(Intent(requireContext(), DashBoardActivity::class.java))
-            /*name = mDataBinding.etName.text.toString()
+            //startActivity(Intent(requireContext(), DashBoardActivity::class.java))
+            name = mDataBinding.etName.text.toString()
             password = mDataBinding.etPassword.text.toString()
             if (name.isEmpty()) {
                 Utility.callCustomToast(
@@ -144,7 +145,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                 )
             } else {
                 callSignInAPI(view)
-            }*/
+            }
         }
         mDataBinding.etName.setText(viewmodel.getEmail().toString())
         mDataBinding.etPassword.setText(viewmodel.getPassword().toString())
@@ -155,25 +156,26 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
 
         if (networkHelper.isNetworkConnected()) {
             viewmodel.signInNow(
-                SignInRequest(
+                SignInRequest( UserRequest(
                     email = name,
                     password = password,
-                    deviceToken = sharedPreference.getPushToken().toString()
+                )
                 )
             )
             viewmodel.signInResponseModel.observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.SUCCESS -> {
                         progressBar.dismiss()
+                        startActivity(Intent(requireContext(), DashBoardActivity::class.java))
 
-                        val bundle = Bundle()
+               /*         val bundle = Bundle()
                         bundle.putString("password", password)
                         viewmodel.setPassword(password)
                         viewmodel.setToken(it.data?.token.toString())
                         viewmodel.setEmail(mDataBinding.etName.text.toString())
                         viewmodel.setFullName(it.data?.fullName)
                         viewmodel.setPhoneNumber(it.data?.phone)
-                        viewmodel.setUserId(it.data?.id)
+                        viewmodel.setUserId(it.data?.id)*/
                     }
 
                     Status.ERROR -> {

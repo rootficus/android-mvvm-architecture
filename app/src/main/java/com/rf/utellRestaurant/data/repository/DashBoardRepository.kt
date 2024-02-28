@@ -1,6 +1,9 @@
 package com.rf.utellRestaurant.data.repository
 
 import android.content.Context
+import com.rf.utellRestaurant.data.model.request.SignInRequest
+import com.rf.utellRestaurant.data.model.response.SignInResponse
+import com.rf.utellRestaurant.data.model.response.StatusResponse
 import com.rf.utellRestaurant.data.remote.FionApiServices
 import com.rf.utellRestaurant.roomDB.FionDatabase
 import com.rf.utellRestaurant.ui.base.BaseRepository
@@ -12,6 +15,27 @@ class DashBoardRepository(
     val sharedPreference: SharedPreference,
     val fionDatabase: FionDatabase
 ) : BaseRepository() {
+
+    fun getVendorStatus(
+        success: (statusResponse: StatusResponse) -> Unit,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.getVendorStatus().apply {
+            execute(this, success, fail, context, message)
+        }
+    }
+    fun setVendorStatus(
+        success: (statusResponse: StatusResponse) -> Unit,
+        statusResponse: StatusResponse,
+        fail: (error: String) -> Unit,
+        message: (msg: String) -> Unit
+    ) {
+        apiServices.setVendorStatus(statusResponse).apply {
+            execute(this, success, fail, context, message)
+        }
+    }
+
 
     fun getUserId(): String? {
         return sharedPreference.getUserId()

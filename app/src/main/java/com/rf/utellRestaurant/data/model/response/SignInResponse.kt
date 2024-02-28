@@ -7,24 +7,61 @@ import java.io.Serializable
 
 @Keep
 data class SignInResponse(
-    @SerializedName("id")
-    @Expose
-    var id: String?,
 
     @SerializedName("token")
     @Expose
     var token: String?,
 
-    @SerializedName("full_name")
+    @SerializedName("user")
     @Expose
-    var fullName: String?,
+    var user: UserResponse?,
 
-    @SerializedName("country")
-    @Expose
-    var country: String?,
+    ) : Serializable
 
-    @SerializedName("phone")
+data class UserResponse(
+
+    @SerializedName("id")
     @Expose
-    var phone: String?,
+    var id: Long?,
+
+    @SerializedName("email")
+    @Expose
+    var email: String?,
+
+    @SerializedName("first_name")
+    @Expose
+    var firstName: String?,
+
+    @SerializedName("last_name")
+    @Expose
+    var lastName: String?,
+
+    @SerializedName("created_at")
+    @Expose
+    var createdAt: String?,
+
+    @SerializedName("updated_at")
+    @Expose
+    var updatedAt: String?,
+
+    @SerializedName("vendor_id")
+    @Expose
+    var vendorId: String?,
+
+    @SerializedName("role_id")
+    @Expose
+    var roleId: String?,
+
+    @SerializedName("phone_number")
+    @Expose
+    var phoneNumber: String?,
+
+    @SerializedName("password")
+    @Expose
+    var password: String?,
+
+    @SerializedName("password_confirmed")
+    @Expose
+    var passwordConfirmed: String?,
 
     ) : Serializable
