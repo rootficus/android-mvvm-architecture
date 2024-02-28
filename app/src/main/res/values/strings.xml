@@ -264,4 +264,6 @@
     <string name="customerRemark">Customer Remarking:</string>
     <string name="active_order">Active Order</string>
     <string name="upcoming_order">Upcoming Order</string>
+    <string name="preparation_time">Preparation Time</string>
+    <string name="proceed">Proceed</string>
 </resources>
