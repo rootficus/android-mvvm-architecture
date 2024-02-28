@@ -129,7 +129,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         }
         sideNavClik()
         navController = Navigation.findNavController(this, R.id.navHostOnDashBoardFragment)
-        NavigationUI.setupWithNavController(viewDataBinding?.navigationRail!!, navController)
+        viewDataBinding?.navigationRail?.let { NavigationUI.setupWithNavController(it, navController) }
 
         val headerNav = viewDataBinding?.headerLayout
         headerNav?.printerButton?.setOnClickListener{

@@ -11,22 +11,23 @@
         android:src="@drawable/app_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="100dp"
+        />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/TxtLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:fontFamily="@font/poppins"
         android:gravity="center"
         android:text="Are you sure you want to logout?"
         android:textColor="@color/black"
         android:textSize="24sp"
+        android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/YesButtonLabel"
         app:layout_constraintTop_toBottomOf="@id/logo_label" />
 
     <androidx.cardview.widget.CardView
@@ -36,18 +37,19 @@
         android:elevation="25dp"
         android:textAlignment="center"
         app:cardBackgroundColor="#E6352D"
-        app:cardCornerRadius="30dp"
+        app:cardCornerRadius="18dp"
         app:layout_constraintBottom_toBottomOf="@id/YesButtonLabel"
         app:layout_constraintEnd_toStartOf="@+id/YesButtonLabel"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/TxtLabel"
         app:layout_constraintTop_toTopOf="@id/YesButtonLabel"
-        app:layout_constraintWidth_percent="0.25">
+        app:layout_constraintWidth_percent="0.35">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             android:layout_marginHorizontal="50dp"
             android:text="NO"
             android:textColor="@color/white"
@@ -62,17 +64,18 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         app:cardBackgroundColor="#03AC00"
-        app:cardCornerRadius="30dp"
+        app:cardCornerRadius="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/NoButtonLabel"
-        app:layout_constraintWidth_percent="0.25">
+        app:layout_constraintTop_toBottomOf="@id/TxtLabel"
+        app:layout_constraintWidth_percent="0.35">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             android:layout_marginHorizontal="50dp"
             android:text="YES"
             android:textColor="@color/white"
