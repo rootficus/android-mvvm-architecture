@@ -6,7 +6,7 @@
 
         <variable
             name="dashBoardViewModel"
-            type="com.rf.utellRestaurant.ui.main.viewmodel.DashBoardViewModel" />
+            type="com.rf.baseSideNav.ui.main.viewmodel.DashBoardViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

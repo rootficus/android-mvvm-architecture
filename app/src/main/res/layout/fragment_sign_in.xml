@@ -6,7 +6,7 @@
 
         <variable
             name="signInModel"
-            type="com.rf.utellRestaurant.ui.main.viewmodel.SignInViewModel" />
+            type="com.rf.baseSideNav.ui.main.viewmodel.SignInViewModel" />
     </data>
 
     <ScrollView
@@ -18,128 +18,115 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:padding="10dp">
+            android:padding="15dp"
+            android:layout_marginTop="20dp">
 
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgTopLogo"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:src="@drawable/app_icon"
-                app:layout_constraintBottom_toTopOf="@id/txt_heading"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.17"
-                app:layout_constraintStart_toStartOf="parent"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/arrowImg"
+                android:src="@drawable/arrow_left"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.25" />
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txt_heading"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:id="@+id/welcomeTxt"
+                android:text="@string/Welcome"
+                android:textSize="14sp"
                 android:fontFamily="@font/roboto_medium"
-                android:text="@string/welcome_text"
-                android:textAlignment="center"
-                android:textColor="@color/homeTextColor"
-                android:textSize="22sp"
+                app:layout_constraintTop_toBottomOf="@id/arrowImg"
+                app:layout_constraintStart_toStartOf="parent"
+                android:padding="8dp"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/etphnNoTxt"
+                android:text="Enter your phone number"
+                android:textSize="16sp"
+                android:fontFamily="@font/roboto_medium"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/txt_sub_heading"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/welcomeTxt"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintWidth_percent="0.8" />
+                android:paddingBottom="15dp"
+                android:paddingHorizontal="8dp"/>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/txt_sub_heading"
-                android:layout_width="0dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@string/login_sub_heading"
-                android:textAlignment="center"
-                android:textColor="@color/textColor"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@id/etName"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/phnNoLayout"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintWidth_percent="0.7" />
-
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/etName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/round_corners"
-                android:backgroundTint="@color/sigInEditTextBackColor"
-                android:fontFamily="@font/roboto_medium"
-                android:hint="@string/user_name"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etphnNoTxt"
                 android:padding="15dp"
-                android:textColor="@color/textColor"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@id/etPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintWidth_percent="0.85" />
+                android:layout_marginTop="15dp"
+                android:background="@color/card_gray">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/email_verified"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:src="@drawable/check_circle"
-                app:layout_constraintBottom_toBottomOf="@id/etName"
-                app:layout_constraintEnd_toEndOf="@id/etName"
-                app:layout_constraintTop_toTopOf="@id/etName" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/codeTxt"
+                    android:text="+91"
+                    android:textSize="14sp"
+                    android:textAlignment="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:paddingHorizontal="15dp"/>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="14dp"
+                    android:id="@+id/idView"
+                    android:background="@color/black"
+                    android:paddingHorizontal="15dp"
+                    app:layout_constraintTop_toTopOf="@id/codeTxt"
+                    app:layout_constraintBottom_toBottomOf="@id/codeTxt"
+                    app:layout_constraintStart_toEndOf="@id/codeTxt"/>
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/etPassword"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/round_corners"
-                android:backgroundTint="@color/sigInEditTextBackColor"
-                android:fontFamily="@font/roboto_medium"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:padding="14dp"
-                android:textColor="@color/textColor"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/etName"
-                app:layout_constraintStart_toStartOf="@id/etName"
-                app:layout_constraintTop_toBottomOf="@id/etName"
-                app:layout_constraintTop_toTopOf="parent" />
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/etPhoneNo"
+                    android:hint="9xxxxxxxxx"
+                    android:textSize="16sp"
+                    android:paddingHorizontal="12dp"
+                    app:layout_constraintTop_toTopOf="@id/codeTxt"
+                    app:layout_constraintBottom_toBottomOf="@id/codeTxt"
+                    app:layout_constraintStart_toEndOf="@id/idView"
+                    app:layout_constraintEnd_toEndOf="parent"/>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/password_toggle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:src="@drawable/hide_password"
-                app:layout_constraintBottom_toBottomOf="@id/etPassword"
-                app:layout_constraintEnd_toEndOf="@id/etPassword"
-                app:layout_constraintTop_toTopOf="@id/etPassword" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_sign_in"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/btn_inactive_back"
                 android:backgroundTint="@color/textColor"
-                android:text="@string/login"
+                android:text="Continue"
+                android:textSize="14sp"
                 android:textColor="@color/sigInButtonTextColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/etPassword"
-                app:layout_constraintWidth_percent="0.85" />
+                app:layout_constraintBottom_toTopOf="@id/helpText"
+                app:layout_constraintWidth_percent="0.80" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/helpText"
+                android:text="Do you need any help?"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textAlignment="center"
+                android:paddingVertical="12dp"
+                android:textSize="14sp"/>
 
             <ProgressBar
                 android:id="@+id/progressBar"

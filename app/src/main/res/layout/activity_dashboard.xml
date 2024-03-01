@@ -1,68 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="dashBoardViewModel"
-            type="com.rf.utellRestaurant.ui.main.viewmodel.DashBoardViewModel" />
+            type="com.rf.baseSideNav.ui.main.viewmodel.DashBoardViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/navigation_drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bgPrimaryColor">
+        tools:context=".MainActivity">
 
-        <fragment
-            android:id="@+id/navHostOnDashBoardFragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:navGraph="@navigation/dashboard_nav_graph" />
+            android:layout_height="match_parent"
+            android:background="@color/bgPrimaryColor">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/headerMessageTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_5sdp"
-            android:background="#D5021916"
-            android:drawableStart="@drawable/ic_notification"
-            android:drawablePadding="5dp"
-            android:elevation="@dimen/_5sdp"
-            android:gravity="start"
-            android:padding="10dp"
-            android:text="@string/notification_message"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:visibility="gone"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageButton
+                android:id="@+id/imgToggleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/filter_icon"
+                android:contentDescription="Nav drawer toggle button"
+                android:onClick="toggleDrawer"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <include
-            android:id="@+id/progressView"
-            layout="@layout/include_progress_bar" />
+            <fragment
+                android:id="@+id/navHostOnDashBoardFragment"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:defaultNavHost="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imgToggleButton"
+                app:navGraph="@navigation/dashboard_nav_graph" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bottom_navigation_bg"
-            android:elevation="@dimen/_10sdp"
-            app:elevation="@dimen/_10sdp"
-            app:itemIconTint="@color/bnv_tab_item_foreground"
-            app:itemPaddingTop="@dimen/_8sdp"
-            app:itemTextColor="@color/bnv_tab_item_foreground"
-            app:labelVisibilityMode="labeled"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/nav_menu_main" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/sideNav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:menu="@menu/dashboard_nav_menu" />
 
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </layout>

@@ -5,10 +5,5 @@
         android:enabled="true"
         android:icon="@drawable/dashboard_logo"
         android:title="@string/dashboard" />
-    <item
-        android:id="@id/navigation_notificationFragment"
-        android:enabled="true"
-        android:icon="@drawable/notification_icon"
-        android:title="@string/pending" />
 
 </menu>

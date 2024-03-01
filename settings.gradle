@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Utell-Restaurant"
+rootProject.name = "Basic-Side-Nav"
 include ':app'

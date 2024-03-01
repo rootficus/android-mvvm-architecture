@@ -7,46 +7,31 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.rf.utellRestaurant.ui.main.fragment.DashBoardFragment"
-        android:label="DashBoardFragment"
+        android:name="com.rf.baseSideNav.ui.main.fragment.DashBoardFragment"
+        android:label="DashBoard"
         tools:layout="@layout/fragment_dashboard">
 
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_notificationFragment"
-        android:name="com.rf.utellRestaurant.ui.main.fragment.NotificationFragment"
-        android:label="NotificationFragment"
-        tools:layout="@layout/fragment_notification" />
+        android:id="@+id/navigation_signupFragment"
+        android:name="com.rf.baseSideNav.ui.main.fragment.SignUpFragment"
+        android:label="SignIn"
+        tools:layout="@layout/fragment_sign_up" />
 
     <fragment
         android:id="@+id/navigation_settingFragment"
-        android:name="com.rf.utellRestaurant.ui.main.fragment.SettingFragment"
-        android:label="SettingFragment"
+        android:name="com.rf.baseSideNav.ui.main.fragment.SettingFragment"
+        android:label="Setting"
         tools:layout="@layout/fragment_setting">
 
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_orderFragment"
-        android:name="com.rf.utellRestaurant.ui.main.fragment.OrderFragment"
-        android:label="OrderFragment"
-        tools:layout="@layout/fragment_oder">
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_historyFragment"
-        android:name="com.rf.utellRestaurant.ui.main.fragment.HistoryFragment"
-        android:label="HistoryFragment"
-        tools:layout="@layout/fragment_history">
-
-    </fragment>
-    <fragment
-        android:id="@+id/navigation_upcomingOrderFragment"
-        android:name="com.rf.utellRestaurant.ui.main.fragment.UpcomingOrderFragment"
-        android:label="UpcomingOrderFragment"
-        tools:layout="@layout/fragment_upcoming_oders">
+        android:id="@+id/navigation_forgotPassFragment"
+        android:name="com.rf.baseSideNav.ui.main.fragment.ForgotPasswordFragment"
+        android:label="ForgotPassword"
+        tools:layout="@layout/fragment_forgot_pass">
 
     </fragment>
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_forgot_pass">
+
+    <fragment
+        android:id="@+id/navigation_forgot_pass"
+        android:name="com.rf.baseSideNav.ui.main.fragment.SignInFragment"
+        android:label="SignInFragment"
+        tools:layout="@layout/fragment_forgot_pass">
+
+    </fragment>
+
+</navigation>

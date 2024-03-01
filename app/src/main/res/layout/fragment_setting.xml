@@ -6,7 +6,7 @@
 
         <variable
             name="dashBoardViewModel"
-            type="com.rf.utellRestaurant.ui.main.viewmodel.DashBoardViewModel" />
+            type="com.rf.baseSideNav.ui.main.viewmodel.DashBoardViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,10 +14,15 @@
         android:layout_height="match_parent"
         android:background="@color/bgPrimaryColor">
 
-        <include
-            android:id="@+id/topHeader"
-            layout="@layout/header"
-            android:elevation="@dimen/_10sdp" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="SETTINGS - No data found"
+            android:textSize="25dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
