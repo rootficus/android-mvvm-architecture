@@ -4,9 +4,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.os.Handler
 import android.print.PrintAttributes
 import android.print.PrintJob
@@ -20,6 +20,7 @@ import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import com.google.gson.Gson
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
@@ -172,6 +173,12 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
             verifyLogout()
         }
 
+       /* viewDataBinding?.btnHome?.setOnClickListener {
+            val value = findFilePath(filesDir, "echallan_jk08y-$challanNumber.PDF")
+
+            showMessage(value.toString())
+        }*/
+
         // Add a PrintJobStateChangeListener
     }
 
@@ -208,10 +215,15 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
 
         // Creating  PrintDocumentAdapter instance
         val printAdapter = webView.createPrintDocumentAdapter(jobName)
+        val printAttributes = PrintAttributes.Builder()
+            .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
+            .build()
+
+
         assert(printManager != null)
         printJob = printManager.print(
             jobName, printAdapter,
-            PrintAttributes.Builder().build()
+            printAttributes
         )
     }
 
@@ -253,18 +265,13 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
         }
     }
 
-    private fun sharePdfOnWhatsApp(pdfFile: File) {
-        // Create an Intent to share the PDF file
-        val shareIntent = Intent(Intent.ACTION_SEND)
-        shareIntent.type = "application/pdf"
-        val uri = Uri.fromFile(pdfFile)
-        shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
-        shareIntent.setPackage("com.whatsapp") // Restrict to WhatsApp
-        startActivity(Intent.createChooser(shareIntent, "Share PDF via"))
-    }
+
     private fun generateQRCode() {
         val bitmap: Bitmap? =
-            generateQRCode("https://geolgyminingjk.in/challan/$challanNumber", ContextCompat.getColor(applicationContext, R.color.qrCode))
+            generateQRCode(
+                "https://geolgyminingjk.in/challan/$challanNumber",
+                ContextCompat.getColor(applicationContext, R.color.qrCode)
+            )
         // Set QR Code to ImageView
         bitmap?.let {
             viewDataBinding?.imgQRCode?.setImageBitmap(it)
@@ -347,6 +354,59 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
             sharedPreference.resetSharedPref()
             startActivity(Intent(this@FinalFormActivity, SignInActivity::class.java))
             finishAffinity()
+        }
+    }
+
+    private fun findFilePath(directory: File, fileName: String): File? {
+        // Check if the directory exists and is a directory
+        // Assuming the file is stored in external storage directory
+        // Assuming the file is stored in external storage directory
+        val directory = Environment.getExternalStoragePublicDirectory(
+            Environment.DIRECTORY_DOWNLOADS
+        )
+
+        // Creating a file object using the directory and file name
+
+        // Creating a file object using the directory and file name
+        val file = File(directory, fileName)
+
+        if (file.exists()) {
+            sharePdfOnWhatsApp(file)
+        }
+
+        // Check if the file exists
+        return if (file.exists()) {
+            file
+        } else {
+            null // File not found
+        }
+    }
+
+
+    private fun sharePdfOnWhatsApp(pdfFile: File) {
+        val fileUri = FileProvider.getUriForFile(
+            applicationContext,
+            applicationContext.packageName + ".fileprovider",
+            pdfFile
+        )
+
+        // Create an Intent to share the PDF file
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.type = "application/pdf"
+        shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri)
+        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+
+        // Set WhatsApp package explicitly
+        shareIntent.setPackage("com .whatsapp")
+
+        // Check if WhatsApp is installed
+        val pm: PackageManager = packageManager
+        if (shareIntent.resolveActivity(pm) != null) {
+            startActivity(shareIntent)
+        } else {
+            // WhatsApp is not installed
+            Toast.makeText(applicationContext, "WhatsApp is not installed.", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 }
