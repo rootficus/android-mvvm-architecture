@@ -1,12 +1,5 @@
 package com.rf.geolgy.ui.main.activity
 
-/*import com.itextpdf.io.image.ImageDataFactory
-import com.itextpdf.kernel.geom.PageSize
-import com.itextpdf.kernel.pdf.PdfDocument
-import com.itextpdf.kernel.pdf.PdfWriter
-import com.itextpdf.layout.Document
-import com.itextpdf.layout.element.Image*/
-
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -42,7 +35,6 @@ import com.rf.geolgy.ui.base.BaseViewModelFactory
 import com.rf.geolgy.ui.main.di.DaggerFinalFormActivityComponent
 import com.rf.geolgy.ui.main.di.FinalFormActivityModule
 import com.rf.geolgy.ui.main.viewmodel.DashBoardViewModel
-import com.rf.geolgy.utils.MyPrintDocumentAdapter
 import com.rf.geolgy.utils.NetworkHelper
 import com.rf.geolgy.utils.SharedPreference
 import com.rf.geolgy.utils.Utility.makeTextBold
@@ -157,8 +149,6 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
                     // Calling createWebPrintJob()
                     PrintTheWebPage(printWeb);
                     //viewDataBinding?.webview?.let { it1 -> WebToPdfConverter.convertToPdf(it1, "https://geolgyminingjk.in/challan/117804427130") }
-                // Start a print job
-
                     // Start a print job
                     /*val printJob: PrintJob? = printManager?.print("MyDocument", MyPrintDocumentAdapter(this), null)
 
@@ -176,6 +166,10 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
                 // Showing Toast message to user
                 Toast.makeText(this, "WebPage not fully loaded", Toast.LENGTH_SHORT).show();
             }
+        }
+
+        viewDataBinding?.btnLogout?.setOnClickListener {
+            verifyLogout()
         }
 
         // Add a PrintJobStateChangeListener
@@ -342,6 +336,22 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
             .finalFormActivityModule(FinalFormActivityModule())
             .baseActivityModule(BaseActivityModule(this@FinalFormActivity)).build()
             .inject(this)
+    }
+
+    private fun verifyLogout() {
+        val mBuilder = android.app.AlertDialog.Builder(this@FinalFormActivity)
+            .setTitle(getString(R.string.log_out))
+            .setMessage("Are you sure you want to Logout?")
+            .setPositiveButton(getString(R.string.yes), null)
+            .setNegativeButton(getString(R.string.no), null)
+            .show()
+        val mPositiveButton = mBuilder.getButton(android.app.AlertDialog.BUTTON_POSITIVE)
+        mPositiveButton.setOnClickListener {
+            mBuilder.dismiss()
+            sharedPreference.resetSharedPref()
+            startActivity(Intent(this@FinalFormActivity, SignInActivity::class.java))
+            finishAffinity()
+        }
     }
 }
 

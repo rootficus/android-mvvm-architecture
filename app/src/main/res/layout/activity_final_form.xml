@@ -21,6 +21,7 @@
             android:id="@+id/mainLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingHorizontal="20dp"
             android:paddingVertical="10dp">
 
             <WebView
@@ -30,21 +31,6 @@
                 android:visibility="gone"
                 app:layout_constraintHeight_percent="0.9"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnPrint1"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginVertical="10dp"
-                android:background="@color/primaryBlue"
-                android:text="@string/print"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/webview" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/mainLayout1"
@@ -72,7 +58,7 @@
                     android:layout_marginTop="10dp"
                     android:text="@string/government_of_jammu_kashmir"
                     android:textColor="@color/black"
-                    android:textSize="13sp"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -84,7 +70,7 @@
                     android:layout_marginTop="5dp"
                     android:text="@string/department_of"
                     android:textColor="@color/black"
-                    android:textSize="13sp"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txtGovt" />
@@ -97,7 +83,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/form"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txtDepartment" />
@@ -111,7 +97,7 @@
                     android:text="@string/see_rule_38_5_50_12_60_1_v_70_71"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -125,7 +111,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/e_challan"
                     android:textColor="@color/black"
-                    android:textSize="13sp"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txtRule" />
@@ -138,7 +124,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/challan_number"
                     android:textColor="@color/black"
-                    android:textSize="13sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -157,7 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/qrCode"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="@id/imgQRCode"
                     app:layout_constraintStart_toStartOf="@id/imgQRCode"
                     app:layout_constraintTop_toBottomOf="@id/imgQRCode" />
@@ -170,7 +156,7 @@
                     android:padding="5dp"
                     android:text="@string/validity_from"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -184,7 +170,7 @@
                     android:padding="5dp"
                     android:text="1."
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txtValidity" />
 
@@ -197,7 +183,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/point1"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/point1"
                     app:layout_constraintTop_toBottomOf="@id/txtValidity" />
 
@@ -206,11 +192,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingVertical="5dp"
+                    android:paddingHorizontal="5dp"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/txtPoint1"
-                    app:layout_constraintTop_toBottomOf="@id/txtPoint1" />
+                    app:layout_constraintStart_toEndOf="@id/txtPoint1"
+                    app:layout_constraintTop_toTopOf="@id/txtPoint1" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txt2Point1"
@@ -219,7 +206,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/issuing_date"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@id/txtPoint1"
                     app:layout_constraintTop_toBottomOf="@id/edtPoint1" />
 
@@ -231,7 +218,7 @@
                     android:padding="5dp"
                     android:text="2."
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txt2Point1" />
 
@@ -243,7 +230,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/point2"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/point2"
                     app:layout_constraintTop_toBottomOf="@id/txt2Point1" />
 
@@ -255,7 +242,7 @@
                     android:padding="5dp"
                     android:text="3."
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txtPoint2" />
 
@@ -267,7 +254,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/point3"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/point3"
                     app:layout_constraintTop_toBottomOf="@id/txtPoint2" />
 
@@ -279,7 +266,7 @@
                     android:padding="5dp"
                     android:text="4."
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txtPoint3" />
 
@@ -291,7 +278,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/point4"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/point4"
                     app:layout_constraintTop_toBottomOf="@id/txtPoint3" />
 
@@ -303,7 +290,7 @@
                     android:padding="5dp"
                     android:text="5."
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txtPoint4" />
 
@@ -316,7 +303,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/point5"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/point5"
                     app:layout_constraintTop_toBottomOf="@id/txtPoint4" />
 
@@ -328,7 +315,7 @@
                     android:padding="5dp"
                     android:text="6."
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txtPoint5" />
 
@@ -340,7 +327,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/point6"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/point6"
                     app:layout_constraintTop_toBottomOf="@id/txtPoint5" />
 
@@ -351,10 +338,11 @@
                     android:paddingVertical="5dp"
                     android:singleLine="true"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/txtPoint6"
-                    app:layout_constraintTop_toBottomOf="@id/txtPoint6" />
+                    app:layout_constraintBottom_toBottomOf="@id/txtPoint6"
+                    app:layout_constraintStart_toEndOf="@id/txtPoint6"
+                    app:layout_constraintTop_toTopOf="@id/txtPoint6" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/point7"
@@ -364,7 +352,7 @@
                     android:padding="5dp"
                     android:text="7."
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/edtPoint6" />
 
@@ -376,7 +364,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/point7"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/point7"
                     app:layout_constraintTop_toBottomOf="@id/edtPoint6" />
 
@@ -388,10 +376,11 @@
                     android:singleLine="true"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/txtPoint7"
-                    app:layout_constraintTop_toBottomOf="@id/txtPoint7" />
+                    app:layout_constraintBottom_toBottomOf="@id/txtPoint7"
+                    app:layout_constraintStart_toEndOf="@id/txtPoint7"
+                    app:layout_constraintTop_toTopOf="@id/txtPoint7" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/point8"
@@ -401,7 +390,7 @@
                     android:padding="5dp"
                     android:text="8."
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/edtPoint7" />
 
@@ -413,7 +402,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/point8"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/point8"
                     app:layout_constraintTop_toBottomOf="@id/edtPoint7" />
 
@@ -427,7 +416,7 @@
                     android:singleLine="true"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/txtPoint8"
                     app:layout_constraintStart_toEndOf="@id/txtPoint8"
@@ -440,7 +429,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/in_cft"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@id/txtPoint8"
                     app:layout_constraintStart_toEndOf="@id/edtPoint8"
                     app:layout_constraintTop_toTopOf="@id/txtPoint8" />
@@ -453,7 +442,7 @@
                     android:padding="5dp"
                     android:text="9."
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txtPoint8" />
 
@@ -467,7 +456,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/point9"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/point9"
@@ -481,7 +470,7 @@
                     android:padding="5dp"
                     android:text="10."
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txtPoint9" />
 
@@ -493,7 +482,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/point10"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/point10"
                     app:layout_constraintTop_toBottomOf="@id/txtPoint9" />
 
@@ -506,7 +495,7 @@
                     android:singleLine="true"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/txtPoint10"
                     app:layout_constraintStart_toEndOf="@id/txtPoint10"
@@ -519,9 +508,10 @@
                     android:paddingVertical="5dp"
                     android:text="@string/destination"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
-                    app:layout_constraintStart_toStartOf="@id/txtPoint10"
-                    app:layout_constraintTop_toBottomOf="@id/txtPoint10" />
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/txtPoint10"
+                    app:layout_constraintStart_toEndOf="@id/txtPoint10"
+                    app:layout_constraintTop_toTopOf="@id/txtPoint10" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/edt2Point10"
@@ -531,7 +521,7 @@
                     android:paddingVertical="5dp"
                     android:singleLine="true"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/txt2Point10"
                     app:layout_constraintStart_toEndOf="@id/txt2Point10"
@@ -546,7 +536,7 @@
                     android:padding="5dp"
                     android:text="11."
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/edt2Point10" />
 
@@ -558,7 +548,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/point11"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/point10"
                     app:layout_constraintTop_toBottomOf="@id/txt2Point10"
@@ -572,7 +562,7 @@
                     android:padding="5dp"
                     android:text="12."
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txtPoint11" />
 
@@ -584,7 +574,7 @@
                     android:lineSpacingExtra="6dp"
                     android:text="@string/point12"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/point12"
                     app:layout_constraintTop_toTopOf="@id/point12" />
@@ -597,7 +587,7 @@
                     android:padding="5dp"
                     android:text="13."
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txtPoint12" />
 
@@ -609,7 +599,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/point13"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/point13"
                     app:layout_constraintTop_toBottomOf="@id/txtPoint12" />
 
@@ -622,7 +612,7 @@
                     android:singleLine="true"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/txtPoint13"
                     app:layout_constraintStart_toEndOf="@id/txtPoint13"
@@ -637,7 +627,7 @@
                     android:padding="5dp"
                     android:text="14."
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/txtPoint13" />
 
@@ -649,7 +639,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/point14"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/point14"
                     app:layout_constraintTop_toBottomOf="@id/edtPoint13" />
 
@@ -661,10 +651,11 @@
                     android:singleLine="true"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/txtPoint14"
-                    app:layout_constraintTop_toBottomOf="@id/txtPoint14" />
+                    app:layout_constraintBottom_toBottomOf="@id/txtPoint14"
+                    app:layout_constraintStart_toEndOf="@id/txtPoint14"
+                    app:layout_constraintTop_toTopOf="@id/txtPoint14" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/point15"
@@ -674,7 +665,7 @@
                     android:padding="5dp"
                     android:text="15."
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/edtPoint14" />
 
@@ -687,7 +678,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/point15"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/point15"
                     app:layout_constraintTop_toBottomOf="@id/edtPoint14" />
 
@@ -699,7 +690,7 @@
                     android:paddingVertical="5dp"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/txtPoint15"
                     app:layout_constraintStart_toEndOf="@id/txtPoint15"
@@ -713,7 +704,7 @@
                     android:paddingVertical="5dp"
                     android:text="@string/comma"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@id/txtPoint15"
                     app:layout_constraintStart_toEndOf="@id/edtPoint15"
                     app:layout_constraintTop_toTopOf="@id/txtPoint15" />
@@ -727,7 +718,7 @@
                     android:paddingVertical="5dp"
                     android:text=""
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/txtPoint15"
                     app:layout_constraintStart_toEndOf="@id/txt2Point15"
@@ -741,7 +732,7 @@
                     android:paddingHorizontal="5dp"
                     android:text="@string/notes"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -772,7 +763,7 @@
                             android:maxLines="3"
                             android:text="@string/self_approved_by_mineral_concessionary"
                             android:textColor="@color/black"
-                            android:textSize="11sp"
+                            android:textSize="12sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -806,7 +797,7 @@
                         android:layout_marginTop="5dp"
                         android:text="@string/signature_seal_of_mineral_concessionary"
                         android:textColor="@color/black"
-                        android:textSize="11sp"
+                        android:textSize="12sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/txtPoint15" />
 
