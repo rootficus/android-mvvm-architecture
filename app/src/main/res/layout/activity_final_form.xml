@@ -336,6 +336,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingVertical="5dp"
+                    android:paddingHorizontal="5dp"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textSize="12sp"
@@ -373,6 +374,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingVertical="5dp"
+                    android:paddingHorizontal="5dp"
                     android:singleLine="true"
                     android:text=""
                     android:textColor="@color/black"
@@ -510,7 +512,7 @@
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@id/txtPoint10"
-                    app:layout_constraintStart_toEndOf="@id/txtPoint10"
+                    app:layout_constraintStart_toEndOf="@id/edtPoint10"
                     app:layout_constraintTop_toTopOf="@id/txtPoint10" />
 
                 <androidx.appcompat.widget.AppCompatTextView

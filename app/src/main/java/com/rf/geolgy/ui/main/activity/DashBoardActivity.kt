@@ -1,14 +1,17 @@
 package com.rf.geolgy.ui.main.activity
 
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.Spanned
+import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import com.google.gson.Gson
 import com.rf.geolgy.R
+import com.rf.geolgy.data.model.request.CreateChallanRequest
 import com.rf.geolgy.data.model.response.SignInResponse
 import com.rf.geolgy.databinding.ActivityDashboardBinding
 import com.rf.geolgy.sdkInit.GeolgySDK
@@ -20,6 +23,7 @@ import com.rf.geolgy.ui.main.di.DashBoardActivityModule
 import com.rf.geolgy.ui.main.viewmodel.DashBoardViewModel
 import com.rf.geolgy.utils.NetworkHelper
 import com.rf.geolgy.utils.SharedPreference
+import com.rf.geolgy.utils.Status
 import com.rf.geolgy.utils.Utility
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -35,11 +39,17 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     @Inject
     lateinit var sharedPreference: SharedPreference
 
+    /*@Inject
+    lateinit var progressBar: Dialog
+*/
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by viewModels { dashBoardViewModelFactory }
     private lateinit var challanNumber: String
-
+    var validFrom: String = ""
+    var validTo: String = ""
+    var rateOfMineral: String = ""
+    var rateOfMineralTotal: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initializationDagger()
@@ -53,8 +63,8 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     private fun initialization(signInResponse: SignInResponse) {
         val permitStartDate: String = signInResponse.company?.permitStartDate.toString()
         val permitEndDate: String = signInResponse.company?.permitEndDate.toString()
-        val rateOfMineral: String = signInResponse.company?.rateOfMineral.toString()
-        val rateOfMineralTotal: String = signInResponse.company?.rateOfMineralTotal.toString()
+        rateOfMineral = signInResponse.company?.rateOfMineral.toString()
+        rateOfMineralTotal = signInResponse.company?.rateOfMineralTotal.toString()
         // val gstNumber: String = signInResponse.company?.gstNumber.toString()
         val qualityPercentage: String = signInResponse.company?.quantityPercentage.toString()
         val qualityAmount: String = signInResponse.company?.quantityAmount.toString()
@@ -74,19 +84,38 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         viewDataBinding?.txtPoint12?.setText(makeTextBold(point12Text))
 
         viewDataBinding?.btnSubmit?.setOnClickListener {
-            val intent = Intent(this@DashBoardActivity, FinalFormActivity::class.java)
-            intent.putExtra("point6", viewDataBinding?.edtPoint6?.text.toString())
-            intent.putExtra("point7", viewDataBinding?.edtPoint7?.text.toString())
-            intent.putExtra("point8", viewDataBinding?.edtPoint8?.text.toString())
-            intent.putExtra("point10", viewDataBinding?.edtPoint10?.text.toString())
-            intent.putExtra("2point10", viewDataBinding?.edt2Point10?.text.toString())
-            intent.putExtra("point13", viewDataBinding?.edtPoint13?.text.toString())
-            intent.putExtra("point14", viewDataBinding?.edtPoint14?.text.toString())
-            intent.putExtra("point15", viewDataBinding?.edtPoint15?.text.toString())
-            intent.putExtra("2point15", viewDataBinding?.edt2Point15?.text.toString())
-            intent.putExtra("challanNumber", challanNumber)
-            intent.putExtra("gstNumber", gstNumber)
-            startActivity(intent)
+            val nameAndLocation = viewDataBinding?.edtPoint6?.text.toString()
+            val product = viewDataBinding?.edtPoint7?.text.toString()
+            val quantityDispatched = viewDataBinding?.edtPoint8?.text.toString()
+            val routeSource = viewDataBinding?.edtPoint10?.text.toString()
+            val routeDesignation = viewDataBinding?.edt2Point10?.text.toString()
+            val vehicleNo = viewDataBinding?.edtPoint13?.text.toString()
+            val nameAndAddress = viewDataBinding?.edtPoint14?.text.toString()
+            val driverName = viewDataBinding?.edtPoint15?.text.toString()
+            val driverPhone = viewDataBinding?.edt2Point15?.text.toString()
+            if (nameAndLocation.isNotEmpty() && product.isNotEmpty() && quantityDispatched.isNotEmpty()
+                && routeSource.isNotEmpty() && routeDesignation.isNotEmpty() && vehicleNo.isNotEmpty()
+                && nameAndAddress.isNotEmpty() && driverName.isNotEmpty() && driverPhone.isNotEmpty()
+            ) {
+                val createChallanRequest = CreateChallanRequest(
+                    nameAndLocation = nameAndLocation,
+                    product = product,
+                    quantityDispatched = quantityDispatched,
+                    routeSource = routeSource,
+                    routeDesignation = routeDesignation,
+                    vehicleNo = vehicleNo,
+                    nameAndAddress = nameAndAddress,
+                    driverName = driverName,
+                    driverPhone = driverPhone,
+                    challanNumber = challanNumber,
+                    validFrom = validFrom,
+                    validTo = validTo,
+                    gstNumber = gstNumber
+                )
+                createChallanAPI(createChallanRequest, gstNumber)
+            } else {
+                showMessage("Please fill all details")
+            }
         }
         viewDataBinding?.btnLogout?.setOnClickListener {
             verifyLogout()
@@ -121,12 +150,14 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm a", Locale.getDefault())
         val calendar = Calendar.getInstance()
         val currentTime = calendar.time
+        validFrom = sdf.format(currentTime)
         calendar.add(Calendar.HOUR_OF_DAY, 3)
         val futureTime = calendar.time
+        validTo = sdf.format(futureTime)
         viewDataBinding?.txtValidity?.text =
-            "Validity from ${sdf.format(currentTime)} to ${sdf.format(futureTime)}"
+            "Validity from $validFrom to $validTo"
         viewDataBinding?.txtPoint9?.text =
-            "DATE & TIME of dispatch ${sdf.format(currentTime)} to ${sdf.format(futureTime)} (Valid upto 3 Hours)"
+            "DATE & TIME of dispatch $validFrom to $validTo (Valid upto 3 Hours)"
         challanNumber = Utility.generateRandomChallanString(12)
         viewDataBinding?.txtEchallanNumber?.text = getString(R.string.challan_number, challanNumber)
     }
@@ -147,5 +178,46 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         }
     }
 
+    private fun createChallanAPI(createChallanRequest: CreateChallanRequest, gstNumber: String) {
+        if (networkHelper.isNetworkConnected()) {
+            viewModel.createChallan(
+                createChallanRequest
+            )
+            viewModel.createChallanResponseModel.observe(this) {
+                when (it.status) {
+                    Status.SUCCESS -> {
+                        viewDataBinding?.progressView?.llProgressView?.visibility =View.GONE
+                        val intent = Intent(this@DashBoardActivity, FinalFormActivity::class.java)
+                        intent.putExtra("point6", viewDataBinding?.edtPoint6?.text.toString())
+                        intent.putExtra("point7", viewDataBinding?.edtPoint7?.text.toString())
+                        intent.putExtra("point8", viewDataBinding?.edtPoint8?.text.toString())
+                        intent.putExtra("point10", viewDataBinding?.edtPoint10?.text.toString())
+                        intent.putExtra("2point10", viewDataBinding?.edt2Point10?.text.toString())
+                        intent.putExtra("point13", viewDataBinding?.edtPoint13?.text.toString())
+                        intent.putExtra("point14", viewDataBinding?.edtPoint14?.text.toString())
+                        intent.putExtra("point15", viewDataBinding?.edtPoint15?.text.toString())
+                        intent.putExtra("2point15", viewDataBinding?.edt2Point15?.text.toString())
+                        intent.putExtra("challanNumber", challanNumber)
+                        intent.putExtra("gstNumber", gstNumber)
+                        intent.putExtra("rateOfMineral", rateOfMineral)
+                        intent.putExtra("rateOfMineralTotal", rateOfMineralTotal)
+                        startActivity(intent)
+                    }
+
+                    Status.ERROR -> {
+                        viewDataBinding?.progressView?.llProgressView?.visibility =View.GONE
+                        showErrorMessage(it.message)
+                    }
+
+                    Status.LOADING -> {
+                        viewDataBinding?.progressView?.llProgressView?.visibility =View.VISIBLE
+                    }
+                }
+            }
+        } else {
+            viewDataBinding?.progressView?.llProgressView?.visibility =View.GONE
+            showMessage(getString(R.string.NO_INTERNET_CONNECTION))
+        }
+    }
 }
 

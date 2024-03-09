@@ -136,7 +136,7 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
             }
         }
         // loading the URL
-        viewDataBinding?.webview?.loadUrl("https://geolgyminingjk.in/challan/117804427130")
+        viewDataBinding?.webview?.loadUrl("https://geolgyminingjk.in/challan/$challanNumber")
         viewDataBinding?.webview?.visibility = View.GONE
         viewDataBinding?.btnLogout?.setOnClickListener {
             viewDataBinding?.webview?.visibility = View.VISIBLE
@@ -208,10 +208,6 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
 
         // Creating  PrintDocumentAdapter instance
         val printAdapter = webView.createPrintDocumentAdapter(jobName)
-        printManager.print(
-            jobName, printAdapter,
-            PrintAttributes.Builder().build()
-        )
         assert(printManager != null)
         printJob = printManager.print(
             jobName, printAdapter,
