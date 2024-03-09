@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_signin"
-        android:name="com.rf.utellRestaurant.ui.main.fragment.SignInFragment"
+        android:name="com.rf.geolgy.ui.main.fragment.SignInFragment"
         android:label="SignInFragment"
         tools:layout="@layout/fragment_sign_in">
 

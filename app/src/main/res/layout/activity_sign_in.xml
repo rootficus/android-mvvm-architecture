@@ -6,7 +6,7 @@
 
         <variable
             name="signInViewModel"
-            type="com.rf.utellRestaurant.ui.main.viewmodel.SignInViewModel" />
+            type="com.rf.geolgy.ui.main.viewmodel.SignInViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

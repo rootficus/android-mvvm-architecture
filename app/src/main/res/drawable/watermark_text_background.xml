@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Define a repeating pattern for the watermark text -->
+    <item android:drawable="@drawable/watermark_text_pattern" />
+</layer-list>

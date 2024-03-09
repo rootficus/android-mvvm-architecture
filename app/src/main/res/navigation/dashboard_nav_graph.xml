@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.rf.utellRestaurant.ui.main.fragment.DashBoardFragment"
+        android:name="com.rf.geolgy.ui.main.fragment.DashBoardFragment"
         android:label="DashBoardFragment"
         tools:layout="@layout/fragment_dashboard">
 
@@ -15,13 +15,13 @@
 
     <fragment
         android:id="@+id/navigation_notificationFragment"
-        android:name="com.rf.utellRestaurant.ui.main.fragment.NotificationFragment"
+        android:name="com.rf.geolgy.ui.main.fragment.NotificationFragment"
         android:label="NotificationFragment"
         tools:layout="@layout/fragment_notification" />
 
     <fragment
         android:id="@+id/navigation_settingFragment"
-        android:name="com.rf.utellRestaurant.ui.main.fragment.SettingFragment"
+        android:name="com.rf.geolgy.ui.main.fragment.SettingFragment"
         android:label="SettingFragment"
         tools:layout="@layout/fragment_setting">
 
@@ -29,7 +29,7 @@
 
     <fragment
         android:id="@+id/navigation_orderFragment"
-        android:name="com.rf.utellRestaurant.ui.main.fragment.OrderFragment"
+        android:name="com.rf.geolgy.ui.main.fragment.OrderFragment"
         android:label="OrderFragment"
         tools:layout="@layout/fragment_oder">
 
@@ -37,14 +37,14 @@
 
     <fragment
         android:id="@+id/navigation_historyFragment"
-        android:name="com.rf.utellRestaurant.ui.main.fragment.HistoryFragment"
+        android:name="com.rf.geolgy.ui.main.fragment.HistoryFragment"
         android:label="HistoryFragment"
         tools:layout="@layout/fragment_history">
 
     </fragment>
     <fragment
         android:id="@+id/navigation_upcomingOrderFragment"
-        android:name="com.rf.utellRestaurant.ui.main.fragment.UpcomingOrderFragment"
+        android:name="com.rf.geolgy.ui.main.fragment.UpcomingOrderFragment"
         android:label="UpcomingOrderFragment"
         tools:layout="@layout/fragment_upcoming_oders">
 

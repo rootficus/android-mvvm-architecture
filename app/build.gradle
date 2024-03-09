@@ -6,18 +6,31 @@ plugins {
 }
 
 android {
-    namespace 'com.rf.utellRestaurant'
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+    }
+    namespace 'com.rf.geolgy'
     compileSdk 34
 
     defaultConfig {
         final BUILD_DATE = new Date().format('dd-MM-YYYY')
-        applicationId "com.rf.utellRestaurant"
+        applicationId "com.rf.geolgy"
         minSdk 26
         //noinspection OldTargetApi
         targetSdk 34
         versionCode 1
         versionName "1.0.1"
-        setProperty("archivesBaseName", "Utell-Restaurant_" + BUILD_DATE+ "_V" + versionName)
+        setProperty("archivesBaseName", "Geolgy_" + BUILD_DATE+ "_V" + versionName)
         vectorDrawables.useSupportLibrary = true
 
         javaCompileOptions {
@@ -71,17 +84,17 @@ android {
         uat {
             dimension "default"
             buildConfigField("String", "VERSION", "\"UAT\"")
-            buildConfigField("String", "BASE_URL", "\"http://192.168.1.83:3000/\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.1.84:3000/\"")
         }
         stage {
             dimension "default"
             buildConfigField("String", "VERSION", "\"STAGE\"")
-            buildConfigField("String", "BASE_URL", "\"http://192.168.1.83:3000/\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.1.84:3000/\"")
         }
         prod {
             dimension "default"
             buildConfigField("String", "VERSION", "\"PROD\"")
-            buildConfigField("String", "BASE_URL", "\"https://abc.abc.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://geolgyminingjk.in/\"")
         }
 
     }
@@ -117,6 +130,8 @@ android {
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation 'androidx.activity:activity-ktx:1.8.2'
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -158,4 +173,19 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    //MPAndroidChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    implementation 'com.github.blackfizz:eazegraph:1.2.5l@aar'
+    implementation 'com.nineoldandroids:library:2.4.0'
+
+    //QR
+    implementation 'com.google.zxing:core:3.4.1'
+    implementation 'com.itextpdf:itext7-core:7.1.15'
+    //implementation 'com.itextpdf:itextpdf:5.5.13.2'
+    //implementation 'com.github.Gkemon:Android-XML-to-PDF-Generator:2.6.8'
+
+    //implementation 'com.github.kapilmhr:DesignToPDF:1.0'
+    implementation 'com.github.Gkemon:Android-XML-to-PDF-Generator:2.6.8'
 }
