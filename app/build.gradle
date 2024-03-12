@@ -84,12 +84,12 @@ android {
         uat {
             dimension "default"
             buildConfigField("String", "VERSION", "\"UAT\"")
-            buildConfigField("String", "BASE_URL", "\"http://192.168.1.84:3000/\"")
+            buildConfigField("String", "BASE_URL", "\"https://geolgyminingjk.in/\"")
         }
         stage {
             dimension "default"
             buildConfigField("String", "VERSION", "\"STAGE\"")
-            buildConfigField("String", "BASE_URL", "\"http://192.168.1.84:3000/\"")
+            buildConfigField("String", "BASE_URL", "\"https://geolgyminingjk.in/\"")
         }
         prod {
             dimension "default"
@@ -183,9 +183,5 @@ dependencies {
     //QR
     implementation 'com.google.zxing:core:3.4.1'
     implementation 'com.itextpdf:itext7-core:7.1.15'
-    //implementation 'com.itextpdf:itextpdf:5.5.13.2'
-    //implementation 'com.github.Gkemon:Android-XML-to-PDF-Generator:2.6.8'
 
-    //implementation 'com.github.kapilmhr:DesignToPDF:1.0'
-    implementation 'com.github.Gkemon:Android-XML-to-PDF-Generator:2.6.8'
 }

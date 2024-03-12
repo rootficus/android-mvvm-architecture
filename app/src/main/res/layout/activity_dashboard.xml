@@ -323,6 +323,7 @@
                 android:paddingHorizontal="5dp"
                 android:singleLine="true"
                 android:textColor="@color/black"
+                android:autofillHints="name"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@id/txtPoint6"
                 app:layout_constraintStart_toEndOf="@id/txtPoint6"
@@ -824,9 +825,15 @@
                 app:layout_constraintStart_toEndOf="@id/bottomView"
                 app:layout_constraintTop_toBottomOf="@id/rightSignatureCard" />
 
-            <include
-                android:id="@+id/progressView"
-                layout="@layout/include_progress_bar" />
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

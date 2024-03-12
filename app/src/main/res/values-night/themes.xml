@@ -1,9 +1,11 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Theme.UtellRestaurant" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
         <item name="colorAccent">@color/primaryAccent</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:windowFullscreen">true</item>
     </style>
 </resources>

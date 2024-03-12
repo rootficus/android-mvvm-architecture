@@ -58,4 +58,67 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
         return dashBoardRepository.getSignInDataModel()
     }
 
+    fun setFullName(fullName: String?) {
+        dashBoardRepository.setFullName(fullName)
+    }
+
+    fun setToken(token: String) {
+        dashBoardRepository.setToken(token)
+    }
+
+    fun setPassword(password: String) {
+        dashBoardRepository.setPassword(password)
+    }
+
+    fun setIsLogin(isLogin: Boolean) {
+        dashBoardRepository.setIsLogin(isLogin)
+    }
+
+    fun setEditText6(text: String?) {
+        text?.let { dashBoardRepository.setEditText6(text) }
+    }
+
+    fun getEditText6(): String? {
+        return dashBoardRepository.getEditText6()
+    }
+
+    fun setEditText7(text: String?) {
+        text?.let { dashBoardRepository.setEditText7(text) }
+    }
+
+    fun getEditText7(): String? {
+        return dashBoardRepository.getEditText7()
+    }
+
+    fun setEditText8(text: String?) {
+        text?.let { dashBoardRepository.setEditText8(text) }
+    }
+
+    fun getEditText8(): String? {
+        return dashBoardRepository.getEditText8()
+    }
+
+    fun setEditText10(text: String?) {
+        text?.let { dashBoardRepository.setEditText10(text) }
+    }
+
+    fun getEditText10(): String? {
+        return dashBoardRepository.getEditText10()
+    }
+    fun setEdit2Text10(text: String?) {
+        text?.let { dashBoardRepository.setEdit2Text10(text) }
+    }
+
+    fun getEdit2Text10(): String? {
+        return dashBoardRepository.getEdit2Text10()
+    }
+
+    fun setEditText14(text: String?) {
+        text?.let { dashBoardRepository.setEditText14(text) }
+    }
+
+    fun getEditText14(): String? {
+        return dashBoardRepository.getEditText14()
+    }
+
 }

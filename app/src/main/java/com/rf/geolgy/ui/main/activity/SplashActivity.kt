@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import com.rf.geolgy.ui.base.BaseActivity
 import com.rf.geolgy.ui.base.BaseActivityModule
 import com.rf.geolgy.ui.base.BaseViewModelFactory
@@ -34,8 +35,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //FirebaseApp.initializeApp(this@SplashActivity)
-        //FirebaseMessaging.getInstance().isAutoInitEnabled = true;
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         initializationDagger()
         initialization()
     }
@@ -48,8 +48,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     }
 
     private fun initialization() {
-
-        viewDataBinding?.progressView?.visibility = View.GONE
+        viewDataBinding?.progressView?.visibility = View.VISIBLE
         Handler(Looper.getMainLooper()).postDelayed(
             {
                 goToNextScreen()
@@ -59,9 +58,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
 
     private fun goToNextScreen() {
         if (viewmodel.isLogin()) {
+            viewDataBinding?.progressView?.visibility = View.GONE
             startActivity(Intent(this@SplashActivity, DashBoardActivity::class.java))
             finishAffinity()
         } else {
+            viewDataBinding?.progressView?.visibility = View.GONE
             startActivity(Intent(this@SplashActivity, SignInActivity::class.java))
             finishAffinity()
         }

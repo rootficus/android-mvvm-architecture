@@ -1,15 +1,16 @@
 package com.rf.geolgy.utils
 
 import android.content.Context
+import com.rf.geolgy.utils.Constant.EDIT2_TEXT_10
+import com.rf.geolgy.utils.Constant.EDIT_TEXT_10
+import com.rf.geolgy.utils.Constant.EDIT_TEXT_14
+import com.rf.geolgy.utils.Constant.EDIT_TEXT_6
+import com.rf.geolgy.utils.Constant.EDIT_TEXT_7
+import com.rf.geolgy.utils.Constant.EDIT_TEXT_8
 import com.rf.geolgy.utils.Constant.PREFS_IS_LOGIN
-import com.rf.geolgy.utils.Constant.PREF_BL_APPROVED
-import com.rf.geolgy.utils.Constant.PREF_BL_DANGER
-import com.rf.geolgy.utils.Constant.PREF_BL_PENDING
-import com.rf.geolgy.utils.Constant.PREF_BL_REJECTED
-import com.rf.geolgy.utils.Constant.PREF_BL_SUCCESS
-import com.rf.geolgy.utils.Constant.PREF_DASHBOARD
 import com.rf.geolgy.utils.Constant.PREF_PASSWORD
 import com.rf.geolgy.utils.Constant.PREF_PUSH_TOKEN
+import com.rf.geolgy.utils.Constant.PREF_SIGN_IN_LIST
 import com.rf.geolgy.utils.Constant.PREF_SIGN_IN_MODEL
 import com.rf.geolgy.utils.Constant.PREF_TOKEN
 
@@ -21,28 +22,8 @@ class SharedPreference(context: Context) {
     private val PREFS_NAME = "fion_modem_pref_file"
     private val pref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)!!
 
-    fun getWorkMangerStatus(): String? {
-        return pref.getString("WorkManagerStatus", "")
-    }
-
-    fun setWorkManagerStatus(customerId: String) {
-        pref.edit().putString("WorkManagerStatus", customerId).apply()
-    }
-
     fun setUserId(userId: String) {
         pref.edit().putString(Constant.PREF_USER_ID, userId).apply()
-    }
-
-    fun getUserId(): String? {
-        return pref.getString(Constant.PREF_USER_ID, "")
-    }
-
-    fun setStoreStatus(status: String) {
-        pref.edit().putString(Constant.PREF_STORE_STATUS, status).apply()
-    }
-
-    fun getStoreStatus(): String? {
-        return pref.getString(Constant.PREF_STORE_STATUS, "")
     }
 
     fun getPassword(): String? {
@@ -52,6 +33,7 @@ class SharedPreference(context: Context) {
     fun setPhoneNumber(phoneNumber: String) {
         pref.edit().putString(Constant.PREF_PHONE_NUMBER, phoneNumber).apply()
     }
+
     fun getSignInDataModel(): String? {
         return pref.getString(PREF_SIGN_IN_MODEL, "")
     }
@@ -60,20 +42,16 @@ class SharedPreference(context: Context) {
         pref.edit().putString(PREF_SIGN_IN_MODEL, model).apply()
     }
 
+    fun getSignInList(): String? {
+        return pref.getString(PREF_SIGN_IN_LIST, "")
+    }
+
+    fun setSignInList(model: String?) {
+        pref.edit().putString(PREF_SIGN_IN_LIST, model).apply()
+    }
+
     fun setFullName(fullName: String) {
         pref.edit().putString(Constant.PREF_FULL_NAME, fullName).apply()
-    }
-
-    fun getFullName(): String? {
-        return pref.getString(Constant.PREF_FULL_NAME, "Akash")
-    }
-
-    fun setProfileImage(image: String) {
-        pref.edit().putString(Constant.PREF_IMAGE, image).apply()
-    }
-
-    fun getProfileImage(): String? {
-        return pref.getString(Constant.PREF_IMAGE, "Akash")
     }
 
     fun setPinCode(userId: String) {
@@ -92,12 +70,6 @@ class SharedPreference(context: Context) {
         pref.edit().putString(PREF_PUSH_TOKEN, token).apply()
     }
 
-    fun getPushToken(): String? {
-        return pref.getString(
-            PREF_PUSH_TOKEN, ""
-        )
-    }
-
     fun setIsLogin(isLogin: Boolean) {
         pref.edit().putBoolean(PREFS_IS_LOGIN, isLogin).apply()
     }
@@ -110,121 +82,52 @@ class SharedPreference(context: Context) {
         pref.edit().putString(PREF_PASSWORD, password).apply()
     }
 
-    fun setBLSuccess(success: Int?) {
-        success?.let { pref.edit().putInt(PREF_BL_SUCCESS, it).apply() }
+    fun setEditText6(token: String) {
+        pref.edit().putString(EDIT_TEXT_6, token).apply()
     }
 
-    fun getBLSuccess(): Int {
-        return pref.getInt(PREF_BL_SUCCESS, 0)
+    fun getEditText6(): String? {
+        return pref.getString(EDIT_TEXT_6, "")
     }
 
-    fun setBLPending(pending: Int?) {
-        pending?.let { pref.edit().putInt(PREF_BL_PENDING, it).apply() }
+    fun setEditText7(token: String) {
+        pref.edit().putString(EDIT_TEXT_7, token).apply()
     }
 
-    fun getBLPending(): Int {
-        return pref.getInt(PREF_BL_PENDING, 0)
+    fun getEditText7(): String? {
+        return pref.getString(EDIT_TEXT_7, "")
     }
 
-    fun setBLRejected(rejected: Int?) {
-        rejected?.let { pref.edit().putInt(PREF_BL_REJECTED, it).apply() }
+    fun setEditText8(token: String) {
+        pref.edit().putString(EDIT_TEXT_8, token).apply()
     }
 
-    fun getBLRejected(): Int {
-        return pref.getInt(PREF_BL_REJECTED, 0)
+    fun getEditText8(): String? {
+        return pref.getString(EDIT_TEXT_8, "")
     }
 
-    fun setBLApproved(approved: Int?) {
-        approved?.let { pref.edit().putInt(PREF_BL_APPROVED, it).apply() }
+    fun setEditText10(token: String) {
+        pref.edit().putString(EDIT_TEXT_10, token).apply()
     }
 
-    fun getBLApproved(): Int {
-        return pref.getInt(PREF_BL_APPROVED, 0)
+    fun getEditText10(): String? {
+        return pref.getString(EDIT_TEXT_10, "")
+    }
+    fun setEdit2Text10(token: String) {
+        pref.edit().putString(EDIT2_TEXT_10, token).apply()
     }
 
-    fun setBLDanger(danger: Int?) {
-        danger?.let { pref.edit().putInt(PREF_BL_DANGER, it).apply() }
+    fun getEdit2Text10(): String? {
+        return pref.getString(EDIT2_TEXT_10, "")
     }
 
-    fun getBLDanger(): Int {
-        return pref.getInt(PREF_BL_DANGER, 0)
+    fun setEditText14(token: String) {
+        pref.edit().putString(EDIT_TEXT_14, token).apply()
     }
 
-    fun setDashBoardDataModel(model: String?) {
-        model?.let { pref.edit().putString(PREF_DASHBOARD, it).apply() }
+    fun getEditText14(): String? {
+        return pref.getString(EDIT_TEXT_14, "")
     }
 
-    fun getDashBoardDataModel(): String? {
-        return pref.getString(PREF_DASHBOARD, "")
-    }
-
-    fun setAvailableBalance(currentBalance: Float) {
-        pref.edit().putFloat(Constant.PREF_AVAILABLE_BALANCE,currentBalance).apply()
-    }
-
-    fun getAvailableBalance(): Float {
-        return pref.getFloat(Constant.PREF_AVAILABLE_BALANCE,0f)
-    }
-
-    fun setBalance(currentBalance: Float) {
-        pref.edit().putFloat(Constant.PREF_BALANCE,currentBalance).apply()
-    }
-
-    fun getBalance(): Float {
-        return pref.getFloat(Constant.PREF_BALANCE,0f)
-    }
-
-    fun setHoldBalance(currentBalance: Float) {
-        pref.edit().putFloat(Constant.PREF_HOLD_BALANCE,currentBalance).apply()
-    }
-
-    fun getHoldBalance(): Float {
-        return pref.getFloat(Constant.PREF_HOLD_BALANCE,0f)
-    }
-
-
-    fun resetSharedPref() {
-        pref.edit().clear().apply()
-    }
-
-    fun setModemChangeStatusNotificationCount(count: Int) {
-        pref.edit().putInt(Constant.PREF_MODEM_CHANGE_STATUS_NOTIFICATION_COUNT, count).apply()
-    }
-
-    fun getModemChangeStatusNotificationCount(): Int {
-        return pref.getInt(Constant.PREF_MODEM_CHANGE_STATUS_NOTIFICATION_COUNT, 0)
-    }
-
-    fun setAddBalanceModemNotificationCount(count: Int) {
-        pref.edit().putInt(Constant.PREF_ADD_BALANCE_MODEM_NOTIFICATION_COUNT, count).apply()
-    }
-
-    fun getAddBalanceModemNotificationCount(): Int {
-        return pref.getInt(Constant.PREF_ADD_BALANCE_MODEM_NOTIFICATION_COUNT, 0)
-    }
-
-    fun setDepositRequestModemNotificationCount(count: Int) {
-        pref.edit().putInt(Constant.PREF_DEPOSIT_REQUEST_MODEM_NOTIFICATION_COUNT, count).apply()
-    }
-
-    fun getDepositRequestModemNotificationCount(): Int {
-        return pref.getInt(Constant.PREF_DEPOSIT_REQUEST_MODEM_NOTIFICATION_COUNT, 0)
-    }
-
-    fun setWithdrawalRequestModemNotificationCount(count: Int) {
-        pref.edit().putInt(Constant.PREF_WITHDRAWAL_REQUEST_MODEM_NOTIFICATION_COUNT, count).apply()
-    }
-
-    fun getWithdrawalRequestModemNotificationCount(): Int {
-        return pref.getInt(Constant.PREF_WITHDRAWAL_REQUEST_MODEM_NOTIFICATION_COUNT, 0)
-    }
-
-    fun setRefundRequestModemNotificationCount(count: Int) {
-        pref.edit().putInt(Constant.PREF_REFUND_REQUEST_MODEM_NOTIFICATION_COUNT, count).apply()
-    }
-
-    fun getRefundRequestModemNotificationCount(): Int {
-        return pref.getInt(Constant.PREF_REFUND_REQUEST_MODEM_NOTIFICATION_COUNT, 0)
-    }
 
 }

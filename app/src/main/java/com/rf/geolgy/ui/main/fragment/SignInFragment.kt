@@ -1,6 +1,5 @@
 package com.rf.geolgy.ui.main.fragment
 
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -8,10 +7,12 @@ import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
+import android.widget.AdapterView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.activityViewModels
 import com.google.gson.Gson
 import com.rf.geolgy.R
+import com.rf.geolgy.data.model.User
 import com.rf.geolgy.data.model.request.SignInRequest
 import com.rf.geolgy.databinding.FragmentSignInBinding
 import com.rf.geolgy.sdkInit.GeolgySDK
@@ -19,6 +20,7 @@ import com.rf.geolgy.ui.base.BaseFragment
 import com.rf.geolgy.ui.base.BaseFragmentModule
 import com.rf.geolgy.ui.base.BaseViewModelFactory
 import com.rf.geolgy.ui.main.activity.DashBoardActivity
+import com.rf.geolgy.ui.main.adapter.CustomSpinnerAdapter
 import com.rf.geolgy.ui.main.di.DaggerSignInFragmentComponent
 import com.rf.geolgy.ui.main.di.SignInFragmentModuleDi
 import com.rf.geolgy.ui.main.viewmodel.SignInViewModel
@@ -37,9 +39,9 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
 
     @Inject
     lateinit var sharedPreference: SharedPreference
-
-    @Inject
-    lateinit var progressBar: Dialog
+    /*
+        @Inject
+        lateinit var progressBar: Dialog*/
 
     @Inject
     lateinit var networkHelper: NetworkHelper
@@ -48,6 +50,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
     lateinit var signInViewModelFactory: BaseViewModelFactory<SignInViewModel>
     private val viewmodel: SignInViewModel by activityViewModels { signInViewModelFactory }
     private var isPasswordVisible = false
+    val items: MutableList<User> = ArrayList()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,6 +68,38 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
     }
 
     private fun initializeView(view: View) {
+
+        val storedSignList = getLoginList()
+        items.addAll(storedSignList)
+        val icons = intArrayOf(R.drawable.online, R.drawable.offline, R.drawable.pause)
+
+        // Create and set custom adapter
+        if (items.isEmpty()) {
+            mDataBinding.spinner.visibility = View.GONE
+        } else {
+            mDataBinding.spinner.visibility = View.VISIBLE
+        }
+        // Create and set custom adapter
+        val adapter = CustomSpinnerAdapter(requireActivity(), items, icons)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        mDataBinding.spinner.adapter = adapter
+        mDataBinding.spinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    mDataBinding.etName.setText(items[position].name)
+                    mDataBinding.etPassword.setText(items[position].password)
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+
+            }
 
         mDataBinding.etName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -133,7 +168,6 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
         })
 
         mDataBinding.btnSignIn.setOnClickListener {
-            //startActivity(Intent(requireContext(), DashBoardActivity::class.java))
             name = mDataBinding.etName.text.toString()
             password = mDataBinding.etPassword.text.toString()
             if (name.isEmpty()) {
@@ -150,9 +184,6 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                 callSignInAPI()
             }
         }
-        //mDataBinding.etName.setText(viewmodel.getEmail().toString())
-        //mDataBinding.etPassword.setText(viewmodel.getPassword().toString())
-
     }
 
     private fun callSignInAPI() {
@@ -167,8 +198,9 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             viewmodel.signInResponseModel.observe(viewLifecycleOwner) {
                 when (it.status) {
                     Status.SUCCESS -> {
-                        progressBar.dismiss()
+                        mDataBinding.progressBar.visibility = View.GONE
                         val gson = Gson()
+                        addLoginList(gson)
                         val json = gson.toJson(it.data)
                         viewmodel.setSignInDataModel(json)
                         viewmodel.setPassword(password)
@@ -179,19 +211,50 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                     }
 
                     Status.ERROR -> {
-                        progressBar.dismiss()
+                        mDataBinding.progressBar.visibility = View.GONE
                         showErrorMessage(it.message)
 
                     }
 
                     Status.LOADING -> {
-                        progressBar.show()
+                        mDataBinding.progressBar.visibility = View.VISIBLE
                     }
                 }
             }
         } else {
-            progressBar.dismiss()
+            mDataBinding.progressBar.visibility = View.GONE
             showMessage(mActivity.getString(R.string.NO_INTERNET_CONNECTION))
+        }
+    }
+
+    // Function to check if the new object already exists in the list
+    private fun isDuplicateObject(existingList: List<User>, newObject: User): Boolean {
+        for (item in existingList) {
+            if (item == newObject) {
+                // If objects are equal, it means newObject already exists in the list
+                return true
+            }
+        }
+        // If no duplicate found, return false
+        return false
+    }
+
+    private fun addLoginList(gson: Gson) {
+        if (!isDuplicateObject(items, User(name, password))) {
+            items.add(User(name, password))
+            val jsonString = gson.toJson(items)
+            sharedPreference.setSignInList(jsonString)
+        }
+    }
+
+    private fun getLoginList(): List<User> {
+        val gson = Gson()
+        val jsonString = sharedPreference.getSignInList()
+        return if (jsonString != null) {
+            val array = gson.fromJson(jsonString, Array<User>::class.java)
+            array?.toList() ?: emptyList()
+        } else {
+            emptyList()
         }
     }
 

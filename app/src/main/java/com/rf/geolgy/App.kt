@@ -15,11 +15,6 @@ class App : Application() {
         super.onTerminate()
         isAppRunning = false
     }
-
-    fun isAppRunning(): Boolean {
-        return isAppRunning
-    }
-
     companion object {
         var isAppRunning = false
     }

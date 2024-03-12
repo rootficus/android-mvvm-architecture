@@ -27,38 +27,17 @@ class SignInRepository(
     }
 
 
-
-
-    fun setUserId(userId: String?) {
-        userId?.let { sharedPreference.setUserId(it) }
-    }
-
-
     fun setPassword(password: String?) {
         password?.let { sharedPreference.setPassword(password) }
     }
 
-    fun getPassword(): String? {
-        return sharedPreference.getPassword()
-    }
     fun setSignInDataModel(model: String?) {
         model?.let { sharedPreference.setSignInDataModel(model) }
     }
 
-    fun getSignInDataModel(): String? {
-        return sharedPreference.getSignInDataModel()
-    }
 
     fun setFullName(fullName: String?) {
         fullName?.let { sharedPreference.setFullName(it) }
-    }
-
-    fun setPinCode(pinCode: String?) {
-        pinCode?.let { sharedPreference.setPinCode(it) }
-    }
-
-    fun setPhoneNumber(phone: String?) {
-        phone?.let { sharedPreference.setPhoneNumber(it) }
     }
 
     fun isLogin(): Boolean {

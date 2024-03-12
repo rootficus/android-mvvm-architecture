@@ -174,8 +174,8 @@
                 android:id="@+id/edtPoint1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingVertical="5dp"
                 android:paddingHorizontal="5dp"
+                android:paddingVertical="5dp"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -322,6 +322,7 @@
                 android:minWidth="200dp"
                 android:paddingHorizontal="5dp"
                 android:singleLine="true"
+                android:autofillHints="name"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/txtPoint6"
@@ -824,9 +825,16 @@
                 app:layout_constraintStart_toEndOf="@id/bottomView"
                 app:layout_constraintTop_toBottomOf="@id/rightSignatureCard" />
 
-            <include
-                android:id="@+id/progressView"
-                layout="@layout/include_progress_bar" />
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

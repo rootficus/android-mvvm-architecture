@@ -3,6 +3,7 @@ package com.rf.geolgy.ui.main.activity
 import android.app.Dialog
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import com.rf.geolgy.ui.main.di.DaggerSignInComponent
 import com.rf.geolgy.ui.main.di.SignInModule
 import com.rf.geolgy.ui.main.viewmodel.SignInViewModel
@@ -28,10 +29,10 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
     @Inject
     lateinit var signInViewModelFactory: BaseViewModelFactory<SignInViewModel>
     private val viewmodel: SignInViewModel by viewModels { signInViewModelFactory }
-    var dialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         initializationDagger()
     }
 
@@ -41,9 +42,4 @@ class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sig
             .baseActivityModule(BaseActivityModule(this@SignInActivity)).build().inject(this)
     }
 
-
-    override fun onResume() {
-        super.onResume()
-        //Utility.getPushToken(this@SignInActivity)
-    }
 }

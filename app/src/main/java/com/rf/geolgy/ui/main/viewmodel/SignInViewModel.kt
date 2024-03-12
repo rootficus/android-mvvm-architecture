@@ -29,26 +29,14 @@ class SignInViewModel @Inject constructor(private val signInRepository: SignInRe
     }
 
 
-    fun setUserId(userId: String?) {
-        signInRepository.setUserId(userId)
-    }
-
     fun setFullName(fullName: String?) {
         signInRepository.setFullName(fullName)
-    }
-
-
-    fun setPinCode(pinCode: String?) {
-        signInRepository.setPinCode(pinCode)
-    }
-
-    fun setPhoneNumber(phone: String?) {
-        signInRepository.setPhoneNumber(phone)
     }
 
     fun isLogin(): Boolean {
         return signInRepository.isLogin()
     }
+
     fun setToken(token: String) {
         signInRepository.setToken(token)
     }
@@ -57,15 +45,8 @@ class SignInViewModel @Inject constructor(private val signInRepository: SignInRe
         signInRepository.setPassword(password)
     }
 
-    fun getPassword(): String? {
-        return signInRepository.getPassword()
-    }
     fun setSignInDataModel(model: String?) {
         signInRepository.setSignInDataModel(model)
-    }
-
-    fun getSignInDataModel(): String? {
-        return signInRepository.getSignInDataModel()
     }
 
     fun setIsLogin(isLogin: Boolean) {

@@ -25,14 +25,14 @@
                 android:id="@+id/imgTopLogo"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:src="@drawable/app_icon"
-                android:visibility="invisible"
+                android:src="@drawable/app_logo"
+                android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@id/txt_heading"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.17"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.25" />
+                app:layout_constraintWidth_percent="0.5" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txt_heading"
@@ -42,7 +42,7 @@
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/welcome_text"
                 android:textAlignment="center"
-                android:textColor="@color/homeTextColor"
+                android:textColor="@color/black"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/txt_sub_heading"
@@ -141,6 +141,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/etPassword"
                 app:layout_constraintWidth_percent="0.85" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/custom_spinner_background"
+                android:popupBackground="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <ProgressBar
                 android:id="@+id/progressBar"

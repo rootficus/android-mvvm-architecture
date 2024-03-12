@@ -1,17 +1,18 @@
 package com.rf.geolgy.ui.main.activity
 
-import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.Spanned
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import com.google.gson.Gson
 import com.rf.geolgy.R
 import com.rf.geolgy.data.model.request.CreateChallanRequest
+import com.rf.geolgy.data.model.response.CreateChallanResponse
 import com.rf.geolgy.data.model.response.SignInResponse
 import com.rf.geolgy.databinding.ActivityDashboardBinding
 import com.rf.geolgy.sdkInit.GeolgySDK
@@ -39,9 +40,6 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     @Inject
     lateinit var sharedPreference: SharedPreference
 
-    /*@Inject
-    lateinit var progressBar: Dialog
-*/
     @Inject
     lateinit var dashBoardViewModelFactory: BaseViewModelFactory<DashBoardViewModel>
     private val viewModel: DashBoardViewModel by viewModels { dashBoardViewModelFactory }
@@ -52,6 +50,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     var rateOfMineralTotal: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         initializationDagger()
         val gson = Gson()
         val json: String? = viewModel.getSignInDataModel()
@@ -65,23 +64,23 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         val permitEndDate: String = signInResponse.company?.permitEndDate.toString()
         rateOfMineral = signInResponse.company?.rateOfMineral.toString()
         rateOfMineralTotal = signInResponse.company?.rateOfMineralTotal.toString()
-        // val gstNumber: String = signInResponse.company?.gstNumber.toString()
         val qualityPercentage: String = signInResponse.company?.quantityPercentage.toString()
         val qualityAmount: String = signInResponse.company?.quantityAmount.toString()
         viewDataBinding?.txtValidity?.text = getString(R.string.validity_from)
         viewDataBinding?.edtPoint1?.text = signInResponse.company?.licenceType
 
-
+        // Check if the device supports autofill
         val gstNumber = Utility.generateRandomGSTString(11)
-
+        //GetShared Pref Edit Text Value
+        getEditTextValues()
         val point2Text1 = "Issuing date <b>$permitStartDate</b> Valid upto <b>$permitEndDate</b>"
         val point11Text =
             "Rate of Mineral GST <b>Rs.$rateOfMineral</b> Total Amount (Excluding GST and Transportation charges) <b>Rs.$rateOfMineralTotal</b>"
         val point12Text =
             "GST Bill/No. <b>$gstNumber</b> Quantity <b>$qualityPercentage%</b> Amount <b>Rs.$qualityAmount</b> (Enclose copy of GST Invoice)"
-        viewDataBinding?.txt2Point1?.setText(makeTextBold(point2Text1))
-        viewDataBinding?.txtPoint11?.setText(makeTextBold(point11Text))
-        viewDataBinding?.txtPoint12?.setText(makeTextBold(point12Text))
+        viewDataBinding?.txt2Point1?.text = makeTextBold(point2Text1)
+        viewDataBinding?.txtPoint11?.text = makeTextBold(point11Text)
+        viewDataBinding?.txtPoint12?.text = makeTextBold(point12Text)
 
         viewDataBinding?.btnSubmit?.setOnClickListener {
             val nameAndLocation = viewDataBinding?.edtPoint6?.text.toString()
@@ -172,7 +171,11 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         val mPositiveButton = mBuilder.getButton(android.app.AlertDialog.BUTTON_POSITIVE)
         mPositiveButton.setOnClickListener {
             mBuilder.dismiss()
-            sharedPreference.resetSharedPref()
+            viewModel.setSignInDataModel("")
+            viewModel.setPassword("")
+            viewModel.setIsLogin(false)
+            viewModel.setToken("")
+            viewModel.setFullName("")
             startActivity(Intent(this@DashBoardActivity, SignInActivity::class.java))
             finishAffinity()
         }
@@ -186,7 +189,8 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
             viewModel.createChallanResponseModel.observe(this) {
                 when (it.status) {
                     Status.SUCCESS -> {
-                        viewDataBinding?.progressView?.llProgressView?.visibility =View.GONE
+                        viewDataBinding?.progressBar?.visibility = View.GONE
+                        setEditTextValue(it.data)
                         val intent = Intent(this@DashBoardActivity, FinalFormActivity::class.java)
                         intent.putExtra("point6", viewDataBinding?.edtPoint6?.text.toString())
                         intent.putExtra("point7", viewDataBinding?.edtPoint7?.text.toString())
@@ -205,19 +209,62 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                     }
 
                     Status.ERROR -> {
-                        viewDataBinding?.progressView?.llProgressView?.visibility =View.GONE
+                        viewDataBinding?.progressBar?.visibility = View.GONE
                         showErrorMessage(it.message)
                     }
 
                     Status.LOADING -> {
-                        viewDataBinding?.progressView?.llProgressView?.visibility =View.VISIBLE
+                        viewDataBinding?.progressBar?.visibility = View.VISIBLE
                     }
                 }
             }
         } else {
-            viewDataBinding?.progressView?.llProgressView?.visibility =View.GONE
+            viewDataBinding?.progressBar?.visibility = View.GONE
             showMessage(getString(R.string.NO_INTERNET_CONNECTION))
         }
+    }
+
+
+    private fun getEditTextValues() {
+        if (viewModel.getEditText6()?.isNotEmpty() == true) {
+            viewDataBinding?.edtPoint6?.setText(
+                viewModel.getEditText6()
+            )
+        }
+        if (viewModel.getEditText7()?.isNotEmpty() == true) {
+            viewDataBinding?.edtPoint7?.setText(
+                viewModel.getEditText7()
+            )
+        }
+        if (viewModel.getEditText8()?.isNotEmpty() == true) {
+            viewDataBinding?.edtPoint8?.setText(
+                viewModel.getEditText8()
+            )
+        }
+        if (viewModel.getEditText10()?.isNotEmpty() == true) {
+            viewDataBinding?.edtPoint10?.setText(
+                viewModel.getEditText10()
+            )
+        }
+        if (viewModel.getEdit2Text10()?.isNotEmpty() == true) {
+            viewDataBinding?.edt2Point10?.setText(
+                viewModel.getEdit2Text10()
+            )
+        }
+        if (viewModel.getEditText14()?.isNotEmpty() == true) {
+            viewDataBinding?.edtPoint14?.setText(
+                viewModel.getEditText14()
+            )
+        }
+    }
+
+    private fun setEditTextValue(data: CreateChallanResponse?) {
+        viewModel.setEditText6(data?.nameAndLocation)
+        viewModel.setEditText7(data?.typesOfProduct)
+        viewModel.setEditText8(data?.quantityAmount)
+        viewModel.setEditText10(data?.routeSource)
+        viewModel.setEdit2Text10(data?.routeDesignation)
+        viewModel.setEditText14(data?.nameAndAddress)
     }
 }
 

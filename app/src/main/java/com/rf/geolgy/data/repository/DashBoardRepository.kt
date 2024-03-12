@@ -27,6 +27,7 @@ class DashBoardRepository(
             execute(this, success, fail, context, message)
         }
     }
+
     fun createChallan(
         success: (createChallanResponse: CreateChallanResponse) -> Unit,
         createChallanRequest: CreateChallanRequest,
@@ -39,12 +40,96 @@ class DashBoardRepository(
     }
 
 
+    fun setUserId(userId: String?) {
+        userId?.let { sharedPreference.setUserId(it) }
+    }
+
+
+    fun setPassword(password: String?) {
+        password?.let { sharedPreference.setPassword(password) }
+    }
+
+    fun getPassword(): String? {
+        return sharedPreference.getPassword()
+    }
+
     fun setSignInDataModel(model: String?) {
         model?.let { sharedPreference.setSignInDataModel(model) }
     }
 
     fun getSignInDataModel(): String? {
         return sharedPreference.getSignInDataModel()
+    }
+
+    fun setFullName(fullName: String?) {
+        fullName?.let { sharedPreference.setFullName(it) }
+    }
+
+    fun setPinCode(pinCode: String?) {
+        pinCode?.let { sharedPreference.setPinCode(it) }
+    }
+
+    fun setPhoneNumber(phone: String?) {
+        phone?.let { sharedPreference.setPhoneNumber(it) }
+    }
+
+    fun isLogin(): Boolean {
+        return sharedPreference.isLogin()
+    }
+
+    fun setIsLogin(isLogin: Boolean?) {
+        isLogin?.let { sharedPreference.setIsLogin(it) }
+    }
+
+    fun setToken(token: String?) {
+        token?.let { sharedPreference.setToken(it) }
+    }
+
+    fun setEditText6(text: String?) {
+        text?.let { sharedPreference.setEditText6(text) }
+    }
+
+    fun getEditText6(): String? {
+        return sharedPreference.getEditText6()
+    }
+
+    fun setEditText7(text: String?) {
+        text?.let { sharedPreference.setEditText7(text) }
+    }
+
+    fun getEditText7(): String? {
+        return sharedPreference.getEditText7()
+    }
+
+    fun setEditText8(text: String?) {
+        text?.let { sharedPreference.setEditText8(text) }
+    }
+
+    fun getEditText8(): String? {
+        return sharedPreference.getEditText8()
+    }
+
+    fun setEditText10(text: String?) {
+        text?.let { sharedPreference.setEditText10(text) }
+    }
+
+    fun getEditText10(): String? {
+        return sharedPreference.getEditText10()
+    }
+    fun setEdit2Text10(text: String?) {
+        text?.let { sharedPreference.setEdit2Text10(text) }
+    }
+
+    fun getEdit2Text10(): String? {
+        return sharedPreference.getEdit2Text10()
+    }
+
+    fun setEditText14(text: String?) {
+        text?.let { sharedPreference.setEditText14(text) }
+    }
+
+    fun getEditText14(): String? {
+        return sharedPreference.getEditText14()
     }
 
 }

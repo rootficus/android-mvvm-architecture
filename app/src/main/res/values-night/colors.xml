@@ -1,33 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bgPrimaryColor">#33000000</color>
-    <color name="homeTextColor">#FFFFFFFF</color>
-    <color name="bottomNacColor">#1A000000</color>
-    <color name="homeCardBackColor">@color/black</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="divideColor">#8E8B8B</color>
+    <color name="primaryColor">#DC135394</color>
+    <color name="primaryDarkColor">#135394</color>
+    <color name="primaryAccent">#DC135394</color>
+    <color name="darkPrimary">#FFD778</color>
+    <color name="greenColor">#4CAF50</color>
+    <color name="orangeColor">#FF5722</color>
+    <color name="teal_700">#FF018786</color>
 
-    <color name="textColor">@color/white</color>
-    <color name="card_gray">#f7f7f7</color>
+    <color name="gray">#3B6C6C6C</color>
+    <color name="water_mark">#EDEBEB</color>
+    <color name="dotted_axis">#56577A</color>
+    <color name="line_axis_1">#0075FF</color>
+    <color name="line_axis_2">#2CD9FF</color>
+    <color name="text_gray">#57D3D3D3</color>
+    <color name="card_gray">#95F7F7F7</color>
 
-    <color name="sigInButtonTextColor">@color/black</color>
-    <color name="sigInEditTextBackColor">@color/black</color>
-    <color name="activeCard">#1A000000</color>
-    <!-- <color name="black">#FF000000</color>
-     <color name="textColor">#222121</color>
-     <color name="white">#FFFFFFFF</color>
-     <color name="primaryColor">#19222c</color>
-     <color name="primaryDarkColor">#19222c</color>
-     <color name="primaryAccent">#19222c</color>
-     <color name="darkPrimary">#FFD778</color>
-     <color name="greenColor">#4CAF50</color>
-     <color name="orangeColor">#FF5722</color>
-     <color name="teal_700">#FF018786</color>
+    <color name="bgPrimaryColor">#F4F8FF</color>
+    <color name="cardBgColor">@color/white</color>
+    <color name="headerText">#012970</color>
+    <color name="primaryTextColor">@color/black</color>
+    <color name="success">#0D6EFD</color>
+    <color name="pending">#FFC107</color>
+    <color name="reject">#DC3545</color>
+    <color name="approve">#198754</color>
+    <color name="selectChipColorBG">#FF0D6EFD</color>
+    <color name="unSelectChipColorBG">#66AFABAB</color>
+    <color name="colorChecked">#FFFFFFFF</color>
+    <color name="colorUnchecked">#131313</color>
+    <color name="primaryBlue">#1D5DB7</color>
+    <color name="qrCode">#7B20A2</color>
+    <color name="secondaryBlue">#1B9DD7</color>
+    <color name="activeGreen">#17BF46</color>
+    <color name="activeGreenBg">#1A17BF46</color>
+    <color name="activeDangerBg">#1ABF1717</color>
+    <color name="activePendingBg">#1AFFC107</color>
+    <color name="nonClickableButton">#33000000</color>
+    <color name="activeCard">#F4F8FF</color>
 
-     <color name="gray">#3B6C6C6C</color>
-     <color name="text_gray">#57D3D3D3</color>
-     <color name="card_gray">#f7f7f7</color>
+    <color name="customPopupBackground">@color/white
+    </color> <!-- Replace with your desired background color -->
+    <color name="customMenuItemSelected">@color/primaryBlue</color>
 
-     <color name="bgPrimaryColor">#19222c</color>
-     <color name="cardBgColor">#222e3c</color>
-     <color name="headerText">@color/white</color>
-     <color name="primaryTextColor">@color/white</color>-->
+    <!--   Home-->
+    <color name="homeTextColor">@color/primaryBlue</color>
+    <color name="bottomNacColor">@color/white</color>
+    <color name="homeCardBackColor">@color/white</color>
+
+    <color name="textColor">@color/black</color>
+    <color name="sigInButtonTextColor">@color/white</color>
+    <color name="sigInEditTextBackColor">@color/white</color>
+    <color name="selected_color">#F4F4F4</color>
+
+
 </resources>

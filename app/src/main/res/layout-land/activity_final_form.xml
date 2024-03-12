@@ -509,7 +509,7 @@
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@id/txtPoint10"
-                    app:layout_constraintStart_toEndOf="@id/txtPoint10"
+                    app:layout_constraintStart_toEndOf="@id/edtPoint10"
                     app:layout_constraintTop_toTopOf="@id/txtPoint10" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -685,8 +685,8 @@
                     android:id="@+id/edtPoint15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
                     android:paddingVertical="5dp"
+                    android:paddingHorizontal="5dp"
                     android:text=""
                     android:textColor="@color/black"
                     android:textSize="14sp"
@@ -846,9 +846,16 @@
                     app:layout_constraintStart_toEndOf="@id/btnPrint"
                     app:layout_constraintTop_toBottomOf="@id/rightSignatureCard" />
 
-                <include
-                    android:id="@+id/progressView"
-                    layout="@layout/include_progress_bar" />
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
