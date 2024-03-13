@@ -23,6 +23,7 @@ import com.rf.geolgy.ui.main.di.DaggerDashBoardActivityComponent
 import com.rf.geolgy.ui.main.di.DashBoardActivityModule
 import com.rf.geolgy.ui.main.viewmodel.DashBoardViewModel
 import com.rf.geolgy.utils.NetworkHelper
+import com.rf.geolgy.utils.PdfGenerator
 import com.rf.geolgy.utils.SharedPreference
 import com.rf.geolgy.utils.Status
 import com.rf.geolgy.utils.Utility
@@ -116,8 +117,10 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                 showMessage("Please fill all details")
             }
         }
+        PdfGenerator.createPdf(this@DashBoardActivity)
         viewDataBinding?.btnLogout?.setOnClickListener {
-            verifyLogout()
+            PdfGenerator.createPdf(this@DashBoardActivity)
+            //verifyLogout()
         }
     }
 
@@ -236,9 +239,9 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                 viewModel.getEditText7()
             )
         }
-        if (viewModel.getEditText8()?.isNotEmpty() == true) {
+        if (viewModel.getEditText8() != 0) {
             viewDataBinding?.edtPoint8?.setText(
-                viewModel.getEditText8()
+                viewModel.getEditText8().toString()
             )
         }
         if (viewModel.getEditText10()?.isNotEmpty() == true) {
@@ -261,7 +264,11 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     private fun setEditTextValue(data: CreateChallanResponse?) {
         viewModel.setEditText6(data?.nameAndLocation)
         viewModel.setEditText7(data?.typesOfProduct)
-        viewModel.setEditText8(data?.quantityAmount)
+        val floatValue = data?.quantityDispatched?.toFloatOrNull()
+        if (floatValue != null) {
+            val quantityDispatched = floatValue.toInt()
+            viewModel.setEditText8(quantityDispatched)
+        }
         viewModel.setEditText10(data?.routeSource)
         viewModel.setEdit2Text10(data?.routeDesignation)
         viewModel.setEditText14(data?.nameAndAddress)

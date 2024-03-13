@@ -101,11 +101,11 @@ class DashBoardRepository(
         return sharedPreference.getEditText7()
     }
 
-    fun setEditText8(text: String?) {
+    fun setEditText8(text: Int?) {
         text?.let { sharedPreference.setEditText8(text) }
     }
 
-    fun getEditText8(): String? {
+    fun getEditText8(): Int? {
         return sharedPreference.getEditText8()
     }
 
@@ -116,6 +116,7 @@ class DashBoardRepository(
     fun getEditText10(): String? {
         return sharedPreference.getEditText10()
     }
+
     fun setEdit2Text10(text: String?) {
         text?.let { sharedPreference.setEdit2Text10(text) }
     }

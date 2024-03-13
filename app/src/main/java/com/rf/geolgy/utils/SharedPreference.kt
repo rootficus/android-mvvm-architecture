@@ -98,12 +98,12 @@ class SharedPreference(context: Context) {
         return pref.getString(EDIT_TEXT_7, "")
     }
 
-    fun setEditText8(token: String) {
-        pref.edit().putString(EDIT_TEXT_8, token).apply()
+    fun setEditText8(token: Int) {
+        pref.edit().putInt(EDIT_TEXT_8, token).apply()
     }
 
-    fun getEditText8(): String? {
-        return pref.getString(EDIT_TEXT_8, "")
+    fun getEditText8(): Int {
+        return pref.getInt(EDIT_TEXT_8, 0)
     }
 
     fun setEditText10(token: String) {
@@ -113,6 +113,7 @@ class SharedPreference(context: Context) {
     fun getEditText10(): String? {
         return pref.getString(EDIT_TEXT_10, "")
     }
+
     fun setEdit2Text10(token: String) {
         pref.edit().putString(EDIT2_TEXT_10, token).apply()
     }

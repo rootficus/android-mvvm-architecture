@@ -90,11 +90,11 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
         return dashBoardRepository.getEditText7()
     }
 
-    fun setEditText8(text: String?) {
+    fun setEditText8(text: Int?) {
         text?.let { dashBoardRepository.setEditText8(text) }
     }
 
-    fun getEditText8(): String? {
+    fun getEditText8(): Int? {
         return dashBoardRepository.getEditText8()
     }
 
