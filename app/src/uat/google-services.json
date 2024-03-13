@@ -1,40 +1,21 @@
 {
   "project_info": {
-    "project_number": "784912703953",
-    "project_id": "fionpay-uat",
-    "storage_bucket": "fionpay-uat.appspot.com"
+    "project_number": "845395569506",
+    "project_id": "basicsidenav",
+    "storage_bucket": "basicsidenav.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:784912703953:android:97071d0eae45098b8400f0",
+        "mobilesdk_app_id": "1:845395569506:android:ac4f3b334edaccc2ba5a3b",
         "android_client_info": {
-          "package_name": "com.fionpay.agent"
+          "package_name": "com.rf.tiffinService"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDrwngNUPGKMTzWEhubitsFsVbdT6YAzig"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:784912703953:android:240d6d9cb18ca1898400f0",
-        "android_client_info": {
-          "package_name": "com.fionpay.modem"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDrwngNUPGKMTzWEhubitsFsVbdT6YAzig"
+          "current_key": "AIzaSyDwdqxfFUf4QyVz427fjgeWMc3X55rVieA"
         }
       ],
       "services": {

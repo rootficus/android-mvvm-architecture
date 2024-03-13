@@ -268,8 +268,8 @@
     <string name="navigation_drawer_close">close</string>
     <string name="Welcome">Welcome</string>
     <string name="enter_the_code">Enter the code</string>
-    <string name="We_sent_you_a_code">We sent you a code</string>
-    <string name="Resend_code_in">Resend code in</string>
+    <string name="We_sent_you_a_code_on">We sent you a code on</string>
+    <string name="Resend_code_in">Resend code in </string>
     <string name="Resend_via_sms">Resend via SMS</string>
     <string name="resend_via_whatsapp">Resend via Whatsapp</string>
     <string name="validate">Validate</string>

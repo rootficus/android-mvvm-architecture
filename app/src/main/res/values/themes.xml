@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.baseSideNav" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.tiffinService" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
@@ -12,7 +12,7 @@
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="color">@android:color/black</item>
     </style>
-    <!-- <style name="Theme.baseSideNav" parent="Base.Theme.baseSideNav" />-->
+    <!-- <style name="Theme.tiffinService" parent="Base.Theme.tiffinService" />-->
 
     <style name="CustomCheckbox02" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
         <item name="android:button">@drawable/custom_checkbox</item>

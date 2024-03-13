@@ -6,7 +6,7 @@
 
         <variable
             name="dashBoardViewModel"
-            type="com.rf.baseSideNav.ui.main.viewmodel.DashBoardViewModel" />
+            type="com.rf.tiffinService.ui.main.viewmodel.DashBoardViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="SETTINGS - No data found"
-            android:textSize="25dp"/>
+            android:textSize="20sp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -6,7 +6,7 @@
 
         <variable
             name="splashModel"
-            type="com.rf.baseSideNav.ui.main.viewmodel.SignInViewModel" />
+            type="com.rf.tiffinService.ui.main.viewmodel.SignInViewModel" />
     </data>
 
 

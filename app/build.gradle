@@ -7,12 +7,12 @@ plugins {
 }
 
 android {
-    namespace 'com.rf.baseSideNav'
+    namespace 'com.rf.tiffinService'
     compileSdk 34
 
     defaultConfig {
         final BUILD_DATE = new Date().format('dd-MM-YYYY')
-        applicationId "com.rf.baseSideNav"
+        applicationId "com.rf.tiffinService"
         minSdk 26
         //noinspection OldTargetApi
         targetSdk 34
@@ -126,6 +126,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging-ktx:23.4.1'
     implementation 'androidx.compose.ui:ui-graphics-android:1.6.2'
     implementation 'com.google.firebase:firebase-auth:22.3.1'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.10.3'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -165,6 +166,7 @@ dependencies {
 
     implementation(platform("com.google.firebase:firebase-bom:32.7.3"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-firestore:22.0.1")
 
 
 

@@ -5,7 +5,7 @@
 
         <variable
             name="signInModel"
-            type="com.rf.baseSideNav.ui.main.viewmodel.SignInViewModel" />
+            type="com.rf.tiffinService.ui.main.viewmodel.SignInViewModel" />
     </data>
 
     <ScrollView
@@ -54,15 +54,27 @@
                 android:paddingVertical="5dp"/>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/subHeadingTxt"
-                android:text="@string/We_sent_you_a_code"
+                android:text="@string/We_sent_you_a_code_on"
                 android:textSize="14sp"
                 android:fontFamily="@font/roboto_medium"
                 app:layout_constraintTop_toBottomOf="@id/etOtpTxt"
                 app:layout_constraintStart_toStartOf="parent"
                 android:paddingHorizontal="8dp"
+                />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/phoneNoTxt"
+                android:text="XXXXXXXXXX"
+                android:textSize="12sp"
+                android:fontFamily="@font/roboto_medium"
+                app:layout_constraintTop_toBottomOf="@id/etOtpTxt"
+                app:layout_constraintTop_toTopOf="@id/subHeadingTxt"
+                app:layout_constraintBottom_toBottomOf="@id/subHeadingTxt"
+                app:layout_constraintStart_toEndOf="@id/subHeadingTxt"
                 />
 
             <include
@@ -79,15 +91,29 @@
 
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/text1"
                 android:text="@string/Resend_code_in"
                 android:textSize="14sp"
-                android:padding="8dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="4dp"
+                android:paddingVertical="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/etOtp"
                 android:fontFamily="@font/roboto_medium"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/timerText"
+                android:text="00:00"
+                android:textSize="14sp"
+                android:fontFamily="@font/roboto_medium"
+                app:layout_constraintTop_toBottomOf="@id/etOtp"
+                app:layout_constraintTop_toTopOf="@id/text1"
+                app:layout_constraintBottom_toBottomOf="@id/text1"
+                app:layout_constraintStart_toEndOf="@id/text1"
+                />
 
             <ImageView
                 android:layout_width="0dp"

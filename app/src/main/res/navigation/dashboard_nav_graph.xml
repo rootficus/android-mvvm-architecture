@@ -3,39 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigation_dashboard">
+    app:startDestination="@id/navigation_for_you">
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.rf.baseSideNav.ui.main.fragment.DashBoardFragment"
-        android:label="DashBoard"
-        tools:layout="@layout/fragment_dashboard">
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/navigation_signupFragment"
-        android:name="com.rf.baseSideNav.ui.main.fragment.SignUpFragment"
-        android:label="SignIn"
-        tools:layout="@layout/fragment_sign_up" />
-
-    <fragment
-        android:id="@+id/navigation_settingFragment"
-        android:name="com.rf.baseSideNav.ui.main.fragment.SettingFragment"
+        android:id="@+id/navigation_for_you"
+        android:name="com.rf.tiffinService.ui.main.fragment.ForYouFragment"
         android:label="Setting"
-        tools:layout="@layout/fragment_setting">
+        tools:layout="@layout/fragment_for_you">
+        <action
+            android:id="@+id/go_home"
+            app:destination="@+id/navigation_for_you"
+            app:popUpTo="@+id/destination_to_pop"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navigation_for_you_to_navigation_cart"
+            app:destination="@id/navigation_cart" />
 
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_forgotPassFragment"
-        android:name="com.rf.baseSideNav.ui.main.fragment.ForgotPasswordFragment"
-        android:label="ForgotPassword"
-        tools:layout="@layout/fragment_forgot_pass">
+        android:id="@+id/navigation_cart"
+        android:name="com.rf.tiffinService.ui.main.fragment.CartFragment"
+        android:label="Cart"
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/go_home"
+            app:destination="@+id/navigation_cart"
+            app:popUpTo="@+id/destination_to_pop"
+            app:popUpToInclusive="true" />
 
     </fragment>
-
-
-
 
 </navigation>

@@ -7,51 +7,55 @@
 
         <variable
             name="dashBoardViewModel"
-            type="com.rf.baseSideNav.ui.main.viewmodel.DashBoardViewModel" />
+            type="com.rf.tiffinService.ui.main.viewmodel.DashBoardViewModel" />
     </data>
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/navigation_drawer"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        android:background="@color/bgPrimaryColor">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+
+        <fragment
+            android:id="@+id/navHostOnDashBoardFragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toTopOf="@id/bottomNav"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/dashboard_nav_graph" />
+
+        <include
+            android:id="@+id/progressView"
+            layout="@layout/include_progress_bar" />
+
+        <FrameLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bgPrimaryColor">
+            android:layout_above="@+id/bottomNav"
+            />
 
-            <ImageButton
-                android:id="@+id/imgToggleButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/filter_icon"
-                android:contentDescription="Nav drawer toggle button"
-                android:onClick="toggleDrawer"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
 
-            <fragment
-                android:id="@+id/navHostOnDashBoardFragment"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:defaultNavHost="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imgToggleButton"
-                app:navGraph="@navigation/dashboard_nav_graph" />
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNav"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_alignParentBottom="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/dashboard_nav_menu"
+            android:scrollIndicators="left"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/sideNav_view"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            app:menu="@menu/dashboard_nav_menu" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.drawerlayout.widget.DrawerLayout>
 
 </layout>
