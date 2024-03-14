@@ -1,5 +1,6 @@
 package com.rf.geolgy.ui.main.activity
 
+import PdfGenerator2
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -23,7 +24,6 @@ import com.rf.geolgy.ui.main.di.DaggerDashBoardActivityComponent
 import com.rf.geolgy.ui.main.di.DashBoardActivityModule
 import com.rf.geolgy.ui.main.viewmodel.DashBoardViewModel
 import com.rf.geolgy.utils.NetworkHelper
-import com.rf.geolgy.utils.PdfGenerator
 import com.rf.geolgy.utils.SharedPreference
 import com.rf.geolgy.utils.Status
 import com.rf.geolgy.utils.Utility
@@ -112,14 +112,22 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                     validTo = validTo,
                     gstNumber = gstNumber
                 )
-                createChallanAPI(createChallanRequest, gstNumber)
+                val outputPdfPath = "output.pdf"
+                //createPdfWithFixedPosition(outputPdfPath)
+                PdfGenerator2.createPdf(this@DashBoardActivity, createChallanRequest, signInResponse.company?.licenceType)
+                //createChallanAPI(createChallanRequest, gstNumber)
             } else {
                 showMessage("Please fill all details")
             }
         }
-        PdfGenerator.createPdf(this@DashBoardActivity)
+
+
         viewDataBinding?.btnLogout?.setOnClickListener {
-            PdfGenerator.createPdf(this@DashBoardActivity)
+           /* PdfGenerator.createPdf(
+                this@DashBoardActivity,
+                createChallanRequest,
+                signInResponse.company?.licenceType
+            )*/
             //verifyLogout()
         }
     }
