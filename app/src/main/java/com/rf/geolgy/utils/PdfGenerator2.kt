@@ -3,6 +3,7 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.util.Log
 import android.widget.Toast
@@ -13,9 +14,12 @@ import com.google.zxing.EncodeHintType
 import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.QRCodeWriter
+import com.itextpdf.io.font.FontConstants
 import com.itextpdf.io.image.ImageDataFactory
 import com.itextpdf.kernel.colors.ColorConstants
 import com.itextpdf.kernel.colors.DeviceRgb
+import com.itextpdf.kernel.font.PdfFont
+import com.itextpdf.kernel.font.PdfFontFactory
 import com.itextpdf.kernel.geom.PageSize
 import com.itextpdf.kernel.geom.Rectangle
 import com.itextpdf.kernel.pdf.PdfDocument
@@ -24,13 +28,11 @@ import com.itextpdf.kernel.pdf.action.PdfAction
 import com.itextpdf.kernel.pdf.annot.PdfAnnotation
 import com.itextpdf.kernel.pdf.annot.PdfLinkAnnotation
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas
-import com.itextpdf.layout.Canvas
 import com.itextpdf.layout.Document
 import com.itextpdf.layout.element.Image
 import com.itextpdf.layout.element.Paragraph
 import com.itextpdf.layout.element.Text
 import com.itextpdf.layout.property.TextAlignment
-import com.itextpdf.layout.property.VerticalAlignment
 import com.rf.geolgy.R
 import com.rf.geolgy.data.model.request.CreateChallanRequest
 import java.io.ByteArrayOutputStream
@@ -49,17 +51,16 @@ object PdfGenerator2 {
             val pdfDocument = PdfDocument(writer)
             val document = Document(pdfDocument)
             document.setMargins(0f, 0f, 0f, 0f)
-            val paragraph = Paragraph()
             // Create a new page
             val newPage = pdfDocument.addNewPage()
+            val canvas = PdfCanvas(pdfDocument.firstPage)
 
             val rect = Rectangle(36f, 700f, 200f, 16f)
 
-            val boldFont = com.itextpdf.kernel.font.PdfFontFactory.createFont()
+            val font = PdfFontFactory.createFont()
+            val boldFont = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD)
 
-            val watermarkText = "https://geologyminingjk.gov.in/ https://geologyminingjk.gov.in/"
-            val watermark = Paragraph(watermarkText).setFontColor(ColorConstants.LIGHT_GRAY).setFontSize(12f)
-            //watermark.setFixedPosition(36f, 700f)
+            val watermarkText = "https://geologymining.jk.gov.in/ https://geologymining.jk.gov.in/"
             val link = PdfLinkAnnotation(rect)
                 .setAction(PdfAction.createURI("https://www.google.com"))
                 .setHighlightMode(PdfAnnotation.HIGHLIGHT_INVERT)
@@ -82,12 +83,16 @@ object PdfGenerator2 {
 
 // Create Color object
             val textColor = DeviceRgb(red, green, blue)
+
             // Add watermark text repeatedly from top to bottom until the entire page is covered
             while (currentPosition > 0) {
                 val watermarkParagraph = Paragraph(watermarkText)
                     .setTextAlignment(TextAlignment.CENTER)
                     .setFontColor(textColor)
-                    .setFontSize(8f)
+                    .setFontSize(12f)
+                    .setMarginTop(10f)
+                    .setMultipliedLeading(0.9f)
+                    .setCharacterSpacing(1.5f)
                 watermarkParagraph.setAction(PdfAction.createURI("https://www.google.com"))
 
                 document.showTextAligned(
@@ -100,38 +105,35 @@ object PdfGenerator2 {
                 currentPosition -= lineHeight
             }
 
-
-
-
-            //document.add(watermark)
-
-
             val govtText = "Government of Jammu Kashmir"
             val govtParagraph = Paragraph(govtText)
                 .setFont(boldFont)
-                .setFontSize( 10f)
+                .setFontSize(14f)
+                .setMarginTop(20F)
                 .setTextAlignment(TextAlignment.CENTER)
-                .setMultipliedLeading( 0.6f)
+                .setMultipliedLeading(0.9f)
 
             govtParagraph.setMarginBottom(0f)
             document.add(govtParagraph)
 
-            val departmentOf = "Department of"
+            val departmentOf = "Department of Geology $ Mining"
             val departmentParagraph = Paragraph(departmentOf)
                 .setFont(boldFont)
-                .setFontSize( 10f)
+                .setFontSize(14f)
+                .setMarginTop(5F)
                 .setTextAlignment(TextAlignment.CENTER)
-                .setMultipliedLeading(  0.6f)
+                .setMultipliedLeading(0.9f)
 
             departmentParagraph.setMarginBottom(0f)
             document.add(departmentParagraph)
 
-            val form = "Form"
+            val form = "Form 'A'"
             val formParagraph = Paragraph(form)
                 .setFont(boldFont)
-                .setFontSize( 10f)
+                .setFontSize(12f)
+                .setMarginTop(5F)
                 .setTextAlignment(TextAlignment.CENTER)
-                .setMultipliedLeading(  0.6f)
+                .setMultipliedLeading(0.9f)
             formParagraph.setMarginBottom(0f)
             document.add(formParagraph)
 
@@ -139,86 +141,200 @@ object PdfGenerator2 {
 
             val seeRuleParagraph = Paragraph(seeRule)
                 .setFont(boldFont)
-                .setFontSize( 10f)
+                .setFontSize(12f)
+                .setMarginTop(5F)
                 .setTextAlignment(TextAlignment.CENTER)
-                .setMultipliedLeading(  0.6f)
+                .setMultipliedLeading(0.9f)
             document.add(seeRuleParagraph)
 
             val seeRule2 = "of challan for dispatch of mineral and its products"
 
             val seeRule2Paragraph = Paragraph(seeRule2)
                 .setFont(boldFont)
-                .setFontSize( 10f)
+                .setFontSize(12f)
+                .setMarginTop(5F)
                 .setTextAlignment(TextAlignment.CENTER)
-                .setMultipliedLeading(  0.6f)
+                .setMultipliedLeading(0.9f)
             document.add(seeRule2Paragraph)
 
             val eChallan = "E-Challan"
 
             val eChallanParagraph = Paragraph(eChallan)
                 .setFont(boldFont)
-                .setFontSize( 10f)
+                .setFontSize(12f)
+                .setMarginTop(5F)
                 .setTextAlignment(TextAlignment.CENTER)
-                .setMultipliedLeading(  0.6f)
+                .setMultipliedLeading(0.9f)
             document.add(eChallanParagraph)
 
             val challanNumber = "Challan No. JK08Y-${request.challanNumber}"
 
             val challanParagraph = Paragraph(challanNumber)
                 .setFont(boldFont)
-                .setFontSize( 10f)
+                .setFontSize(14f)
+                .setMarginTop(8F)
                 .setTextAlignment(TextAlignment.CENTER)
-                .setMultipliedLeading(  0.6f)
+                .setMultipliedLeading(0.9f)
             document.add(challanParagraph)
 
             // Add QR code image to PDF
             val qrCodeBitmap = generateQRCode("qrText", context)
             qrCodeBitmap?.let {
                 val qrCodeImage = Image(ImageDataFactory.create(bitmapToByteArray(it)))
+                qrCodeImage.scaleToFit(75f, 75f)
                 document.add(qrCodeImage)
             }
 
             val validFromTo = "Validity from ${request.validFrom} to ${request.validTo}"
             val validFromToParagraph = Paragraph(validFromTo)
                 .setFont(boldFont)
-                .setFontSize( 10f)
+                .setFontSize(14f)
+                .setMarginTop(15F)
                 .setTextAlignment(TextAlignment.CENTER)
-                .setMultipliedLeading(  0.6f)
+                .setMultipliedLeading(0.6f)
             document.add(validFromToParagraph)
 
-            val point1 = "1. Type of mineral concessions Lease / License / Permit no. $licenceType"
-            val point1Paragraph = Paragraph(point1)
-                .setFont(boldFont)
-                .setFontSize( 10f)
-                .setMarginLeft(10F)
-                .setTextAlignment(TextAlignment.LEFT)
-                .setMultipliedLeading(  0.6f)
-            document.add(point1Paragraph)
-            val point2= "2. Name & Style of Concessionary ......................................."
+            createPoint1(document, licenceType, font, boldFont)
+            createPointTwo1(document, request, font, boldFont)
+
+            val point2 = "2. Name & Style of Concessionary ......................................."
             val point2Paragraph = Paragraph(point2)
-                .setFont(boldFont)
-                .setFontSize( 10f)
+                .setFont(font)
+                .setFontSize(12f)
                 .setMarginLeft(10F)
+                .setMarginTop(8f)
                 .setTextAlignment(TextAlignment.LEFT)
-                .setMultipliedLeading(  0.6f)
+                .setMultipliedLeading(0.9f)
             document.add(point2Paragraph)
-            val point3= "3. Location of mineral concession area ................................."
+            val point3 = "3. Location of mineral concession area ................................."
             val point3Paragraph = Paragraph(point3)
-                .setFont(boldFont)
-                .setFontSize( 10f)
+                .setFont(font)
+                .setFontSize(12f)
                 .setMarginLeft(10F)
+                .setMarginTop(6f)
                 .setTextAlignment(TextAlignment.LEFT)
-                .setMultipliedLeading(  0.6f)
+                .setMultipliedLeading(0.9f)
             document.add(point3Paragraph)
-            val point4= "4. Type of mineral Granted on mineral concessions ................................."
+            val point4 =
+                "4. Type of mineral Granted on mineral concessions ................................."
             val point4Paragraph = Paragraph(point4)
-                .setFont(boldFont)
-                .setFontSize( 10f)
+                .setFont(font)
+                .setFontSize(12f)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setMarginLeft(10F)
-                .setMultipliedLeading(  0.6f)
+                .setMarginTop(6f)
+                .setMultipliedLeading(0.9f)
             document.add(point4Paragraph)
-            // Add other content here using Paragraph and other iText elements
+            val point5 =
+                "5. Quantity of mineral granted on mineral Concessions ................................."
+            val point5Paragraph = Paragraph(point5)
+                .setFont(font)
+                .setFontSize(12f)
+                .setTextAlignment(TextAlignment.LEFT)
+                .setMarginLeft(10F)
+                .setMarginTop(8f)
+                .setMultipliedLeading(0.9f)
+            document.add(point5Paragraph)
+
+            createPoint6(document, "${request.nameAndLocation}", font, boldFont)
+
+            createPoint7(document, request.product, font, boldFont)
+
+            createPoint8(document, request.quantityDispatched, font, boldFont)
+
+            createPoint9(document, request, font, boldFont)
+
+            createPoint10(document, request, font, boldFont)
+            createPoint11(document, request, font, boldFont)
+            createPoint12(document, request, font, boldFont)
+
+            createPoint13(document, request.vehicleNo, font, boldFont)
+            createPoint14(document, request.nameAndAddress, font, boldFont)
+            createPoint15(
+                document,
+                "${request.driverName} , ${request.driverPhone}",
+                font,
+                boldFont
+            )
+
+            val pointNote =
+                "Note: The Information mentioned in e-Challan, Such as (Validity and Vehicle No.) " +
+                        "should be matched with the information mentioned in the https://geologymining.jk.gov.in/ which can be seen " +
+                        "after scanning the QR code encrypted on e-Challan."
+            val pointNoteParagraph = Paragraph(pointNote)
+                .setFont(boldFont)
+                .setFontSize(12f)
+                .setTextAlignment(TextAlignment.LEFT)
+                .setMarginLeft(10F)
+                .setMarginTop(5f)
+                .setMultipliedLeading(1.2f)
+
+            document.add(pointNoteParagraph)
+
+
+            val selfApproved = "Self Approved by Mineral Concessionary"
+            val xPosition = 25f
+            val yPosition = 20f // Adjust the Y position as needed
+
+            val selfApprovedParagraph = Paragraph(selfApproved)
+                .setFont(font)
+                .setFontSize(10f)
+                .setTextAlignment(TextAlignment.LEFT)
+
+            val bottomMargin = 105f // Adjust the bottom margin as needed
+
+            document.showTextAligned(
+                selfApprovedParagraph,
+                xPosition,
+                yPosition + bottomMargin,
+                TextAlignment.LEFT
+            )
+            val signature =
+                "Signature & Seal of Mineral Concessionary"
+            val rect2Width = pageWidth / 2
+            val signatureParagraph = Paragraph(signature)
+                .setFont(font)
+                .setFontSize(10f)
+                .setTextAlignment(TextAlignment.LEFT)
+                .setMarginTop(-15f)
+                .setMultipliedLeading(0.9f)
+
+            document.showTextAligned(
+                signatureParagraph,
+                rect2Width.plus(20f),
+                yPosition + bottomMargin,
+                TextAlignment.LEFT
+            )
+
+            val drawableId: Int =
+                R.drawable.image // Replace your_image with your drawable resource ID
+
+            // Convert drawable to Bitmap
+            val bitmap: Bitmap = drawableToBitmap(context, drawableId)
+            // Create an Image object from the Bitmap
+            val image = Image(ImageDataFactory.create(bitmapToByteArray(bitmap)))
+
+// Set position and size of the image
+            image.setFixedPosition(30f, 30f) // Adjust position as needed
+            image.scaleToFit(95f, 95f) // Adjust width and height as needed
+
+// Add the image to the document
+            document.add(image)
+
+
+            canvas.setFillColor(ColorConstants.WHITE)
+
+            // Draw the transparent rectangle
+            val rectWidth = pageWidth / 2 - 35 // Adjust as needed
+            val rectHeight = 120f // Adjust as needed
+            val rect1 = Rectangle(20f, 20f, rectWidth, rectHeight)
+            canvas.rectangle(rect1)
+            canvas.stroke()
+
+            // Repeat for the second rectangle
+            val rect2 = Rectangle(pageWidth / 2 + 10, 20f, rectWidth, rectHeight)
+            canvas.rectangle(rect2)
+            canvas.stroke()
 
             try {
                 document.close()
@@ -232,6 +348,306 @@ object PdfGenerator2 {
             // Handle the exception (e.g., log an error message)
         }
 
+    }
+
+    private fun createPoint12(document: Document, request: CreateChallanRequest, font: PdfFont?, boldFont: PdfFont?) {
+        val validFromText = Text(request.gstNumber).setFont(boldFont)
+
+        val pointTwo1 = "12. GST Bill/No. "
+        val pointTwo1Paragraph = Paragraph(pointTwo1)
+            .setFont(font)
+            .setFontSize(12f)
+            .setMarginLeft(10F)
+            .setMarginTop(8f)
+            .setTextAlignment(TextAlignment.LEFT)
+            .setMultipliedLeading(0.9f)
+
+        pointTwo1Paragraph.add(validFromText) // Add validFrom chunk
+        pointTwo1Paragraph.add(" Quantity 5.0% Amount Rs.%2 (Enclose copy of GST Invoice)")
+
+        document.add(pointTwo1Paragraph)
+    }
+
+    private fun createPoint11(document: Document, request: CreateChallanRequest, font: PdfFont?, boldFont: PdfFont?) {
+        val validFromText = Text("\$1").setFont(boldFont)
+        val validToText = Text("%2").setFont(boldFont)
+
+        val pointTwo1 = "11. Rate of Mineral GST Rs. "
+        val pointTwo1Paragraph = Paragraph(pointTwo1)
+            .setFont(font)
+            .setFontSize(12f)
+            .setMarginLeft(10F)
+            .setMarginTop(8f)
+            .setTextAlignment(TextAlignment.LEFT)
+            .setMultipliedLeading(0.9f)
+
+        pointTwo1Paragraph.add(validFromText) // Add validFrom chunk
+        pointTwo1Paragraph.add(" % Total Amount (Excluding GST and Transportation charges) Rs. ")
+        pointTwo1Paragraph.add(validToText) // Add validTo chunk
+
+        document.add(pointTwo1Paragraph)
+    }
+
+    private fun createPoint10(document: Document, request: CreateChallanRequest, font: PdfFont?, boldFont: PdfFont?) {
+        val validFromText = Text(request.routeSource).setFont(boldFont)
+        val validToText = Text(request.routeDesignation).setFont(boldFont)
+
+        val pointTwo1 = "10. Route of the Transportation- Source "
+        val pointTwo1Paragraph = Paragraph(pointTwo1)
+            .setFont(font)
+            .setFontSize(12f)
+            .setMarginLeft(10F)
+            .setMarginTop(8f)
+            .setTextAlignment(TextAlignment.LEFT)
+            .setMultipliedLeading(0.9f)
+
+        pointTwo1Paragraph.add(validFromText) // Add validFrom chunk
+        pointTwo1Paragraph.add(" Destination ")
+        pointTwo1Paragraph.add(validToText) // Add validTo chunk
+
+        document.add(pointTwo1Paragraph)
+    }
+    private fun createPoint9(document: Document, request: CreateChallanRequest, font: PdfFont?, boldFont: PdfFont?) {
+        val validFromText = Text(request.validFrom).setFont(boldFont)
+        val validToText = Text(request.validTo).setFont(boldFont)
+
+        val pointTwo1 = "9. DATE & TIME of dispatch  "
+        val pointTwo1Paragraph = Paragraph(pointTwo1)
+            .setFont(font)
+            .setFontSize(12f)
+            .setMarginLeft(10F)
+            .setMarginTop(8f)
+            .setTextAlignment(TextAlignment.LEFT)
+            .setMultipliedLeading(0.9f)
+
+        pointTwo1Paragraph.add(validFromText) // Add validFrom chunk
+        pointTwo1Paragraph.add(" to ")
+        pointTwo1Paragraph.add(validToText) // Add validTo chunk
+
+        document.add(pointTwo1Paragraph)
+    }
+
+    private fun createPoint6(
+        document: Document,
+        nameAndLocation: String,
+        font: PdfFont?,
+        boldFont: PdfFont?
+    ) {
+        val point1 = "6. Name & Location of Stone crusher Unit and Holder "
+        val licenceTypeIndex = point1.length // Start index for the licence type
+
+
+        val part1 = point1.substring(0, licenceTypeIndex)
+        val part3 = point1.substring(licenceTypeIndex)
+
+        val point7Paragraph = Paragraph()
+            .setFont(font)
+            .setFontSize(12f)
+            .setMarginLeft(10F)
+            .setMarginTop(8f)
+            .setTextAlignment(TextAlignment.LEFT)
+            .setMultipliedLeading(0.9f)
+
+        point7Paragraph.add(part1)
+        point7Paragraph.add(Text(nameAndLocation).setFont(boldFont))
+        point7Paragraph.add(part3)
+
+        document.add(point7Paragraph)
+    }
+
+    private fun createPointTwo1(
+        document: Document,
+        request: CreateChallanRequest,
+        font: PdfFont?,
+        boldFont: PdfFont?
+    ) {
+        val validFromText = Text(request.validFrom).setFont(boldFont)
+        val validToText = Text(request.validTo).setFont(boldFont)
+
+        val pointTwo1 = "Issuing date "
+        val pointTwo1Paragraph = Paragraph(pointTwo1)
+            .setFont(font)
+            .setFontSize(12f)
+            .setMarginLeft(24F)
+            .setMarginTop(8f)
+            .setTextAlignment(TextAlignment.LEFT)
+            .setMultipliedLeading(0.9f)
+
+        pointTwo1Paragraph.add(validFromText) // Add validFrom chunk
+        pointTwo1Paragraph.add(" Valid upto ")
+        pointTwo1Paragraph.add(validToText) // Add validTo chunk
+
+        document.add(pointTwo1Paragraph)
+
+    }
+
+    private fun createPoint15(
+        document: Document,
+        nameNumber: String,
+        font: PdfFont?,
+        boldFont: PdfFont?
+    ) {
+        val point1 = "15. Name & Phone No. of Driver "
+        val licenceTypeIndex = point1.length // Start index for the licence type
+
+
+        val part1 = point1.substring(0, licenceTypeIndex)
+        val part3 = point1.substring(licenceTypeIndex)
+
+        val point7Paragraph = Paragraph()
+            .setFont(font)
+            .setFontSize(12f)
+            .setMarginLeft(10F)
+            .setMarginTop(8f)
+            .setTextAlignment(TextAlignment.LEFT)
+            .setMultipliedLeading(0.9f)
+
+        point7Paragraph.add(part1)
+        point7Paragraph.add(Text(nameNumber).setFont(boldFont))
+        point7Paragraph.add(part3)
+
+        document.add(point7Paragraph)
+
+    }
+
+    private fun createPoint14(
+        document: Document,
+        nameAndAddress: String?,
+        font: PdfFont?,
+        boldFont: PdfFont?
+    ) {
+        val point1 = "14. Name & Address of Consignee / Buyer / Purchase "
+        val licenceTypeIndex = point1.length // Start index for the licence type
+
+
+        val part1 = point1.substring(0, licenceTypeIndex)
+        val part3 = point1.substring(licenceTypeIndex)
+
+        val point7Paragraph = Paragraph()
+            .setFont(font)
+            .setFontSize(12f)
+            .setMarginLeft(10F)
+            .setMarginTop(8f)
+            .setTextAlignment(TextAlignment.LEFT)
+            .setMultipliedLeading(0.9f)
+
+        point7Paragraph.add(part1)
+        point7Paragraph.add(Text(nameAndAddress).setFont(boldFont))
+        point7Paragraph.add(part3)
+
+        document.add(point7Paragraph)
+    }
+
+    private fun createPoint13(
+        document: Document,
+        vehicleNo: String?,
+        font: PdfFont?,
+        boldFont: PdfFont?
+    ) {
+        val point1 = "13. Vehicle No. "
+        val licenceTypeIndex = point1.length // Start index for the licence type
+
+
+        val part1 = point1.substring(0, licenceTypeIndex)
+        val part3 = point1.substring(licenceTypeIndex)
+
+        val point7Paragraph = Paragraph()
+            .setFont(font)
+            .setFontSize(12f)
+            .setMarginLeft(10F)
+            .setMarginTop(8f)
+            .setTextAlignment(TextAlignment.LEFT)
+            .setMultipliedLeading(0.9f)
+
+        point7Paragraph.add(part1)
+        point7Paragraph.add(Text(vehicleNo).setFont(boldFont))
+        point7Paragraph.add(part3)
+
+        document.add(point7Paragraph)
+    }
+
+    private fun createPoint8(
+        document: Document,
+        quantityDispatched: String?,
+        font: PdfFont?,
+        boldFont: PdfFont?
+    ) {
+        val point1 = "8. Quantity of mineral dispatched "
+        val licenceTypeIndex = point1.length // Start index for the licence type
+
+
+        val part1 = point1.substring(0, licenceTypeIndex)
+        val part3 = point1.substring(licenceTypeIndex)
+
+        val point7Paragraph = Paragraph()
+            .setFont(font)
+            .setFontSize(12f)
+            .setMarginLeft(10F)
+            .setMarginTop(8f)
+            .setTextAlignment(TextAlignment.LEFT)
+            .setMultipliedLeading(0.9f)
+
+        point7Paragraph.add(part1)
+        point7Paragraph.add(Text(quantityDispatched).setFont(boldFont))
+        point7Paragraph.add(part3)
+
+        document.add(point7Paragraph)
+    }
+
+    private fun createPoint7(
+        document: Document,
+        product: String?,
+        font: PdfFont?,
+        boldFont: PdfFont?
+    ) {
+        val point1 = "7. Type of Finished Products: "
+        val licenceTypeIndex = point1.length // Start index for the licence type
+
+
+        val part1 = point1.substring(0, licenceTypeIndex)
+        val part3 = point1.substring(licenceTypeIndex)
+
+        val point7Paragraph = Paragraph()
+            .setFont(font)
+            .setFontSize(12f)
+            .setMarginLeft(10F)
+            .setMarginTop(8f)
+            .setTextAlignment(TextAlignment.LEFT)
+            .setMultipliedLeading(0.9f)
+
+        point7Paragraph.add(part1)
+        point7Paragraph.add(Text(product).setFont(boldFont))
+        point7Paragraph.add(part3)
+
+        document.add(point7Paragraph)
+    }
+
+    private fun createPoint1(
+        document: Document,
+        licenceType: String?,
+        font: PdfFont,
+        boldFont: PdfFont
+    ) {
+        val point1 = "1. Type of mineral concessions Lease / License / Permit no. "
+        val licenceTypeIndex = point1.length // Start index for the licence type
+
+
+        val part1 = point1.substring(0, licenceTypeIndex)
+        val part3 = point1.substring(licenceTypeIndex)
+
+        val point1Paragraph = Paragraph()
+            .setFont(font)
+            .setFontSize(12f)
+            .setMarginLeft(10F)
+            .setMarginTop(8f)
+            .setTextAlignment(TextAlignment.LEFT)
+            .setMultipliedLeading(0.9f)
+
+        point1Paragraph.add(part1)
+        point1Paragraph.add(Text(licenceType).setFont(boldFont))
+        point1Paragraph.add(part3)
+
+        document.add(point1Paragraph)
     }
 
     private fun openPdfFile(context: Context, file: File) {
@@ -254,6 +670,11 @@ object PdfGenerator2 {
     fun getNextValue(addValue: Float): Float {
         currentValue += addValue
         return currentValue
+    }
+
+    // Function to convert drawable resource to Bitmap
+    fun drawableToBitmap(context: Context, drawableId: Int): Bitmap {
+        return BitmapFactory.decodeResource(context.resources, drawableId)
     }
 
     private fun bitmapToByteArray(bitmap: Bitmap): ByteArray {
