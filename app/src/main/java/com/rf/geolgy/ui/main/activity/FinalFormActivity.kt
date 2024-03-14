@@ -151,6 +151,12 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
             verifyLogout()
         }
 
+        viewDataBinding?.btnHome?.setOnClickListener {
+            viewDataBinding?.progressBar?.visibility = View.VISIBLE
+            startActivity(Intent(applicationContext, DashBoardActivity::class.java))
+            finish()
+        }
+
     }
 
     private fun showToast(message: String) {

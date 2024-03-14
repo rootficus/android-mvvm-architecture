@@ -23,7 +23,6 @@ import com.rf.geolgy.ui.main.di.DaggerDashBoardActivityComponent
 import com.rf.geolgy.ui.main.di.DashBoardActivityModule
 import com.rf.geolgy.ui.main.viewmodel.DashBoardViewModel
 import com.rf.geolgy.utils.NetworkHelper
-import com.rf.geolgy.utils.PdfGenerator
 import com.rf.geolgy.utils.SharedPreference
 import com.rf.geolgy.utils.Status
 import com.rf.geolgy.utils.Utility
@@ -117,10 +116,9 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                 showMessage("Please fill all details")
             }
         }
-        PdfGenerator.createPdf(this@DashBoardActivity)
+
         viewDataBinding?.btnLogout?.setOnClickListener {
-            PdfGenerator.createPdf(this@DashBoardActivity)
-            //verifyLogout()
+            verifyLogout()
         }
     }
 
@@ -263,7 +261,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
 
     private fun setEditTextValue(data: CreateChallanResponse?) {
         viewModel.setEditText6(data?.nameAndLocation)
-        viewModel.setEditText7(data?.typesOfProduct)
+        viewModel.setEditText7(data?.product)
         val floatValue = data?.quantityDispatched?.toFloatOrNull()
         if (floatValue != null) {
             val quantityDispatched = floatValue.toInt()
