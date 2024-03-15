@@ -43,10 +43,20 @@ import java.util.EnumMap
 object PdfGenerator2 {
 
     private var currentValue: Float = 0f
+    private var rateOfMineral: String? = ""
+    private var rateOfMineralTotal: String? = ""
 
-    fun createPdf(context: Activity, request: CreateChallanRequest, licenceType: String?) {
+    fun createPdf(
+        context: Activity,
+        request: CreateChallanRequest,
+        licenceType: String?,
+        rateOfMineral: String?,
+        rateOfMineralTotal: String?
+    ) {
         try {
-            val file = File(context.getExternalFilesDir("PDF"), "example.pdf")
+            this.rateOfMineral = rateOfMineral
+            this.rateOfMineralTotal = rateOfMineralTotal
+            val file = File(context.getExternalFilesDir("PDF"), "echallan_jk08y-${request.challanNumber}.pdf")
             val writer = PdfWriter(file)
             val pdfDocument = PdfDocument(writer)
             val document = Document(pdfDocument)
@@ -60,7 +70,7 @@ object PdfGenerator2 {
             val font = PdfFontFactory.createFont()
             val boldFont = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD)
 
-            val watermarkText = "https://geologymining.jk.gov.in/ https://geologymining.jk.gov.in/"
+            val watermarkText = "https://geologymining.jk.gov.in/  https://geologymining.jk.gov.in/"
             val link = PdfLinkAnnotation(rect)
                 .setAction(PdfAction.createURI("https://www.google.com"))
                 .setHighlightMode(PdfAnnotation.HIGHLIGHT_INVERT)
@@ -75,13 +85,12 @@ object PdfGenerator2 {
             val pageWidth = PageSize.A4.width
 
             var currentPosition = pageHeight
-            val backgroundColor = DeviceRgb(255, 255, 255) // Adjust as needed
             val colorInt = ContextCompat.getColor(context, R.color.water_mark)// Adjust as needed
             val red = Color.red(colorInt)
             val green = Color.green(colorInt)
             val blue = Color.blue(colorInt)
 
-// Create Color object
+            // Create Color object
             val textColor = DeviceRgb(red, green, blue)
 
             // Add watermark text repeatedly from top to bottom until the entire page is covered
@@ -91,7 +100,7 @@ object PdfGenerator2 {
                     .setFontColor(textColor)
                     .setFontSize(12f)
                     .setMarginTop(10f)
-                    .setMultipliedLeading(0.9f)
+                    .setMultipliedLeading(1.2f)
                     .setCharacterSpacing(1.5f)
                 watermarkParagraph.setAction(PdfAction.createURI("https://www.google.com"))
 
@@ -109,7 +118,7 @@ object PdfGenerator2 {
             val govtParagraph = Paragraph(govtText)
                 .setFont(boldFont)
                 .setFontSize(14f)
-                .setMarginTop(20F)
+                .setMarginTop(15F)
                 .setTextAlignment(TextAlignment.CENTER)
                 .setMultipliedLeading(0.9f)
 
@@ -120,7 +129,7 @@ object PdfGenerator2 {
             val departmentParagraph = Paragraph(departmentOf)
                 .setFont(boldFont)
                 .setFontSize(14f)
-                .setMarginTop(5F)
+                .setMarginTop(2F)
                 .setTextAlignment(TextAlignment.CENTER)
                 .setMultipliedLeading(0.9f)
 
@@ -152,7 +161,7 @@ object PdfGenerator2 {
             val seeRule2Paragraph = Paragraph(seeRule2)
                 .setFont(boldFont)
                 .setFontSize(12f)
-                .setMarginTop(5F)
+                .setMarginTop(0F)
                 .setTextAlignment(TextAlignment.CENTER)
                 .setMultipliedLeading(0.9f)
             document.add(seeRule2Paragraph)
@@ -181,15 +190,25 @@ object PdfGenerator2 {
             val qrCodeBitmap = generateQRCode("qrText", context)
             qrCodeBitmap?.let {
                 val qrCodeImage = Image(ImageDataFactory.create(bitmapToByteArray(it)))
-                qrCodeImage.scaleToFit(75f, 75f)
+                qrCodeImage.scaleToFit(85f, 85f)
                 document.add(qrCodeImage)
             }
+
+            val qrCode = "(QR-Code)"
+            val qrCodeParagraph = Paragraph(qrCode)
+                .setFont(font)
+                .setFontSize(8f)
+                .setMarginLeft(10F)
+                .setMarginTop(-8f)
+                .setTextAlignment(TextAlignment.LEFT)
+                .setMultipliedLeading(0.6f)
+            document.add(qrCodeParagraph)
 
             val validFromTo = "Validity from ${request.validFrom} to ${request.validTo}"
             val validFromToParagraph = Paragraph(validFromTo)
                 .setFont(boldFont)
                 .setFontSize(14f)
-                .setMarginTop(15F)
+                .setMarginTop(18F)
                 .setTextAlignment(TextAlignment.CENTER)
                 .setMultipliedLeading(0.6f)
             document.add(validFromToParagraph)
@@ -211,7 +230,7 @@ object PdfGenerator2 {
                 .setFont(font)
                 .setFontSize(12f)
                 .setMarginLeft(10F)
-                .setMarginTop(6f)
+                .setMarginTop(8f)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setMultipliedLeading(0.9f)
             document.add(point3Paragraph)
@@ -257,25 +276,65 @@ object PdfGenerator2 {
                 boldFont
             )
 
+            val xPosition = 10f
+            val yPosition = 20f // Adjust the Y position as needed
+
             val pointNote =
-                "Note: The Information mentioned in e-Challan, Such as (Validity and Vehicle No.) " +
-                        "should be matched with the information mentioned in the https://geologymining.jk.gov.in/ which can be seen " +
-                        "after scanning the QR code encrypted on e-Challan."
+                "Note: The Information mentioned in e-Challan, Such as (Validity and Vehicle No.) should be matched with the"
             val pointNoteParagraph = Paragraph(pointNote)
                 .setFont(boldFont)
-                .setFontSize(12f)
+                .setFontSize(11f)
                 .setTextAlignment(TextAlignment.LEFT)
-                .setMarginLeft(10F)
-                .setMarginTop(5f)
-                .setMultipliedLeading(1.2f)
+                .setMarginLeft(5F)
+                .setMarginTop(3f)
+                .setMultipliedLeading(1f)
 
-            document.add(pointNoteParagraph)
+
+            document.showTextAligned(
+                pointNoteParagraph,
+                xPosition,
+                yPosition + 150f,
+                TextAlignment.LEFT
+            )
+            val pointNote2 =
+                "information mentioned in the https://geologymining.jk.gov.in/ which can be seen after scanning the QR code"
+
+            val pointNote2Paragraph = Paragraph(pointNote2)
+                .setFont(boldFont)
+                .setFontSize(11f)
+                .setTextAlignment(TextAlignment.LEFT)
+                .setMarginLeft(5F)
+                .setMarginTop(3f)
+                .setMultipliedLeading(1f)
+
+
+            document.showTextAligned(
+                pointNote2Paragraph,
+                xPosition,
+                yPosition + 137f,
+                TextAlignment.LEFT
+            )
+
+            val pointNote3 = "encrypted on e-Challan."
+
+            val pointNote3Paragraph = Paragraph(pointNote3)
+                .setFont(boldFont)
+                .setFontSize(11f)
+                .setTextAlignment(TextAlignment.LEFT)
+                .setMarginLeft(5F)
+                .setMarginTop(3f)
+                .setMultipliedLeading(1f)
+
+
+            document.showTextAligned(
+                pointNote3Paragraph,
+                xPosition,
+                yPosition + 124f,
+                TextAlignment.LEFT
+            )
 
 
             val selfApproved = "Self Approved by Mineral Concessionary"
-            val xPosition = 25f
-            val yPosition = 20f // Adjust the Y position as needed
-
             val selfApprovedParagraph = Paragraph(selfApproved)
                 .setFont(font)
                 .setFontSize(10f)
@@ -285,7 +344,7 @@ object PdfGenerator2 {
 
             document.showTextAligned(
                 selfApprovedParagraph,
-                xPosition,
+                25F,
                 yPosition + bottomMargin,
                 TextAlignment.LEFT
             )
@@ -316,7 +375,7 @@ object PdfGenerator2 {
 
 // Set position and size of the image
             image.setFixedPosition(30f, 30f) // Adjust position as needed
-            image.scaleToFit(95f, 95f) // Adjust width and height as needed
+            image.scaleToFit(99f, 99f) // Adjust width and height as needed
 
 // Add the image to the document
             document.add(image)
@@ -338,7 +397,7 @@ object PdfGenerator2 {
 
             try {
                 document.close()
-                openPdfFile(context, file)
+                showPdf(context, file)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -350,7 +409,12 @@ object PdfGenerator2 {
 
     }
 
-    private fun createPoint12(document: Document, request: CreateChallanRequest, font: PdfFont?, boldFont: PdfFont?) {
+    private fun createPoint12(
+        document: Document,
+        request: CreateChallanRequest,
+        font: PdfFont?,
+        boldFont: PdfFont?
+    ) {
         val validFromText = Text(request.gstNumber).setFont(boldFont)
 
         val pointTwo1 = "12. GST Bill/No. "
@@ -368,11 +432,16 @@ object PdfGenerator2 {
         document.add(pointTwo1Paragraph)
     }
 
-    private fun createPoint11(document: Document, request: CreateChallanRequest, font: PdfFont?, boldFont: PdfFont?) {
-        val validFromText = Text("\$1").setFont(boldFont)
-        val validToText = Text("%2").setFont(boldFont)
+    private fun createPoint11(
+        document: Document,
+        request: CreateChallanRequest,
+        font: PdfFont?,
+        boldFont: PdfFont?
+    ) {
+        val rateOfMineral = Text(rateOfMineral).setFont(boldFont)
+        val rateOfMineralTotal = Text(rateOfMineralTotal).setFont(boldFont)
 
-        val pointTwo1 = "11. Rate of Mineral GST Rs. "
+        val pointTwo1 = "11. Rate of Mineral Rs."
         val pointTwo1Paragraph = Paragraph(pointTwo1)
             .setFont(font)
             .setFontSize(12f)
@@ -381,14 +450,19 @@ object PdfGenerator2 {
             .setTextAlignment(TextAlignment.LEFT)
             .setMultipliedLeading(0.9f)
 
-        pointTwo1Paragraph.add(validFromText) // Add validFrom chunk
-        pointTwo1Paragraph.add(" % Total Amount (Excluding GST and Transportation charges) Rs. ")
-        pointTwo1Paragraph.add(validToText) // Add validTo chunk
+        pointTwo1Paragraph.add(rateOfMineral) // Add validFrom chunk
+        pointTwo1Paragraph.add(" Total Amount (Excluding GST and Transportation charges) Rs.")
+        pointTwo1Paragraph.add(rateOfMineralTotal) // Add validTo chunk
 
         document.add(pointTwo1Paragraph)
     }
 
-    private fun createPoint10(document: Document, request: CreateChallanRequest, font: PdfFont?, boldFont: PdfFont?) {
+    private fun createPoint10(
+        document: Document,
+        request: CreateChallanRequest,
+        font: PdfFont?,
+        boldFont: PdfFont?
+    ) {
         val validFromText = Text(request.routeSource).setFont(boldFont)
         val validToText = Text(request.routeDesignation).setFont(boldFont)
 
@@ -407,7 +481,13 @@ object PdfGenerator2 {
 
         document.add(pointTwo1Paragraph)
     }
-    private fun createPoint9(document: Document, request: CreateChallanRequest, font: PdfFont?, boldFont: PdfFont?) {
+
+    private fun createPoint9(
+        document: Document,
+        request: CreateChallanRequest,
+        font: PdfFont?,
+        boldFont: PdfFont?
+    ) {
         val validFromText = Text(request.validFrom).setFont(boldFont)
         val validToText = Text(request.validTo).setFont(boldFont)
 
@@ -468,7 +548,7 @@ object PdfGenerator2 {
         val pointTwo1Paragraph = Paragraph(pointTwo1)
             .setFont(font)
             .setFontSize(12f)
-            .setMarginLeft(24F)
+            .setMarginLeft(10F)
             .setMarginTop(8f)
             .setTextAlignment(TextAlignment.LEFT)
             .setMultipliedLeading(0.9f)
@@ -639,7 +719,7 @@ object PdfGenerator2 {
             .setFont(font)
             .setFontSize(12f)
             .setMarginLeft(10F)
-            .setMarginTop(8f)
+            .setMarginTop(10f)
             .setTextAlignment(TextAlignment.LEFT)
             .setMultipliedLeading(0.9f)
 
@@ -704,6 +784,24 @@ object PdfGenerator2 {
             e.printStackTrace()
         }
         return null
+    }
+
+
+    private fun showPdf(context: Activity, file: File) {
+        val uri = FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
+
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.setType("application/pdf")
+        intent.putExtra(Intent.EXTRA_STREAM, uri)
+        intent.setPackage("com.whatsapp")
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        try {
+            context.startActivity(Intent.createChooser(intent, "Share PDF using"))
+        } catch (ex: ActivityNotFoundException) {
+            // Handle case where WhatsApp is not installed
+            ex.printStackTrace()
+        }
     }
 
     // Rest of the functions like generateQRCode can be reused as they are

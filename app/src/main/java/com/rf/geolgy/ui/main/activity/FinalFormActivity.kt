@@ -22,6 +22,7 @@ import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.QRCodeWriter
 import com.rf.geolgy.R
+import com.rf.geolgy.data.model.request.CreateChallanRequest
 import com.rf.geolgy.data.model.response.SignInResponse
 import com.rf.geolgy.databinding.ActivityFinalFormBinding
 import com.rf.geolgy.sdkInit.GeolgySDK
@@ -55,17 +56,19 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
     private lateinit var printWeb: WebView
     var printJob: PrintJob? = null
     var printBtnPressed = false
-    var point6 = ""
-    var point7 = ""
-    var point8 = ""
-    var point10 = ""
-    var pointTwo10 = ""
-    var point13 = ""
-    var point14 = ""
-    var point15 = ""
-    var pointTwo15 = ""
+    var nameAndLocation = ""
+    var product = ""
+    var quantityDispatched = ""
+    var routeSource = ""
+    var routeDesignation = ""
+    var vehicleNo = ""
+    var nameAndAddress = ""
+    var driverName = ""
+    var driverPhone = ""
     var challanNumber = ""
     var gstNumber = ""
+    var validFrom: String = ""
+    var validTo: String = ""
     private var printManager: PrintManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,15 +80,15 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
         val json: String? = viewModel.getSignInDataModel()
         val signInResponse: SignInResponse = gson.fromJson(json, SignInResponse::class.java)
         val intent = intent.extras
-        point6 = intent?.getString("point6").toString()
-        point7 = intent?.getString("point7").toString()
-        point8 = intent?.getString("point8").toString()
-        point10 = intent?.getString("point10").toString()
-        pointTwo10 = intent?.getString("2point10").toString()
-        point13 = intent?.getString("point13").toString()
-        point14 = intent?.getString("point14").toString()
-        point15 = intent?.getString("point15").toString()
-        pointTwo15 = intent?.getString("2point15").toString()
+        nameAndLocation = intent?.getString("point6").toString()
+        product = intent?.getString("point7").toString()
+        quantityDispatched = intent?.getString("point8").toString()
+        routeSource = intent?.getString("point10").toString()
+        routeDesignation = intent?.getString("2point10").toString()
+        vehicleNo = intent?.getString("point13").toString()
+        nameAndAddress = intent?.getString("point14").toString()
+        driverName = intent?.getString("point15").toString()
+        driverPhone = intent?.getString("2point15").toString()
         challanNumber = intent?.getString("challanNumber").toString()
         gstNumber = intent?.getString("gstNumber").toString()
 
@@ -100,7 +103,7 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
 
         val point2Text1 = "Issuing date <b>$permitStartDate</b> Valid upto <b>$permitEndDate</b>"
         val point11Text =
-            "Rate of Mineral GST <b>Rs.$rateOfMineral</b> Total Amount (Excluding GST and Transportation charges) <b>Rs.$rateOfMineralTotal</b>"
+            "Rate of Mineral <b>Rs.$rateOfMineral</b> Total Amount (Excluding GST and Transportation charges) <b>Rs.$rateOfMineralTotal</b>"
         val point12Text =
             "GST Bill/No. <b>$gstNumber</b> Quantity <b>$qualityPercentage%</b> Amount <b>Rs.$qualityAmount</b> (Enclose copy of GST Invoice)"
         viewDataBinding?.txt2Point1?.text = makeTextBold(point2Text1)
@@ -108,15 +111,15 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
         viewDataBinding?.txtPoint12?.text = makeTextBold(point12Text)
 
 
-        viewDataBinding?.edtPoint6?.text = point6
-        viewDataBinding?.edtPoint7?.text = point7
-        viewDataBinding?.edtPoint8?.text = point8
-        viewDataBinding?.edtPoint10?.text = point10
-        viewDataBinding?.edt2Point10?.text = pointTwo10
-        viewDataBinding?.edtPoint13?.text = point13
-        viewDataBinding?.edtPoint14?.text = point14
-        viewDataBinding?.edtPoint15?.text = point15
-        viewDataBinding?.edt2Point15?.text = pointTwo15
+        viewDataBinding?.edtPoint6?.text = nameAndLocation
+        viewDataBinding?.edtPoint7?.text = product
+        viewDataBinding?.edtPoint8?.text = quantityDispatched
+        viewDataBinding?.edtPoint10?.text = routeSource
+        viewDataBinding?.edt2Point10?.text = routeDesignation
+        viewDataBinding?.edtPoint13?.text = vehicleNo
+        viewDataBinding?.edtPoint14?.text = nameAndAddress
+        viewDataBinding?.edtPoint15?.text = driverName
+        viewDataBinding?.edt2Point15?.text = driverPhone
         viewDataBinding?.txtEchallanNumber?.text = getString(R.string.challan_number, challanNumber)
 
         //Generate QR Code
@@ -135,7 +138,24 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
         viewDataBinding?.webview?.loadUrl("https://geolgyminingjk.in/challan/$challanNumber")
         viewDataBinding?.webview?.visibility = View.GONE
         viewDataBinding?.btnPrint?.setOnClickListener {
-            viewDataBinding?.progressBar?.visibility = View.VISIBLE
+            val createChallanRequest = CreateChallanRequest(
+                nameAndLocation = nameAndLocation,
+                product = product,
+                quantityDispatched = quantityDispatched,
+                routeSource = routeSource,
+                routeDesignation = routeDesignation,
+                vehicleNo = vehicleNo,
+                nameAndAddress = nameAndAddress,
+                driverName = driverName,
+                driverPhone = driverPhone,
+                challanNumber = challanNumber,
+                validFrom = validFrom,
+                validTo = validTo,
+                gstNumber = gstNumber
+            )
+            PdfGenerator2.createPdf(this@FinalFormActivity, createChallanRequest, signInResponse.company?.licenceType, signInResponse?.company?.rateOfMineral, signInResponse?.company?.rateOfMineralTotal)
+
+            /*viewDataBinding?.progressBar?.visibility = View.VISIBLE
             if (printWeb != null) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     // Calling createWebPrintJob()
@@ -144,7 +164,7 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
             } else {
                 // Showing Toast message to user
                 Toast.makeText(this, "WebPage not fully loaded", Toast.LENGTH_SHORT).show();
-            }
+            }*/
         }
 
         viewDataBinding?.btnLogout?.setOnClickListener {
@@ -190,13 +210,14 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
         val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm a", Locale.getDefault())
         val calendar = Calendar.getInstance()
         val currentTime = calendar.time
+        validFrom = sdf.format(currentTime)
         calendar.add(Calendar.HOUR_OF_DAY, 3)
         val futureTime = calendar.time
+        validTo = sdf.format(futureTime)
         viewDataBinding?.txtValidity?.text =
-            "Validity from ${sdf.format(currentTime)} to ${sdf.format(futureTime)}"
+            "Validity from $validFrom to $validTo"
         viewDataBinding?.txtPoint9?.text =
-            "DATE & TIME of dispatch ${sdf.format(currentTime)} to ${sdf.format(futureTime)} (Valid upto 3 Hours)"
-
+            "DATE & TIME of dispatch $validFrom to $validTo (Valid upto 3 Hours)"
         if (printJob != null && printBtnPressed) {
             if (printJob!!.isCompleted) {
                 // Showing Toast Message

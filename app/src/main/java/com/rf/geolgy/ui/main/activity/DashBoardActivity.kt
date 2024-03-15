@@ -1,6 +1,5 @@
 package com.rf.geolgy.ui.main.activity
 
-import PdfGenerator2
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -76,7 +75,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         getEditTextValues()
         val point2Text1 = "Issuing date <b>$permitStartDate</b> Valid upto <b>$permitEndDate</b>"
         val point11Text =
-            "Rate of Mineral GST <b>Rs.$rateOfMineral</b> Total Amount (Excluding GST and Transportation charges) <b>Rs.$rateOfMineralTotal</b>"
+            "Rate of Mineral <b>Rs.$rateOfMineral</b> Total Amount (Excluding GST and Transportation charges) <b>Rs.$rateOfMineralTotal</b>"
         val point12Text =
             "GST Bill/No. <b>$gstNumber</b> Quantity <b>$qualityPercentage%</b> Amount <b>Rs.$qualityAmount</b> (Enclose copy of GST Invoice)"
         viewDataBinding?.txt2Point1?.text = makeTextBold(point2Text1)
@@ -114,8 +113,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                 )
                 val outputPdfPath = "output.pdf"
                 //createPdfWithFixedPosition(outputPdfPath)
-                PdfGenerator2.createPdf(this@DashBoardActivity, createChallanRequest, signInResponse.company?.licenceType)
-                //createChallanAPI(createChallanRequest, gstNumber)
+                createChallanAPI(createChallanRequest, gstNumber)
             } else {
                 showMessage("Please fill all details")
             }

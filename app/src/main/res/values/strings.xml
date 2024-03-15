@@ -54,7 +54,7 @@
     <string name="point10"><b>Route of the Transportation- Source</b></string>
     <string name="source">Source</string>
     <string name="destination"><b>Destination</b></string>
-    <string name="point11">Rate of Mineral GST Rs. %1$s % Total Amount (Excluding GST and Transportation charges) Rs. %2$s</string>
+    <string name="point11">Rate of Mineral Rs. %1$s Total Amount (Excluding GST and Transportation charges) Rs.%2$s</string>
     <string name="point12">GST Bill/No. <b>%1$s</b> Quantity <b>5.0</b>% Amount Rs.<b>%2$s</b> (Enclose copy of GST Invoice)</string>
     <string name="point13">Vehicle No.</string>
     <string name="pb07_2523">PB07 2523</string>
@@ -70,6 +70,7 @@
     <string name="signature_seal_of_mineral_concessionary"><![CDATA[Signature & Seal of Mineral Concessionary]]></string>
     <string name="home">Home</string>
     <string name="print">Print</string>
+    <string name="share">Share</string>
     <string name="issuing_date">Issuing date <b>%1$s</b> Valid upto %2$s</string>
     <string name="log_out">Log Out</string>
     <string name="PLEASE_ENTER_PASSWORD">Enter Password</string>
