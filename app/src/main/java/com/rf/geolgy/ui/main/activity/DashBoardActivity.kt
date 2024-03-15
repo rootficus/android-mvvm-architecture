@@ -111,8 +111,6 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                     validTo = validTo,
                     gstNumber = gstNumber
                 )
-                val outputPdfPath = "output.pdf"
-                //createPdfWithFixedPosition(outputPdfPath)
                 createChallanAPI(createChallanRequest, gstNumber)
             } else {
                 showMessage("Please fill all details")
@@ -121,12 +119,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
 
 
         viewDataBinding?.btnLogout?.setOnClickListener {
-           /* PdfGenerator.createPdf(
-                this@DashBoardActivity,
-                createChallanRequest,
-                signInResponse.company?.licenceType
-            )*/
-            //verifyLogout()
+            verifyLogout()
         }
     }
 
@@ -269,7 +262,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
 
     private fun setEditTextValue(data: CreateChallanResponse?) {
         viewModel.setEditText6(data?.nameAndLocation)
-        viewModel.setEditText7(data?.typesOfProduct)
+        viewModel.setEditText7(data?.product)
         val floatValue = data?.quantityDispatched?.toFloatOrNull()
         if (floatValue != null) {
             val quantityDispatched = floatValue.toInt()
