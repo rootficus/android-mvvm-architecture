@@ -191,8 +191,8 @@
                     android:id="@+id/edtPoint1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="5dp"
                     android:paddingHorizontal="5dp"
+                    android:paddingVertical="5dp"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     android:textStyle="bold"
@@ -324,8 +324,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:paddingVertical="5dp"
                     android:paddingHorizontal="5dp"
+                    android:paddingVertical="5dp"
                     android:text="@string/point6"
                     android:textColor="@color/black"
                     android:textSize="12sp"
@@ -336,8 +336,8 @@
                     android:id="@+id/edtPoint6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="5dp"
                     android:paddingHorizontal="5dp"
+                    android:paddingVertical="5dp"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textSize="12sp"
@@ -374,8 +374,8 @@
                     android:id="@+id/edtPoint7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="5dp"
                     android:paddingHorizontal="5dp"
+                    android:paddingVertical="5dp"
                     android:singleLine="true"
                     android:text=""
                     android:textColor="@color/black"
@@ -639,8 +639,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:paddingVertical="5dp"
                     android:paddingHorizontal="5dp"
+                    android:paddingVertical="5dp"
                     android:text="@string/point14"
                     android:textColor="@color/black"
                     android:textSize="12sp"
@@ -774,7 +774,7 @@
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="70dp"
                             android:layout_height="70dp"
-                            android:src="@drawable/image"
+                            android:src="@drawable/approved"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/txtSelfApproved" />
@@ -836,6 +836,18 @@
                     app:layout_constraintStart_toEndOf="@id/btnHome"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rightSignatureCard" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnShare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/share"
+                    android:foreground="@drawable/whatsapp_icon"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:contentDescription="Share" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnLogout"

@@ -1,5 +1,6 @@
 package com.rf.geolgy.ui.main.activity
 
+import PdfGenerator2
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -137,7 +138,7 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
         // loading the URL
         viewDataBinding?.webview?.loadUrl("https://geolgyminingjk.in/challan/$challanNumber")
         viewDataBinding?.webview?.visibility = View.GONE
-        viewDataBinding?.btnPrint?.setOnClickListener {
+        viewDataBinding?.btnShare?.setOnClickListener {
             val createChallanRequest = CreateChallanRequest(
                 nameAndLocation = nameAndLocation,
                 product = product,
@@ -153,18 +154,22 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
                 validTo = validTo,
                 gstNumber = gstNumber
             )
-            PdfGenerator2.createPdf(this@FinalFormActivity, createChallanRequest, signInResponse.company?.licenceType, signInResponse?.company?.rateOfMineral, signInResponse?.company?.rateOfMineralTotal)
+            PdfGenerator2.createPdf(
+                this@FinalFormActivity,
+                createChallanRequest,
+                signInResponse.company
+            )
 
-            /*viewDataBinding?.progressBar?.visibility = View.VISIBLE
+        }
+        viewDataBinding?.btnPrint?.setOnClickListener {
+            viewDataBinding?.progressBar?.visibility = View.VISIBLE
             if (printWeb != null) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    // Calling createWebPrintJob()
-                    printTheWebPage(printWeb);
-                }
+                // Calling createWebPrintJob()
+                printTheWebPage(printWeb);
             } else {
                 // Showing Toast message to user
                 Toast.makeText(this, "WebPage not fully loaded", Toast.LENGTH_SHORT).show();
-            }*/
+            }
         }
 
         viewDataBinding?.btnLogout?.setOnClickListener {
@@ -178,11 +183,6 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
         }
 
     }
-
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private fun printTheWebPage(webView: WebView) {

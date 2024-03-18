@@ -35,6 +35,7 @@ import com.itextpdf.layout.element.Text
 import com.itextpdf.layout.property.TextAlignment
 import com.rf.geolgy.R
 import com.rf.geolgy.data.model.request.CreateChallanRequest
+import com.rf.geolgy.data.model.response.Company
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
@@ -45,17 +46,19 @@ object PdfGenerator2 {
     private var currentValue: Float = 0f
     private var rateOfMineral: String? = ""
     private var rateOfMineralTotal: String? = ""
+    private var qualityPercentage: String? = ""
+    private var qualityAmount: String? = ""
 
     fun createPdf(
         context: Activity,
         request: CreateChallanRequest,
-        licenceType: String?,
-        rateOfMineral: String?,
-        rateOfMineralTotal: String?
+        company: Company?,
     ) {
         try {
-            this.rateOfMineral = rateOfMineral
-            this.rateOfMineralTotal = rateOfMineralTotal
+            this.rateOfMineral = company?.rateOfMineral
+            this.rateOfMineralTotal = company?.rateOfMineralTotal
+            this.qualityPercentage = company?.quantityPercentage.toString()
+            this.qualityAmount = company?.quantityAmount.toString()
             val file = File(context.getExternalFilesDir("PDF"), "echallan_jk08y-${request.challanNumber}.pdf")
             val writer = PdfWriter(file)
             val pdfDocument = PdfDocument(writer)
@@ -102,7 +105,7 @@ object PdfGenerator2 {
                     .setMarginTop(10f)
                     .setMultipliedLeading(1.2f)
                     .setCharacterSpacing(1.5f)
-                watermarkParagraph.setAction(PdfAction.createURI("https://www.google.com"))
+                watermarkParagraph.setAction(PdfAction.createURI("https://geologymining.jk.gov.in/"))
 
                 document.showTextAligned(
                     watermarkParagraph,
@@ -198,7 +201,7 @@ object PdfGenerator2 {
             val qrCodeParagraph = Paragraph(qrCode)
                 .setFont(font)
                 .setFontSize(8f)
-                .setMarginLeft(10F)
+                .setMarginLeft(14F)
                 .setMarginTop(-8f)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setMultipliedLeading(0.6f)
@@ -213,7 +216,7 @@ object PdfGenerator2 {
                 .setMultipliedLeading(0.6f)
             document.add(validFromToParagraph)
 
-            createPoint1(document, licenceType, font, boldFont)
+            createPoint1(document, company?.licenceType, font, boldFont)
             createPointTwo1(document, request, font, boldFont)
 
             val point2 = "2. Name & Style of Concessionary ......................................."
@@ -340,11 +343,11 @@ object PdfGenerator2 {
                 .setFontSize(10f)
                 .setTextAlignment(TextAlignment.LEFT)
 
-            val bottomMargin = 105f // Adjust the bottom margin as needed
+            val bottomMargin = 100f // Adjust the bottom margin as needed
 
             document.showTextAligned(
                 selfApprovedParagraph,
-                25F,
+                30F,
                 yPosition + bottomMargin,
                 TextAlignment.LEFT
             )
@@ -355,18 +358,18 @@ object PdfGenerator2 {
                 .setFont(font)
                 .setFontSize(10f)
                 .setTextAlignment(TextAlignment.LEFT)
-                .setMarginTop(-15f)
+                .setMarginTop(-20f)
                 .setMultipliedLeading(0.9f)
 
             document.showTextAligned(
                 signatureParagraph,
-                rect2Width.plus(20f),
+                rect2Width.plus(25f),
                 yPosition + bottomMargin,
                 TextAlignment.LEFT
             )
 
             val drawableId: Int =
-                R.drawable.image // Replace your_image with your drawable resource ID
+                R.drawable.approved // Replace your_image with your drawable resource ID
 
             // Convert drawable to Bitmap
             val bitmap: Bitmap = drawableToBitmap(context, drawableId)
@@ -375,7 +378,7 @@ object PdfGenerator2 {
 
 // Set position and size of the image
             image.setFixedPosition(30f, 30f) // Adjust position as needed
-            image.scaleToFit(99f, 99f) // Adjust width and height as needed
+            image.scaleToFit(95f, 95f) // Adjust width and height as needed
 
 // Add the image to the document
             document.add(image)
@@ -397,7 +400,8 @@ object PdfGenerator2 {
 
             try {
                 document.close()
-                showPdf(context, file)
+                openPdfFile(context, file)
+                //showPdf(context, file)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -415,7 +419,9 @@ object PdfGenerator2 {
         font: PdfFont?,
         boldFont: PdfFont?
     ) {
-        val validFromText = Text(request.gstNumber).setFont(boldFont)
+        val gstNumber = Text(request.gstNumber).setFont(boldFont)
+        val qualityPercentage = Text(qualityPercentage).setFont(boldFont)
+        val qualityAmount = Text(qualityAmount).setFont(boldFont)
 
         val pointTwo1 = "12. GST Bill/No. "
         val pointTwo1Paragraph = Paragraph(pointTwo1)
@@ -426,8 +432,12 @@ object PdfGenerator2 {
             .setTextAlignment(TextAlignment.LEFT)
             .setMultipliedLeading(0.9f)
 
-        pointTwo1Paragraph.add(validFromText) // Add validFrom chunk
-        pointTwo1Paragraph.add(" Quantity 5.0% Amount Rs.%2 (Enclose copy of GST Invoice)")
+        pointTwo1Paragraph.add(gstNumber) // Add validFrom chunk
+        pointTwo1Paragraph.add(" Quantity ")
+        pointTwo1Paragraph.add(qualityPercentage)
+        pointTwo1Paragraph.add("% Amount Rs.")
+        pointTwo1Paragraph.add(qualityAmount)
+        pointTwo1Paragraph.add(" (Enclose copy of GST Invoice)")
 
         document.add(pointTwo1Paragraph)
     }

@@ -71,7 +71,6 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
 
         val storedSignList = getLoginList()
         items.addAll(storedSignList)
-        val icons = intArrayOf(R.drawable.online, R.drawable.offline, R.drawable.pause)
 
         // Create and set custom adapter
         if (items.isEmpty()) {
@@ -80,7 +79,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             mDataBinding.spinner.visibility = View.VISIBLE
         }
         // Create and set custom adapter
-        val adapter = CustomSpinnerAdapter(requireActivity(), items, icons)
+        val adapter = CustomSpinnerAdapter(requireActivity(), items)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         mDataBinding.spinner.adapter = adapter
         mDataBinding.spinner.onItemSelectedListener =

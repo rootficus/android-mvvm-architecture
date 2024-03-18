@@ -336,7 +336,6 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="5dp"
                     android:paddingVertical="5dp"
-                    android:paddingHorizontal="5dp"
                     android:singleLine="true"
                     android:textColor="@color/black"
                     android:textSize="14sp"
@@ -640,7 +639,6 @@
                     android:layout_marginTop="5dp"
                     android:paddingHorizontal="5dp"
                     android:paddingVertical="5dp"
-                    android:paddingHorizontal="5dp"
                     android:text="@string/point14"
                     android:textColor="@color/black"
                     android:textSize="14sp"
@@ -775,7 +773,7 @@
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:src="@drawable/image"
+                            android:src="@drawable/approved"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/txtSelfApproved" />
@@ -821,6 +819,19 @@
                     android:visibility="visible"
                     app:layout_constraintEnd_toStartOf="@id/btnPrint"
                     app:layout_constraintTop_toBottomOf="@id/rightSignatureCard" />
+
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnShare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/share"
+                    android:foreground="@drawable/whatsapp_icon"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:contentDescription="Share" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnPrint"

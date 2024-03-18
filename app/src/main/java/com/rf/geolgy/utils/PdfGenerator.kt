@@ -298,7 +298,7 @@ object PdfGenerator {
         canvas.drawRect(destRect2, strokePaint)
 
         // Load the image from drawable resources
-        val bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.image)
+        val bitmap = BitmapFactory.decodeResource(context.resources, R.drawable.approved)
         bitmap?.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
 
         val destRectImage = Rect(30, 735, 110, 810)

@@ -14,7 +14,6 @@ import com.rf.geolgy.data.model.User
 class CustomSpinnerAdapter(
     context: Context,
     private val items: List<User>,
-    private val icons: IntArray
 ) : ArrayAdapter<User>(context, R.layout.custom_spinner_item, items) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -35,7 +34,6 @@ class CustomSpinnerAdapter(
         val imageView = itemView.findViewById<ImageView>(R.id.spinner_icon)
 
         textView.text = items[position].name
-        imageView.setImageResource(icons[position])
 
         return itemView
     }
