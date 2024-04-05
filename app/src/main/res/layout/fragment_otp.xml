@@ -5,13 +5,14 @@
 
         <variable
             name="signInModel"
-            type="com.rf.tiffinService.ui.main.viewmodel.SignInViewModel" />
+            type="com.rf.macgyver.ui.main.viewmodel.SignInViewModel" />
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:background="#041212">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,11 +34,12 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/welcomeTxt"
                 android:text="@string/Welcome"
-                android:textSize="14sp"
+                android:textSize="15sp"
+                android:textColor="@color/white"
                 android:fontFamily="@font/roboto_medium"
                 app:layout_constraintTop_toBottomOf="@id/arrowImg"
                 app:layout_constraintStart_toStartOf="parent"
-                android:padding="8dp"
+                android:padding="6dp"
                 />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -46,6 +48,7 @@
                 android:id="@+id/etOtpTxt"
                 android:text="@string/enter_the_code"
                 android:textSize="18sp"
+                android:textColor="@color/white"
                 android:fontFamily="@font/roboto_medium"
                 android:textStyle="bold"
                 app:layout_constraintTop_toBottomOf="@id/welcomeTxt"
@@ -58,7 +61,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/subHeadingTxt"
                 android:text="@string/We_sent_you_a_code_on"
+                android:textColor="#7f9391"
                 android:textSize="14sp"
+                android:padding="6dp"
                 android:fontFamily="@font/roboto_medium"
                 app:layout_constraintTop_toBottomOf="@id/etOtpTxt"
                 app:layout_constraintStart_toStartOf="parent"
@@ -69,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/phoneNoTxt"
                 android:text="XXXXXXXXXX"
+                android:textColor="#7f9391"
                 android:textSize="12sp"
                 android:fontFamily="@font/roboto_medium"
                 app:layout_constraintTop_toBottomOf="@id/etOtpTxt"
@@ -96,6 +102,7 @@
                 android:id="@+id/text1"
                 android:text="@string/Resend_code_in"
                 android:textSize="14sp"
+                android:textColor="#7f9391"
                 android:paddingStart="8dp"
                 android:paddingEnd="4dp"
                 android:paddingVertical="8dp"
@@ -108,6 +115,7 @@
                 android:id="@+id/timerText"
                 android:text="00:00"
                 android:textSize="14sp"
+                android:textColor="@color/white"
                 android:fontFamily="@font/roboto_medium"
                 app:layout_constraintTop_toBottomOf="@id/etOtp"
                 app:layout_constraintTop_toTopOf="@id/text1"
@@ -130,7 +138,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/resendCodeTxt"
                 android:text="@string/Resend_via_sms"
-                android:textSize="16sp"
+                android:textColor="#165343"
+                android:textStyle="bold"
+                android:textSize="13sp"
                 app:layout_constraintTop_toBottomOf="@id/text1"
                 app:layout_constraintTop_toTopOf="@id/msgImg"
                 app:layout_constraintBottom_toBottomOf="@id/msgImg"
@@ -152,8 +162,10 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/resendCodeTxt1"
                 android:text="@string/resend_via_whatsapp"
-                android:textSize="14sp"
+                android:textSize="13sp"
+                android:textStyle="bold"
                 android:padding="10dp"
+                android:textColor="#165343"
                 app:layout_constraintTop_toBottomOf="@id/msgImg"
                 app:layout_constraintTop_toTopOf="@id/whatsappMsgImg"
                 app:layout_constraintBottom_toBottomOf="@id/whatsappMsgImg"
@@ -165,11 +177,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="12dp"
-                android:background="@drawable/btn_inactive_back"
-                android:backgroundTint="@color/textColor"
+                android:background="#20e7a6"
+                android:backgroundTint="#20e7a6"
                 android:text="@string/validate"
                 android:textSize="14sp"
-                android:textColor="@color/sigInButtonTextColor"
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"

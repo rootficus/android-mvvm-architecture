@@ -224,14 +224,6 @@
     <string name="apply">Apply</string>
     <string name="used">Used</string>
     <string name="upload_your_profile_picture">Upload your profile picture</string>
-    <string name="enter_full_name">Enter full name</string>
-    <string name="total_balance">Total Balance :</string>
-    <string name="bank_name_1">Bank Name 1</string>
-    <string name="not_linked">Not Linked</string>
-    <string name="dot">...</string>
-    <string name="unblocked">Unblocked</string>
-    <string name="logged_in">Logged In</string>
-    <string name="demo_text">Office ipsum you must be muted. Adoption open activities meat walk.</string>
     <string name="just_now">Just now</string>
     <string name="refund">Refund</string>
     <string name="agent_name">Agent Name</string>
@@ -273,4 +265,21 @@
     <string name="Resend_via_sms">Resend via SMS</string>
     <string name="resend_via_whatsapp">Resend via Whatsapp</string>
     <string name="validate">Validate</string>
+    <string name="proceed">Proceed</string>
+    <string name="bill_summary">Bill Summary</string>
+    <string name="_00000">00000</string>
+    <string name="currentDate">Date:</string>
+    <string name="xx_xx_xxxx">xx/xx/xxxx</string>
+    <string name="order_id">Order Id:</string>
+    <string name="quantity">Quantity</string>
+    <string name="login_to_your_account">Login to your Account</string>
+    <string name="username">Username</string>
+    <string name="phone_no">Phone No.</string>
+    <string name="restaurant_s_name">Restaurant\'s name</string>
+    <string name="address_">Address</string>
+    <string name="enter_restaurant_details">Enter restaurant Details</string>
+    <string name="categories">Categories</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="lunch">Lunch</string>
+    <string name="dinner">Dinner</string>
 </resources>

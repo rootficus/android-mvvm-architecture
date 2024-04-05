@@ -10,12 +10,12 @@
         android:layout_marginEnd="4dp"
         android:layout_weight="1"
         android:background="@drawable/otp_round_view"
-        android:backgroundTint="@color/sigInEditTextBackColor"
+        android:backgroundTint="#404f4c"
         android:contentDescription="@string/otp_box_1"
         android:gravity="center"
         android:inputType="number"
         android:maxLength="1"
-        android:textColor="@color/textColor"
+        android:textColor="@color/white"
         android:textSize="24sp" />
 
     <!-- OTP Box 2 -->
@@ -26,12 +26,12 @@
         android:layout_marginEnd="4dp"
         android:layout_weight="1"
         android:background="@drawable/otp_round_view"
-        android:backgroundTint="@color/sigInEditTextBackColor"
+        android:backgroundTint="#404f4c"
         android:contentDescription="@string/otp_box_2"
         android:gravity="center"
         android:inputType="number"
         android:maxLength="1"
-        android:textColor="@color/textColor"
+        android:textColor="@color/white"
         android:textSize="24sp" />
 
     <!-- OTP Box 3 -->
@@ -42,12 +42,12 @@
         android:layout_marginEnd="4dp"
         android:layout_weight="1"
         android:background="@drawable/otp_round_view"
-        android:backgroundTint="@color/sigInEditTextBackColor"
+        android:backgroundTint="#404f4c"
         android:contentDescription="@string/otp_box_3"
         android:gravity="center"
         android:inputType="number"
         android:maxLength="1"
-        android:textColor="@color/textColor"
+        android:textColor="@color/white"
         android:textSize="24sp" />
 
     <!-- OTP Box 4 -->
@@ -58,12 +58,12 @@
         android:layout_marginEnd="4dp"
         android:layout_weight="1"
         android:background="@drawable/otp_round_view"
-        android:backgroundTint="@color/sigInEditTextBackColor"
+        android:backgroundTint="#404f4c"
         android:contentDescription="@string/otp_box_4"
         android:gravity="center"
         android:inputType="number"
         android:maxLength="1"
-        android:textColor="@color/textColor"
+        android:textColor="@color/white"
         android:textSize="24sp" />
     <!-- OTP Box 5 -->
     <androidx.appcompat.widget.AppCompatEditText
@@ -73,12 +73,12 @@
         android:layout_marginEnd="4dp"
         android:layout_weight="1"
         android:background="@drawable/otp_round_view"
-        android:backgroundTint="@color/sigInEditTextBackColor"
+        android:backgroundTint="#404f4c"
         android:contentDescription="@string/otp_box_5"
         android:gravity="center"
         android:inputType="number"
         android:maxLength="1"
-        android:textColor="@color/textColor"
+        android:textColor="@color/white"
         android:textSize="24sp" />
     <!-- OTP Box 6 -->
     <androidx.appcompat.widget.AppCompatEditText
@@ -88,12 +88,12 @@
         android:layout_marginEnd="4dp"
         android:layout_weight="1"
         android:background="@drawable/otp_round_view"
-        android:backgroundTint="@color/sigInEditTextBackColor"
+        android:backgroundTint="#404f4c"
         android:contentDescription="@string/otp_box_6"
         android:gravity="center"
         android:inputType="number"
         android:maxLength="1"
-        android:textColor="@color/textColor"
+        android:textColor="@color/white"
         android:textSize="24sp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

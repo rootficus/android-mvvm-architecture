@@ -7,20 +7,46 @@
 
     <fragment
         android:id="@+id/fragment_signIn"
-        android:name="com.rf.tiffinService.ui.main.fragment.SignInFragment"
+        android:name="com.rf.macgyver.ui.main.fragment.SignInFragment"
         android:label="Fragment SignIn"
         tools:layout="@layout/fragment_sign_in">
         <action
-            android:id="@+id/action_fragment_SignIn_to_fragment_Otp"
-            app:destination="@id/fragment_Otp" />
+            android:id="@+id/action_fragment_SignIn_to_fragment_signup"
+            app:destination="@id/fragment_signup" />
+        <action
+            android:id="@+id/action_fragment_signin_to_fragment_company_info"
+            app:destination="@+id/fragment_company_info"/>
     </fragment>
 
     <fragment
-        android:id="@+id/fragment_Otp"
-        android:name="com.rf.tiffinService.ui.main.fragment.FragmentOtp"
-        android:label="Fragment Otp"
-        tools:layout="@layout/fragment_otp"/>
+        android:id="@+id/fragment_signup"
+        android:name="com.rf.macgyver.ui.main.fragment.SignUpFragment"
+        android:label="Fragment SignUp"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_fragment_signup_to_fragment_company_info"
+            app:destination="@+id/fragment_company_info"/>
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_company_info"
+        android:name="com.rf.macgyver.ui.main.fragment.CompanyInfoFragment"
+        android:label="Fragment Company Info"
+        tools:layout="@layout/fragment_company_info">
+        <action
+            android:id="@+id/action_fragment_company_info_to_fragment_start"
+            app:destination="@+id/fragment_start"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_start"
+        android:name="com.rf.macgyver.ui.main.fragment.StartFragment"
+        android:label="Fragment Start"
+        tools:layout="@layout/fragment_start">
+
+    </fragment>
 
 
 </navigation>

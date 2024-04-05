@@ -50,5 +50,8 @@
     <color name="sigInEditTextBackColor">@color/white</color>
     <color name="selected_color">#F4F4F4</color>
 
+    <color name="colorButtonPressed">#FF5733</color>
+    <color name="colorButtonNormal">#FFA500</color>
+
 
 </resources>

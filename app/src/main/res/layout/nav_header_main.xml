@@ -6,7 +6,7 @@
 
         <variable
             name="dashBoardViewModel"
-            type="com.rf.tiffinService.ui.main.viewmodel.DashBoardViewModel" />
+            type="com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="@string/dot"
+                    android:text="..."
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintLeft_toRightOf="@+id/textAgentFullName"
@@ -64,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="@string/dot"
+                    android:text="..."
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintLeft_toRightOf="@+id/textAgentPinCode"
