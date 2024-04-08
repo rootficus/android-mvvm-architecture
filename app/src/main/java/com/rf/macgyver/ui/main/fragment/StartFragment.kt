@@ -27,10 +27,10 @@ class StartFragment : BaseFragment<FragmentStartBinding>(R.layout.fragment_start
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        initializeView()
     }
 
-    private fun intializeView(){
+    private fun initializeView(){
         mDataBinding.letsStartBtn.setOnClickListener{
             val intent = Intent(requireActivity(), DashBoardActivity::class.java)
             startActivity(intent)
