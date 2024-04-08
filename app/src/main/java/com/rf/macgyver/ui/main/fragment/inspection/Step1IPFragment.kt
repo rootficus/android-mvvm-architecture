@@ -1,4 +1,4 @@
-package com.rf.macgyver.ui.main.fragment.dailyReporting
+package com.rf.macgyver.ui.main.fragment.inspection
 
 import android.os.Bundle
 import android.view.LayoutInflater

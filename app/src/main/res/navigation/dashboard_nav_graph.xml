@@ -3,48 +3,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigation_homepage">
+    app:startDestination="@id/navigation_dashboard">
 
     <fragment
-        android:id="@+id/navigation_homepage"
-        android:name="com.rf.macgyver.ui.main.fragment.HomepageFragment"
-        android:label="Setting"
-        tools:layout="@layout/fragment_homepage">
+        android:id="@+id/navigation_dashboard"
+        android:name="com.rf.macgyver.ui.main.fragment.DashBoardFragment"
+        android:label="DashBoardFragment"
+        tools:layout="@layout/fragment_dashboard">
+
         <action
-            android:id="@+id/go_home"
-            app:destination="@+id/navigation_homepage"
-            app:popUpTo="@+id/destination_to_pop"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_navigation_home_to_navigation_cart"
-            app:destination="@id/navigation_cart" />
+            android:id="@+id/action_navigation_dashboard_to_navigation_daily_report"
+            app:destination="@id/navigation_daily_report" />
 
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_cart"
-        android:name="com.rf.macgyver.ui.main.fragment.CartFragment"
-        android:label="Cart"
-        tools:layout="@layout/fragment_cart">
+        android:id="@+id/navigation_daily_report"
+        android:name="com.rf.macgyver.ui.main.fragment.dailyReporting.DailyReportingFragment"
+        android:label="DailyReportingFragment"
+        tools:layout="@layout/fragment_daily_reporting">
+
         <action
-            android:id="@+id/go_home"
-            app:destination="@+id/navigation_cart"
-            app:popUpTo="@+id/destination_to_pop"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_navigation_cart_to_navigation_payment"
-            app:destination="@+id/navigation_payment"/>
+            android:id="@+id/action_navigation_daily_report_to_navigation_step1_report"
+            app:destination="@id/navigation_step1_report" />
+
     </fragment>
     <fragment
-        android:id="@+id/navigation_payment"
-        android:name="com.rf.macgyver.ui.main.fragment.PaymentFragment"
-        android:label="Payment"
-        tools:layout="@layout/fragment_payment">
+        android:id="@+id/navigation_step1_report"
+        android:name="com.rf.macgyver.ui.main.fragment.dailyReporting.Step1DRFragment"
+        android:label="Step1DRFragment"
+        tools:layout="@layout/fragment_step1_d_r">
+
         <action
-            android:id="@+id/go_home"
-            app:destination="@+id/navigation_payment"
-            app:popUpTo="@+id/destination_to_pop"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_navigation_step1_report_to_navigation_step2_report"
+            app:destination="@id/navigation_step2_report" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_step2_report"
+        android:name="com.rf.macgyver.ui.main.fragment.dailyReporting.Step2DRFragment"
+        android:label="Step2DRFragment"
+        tools:layout="@layout/fragment_step2_d_r">
+
+        <action
+            android:id="@+id/action_navigation_step2_report_to_navigation_step3_report"
+            app:destination="@id/navigation_step3_report" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_step3_report"
+        android:name="com.rf.macgyver.ui.main.fragment.dailyReporting.Step3DRFragment"
+        android:label="Step3DRFragment"
+        tools:layout="@layout/fragment_step3_d_r">
+
     </fragment>
 
 </navigation>

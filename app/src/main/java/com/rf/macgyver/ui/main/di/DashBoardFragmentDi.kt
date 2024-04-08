@@ -8,6 +8,10 @@ import com.rf.macgyver.sdkInit.di.AppComponent
 import com.rf.macgyver.ui.base.BaseFragmentModule
 import com.rf.macgyver.ui.base.BaseViewModelFactory
 import com.rf.macgyver.ui.main.fragment.DashBoardFragment
+import com.rf.macgyver.ui.main.fragment.dailyReporting.DailyReportingFragment
+import com.rf.macgyver.ui.main.fragment.dailyReporting.Step1DRFragment
+import com.rf.macgyver.ui.main.fragment.dailyReporting.Step2DRFragment
+import com.rf.macgyver.ui.main.fragment.dailyReporting.Step3DRFragment
 import com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel
 import com.rf.macgyver.utils.ApplicationContext
 import com.rf.macgyver.utils.FragmentScope
@@ -53,5 +57,50 @@ interface DashBoardFragmentComponent {
 
 @Module(includes = [DashBoardFragmentModuleDi::class])
 class DashBoardFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [DailyReportingFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface DailyReportingFragmentComponent {
+    fun inject(dailyReportingFragment: DailyReportingFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class DailyReportingFragmentModule
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [Step1DRFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface Step1DRFragmentComponent {
+    fun inject(step1DRFragment: Step1DRFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class Step1DRFragmentModule
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [Step2DRFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface Step2DRFragmentComponent {
+    fun inject(step2DRFragment: Step2DRFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class Step2DRFragmentModule
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [Step3DRFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface Step3DRFragmentComponent {
+    fun inject(step2DRFragment: Step3DRFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class Step3DRFragmentModule
 
 

@@ -87,14 +87,14 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding, Any?>(R.layout.
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.navigation_homepage -> {
+            R.id.navigation_dashboard -> {
                 val bundle = Bundle()
-                jumpToAnotherFragment(R.id.navigation_homepage, bundle)
+                jumpToAnotherFragment(R.id.navigation_dashboard, bundle)
             }
 
-            R.id.navigation_cart -> {
+            R.id.navigation_account -> {
                 val bundle = Bundle()
-                jumpToAnotherFragment(R.id.navigation_cart, bundle)
+                jumpToAnotherFragment(R.id.navigation_account, bundle)
             }
             else-> return false
         }

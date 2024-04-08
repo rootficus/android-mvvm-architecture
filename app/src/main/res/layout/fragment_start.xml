@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
 
         <variable
@@ -14,85 +15,97 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:padding="10dp">
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/card"
-            app:cardCornerRadius="8dp"
-            android:elevation="15dp"
             android:layout_margin="8dp"
-            app:layout_constraintTop_toTopOf="parent"
+            android:elevation="15dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
+
             <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:paddingVertical="@dimen/_10sdp"
+                android:layout_height="match_parent">
+
                 <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/cardHeading"
-                android:text="What can HVI help you with?"
-                    android:padding="4dp"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/cardHeading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="What can HVI help you with?"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/inspectionCheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="Inspection and Complaince"
                     android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cardHeading"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardHeading" />
+
                 <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/maintainanceCheckbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/maintainanceCheckbox"
                     android:text="Maintainance and Services"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@id/inspectionCheckbox"
-                    app:layout_constraintTop_toBottomOf="@id/inspectionCheckbox"/>
+                    app:layout_constraintTop_toBottomOf="@id/inspectionCheckbox" />
+
                 <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/fuelCheckbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/fuelCheckbox"
                     android:text="Fuel Management"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@id/inspectionCheckbox"
-                    app:layout_constraintTop_toBottomOf="@id/maintainanceCheckbox"/>
+                    app:layout_constraintTop_toBottomOf="@id/maintainanceCheckbox" />
+
                 <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/safetyCheckbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/safetyCheckbox"
                     android:text="Safety"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@id/inspectionCheckbox"
-                    app:layout_constraintTop_toBottomOf="@id/fuelCheckbox"/>
+                    app:layout_constraintTop_toBottomOf="@id/fuelCheckbox" />
+
                 <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/purchasingCheckbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/purchasingCheckbox"
                     android:text="Purchasing/Inventory"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@id/inspectionCheckbox"
-                    app:layout_constraintTop_toBottomOf="@id/safetyCheckbox"/>
+                    app:layout_constraintTop_toBottomOf="@id/safetyCheckbox" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/letsStartBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/letsStartBtn"
-            android:text="Let's Start"
             android:layout_margin="12dp"
-            app:layout_constraintWidth_percent="0.8"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="Let's Start"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card"
+            app:layout_constraintWidth_percent="0.8" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import com.rf.macgyver.R
 import com.rf.macgyver.databinding.FragmentDashboardBinding
 import com.rf.macgyver.sdkInit.UtellSDK
@@ -37,15 +38,11 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
         super.onViewCreated(view, savedInstanceState)
         initializeDagger()
         initializeView()
-
-
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
     }
-
 
     private fun initializeDagger() {
         DaggerDashBoardFragmentComponent.builder().appComponent(UtellSDK.appComponent)
@@ -54,7 +51,9 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
     }
 
     private fun initializeView() {
-
+        mDataBinding.dailyCheckupCard.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_dashboard_to_navigation_daily_report)
+        }
     }
 
 }

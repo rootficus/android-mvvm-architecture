@@ -1,66 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.main.fragment.dailyReporting.InspectionFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="signInModel"
+            type="com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingTop="@dimen/_10sdp">
+
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/backArrowBtn"
-            android:src="@drawable/vector__6_"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="30dp"
+            android:layout_height="18dp"
             android:layout_margin="12dp"
-            app:layout_constraintStart_toStartOf="parent"/>
+            android:src="@drawable/vector__6_"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/dailyReportingHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/dailyReportingHeading"
-            android:text="Daily Reporting"
-            android:textSize="20sp"
             android:padding="8dp"
+            android:text="Daily Reporting"
+            android:textSize="18sp"
+            android:fontFamily="@font/roboto_regular"
+            app:layout_constraintBottom_toBottomOf="@id/backArrowBtn"
             app:layout_constraintStart_toEndOf="@id/backArrowBtn"
-            app:layout_constraintTop_toTopOf="@id/backArrowBtn"
-            app:layout_constraintBottom_toBottomOf="@id/backArrowBtn"/>
+            app:layout_constraintTop_toTopOf="@id/backArrowBtn" />
 
         <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tabLayout"
-            app:layout_constraintTop_toBottomOf="@id/dailyReportingHeading"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="12dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="12dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dailyReportingHeading" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/recyclerViewId"
-            app:layout_constraintTop_toBottomOf="@id/tabLayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_margin="12dp"
-            tools:itemCount="8"
-            tools:listitem="@layout/item_daily_reporting"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/startNewButton"
-            android:text="+ Start New Inspection"
-            android:textSize="15dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tabLayout"
+            tools:itemCount="8"
+            tools:listitem="@layout/item_daily_reporting" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/startNewButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
-            app:layout_constraintWidth_percent="0.7"
-            android:background="@drawable/button_rounded_corners"/>
+            android:background="@drawable/button_rounded_corners"
+            android:fontFamily="@font/roboto_bold"
+            android:text="+ Start New Inspection"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.7" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+</layout>

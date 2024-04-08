@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.rf.macgyver.R
 import com.rf.macgyver.ui.base.BaseFragment
@@ -12,11 +13,15 @@ import com.rf.macgyver.utils.NetworkHelper
 import com.rf.macgyver.utils.SharedPreference
 import javax.inject.Inject
 import com.rf.macgyver.databinding.FragmentSignInBinding
+import com.rf.macgyver.sdkInit.UtellSDK
+import com.rf.macgyver.ui.base.BaseFragmentModule
+import com.rf.macgyver.ui.base.BaseViewModelFactory
+import com.rf.macgyver.ui.main.di.DaggerSignInFragmentComponent
+import com.rf.macgyver.ui.main.di.SignInFragmentModuleDi
+import com.rf.macgyver.ui.main.viewmodel.SignInViewModel
 
 
 class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sign_in) {
-
-    private lateinit var binding: FragmentSignInBinding
 
     @Inject
     lateinit var sharedPreference: SharedPreference
@@ -27,25 +32,23 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
     @Inject
     lateinit var networkHelper: NetworkHelper
 
-    /* @Inject
+     @Inject
     lateinit var signInViewModelFactory: BaseViewModelFactory<SignInViewModel>
     private val viewmodel: SignInViewModel by activityViewModels { signInViewModelFactory }
-    private var isPasswordVisible = false*/
+    private var isPasswordVisible = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*
-        initializeDagger()*/
+        initializeDagger()
         initializeView(view)
 
     }
 
-    /* private fun initializeDagger() {
-
+     private fun initializeDagger() {
         DaggerSignInFragmentComponent.builder().appComponent(UtellSDK.appComponent)
             .signInFragmentModuleDi(SignInFragmentModuleDi())
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
-    }*/
+    }
 
     private fun initializeView(view: View) {
         mDataBinding.loginBtn.setOnClickListener{

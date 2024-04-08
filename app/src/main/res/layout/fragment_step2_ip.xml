@@ -1,521 +1,559 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.main.fragment.dailyReporting.Step2IPFragment">
+    tools:context=".ui.main.fragment.inspection.Step2IPFragment">
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/step1Card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/step1Card"
-        android:elevation="5dp"
-        app:cardCornerRadius="8dp"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="12dp"
-        app:layout_constraintWidth_percent="0.32"
+        android:elevation="5dp"
+        app:cardCornerRadius="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.32">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/step1Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/step1Icon"
+                android:background="@drawable/small_rounded_textview"
                 android:src="@drawable/group_11"
                 android:textColor="@color/white"
-                android:background="@drawable/small_rounded_textview"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Step1Txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/Step1Txt"
                 android:text="Step 1"
                 android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="@id/step1Icon"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/step1Icon"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="@id/step1Icon" />
+
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/inspectionInfoTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/inspectionInfoTxt"
                 android:text="Inspection Info."
-                android:textSize="12sp"
                 android:textColor="#808080"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@id/step1Icon"
-                app:layout_constraintStart_toEndOf="@id/step1Icon"/>
+                app:layout_constraintStart_toEndOf="@id/step1Icon" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/step2Card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/step2Card"
+        android:layout_margin="5dp"
         android:elevation="5dp"
         app:cardCornerRadius="8dp"
-        android:layout_margin="5dp"
-        app:layout_constraintWidth_percent="0.32"
-        app:layout_constraintStart_toEndOf="@id/step1Card"
+        app:layout_constraintBottom_toBottomOf="@id/step1Card"
         app:layout_constraintEnd_toStartOf="@id/step3Card"
+        app:layout_constraintStart_toEndOf="@id/step1Card"
         app:layout_constraintTop_toTopOf="@id/step1Card"
-        app:layout_constraintBottom_toBottomOf="@id/step1Card">
+        app:layout_constraintWidth_percent="0.32">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/step2Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/step2Icon"
-                android:text="2"
-                android:textSize="22sp"
-                android:gravity="center"
-                android:textColor="@color/white"
                 android:background="@drawable/small_rounded_textview"
-                app:layout_constraintTop_toTopOf="parent"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="@color/white"
+                android:textSize="22sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Step2Txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/Step2Txt"
                 android:text="Step 2"
                 android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="@id/step2Icon"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/step2Icon"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="@id/step2Icon" />
+
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/doInspectiontxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/doInspectiontxt"
                 android:text="Do Inspection"
-                android:textSize="12sp"
                 android:textColor="#808080"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@id/step2Icon"
-                app:layout_constraintStart_toEndOf="@id/step2Icon"/>
+                app:layout_constraintStart_toEndOf="@id/step2Icon" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/step3Card"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/step3Card"
+        android:layout_margin="5dp"
         android:elevation="5dp"
         app:cardCornerRadius="8dp"
-        android:layout_margin="5dp"
-        app:layout_constraintWidth_percent="0.32"
+        app:layout_constraintBottom_toBottomOf="@id/step1Card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/step1Card"
-        app:layout_constraintBottom_toBottomOf="@id/step1Card">
+        app:layout_constraintWidth_percent="0.32">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <TextView
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/threeTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/threeTxt"
-                android:text="3"
-                android:textSize="22sp"
-                android:gravity="center"
-                android:textColor="@color/white"
                 android:background="@drawable/small_rounded_textview"
-                app:layout_constraintTop_toTopOf="parent"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="@color/white"
+                android:textSize="22sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Step3Txt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/Step3Txt"
                 android:text="Step 3"
                 android:textSize="18sp"
-                app:layout_constraintTop_toTopOf="@id/threeTxt"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/threeTxt"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="@id/threeTxt" />
+
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/summaryTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/summaryTxt"
                 android:text="Summary"
-                android:textSize="12sp"
                 android:textColor="#808080"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@id/threeTxt"
-                app:layout_constraintStart_toEndOf="@id/threeTxt"/>
+                app:layout_constraintStart_toEndOf="@id/threeTxt" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/airCompressorHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/airCompressorHeading"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="40dp"
         android:text="1. Visually Inspect Air Compressor"
         android:textSize="18sp"
-        android:layout_marginVertical="40dp"
-        android:layout_marginHorizontal="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/step1Card"/>
+        app:layout_constraintTop_toBottomOf="@id/step1Card" />
+
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/airCompressorPlusBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/airCompressorPlusBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/airCompressorHeading"
-        app:layout_constraintBottom_toBottomOf="@id/airCompressorHeading"
+        android:layout_margin="8dp"
         android:src="@drawable/vector__7_"
-        android:layout_margin="8dp"/>
-    
+        app:layout_constraintBottom_toBottomOf="@id/airCompressorHeading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/airCompressorHeading" />
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/card1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/card1"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="10dp"
         android:elevation="10dp"
         app:cardCornerRadius="8dp"
-        android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="8dp"
-        app:layout_constraintTop_toBottomOf="@id/airCompressorHeading"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/airCompressorHeading">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp">
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/card1OKtxt"
-                android:text="OK"
-                android:textColor="#979797"
-                app:layout_constraintWidth_percent="0.24"
-                android:textAlignment="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/card1FaultyTxt"
-                android:text="Faulty"
-                android:textColor="#979797"
-                app:layout_constraintWidth_percent="0.24"
-                android:textAlignment="center"
-                app:layout_constraintStart_toEndOf="@id/card1OKtxt"
-                app:layout_constraintTop_toTopOf="@id/card1OKtxt"
-                app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"/>
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/card1FaultyButOkTxt"
-                android:text="Faulty but OK"
-                android:textColor="#979797"
-                app:layout_constraintWidth_percent="0.24"
-                android:textAlignment="center"
-                app:layout_constraintStart_toEndOf="@id/card1FaultyTxt"
-                app:layout_constraintEnd_toStartOf="@id/card1NATxt"
-                app:layout_constraintTop_toTopOf="@id/card1OKtxt"
-                app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"/>
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/card1OKtxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/card1NATxt"
-                android:text="NA"
-                android:textColor="#979797"
-                app:layout_constraintWidth_percent="0.24"
+                android:text="OK"
                 android:textAlignment="center"
+                android:textColor="#979797"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.24" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/card1FaultyTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Faulty"
+                android:textAlignment="center"
+                android:textColor="#979797"
+                app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
+                app:layout_constraintStart_toEndOf="@id/card1OKtxt"
+                app:layout_constraintTop_toTopOf="@id/card1OKtxt"
+                app:layout_constraintWidth_percent="0.24" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/card1FaultyButOkTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Faulty but OK"
+                android:textAlignment="center"
+                android:textColor="#979797"
+                app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
+                app:layout_constraintEnd_toStartOf="@id/card1NATxt"
+                app:layout_constraintStart_toEndOf="@id/card1FaultyTxt"
+                app:layout_constraintTop_toTopOf="@id/card1OKtxt"
+                app:layout_constraintWidth_percent="0.24" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/card1NATxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="NA"
+                android:textAlignment="center"
+                android:textColor="#979797"
+                app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/card1FaultyButOkTxt"
                 app:layout_constraintTop_toTopOf="@id/card1OKtxt"
-                app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"/>
+                app:layout_constraintWidth_percent="0.24" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/motorBearingHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/motorBearingHeading"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="30dp"
         android:text="2. Check and Log Motor Bearing Temps"
         android:textSize="18sp"
-        android:layout_marginVertical="30dp"
-        android:layout_marginHorizontal="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card1"/>
+        app:layout_constraintTop_toBottomOf="@id/card1" />
+
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/motorBearingPlusBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/motorBearingPlusBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/motorBearingHeading"
-        app:layout_constraintBottom_toBottomOf="@id/motorBearingHeading"
+        android:layout_margin="8dp"
         android:src="@drawable/vector__7_"
-        android:layout_margin="8dp"/>
+        app:layout_constraintBottom_toBottomOf="@id/motorBearingHeading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/motorBearingHeading" />
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/card2"
-        android:elevation="10dp"
-        app:cardCornerRadius="8dp"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="10dp"
-        app:layout_constraintTop_toBottomOf="@id/motorBearingHeading"
-        app:layout_constraintStart_toStartOf="parent">
+        android:elevation="10dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/motorBearingHeading">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:id="@+id/card2OKtxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:text="OK"
-                android:textColor="#979797"
-                app:layout_constraintWidth_percent="0.24"
                 android:textAlignment="center"
+                android:textColor="#979797"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/card2FaultyTxt"
-                android:text="Faulty"
-                android:textColor="#979797"
-                app:layout_constraintWidth_percent="0.24"
-                android:textAlignment="center"
-                app:layout_constraintStart_toEndOf="@id/card2OKtxt"
-                app:layout_constraintTop_toTopOf="@id/card2OKtxt"
-                app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"/>
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/card2FaultyButOkTxt"
-                android:text="Faulty but OK"
-                android:textColor="#979797"
-                app:layout_constraintWidth_percent="0.24"
-                android:textAlignment="center"
-                app:layout_constraintStart_toEndOf="@id/card2FaultyTxt"
-                app:layout_constraintEnd_toStartOf="@id/card2NATxt"
-                app:layout_constraintTop_toTopOf="@id/card2OKtxt"
-                app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.24" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/card2FaultyTxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/card2NATxt"
-                android:text="NA"
-                android:textColor="#979797"
-                app:layout_constraintWidth_percent="0.24"
+                android:text="Faulty"
                 android:textAlignment="center"
+                android:textColor="#979797"
+                app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
+                app:layout_constraintStart_toEndOf="@id/card2OKtxt"
+                app:layout_constraintTop_toTopOf="@id/card2OKtxt"
+                app:layout_constraintWidth_percent="0.24" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/card2FaultyButOkTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Faulty but OK"
+                android:textAlignment="center"
+                android:textColor="#979797"
+                app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
+                app:layout_constraintEnd_toStartOf="@id/card2NATxt"
+                app:layout_constraintStart_toEndOf="@id/card2FaultyTxt"
+                app:layout_constraintTop_toTopOf="@id/card2OKtxt"
+                app:layout_constraintWidth_percent="0.24" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/card2NATxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="NA"
+                android:textAlignment="center"
+                android:textColor="#979797"
+                app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/card2FaultyButOkTxt"
                 app:layout_constraintTop_toTopOf="@id/card2OKtxt"
-                app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"/>
+                app:layout_constraintWidth_percent="0.24" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/inspectCouplerHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/inspectCouplerHeading"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="30dp"
         android:text="3. Inspect Coupler, Hub and Shaft Sheal"
         android:textSize="18sp"
-        android:layout_marginVertical="30dp"
-        android:layout_marginHorizontal="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card2"/>
+        app:layout_constraintTop_toBottomOf="@id/card2" />
+
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ispectCouplerPlusBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ispectCouplerPlusBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/inspectCouplerHeading"
-        app:layout_constraintBottom_toBottomOf="@id/inspectCouplerHeading"
+        android:layout_margin="8dp"
         android:src="@drawable/vector__7_"
-        android:layout_margin="8dp"/>
+        app:layout_constraintBottom_toBottomOf="@id/inspectCouplerHeading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/inspectCouplerHeading" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/card3"
-        android:elevation="10dp"
-        app:cardCornerRadius="8dp"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="10dp"
-        app:layout_constraintTop_toBottomOf="@id/inspectCouplerHeading"
-        app:layout_constraintStart_toStartOf="parent">
+        android:elevation="10dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inspectCouplerHeading">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:id="@+id/card3OKtxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:text="OK"
-                android:textColor="#979797"
-                app:layout_constraintWidth_percent="0.24"
                 android:textAlignment="center"
+                android:textColor="#979797"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/card3FaultyTxt"
-                android:text="Faulty"
-                android:textColor="#979797"
-                app:layout_constraintWidth_percent="0.24"
-                android:textAlignment="center"
-                app:layout_constraintStart_toEndOf="@id/card3OKtxt"
-                app:layout_constraintTop_toTopOf="@id/card3OKtxt"
-                app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"/>
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/card3FaultyButOkTxt"
-                android:text="Faulty but OK"
-                android:textColor="#979797"
-                app:layout_constraintWidth_percent="0.24"
-                android:textAlignment="center"
-                app:layout_constraintStart_toEndOf="@id/card3FaultyTxt"
-                app:layout_constraintEnd_toStartOf="@id/card3NATxt"
-                app:layout_constraintTop_toTopOf="@id/card3OKtxt"
-                app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.24" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/card3FaultyTxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/card3NATxt"
-                android:text="NA"
-                android:textColor="#979797"
-                app:layout_constraintWidth_percent="0.24"
+                android:text="Faulty"
                 android:textAlignment="center"
+                android:textColor="#979797"
+                app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"
+                app:layout_constraintStart_toEndOf="@id/card3OKtxt"
+                app:layout_constraintTop_toTopOf="@id/card3OKtxt"
+                app:layout_constraintWidth_percent="0.24" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/card3FaultyButOkTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Faulty but OK"
+                android:textAlignment="center"
+                android:textColor="#979797"
+                app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"
+                app:layout_constraintEnd_toStartOf="@id/card3NATxt"
+                app:layout_constraintStart_toEndOf="@id/card3FaultyTxt"
+                app:layout_constraintTop_toTopOf="@id/card3OKtxt"
+                app:layout_constraintWidth_percent="0.24" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/card3NATxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="NA"
+                android:textAlignment="center"
+                android:textColor="#979797"
+                app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/card3FaultyButOkTxt"
                 app:layout_constraintTop_toTopOf="@id/card3OKtxt"
-                app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"/>
+                app:layout_constraintWidth_percent="0.24" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/coolerTempsHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/coolerTempsHeading"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="30dp"
         android:text="2. Check and Log Motor Bearing Temps"
         android:textSize="18sp"
-        android:layout_marginVertical="30dp"
-        android:layout_marginHorizontal="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card3"/>
+        app:layout_constraintTop_toBottomOf="@id/card3" />
+
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/coolerTempsPlusBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/coolerTempsPlusBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/coolerTempsHeading"
-        app:layout_constraintBottom_toBottomOf="@id/coolerTempsHeading"
+        android:layout_margin="8dp"
         android:src="@drawable/vector__7_"
-        android:layout_margin="8dp"/>
+        app:layout_constraintBottom_toBottomOf="@id/coolerTempsHeading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/coolerTempsHeading" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/card4"
-        android:elevation="10dp"
-        app:cardCornerRadius="8dp"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="10dp"
-        app:layout_constraintTop_toBottomOf="@id/coolerTempsHeading"
-        app:layout_constraintStart_toStartOf="parent">
+        android:elevation="10dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/coolerTempsHeading">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:id="@+id/card4OKtxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:text="OK"
-                android:textColor="#979797"
-                app:layout_constraintWidth_percent="0.24"
                 android:textAlignment="center"
+                android:textColor="#979797"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/card4FaultyTxt"
-                android:text="Faulty"
-                android:textColor="#979797"
-                app:layout_constraintWidth_percent="0.24"
-                android:textAlignment="center"
-                app:layout_constraintStart_toEndOf="@id/card4OKtxt"
-                app:layout_constraintTop_toTopOf="@id/card4OKtxt"
-                app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"/>
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/card4FaultyButOkTxt"
-                android:text="Faulty but OK"
-                android:textColor="#979797"
-                app:layout_constraintWidth_percent="0.24"
-                android:textAlignment="center"
-                app:layout_constraintStart_toEndOf="@id/card4FaultyTxt"
-                app:layout_constraintEnd_toStartOf="@id/card4NATxt"
-                app:layout_constraintTop_toTopOf="@id/card4OKtxt"
-                app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.24" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/card4FaultyTxt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/card4NATxt"
-                android:text="NA"
-                android:textColor="#979797"
-                app:layout_constraintWidth_percent="0.24"
+                android:text="Faulty"
                 android:textAlignment="center"
+                android:textColor="#979797"
+                app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"
+                app:layout_constraintStart_toEndOf="@id/card4OKtxt"
+                app:layout_constraintTop_toTopOf="@id/card4OKtxt"
+                app:layout_constraintWidth_percent="0.24" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/card4FaultyButOkTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Faulty but OK"
+                android:textAlignment="center"
+                android:textColor="#979797"
+                app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"
+                app:layout_constraintEnd_toStartOf="@id/card4NATxt"
+                app:layout_constraintStart_toEndOf="@id/card4FaultyTxt"
+                app:layout_constraintTop_toTopOf="@id/card4OKtxt"
+                app:layout_constraintWidth_percent="0.24" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/card4NATxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="NA"
+                android:textAlignment="center"
+                android:textColor="#979797"
+                app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/card4FaultyButOkTxt"
                 app:layout_constraintTop_toTopOf="@id/card4OKtxt"
-                app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"/>
+                app:layout_constraintWidth_percent="0.24" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/backOrCompletedCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/backOrCompletedCard"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintWidth_percent="0.8"
         android:layout_marginBottom="50dp"
         android:elevation="12dp"
-        app:cardCornerRadius="12dp">
+        app:cardCornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.8">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="12dp">
+
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/backTxt"
-                android:text="<< Back"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Back"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/completedTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Completed>"
                 android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

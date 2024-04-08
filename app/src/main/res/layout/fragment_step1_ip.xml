@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.main.fragment.dailyReporting.Step1IPFragment">
+    tools:context=".ui.main.fragment.inspection.Step1IPFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"

@@ -68,7 +68,7 @@ class CartFragment : BaseFragment<FragmentCartBinding>(R.layout.fragment_cart) {
             }
 
         mDataBinding.ProceedBtn.setOnClickListener{
-            findNavController().navigate(R.id.action_navigation_cart_to_navigation_payment)
+            findNavController().navigate(R.id.action_fragment_company_info_to_fragment_start)
         }
     }
     private fun setAdapter(itemData: ImageData) {
