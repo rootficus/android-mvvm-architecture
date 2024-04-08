@@ -45,10 +45,16 @@
             android:isScrollContainer="false"
             android:windowSoftInputMode="adjustPan" />
         <activity
-        android:name=".ui.main.activity.CalculatorActivity"
-        android:exported="true"
-        android:isScrollContainer="false"
-        android:windowSoftInputMode="adjustPan" />
+            android:name=".ui.main.activity.CalculatorActivity"
+            android:exported="true"
+            android:isScrollContainer="false"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.main.activity.SignInActivity"
             android:exported="true"
@@ -57,11 +63,7 @@
         <activity
             android:name=".ui.main.activity.SplashActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <provider

@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/welcomeTxt"
             android:text="@string/Welcome"
-            android:layout_margin="5dp"
+            android:layout_marginHorizontal="5dp"
             app:layout_constraintStart_toEndOf="@id/profileImgId"
             app:layout_constraintTop_toTopOf="@id/profileImgId"/>
         <androidx.appcompat.widget.AppCompatTextView

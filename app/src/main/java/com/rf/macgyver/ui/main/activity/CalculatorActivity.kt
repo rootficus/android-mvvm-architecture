@@ -12,7 +12,7 @@ import net.objecthunter.exp4j.ExpressionBuilder
 
 class CalculatorActivity : BaseActivity<ActivityCalculatorUiBinding, Any?>(R.layout.activity_calculator_ui) {
 
-    private lateinit var editText: EditText
+    private lateinit var editText: TextView
 
     private lateinit var viewBinding : ActivityCalculatorUiBinding
 
@@ -52,7 +52,7 @@ class CalculatorActivity : BaseActivity<ActivityCalculatorUiBinding, Any?>(R.lay
         val delBtn = findViewById<ImageView>(R.id.deleteIconId)
         delBtn.setOnClickListener {
             var str: String = editText.text.toString()
-            if (!str.equals("")) {
+            if (str != "") {
                 str = str.substring(0, str.length - 1)
                 editText.setText(str)
             }
@@ -62,8 +62,7 @@ class CalculatorActivity : BaseActivity<ActivityCalculatorUiBinding, Any?>(R.lay
 
     private val onClickListener = View.OnClickListener { v ->
         val button = v as TextView
-        val buttonText = button.text.toString()
-        when(buttonText) {
+        when(val buttonText = button.text.toString()) {
             "C" -> editText.setText("")
             "( )" -> {val newTxt ="("+ editText.text.toString()+")"
                                      editText.setText(newTxt)}
