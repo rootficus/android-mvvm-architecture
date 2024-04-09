@@ -6,7 +6,7 @@ import com.rf.macgyver.data.model.response.SignInResponse
 import retrofit2.Call
 import retrofit2.http.*
 
-interface FionApiServices {
+interface MagApiServices {
 
     @Headers("Content-Type:application/json")
     @POST("api/v1/app/agents/login")

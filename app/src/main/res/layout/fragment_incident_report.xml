@@ -9,6 +9,7 @@
             name="signInModel"
             type="com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,10 +29,10 @@
             android:id="@+id/incidentReportHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
             android:padding="8dp"
             android:text="Incident Report"
             android:textSize="18sp"
-            android:fontFamily="@font/roboto_regular"
             app:layout_constraintBottom_toBottomOf="@id/backArrowBtn"
             app:layout_constraintStart_toEndOf="@id/backArrowBtn"
             app:layout_constraintTop_toTopOf="@id/backArrowBtn" />
@@ -64,7 +65,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </layout>

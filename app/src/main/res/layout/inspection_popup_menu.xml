@@ -1,47 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
+
     <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/viewReportId"
-        android:text="View Report"
-        android:layout_margin="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:drawableStart="@drawable/vector__10_"
-        android:drawablePadding="4dp"/>
-    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:drawableStart="@drawable/vector__10_"
+        android:drawablePadding="4dp"
+        android:text="View Report"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/shareId"
-        android:text="Share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginVertical="8dp"
         android:drawableStart="@drawable/vector__11_"
         android:drawablePadding="4dp"
-        app:layout_constraintTop_toBottomOf="@id/viewReportId"
-        app:layout_constraintStart_toStartOf="@id/viewReportId"/>
+        android:fontFamily="@font/roboto_regular"
+        android:text="Share"
+        app:layout_constraintStart_toStartOf="@id/viewReportId"
+        app:layout_constraintTop_toBottomOf="@id/viewReportId" />
+
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/correctiveActionId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/correctiveActionId"
-        android:text="Corrective Action"
+        android:layout_marginVertical="8dp"
         android:drawableStart="@drawable/vector__12_"
         android:drawablePadding="4dp"
-        android:layout_marginVertical="8dp"
-        app:layout_constraintTop_toBottomOf="@id/shareId"
-        app:layout_constraintStart_toStartOf="@id/shareId"/>
+        android:fontFamily="@font/roboto_regular"
+        android:text="Corrective Action"
+        app:layout_constraintStart_toStartOf="@id/shareId"
+        app:layout_constraintTop_toBottomOf="@id/shareId" />
+
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/deleteId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/deleteId"
-        android:text="Delete"
+        android:layout_marginVertical="8dp"
         android:drawableStart="@drawable/delete_1"
         android:drawablePadding="4dp"
-        android:layout_marginVertical="8dp"
-        app:layout_constraintTop_toBottomOf="@id/correctiveActionId"
-        app:layout_constraintStart_toStartOf="@id/correctiveActionId"/>
+        android:fontFamily="@font/roboto_regular"
+        android:text="Delete"
+        app:layout_constraintStart_toStartOf="@id/correctiveActionId"
+        app:layout_constraintTop_toBottomOf="@id/correctiveActionId" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

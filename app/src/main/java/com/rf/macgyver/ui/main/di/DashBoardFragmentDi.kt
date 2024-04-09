@@ -1,9 +1,9 @@
 package com.rf.macgyver.ui.main.di
 
 import android.content.Context
-import com.rf.macgyver.data.remote.FionApiServices
+import com.rf.macgyver.data.remote.MagApiServices
 import com.rf.macgyver.data.repository.DashBoardRepository
-import com.rf.macgyver.roomDB.FionDatabase
+import com.rf.macgyver.roomDB.MagDatabase
 import com.rf.macgyver.sdkInit.di.AppComponent
 import com.rf.macgyver.ui.base.BaseFragmentModule
 import com.rf.macgyver.ui.base.BaseViewModelFactory
@@ -35,18 +35,18 @@ class DashBoardFragmentModuleDi {
 
     @Provides
     @FragmentScope
-    fun provideApiServices(retrofit: Retrofit): FionApiServices =
-        retrofit.create(FionApiServices::class.java)
+    fun provideApiServices(retrofit: Retrofit): MagApiServices =
+        retrofit.create(MagApiServices::class.java)
 
     @Provides
     @FragmentScope
     fun provideDashBoardRepository(
-        apiServices: FionApiServices,
+        apiServices: MagApiServices,
         @ApplicationContext context: Context,
         sharedPreference: SharedPreference,
-        fionDatabase: FionDatabase
+        magDatabase: MagDatabase
     ): DashBoardRepository =
-        DashBoardRepository(apiServices, context, sharedPreference, fionDatabase)
+        DashBoardRepository(apiServices, context, sharedPreference, magDatabase)
 
     @FragmentScope
     @Provides

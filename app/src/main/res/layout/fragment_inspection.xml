@@ -10,63 +10,67 @@
             name="signInModel"
             type="com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/backArrowBtn"
-            android:src="@drawable/vector__6_"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_margin="12dp"
-            app:layout_constraintStart_toStartOf="parent"/>
-        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:src="@drawable/vector__6_"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/dailyReportingHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:padding="8dp"
             android:text="Daily Reporting"
             android:textSize="20sp"
-            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/backArrowBtn"
             app:layout_constraintStart_toEndOf="@id/backArrowBtn"
-            app:layout_constraintTop_toTopOf="@id/backArrowBtn"
-            app:layout_constraintBottom_toBottomOf="@id/backArrowBtn"/>
+            app:layout_constraintTop_toTopOf="@id/backArrowBtn" />
 
         <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tabLayout"
-            app:layout_constraintTop_toBottomOf="@id/dailyReportingHeading"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="12dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="12dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dailyReportingHeading" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/recyclerViewId"
-            app:layout_constraintTop_toBottomOf="@id/tabLayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tabLayout"
             tools:itemCount="3"
-            tools:listitem="@layout/item_inspection"/>
+            tools:listitem="@layout/item_inspection" />
+
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/startNewButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/startNewButton"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/button_rounded_corners"
             android:text="+ Start New Inspection"
             android:textSize="15dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="30dp"
-            app:layout_constraintWidth_percent="0.7"
-            android:background="@drawable/button_rounded_corners"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.7" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </layout>

@@ -1,157 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="8dp"
     android:elevation="10dp"
-    app:cardCornerRadius="8dp"
-    android:layout_margin="8dp">
+    app:cardCornerRadius="8dp">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="5dp">
+
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/reportHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/reportHeading"
+            android:fontFamily="@font/roboto_regular"
             android:text="Report#"
             android:textColor="#808080"
+            app:layout_constraintBottom_toBottomOf="@id/etReportNo."
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/etReportNo."
-            app:layout_constraintBottom_toBottomOf="@id/etReportNo."/>
+            app:layout_constraintTop_toTopOf="@id/etReportNo." />
+
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etReportNo."
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/etReportNo."
+            android:layout_margin="8dp"
             android:background="@drawable/custom_edittext"
             app:layout_constraintStart_toEndOf="@id/reportHeading"
-            android:layout_margin="8dp"
-            app:layout_constraintWidth_percent="0.6"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.6" />
+
         <View
             android:id="@+id/idView1"
             android:layout_width="0dp"
             android:layout_height="1dp"
+            android:layout_marginVertical="5dp"
             android:background="#D3D3D3"
             android:paddingHorizontal="5dp"
-            android:layout_marginVertical="5dp"
-            app:layout_constraintWidth_percent="0.75"
-            app:layout_constraintTop_toBottomOf="@id/etReportNo."
             app:layout_constraintHorizontal_bias="0.533"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etReportNo."
+            app:layout_constraintWidth_percent="0.75" />
+
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/faultContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/faultContent"
-            android:textSize="24sp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="9"
             android:textColor="#D3494E"
-            app:layout_constraintStart_toEndOf="@id/idView1"
+            android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@id/faultHeading"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="9"/>
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/faultHeading"
-                android:text="Fault"
-                android:textSize="15sp"
-                android:textColor="#808080"
-                app:layout_constraintBottom_toTopOf="@id/idView2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/idView1"/>
+            app:layout_constraintStart_toEndOf="@id/idView1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/faultHeading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Fault"
+            android:textColor="#808080"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@id/idView2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/idView1" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/vehicleHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/vehicleHeading"
+            android:fontFamily="@font/roboto_regular"
             android:text="Vehicle"
             android:textColor="#808080"
+            app:layout_constraintBottom_toBottomOf="@id/etVehicle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/etVehicle"
-            app:layout_constraintBottom_toBottomOf="@id/etVehicle"/>
+            app:layout_constraintTop_toTopOf="@id/etVehicle" />
+
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etVehicle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/etVehicle"
-            app:layout_constraintStart_toEndOf="@id/reportHeading"
-            android:background="@drawable/custom_edittext"
             android:layout_margin="8dp"
-            app:layout_constraintWidth_percent="0.6"
-            app:layout_constraintTop_toBottomOf="@id/idView1"/>
+            android:background="@drawable/custom_edittext"
+            app:layout_constraintStart_toEndOf="@id/reportHeading"
+            app:layout_constraintTop_toBottomOf="@id/idView1"
+            app:layout_constraintWidth_percent="0.6" />
+
         <View
             android:id="@+id/idView2"
             android:layout_width="match_parent"
             android:layout_height="1.5dp"
+            android:layout_marginVertical="5dp"
             android:background="#D3D3D3"
             android:paddingHorizontal="5dp"
-            android:layout_marginVertical="5dp"
-            app:layout_constraintTop_toBottomOf="@id/etVehicle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.533"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etVehicle" />
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/correctiveActionCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/correctiveActionCard"
-            app:cardCornerRadius="15dp"
             android:layout_margin="8dp"
             android:backgroundTint="#D3494E"
-            app:layout_constraintTop_toBottomOf="@id/idView2"
-            app:layout_constraintStart_toEndOf="@id/correctiveActionHeading">
+            app:cardCornerRadius="15dp"
+            app:layout_constraintStart_toEndOf="@id/correctiveActionHeading"
+            app:layout_constraintTop_toBottomOf="@id/idView2">
+
             <TextView
+                android:id="@+id/actionTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/actionTxt"
-                android:text="Not Taken"
+                android:background="@android:color/transparent"
                 android:padding="5dp"
-                android:background="@android:color/transparent"/>
+                android:text="Not Taken" />
         </androidx.cardview.widget.CardView>
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/correctiveActionHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/correctiveActionHeading"
+            android:fontFamily="@font/roboto_regular"
             android:text="Corrective Action"
             android:textColor="#808080"
-            app:layout_constraintTop_toTopOf="@id/correctiveActionCard"
             app:layout_constraintBottom_toBottomOf="@id/correctiveActionCard"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/correctiveActionCard" />
+
         <View
             android:id="@+id/idView3"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginVertical="5dp"
             android:background="#D3D3D3"
             android:paddingHorizontal="5dp"
-            android:layout_marginVertical="5dp"
-            app:layout_constraintTop_toBottomOf="@id/correctiveActionCard"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.533"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/correctiveActionCard" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/dateHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/dateHeading"
+            android:fontFamily="@font/roboto_regular"
             android:text="Date"
             android:textColor="#808080"
+            app:layout_constraintBottom_toBottomOf="@id/etDate"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/etDate"
-            app:layout_constraintBottom_toBottomOf="@id/etDate"/>
+            app:layout_constraintTop_toTopOf="@id/etDate" />
+
         <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/etDate"
-            android:background="@drawable/custom_edittext"
-            app:layout_constraintStart_toEndOf="@id/reportHeading"
             android:layout_margin="8dp"
+            android:background="@drawable/custom_edittext"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/idView3"/>
+            app:layout_constraintStart_toEndOf="@id/reportHeading"
+            app:layout_constraintTop_toBottomOf="@id/idView3" />
 
 
         <!--<androidx.appcompat.widget.AppCompatTextView
+                    android:fontFamily="@font/roboto_regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/Mtxt"
@@ -163,6 +181,7 @@
             app:layout_constraintTop_toBottomOf="@id/idView3"
             android:layout_marginTop="12dp"/>
         <androidx.appcompat.widget.AppCompatTextView
+                    android:fontFamily="@font/roboto_regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/Ttxt"
@@ -174,6 +193,7 @@
             app:layout_constraintTop_toTopOf="@id/Mtxt"
             app:layout_constraintBottom_toBottomOf="@id/Mtxt"/>
         <androidx.appcompat.widget.AppCompatTextView
+                    android:fontFamily="@font/roboto_regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/Wtxt"
@@ -185,6 +205,7 @@
             app:layout_constraintTop_toTopOf="@id/Mtxt"
             app:layout_constraintBottom_toBottomOf="@id/Mtxt"/>
         <androidx.appcompat.widget.AppCompatTextView
+                    android:fontFamily="@font/roboto_regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/Thurstxt"
@@ -196,6 +217,7 @@
             app:layout_constraintTop_toTopOf="@id/Mtxt"
             app:layout_constraintBottom_toBottomOf="@id/Mtxt"/>
         <androidx.appcompat.widget.AppCompatTextView
+                    android:fontFamily="@font/roboto_regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/Ftxt"
@@ -207,6 +229,7 @@
             app:layout_constraintTop_toTopOf="@id/Mtxt"
             app:layout_constraintBottom_toBottomOf="@id/Mtxt"/>
         <androidx.appcompat.widget.AppCompatTextView
+                    android:fontFamily="@font/roboto_regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/Sattxt"
@@ -218,6 +241,7 @@
             app:layout_constraintTop_toTopOf="@id/Mtxt"
             app:layout_constraintBottom_toBottomOf="@id/Mtxt"/>
         <androidx.appcompat.widget.AppCompatTextView
+                    android:fontFamily="@font/roboto_regular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/Sundaytxt"
@@ -241,6 +265,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
+                    android:fontFamily="@font/roboto_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/startTodayInspectionTxt"

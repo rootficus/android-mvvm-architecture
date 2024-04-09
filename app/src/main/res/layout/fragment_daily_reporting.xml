@@ -30,10 +30,10 @@
             android:id="@+id/dailyReportingHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
             android:padding="8dp"
             android:text="Daily Reporting"
             android:textSize="18sp"
-            android:fontFamily="@font/roboto_regular"
             app:layout_constraintBottom_toBottomOf="@id/backArrowBtn"
             app:layout_constraintStart_toEndOf="@id/backArrowBtn"
             app:layout_constraintTop_toTopOf="@id/backArrowBtn" />

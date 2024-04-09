@@ -11,9 +11,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@color/white"
-        android:paddingTop="@dimen/_10sdp"
-        android:layout_height="match_parent">
+        android:paddingTop="@dimen/_10sdp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileImgId"
@@ -33,8 +33,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"
             android:layout_marginStart="@dimen/_10sdp"
-            android:text="@string/Welcome"
             android:fontFamily="@font/roboto_regular"
+            android:text="@string/Welcome"
             android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@id/profileImgId"
             app:layout_constraintTop_toTopOf="@id/profileImgId" />
@@ -43,9 +43,9 @@
             android:id="@+id/nameId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
             android:text="John Duo"
             android:textSize="14sp"
-            android:fontFamily="@font/roboto_bold"
             app:layout_constraintStart_toEndOf="@id/profileImgId"
             app:layout_constraintStart_toStartOf="@id/welcomeTxt"
             app:layout_constraintTop_toBottomOf="@id/welcomeTxt" />

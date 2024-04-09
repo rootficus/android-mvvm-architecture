@@ -42,15 +42,18 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
                 <RadioGroup
+                    android:id="@+id/card1RadioGrp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/card1RadioGrp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/card1Heading">
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <androidx.appcompat.widget.AppCompatRadioButton
                             android:id="@+id/radioBtn1to25"
                             android:layout_width="wrap_content"
@@ -60,7 +63,7 @@
                             android:textSize="12sp"
                             app:layout_constraintEnd_toStartOf="@id/radioBtn26to100"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.appcompat.widget.AppCompatRadioButton
                             android:id="@+id/radioBtn26to100"
@@ -127,15 +130,18 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
                 <RadioGroup
+                    android:id="@+id/card2RadioGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/card2RadioGroup"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/card2Heading">
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <androidx.appcompat.widget.AppCompatRadioButton
                             android:id="@+id/businessOwnerBtn"
                             android:layout_width="wrap_content"
@@ -144,7 +150,7 @@
                             android:text="Business owner"
                             android:textSize="12sp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.appcompat.widget.AppCompatRadioButton
                             android:id="@+id/fleetManagerBtn"
@@ -247,15 +253,18 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
                 <RadioGroup
+                    android:id="@+id/card3RadioGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/card3RadioGroup"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/card3Heading">
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <androidx.appcompat.widget.AppCompatRadioButton
                             android:id="@+id/constructionBtn"
                             android:layout_width="wrap_content"
@@ -265,7 +274,7 @@
                             android:textSize="12sp"
                             app:layout_constraintEnd_toStartOf="@id/miningBtn"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"/>
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.appcompat.widget.AppCompatRadioButton
                             android:id="@+id/miningBtn"
@@ -374,18 +383,18 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/nextBtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:text="Next"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card3"
-        app:layout_constraintWidth_percent="0.75" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/nextBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="Next"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card3"
+            app:layout_constraintWidth_percent="0.75" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

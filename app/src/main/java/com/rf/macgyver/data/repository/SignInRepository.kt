@@ -3,16 +3,16 @@ package com.rf.macgyver.data.repository
 import android.content.Context
 import com.rf.macgyver.data.model.request.SignInRequest
 import com.rf.macgyver.data.model.response.SignInResponse
-import com.rf.macgyver.data.remote.FionApiServices
-import com.rf.macgyver.roomDB.FionDatabase
+import com.rf.macgyver.data.remote.MagApiServices
+import com.rf.macgyver.roomDB.MagDatabase
 import com.rf.macgyver.ui.base.BaseRepository
 import com.rf.macgyver.utils.SharedPreference
 
 class SignInRepository(
-    val apiServices: FionApiServices,
+    val apiServices: MagApiServices,
     val context: Context,
     val sharedPreference: SharedPreference,
-    val fionDatabase: FionDatabase
+    val magDatabase: MagDatabase
 ) : BaseRepository() {
 
     fun signInNow(

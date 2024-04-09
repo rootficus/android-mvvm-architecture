@@ -32,9 +32,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingVertical="@dimen/_5sdp"
                 android:layout_marginHorizontal="4dp"
-                android:layout_marginVertical="8dp">
+                android:layout_marginVertical="8dp"
+                android:paddingVertical="@dimen/_5sdp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/step1Icon"
@@ -51,6 +51,7 @@
                     android:id="@+id/Step1Txt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="Step 1"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -61,6 +62,7 @@
                     android:id="@+id/inspectionInfoTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="Inspection Info."
                     android:textColor="#808080"
                     android:textSize="12sp"
@@ -115,6 +117,7 @@
                     android:id="@+id/Step2Txt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="Step 2"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -125,6 +128,7 @@
                     android:id="@+id/doInspectiontxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="Do Inspection"
                     android:textColor="#808080"
                     android:textSize="13sp"
@@ -170,6 +174,7 @@
                     android:id="@+id/Step3Txt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="Step 3"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -180,6 +185,7 @@
                     android:id="@+id/summaryTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="Summary"
                     android:textColor="#808080"
                     android:textSize="13sp"
@@ -194,6 +200,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="18dp"
+            android:fontFamily="@font/roboto_regular"
             android:padding="10dp"
             android:text="Vehicle Downtime"
             android:textColor="#808080"
@@ -221,13 +228,12 @@
             android:id="@+id/downtimeSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="4dp"
             android:layout_margin="20dp"
-            app:layout_constraintWidth_percent="0.3"
+            android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="@id/downtimeEdittext"
             app:layout_constraintStart_toEndOf="@id/downtimeEdittext"
-            app:layout_constraintTop_toTopOf="@id/downtimeEdittext"/>
-
+            app:layout_constraintTop_toTopOf="@id/downtimeEdittext"
+            app:layout_constraintWidth_percent="0.3" />
 
 
         <androidx.appcompat.widget.AppCompatEditText
@@ -260,6 +266,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="18dp"
+            android:fontFamily="@font/roboto_regular"
             android:padding="10dp"
             android:text="Vehicle Runtime"
             android:textColor="#808080"
@@ -286,13 +293,12 @@
             android:id="@+id/runtimeSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="4dp"
             android:layout_margin="20dp"
+            android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="@id/runtimeEdittext"
             app:layout_constraintStart_toEndOf="@id/runtimeEdittext"
             app:layout_constraintTop_toTopOf="@id/runtimeEdittext"
-            app:layout_constraintWidth_percent="0.3"/>
-
+            app:layout_constraintWidth_percent="0.3" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -300,6 +306,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="18dp"
+            android:fontFamily="@font/roboto_regular"
             android:padding="10dp"
             android:text="Vehicle Runtime"
             android:textColor="#808080"
@@ -321,16 +328,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/operatorWorklogHeading"
             app:layout_constraintWidth_percent="0.6" />
+
         <Spinner
             android:id="@+id/worklohSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="4dp"
             android:layout_margin="20dp"
+            android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="@id/worklogEdittext"
             app:layout_constraintStart_toEndOf="@id/worklogEdittext"
             app:layout_constraintTop_toTopOf="@id/worklogEdittext"
-            app:layout_constraintWidth_percent="0.3"/>
+            app:layout_constraintWidth_percent="0.3" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/backOrGenerateCard"
@@ -353,6 +361,7 @@
                     android:id="@+id/backTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="Back"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -363,6 +372,7 @@
                     android:id="@+id/generateReportTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="Generate Report"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"

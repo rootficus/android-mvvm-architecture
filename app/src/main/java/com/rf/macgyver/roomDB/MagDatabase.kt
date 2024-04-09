@@ -15,18 +15,18 @@ import com.rf.macgyver.roomDB.model.SMSRecord
     entities = [SMSRecord::class, ModemSetting::class, OperatorRecord::class, NotificationRecord::class],
     version = 1
 )
-abstract class FionDatabase : RoomDatabase() {
+abstract class MagDatabase : RoomDatabase() {
     abstract fun fioDao(): UtellDao?
 
     companion object {
         @Volatile
-        private var INSTANCE: FionDatabase? = null
+        private var INSTANCE: MagDatabase? = null
 
-        fun getDatabase(context: Context): FionDatabase {
+        fun getDatabase(context: Context): MagDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    FionDatabase::class.java,
+                    MagDatabase::class.java,
                     "FionDatabase.db"
                 ).allowMainThreadQueries().build()//.addMigrations(migration_1_2).build()
                 INSTANCE = instance

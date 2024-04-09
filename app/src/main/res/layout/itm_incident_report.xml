@@ -1,170 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/headingCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/headingCard"
         android:layout_margin="10dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="#D3D3D3"
         app:layout_constraintStart_toStartOf="parent"
-        android:backgroundTint="#D3D3D3">
+        app:layout_constraintTop_toTopOf="parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/IncidentReportId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/IncidentReportId"
-                android:text="INC000"
+                android:fontFamily="@font/roboto_regular"
                 android:padding="8dp"
-                app:layout_constraintTop_toTopOf="parent"
+                android:text="INC000"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/incidentDateHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/incidentDateHeading"
+        android:layout_marginVertical="8dp"
+        android:fontFamily="@font/roboto_regular"
         android:text="Incident Date"
         android:textColor="#808080"
         android:textStyle="bold"
-        android:layout_marginVertical="8dp"
-        app:layout_constraintTop_toBottomOf="@id/headingCard"
-        app:layout_constraintStart_toStartOf="@id/headingCard"/>
+        app:layout_constraintStart_toStartOf="@id/headingCard"
+        app:layout_constraintTop_toBottomOf="@id/headingCard" />
+
     <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etIncidentDateId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/etIncidentDateId"
         android:layout_marginStart="8dp"
-        app:layout_constraintTop_toTopOf="@id/incidentDateHeading"
         app:layout_constraintBottom_toBottomOf="@id/incidentDateHeading"
+        app:layout_constraintEnd_toEndOf="@id/headingCard"
         app:layout_constraintStart_toEndOf="@id/incidentDateHeading"
-        app:layout_constraintEnd_toEndOf="@id/headingCard"/>
+        app:layout_constraintTop_toTopOf="@id/incidentDateHeading" />
+
     <View
+        android:id="@+id/idView1"
         android:layout_width="0dp"
         android:layout_height="1.5dp"
-        android:id="@+id/idView1"
-        android:background="#D3D3D3"
         android:layout_marginVertical="4dp"
-        app:layout_constraintTop_toBottomOf="@id/etIncidentDateId"
+        android:background="#D3D3D3"
+        app:layout_constraintEnd_toEndOf="@id/headingCard"
         app:layout_constraintStart_toStartOf="@id/headingCard"
-        app:layout_constraintEnd_toEndOf="@id/headingCard"/>
+        app:layout_constraintTop_toBottomOf="@id/etIncidentDateId" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/vehicleNameHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/vehicleNameHeading"
+        android:layout_marginVertical="8dp"
+        android:fontFamily="@font/roboto_regular"
         android:text="Vehicle Name"
         android:textColor="#808080"
         android:textStyle="bold"
-        android:layout_marginVertical="8dp"
-        app:layout_constraintTop_toBottomOf="@id/idView1"
-        app:layout_constraintStart_toStartOf="@id/headingCard"/>
+        app:layout_constraintStart_toStartOf="@id/headingCard"
+        app:layout_constraintTop_toBottomOf="@id/idView1" />
+
     <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etVehicleNameId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/etVehicleNameId"
-        app:layout_constraintTop_toTopOf="@id/vehicleNameHeading"
         app:layout_constraintBottom_toBottomOf="@id/vehicleNameHeading"
+        app:layout_constraintEnd_toEndOf="@id/headingCard"
         app:layout_constraintStart_toStartOf="@id/etIncidentDateId"
-        app:layout_constraintEnd_toEndOf="@id/headingCard"/>
+        app:layout_constraintTop_toTopOf="@id/vehicleNameHeading" />
+
     <View
+        android:id="@+id/idView2"
         android:layout_width="0dp"
         android:layout_height="1.5dp"
-        android:id="@+id/idView2"
-        android:background="#D3D3D3"
         android:layout_marginVertical="4dp"
-        app:layout_constraintTop_toBottomOf="@id/etVehicleNameId"
+        android:background="#D3D3D3"
+        app:layout_constraintEnd_toEndOf="@id/headingCard"
         app:layout_constraintStart_toStartOf="@id/headingCard"
-        app:layout_constraintEnd_toEndOf="@id/headingCard"/>
+        app:layout_constraintTop_toBottomOf="@id/etVehicleNameId" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/vehicleNoHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/vehicleNoHeading"
+        android:layout_marginVertical="8dp"
+        android:fontFamily="@font/roboto_regular"
         android:text="Vehicle #"
         android:textColor="#808080"
         android:textStyle="bold"
-        android:layout_marginVertical="8dp"
-        app:layout_constraintTop_toBottomOf="@id/idView2"
-        app:layout_constraintStart_toStartOf="@id/headingCard"/>
+        app:layout_constraintStart_toStartOf="@id/headingCard"
+        app:layout_constraintTop_toBottomOf="@id/idView2" />
+
     <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etvehicleNoId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/etvehicleNoId"
-        app:layout_constraintTop_toTopOf="@id/vehicleNoHeading"
         app:layout_constraintBottom_toBottomOf="@id/vehicleNoHeading"
+        app:layout_constraintEnd_toEndOf="@id/headingCard"
         app:layout_constraintStart_toStartOf="@id/etIncidentDateId"
-        app:layout_constraintEnd_toEndOf="@id/headingCard"/>
+        app:layout_constraintTop_toTopOf="@id/vehicleNoHeading" />
+
     <View
+        android:id="@+id/idView3"
         android:layout_width="0dp"
         android:layout_height="1.5dp"
-        android:id="@+id/idView3"
-        android:background="#D3D3D3"
         android:layout_marginVertical="4dp"
-        app:layout_constraintTop_toBottomOf="@id/etvehicleNoId"
+        android:background="#D3D3D3"
+        app:layout_constraintEnd_toEndOf="@id/headingCard"
         app:layout_constraintStart_toStartOf="@id/headingCard"
-        app:layout_constraintEnd_toEndOf="@id/headingCard"/>
+        app:layout_constraintTop_toBottomOf="@id/etvehicleNoId" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/locationHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/locationHeading"
+        android:layout_marginVertical="8dp"
+        android:fontFamily="@font/roboto_regular"
         android:text="Location"
         android:textColor="#808080"
         android:textStyle="bold"
-        android:layout_marginVertical="8dp"
-        app:layout_constraintTop_toBottomOf="@id/idView3"
-        app:layout_constraintStart_toStartOf="@id/headingCard"/>
+        app:layout_constraintStart_toStartOf="@id/headingCard"
+        app:layout_constraintTop_toBottomOf="@id/idView3" />
+
     <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etLocationId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/etLocationId"
-        app:layout_constraintTop_toTopOf="@id/locationHeading"
+        app:layout_constraintEnd_toEndOf="@id/headingCard"
         app:layout_constraintStart_toStartOf="@id/etIncidentDateId"
-        app:layout_constraintEnd_toEndOf="@id/headingCard"/>
+        app:layout_constraintTop_toTopOf="@id/locationHeading" />
+
     <View
+        android:id="@+id/idView4"
         android:layout_width="0dp"
         android:layout_height="1.5dp"
-        android:id="@+id/idView4"
-        android:background="#D3D3D3"
         android:layout_marginVertical="4dp"
-        app:layout_constraintTop_toBottomOf="@id/etLocationId"
+        android:background="#D3D3D3"
+        app:layout_constraintEnd_toEndOf="@id/headingCard"
         app:layout_constraintStart_toStartOf="@id/headingCard"
-        app:layout_constraintEnd_toEndOf="@id/headingCard"/>
+        app:layout_constraintTop_toBottomOf="@id/etLocationId" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/reportedByHeading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/reportedByHeading"
+        android:layout_marginVertical="8dp"
+        android:fontFamily="@font/roboto_regular"
         android:text="Reported By"
         android:textColor="#808080"
         android:textStyle="bold"
-        android:layout_marginVertical="8dp"
-        app:layout_constraintTop_toBottomOf="@id/idView4"
-        app:layout_constraintStart_toStartOf="@id/headingCard"/>
+        app:layout_constraintStart_toStartOf="@id/headingCard"
+        app:layout_constraintTop_toBottomOf="@id/idView4" />
+
     <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etReportedById"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/etReportedById"
-        app:layout_constraintTop_toTopOf="@id/reportedByHeading"
+        app:layout_constraintEnd_toEndOf="@id/headingCard"
         app:layout_constraintStart_toStartOf="@id/etIncidentDateId"
-        app:layout_constraintEnd_toEndOf="@id/headingCard"/>
+        app:layout_constraintTop_toTopOf="@id/reportedByHeading" />
+
     <View
+        android:id="@+id/idView5"
         android:layout_width="0dp"
         android:layout_height="1.5dp"
-        android:id="@+id/idView5"
-        android:background="#D3D3D3"
         android:layout_marginVertical="4dp"
-        app:layout_constraintTop_toBottomOf="@id/etReportedById"
+        android:background="#D3D3D3"
+        app:layout_constraintEnd_toEndOf="@id/headingCard"
         app:layout_constraintStart_toStartOf="@id/headingCard"
-        app:layout_constraintEnd_toEndOf="@id/headingCard"/>
+        app:layout_constraintTop_toBottomOf="@id/etReportedById" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

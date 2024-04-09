@@ -30,17 +30,17 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:paddingVertical="@dimen/_10sdp"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/_10sdp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/cardHeading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
                     android:padding="4dp"
                     android:text="What can HVI help you with?"
                     android:textSize="16sp"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -49,9 +49,10 @@
                     android:id="@+id/inspectionCheckbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="Inspection and Complaince"
                     android:textSize="12sp"
-                    android:layout_marginTop="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cardHeading" />
@@ -60,6 +61,7 @@
                     android:id="@+id/maintainanceCheckbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="Maintainance and Services"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@id/inspectionCheckbox"
@@ -69,6 +71,7 @@
                     android:id="@+id/fuelCheckbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="Fuel Management"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@id/inspectionCheckbox"
@@ -78,6 +81,7 @@
                     android:id="@+id/safetyCheckbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="Safety"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@id/inspectionCheckbox"
@@ -87,6 +91,7 @@
                     android:id="@+id/purchasingCheckbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
                     android:text="Purchasing/Inventory"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@id/inspectionCheckbox"

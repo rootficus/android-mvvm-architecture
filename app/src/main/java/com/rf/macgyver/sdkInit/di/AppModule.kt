@@ -2,7 +2,7 @@ package com.rf.macgyver.sdkInit.di
 
 import android.app.Application
 import android.content.Context
-import com.rf.macgyver.roomDB.FionDatabase
+import com.rf.macgyver.roomDB.MagDatabase
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.utils.ApplicationContext
 import com.rf.macgyver.utils.AuthInterceptor
@@ -33,7 +33,7 @@ interface AppComponent {
 
     @ApplicationContext
     fun getContext(): Context
-    fun getFionDatabase(): FionDatabase
+    fun getFionDatabase(): MagDatabase
 }
 
 @Module
@@ -94,7 +94,7 @@ class AppModule(private val mApplication: Application) {
 
     @Provides
     @Singleton
-    fun provideFionDatabase(@ApplicationContext context: Context): FionDatabase =
-        FionDatabase.getDatabase(context)
+    fun provideFionDatabase(@ApplicationContext context: Context): MagDatabase =
+        MagDatabase.getDatabase(context)
 
 }

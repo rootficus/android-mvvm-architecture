@@ -1,16 +1,16 @@
 package com.rf.macgyver.data.repository
 
 import android.content.Context
-import com.rf.macgyver.data.remote.FionApiServices
-import com.rf.macgyver.roomDB.FionDatabase
+import com.rf.macgyver.data.remote.MagApiServices
+import com.rf.macgyver.roomDB.MagDatabase
 import com.rf.macgyver.ui.base.BaseRepository
 import com.rf.macgyver.utils.SharedPreference
 
 class DashBoardRepository(
-    val apiServices: FionApiServices,
+    val apiServices: MagApiServices,
     val context: Context,
     val sharedPreference: SharedPreference,
-    val fionDatabase: FionDatabase
+    val magDatabase: MagDatabase
 ) : BaseRepository() {
 
     fun getUserId(): String? {

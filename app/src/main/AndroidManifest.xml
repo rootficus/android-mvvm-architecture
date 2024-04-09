@@ -34,23 +34,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.main.activity.VendorDashboardActivity"
-            android:exported="true" />
-        <activity
-            android:name=".ui.main.activity.VendorLoginActivity"
-            android:exported="true" />
-        <activity
             android:name=".ui.main.activity.DashBoardActivity"
             android:exported="true"
             android:isScrollContainer="false"
             android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".ui.main.activity.CalculatorActivity"
-            android:exported="true"
-            android:isScrollContainer="false"
-            android:windowSoftInputMode="adjustPan">
 
-        </activity>
         <activity
             android:name=".ui.main.activity.SignInActivity"
             android:exported="true"
@@ -77,7 +65,7 @@
         </provider>
 
         <service
-            android:name=".service.UtellFCMService"
+            android:name=".service.MagFCMService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

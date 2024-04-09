@@ -9,600 +9,687 @@
             name="signInModel"
             type="com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.main.fragment.inspection.Step3IPFragment">
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/step1Card"
-            android:elevation="5dp"
-            app:cardCornerRadius="8dp"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginVertical="12dp"
-            app:layout_constraintWidth_percent="0.32"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/step1Icon"
-                    android:src="@drawable/group_11"
-                    android:textColor="@color/white"
-                    android:background="@drawable/small_rounded_textview"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/Step1Txt"
-                    android:text="Step 1"
-                    android:textSize="18sp"
-                    app:layout_constraintTop_toTopOf="@id/step1Icon"
-                    app:layout_constraintStart_toEndOf="@id/step1Icon"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/inspectionInfoTxt"
-                    android:text="Inspection Info."
-                    android:textSize="13sp"
-                    android:textColor="#808080"
-                    app:layout_constraintBottom_toBottomOf="@id/step1Icon"
-                    app:layout_constraintStart_toEndOf="@id/step1Icon"/>
+        android:fillViewport="true">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/step2Card"
-            android:elevation="5dp"
-            app:cardCornerRadius="8dp"
-            android:layout_margin="5dp"
-            app:layout_constraintWidth_percent="0.32"
-            app:layout_constraintStart_toEndOf="@id/step1Card"
-            app:layout_constraintEnd_toStartOf="@id/step3Card"
-            app:layout_constraintTop_toTopOf="@id/step1Card"
-            app:layout_constraintBottom_toBottomOf="@id/step1Card">
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/step2Icon"
-                    android:src="@drawable/group_11"
-                    android:textColor="@color/white"
-                    android:background="@drawable/small_rounded_textview"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/Step2Txt"
-                    android:text="Step 2"
-                    android:textSize="18sp"
-                    app:layout_constraintTop_toTopOf="@id/step2Icon"
-                    app:layout_constraintStart_toEndOf="@id/step2Icon"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/doInspectiontxt"
-                    android:text="Do Inspection"
-                    android:textSize="13sp"
-                    android:textColor="#808080"
-                    app:layout_constraintBottom_toBottomOf="@id/step2Icon"
-                    app:layout_constraintStart_toEndOf="@id/step2Icon"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/step3Card"
-            android:elevation="5dp"
-            app:cardCornerRadius="8dp"
-            android:layout_margin="5dp"
-            app:layout_constraintWidth_percent="0.32"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/step1Card"
-            app:layout_constraintBottom_toBottomOf="@id/step1Card">
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/threeTxt"
-                    android:text="3"
-                    android:textSize="22sp"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:background="@drawable/small_rounded_textview"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/Step3Txt"
-                    android:text="Step 3"
-                    android:textSize="18sp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/threeTxt"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/summaryTxt"
-                    android:text="Summary"
-                    android:textSize="13sp"
-                    android:textColor="#808080"
-                    app:layout_constraintBottom_toBottomOf="@id/threeTxt"
-                    app:layout_constraintStart_toEndOf="@id/threeTxt"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/faultyItemsHeading"
-            android:text="Faulty Items"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            android:padding="8dp"
-            android:textColor="#808080"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/step1Card"
-            android:layout_marginHorizontal="8dp"/>
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/faultyItemsNo."
-            android:text="9"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="#D3494E"
-            app:layout_constraintTop_toTopOf="@id/faultyItemsHeading"
-            app:layout_constraintBottom_toBottomOf="@id/faultyItemsHeading"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginHorizontal="12dp"/>
-        <View
-            android:id="@+id/idView1"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="#D3D3D3"
-            android:paddingHorizontal="5dp"
-            app:layout_constraintTop_toBottomOf="@id/faultyItemsHeading"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.533"
-            android:layout_marginVertical="12dp"
-            android:layout_marginHorizontal="8dp"
-            app:layout_constraintStart_toStartOf="parent" />
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/overallCondHeading"
-            android:text="Overall Condition"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:padding="8dp"
-            android:layout_marginVertical="8dp"
-            android:textColor="#808080"
-            app:layout_constraintStart_toStartOf="@id/faultyItemsHeading"
-            app:layout_constraintTop_toBottomOf="@id/idView1"/>
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/overallCondSelectId."
-            android:text="Select"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="#8EBCFF"
-            app:layout_constraintTop_toTopOf="@id/overallCondHeading"
-            app:layout_constraintBottom_toBottomOf="@id/overallCondHeading"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginHorizontal="12dp"/>
-        <View
-            android:id="@+id/idView2"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="#D3D3D3"
-            android:paddingHorizontal="5dp"
-            app:layout_constraintTop_toBottomOf="@id/overallCondHeading"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.533"
-            android:layout_marginVertical="12dp"
-            android:layout_marginHorizontal="8dp"
-            app:layout_constraintStart_toStartOf="parent" />
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/vehicleStatusHeading"
-            android:text="Vehicle Status"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:padding="8dp"
-            android:layout_marginVertical="8dp"
-            android:textColor="#808080"
-            app:layout_constraintStart_toStartOf="@id/faultyItemsHeading"
-            app:layout_constraintTop_toBottomOf="@id/idView2"/>
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/vehicleStatusCard"
-            app:layout_constraintTop_toBottomOf="@id/vehicleStatusHeading"
-            app:layout_constraintWidth_percent="0.8"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-            <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_height="match_parent"
+            tools:context=".ui.main.fragment.inspection.Step3IPFragment">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/step1Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="12dp"
+                android:elevation="5dp"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.32">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/step1Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/small_rounded_textview"
+                        android:src="@drawable/group_11"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Step1Txt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Step 1"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/step1Icon"
+                        app:layout_constraintTop_toTopOf="@id/step1Icon" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/inspectionInfoTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Inspection Info."
+                        android:textColor="#808080"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="@id/step1Icon"
+                        app:layout_constraintStart_toEndOf="@id/step1Icon" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/step2Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:elevation="5dp"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintBottom_toBottomOf="@id/step1Card"
+                app:layout_constraintEnd_toStartOf="@id/step3Card"
+                app:layout_constraintStart_toEndOf="@id/step1Card"
+                app:layout_constraintTop_toTopOf="@id/step1Card"
+                app:layout_constraintWidth_percent="0.32">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/step2Icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/small_rounded_textview"
+                        android:src="@drawable/group_11"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Step2Txt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Step 2"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/step2Icon"
+                        app:layout_constraintTop_toTopOf="@id/step2Icon" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/doInspectiontxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Do Inspection"
+                        android:textColor="#808080"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="@id/step2Icon"
+                        app:layout_constraintStart_toEndOf="@id/step2Icon" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/step3Card"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:elevation="5dp"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintBottom_toBottomOf="@id/step1Card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/step1Card"
+                app:layout_constraintWidth_percent="0.32">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/threeTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/small_rounded_textview"
+                        android:gravity="center"
+                        android:text="3"
+                        android:textColor="@color/white"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/Step3Txt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Step 3"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/threeTxt"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/summaryTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Summary"
+                        android:textColor="#808080"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="@id/threeTxt"
+                        app:layout_constraintStart_toEndOf="@id/threeTxt" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/faultyItemsHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto_regular"
+                android:padding="8dp"
+                android:text="Faulty Items"
+                android:textColor="#808080"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/step1Card" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/faultyItemsNo."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="9"
+                android:textColor="#D3494E"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/faultyItemsHeading"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/faultyItemsHeading" />
+
+            <View
+                android:id="@+id/idView1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/availableBtn"
-                    android:text="Available"
-                    android:padding="8dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintTop_toTopOf="@id/availableBtn"
-                    app:layout_constraintBottom_toBottomOf="@id/availableBtn"
-                    android:background="@color/black"
-                    app:layout_constraintStart_toEndOf="@id/availableBtn"
-                    app:layout_constraintEnd_toStartOf="@id/maintenanceRequiredId"/>
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/maintenanceRequiredId"
-                    android:text="Maintenance Required"
-                    android:padding="8dp"
-                    app:layout_constraintTop_toTopOf="@id/availableBtn"
-                    app:layout_constraintStart_toEndOf="@id/availableBtn"
-                    app:layout_constraintBottom_toBottomOf="@id/availableBtn"
-                    app:layout_constraintEnd_toStartOf="@id/breakdownBtn"/>
+                android:layout_height="8dp"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="12dp"
+                android:background="#D3D3D3"
+                android:paddingHorizontal="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.533"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/faultyItemsHeading" />
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintTop_toTopOf="@id/availableBtn"
-                    app:layout_constraintBottom_toBottomOf="@id/availableBtn"
-                    android:background="@color/black"
-                    app:layout_constraintStart_toEndOf="@id/maintenanceRequiredId"
-                    app:layout_constraintEnd_toStartOf="@id/breakdownBtn"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/overallCondHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:padding="8dp"
+                android:text="Overall Condition"
+                android:textColor="#808080"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/faultyItemsHeading"
+                app:layout_constraintTop_toBottomOf="@id/idView1" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/breakdownBtn"
-                    android:text="Breakdown"
-                    android:padding="8dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/overallCondSelectId."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Select"
+                android:textColor="#8EBCFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/overallCondHeading"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/overallCondHeading" />
+
+            <View
+                android:id="@+id/idView2"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="12dp"
+                android:background="#D3D3D3"
+                android:paddingHorizontal="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.533"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/overallCondHeading" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/vehicleStatusHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:padding="8dp"
+                android:text="Vehicle Status"
+                android:textColor="#808080"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/faultyItemsHeading"
+                app:layout_constraintTop_toBottomOf="@id/idView2" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/vehicleStatusCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vehicleStatusHeading"
+                app:layout_constraintWidth_percent="0.8">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/availableBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="8dp"
+                        android:text="Available"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:background="@color/black"
+                        app:layout_constraintBottom_toBottomOf="@id/availableBtn"
+                        app:layout_constraintEnd_toStartOf="@id/maintenanceRequiredId"
+                        app:layout_constraintStart_toEndOf="@id/availableBtn"
+                        app:layout_constraintTop_toTopOf="@id/availableBtn" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/maintenanceRequiredId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="8dp"
+                        android:text="Maintenance Required"
+                        app:layout_constraintBottom_toBottomOf="@id/availableBtn"
+                        app:layout_constraintEnd_toStartOf="@id/breakdownBtn"
+                        app:layout_constraintStart_toEndOf="@id/availableBtn"
+                        app:layout_constraintTop_toTopOf="@id/availableBtn" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:background="@color/black"
+                        app:layout_constraintBottom_toBottomOf="@id/availableBtn"
+                        app:layout_constraintEnd_toStartOf="@id/breakdownBtn"
+                        app:layout_constraintStart_toEndOf="@id/maintenanceRequiredId"
+                        app:layout_constraintTop_toTopOf="@id/availableBtn" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/breakdownBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="8dp"
+                        android:text="Breakdown"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/priorityHeading"
-            android:text="Priority"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:padding="8dp"
-            android:layout_marginVertical="8dp"
-            android:textColor="#808080"
-            app:layout_constraintStart_toStartOf="@id/faultyItemsHeading"
-            app:layout_constraintTop_toBottomOf="@id/vehicleStatusCard"/>
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/priorityCard"
-            app:layout_constraintTop_toBottomOf="@id/priorityHeading"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:cardCornerRadius="8dp"
-            android:elevation="10dp"
-            android:layout_margin="15dp">
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/priorityHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:padding="8dp"
+                android:text="Priority"
+                android:textColor="#808080"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/faultyItemsHeading"
+                app:layout_constraintTop_toBottomOf="@id/vehicleStatusCard" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/priorityCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="9">
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/lowId"
-                    android:text="low"
-                    android:padding="5dp"
-                    android:textAlignment="center"
-                    android:layout_weight="2"/>
-                <View
-                    android:layout_width="1.5dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/black"/>
+                android:layout_margin="15dp"
+                android:elevation="10dp"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/priorityHeading">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/mediumId"
-                    android:text="medium"
-                    android:padding="5dp"
-                    android:textAlignment="center"
-                    android:layout_weight="2"/>
-                <View
-                    android:layout_width="1.5dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/black"/>
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/highId"
-                    android:text="high"
-                    android:padding="5dp"
-                    android:textAlignment="center"
-                    android:layout_weight="2"/>
-                <View
-                    android:layout_width="1.5dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/black"/>
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/emergencyId"
-                    android:text="emergency"
-                    android:padding="5dp"
-                    android:textAlignment="center"
-                    android:layout_weight="3"/>
+                    android:orientation="horizontal"
+                    android:weightSum="9">
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
-        </androidx.cardview.widget.CardView>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/lowId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="5dp"
+                        android:text="low"
+                        android:textAlignment="center" />
 
-        <View
-            android:id="@+id/idView3"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="#D3D3D3"
-            android:paddingHorizontal="5dp"
-            app:layout_constraintTop_toBottomOf="@id/priorityCard"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.533"
-            android:layout_marginVertical="12dp"
-            android:layout_marginHorizontal="8dp"
-            app:layout_constraintStart_toStartOf="parent" />
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/vehicleSafeHeading"
-            android:text="Vehicle safe to use"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:padding="8dp"
-            android:layout_marginVertical="8dp"
-            android:textColor="#808080"
-            app:layout_constraintStart_toStartOf="@id/faultyItemsHeading"
-            app:layout_constraintTop_toBottomOf="@id/idView3"/>
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/vehicleSafeToUseCard"
-            app:layout_constraintWidth_percent="0.3"
-            android:elevation="5dp"
-            app:cardCornerRadius="8dp"
-            android:layout_marginHorizontal="8dp"
-            app:layout_constraintTop_toTopOf="@id/vehicleSafeHeading"
-            app:layout_constraintBottom_toBottomOf="@id/vehicleSafeHeading"
-            app:layout_constraintEnd_toEndOf="parent">
-            <androidx.constraintlayout.widget.ConstraintLayout
+                    <View
+                        android:layout_width="1.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/black" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/mediumId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="5dp"
+                        android:text="medium"
+                        android:textAlignment="center" />
+
+                    <View
+                        android:layout_width="1.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/black" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/highId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="5dp"
+                        android:text="high"
+                        android:textAlignment="center" />
+
+                    <View
+                        android:layout_width="1.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/black" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/emergencyId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="5dp"
+                        android:text="emergency"
+                        android:textAlignment="center" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:id="@+id/idView3"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/safeVehicleYesBtn"
-                    android:text="Yes"
-                    android:padding="8dp"
-                    android:textAlignment="center"
-                    app:layout_constraintWidth_percent="0.5"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                android:layout_height="8dp"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="12dp"
+                android:background="#D3D3D3"
+                android:paddingHorizontal="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.533"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/priorityCard" />
 
-                <View
-                    android:layout_width="1.5dp"
-                    android:layout_height="0dp"
-                    android:background="@color/black"
-                    app:layout_constraintStart_toEndOf="@id/safeVehicleYesBtn"
-                    app:layout_constraintTop_toTopOf="@id/safeVehicleYesBtn"
-                    app:layout_constraintBottom_toBottomOf="@id/safeVehicleYesBtn"/>
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/safeVehicleNoBtn"
-                    android:text="NO"
-                    android:padding="8dp"
-                    android:textAlignment="center"
-                    app:layout_constraintWidth_percent="0.5"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/vehicleSafeHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:padding="8dp"
+                android:text="Vehicle safe to use"
+                android:textColor="#808080"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/faultyItemsHeading"
+                app:layout_constraintTop_toBottomOf="@id/idView3" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/vehicleSafeToUseCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:elevation="5dp"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintBottom_toBottomOf="@id/vehicleSafeHeading"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/vehicleSafeHeading"
+                app:layout_constraintWidth_percent="0.3">
 
-        <View
-            android:id="@+id/idView4"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="#D3D3D3"
-            android:paddingHorizontal="5dp"
-            app:layout_constraintTop_toBottomOf="@id/vehicleSafeHeading"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.533"
-            android:layout_marginVertical="12dp"
-            android:layout_marginHorizontal="8dp"
-            app:layout_constraintStart_toStartOf="parent" />
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/DeployedHeading"
-            android:text="Deployed"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:padding="8dp"
-            android:layout_marginVertical="8dp"
-            android:textColor="#808080"
-            app:layout_constraintStart_toStartOf="@id/faultyItemsHeading"
-            app:layout_constraintTop_toBottomOf="@id/idView4"/>
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/deployedCard"
-            app:layout_constraintWidth_percent="0.3"
-            android:elevation="5dp"
-            app:cardCornerRadius="8dp"
-            android:layout_marginHorizontal="8dp"
-            app:layout_constraintTop_toTopOf="@id/DeployedHeading"
-            app:layout_constraintBottom_toBottomOf="@id/DeployedHeading"
-            app:layout_constraintEnd_toEndOf="parent">
-            <androidx.constraintlayout.widget.ConstraintLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/safeVehicleYesBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="8dp"
+                        android:text="Yes"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.5" />
+
+                    <View
+                        android:layout_width="1.5dp"
+                        android:layout_height="0dp"
+                        android:background="@color/black"
+                        app:layout_constraintBottom_toBottomOf="@id/safeVehicleYesBtn"
+                        app:layout_constraintStart_toEndOf="@id/safeVehicleYesBtn"
+                        app:layout_constraintTop_toTopOf="@id/safeVehicleYesBtn" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/safeVehicleNoBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="8dp"
+                        android:text="NO"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.5" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:id="@+id/idView4"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/deployedYesBtn"
-                    android:text="Yes"
-                    android:padding="8dp"
-                    android:textAlignment="center"
-                    app:layout_constraintWidth_percent="0.5"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
-                <View
-                android:layout_width="1.5dp"
+                android:layout_height="8dp"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="12dp"
+                android:background="#D3D3D3"
+                android:paddingHorizontal="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.533"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vehicleSafeHeading" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/DeployedHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:padding="8dp"
+                android:text="Deployed"
+                android:textColor="#808080"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/faultyItemsHeading"
+                app:layout_constraintTop_toBottomOf="@id/idView4" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/deployedCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:elevation="5dp"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintBottom_toBottomOf="@id/DeployedHeading"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/DeployedHeading"
+                app:layout_constraintWidth_percent="0.3">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/deployedYesBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="8dp"
+                        android:text="Yes"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.5" />
+
+                    <View
+                        android:layout_width="1.5dp"
+                        android:layout_height="0dp"
+                        android:background="@color/black"
+                        app:layout_constraintBottom_toBottomOf="@id/deployedYesBtn"
+                        app:layout_constraintStart_toEndOf="@id/deployedYesBtn"
+                        app:layout_constraintTop_toTopOf="@id/deployedYesBtn" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/deplpyedNoBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:padding="8dp"
+                        android:text="NO"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.5" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:id="@+id/idView5"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginVertical="12dp"
+                android:background="#D3D3D3"
+                android:paddingHorizontal="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.533"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/DeployedHeading" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etAdditionalNote"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/edit_text_border"
+                android:hint="Additional Note"
+                android:padding="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/idView5"
+                app:layout_constraintWidth_percent="0.85" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/InspectorSignatureHeading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="@font/roboto_regular"
+                android:padding="8dp"
+                android:text="Inspector Signature"
+                android:textColor="#808080"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etAdditionalNote" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/signatureCard"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="@color/black"
-                app:layout_constraintStart_toEndOf="@id/deployedYesBtn"
-                app:layout_constraintTop_toTopOf="@id/deployedYesBtn"
-                app:layout_constraintBottom_toBottomOf="@id/deployedYesBtn"/>
+                android:layout_margin="10dp"
+                android:elevation="5dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.15"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/InspectorSignatureHeading" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/deplpyedNoBtn"
-                    android:text="NO"
-                    android:padding="8dp"
-                    android:textAlignment="center"
-                    app:layout_constraintWidth_percent="0.5"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/backOrGenerateCard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="20dp"
+                android:elevation="15dp"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/signatureCard"
+                app:layout_constraintWidth_percent="0.8">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="12dp">
 
-        <View
-            android:id="@+id/idView5"
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="#D3D3D3"
-            android:paddingHorizontal="5dp"
-            app:layout_constraintTop_toBottomOf="@id/DeployedHeading"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.533"
-            android:layout_marginVertical="12dp"
-            android:layout_marginHorizontal="8dp"
-            app:layout_constraintStart_toStartOf="parent" />
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/etAdditionalNote"
-            android:hint="Additional Note"
-            app:layout_constraintTop_toBottomOf="@id/idView5"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_margin="8dp"
-            android:padding="12dp"
-            app:layout_constraintWidth_percent="0.85"
-            android:background="@drawable/edit_text_border"/>
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/InspectorSignatureHeading"
-            android:text="Inspector Signature"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:padding="8dp"
-            android:layout_marginVertical="8dp"
-            android:textColor="#808080"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etAdditionalNote"/>
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/signatureCard"
-            android:layout_margin="10dp"
-            android:elevation="5dp"
-            app:cardCornerRadius="10dp"
-            app:layout_constraintHeight_percent="0.15"
-            app:layout_constraintTop_toBottomOf="@id/InspectorSignatureHeading"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/backTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Back"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/backOrGenerateCard"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintWidth_percent="0.8"
-            android:layout_marginBottom="50dp"
-            android:elevation="15dp"
-            app:cardCornerRadius="12dp">
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="12dp">
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/backTxt"
-                    android:text="Back"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/generateReportTxt"
-                    android:text="Generate Report"
-                    android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/generateReportTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Generate Report"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </layout>

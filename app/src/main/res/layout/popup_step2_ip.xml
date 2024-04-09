@@ -1,79 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
+
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/headingId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/headingId"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="20dp"
+        android:fontFamily="@font/roboto_regular"
         android:text="1. Visually inspect Air Compressor"
         android:textSize="18sp"
-        android:layout_marginVertical="20dp"
-        android:layout_marginHorizontal="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="@id/etNoteId"/>
+        app:layout_constraintStart_toStartOf="@id/etNoteId"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etNoteId"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:id="@+id/etNoteId"
-        app:layout_constraintHeight_percent="0.22"
-        android:background="@drawable/edit_text_border"
         android:layout_marginHorizontal="14dp"
         android:layout_marginVertical="12dp"
-        app:layout_constraintWidth_percent="0.85"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/edit_text_border"
+        android:fontFamily="@font/roboto_regular"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headingId"/>
+        app:layout_constraintHeight_percent="0.22"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headingId"
+        app:layout_constraintWidth_percent="0.85" />
+
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/noteTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/noteTxt"
-        android:text="NOTE"
-        android:textSize="16sp"
         android:layout_margin="5dp"
-        android:textStyle="bold"
+        android:fontFamily="@font/roboto_regular"
+        android:text="NOTE"
         android:textColor="#8EBCFF"
-        app:layout_constraintTop_toTopOf="@id/etNoteId"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/etNoteId"
         app:layout_constraintStart_toStartOf="@id/etNoteId"
-        app:layout_constraintEnd_toEndOf="@id/etNoteId"/>
+        app:layout_constraintTop_toTopOf="@id/etNoteId" />
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/backOrGenerateCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/backOrGenerateCard"
+        android:layout_margin="10dp"
+        android:elevation="15dp"
+        app:cardCornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etNoteId"
-        app:layout_constraintWidth_percent="0.85"
-        android:layout_margin="10dp"
-        android:elevation="15dp"
-        app:cardCornerRadius="12dp">
+        app:layout_constraintWidth_percent="0.85">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="12dp">
+
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/cancelTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/cancelTxt"
+                android:fontFamily="@font/roboto_regular"
                 android:text="Cancel"
                 android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/DoneTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/DoneTxt"
+                android:fontFamily="@font/roboto_regular"
                 android:text="Done"
                 android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

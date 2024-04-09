@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import com.rf.macgyver.App
-import com.rf.macgyver.roomDB.FionDatabase
+import com.rf.macgyver.roomDB.MagDatabase
 import com.rf.macgyver.roomDB.model.NotificationMessageBody
 import com.rf.macgyver.roomDB.model.NotificationRecord
 import com.rf.macgyver.utils.Constant
@@ -20,14 +20,14 @@ import com.google.firebase.messaging.RemoteMessage
 import com.google.gson.Gson
 import com.rf.macgyver.R
 
-open class UtellFCMService : FirebaseMessagingService() {
-    var TAG: String = UtellFCMService::class.java.name
+open class MagFCMService : FirebaseMessagingService() {
+    var TAG: String = MagFCMService::class.java.name
 
-    lateinit var fionDatabase: FionDatabase
+    lateinit var magDatabase: MagDatabase
 
     override fun onCreate() {
         super.onCreate()
-        fionDatabase = FionDatabase.getDatabase(applicationContext)
+        magDatabase = MagDatabase.getDatabase(applicationContext)
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -106,7 +106,7 @@ open class UtellFCMService : FirebaseMessagingService() {
             NotificationMessageBody::class.java
         )
         if (Utility.isNotificationExits(
-                fionDatabase.fioDao(),
+                magDatabase.fioDao(),
                 notificationMessageBody.id
             ) != true
         ) {
@@ -117,7 +117,7 @@ open class UtellFCMService : FirebaseMessagingService() {
                     isSend = false,
                     createdAt = it.date
                 )
-                fionDatabase.fioDao()?.insertNotification(notificationRecord)
+                magDatabase.fioDao()?.insertNotification(notificationRecord)
                 sendBroadCast(applicationContext, notificationRecord)
             }
         }
