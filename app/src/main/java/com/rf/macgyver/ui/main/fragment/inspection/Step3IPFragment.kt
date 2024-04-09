@@ -2,36 +2,28 @@ package com.rf.macgyver.ui.main.fragment.inspection
 
 import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import com.rf.macgyver.R
-import com.rf.macgyver.databinding.FragmentStep2DRBinding
-import com.rf.macgyver.databinding.FragmentStep3DRBinding
+import com.rf.macgyver.databinding.FragmentStep3IpBinding
+import com.rf.macgyver.databinding.PopupInspectionStep3Binding
+import com.rf.macgyver.databinding.PopupStep2IpBinding
+import com.rf.macgyver.databinding.SuccessAlertDrBinding
+import com.rf.macgyver.databinding.SuccessAlertIpBinding
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
 import com.rf.macgyver.ui.base.BaseViewModelFactory
-import com.rf.macgyver.ui.main.di.DaggerStep3DRFragmentComponent
+import com.rf.macgyver.ui.main.di.DaggerStep3IPFragmentComponent
 import com.rf.macgyver.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel
 import com.rf.macgyver.utils.NetworkHelper
 import com.rf.macgyver.utils.SharedPreference
 import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Step3IPFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class Step3IPFragment: BaseFragment<FragmentStep3DRBinding>(R.layout.fragment_step3_d_r) {
+class Step3IPFragment: BaseFragment<FragmentStep3IpBinding>(R.layout.fragment_step3_ip) {
 
     @Inject
     lateinit var sharedPreference: SharedPreference
@@ -55,12 +47,27 @@ class Step3IPFragment: BaseFragment<FragmentStep3DRBinding>(R.layout.fragment_st
     }
 
     private fun initializeView() {
+        val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
+        val binding = PopupStep2IpBinding.inflate(layoutInflater)
+
+        mDataBinding.backTxt.setOnClickListener{
+            navController.navigateUp()
+        }
+        mDataBinding.generateReportTxt.setOnClickListener{
+
+            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
+            val view = SuccessAlertIpBinding.inflate(layoutInflater)
+            mBuilder.setView(view.root)
+            val dialog: android.app.AlertDialog? = mBuilder.create()
+            dialog?.show()
+        }
+
 
     }
 
     private fun initializeDagger() {
-       /* DaggerStep3DRFragmentComponent.builder().appComponent(UtellSDK.appComponent)
+        DaggerStep3IPFragmentComponent.builder().appComponent(UtellSDK.appComponent)
             .dashBoardFragmentModuleDi(DashBoardFragmentModuleDi())
-            .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)*/
+            .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
 }

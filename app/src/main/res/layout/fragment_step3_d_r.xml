@@ -31,7 +31,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/_5sdp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/step1Icon"
@@ -60,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:text="Inspection Info."
                     android:textColor="#808080"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@id/step1Icon"
                     app:layout_constraintStart_toEndOf="@id/step1Icon" />
 
@@ -82,7 +85,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp"
+                android:paddingVertical="@dimen/_5sdp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/step2Icon"
@@ -142,7 +148,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp"
+                android:paddingVertical="@dimen/_5sdp">
 
                 <TextView
                     android:id="@+id/threeTxt"
@@ -188,7 +197,7 @@
             android:padding="10dp"
             android:text="Vehicle Downtime"
             android:textColor="#808080"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -201,29 +210,25 @@
             android:layout_marginHorizontal="8dp"
             android:background="@drawable/edit_text_border"
             android:hint="Downtime"
-            android:padding="10dp"
+            android:padding="8dp"
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/vehicleDOwntimeHeading"
             app:layout_constraintWidth_percent="0.6" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+
+        <Spinner
+            android:id="@+id/downtimeSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:padding="4dp"
             android:layout_margin="20dp"
+            app:layout_constraintWidth_percent="0.3"
             app:layout_constraintBottom_toBottomOf="@id/downtimeEdittext"
             app:layout_constraintStart_toEndOf="@id/downtimeEdittext"
-            app:layout_constraintTop_toTopOf="@id/downtimeEdittext"
-            app:layout_constraintWidth_percent="0.3">
+            app:layout_constraintTop_toTopOf="@id/downtimeEdittext"/>
 
-            <AutoCompleteTextView
-                android:id="@+id/autoCompleteTextView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="none"
-                android:text="hour" />
-        </com.google.android.material.textfield.TextInputLayout>
+
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/downtimeNoteEdittext"
@@ -258,7 +263,7 @@
             android:padding="10dp"
             android:text="Vehicle Runtime"
             android:textColor="#808080"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -271,29 +276,24 @@
             android:layout_marginHorizontal="8dp"
             android:background="@drawable/edit_text_border"
             android:hint="Runtime"
-            android:padding="10dp"
+            android:padding="8dp"
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/vehicleRuntimeHeading"
             app:layout_constraintWidth_percent="0.6" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        <Spinner
+            android:id="@+id/runtimeSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:padding="4dp"
             android:layout_margin="20dp"
             app:layout_constraintBottom_toBottomOf="@id/runtimeEdittext"
             app:layout_constraintStart_toEndOf="@id/runtimeEdittext"
             app:layout_constraintTop_toTopOf="@id/runtimeEdittext"
-            app:layout_constraintWidth_percent="0.3">
+            app:layout_constraintWidth_percent="0.3"/>
 
-            <AutoCompleteTextView
-                android:id="@+id/runtimeAutoCompleteTextView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="none"
-                android:text="hour" />
-        </com.google.android.material.textfield.TextInputLayout>
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/operatorWorklogHeading"
@@ -303,7 +303,7 @@
             android:padding="10dp"
             android:text="Vehicle Runtime"
             android:textColor="#808080"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -316,29 +316,21 @@
             android:layout_marginHorizontal="8dp"
             android:background="@drawable/edit_text_border"
             android:hint="Work Log"
-            android:padding="10dp"
+            android:padding="8dp"
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/operatorWorklogHeading"
             app:layout_constraintWidth_percent="0.6" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        <Spinner
+            android:id="@+id/worklohSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:padding="4dp"
             android:layout_margin="20dp"
             app:layout_constraintBottom_toBottomOf="@id/worklogEdittext"
             app:layout_constraintStart_toEndOf="@id/worklogEdittext"
             app:layout_constraintTop_toTopOf="@id/worklogEdittext"
-            app:layout_constraintWidth_percent="0.3">
-
-            <AutoCompleteTextView
-                android:id="@+id/worklogAutoCompleteTextView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="none"
-                android:text="hour" />
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintWidth_percent="0.3"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/backOrGenerateCard"

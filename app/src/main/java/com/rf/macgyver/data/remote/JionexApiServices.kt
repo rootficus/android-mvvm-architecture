@@ -8,7 +8,6 @@ import retrofit2.http.*
 
 interface FionApiServices {
 
-
     @Headers("Content-Type:application/json")
     @POST("api/v1/app/agents/login")
     fun signInNow(@Body signInRequest: SignInRequest): Call<BaseResponseModel<SignInResponse>>

@@ -101,7 +101,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:id="@+id/InspectionCard"
+            android:id="@+id/inspectionCard"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dailyCheckupCard"
@@ -153,7 +153,7 @@
             android:id="@+id/troubleshootCard"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/InspectionCard"
+            app:layout_constraintTop_toBottomOf="@id/inspectionCard"
             app:layout_constraintWidth_percent="0.85"
             app:layout_constraintHeight_percent="0.17"
             android:layout_margin="15dp"

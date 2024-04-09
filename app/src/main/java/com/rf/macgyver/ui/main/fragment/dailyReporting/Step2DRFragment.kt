@@ -3,10 +3,15 @@ package com.rf.macgyver.ui.main.fragment.dailyReporting
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
 import com.rf.macgyver.R
+import com.rf.macgyver.databinding.AddVehicleAlertBinding
 import com.rf.macgyver.databinding.FragmentStep2DRBinding
+import com.rf.macgyver.databinding.PopupInspectionStep3Binding
+import com.rf.macgyver.databinding.PopupStep2DrBinding
+import com.rf.macgyver.databinding.PopupStep2IpBinding
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
@@ -18,16 +23,6 @@ import com.rf.macgyver.utils.NetworkHelper
 import com.rf.macgyver.utils.SharedPreference
 import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Step2IPFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Step2DRFragment : BaseFragment<FragmentStep2DRBinding>(R.layout.fragment_step2_d_r) {
 
     @Inject
@@ -48,10 +43,56 @@ class Step2DRFragment : BaseFragment<FragmentStep2DRBinding>(R.layout.fragment_s
         super.onViewCreated(view, savedInstanceState)
         initializeDagger()
         initializeView()
-
     }
 
     private fun initializeView() {
+
+        val binding = PopupStep2DrBinding.inflate(layoutInflater)
+
+        mDataBinding.airCompressorPlusBtn.setOnClickListener{
+
+            val text = mDataBinding.airCompressorHeading.text.toString()
+            binding.headingId.setText(text)
+            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
+            val view = PopupStep2DrBinding.inflate(layoutInflater)
+            view.headingId.text = mDataBinding.airCompressorHeading.text.toString()
+            mBuilder.setView(view.root)
+            val dialog: android.app.AlertDialog? = mBuilder.create()
+            dialog?.show()
+        }
+        mDataBinding.motorBearingPlusBtn.setOnClickListener{
+            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
+            val view = PopupStep2DrBinding.inflate(layoutInflater)
+            view.headingId.text = mDataBinding.motorBearingHeading.text.toString()
+            mBuilder.setView(view.root)
+            val dialog: android.app.AlertDialog? = mBuilder.create()
+            dialog?.show()
+        }
+        mDataBinding.coolerTempsPlusBtn.setOnClickListener{
+            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
+            val view = PopupStep2DrBinding.inflate(layoutInflater)
+            view.headingId.text = mDataBinding.coolerTempsHeading.text.toString()
+            mBuilder.setView(view.root)
+            val dialog: android.app.AlertDialog? = mBuilder.create()
+            dialog?.show()
+        }
+        mDataBinding.ispectCouplerPlusBtn.setOnClickListener{
+            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
+            val view = PopupStep2DrBinding.inflate(layoutInflater)
+            view.headingId.text = mDataBinding.inspectCouplerHeading.text.toString()
+            mBuilder.setView(view.root)
+            val dialog: android.app.AlertDialog? = mBuilder.create()
+            dialog?.show()
+        }
+
+        val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
+
+        mDataBinding.completedTxt.setOnClickListener{
+            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_step2_report_to_navigation_step3_report)
+        }
+        mDataBinding.backTxt.setOnClickListener{
+            navController.navigateUp()
+        }
 
     }
 

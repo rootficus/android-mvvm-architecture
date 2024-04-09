@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import com.rf.macgyver.R
+import com.rf.macgyver.databinding.AddVehicleAlertBinding
 import com.rf.macgyver.databinding.FragmentStartBinding
+import com.rf.macgyver.databinding.FragmentStep1DRBinding
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
@@ -19,7 +22,7 @@ import com.rf.macgyver.utils.NetworkHelper
 import com.rf.macgyver.utils.SharedPreference
 import javax.inject.Inject
 
-class Step1DRFragment : BaseFragment<FragmentStartBinding>(R.layout.fragment_step1_d_r) {
+class Step1DRFragment : BaseFragment<FragmentStep1DRBinding>(R.layout.fragment_step1_d_r) {
 
     @Inject
     lateinit var sharedPreference: SharedPreference
@@ -43,6 +46,23 @@ class Step1DRFragment : BaseFragment<FragmentStartBinding>(R.layout.fragment_ste
     }
 
     private fun initializeView() {
+        mDataBinding.vehicleSelectTxt.setOnClickListener{
+            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
+
+            val view = AddVehicleAlertBinding.inflate(layoutInflater)
+            mBuilder.setView(view.root)
+            val dialog: android.app.AlertDialog? = mBuilder.create()
+            dialog?.show()
+        }
+
+        mDataBinding.nextTxt.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_step1_report_to_navigation_step2_report)
+        }
+        val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
+
+        mDataBinding.cancelTxt.setOnClickListener{
+            navController.navigateUp()
+        }
 
     }
 

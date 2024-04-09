@@ -31,7 +31,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp"
+                android:paddingVertical="@dimen/_5sdp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/step1Icon"
@@ -82,7 +85,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp"
+                android:paddingVertical="@dimen/_5sdp">
 
                 <TextView
                     android:id="@+id/step2Icon"
@@ -134,7 +140,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp"
+                android:paddingVertical="@dimen/_5sdp">
 
                 <TextView
                     android:id="@+id/threeTxt"
@@ -179,7 +188,7 @@
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="40dp"
             android:text="1. Visually Inspect Air Compressor"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/step1Card" />
 
@@ -197,7 +206,7 @@
             android:id="@+id/card1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
+            android:layout_marginHorizontal="12dp"
             android:layout_marginVertical="10dp"
             android:elevation="10dp"
             app:cardCornerRadius="8dp"
@@ -207,13 +216,15 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp">
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="6dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card1OKtxt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="OK"
+                    android:padding="8dp"
                     android:textAlignment="center"
                     android:textColor="#979797"
                     app:layout_constraintStart_toStartOf="parent"
@@ -225,6 +236,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Faulty"
+                    android:padding="8dp"
                     android:textAlignment="center"
                     android:textColor="#979797"
                     app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
@@ -238,6 +250,7 @@
                     android:layout_height="wrap_content"
                     android:text="Faulty but OK"
                     android:textAlignment="center"
+                    android:paddingVertical="8dp"
                     android:textColor="#979797"
                     app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
                     app:layout_constraintEnd_toStartOf="@id/card1NATxt"
@@ -252,6 +265,7 @@
                     android:text="NA"
                     android:textAlignment="center"
                     android:textColor="#979797"
+                    android:padding="8dp"
                     app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/card1FaultyButOkTxt"
@@ -268,7 +282,7 @@
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="30dp"
             android:text="2. Check and Log Motor Bearing Temps"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card1" />
 
@@ -287,7 +301,7 @@
             android:id="@+id/card2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
+            android:layout_marginHorizontal="12dp"
             android:layout_marginVertical="10dp"
             android:elevation="10dp"
             app:cardCornerRadius="8dp"
@@ -297,13 +311,15 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp">
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="6dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card2OKtxt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="OK"
+                    android:padding="8dp"
                     android:textAlignment="center"
                     android:textColor="#979797"
                     app:layout_constraintStart_toStartOf="parent"
@@ -315,6 +331,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Faulty"
+                    android:padding="8dp"
                     android:textAlignment="center"
                     android:textColor="#979797"
                     app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
@@ -327,6 +344,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Faulty but OK"
+                    android:paddingVertical="8dp"
                     android:textAlignment="center"
                     android:textColor="#979797"
                     app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
@@ -340,6 +358,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="NA"
+                    android:padding="8dp"
                     android:textAlignment="center"
                     android:textColor="#979797"
                     app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
@@ -358,7 +377,7 @@
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="30dp"
             android:text="3. Inspect Coupler, Hub and Shaft Sheal"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card2" />
 
@@ -376,7 +395,7 @@
             android:id="@+id/card3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
+            android:layout_marginHorizontal="12dp"
             android:layout_marginVertical="10dp"
             android:elevation="10dp"
             app:cardCornerRadius="8dp"
@@ -386,13 +405,15 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp">
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="6dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card3OKtxt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="OK"
+                    android:padding="8dp"
                     android:textAlignment="center"
                     android:textColor="#979797"
                     app:layout_constraintStart_toStartOf="parent"
@@ -404,6 +425,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Faulty"
+                    android:padding="8dp"
                     android:textAlignment="center"
                     android:textColor="#979797"
                     app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"
@@ -416,6 +438,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Faulty but OK"
+                    android:paddingVertical="8dp"
                     android:textAlignment="center"
                     android:textColor="#979797"
                     app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"
@@ -429,6 +452,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="NA"
+                    android:padding="8dp"
                     android:textAlignment="center"
                     android:textColor="#979797"
                     app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"
@@ -447,7 +471,7 @@
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="30dp"
             android:text="2. Check and Log Motor Bearing Temps"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card3" />
 
@@ -465,7 +489,7 @@
             android:id="@+id/card4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
+            android:layout_marginHorizontal="12dp"
             android:layout_marginVertical="10dp"
             android:elevation="10dp"
             app:cardCornerRadius="8dp"
@@ -475,13 +499,15 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp">
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="6dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card4OKtxt"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="OK"
+                    android:padding="8dp"
                     android:textAlignment="center"
                     android:textColor="#979797"
                     app:layout_constraintStart_toStartOf="parent"
@@ -493,6 +519,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Faulty"
+                    android:padding="8dp"
                     android:textAlignment="center"
                     android:textColor="#979797"
                     app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"
@@ -505,6 +532,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="Faulty but OK"
+                    android:paddingVertical="8dp"
                     android:textAlignment="center"
                     android:textColor="#979797"
                     app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"
@@ -518,6 +546,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="NA"
+                    android:padding="8dp"
                     android:textAlignment="center"
                     android:textColor="#979797"
                     app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"
@@ -551,7 +580,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Back"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
+                    android:padding="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -561,7 +591,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Completed>"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
+                    android:padding="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

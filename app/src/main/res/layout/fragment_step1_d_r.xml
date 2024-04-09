@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -20,7 +18,7 @@
         tools:context=".ui.main.fragment.inspection.Step1IPFragment">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
             android:id="@+id/step1Card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -29,6 +27,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.32">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/_5sdp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp">
 
             <TextView
                 android:id="@+id/step1Icon"
@@ -63,11 +67,12 @@
                 android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="@id/step1Icon"
                 app:layout_constraintStart_toEndOf="@id/step1Icon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
             android:id="@+id/step2Card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -80,6 +85,12 @@
             app:layout_constraintStart_toEndOf="@id/step1Card"
             app:layout_constraintTop_toTopOf="@id/step1Card"
             app:layout_constraintWidth_percent="0.32">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/_5sdp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp">
 
             <TextView
                 android:id="@+id/step2Icon"
@@ -114,8 +125,9 @@
                 android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="@id/step2Icon"
                 app:layout_constraintStart_toEndOf="@id/step2Icon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/step3Card"
@@ -132,7 +144,9 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingVertical="@dimen/_5sdp">
+                android:paddingVertical="@dimen/_5sdp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp">
 
                 <TextView
                     android:id="@+id/threeTxt"
@@ -289,10 +303,10 @@
             android:id="@+id/reportCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
+            android:layout_marginHorizontal="15.60dp"
             android:backgroundTint="#D3D3D3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/dateCard"
+            app:layout_constraintStart_toStartOf="@id/dateCard"
             app:layout_constraintTop_toBottomOf="@id/dateCard">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -351,7 +365,7 @@
             android:id="@+id/shiftHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="14dp"
+            android:layout_marginVertical="15.60dp"
             android:layout_marginStart="@dimen/_12sdp"
             android:text="Shift"
             android:textColor="#808080"
@@ -404,44 +418,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/shiftHeading" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/starIcon1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/vehicleHeading" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/vehicleHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
+            android:layout_marginHorizontal="15.60dp"
             android:layout_marginVertical="10dp"
             android:text="Vehicle"
             android:textColor="#808080"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/starIcon1"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/idView2" />
 
-        <ImageView
-            android:id="@+id/vehicleSelectArrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/vehicleHeading"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/vehicleHeading" />
-
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/vehicleSelectTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_12sdp"
             android:text="Select"
+            android:textSize="13sp"
             android:textColor="#407AFF"
             app:layout_constraintBottom_toBottomOf="@id/vehicleHeading"
-            app:layout_constraintEnd_toStartOf="@id/vehicleSelectArrow"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/vehicleHeading" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -451,7 +450,6 @@
             android:layout_margin="@dimen/_12sdp"
             android:text="NO63850237"
             android:textColor="#808080"
-
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/vehicleHeading" />
@@ -469,14 +467,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/vehicleContent" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/starIcon2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/inspectionFormHeading" />
-
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/inspectionFormHeading"
             android:layout_width="wrap_content"
@@ -486,28 +476,19 @@
             android:text="Inspection Form"
             android:textColor="#808080"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/starIcon1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/idView3" />
 
-        <ImageView
-            android:id="@+id/formSelectArrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/inspectionFormHeading"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/inspectionFormHeading" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/formSelectTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_12sdp"
             android:text="Select"
             android:textColor="#407AFF"
             app:layout_constraintBottom_toBottomOf="@id/inspectionFormHeading"
-            app:layout_constraintEnd_toStartOf="@id/vehicleSelectArrow"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/inspectionFormHeading" />
 
         <androidx.appcompat.widget.AppCompatTextView

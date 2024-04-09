@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import com.google.android.material.tabs.TabLayout
 import com.rf.macgyver.R
 import com.rf.macgyver.databinding.FragmentDailyReportingBinding
 import com.rf.macgyver.sdkInit.UtellSDK
@@ -23,6 +24,8 @@ class DailyReportingFragment  : BaseFragment<FragmentDailyReportingBinding>(R.la
 
     @Inject
     lateinit var sharedPreference: SharedPreference
+
+    private lateinit var itemTabLayout: TabLayout
 
     @Inject
     lateinit var progressBar: Dialog
@@ -46,6 +49,11 @@ class DailyReportingFragment  : BaseFragment<FragmentDailyReportingBinding>(R.la
         mDataBinding.startNewButton.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.action_navigation_daily_report_to_navigation_step1_report)
         }
+
+        itemTabLayout = mDataBinding.tabLayout
+
+        itemTabLayout.addTab(itemTabLayout.newTab().setText("Running"))
+        itemTabLayout.addTab(itemTabLayout.newTab().setText("Submitted"))
     }
 
     private fun initializeDagger() {

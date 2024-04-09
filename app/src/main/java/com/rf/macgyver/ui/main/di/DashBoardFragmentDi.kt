@@ -12,6 +12,14 @@ import com.rf.macgyver.ui.main.fragment.dailyReporting.DailyReportingFragment
 import com.rf.macgyver.ui.main.fragment.dailyReporting.Step1DRFragment
 import com.rf.macgyver.ui.main.fragment.dailyReporting.Step2DRFragment
 import com.rf.macgyver.ui.main.fragment.dailyReporting.Step3DRFragment
+import com.rf.macgyver.ui.main.fragment.incidentReport.IncidentReportFragment
+import com.rf.macgyver.ui.main.fragment.incidentReport.Step1IRFragment
+import com.rf.macgyver.ui.main.fragment.incidentReport.Step2IRFragment
+import com.rf.macgyver.ui.main.fragment.incidentReport.Step3IRFragment
+import com.rf.macgyver.ui.main.fragment.inspection.InspectionFragment
+import com.rf.macgyver.ui.main.fragment.inspection.Step1IPFragment
+import com.rf.macgyver.ui.main.fragment.inspection.Step2IPFragment
+import com.rf.macgyver.ui.main.fragment.inspection.Step3IPFragment
 import com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel
 import com.rf.macgyver.utils.ApplicationContext
 import com.rf.macgyver.utils.FragmentScope
@@ -102,5 +110,98 @@ interface Step3DRFragmentComponent {
 
 @Module(includes = [DashBoardFragmentModuleDi::class])
 class Step3DRFragmentModule
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [Step1IRFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface Step1IRFragmentComponent {
+    fun inject(step1IRFragment: Step1IRFragment)
+}
 
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class Step1IRFragmentModule
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [Step2IRFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface Step2IRFragmentComponent {
+    fun inject(step2IRFragment: Step2IRFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class Step2IRFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [Step3IRFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface Step3IRFragmentComponent {
+    fun inject(step3IRFragment: Step3IRFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class Step3IRFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [IncidentReportFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface IncidentReportFragmentComponent {
+    fun inject(incidentReportFragment: IncidentReportFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class IncidentReportFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [InspectionFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface InspectionFragmentComponent {
+    fun inject(inspectionFragment: InspectionFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class InspectionFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [Step1IPFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface Step1IPFragmentComponent {
+    fun inject(step1IPFragment: Step1IPFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class Step1IPFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [Step2IPFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface Step2IPFragmentComponent {
+    fun inject(step2IPFragment: Step2IPFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class Step2IPFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [Step3IPFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface Step3IPFragmentComponent {
+    fun inject(step3IPFragment: Step3IPFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class Step3IPFragmentModule
 

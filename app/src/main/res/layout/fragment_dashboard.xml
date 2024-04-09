@@ -117,7 +117,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/InspectionCard"
+            android:id="@+id/inspectionCard"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="15dp"
@@ -181,7 +181,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.17"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/InspectionCard"
+            app:layout_constraintTop_toBottomOf="@id/inspectionCard"
             app:layout_constraintWidth_percent="0.85">
 
             <androidx.constraintlayout.widget.ConstraintLayout

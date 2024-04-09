@@ -2,37 +2,30 @@ package com.rf.macgyver.ui.main.fragment.dailyReporting
 
 import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import com.rf.macgyver.R
 import com.rf.macgyver.databinding.FragmentStep3DRBinding
+import com.rf.macgyver.databinding.SuccessAlertDrBinding
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
 import com.rf.macgyver.ui.base.BaseViewModelFactory
 import com.rf.macgyver.ui.main.di.DaggerStep3DRFragmentComponent
 import com.rf.macgyver.ui.main.di.DashBoardFragmentModuleDi
-import com.rf.macgyver.ui.main.fragment.inspection.Step3IPFragment
 import com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel
 import com.rf.macgyver.utils.NetworkHelper
 import com.rf.macgyver.utils.SharedPreference
 import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Step3IPFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Step3DRFragment : BaseFragment<FragmentStep3DRBinding>(R.layout.fragment_step3_d_r) {
 
+
+    private var downtimeData = arrayOf("hours")
+    private var runtimeData = arrayOf("hours")
+    private var worklogData = arrayOf("hours")
     @Inject
     lateinit var sharedPreference: SharedPreference
 
@@ -55,6 +48,31 @@ class Step3DRFragment : BaseFragment<FragmentStep3DRBinding>(R.layout.fragment_s
     }
 
     private fun initializeView() {
+        mDataBinding.generateReportTxt.setOnClickListener{
+
+            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
+            val view = SuccessAlertDrBinding.inflate(layoutInflater)
+            mBuilder.setView(view.root)
+            val dialog: android.app.AlertDialog? = mBuilder.create()
+            dialog?.show()
+        }
+        val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
+
+        mDataBinding.backTxt.setOnClickListener{
+            navController.navigateUp()
+        }
+
+        val spinner1Adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, downtimeData)
+        spinner1Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        mDataBinding.downtimeSpinner.adapter = spinner1Adapter
+
+        val spinner2Adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, runtimeData)
+        spinner2Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        mDataBinding.runtimeSpinner.adapter = spinner2Adapter
+
+        val spinner3Adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, worklogData)
+        spinner3Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        mDataBinding.worklohSpinner.adapter = spinner3Adapter
 
     }
 
