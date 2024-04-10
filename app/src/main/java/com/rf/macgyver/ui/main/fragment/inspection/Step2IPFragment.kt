@@ -45,8 +45,6 @@ class Step2IPFragment  : BaseFragment<FragmentStep2IpBinding>(R.layout.fragment_
     }
     private fun initializeView() {
         val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
-        val binding = PopupStep2IpBinding.inflate(layoutInflater)
-
 
         mDataBinding.completedTxt.setOnClickListener{
             Navigation.findNavController(requireView()).navigate(R.id.action_navigation_step2_inspection_to_navigation_step3_inspection)

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import com.rf.macgyver.R
 import com.rf.macgyver.databinding.FragmentStep2IRBinding
 import com.rf.macgyver.databinding.FragmentStep2IpBinding
@@ -52,6 +53,14 @@ class Step2IRFragment : BaseFragment<FragmentStep2IRBinding>(R.layout.fragment_s
     }
 
     private fun initializeView() {
+        val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
+
+        mDataBinding.completedTxt.setOnClickListener{
+            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_step2_incident_to_navigation_step3_incident)
+        }
+        mDataBinding.backTxt.setOnClickListener{
+            navController.navigateUp()
+        }
         val spinner1Adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, incidentSeverityOptions)
         spinner1Adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         mDataBinding.incidentSeveritySpinner.adapter = spinner1Adapter

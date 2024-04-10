@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.rf.macgyver.R
 import com.rf.macgyver.databinding.FragmentDailyReportingBinding
@@ -12,6 +13,7 @@ import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
 import com.rf.macgyver.ui.base.BaseViewModelFactory
+import com.rf.macgyver.ui.main.adapter.DailyReportingItemAdapter
 import com.rf.macgyver.ui.main.di.DaggerDailyReportingFragmentComponent
 import com.rf.macgyver.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel
@@ -22,6 +24,7 @@ import javax.inject.Inject
 
 class DailyReportingFragment  : BaseFragment<FragmentDailyReportingBinding>(R.layout.fragment_daily_reporting) {
 
+    private var dataList: ArrayList<Triple<String,String,String>> = arrayListOf()
     @Inject
     lateinit var sharedPreference: SharedPreference
 
@@ -49,6 +52,17 @@ class DailyReportingFragment  : BaseFragment<FragmentDailyReportingBinding>(R.la
         mDataBinding.startNewButton.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.action_navigation_daily_report_to_navigation_step1_report)
         }
+
+        val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
+
+        mDataBinding.backArrowBtn.setOnClickListener{
+            navController.navigateUp()
+        }
+
+        val itemAdapter = DailyReportingItemAdapter(dataList, requireActivity())
+        val layoutManager = LinearLayoutManager(requireActivity())
+        mDataBinding.recyclerViewId.layoutManager = layoutManager
+        mDataBinding.recyclerViewId.adapter = itemAdapter
 
         itemTabLayout = mDataBinding.tabLayout
 

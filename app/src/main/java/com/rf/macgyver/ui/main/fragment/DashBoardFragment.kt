@@ -58,6 +58,9 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
         mDataBinding.inspectionCard.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.action_navigation_dashboard_to_navigation_inspection)
         }
+        mDataBinding.IncidentReport.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_dashboard_to_navigation_incident_report)
+        }
     }
 
 }

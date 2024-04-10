@@ -1,10 +1,13 @@
 package com.rf.macgyver.ui.main.fragment
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.text.method.PasswordTransformationMethod
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.rf.macgyver.R
@@ -16,9 +19,11 @@ import com.rf.macgyver.databinding.FragmentSignInBinding
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragmentModule
 import com.rf.macgyver.ui.base.BaseViewModelFactory
+import com.rf.macgyver.ui.main.activity.DashBoardActivity
 import com.rf.macgyver.ui.main.di.DaggerSignInFragmentComponent
 import com.rf.macgyver.ui.main.di.SignInFragmentModuleDi
 import com.rf.macgyver.ui.main.viewmodel.SignInViewModel
+import com.rf.macgyver.utils.Utility
 
 
 class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sign_in) {
@@ -57,8 +62,8 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
         mDataBinding.signupTxt.setOnClickListener{
             findNavController().navigate(R.id.action_fragment_SignIn_to_fragment_signup)
         }
-    }
-}
+
+
         /*binding = FragmentSignInBinding.inflate(layoutInflater)
 
         mDataBinding.etPhoneNo.addTextChangedListener(object : TextWatcher {
@@ -88,8 +93,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
 }*/
 
 
-
-        /*mDataBinding.etName.addTextChangedListener(object : TextWatcher {
+       /* mDataBinding.etUsername.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -106,19 +110,20 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             override fun afterTextChanged(s: Editable?) {
                 if (s.toString()
                         .isNotEmpty() && mDataBinding.etPassword.text!!.isNotEmpty() && mDataBinding.etPassword.text!!.length > 8
-                ) {
+                ) {*//*
                     mDataBinding.btnSignIn.background =
                         AppCompatResources.getDrawable(requireContext(), R.drawable.btn_active_back)
-                    mDataBinding.btnSignIn.isEnabled = true
-                } else {
+                    mDataBinding.btnSignIn.isEnabled = true*//*
+                } else {*//*
                     mDataBinding.btnSignIn.background =
                         AppCompatResources.getDrawable(requireContext(),R.drawable.btn_inactive_back)
-                    mDataBinding.btnSignIn.isEnabled = true
+                    mDataBinding.btnSignIn.isEnabled = true*//*
                 }
             }
-        })
+        })*/
 
-        mDataBinding.etPassword.transformationMethod = PasswordTransformationMethod.getInstance()*/
+        mDataBinding.etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+
 
         /*mDataBinding.passwordToggle.setOnClickListener {
             togglePasswordVisibility()
@@ -148,10 +153,10 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             }
         })*/
 
-       /* mDataBinding.btnSignIn.setOnClickListener {
+        /*mDataBinding.loginBtn.setOnClickListener {
             startActivity(Intent(requireContext(), DashBoardActivity::class.java))
-            name = mDataBinding.etName.text.toString()
-            password = mDataBinding.etPassword.text.toString()
+            val name = mDataBinding.etUsername.text.toString()
+            val password = mDataBinding.etPassword.text.toString()
             if (name.isEmpty()) {
                 Utility.callCustomToast(
                     requireContext(),
@@ -162,9 +167,9 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                     requireContext(),
                     mActivity.getString(R.string.PLEASE_ENTER_PASSWORD)
                 )
-            }*//* else {
-                callSignInAPI(view)
-            }*/
+            } else {
+//                callSignInAPI(view)
+            }}*/}}
 
         /*mDataBinding.etName.setText(viewmodel.getEmail().toString())
         mDataBinding.etPassword.setText(viewmodel.getPassword().toString())*/

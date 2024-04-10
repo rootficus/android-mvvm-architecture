@@ -48,10 +48,16 @@ class Step3IPFragment: BaseFragment<FragmentStep3IpBinding>(R.layout.fragment_st
 
     private fun initializeView() {
         val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
-        val binding = PopupStep2IpBinding.inflate(layoutInflater)
 
         mDataBinding.backTxt.setOnClickListener{
             navController.navigateUp()
+        }
+        mDataBinding.overallCondSelectId.setOnClickListener{
+            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
+            val view = PopupInspectionStep3Binding.inflate(layoutInflater)
+            mBuilder.setView(view.root)
+            val dialog: android.app.AlertDialog? = mBuilder.create()
+            dialog?.show()
         }
         mDataBinding.generateReportTxt.setOnClickListener{
 

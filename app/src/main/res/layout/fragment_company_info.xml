@@ -45,20 +45,19 @@
 
                 <RadioGroup
                     android:id="@+id/card1RadioGrp"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/card1Heading">
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card1Heading"
+                    android:orientation="horizontal">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
 
                         <androidx.appcompat.widget.AppCompatRadioButton
                             android:id="@+id/radioBtn1to25"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginVertical="@dimen/_10sdp"
+                            android:layout_marginHorizontal="8dp"
                             android:text="1-25"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toStartOf="@id/radioBtn26to100"
@@ -69,6 +68,7 @@
                             android:id="@+id/radioBtn26to100"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
                             android:text="26-100"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -80,6 +80,7 @@
                             android:id="@+id/radioBtn101to250"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
                             android:text="101-250"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toStartOf="@id/radioBtn250"
@@ -90,18 +91,14 @@
                             android:id="@+id/radioBtn250"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="8dp"
                             android:text="250"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/radioBtn101to250"
                             app:layout_constraintTop_toTopOf="@id/radioBtn1to25" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
                 </RadioGroup>
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView

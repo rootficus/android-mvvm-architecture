@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.rf.macgyver.R
 import com.rf.macgyver.databinding.FragmentInspectionBinding
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
 import com.rf.macgyver.ui.base.BaseViewModelFactory
+import com.rf.macgyver.ui.main.adapter.InspectionItemAdapter
 import com.rf.macgyver.ui.main.di.DaggerInspectionFragmentComponent
 import com.rf.macgyver.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel
@@ -20,6 +22,7 @@ import javax.inject.Inject
 
 class InspectionFragment : BaseFragment<FragmentInspectionBinding>(R.layout.fragment_inspection) {
 
+    val dataList= arrayListOf("A","B")
     @Inject
     lateinit var sharedPreference: SharedPreference
 
@@ -45,6 +48,18 @@ class InspectionFragment : BaseFragment<FragmentInspectionBinding>(R.layout.frag
         mDataBinding.startNewButton.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.action_navigation_inspection_to_navigation_step1_inspection)
         }
+
+        val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
+
+        mDataBinding.backArrowBtn.setOnClickListener{
+            navController.navigateUp()
+        }
+
+
+        val itemAdapter = InspectionItemAdapter(dataList, requireActivity())
+        val layoutManager = LinearLayoutManager(requireActivity())
+        mDataBinding.recyclerViewId.layoutManager = layoutManager
+        mDataBinding.recyclerViewId.adapter = itemAdapter
     }
 
     private fun initializeDagger() {

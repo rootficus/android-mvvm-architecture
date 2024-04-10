@@ -34,7 +34,10 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="8dp">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/step1Icon"
@@ -87,7 +90,10 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="8dp">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/step2Icon"
@@ -139,7 +145,10 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:paddingVertical="@dimen/_5sdp"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginVertical="8dp">
 
                     <TextView
                         android:id="@+id/threeTxt"
@@ -281,6 +290,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:cardCornerRadius="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/vehicleStatusHeading"
                 app:layout_constraintWidth_percent="0.8">
@@ -302,7 +312,7 @@
                     <View
                         android:layout_width="1dp"
                         android:layout_height="0dp"
-                        android:background="@color/black"
+                        android:background="#D3D3D3"
                         app:layout_constraintBottom_toBottomOf="@id/availableBtn"
                         app:layout_constraintEnd_toStartOf="@id/maintenanceRequiredId"
                         app:layout_constraintStart_toEndOf="@id/availableBtn"
@@ -323,7 +333,7 @@
                     <View
                         android:layout_width="1dp"
                         android:layout_height="0dp"
-                        android:background="@color/black"
+                        android:background="#D3D3D3"
                         app:layout_constraintBottom_toBottomOf="@id/availableBtn"
                         app:layout_constraintEnd_toStartOf="@id/breakdownBtn"
                         app:layout_constraintStart_toEndOf="@id/maintenanceRequiredId"
@@ -388,7 +398,7 @@
                     <View
                         android:layout_width="1.5dp"
                         android:layout_height="match_parent"
-                        android:background="@color/black" />
+                        android:background="#D3D3D3"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/mediumId"
@@ -403,7 +413,7 @@
                     <View
                         android:layout_width="1.5dp"
                         android:layout_height="match_parent"
-                        android:background="@color/black" />
+                        android:background="#D3D3D3" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/highId"
@@ -418,7 +428,7 @@
                     <View
                         android:layout_width="1.5dp"
                         android:layout_height="match_parent"
-                        android:background="@color/black" />
+                        android:background="#D3D3D3" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/emergencyId"
@@ -492,7 +502,7 @@
                     <View
                         android:layout_width="1.5dp"
                         android:layout_height="0dp"
-                        android:background="@color/black"
+                        android:background="#D3D3D3"
                         app:layout_constraintBottom_toBottomOf="@id/safeVehicleYesBtn"
                         app:layout_constraintStart_toEndOf="@id/safeVehicleYesBtn"
                         app:layout_constraintTop_toTopOf="@id/safeVehicleYesBtn" />
@@ -572,7 +582,7 @@
                     <View
                         android:layout_width="1.5dp"
                         android:layout_height="0dp"
-                        android:background="@color/black"
+                        android:background="#D3D3D3"
                         app:layout_constraintBottom_toBottomOf="@id/deployedYesBtn"
                         app:layout_constraintStart_toEndOf="@id/deployedYesBtn"
                         app:layout_constraintTop_toTopOf="@id/deployedYesBtn" />
@@ -625,6 +635,7 @@
                 android:layout_marginVertical="8dp"
                 android:fontFamily="@font/roboto_regular"
                 android:padding="8dp"
+                android:visibility="gone"
                 android:text="Inspector Signature"
                 android:textColor="#808080"
                 android:textSize="16sp"
@@ -640,6 +651,7 @@
                 android:layout_margin="10dp"
                 android:elevation="5dp"
                 app:cardCornerRadius="10dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.15"
                 app:layout_constraintStart_toStartOf="parent"

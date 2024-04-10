@@ -29,7 +29,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/_5sdp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/step1Icon"
@@ -63,8 +66,7 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="Inspection Info"
                     android:textColor="#808080"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/step1Icon"
+                    android:textSize="11sp"                    app:layout_constraintBottom_toBottomOf="@id/step1Icon"
                     app:layout_constraintStart_toEndOf="@id/step1Icon" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -85,7 +87,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/_5sdp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/step2Icon"
@@ -119,8 +124,7 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="Do Inpection"
                     android:textColor="#808080"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/step2Icon"
+                    android:textSize="11sp"                    app:layout_constraintBottom_toBottomOf="@id/step2Icon"
                     app:layout_constraintStart_toEndOf="@id/step2Icon" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -140,7 +144,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/_5sdp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/threeTxt"
@@ -174,8 +181,7 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="Summary"
                     android:textColor="#808080"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/threeTxt"
+                    android:textSize="11sp"                    app:layout_constraintBottom_toBottomOf="@id/threeTxt"
                     app:layout_constraintStart_toEndOf="@id/threeTxt" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -317,7 +323,7 @@
             android:background="@drawable/edit_text_border"
             android:fontFamily="@font/roboto_regular"
             android:hint="Meter Reading"
-            android:padding="10dp"
+            android:padding="8dp"
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="@id/vehicleHeading"
             app:layout_constraintTop_toBottomOf="@id/vehicleContent"

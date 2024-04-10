@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rf.macgyver.databinding.ItemInspectionBinding
 
-class InspectionItemAdapter (private var dataList: ArrayList<Triple<String,String,String>>, private val context: Context?):
+class InspectionItemAdapter (private var dataList: ArrayList<String>, private val context: Context?):
     RecyclerView.Adapter<InspectionItemAdapter.RecyclerViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val binding = ItemInspectionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -15,18 +15,14 @@ class InspectionItemAdapter (private var dataList: ArrayList<Triple<String,Strin
 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         val cardData = dataList[position]
-        holder.reportId.setText(cardData.first)
-        holder.vehicleId.setText(cardData.second)
-        holder.dateId.setText(cardData.third)
+        holder.reportId.setText(cardData)
     }
 
     override fun getItemCount(): Int {
         return dataList.size
     }
     class RecyclerViewHolder(val binding: ItemInspectionBinding) : RecyclerView.ViewHolder(binding.root) {
-        var reportId = binding.etReportNo
-        var vehicleId = binding.etVehicle
-        var dateId = binding.etDate
+        var reportId = binding.reportHeading
 
     }
 

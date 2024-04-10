@@ -4,6 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/navigation_dashboard">
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.rf.macgyver.ui.main.fragment.AccountFragment"
+        android:label="AccountFragment"
+        tools:layout="@layout/fragment_account">
+        <action
+            android:id="@+id/go_home"
+            app:destination="@+id/navigation_account"
+            app:popUpTo="@+id/destination_to_pop"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_navigation_account_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -12,12 +28,27 @@
         tools:layout="@layout/fragment_dashboard">
 
         <action
+            android:id="@+id/go_home"
+            app:destination="@+id/navigation_dashboard"
+            app:popUpTo="@+id/destination_to_pop"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_account"
+            app:destination="@id/navigation_account" />
+
+
+        <action
             android:id="@+id/action_navigation_dashboard_to_navigation_daily_report"
             app:destination="@id/navigation_daily_report" />
 
         <action
             android:id="@+id/action_navigation_dashboard_to_navigation_inspection"
             app:destination="@id/navigation_inspection" />
+
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_incident_report"
+            app:destination="@id/navigation_incident_report" />
 
     </fragment>
 
@@ -100,6 +131,47 @@
         android:name="com.rf.macgyver.ui.main.fragment.inspection.Step3IPFragment"
         android:label="Step3IPFragment"
         tools:layout="@layout/fragment_step3_ip">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_incident_report"
+        android:name="com.rf.macgyver.ui.main.fragment.incidentReport.IncidentReportFragment"
+        android:label="IncidfentReportFragment"
+        tools:layout="@layout/fragment_incident_report">
+
+        <action
+            android:id="@+id/action_navigation_incident_report_to_navigation_step1_incident"
+            app:destination="@id/navigation_step1_incident" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_step1_incident"
+        android:name="com.rf.macgyver.ui.main.fragment.incidentReport.Step1IRFragment"
+        android:label="Step1IRFragment"
+        tools:layout="@layout/fragment_step1_i_r">
+
+        <action
+            android:id="@+id/action_navigation_step1_incident_to_navigation_step2_incident"
+            app:destination="@id/navigation_step2_incident" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_step2_incident"
+        android:name="com.rf.macgyver.ui.main.fragment.incidentReport.Step2IRFragment"
+        android:label="Step2IRFragment"
+        tools:layout="@layout/fragment_step2_i_r">
+
+        <action
+            android:id="@+id/action_navigation_step2_incident_to_navigation_step3_incident"
+            app:destination="@id/navigation_step3_incident" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_step3_incident"
+        android:name="com.rf.macgyver.ui.main.fragment.incidentReport.Step3IRFragment"
+        android:label="Step3IRFragment"
+        tools:layout="@layout/fragment_step3_i_r">
 
     </fragment>
 

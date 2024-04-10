@@ -29,7 +29,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/_5sdp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/step1Icon"
@@ -60,8 +63,7 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="Inspection Info."
                     android:textColor="#808080"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/step1Icon"
+                    android:textSize="11sp"                    app:layout_constraintBottom_toBottomOf="@id/step1Icon"
                     app:layout_constraintStart_toEndOf="@id/step1Icon" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -82,7 +84,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/_5sdp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/step2Icon"
@@ -116,8 +121,7 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="Do Inspection"
                     android:textColor="#808080"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/step2Icon"
+                    android:textSize="11sp"                    app:layout_constraintBottom_toBottomOf="@id/step2Icon"
                     app:layout_constraintStart_toEndOf="@id/step2Icon" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -137,7 +141,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingVertical="@dimen/_5sdp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginVertical="8dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/threeTxt"
@@ -171,8 +178,7 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="Summary"
                     android:textColor="#808080"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/threeTxt"
+                    android:textSize="11sp"                    app:layout_constraintBottom_toBottomOf="@id/threeTxt"
                     app:layout_constraintStart_toEndOf="@id/threeTxt" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -186,7 +192,7 @@
             android:layout_marginVertical="40dp"
             android:fontFamily="@font/roboto_regular"
             android:text="1. Visually Inspect Air Compressor"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/step1Card" />
 
@@ -196,6 +202,17 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:src="@drawable/vector__7_"
+            app:layout_constraintBottom_toBottomOf="@id/airCompressorHeading"
+            app:layout_constraintEnd_toStartOf="@id/airCompressorQuesBtn"
+            app:layout_constraintTop_toTopOf="@id/airCompressorHeading" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/airCompressorQuesBtn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="3.5dp"
+            app:layout_constraintWidth_percent="0.05"
+            android:src="@drawable/question_mark_in_a_circle_outline_svgrepo_com"
             app:layout_constraintBottom_toBottomOf="@id/airCompressorHeading"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/airCompressorHeading" />
@@ -212,19 +229,21 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card1"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="10dp"
             android:elevation="10dp"
             app:cardCornerRadius="8dp"
+            app:layout_constraintWidth_percent="0.7"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/airCompressorHeading">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp">
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card1OKtxt"
@@ -236,7 +255,7 @@
                     android:textColor="#979797"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.24" />
+                    app:layout_constraintWidth_percent="0.33" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card1FaultyTxt"
@@ -249,21 +268,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
                     app:layout_constraintStart_toEndOf="@id/card1OKtxt"
                     app:layout_constraintTop_toTopOf="@id/card1OKtxt"
-                    app:layout_constraintWidth_percent="0.24" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card1FaultyButOkTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="Faulty but OK"
-                    android:textAlignment="center"
-                    android:textColor="#979797"
-                    app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
-                    app:layout_constraintEnd_toStartOf="@id/card1NATxt"
-                    app:layout_constraintStart_toEndOf="@id/card1FaultyTxt"
-                    app:layout_constraintTop_toTopOf="@id/card1OKtxt"
-                    app:layout_constraintWidth_percent="0.24" />
+                    app:layout_constraintWidth_percent="0.33" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card1NATxt"
@@ -275,9 +280,9 @@
                     android:textColor="#979797"
                     app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/card1FaultyButOkTxt"
+                    app:layout_constraintStart_toEndOf="@id/card1FaultyTxt"
                     app:layout_constraintTop_toTopOf="@id/card1OKtxt"
-                    app:layout_constraintWidth_percent="0.24" />
+                    app:layout_constraintWidth_percent="0.33" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -290,7 +295,7 @@
             android:layout_marginVertical="30dp"
             android:fontFamily="@font/roboto_regular"
             android:text="2. Check and Log Motor Bearing Temps"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card1" />
 
@@ -300,6 +305,17 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:src="@drawable/vector__7_"
+            app:layout_constraintBottom_toBottomOf="@id/motorBearingHeading"
+            app:layout_constraintEnd_toStartOf="@id/motorBearingQuesBtn"
+            app:layout_constraintTop_toTopOf="@id/motorBearingHeading" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/motorBearingQuesBtn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="3.5dp"
+            app:layout_constraintWidth_percent="0.05"
+            android:src="@drawable/question_mark_in_a_circle_outline_svgrepo_com"
             app:layout_constraintBottom_toBottomOf="@id/motorBearingHeading"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/motorBearingHeading" />
@@ -317,19 +333,21 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card2"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="10dp"
             android:elevation="10dp"
             app:cardCornerRadius="8dp"
+            app:layout_constraintWidth_percent="0.7"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/motorBearingHeading">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp">
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card2OKtxt"
@@ -341,7 +359,7 @@
                     android:textColor="#979797"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.24" />
+                    app:layout_constraintWidth_percent="0.33" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card2FaultyTxt"
@@ -354,21 +372,8 @@
                     app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
                     app:layout_constraintStart_toEndOf="@id/card2OKtxt"
                     app:layout_constraintTop_toTopOf="@id/card2OKtxt"
-                    app:layout_constraintWidth_percent="0.24" />
+                    app:layout_constraintWidth_percent="0.33" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card2FaultyButOkTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="Faulty but OK"
-                    android:textAlignment="center"
-                    android:textColor="#979797"
-                    app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
-                    app:layout_constraintEnd_toStartOf="@id/card2NATxt"
-                    app:layout_constraintStart_toEndOf="@id/card2FaultyTxt"
-                    app:layout_constraintTop_toTopOf="@id/card2OKtxt"
-                    app:layout_constraintWidth_percent="0.24" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card2NATxt"
@@ -380,9 +385,9 @@
                     android:textColor="#979797"
                     app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/card2FaultyButOkTxt"
+                    app:layout_constraintStart_toEndOf="@id/card2FaultyTxt"
                     app:layout_constraintTop_toTopOf="@id/card2OKtxt"
-                    app:layout_constraintWidth_percent="0.24" />
+                    app:layout_constraintWidth_percent="0.33" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -395,7 +400,7 @@
             android:layout_marginVertical="30dp"
             android:fontFamily="@font/roboto_regular"
             android:text="3. Inspect Coupler, Hub and Shaft Sheal"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card2" />
 
@@ -405,6 +410,17 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:src="@drawable/vector__7_"
+            app:layout_constraintBottom_toBottomOf="@id/inspectCouplerHeading"
+            app:layout_constraintEnd_toStartOf="@id/inspectCouplerQuesBtn"
+            app:layout_constraintTop_toTopOf="@id/inspectCouplerHeading" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/inspectCouplerQuesBtn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="3.5dp"
+            app:layout_constraintWidth_percent="0.05"
+            android:src="@drawable/question_mark_in_a_circle_outline_svgrepo_com"
             app:layout_constraintBottom_toBottomOf="@id/inspectCouplerHeading"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/inspectCouplerHeading" />
@@ -419,22 +435,23 @@
             app:layout_constraintEnd_toStartOf="@id/ispectCouplerPlusBtn"
             app:layout_constraintTop_toTopOf="@id/inspectCouplerHeading" />
 
-
         <androidx.cardview.widget.CardView
             android:id="@+id/card3"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="10dp"
             android:elevation="10dp"
             app:cardCornerRadius="8dp"
+            app:layout_constraintWidth_percent="0.7"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/inspectCouplerHeading">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp">
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card3OKtxt"
@@ -446,7 +463,7 @@
                     android:textColor="#979797"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.24" />
+                    app:layout_constraintWidth_percent="0.33" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card3FaultyTxt"
@@ -459,21 +476,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"
                     app:layout_constraintStart_toEndOf="@id/card3OKtxt"
                     app:layout_constraintTop_toTopOf="@id/card3OKtxt"
-                    app:layout_constraintWidth_percent="0.24" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card3FaultyButOkTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="Faulty but OK"
-                    android:textAlignment="center"
-                    android:textColor="#979797"
-                    app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"
-                    app:layout_constraintEnd_toStartOf="@id/card3NATxt"
-                    app:layout_constraintStart_toEndOf="@id/card3FaultyTxt"
-                    app:layout_constraintTop_toTopOf="@id/card3OKtxt"
-                    app:layout_constraintWidth_percent="0.24" />
+                    app:layout_constraintWidth_percent="0.33" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card3NATxt"
@@ -485,9 +488,9 @@
                     android:textColor="#979797"
                     app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/card3FaultyButOkTxt"
+                    app:layout_constraintStart_toEndOf="@id/card3FaultyTxt"
                     app:layout_constraintTop_toTopOf="@id/card3OKtxt"
-                    app:layout_constraintWidth_percent="0.24" />
+                    app:layout_constraintWidth_percent="0.33" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -500,7 +503,7 @@
             android:layout_marginVertical="30dp"
             android:fontFamily="@font/roboto_regular"
             android:text="2. Check and Log Motor Bearing Temps"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card3" />
 
@@ -510,6 +513,16 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:src="@drawable/vector__7_"
+            app:layout_constraintBottom_toBottomOf="@id/coolerTempsHeading"
+            app:layout_constraintEnd_toStartOf="@id/coolerTempsQuesBtn"
+            app:layout_constraintTop_toTopOf="@id/coolerTempsHeading" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/coolerTempsQuesBtn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="3.5dp"
+            app:layout_constraintWidth_percent="0.05"
+            android:src="@drawable/question_mark_in_a_circle_outline_svgrepo_com"
             app:layout_constraintBottom_toBottomOf="@id/coolerTempsHeading"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/coolerTempsHeading" />
@@ -524,22 +537,23 @@
             app:layout_constraintEnd_toStartOf="@id/coolerTempsPlusBtn"
             app:layout_constraintTop_toTopOf="@id/coolerTempsHeading" />
 
-
         <androidx.cardview.widget.CardView
             android:id="@+id/card4"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="10dp"
             android:elevation="10dp"
             app:cardCornerRadius="8dp"
+            app:layout_constraintWidth_percent="0.7"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/coolerTempsHeading">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp">
+                android:layout_marginVertical="10dp"
+                android:layout_marginHorizontal="5dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card4OKtxt"
@@ -551,7 +565,7 @@
                     android:textColor="#979797"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.24" />
+                    app:layout_constraintWidth_percent="0.33" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card4FaultyTxt"
@@ -564,21 +578,8 @@
                     app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"
                     app:layout_constraintStart_toEndOf="@id/card4OKtxt"
                     app:layout_constraintTop_toTopOf="@id/card4OKtxt"
-                    app:layout_constraintWidth_percent="0.24" />
+                    app:layout_constraintWidth_percent="0.33" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card4FaultyButOkTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="Faulty but OK"
-                    android:textAlignment="center"
-                    android:textColor="#979797"
-                    app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"
-                    app:layout_constraintEnd_toStartOf="@id/card4NATxt"
-                    app:layout_constraintStart_toEndOf="@id/card4FaultyTxt"
-                    app:layout_constraintTop_toTopOf="@id/card4OKtxt"
-                    app:layout_constraintWidth_percent="0.24" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card4NATxt"
@@ -590,9 +591,9 @@
                     android:textColor="#979797"
                     app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/card4FaultyButOkTxt"
+                    app:layout_constraintStart_toEndOf="@id/card4FaultyTxt"
                     app:layout_constraintTop_toTopOf="@id/card4OKtxt"
-                    app:layout_constraintWidth_percent="0.24" />
+                    app:layout_constraintWidth_percent="0.33" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

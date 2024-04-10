@@ -14,16 +14,16 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/reportHeading"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
             android:text="Report#"
             android:textColor="#808080"
-            app:layout_constraintBottom_toBottomOf="@id/etReportNo."
+            android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/etReportNo." />
+            app:layout_constraintTop_toTopOf="parent." />
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <!--<androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etReportNo."
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -166,117 +166,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/reportHeading"
             app:layout_constraintTop_toBottomOf="@id/idView3" />
+-->
 
-
-        <!--<androidx.appcompat.widget.AppCompatTextView
-                    android:fontFamily="@font/roboto_regular"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/Mtxt"
-            android:text="M"
-            android:textSize="16sp"
-            app:layout_constraintWidth_percent="0.14"
-            android:textAlignment="center"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/idView3"
-            android:layout_marginTop="12dp"/>
-        <androidx.appcompat.widget.AppCompatTextView
-                    android:fontFamily="@font/roboto_regular"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/Ttxt"
-            android:text="T"
-            android:textSize="16sp"
-            app:layout_constraintWidth_percent="0.14"
-            android:textAlignment="center"
-            app:layout_constraintStart_toEndOf="@id/Mtxt"
-            app:layout_constraintTop_toTopOf="@id/Mtxt"
-            app:layout_constraintBottom_toBottomOf="@id/Mtxt"/>
-        <androidx.appcompat.widget.AppCompatTextView
-                    android:fontFamily="@font/roboto_regular"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/Wtxt"
-            android:text="W"
-            android:textSize="16sp"
-            app:layout_constraintWidth_percent="0.14"
-            android:textAlignment="center"
-            app:layout_constraintStart_toEndOf="@id/Ttxt"
-            app:layout_constraintTop_toTopOf="@id/Mtxt"
-            app:layout_constraintBottom_toBottomOf="@id/Mtxt"/>
-        <androidx.appcompat.widget.AppCompatTextView
-                    android:fontFamily="@font/roboto_regular"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/Thurstxt"
-            android:text="T"
-            android:textSize="16sp"
-            app:layout_constraintWidth_percent="0.14"
-            android:textAlignment="center"
-            app:layout_constraintStart_toEndOf="@id/Wtxt"
-            app:layout_constraintTop_toTopOf="@id/Mtxt"
-            app:layout_constraintBottom_toBottomOf="@id/Mtxt"/>
-        <androidx.appcompat.widget.AppCompatTextView
-                    android:fontFamily="@font/roboto_regular"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/Ftxt"
-            android:text="F"
-            android:textSize="16sp"
-            app:layout_constraintWidth_percent="0.14"
-            android:textAlignment="center"
-            app:layout_constraintStart_toEndOf="@id/Thurstxt"
-            app:layout_constraintTop_toTopOf="@id/Mtxt"
-            app:layout_constraintBottom_toBottomOf="@id/Mtxt"/>
-        <androidx.appcompat.widget.AppCompatTextView
-                    android:fontFamily="@font/roboto_regular"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/Sattxt"
-            android:text="S"
-            android:textSize="16sp"
-            app:layout_constraintWidth_percent="0.14"
-            android:textAlignment="center"
-            app:layout_constraintStart_toEndOf="@id/Ftxt"
-            app:layout_constraintTop_toTopOf="@id/Mtxt"
-            app:layout_constraintBottom_toBottomOf="@id/Mtxt"/>
-        <androidx.appcompat.widget.AppCompatTextView
-                    android:fontFamily="@font/roboto_regular"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/Sundaytxt"
-            android:text="S"
-            android:textSize="16sp"
-            app:layout_constraintWidth_percent="0.14"
-            android:textAlignment="center"
-            app:layout_constraintStart_toEndOf="@id/Sattxt"
-            app:layout_constraintTop_toTopOf="@id/Mtxt"
-            app:layout_constraintBottom_toBottomOf="@id/Mtxt"/>
-        <View
-            android:id="@+id/idView4"
-            android:layout_width="match_parent"
-            android:layout_height="1.5dp"
-            android:background="#D3D3D3"
-            android:paddingHorizontal="5dp"
-            app:layout_constraintTop_toBottomOf="@id/Mtxt"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.533"
-            android:layout_marginVertical="12dp"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-                    android:fontFamily="@font/roboto_regular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/startTodayInspectionTxt"
-            android:text="Start Today's Inspection"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/idView4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/blue_outline_textview"
-            android:textColor="#8EBCFF"
-            android:padding="10dp"
-            android:layout_margin="5dp"/>-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
