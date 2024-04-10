@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingHorizontal="@dimen/_3sdp"
+        android:background="@drawable/auth_back"
         android:paddingVertical="@dimen/_10sdp">
 
         <androidx.cardview.widget.CardView
@@ -60,6 +61,7 @@
                             android:layout_marginHorizontal="8dp"
                             android:text="1-25"
                             android:textSize="12sp"
+                            android:fontFamily="@font/roboto_regular"
                             app:layout_constraintEnd_toStartOf="@id/radioBtn26to100"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -70,6 +72,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="8dp"
                             android:text="26-100"
+                            android:fontFamily="@font/roboto_regular"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/radioBtn101to250"
@@ -83,6 +86,7 @@
                             android:layout_marginHorizontal="8dp"
                             android:text="101-250"
                             android:textSize="12sp"
+                            android:fontFamily="@font/roboto_regular"
                             app:layout_constraintEnd_toStartOf="@id/radioBtn250"
                             app:layout_constraintStart_toEndOf="@id/radioBtn26to100"
                             app:layout_constraintTop_toTopOf="@id/radioBtn1to25" />
@@ -93,6 +97,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="8dp"
                             android:text="250"
+                            android:fontFamily="@font/roboto_regular"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/radioBtn101to250"
@@ -106,7 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="15dp"
+            android:layout_marginVertical="25dp"
             android:elevation="10dp"
             app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -145,6 +150,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/_10sdp"
                             android:text="Business owner"
+                            android:fontFamily="@font/roboto_regular"
                             android:textSize="12sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -153,6 +159,7 @@
                             android:id="@+id/fleetManagerBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
                             android:text="Fleet Manager"
                             app:layout_constraintEnd_toStartOf="@id/safetManagerBtn"
                             app:layout_constraintStart_toEndOf="@id/businessOwnerBtn"
@@ -162,6 +169,7 @@
                             android:id="@+id/safetManagerBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
                             android:text="Safety Manager"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -174,6 +182,7 @@
                             android:layout_height="wrap_content"
                             android:text="Maintenance Manager"
                             android:textSize="12sp"
+                            android:fontFamily="@font/roboto_regular"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/businessOwnerBtn" />
 
@@ -183,6 +192,7 @@
                             android:layout_height="wrap_content"
                             android:text="Office Admin"
                             android:textSize="12sp"
+                            android:fontFamily="@font/roboto_regular"
                             app:layout_constraintEnd_toStartOf="@id/technicianBtn"
                             app:layout_constraintStart_toEndOf="@id/maintenanceManagerBtn"
                             app:layout_constraintTop_toBottomOf="@id/businessOwnerBtn" />
@@ -192,6 +202,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Technician"
+                            android:fontFamily="@font/roboto_regular"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/officeAdminBtn"
@@ -202,6 +213,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Driver"
+                            android:fontFamily="@font/roboto_regular"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toStartOf="@id/othersBtn"
                             app:layout_constraintStart_toStartOf="parent"
@@ -213,6 +225,7 @@
                             android:layout_height="wrap_content"
                             android:text="Others"
                             android:textSize="12sp"
+                            android:fontFamily="@font/roboto_regular"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/driverBtn"
                             app:layout_constraintTop_toBottomOf="@id/maintenanceManagerBtn" />
@@ -229,7 +242,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:layout_marginVertical="15dp"
+            android:layout_marginVertical="25dp"
             android:elevation="10dp"
             app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -269,6 +282,7 @@
                             android:layout_marginVertical="@dimen/_10sdp"
                             android:text="Construction"
                             android:textSize="12sp"
+                            android:fontFamily="@font/roboto_regular"
                             app:layout_constraintEnd_toStartOf="@id/miningBtn"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -279,6 +293,7 @@
                             android:layout_height="wrap_content"
                             android:text="Mining"
                             android:textSize="12sp"
+                            android:fontFamily="@font/roboto_regular"
                             app:layout_constraintEnd_toStartOf="@id/transportationBtn"
                             app:layout_constraintStart_toEndOf="@id/constructionBtn"
                             app:layout_constraintTop_toTopOf="@id/constructionBtn" />
@@ -289,6 +304,7 @@
                             android:layout_height="wrap_content"
                             android:text="Transportation"
                             android:textSize="12sp"
+                            android:fontFamily="@font/roboto_regular"
                             app:layout_constraintEnd_toStartOf="@id/utilitiesBtn"
                             app:layout_constraintStart_toEndOf="@id/miningBtn"
                             app:layout_constraintTop_toTopOf="@id/constructionBtn" />
@@ -300,6 +316,7 @@
                             android:text="Utilities"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
+                            android:fontFamily="@font/roboto_regular"
                             app:layout_constraintStart_toEndOf="@id/transportationBtn"
                             app:layout_constraintTop_toTopOf="@id/constructionBtn" />
 
@@ -309,6 +326,7 @@
                             android:layout_height="wrap_content"
                             android:text="Agriculture"
                             android:textSize="12sp"
+                            android:fontFamily="@font/roboto_regular"
                             app:layout_constraintEnd_toEndOf="@id/constructionBtn"
                             app:layout_constraintStart_toStartOf="@id/constructionBtn"
                             app:layout_constraintTop_toBottomOf="@id/constructionBtn" />
@@ -319,6 +337,7 @@
                             android:layout_height="wrap_content"
                             android:text="Waste Management"
                             android:textSize="12sp"
+                            android:fontFamily="@font/roboto_regular"
                             app:layout_constraintEnd_toStartOf="@id/oilGasBtn"
                             app:layout_constraintStart_toStartOf="@id/miningBtn"
                             app:layout_constraintTop_toBottomOf="@id/constructionBtn" />
@@ -329,6 +348,7 @@
                             android:layout_height="wrap_content"
                             android:text="Oil and Gas"
                             android:textSize="12sp"
+                            android:fontFamily="@font/roboto_regular"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/wasteManagementBtn"
                             app:layout_constraintTop_toBottomOf="@id/constructionBtn" />
@@ -338,6 +358,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Workshop"
+                            android:fontFamily="@font/roboto_regular"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toStartOf="@id/inventoryBtn"
                             app:layout_constraintStart_toStartOf="parent"
@@ -348,6 +369,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Inventory"
+                            android:fontFamily="@font/roboto_regular"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toStartOf="@id/forestryBtn"
                             app:layout_constraintStart_toEndOf="@id/workshopBtn"
@@ -359,6 +381,7 @@
                             android:layout_height="wrap_content"
                             android:text="Forestry"
                             android:textSize="12sp"
+                            android:fontFamily="@font/roboto_regular"
                             app:layout_constraintEnd_toStartOf="@id/governmentBtn"
                             app:layout_constraintStart_toEndOf="@id/inventoryBtn"
                             app:layout_constraintTop_toBottomOf="@id/agricultureBtn" />
@@ -368,6 +391,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Government"
+                            android:fontFamily="@font/roboto_regular"
                             android:textSize="12sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/forestryBtn"
@@ -386,12 +410,17 @@
             android:id="@+id/nextBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:text="Next"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="#8EBCFF"
+            android:textSize="14sp"
+            android:fontFamily="@font/roboto_bold"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card3"
-            app:layout_constraintWidth_percent="0.75" />
+            app:layout_constraintWidth_percent="0.65" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

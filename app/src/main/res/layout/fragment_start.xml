@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:background="@drawable/auth_back"
         android:padding="10dp">
 
         <androidx.cardview.widget.CardView
@@ -105,12 +106,17 @@
             android:id="@+id/letsStartBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="@dimen/_12sdp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="#8EBCFF"
+            android:fontFamily="@font/roboto_bold"
             android:text="Let's Start"
+            android:textColor="@color/white"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card"
-            app:layout_constraintWidth_percent="0.8" />
+            app:layout_constraintWidth_percent="0.6" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

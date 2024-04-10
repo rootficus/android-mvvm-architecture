@@ -9,185 +9,215 @@
             name="signInModel"
             type="com.rf.macgyver.ui.main.viewmodel.SignInViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/profileHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/profileHeading"
-            android:text="Profile"
-            android:textSize="18sp"
             android:layout_margin="18dp"
             android:fontFamily="@font/roboto_medium"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="Profile"
+            android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/adminNameLabel"
-            android:text="Admin Name"
-            android:padding="@dimen/_6sdp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="20dp"
-            android:fontFamily="@font/roboto_medium"
-            app:layout_constraintTop_toBottomOf="@id/profileHeading"
-            app:layout_constraintStart_toStartOf="parent"
-            android:drawableEnd="@drawable/group__4_"
             android:drawableStart="@drawable/group"
-            android:drawablePadding="5dp"/>
+            android:drawableEnd="@drawable/group__4_"
+            android:drawablePadding="5dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_6sdp"
+            android:text="Admin Name"
+            android:textSize="14sp"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profileHeading" />
+
         <View
-            android:layout_width="0dp"
-            android:layout_height="1.5dp"
-            android:background="#D3D3D3"
             android:id="@+id/view1"
-            android:layout_marginVertical="8dp"
-            app:layout_constraintTop_toBottomOf="@id/adminNameLabel"
+            android:layout_width="0dp"
+            android:layout_height="1.5dp"
+            android:layout_marginVertical="5dp"
+            android:background="#D3D3D3"
+            app:layout_constraintEnd_toEndOf="@id/adminNameLabel"
             app:layout_constraintStart_toStartOf="@id/adminNameLabel"
-            app:layout_constraintEnd_toEndOf="@id/adminNameLabel"/>
+            app:layout_constraintTop_toBottomOf="@id/adminNameLabel" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/locationLabel"
-            android:text="Location"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_margin="12dp"
-            android:padding="@dimen/_6sdp"
-            android:fontFamily="@font/roboto_medium"
-            app:layout_constraintTop_toBottomOf="@id/view1"
-            app:layout_constraintStart_toStartOf="parent"
-            android:drawableEnd="@drawable/group__4_"
             android:drawableStart="@drawable/vector__14_"
-            android:drawablePadding="5dp"/>
+            android:drawableEnd="@drawable/group__4_"
+            android:drawablePadding="5dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_6sdp"
+            android:text="Location"
+            android:textSize="14sp"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view1" />
+
         <View
-            android:layout_width="0dp"
-            android:layout_height="1.5dp"
-            android:background="#D3D3D3"
             android:id="@+id/view2"
-            android:layout_marginVertical="8dp"
-            app:layout_constraintTop_toBottomOf="@id/locationLabel"
+            android:layout_width="0dp"
+            android:layout_height="1.5dp"
+            android:layout_marginVertical="5dp"
+            android:background="#D3D3D3"
+            app:layout_constraintEnd_toEndOf="@id/locationLabel"
             app:layout_constraintStart_toStartOf="@id/locationLabel"
-            app:layout_constraintEnd_toEndOf="@id/locationLabel"/>
+            app:layout_constraintTop_toBottomOf="@id/locationLabel" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/integrationLabel"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="12dp"
+            android:drawableStart="@drawable/group__1_"
+            android:drawableEnd="@drawable/group__4_"
+            android:drawablePadding="5dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_6sdp"
             android:text="Integration with IOT"
-            android:layout_margin="12dp"
-            android:padding="@dimen/_6sdp"
-            android:fontFamily="@font/roboto_medium"
-            app:layout_constraintTop_toBottomOf="@id/view2"
+            android:textSize="14sp"
+            app:layout_constraintHeight_percent="0.06"
             app:layout_constraintStart_toStartOf="parent"
-            android:drawableEnd="@drawable/group__4_"
-            android:drawableStart="@drawable/group__1_"
-            android:drawablePadding="5dp"/>
+            app:layout_constraintTop_toBottomOf="@id/view2" />
+
         <View
-            android:layout_width="0dp"
-            android:layout_height="1.5dp"
-            android:background="#D3D3D3"
             android:id="@+id/view7"
-            android:layout_marginVertical="8dp"
-            app:layout_constraintTop_toBottomOf="@id/integrationLabel"
+            android:layout_width="0dp"
+            android:layout_height="1.5dp"
+            android:layout_marginVertical="5dp"
+            android:background="#D3D3D3"
+            app:layout_constraintEnd_toEndOf="@id/integrationLabel"
             app:layout_constraintStart_toStartOf="@id/integrationLabel"
-            app:layout_constraintEnd_toEndOf="@id/integrationLabel"/>
+            app:layout_constraintTop_toBottomOf="@id/integrationLabel" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/companyNameLabel"
-            android:text="Company Name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_margin="12dp"
-            android:padding="@dimen/_6sdp"
-            android:fontFamily="@font/roboto_medium"
-            app:layout_constraintTop_toBottomOf="@id/view7"
-            app:layout_constraintStart_toStartOf="parent"
-            android:drawableEnd="@drawable/group__4_"
             android:drawableStart="@drawable/group__1_"
-            android:drawablePadding="5dp"/>
+            android:drawableEnd="@drawable/group__4_"
+            android:drawablePadding="5dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_6sdp"
+            android:text="Company Name"
+            android:textSize="14sp"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view7" />
+
         <View
-            android:layout_width="0dp"
-            android:layout_height="1.5dp"
-            android:background="#D3D3D3"
             android:id="@+id/view3"
-            android:layout_marginVertical="8dp"
-            app:layout_constraintTop_toBottomOf="@id/companyNameLabel"
+            android:layout_width="0dp"
+            android:layout_height="1.5dp"
+            android:layout_marginVertical="5dp"
+            android:background="#D3D3D3"
+            app:layout_constraintEnd_toEndOf="@id/companyNameLabel"
             app:layout_constraintStart_toStartOf="@id/companyNameLabel"
-            app:layout_constraintEnd_toEndOf="@id/companyNameLabel"/>
+            app:layout_constraintTop_toBottomOf="@id/companyNameLabel" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/companyAddLabel"
-            android:text="Company Address"
-            android:padding="@dimen/_6sdp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_margin="12dp"
-            android:fontFamily="@font/roboto_medium"
-            app:layout_constraintTop_toBottomOf="@id/view3"
-            app:layout_constraintStart_toStartOf="parent"
-            android:drawableEnd="@drawable/group__4_"
             android:drawableStart="@drawable/group__2_"
-            android:drawablePadding="5dp"/>
+            android:drawableEnd="@drawable/group__4_"
+            android:drawablePadding="5dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_6sdp"
+            android:text="Company Address"
+            android:textSize="14sp"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view3" />
+
         <View
-            android:layout_width="0dp"
-            android:layout_height="1.5dp"
-            android:background="#D3D3D3"
             android:id="@+id/view4"
-            android:layout_marginVertical="8dp"
-            app:layout_constraintTop_toBottomOf="@id/companyAddLabel"
+            android:layout_width="0dp"
+            android:layout_height="1.5dp"
+            android:layout_marginVertical="5dp"
+            android:background="#D3D3D3"
+            app:layout_constraintEnd_toEndOf="@id/companyAddLabel"
             app:layout_constraintStart_toStartOf="@id/companyAddLabel"
-            app:layout_constraintEnd_toEndOf="@id/companyAddLabel"/>
+            app:layout_constraintTop_toBottomOf="@id/companyAddLabel" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/contactNoLabel"
-            android:text="Contact Number"
-            android:padding="@dimen/_6sdp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_margin="12dp"
-            android:fontFamily="@font/roboto_medium"
-            app:layout_constraintTop_toBottomOf="@id/view4"
-            app:layout_constraintStart_toStartOf="parent"
-            android:drawableEnd="@drawable/group__4_"
             android:drawableStart="@drawable/phone_1"
-            android:drawablePadding="5dp"/>
+            android:drawableEnd="@drawable/group__4_"
+            android:drawablePadding="5dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_6sdp"
+            android:text="Contact Number"
+            android:textSize="14sp"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view4" />
+
         <View
+            android:id="@+id/view5"
             android:layout_width="0dp"
             android:layout_height="1.5dp"
+            android:layout_marginVertical="5dp"
             android:background="#D3D3D3"
-            android:id="@+id/view5"
-            android:layout_marginVertical="8dp"
-            app:layout_constraintTop_toBottomOf="@id/contactNoLabel"
+            app:layout_constraintEnd_toEndOf="@id/contactNoLabel"
             app:layout_constraintStart_toStartOf="@id/contactNoLabel"
-            app:layout_constraintEnd_toEndOf="@id/contactNoLabel"/>
+            app:layout_constraintTop_toBottomOf="@id/contactNoLabel" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/signOutLabel"
-            android:text="Sign Out"
-            android:padding="@dimen/_6sdp"
-            android:textColor="#FF6565"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_margin="12dp"
-            android:fontFamily="@font/roboto_medium"
-            app:layout_constraintTop_toBottomOf="@id/view5"
-            app:layout_constraintStart_toStartOf="parent"
-            android:drawableEnd="@drawable/group__4_"
             android:drawableStart="@drawable/group__3_"
-            android:drawablePadding="5dp"/>
+            android:drawableEnd="@drawable/group__4_"
+            android:drawablePadding="5dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center_vertical"
+            android:padding="@dimen/_6sdp"
+            android:text="Sign Out"
+            android:textColor="#FF6565"
+            android:textSize="14sp"
+            app:layout_constraintHeight_percent="0.06"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view5" />
+
         <View
+            android:id="@+id/view6"
             android:layout_width="0dp"
             android:layout_height="1.5dp"
+            android:layout_marginVertical="5dp"
             android:background="#D3D3D3"
-            android:id="@+id/view6"
-            android:layout_marginVertical="8dp"
-            app:layout_constraintTop_toBottomOf="@id/signOutLabel"
+            app:layout_constraintEnd_toEndOf="@id/signOutLabel"
             app:layout_constraintStart_toStartOf="@id/signOutLabel"
-            app:layout_constraintEnd_toEndOf="@id/signOutLabel"/>
-
+            app:layout_constraintTop_toBottomOf="@id/signOutLabel" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -44,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dailyReportingHeading" />
 
@@ -64,10 +65,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
-            android:background="@drawable/button_rounded_corners"
-            android:fontFamily="@font/roboto_bold"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/white"
+            android:fontFamily="@font/roboto_regular"
+            android:textAllCaps="false"
             android:text="+ Start New Inspection"
             android:textSize="14sp"
+            android:elevation="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

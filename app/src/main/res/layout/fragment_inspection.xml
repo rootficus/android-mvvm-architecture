@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.main.fragment.inspection.InspectionFragment">
+    xmlns:tools="http://schemas.android.com/tools">
+
 
     <data>
 
@@ -22,7 +22,7 @@
             android:layout_margin="12dp"
             android:src="@drawable/vector__6_"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/dailyReportingHeading"
@@ -36,15 +36,6 @@
             app:layout_constraintStart_toEndOf="@id/backArrowBtn"
             app:layout_constraintTop_toTopOf="@id/backArrowBtn" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dailyReportingHeading" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewId"
             android:layout_width="match_parent"
@@ -52,7 +43,7 @@
             android:layout_margin="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tabLayout"
+            app:layout_constraintTop_toBottomOf="@id/dailyReportingHeading"
             tools:itemCount="3"
             tools:listitem="@layout/item_inspection" />
 
@@ -62,8 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:background="@drawable/button_rounded_corners"
-            android:text="+ Start New Inspection"
-            android:textSize="15dp"
+            android:text="Start New Inspection"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

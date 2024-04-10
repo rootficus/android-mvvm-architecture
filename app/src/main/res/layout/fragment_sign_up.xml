@@ -14,21 +14,107 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:padding="10dp">
+        android:background="@drawable/auth_back"
+        android:paddingVertical="10dp">
 
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imgTopLogo"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginVertical="35dp"
-            android:src="@drawable/group_3"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:padding="8dp"
+            android:text="SignUp"
+            android:textColor="@color/white"
+            android:textSize="32sp"
             app:layout_constraintBottom_toTopOf="@id/txt_sub_heading"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.17"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/signCard"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/white"
+            android:paddingVertical="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.25" />
+            app:layout_constraintWidth_percent="0.85">
+
+            <View
+                android:id="@+id/viewTop"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintHeight_percent="0.2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etUsername"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:drawableStart="@drawable/vector__4_"
+                android:drawablePadding="6dp"
+                android:hint="Username"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@id/etPassword"
+                app:layout_constraintEnd_toEndOf="@id/etPassword"
+                app:layout_constraintHeight_percent="0.28"
+                app:layout_constraintStart_toStartOf="@id/etPassword"
+                app:layout_constraintTop_toBottomOf="@id/viewTop" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                android:drawableStart="@drawable/vector__3_"
+                android:drawablePadding="6dp"
+                android:hint="Password"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="12dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.28"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etUsername"
+                app:layout_constraintWidth_percent="0.7" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/round_corners"
+                android:backgroundTint="@color/sigInEditTextBackColor"
+                android:drawableStart="@drawable/vector__5_"
+                android:drawablePadding="6dp"
+                android:hint="Email"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingVertical="12dp"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/etPassword"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.28"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintWidth_percent="0.7" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/logoImg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/signincheck"
+            app:layout_constraintBottom_toTopOf="@id/signCard"
+            app:layout_constraintEnd_toEndOf="@id/signCard"
+            app:layout_constraintStart_toStartOf="@id/signCard"
+            app:layout_constraintTop_toTopOf="@id/signCard" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -39,91 +125,29 @@
             android:fontFamily="@font/roboto_regular"
             android:text="Enter following details to register"
             android:textAlignment="center"
-            android:textColor="@color/textColor"
+            android:textColor="@color/white"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@id/etUserName"
+            app:layout_constraintBottom_toTopOf="@id/logoImg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintWidth_percent="0.8" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etUserName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
-            android:background="@drawable/round_corners"
-            android:backgroundTint="@color/sigInEditTextBackColor"
-            android:drawableStart="@drawable/vector__4_"
-            android:drawablePadding="6dp"
-            android:fontFamily="@font/roboto_medium"
-            android:hint="User Name"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:padding="14dp"
-            android:textColor="@color/textColor"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/etPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintWidth_percent="0.85" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etPassword"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
-            android:background="@drawable/round_corners"
-            android:backgroundTint="@color/sigInEditTextBackColor"
-            android:drawableStart="@drawable/vector__3_"
-            android:drawablePadding="6dp"
-            android:fontFamily="@font/roboto_medium"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:padding="14dp"
-            android:textColor="@color/textColor"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/etUserName"
-            app:layout_constraintStart_toStartOf="@id/etUserName"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etEmail"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
-            android:background="@drawable/round_corners"
-            android:backgroundTint="@color/sigInEditTextBackColor"
-            android:drawableStart="@drawable/vector__5_"
-            android:drawablePadding="6dp"
-            android:fontFamily="@font/roboto_medium"
-            android:hint="Email Address"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:padding="14dp"
-            android:textColor="@color/textColor"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/etPassword"
-            app:layout_constraintStart_toStartOf="@id/etPassword"
-            app:layout_constraintTop_toBottomOf="@id/etPassword" />
 
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/registerBtn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/btn_inactive_back"
-            android:backgroundTint="@color/textColor"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/round_card_corners"
+            android:backgroundTint="#8EBCFF"
             android:text="Register"
-            android:textColor="@color/sigInButtonTextColor"
-            android:textSize="25sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etEmail"
-            app:layout_constraintWidth_percent="0.8" />
+            app:layout_constraintTop_toBottomOf="@id/signCard"
+            app:layout_constraintWidth_percent="0.5" />
 
         <ProgressBar
             android:id="@+id/progressBar"

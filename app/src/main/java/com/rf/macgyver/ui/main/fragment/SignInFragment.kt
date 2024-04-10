@@ -59,7 +59,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
         mDataBinding.loginBtn.setOnClickListener{
             findNavController().navigate(R.id.action_fragment_signin_to_fragment_company_info)
         }
-        mDataBinding.signupTxt.setOnClickListener{
+        mDataBinding.signupBtn.setOnClickListener{
             findNavController().navigate(R.id.action_fragment_SignIn_to_fragment_signup)
         }
 

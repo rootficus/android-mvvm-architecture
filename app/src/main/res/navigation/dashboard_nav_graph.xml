@@ -4,22 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/navigation_dashboard">
-    <fragment
-        android:id="@+id/navigation_account"
-        android:name="com.rf.macgyver.ui.main.fragment.AccountFragment"
-        android:label="AccountFragment"
-        tools:layout="@layout/fragment_account">
-        <action
-            android:id="@+id/go_home"
-            app:destination="@+id/navigation_account"
-            app:popUpTo="@+id/destination_to_pop"
-            app:popUpToInclusive="true" />
-
-        <action
-            android:id="@+id/action_navigation_account_to_navigation_dashboard"
-            app:destination="@id/navigation_dashboard" />
-
-    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -51,6 +35,25 @@
             app:destination="@id/navigation_incident_report" />
 
     </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.rf.macgyver.ui.main.fragment.AccountFragment"
+        android:label="AccountFragment"
+        tools:layout="@layout/fragment_account">
+        <action
+            android:id="@+id/go_home"
+            app:destination="@+id/navigation_account"
+            app:popUpTo="@+id/destination_to_pop"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/action_navigation_account_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+
+    </fragment>
+
 
     <fragment
         android:id="@+id/navigation_daily_report"
