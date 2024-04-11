@@ -7,7 +7,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.rf.macgyver.R
 import com.rf.macgyver.databinding.FragmentStep1IRBinding
-import com.rf.macgyver.databinding.FragmentStep1IpBinding
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
@@ -44,11 +43,13 @@ class Step1IRFragment : BaseFragment<FragmentStep1IRBinding>(R.layout.fragment_s
 
     private fun initializeView() {
         mDataBinding.nextTxt.setOnClickListener {
-            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_step1_incident_to_navigation_step2_incident)
+            Navigation.findNavController(requireView())
+                .navigate(R.id.action_navigation_step1_incident_to_navigation_step2_incident)
         }
-        val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
+        val navController =
+            Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
 
-        mDataBinding.cancelTxt.setOnClickListener{
+        mDataBinding.cancelTxt.setOnClickListener {
             navController.navigateUp()
         }
 

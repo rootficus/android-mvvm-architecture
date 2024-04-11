@@ -3,6 +3,7 @@ package com.rf.macgyver.ui.main.fragment.inspection
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.rf.macgyver.R
@@ -53,36 +54,36 @@ class Step2IPFragment  : BaseFragment<FragmentStep2IpBinding>(R.layout.fragment_
             navController.navigateUp()
         }
 
-        mDataBinding.airCompressorPlusBtn.setOnClickListener{
-            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
+        mDataBinding.airCompressorPlusBtn.setOnClickListener {
+            val mBuilder = AlertDialog.Builder(requireActivity())
             val view = PopupStep2IpBinding.inflate(layoutInflater)
             view.headingId.text = mDataBinding.airCompressorHeading.text.toString()
             mBuilder.setView(view.root)
-            val dialog: android.app.AlertDialog? = mBuilder.create()
+            val dialog: AlertDialog? = mBuilder.create()
             dialog?.show()
         }
         mDataBinding.motorBearingPlusBtn.setOnClickListener{
-            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
+            val mBuilder = AlertDialog.Builder(requireActivity())
             val view = PopupStep2IpBinding.inflate(layoutInflater)
             view.headingId.text = mDataBinding.motorBearingHeading.text.toString()
             mBuilder.setView(view.root)
-            val dialog: android.app.AlertDialog? = mBuilder.create()
+            val dialog: AlertDialog? = mBuilder.create()
             dialog?.show()
         }
         mDataBinding.coolerTempsPlusBtn.setOnClickListener{
-            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
+            val mBuilder = AlertDialog.Builder(requireActivity())
             val view = PopupStep2IpBinding.inflate(layoutInflater)
             view.headingId.text = mDataBinding.coolerTempsHeading.text.toString()
             mBuilder.setView(view.root)
-            val dialog: android.app.AlertDialog? = mBuilder.create()
+            val dialog: AlertDialog? = mBuilder.create()
             dialog?.show()
         }
         mDataBinding.ispectCouplerPlusBtn.setOnClickListener{
-            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
+            val mBuilder = AlertDialog.Builder(requireActivity())
             val view = PopupStep2IpBinding.inflate(layoutInflater)
             view.headingId.text = mDataBinding.inspectCouplerHeading.text.toString()
             mBuilder.setView(view.root)
-            val dialog: android.app.AlertDialog? = mBuilder.create()
+            val dialog: AlertDialog? = mBuilder.create()
             dialog?.show()
         }
 

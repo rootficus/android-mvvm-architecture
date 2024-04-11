@@ -19,26 +19,26 @@
             android:id="@+id/iv_onboard_logo"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:padding="25dp"
-            android:src="@drawable/app_icon"
+            android:padding="10dp"
+            android:src="@drawable/app_logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.5" />
-<!--
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtUtell"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/utell"
-            android:textColor="@color/primaryBlue"
-            android:textSize="38sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_onboard_logo" />-->
+            app:layout_constraintWidth_percent="0.7" />
+        <!--
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtUtell"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/utell"
+                    android:textColor="@color/primaryBlue"
+                    android:textSize="38sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_onboard_logo" />-->
 
         <ProgressBar
             android:id="@+id/progressView"

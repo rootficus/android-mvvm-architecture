@@ -13,25 +13,27 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingTop="@dimen/_10sdp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/backArrowBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="18dp"
             android:layout_margin="12dp"
             android:src="@drawable/vector__6_"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/dailyReportingHeading"
+            android:id="@+id/inspectionFormHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
             android:padding="8dp"
-            android:text="Daily Reporting"
-            android:textSize="20sp"
+            android:text="Incident Report"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@id/backArrowBtn"
             app:layout_constraintStart_toEndOf="@id/backArrowBtn"
             app:layout_constraintTop_toTopOf="@id/backArrowBtn" />
@@ -43,18 +45,24 @@
             android:layout_margin="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dailyReportingHeading"
-            tools:itemCount="3"
+            app:layout_constraintTop_toBottomOf="@id/inspectionFormHeading"
+            tools:itemCount="2"
+            android:visibility="gone"
             tools:listitem="@layout/item_inspection" />
 
+
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/startNewButton"
+            android:id="@+id/createReportButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
-            android:background="@drawable/button_rounded_corners"
-            android:text="Start New Inspection"
-            android:textSize="15sp"
+            android:background="@drawable/round_corners"
+            android:backgroundTint="@color/white"
+            android:elevation="14dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/start_new_inspection"
+            android:textAllCaps="false"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

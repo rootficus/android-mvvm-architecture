@@ -15,6 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".ui.main.fragment.inspection.Step2IPFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,15 +23,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingVertical="@dimen/_5sdp"
+            android:background="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/step1Card"
             app:layout_constraintWidth_percent="0.33">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/step1Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/small_rounded_textview"
+                android:backgroundTint="#8EBCFF"
                 android:gravity="center"
                 android:text="1"
                 android:textColor="@color/white"
@@ -46,7 +49,7 @@
                 android:layout_marginHorizontal="@dimen/_4sdp"
                 android:fontFamily="@font/roboto_regular"
                 android:text="Step 1"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@id/step1Icon"
                 app:layout_constraintTop_toTopOf="@id/step1Icon" />
 
@@ -63,13 +66,12 @@
                 app:layout_constraintStart_toEndOf="@id/step1Icon" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/step2Card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:elevation="5dp"
             android:paddingVertical="@dimen/_5sdp"
+            android:background="@color/white"
             app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="@id/step1Card"
             app:layout_constraintEnd_toStartOf="@id/step3Card"
@@ -77,7 +79,7 @@
             app:layout_constraintTop_toTopOf="@id/step1Card"
             app:layout_constraintWidth_percent="0.33">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/step2Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,7 +100,7 @@
                 android:layout_marginHorizontal="@dimen/_4sdp"
                 android:fontFamily="@font/roboto_regular"
                 android:text="Step 2"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@id/step2Icon"
                 app:layout_constraintTop_toTopOf="@id/step2Icon" />
 
@@ -115,13 +117,12 @@
                 app:layout_constraintStart_toEndOf="@id/step2Icon" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/step3Card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:elevation="5dp"
             android:paddingVertical="@dimen/_5sdp"
+            android:background="@color/white"
             app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="@id/step1Card"
             app:layout_constraintEnd_toEndOf="parent"
@@ -148,7 +149,7 @@
                 android:layout_marginHorizontal="@dimen/_4sdp"
                 android:fontFamily="@font/roboto_regular"
                 android:text="Step 3"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toEndOf="@id/threeTxt"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -166,428 +167,1067 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/airCompressorHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginVertical="40dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="1. Visually Inspect Air Compressor"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/step1Card" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/airCompressorPlusBtn"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginEnd="12dp"
-            android:src="@drawable/vector__7_"
-            app:layout_constraintBottom_toBottomOf="@id/airCompressorHeading"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/airCompressorHeading" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card1"
+        <ScrollView
+            android:id="@+id/dailyScroll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginVertical="10dp"
-            android:elevation="10dp"
-            app:cardCornerRadius="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/airCompressorHeading">
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toTopOf="@id/backOrCompletedCard"
+            app:layout_constraintTop_toBottomOf="@id/step1Card">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="6dp"
-                android:layout_marginVertical="6dp">
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="@dimen/_10sdp">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card1OKtxt"
-                    android:layout_width="0dp"
+                    android:id="@+id/txtDailyCheckUp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:padding="8dp"
-                    android:textSize="12sp"
-                    android:text="OK"
-                    android:textAlignment="center"
-                    android:textColor="#979797"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.2" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card1FaultyTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:padding="8dp"
-                    android:text="Faulty"
-                    android:textSize="12sp"
-                    android:textAlignment="center"
-                    android:textColor="#979797"
-                    app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
-                    app:layout_constraintStart_toEndOf="@id/card1OKtxt"
-                    app:layout_constraintTop_toTopOf="@id/card1OKtxt"
-                    app:layout_constraintWidth_percent="0.22" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card1FaultyButOkTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:paddingVertical="8dp"
-                    android:text="Faulty but OK"
-                    android:textSize="12sp"
-                    android:textAlignment="center"
-                    android:textColor="#979797"
-                    app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
-                    app:layout_constraintEnd_toStartOf="@id/card1NATxt"
-                    app:layout_constraintStart_toEndOf="@id/card1FaultyTxt"
-                    app:layout_constraintTop_toTopOf="@id/card1OKtxt"
-                    app:layout_constraintWidth_percent="0.24" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card1NATxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:padding="8dp"
-                    android:text="NA"
-                    android:textSize="12sp"
-                    android:textAlignment="center"
-                    android:textColor="#979797"
-                    app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
+                    android:layout_marginVertical="20dp"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Daily check up"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/card1FaultyButOkTxt"
-                    app:layout_constraintTop_toTopOf="@id/card1OKtxt"
-                    app:layout_constraintWidth_percent="0.2" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/airCompressorHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="How is the weather today?"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txtDailyCheckUp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/airCompressorPlusBtn"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/vector__7_"
+                    app:layout_constraintBottom_toBottomOf="@id/airCompressorHeading"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/airCompressorHeading" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/airCompressorHeading">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_marginVertical="6dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card1OKtxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="Hot"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintWidth_percent="0.17" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card1FaultyTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="Cold"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
+                            app:layout_constraintStart_toEndOf="@id/card1OKtxt"
+                            app:layout_constraintTop_toTopOf="@id/card1OKtxt"
+                            app:layout_constraintWidth_percent="0.22" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card1FaultyButOkTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingVertical="8dp"
+                            android:text="Windy"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
+                            app:layout_constraintStart_toEndOf="@id/card1FaultyTxt"
+                            app:layout_constraintTop_toTopOf="@id/card1OKtxt"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card1DownpourTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="Downpour"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
+                            app:layout_constraintStart_toEndOf="@id/card1FaultyButOkTxt"
+                            app:layout_constraintTop_toTopOf="@id/card1OKtxt"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card1NATxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="NA"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/card1DownpourTxt"
+                            app:layout_constraintTop_toTopOf="@id/card1OKtxt"
+                            app:layout_constraintWidth_percent="0.13" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/motorBearingHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="What type of surface will be operated on today?"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card1" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/motorBearingPlusBtn"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/vector__7_"
+                    app:layout_constraintBottom_toBottomOf="@id/motorBearingHeading"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/motorBearingHeading" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/motorBearingHeading">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_marginVertical="6dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card2OKtxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="Soft"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintWidth_percent="0.16" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card2FaultyTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="Firm"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
+                            app:layout_constraintStart_toEndOf="@id/card2OKtxt"
+                            app:layout_constraintTop_toTopOf="@id/card2OKtxt"
+                            app:layout_constraintWidth_percent="0.22" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card2FaultyButOkTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingVertical="8dp"
+                            android:text="Large rocks"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
+                            app:layout_constraintStart_toEndOf="@id/card2FaultyTxt"
+                            app:layout_constraintTop_toTopOf="@id/card2OKtxt"
+                            app:layout_constraintWidth_percent="0.22" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card2SlipperyTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingVertical="8dp"
+                            android:text="Slippery"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
+                            app:layout_constraintEnd_toStartOf="@id/card2NATxt"
+                            app:layout_constraintStart_toEndOf="@id/card2FaultyButOkTxt"
+                            app:layout_constraintTop_toTopOf="@id/card2OKtxt"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card2NATxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="NA"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/card2SlipperyTxt"
+                            app:layout_constraintTop_toTopOf="@id/card2OKtxt"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/inspectCouplerHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Wheels \n\t\t\t\t Pressure / Nuts / Wear"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card2" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ispectCouplerPlusBtn"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/vector__7_"
+                    app:layout_constraintBottom_toBottomOf="@id/inspectCouplerHeading"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/inspectCouplerHeading" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/inspectCouplerHeading">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_marginVertical="6dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card3OKtxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="OK"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card3FaultyTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="Faulty"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"
+                            app:layout_constraintStart_toEndOf="@id/card3OKtxt"
+                            app:layout_constraintTop_toTopOf="@id/card3OKtxt"
+                            app:layout_constraintWidth_percent="0.22" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card3FaultyButOkTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingVertical="8dp"
+                            android:text="Faulty but OK"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"
+                            app:layout_constraintEnd_toStartOf="@id/card3NATxt"
+                            app:layout_constraintStart_toEndOf="@id/card3FaultyTxt"
+                            app:layout_constraintTop_toTopOf="@id/card3OKtxt"
+                            app:layout_constraintWidth_percent="0.24" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card3NATxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="NA"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/card3FaultyButOkTxt"
+                            app:layout_constraintTop_toTopOf="@id/card3OKtxt"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/coolerTempsHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Hydraulic system \n\t\t\t\t Look at the Levels / Leaks / Damages"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card3" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/coolerTempsPlusBtn"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/vector__7_"
+                    app:layout_constraintBottom_toBottomOf="@id/coolerTempsHeading"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/coolerTempsHeading" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/coolerTempsHeading">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_marginVertical="6dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card4OKtxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="OK"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card4FaultyTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="Faulty"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"
+                            app:layout_constraintStart_toEndOf="@id/card4OKtxt"
+                            app:layout_constraintTop_toTopOf="@id/card4OKtxt"
+                            app:layout_constraintWidth_percent="0.22" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card4FaultyButOkTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingVertical="8dp"
+                            android:text="Faulty but OK"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"
+                            app:layout_constraintEnd_toStartOf="@id/card4NATxt"
+                            app:layout_constraintStart_toEndOf="@id/card4FaultyTxt"
+                            app:layout_constraintTop_toTopOf="@id/card4OKtxt"
+                            app:layout_constraintWidth_percent="0.24" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card4NATxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="NA"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/card4FaultyButOkTxt"
+                            app:layout_constraintTop_toTopOf="@id/card4OKtxt"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/engineTempsHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Engine Oil \n\t\t\t\t Look at the Levels / Leaks / Damages"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card4" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/engineTempsPlusBtn"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/vector__7_"
+                    app:layout_constraintBottom_toBottomOf="@id/engineTempsHeading"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/engineTempsHeading" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/engineTempsHeading">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_marginVertical="6dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card5OKtxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="OK"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card5FaultyTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="Faulty"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card5OKtxt"
+                            app:layout_constraintStart_toEndOf="@id/card5OKtxt"
+                            app:layout_constraintTop_toTopOf="@id/card5OKtxt"
+                            app:layout_constraintWidth_percent="0.22" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card5FaultyButOkTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingVertical="8dp"
+                            android:text="Faulty but OK"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card5OKtxt"
+                            app:layout_constraintEnd_toStartOf="@id/card5NATxt"
+                            app:layout_constraintStart_toEndOf="@id/card5FaultyTxt"
+                            app:layout_constraintTop_toTopOf="@id/card5OKtxt"
+                            app:layout_constraintWidth_percent="0.24" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card5NATxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="NA"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card5OKtxt"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/card5FaultyButOkTxt"
+                            app:layout_constraintTop_toTopOf="@id/card5OKtxt"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/coolantTempsHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Coolant system \n\t\t\t\t Look at the Levels / Leaks / Damages"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card5" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/coolantTempsPlusBtn"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/vector__7_"
+                    app:layout_constraintBottom_toBottomOf="@id/coolantTempsHeading"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/coolantTempsHeading" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/coolantTempsHeading">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_marginVertical="6dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card6OKtxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="OK"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card6FaultyTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="Faulty"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card6OKtxt"
+                            app:layout_constraintStart_toEndOf="@id/card6OKtxt"
+                            app:layout_constraintTop_toTopOf="@id/card6OKtxt"
+                            app:layout_constraintWidth_percent="0.22" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card6FaultyButOkTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingVertical="8dp"
+                            android:text="Faulty but OK"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card6OKtxt"
+                            app:layout_constraintEnd_toStartOf="@id/card6NATxt"
+                            app:layout_constraintStart_toEndOf="@id/card6FaultyTxt"
+                            app:layout_constraintTop_toTopOf="@id/card6OKtxt"
+                            app:layout_constraintWidth_percent="0.24" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card6NATxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="NA"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card6OKtxt"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/card6FaultyButOkTxt"
+                            app:layout_constraintTop_toTopOf="@id/card6OKtxt"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!--Engine Startup-->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtEngineStartUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="Engine Start Up"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card6" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/engineHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Look for abnormal sounds"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/txtEngineStartUp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/engineCamBtn"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/vector__13_"
+                    app:layout_constraintBottom_toBottomOf="@id/engineHeading"
+                    app:layout_constraintEnd_toStartOf="@id/engineStartUpPlusBtn"
+                    app:layout_constraintTop_toTopOf="@id/engineHeading" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/engineStartUpPlusBtn"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/vector__7_"
+                    app:layout_constraintBottom_toBottomOf="@id/engineHeading"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/engineHeading" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/engineHeading">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_marginVertical="6dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card7OKtxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="OK"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card7FaultyTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="Faulty"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card7OKtxt"
+                            app:layout_constraintStart_toEndOf="@id/card7OKtxt"
+                            app:layout_constraintTop_toTopOf="@id/card7OKtxt"
+                            app:layout_constraintWidth_percent="0.22" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card7FaultyButOkTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingVertical="8dp"
+                            android:text="Faulty but OK"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card7OKtxt"
+                            app:layout_constraintEnd_toStartOf="@id/card7NATxt"
+                            app:layout_constraintStart_toEndOf="@id/card7FaultyTxt"
+                            app:layout_constraintTop_toTopOf="@id/card7OKtxt"
+                            app:layout_constraintWidth_percent="0.24" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card7NATxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="NA"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card7OKtxt"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/card7FaultyButOkTxt"
+                            app:layout_constraintTop_toTopOf="@id/card7OKtxt"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/vibrationHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Look for abnormal vibrations"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card7" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/vibrationCamBtn"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/vector__13_"
+                    app:layout_constraintBottom_toBottomOf="@id/vibrationHeading"
+                    app:layout_constraintEnd_toStartOf="@id/vibrationPlusBtn"
+                    app:layout_constraintTop_toTopOf="@id/vibrationHeading" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/vibrationPlusBtn"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/vector__7_"
+                    app:layout_constraintBottom_toBottomOf="@id/vibrationHeading"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/vibrationHeading" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/vibrationHeading">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_marginVertical="6dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card8OKtxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="Soft"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintWidth_percent="0.16" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card8FaultyTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="Firm"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card8OKtxt"
+                            app:layout_constraintStart_toEndOf="@id/card8OKtxt"
+                            app:layout_constraintTop_toTopOf="@id/card8OKtxt"
+                            app:layout_constraintWidth_percent="0.22" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card8FaultyButOkTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingVertical="8dp"
+                            android:text="Large rocks"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card8OKtxt"
+                            app:layout_constraintStart_toEndOf="@id/card8FaultyTxt"
+                            app:layout_constraintTop_toTopOf="@id/card8OKtxt"
+                            app:layout_constraintWidth_percent="0.22" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card8SlipperyTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingVertical="8dp"
+                            android:text="Slippery"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card8OKtxt"
+                            app:layout_constraintEnd_toStartOf="@id/card8NATxt"
+                            app:layout_constraintStart_toEndOf="@id/card8FaultyButOkTxt"
+                            app:layout_constraintTop_toTopOf="@id/card8OKtxt"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card8NATxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="NA"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card8OKtxt"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/card8SlipperyTxt"
+                            app:layout_constraintTop_toTopOf="@id/card8OKtxt"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/smellHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginStart="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Look for abnormal smell"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card8" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/smellCamBtn"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/vector__13_"
+                    app:layout_constraintBottom_toBottomOf="@id/smellHeading"
+                    app:layout_constraintEnd_toStartOf="@id/smellPlusBtn"
+                    app:layout_constraintTop_toTopOf="@id/smellHeading" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/smellPlusBtn"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="12dp"
+                    android:src="@drawable/vector__7_"
+                    app:layout_constraintBottom_toBottomOf="@id/smellHeading"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/smellHeading" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="10dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/smellHeading">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="6dp"
+                        android:layout_marginVertical="6dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card9OKtxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="OK"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card9FaultyTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="Faulty"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card9OKtxt"
+                            app:layout_constraintStart_toEndOf="@id/card9OKtxt"
+                            app:layout_constraintTop_toTopOf="@id/card9OKtxt"
+                            app:layout_constraintWidth_percent="0.22" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card9FaultyButOkTxt"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/roboto_regular"
+                            android:paddingVertical="8dp"
+                            android:text="Faulty but OK"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card9OKtxt"
+                            app:layout_constraintEnd_toStartOf="@id/card9NATxt"
+                            app:layout_constraintStart_toEndOf="@id/card9FaultyTxt"
+                            app:layout_constraintTop_toTopOf="@id/card9OKtxt"
+                            app:layout_constraintWidth_percent="0.24" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/card9NATxt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:padding="8dp"
+                            android:text="NA"
+                            android:textAlignment="center"
+                            android:textColor="#979797"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/card9OKtxt"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/card9FaultyButOkTxt"
+                            app:layout_constraintTop_toTopOf="@id/card9OKtxt"
+                            app:layout_constraintWidth_percent="0.2" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/motorBearingHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginVertical="30dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="2. Check and Log Motor Bearing Temps"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card1" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/motorBearingPlusBtn"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginEnd="12dp"
-            android:src="@drawable/vector__7_"
-            app:layout_constraintBottom_toBottomOf="@id/motorBearingHeading"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/motorBearingHeading" />
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginVertical="10dp"
-            android:elevation="10dp"
-            app:cardCornerRadius="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/motorBearingHeading">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="6dp"
-                android:layout_marginVertical="6dp">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card2OKtxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:padding="8dp"
-                    android:text="OK"
-                    android:textAlignment="center"
-                    android:textSize="12sp"
-                    android:textColor="#979797"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.2" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card2FaultyTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:padding="8dp"
-                    android:text="Faulty"
-                    android:textSize="12sp"
-                    android:textAlignment="center"
-                    android:textColor="#979797"
-                    app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
-                    app:layout_constraintStart_toEndOf="@id/card2OKtxt"
-                    app:layout_constraintTop_toTopOf="@id/card2OKtxt"
-                    app:layout_constraintWidth_percent="0.22" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card2FaultyButOkTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:paddingVertical="8dp"
-                    android:text="Faulty but OK"
-                    android:textSize="12sp"
-                    android:textAlignment="center"
-                    android:textColor="#979797"
-                    app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
-                    app:layout_constraintEnd_toStartOf="@id/card2NATxt"
-                    app:layout_constraintStart_toEndOf="@id/card2FaultyTxt"
-                    app:layout_constraintTop_toTopOf="@id/card2OKtxt"
-                    app:layout_constraintWidth_percent="0.24" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card2NATxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:padding="8dp"
-                    android:text="NA"
-                    android:textSize="12sp"
-                    android:textAlignment="center"
-                    android:textColor="#979797"
-                    app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/card2FaultyButOkTxt"
-                    app:layout_constraintTop_toTopOf="@id/card2OKtxt"
-                    app:layout_constraintWidth_percent="0.2" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/inspectCouplerHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginVertical="30dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="3. Inspect Coupler, Hub and Shaft Sheal"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card2" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ispectCouplerPlusBtn"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginEnd="12dp"
-            android:src="@drawable/vector__7_"
-            app:layout_constraintBottom_toBottomOf="@id/inspectCouplerHeading"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/inspectCouplerHeading" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginVertical="10dp"
-            android:elevation="10dp"
-            app:cardCornerRadius="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/inspectCouplerHeading">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="6dp"
-                android:layout_marginVertical="6dp">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card3OKtxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:padding="8dp"
-                    android:text="OK"
-                    android:textAlignment="center"
-                    android:textSize="12sp"
-                    android:textColor="#979797"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.2" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card3FaultyTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:padding="8dp"
-                    android:text="Faulty"
-                    android:textAlignment="center"
-                    android:textSize="12sp"
-                    android:textColor="#979797"
-                    app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"
-                    app:layout_constraintStart_toEndOf="@id/card3OKtxt"
-                    app:layout_constraintTop_toTopOf="@id/card3OKtxt"
-                    app:layout_constraintWidth_percent="0.22" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card3FaultyButOkTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:paddingVertical="8dp"
-                    android:text="Faulty but OK"
-                    android:textAlignment="center"
-                    android:textColor="#979797"
-                    app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"
-                    app:layout_constraintEnd_toStartOf="@id/card3NATxt"
-                    app:layout_constraintStart_toEndOf="@id/card3FaultyTxt"
-                    app:layout_constraintTop_toTopOf="@id/card3OKtxt"
-                    app:layout_constraintWidth_percent="0.24" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card3NATxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:padding="8dp"
-                    android:text="NA"
-                    android:textAlignment="center"
-                    android:textColor="#979797"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/card3FaultyButOkTxt"
-                    app:layout_constraintTop_toTopOf="@id/card3OKtxt"
-                    app:layout_constraintWidth_percent="0.2" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/coolerTempsHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginVertical="30dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="4. Check and Log Motor Bearing Temps"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card3" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/coolerTempsPlusBtn"
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            android:layout_marginEnd="12dp"
-            android:src="@drawable/vector__7_"
-            app:layout_constraintBottom_toBottomOf="@id/coolerTempsHeading"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/coolerTempsHeading" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="12dp"
-            android:layout_marginVertical="10dp"
-            android:elevation="10dp"
-            app:cardCornerRadius="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/coolerTempsHeading">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="6dp"
-                android:layout_marginVertical="6dp">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card4OKtxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:padding="8dp"
-                    android:text="OK"
-                    android:textSize="12sp"
-                    android:textAlignment="center"
-                    android:textColor="#979797"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.2" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card4FaultyTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:padding="8dp"
-                    android:text="Faulty"
-                    android:textAlignment="center"
-                    android:textSize="12sp"
-                    android:textColor="#979797"
-                    app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"
-                    app:layout_constraintStart_toEndOf="@id/card4OKtxt"
-                    app:layout_constraintTop_toTopOf="@id/card4OKtxt"
-                    app:layout_constraintWidth_percent="0.22" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card4FaultyButOkTxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:paddingVertical="8dp"
-                    android:text="Faulty but OK"
-                    android:textAlignment="center"
-                    android:textColor="#979797"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"
-                    app:layout_constraintEnd_toStartOf="@id/card4NATxt"
-                    app:layout_constraintStart_toEndOf="@id/card4FaultyTxt"
-                    app:layout_constraintTop_toTopOf="@id/card4OKtxt"
-                    app:layout_constraintWidth_percent="0.24" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/card4NATxt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:padding="8dp"
-                    android:text="NA"
-                    android:textAlignment="center"
-                    android:textColor="#979797"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/card4OKtxt"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/card4FaultyButOkTxt"
-                    app:layout_constraintTop_toTopOf="@id/card4OKtxt"
-                    app:layout_constraintWidth_percent="0.2" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+        </ScrollView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/backOrCompletedCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_marginVertical="10dp"
             android:elevation="12dp"
             app:cardCornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dailyScroll"
             app:layout_constraintWidth_percent="0.8">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -599,9 +1239,9 @@
                     android:id="@+id/backTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/roboto_bold"
                     android:padding="5dp"
-                    android:text="Back"
+                    android:text="@string/back1arrow"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -611,9 +1251,9 @@
                     android:id="@+id/completedTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/roboto_bold"
                     android:padding="5dp"
-                    android:text="Completed>"
+                    android:text="@string/completed_2arrow"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

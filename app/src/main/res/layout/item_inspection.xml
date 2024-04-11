@@ -8,165 +8,125 @@
     app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/inspectionCardLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="5dp">
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:paddingVertical="@dimen/_15sdp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/reportHeading"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
             android:text="Report#"
-            android:textColor="#808080"
             android:textAlignment="center"
+            android:textColor="#808080"
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto_bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!--<androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etReportNo."
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelConcernLevel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/custom_edittext"
-            app:layout_constraintStart_toEndOf="@id/reportHeading"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.6" />
-
-        <View
-            android:id="@+id/idView1"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginVertical="5dp"
-            android:background="#D3D3D3"
-            android:paddingHorizontal="5dp"
-            app:layout_constraintHorizontal_bias="0.533"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etReportNo."
-            app:layout_constraintWidth_percent="0.75" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/faultContent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/roboto_regular"
-            android:text="9"
-            android:textColor="#D3494E"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@id/faultHeading"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/idView1"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/faultHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
-            android:text="Fault"
+            android:text="Concern Level"
+            android:textAlignment="textStart"
             android:textColor="#808080"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toTopOf="@id/idView2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/idView1" />
-
+            android:textSize="14sp"
+            app:fontFamily="@font/roboto_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/reportHeading"
+            app:layout_constraintWidth_percent="0.4" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/vehicleHeading"
+            android:id="@+id/txtConcernLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/roboto_regular"
-            android:text="Vehicle"
+            android:text="50%"
+            android:textAlignment="center"
             android:textColor="#808080"
-            app:layout_constraintBottom_toBottomOf="@id/etVehicle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/etVehicle" />
+            android:textSize="16sp"
+            app:fontFamily="@font/roboto_regular"
+            app:layout_constraintBottom_toBottomOf="@id/labelConcernLevel"
+            app:layout_constraintStart_toEndOf="@id/labelConcernLevel"
+            app:layout_constraintTop_toTopOf="@id/labelConcernLevel" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etVehicle"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/labelSeverityLevel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/custom_edittext"
-            app:layout_constraintStart_toEndOf="@id/reportHeading"
-            app:layout_constraintTop_toBottomOf="@id/idView1"
-            app:layout_constraintWidth_percent="0.6" />
-
-        <View
-            android:id="@+id/idView2"
-            android:layout_width="match_parent"
-            android:layout_height="1.5dp"
-            android:layout_marginVertical="5dp"
-            android:background="#D3D3D3"
-            android:paddingHorizontal="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.533"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etVehicle" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/correctiveActionCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:backgroundTint="#D3494E"
-            app:cardCornerRadius="15dp"
-            app:layout_constraintStart_toEndOf="@id/correctiveActionHeading"
-            app:layout_constraintTop_toBottomOf="@id/idView2">
-
-            <TextView
-                android:id="@+id/actionTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:padding="5dp"
-                android:text="Not Taken" />
-        </androidx.cardview.widget.CardView>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/correctiveActionHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
             android:fontFamily="@font/roboto_regular"
-            android:text="Corrective Action"
+            android:text="Severity Level"
+            android:textAlignment="textStart"
             android:textColor="#808080"
-            app:layout_constraintBottom_toBottomOf="@id/correctiveActionCard"
+            android:textSize="14sp"
+            app:fontFamily="@font/roboto_regular"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/correctiveActionCard" />
+            app:layout_constraintTop_toBottomOf="@id/labelConcernLevel"
+            app:layout_constraintWidth_percent="0.4" />
 
-        <View
-            android:id="@+id/idView3"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginVertical="5dp"
-            android:background="#D3D3D3"
-            android:paddingHorizontal="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.533"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/correctiveActionCard" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/dateHeading"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/circlesContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
-            android:text="Date"
-            android:textColor="#808080"
-            app:layout_constraintBottom_toBottomOf="@id/etDate"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/etDate" />
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/labelSeverityLevel"
+            app:layout_constraintStart_toEndOf="@id/labelSeverityLevel"
+            app:layout_constraintTop_toTopOf="@id/labelSeverityLevel">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/custom_edittext"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/reportHeading"
-            app:layout_constraintTop_toBottomOf="@id/idView3" />
--->
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/circle1"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_margin="5dp"
+                android:onClick="onCircleClicked"
+                android:src="@drawable/circle_unselected" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/circle2"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_margin="5dp"
+                android:onClick="onCircleClicked"
+                android:src="@drawable/circle_unselected" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/circle3"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_margin="5dp"
+                android:onClick="onCircleClicked"
+                android:src="@drawable/circle_unselected" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/circle4"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_margin="5dp"
+                android:onClick="onCircleClicked"
+                android:src="@drawable/circle_unselected" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/circle5"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_margin="5dp"
+                android:onClick="onCircleClicked"
+                android:src="@drawable/circle_unselected" />
+
+            <!-- Repeat ImageView for the other circles -->
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

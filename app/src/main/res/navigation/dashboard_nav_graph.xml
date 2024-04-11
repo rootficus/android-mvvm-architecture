@@ -116,6 +116,9 @@
         <action
             android:id="@+id/action_navigation_step1_inspection_to_navigation_step2_inspection"
             app:destination="@id/navigation_step2_inspection" />
+        <action
+            android:id="@+id/action_navigation_step1_inspection_to_navigation_step3_inspection"
+            app:destination="@id/navigation_step3_inspection" />
     </fragment>
     <fragment
         android:id="@+id/navigation_step2_inspection"

@@ -2,15 +2,14 @@ package com.rf.macgyver.ui.main.fragment.inspection
 
 import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.rf.macgyver.R
-import com.rf.macgyver.databinding.FragmentStep1DRBinding
+import com.rf.macgyver.data.model.request.InspectionFormData
 import com.rf.macgyver.databinding.FragmentStep1IpBinding
+import com.rf.macgyver.databinding.PopupStep2IpBinding
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
@@ -46,13 +45,149 @@ class Step1IPFragment : BaseFragment<FragmentStep1IpBinding>(R.layout.fragment_s
     }
 
     private fun initializeView() {
-        mDataBinding.nextTxt.setOnClickListener {
-            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_step1_inspection_to_navigation_step2_inspection)
-        }
-        val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
+        val bundle = arguments
 
-        mDataBinding.cancelTxt.setOnClickListener{
+        // Check if the bundle is not null
+        if (bundle != null) {
+            // Retrieve the Transaction object from the bundle
+            val inspectionFormData: InspectionFormData? =
+                bundle.getSerializable("inspectionFormData") as? InspectionFormData
+
+            // Now you can use the transaction object as needed
+            if (inspectionFormData != null) {
+                // Do something with the transaction object
+            }
+        }
+
+        mDataBinding.nextTxt.setOnClickListener {
+            Navigation.findNavController(requireView())
+                .navigate(R.id.action_navigation_step1_inspection_to_navigation_step3_inspection)
+        }
+        val navController =
+            Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
+
+        mDataBinding.cancelTxt.setOnClickListener {
             navController.navigateUp()
+        }
+        mDataBinding.bearingsPlusBtn.setOnClickListener{
+            val mBuilder = AlertDialog.Builder(requireActivity())
+            val view = PopupStep2IpBinding.inflate(layoutInflater)
+            view.headingId.text = mDataBinding.bearingsHeading.text.toString()
+            mBuilder.setView(view.root)
+            val dialog: AlertDialog = mBuilder.create()
+            view.cancelTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+            view.DoneTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialog.show()
+        }
+        mDataBinding.engineStartUpPlusBtn.setOnClickListener{
+            val mBuilder = AlertDialog.Builder(requireActivity())
+            val view = PopupStep2IpBinding.inflate(layoutInflater)
+            view.headingId.text = mDataBinding.engineHeading.text.toString()
+            mBuilder.setView(view.root)
+            val dialog: AlertDialog = mBuilder.create()
+            view.cancelTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+            view.DoneTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialog.show()
+        }
+        mDataBinding.vibrationPlusBtn.setOnClickListener{
+            val mBuilder = AlertDialog.Builder(requireActivity())
+            val view = PopupStep2IpBinding.inflate(layoutInflater)
+            view.headingId.text = mDataBinding.vibrationHeading.text.toString()
+            mBuilder.setView(view.root)
+            val dialog: AlertDialog = mBuilder.create()
+            view.cancelTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+            view.DoneTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialog.show()
+        }
+        mDataBinding.vibrationPlusBtn.setOnClickListener{
+            val mBuilder = AlertDialog.Builder(requireActivity())
+            val view = PopupStep2IpBinding.inflate(layoutInflater)
+            view.headingId.text = mDataBinding.vibrationHeading.text.toString()
+            mBuilder.setView(view.root)
+            val dialog: AlertDialog = mBuilder.create()
+            view.cancelTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+            view.DoneTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialog.show()
+        }
+        mDataBinding.hatchStartUpPlusBtn.setOnClickListener{
+            val mBuilder = AlertDialog.Builder(requireActivity())
+            val view = PopupStep2IpBinding.inflate(layoutInflater)
+            view.headingId.text = mDataBinding.hatchSHeading.text.toString()
+            mBuilder.setView(view.root)
+            val dialog: AlertDialog = mBuilder.create()
+            view.cancelTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+            view.DoneTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialog.show()
+        }
+        mDataBinding.soundsPlusBtn.setOnClickListener{
+            val mBuilder = AlertDialog.Builder(requireActivity())
+            val view = PopupStep2IpBinding.inflate(layoutInflater)
+            view.headingId.text = mDataBinding.soundsHeading.text.toString()
+            mBuilder.setView(view.root)
+            val dialog: AlertDialog = mBuilder.create()
+            view.cancelTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+            view.DoneTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialog.show()
+        }
+        mDataBinding.spinningPlusBtn.setOnClickListener{
+            val mBuilder = AlertDialog.Builder(requireActivity())
+            val view = PopupStep2IpBinding.inflate(layoutInflater)
+            view.headingId.text = mDataBinding.spinningHeading.text.toString()
+            mBuilder.setView(view.root)
+            val dialog: AlertDialog = mBuilder.create()
+            view.cancelTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+            view.DoneTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialog.show()
+        }
+        mDataBinding.coolantPlusBtn.setOnClickListener{
+            val mBuilder = AlertDialog.Builder(requireActivity())
+            val view = PopupStep2IpBinding.inflate(layoutInflater)
+            view.headingId.text = mDataBinding.coolantHeading.text.toString()
+            mBuilder.setView(view.root)
+            val dialog: AlertDialog = mBuilder.create()
+            view.cancelTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+            view.DoneTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialog.show()
         }
     }
 

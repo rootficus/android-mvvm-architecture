@@ -3,6 +3,7 @@ package com.rf.macgyver.ui.main.fragment.incidentReport
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.rf.macgyver.R
@@ -45,19 +46,26 @@ class Step3IRFragment : BaseFragment<FragmentStep3IRBinding>(R.layout.fragment_s
     }
 
     private fun initializeView() {
-        val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
+        val navController =
+            Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
 
-        mDataBinding.backTxt.setOnClickListener{
+        mDataBinding.backTxt.setOnClickListener {
             navController.navigateUp()
         }
 
-        mDataBinding.generateReportTxt.setOnClickListener{
+        mDataBinding.backOrGenerateCard.setOnClickListener {
 
-            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
+            val mBuilder = AlertDialog.Builder(requireActivity())
             val view = SuccessAlertIrBinding.inflate(layoutInflater)
             mBuilder.setView(view.root)
-            val dialog: android.app.AlertDialog? = mBuilder.create()
-            dialog?.show()
+            val dialog: AlertDialog = mBuilder.create()
+            view.backTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+            view.viewReportTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.show()
         }
 
     }

@@ -15,174 +15,155 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.fragment.inspection.Step2IPFragment">
 
-        <androidx.cardview.widget.CardView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/step1Card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginVertical="12dp"
-            android:elevation="5dp"
-            app:cardCornerRadius="8dp"
+            android:paddingVertical="@dimen/_5sdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.32">
+            app:layout_constraintTop_toTopOf="@id/step1Card"
+            app:layout_constraintWidth_percent="0.33">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingVertical="@dimen/_5sdp"
-                android:layout_marginHorizontal="4dp"
-                android:layout_marginVertical="8dp">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/step1Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/small_rounded_textview"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/step1Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/small_rounded_textview"
-                    android:src="@drawable/group_11"
-                    android:textColor="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Step1Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_4sdp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Step 1"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/step1Icon"
+                app:layout_constraintTop_toTopOf="@id/step1Icon" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/Step1Txt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="Step 1"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/step1Icon"
-                    app:layout_constraintTop_toTopOf="@id/step1Icon" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/inspectionInfoTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_4sdp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Inspection Info"
+                android:textColor="#808080"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="@id/step1Icon"
+                app:layout_constraintStart_toEndOf="@id/step1Icon" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/inspectionInfoTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="Inspection Info."
-                    android:textColor="#808080"
-                    android:textSize="11sp"                    app:layout_constraintBottom_toBottomOf="@id/step1Icon"
-                    app:layout_constraintStart_toEndOf="@id/step1Icon" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/step2Card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:elevation="5dp"
+            android:paddingVertical="@dimen/_5sdp"
             app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="@id/step1Card"
             app:layout_constraintEnd_toStartOf="@id/step3Card"
             app:layout_constraintStart_toEndOf="@id/step1Card"
             app:layout_constraintTop_toTopOf="@id/step1Card"
-            app:layout_constraintWidth_percent="0.32">
+            app:layout_constraintWidth_percent="0.33">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingVertical="@dimen/_5sdp"
-                android:layout_marginHorizontal="4dp"
-                android:layout_marginVertical="8dp">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/step2Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/small_rounded_textview"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/step2Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/small_rounded_textview"
-                    android:fontFamily="@font/roboto_regular"
-                    android:gravity="center"
-                    android:text="2"
-                    android:textColor="@color/white"
-                    android:textSize="22sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Step2Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_4sdp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Step 2"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/step2Icon"
+                app:layout_constraintTop_toTopOf="@id/step2Icon" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/Step2Txt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="Step 2"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/step2Icon"
-                    app:layout_constraintTop_toTopOf="@id/step2Icon" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/doInspectiontxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_4sdp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Do Inpection"
+                android:textColor="#808080"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="@id/step2Icon"
+                app:layout_constraintStart_toEndOf="@id/step2Icon" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/doInspectiontxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="Do Inspection"
-                    android:textColor="#808080"
-                    android:textSize="11sp"                    app:layout_constraintBottom_toBottomOf="@id/step2Icon"
-                    app:layout_constraintStart_toEndOf="@id/step2Icon" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/step3Card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
             android:elevation="5dp"
+            android:paddingVertical="@dimen/_5sdp"
             app:cardCornerRadius="8dp"
             app:layout_constraintBottom_toBottomOf="@id/step1Card"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/step1Card"
-            app:layout_constraintWidth_percent="0.32">
+            app:layout_constraintWidth_percent="0.33">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingVertical="@dimen/_5sdp"
-                android:layout_marginHorizontal="4dp"
-                android:layout_marginVertical="8dp">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/threeTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/small_rounded_textview"
+                android:backgroundTint="#8EBCFF"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/threeTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/small_rounded_textview"
-                    android:fontFamily="@font/roboto_regular"
-                    android:gravity="center"
-                    android:text="3"
-                    android:textColor="@color/white"
-                    android:textSize="22sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/Step3Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_4sdp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Step 3"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@id/threeTxt"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/Step3Txt"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="Step 3"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/threeTxt"
-                    app:layout_constraintTop_toTopOf="@id/threeTxt" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/summaryTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_4sdp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="Summary"
+                android:textColor="#808080"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="@id/threeTxt"
+                app:layout_constraintStart_toEndOf="@id/threeTxt" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/summaryTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="Summary"
-                    android:textColor="#808080"
-                    android:textSize="11sp"                    app:layout_constraintBottom_toBottomOf="@id/threeTxt"
-                    app:layout_constraintStart_toEndOf="@id/threeTxt" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/airCompressorHeading"
@@ -211,11 +192,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginVertical="3.5dp"
-            app:layout_constraintWidth_percent="0.05"
             android:src="@drawable/question_mark_in_a_circle_outline_svgrepo_com"
             app:layout_constraintBottom_toBottomOf="@id/airCompressorHeading"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/airCompressorHeading" />
+            app:layout_constraintTop_toTopOf="@id/airCompressorHeading"
+            app:layout_constraintWidth_percent="0.05" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/airCompressorCamBtn"
@@ -235,15 +216,15 @@
             android:layout_marginVertical="10dp"
             android:elevation="10dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintWidth_percent="0.7"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/airCompressorHeading">
+            app:layout_constraintTop_toBottomOf="@id/airCompressorHeading"
+            app:layout_constraintWidth_percent="0.7">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginVertical="10dp"
-                android:layout_marginHorizontal="5dp">
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="10dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card1OKtxt"
@@ -314,11 +295,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginVertical="3.5dp"
-            app:layout_constraintWidth_percent="0.05"
             android:src="@drawable/question_mark_in_a_circle_outline_svgrepo_com"
             app:layout_constraintBottom_toBottomOf="@id/motorBearingHeading"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/motorBearingHeading" />
+            app:layout_constraintTop_toTopOf="@id/motorBearingHeading"
+            app:layout_constraintWidth_percent="0.05" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/motorBearingCamBtn"
@@ -339,15 +320,15 @@
             android:layout_marginVertical="10dp"
             android:elevation="10dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintWidth_percent="0.7"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/motorBearingHeading">
+            app:layout_constraintTop_toBottomOf="@id/motorBearingHeading"
+            app:layout_constraintWidth_percent="0.7">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginVertical="10dp"
-                android:layout_marginHorizontal="5dp">
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="10dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card2OKtxt"
@@ -419,11 +400,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginVertical="3.5dp"
-            app:layout_constraintWidth_percent="0.05"
             android:src="@drawable/question_mark_in_a_circle_outline_svgrepo_com"
             app:layout_constraintBottom_toBottomOf="@id/inspectCouplerHeading"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/inspectCouplerHeading" />
+            app:layout_constraintTop_toTopOf="@id/inspectCouplerHeading"
+            app:layout_constraintWidth_percent="0.05" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/inspectCouplerCamBtn"
@@ -443,15 +424,15 @@
             android:layout_marginVertical="10dp"
             android:elevation="10dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintWidth_percent="0.7"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/inspectCouplerHeading">
+            app:layout_constraintTop_toBottomOf="@id/inspectCouplerHeading"
+            app:layout_constraintWidth_percent="0.7">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginVertical="10dp"
-                android:layout_marginHorizontal="5dp">
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="10dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card3OKtxt"
@@ -516,16 +497,17 @@
             app:layout_constraintBottom_toBottomOf="@id/coolerTempsHeading"
             app:layout_constraintEnd_toStartOf="@id/coolerTempsQuesBtn"
             app:layout_constraintTop_toTopOf="@id/coolerTempsHeading" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/coolerTempsQuesBtn"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginVertical="3.5dp"
-            app:layout_constraintWidth_percent="0.05"
             android:src="@drawable/question_mark_in_a_circle_outline_svgrepo_com"
             app:layout_constraintBottom_toBottomOf="@id/coolerTempsHeading"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/coolerTempsHeading" />
+            app:layout_constraintTop_toTopOf="@id/coolerTempsHeading"
+            app:layout_constraintWidth_percent="0.05" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/coolerTempsCamBtn"
@@ -545,15 +527,15 @@
             android:layout_marginVertical="10dp"
             android:elevation="10dp"
             app:cardCornerRadius="8dp"
-            app:layout_constraintWidth_percent="0.7"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/coolerTempsHeading">
+            app:layout_constraintTop_toBottomOf="@id/coolerTempsHeading"
+            app:layout_constraintWidth_percent="0.7">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginVertical="10dp"
-                android:layout_marginHorizontal="5dp">
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginVertical="10dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/card4OKtxt"
@@ -602,7 +584,7 @@
             android:id="@+id/backOrCompletedCard"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
+            android:layout_marginVertical="10dp"
             android:elevation="12dp"
             app:cardCornerRadius="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -613,15 +595,16 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="12dp">
+                android:layout_margin="8dp">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/backTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="Back"
-                    android:textSize="20sp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:padding="5dp"
+                    android:text="@string/back1arrow"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -630,9 +613,10 @@
                     android:id="@+id/completedTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="Completed>"
-                    android:textSize="20sp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:padding="5dp"
+                    android:text="@string/completed_2arrow"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

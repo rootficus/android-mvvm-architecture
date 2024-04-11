@@ -15,6 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         tools:context=".ui.main.fragment.inspection.Step2IPFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +27,7 @@
             app:layout_constraintTop_toTopOf="@id/step1Card"
             app:layout_constraintWidth_percent="0.33">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/step1Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -78,11 +79,12 @@
             app:layout_constraintTop_toTopOf="@id/step1Card"
             app:layout_constraintWidth_percent="0.33">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/step2Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/small_rounded_textview"
+                android:backgroundTint="#8EBCFF"
                 android:gravity="center"
                 android:text="2"
                 android:textColor="@color/white"
@@ -128,11 +130,12 @@
             app:layout_constraintTop_toTopOf="@id/step1Card"
             app:layout_constraintWidth_percent="0.33">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/threeTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/small_rounded_textview"
+                android:backgroundTint="#8EBCFF"
                 android:gravity="center"
                 android:text="3"
                 android:textColor="@color/white"
@@ -186,18 +189,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
-            android:fontFamily="@font/roboto_regular"
             android:background="@drawable/edit_text_border"
+            android:fontFamily="@font/roboto_regular"
             android:hint="Downtime"
             android:padding="8dp"
-            android:textSize="14sp"
             android:textAlignment="center"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/vehicleDOwntimeHeading"
             app:layout_constraintWidth_percent="0.6" />
 
 
-        <Spinner
+        <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/downtimeSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -214,15 +217,15 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="15dp"
-            android:fontFamily="@font/roboto_regular"
             android:background="@drawable/edit_text_border"
+            android:fontFamily="@font/roboto_regular"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.28"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/downtimeEdittext" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/downTimeNoteHeading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -256,17 +259,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
-            android:fontFamily="@font/roboto_regular"
             android:background="@drawable/edit_text_border"
+            android:fontFamily="@font/roboto_regular"
             android:hint="Runtime"
             android:padding="8dp"
-            android:textSize="14sp"
             android:textAlignment="center"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/vehicleRuntimeHeading"
             app:layout_constraintWidth_percent="0.6" />
 
-        <Spinner
+        <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/runtimeSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -298,8 +301,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
-            android:fontFamily="@font/roboto_regular"
             android:background="@drawable/edit_text_border"
+            android:fontFamily="@font/roboto_regular"
             android:hint="Work Log"
             android:padding="8dp"
             android:textAlignment="center"
@@ -308,7 +311,7 @@
             app:layout_constraintTop_toBottomOf="@id/operatorWorklogHeading"
             app:layout_constraintWidth_percent="0.6" />
 
-        <Spinner
+        <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/worklohSpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -340,7 +343,7 @@
                     android:id="@+id/backTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/roboto_bold"
                     android:text="Back"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -351,7 +354,7 @@
                     android:id="@+id/generateReportTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
+                    android:fontFamily="@font/roboto_bold"
                     android:text="Generate Report"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"

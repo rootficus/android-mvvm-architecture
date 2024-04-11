@@ -7,6 +7,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rf.macgyver.R
+import com.rf.macgyver.data.model.request.InspectionFormData
 import com.rf.macgyver.databinding.FragmentInspectionBinding
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
@@ -22,7 +23,9 @@ import javax.inject.Inject
 
 class InspectionFragment : BaseFragment<FragmentInspectionBinding>(R.layout.fragment_inspection) {
 
-    val dataList= arrayListOf("A","B")
+    var dataList: ArrayList<InspectionFormData> = arrayListOf()
+
+    //arrayListOf("Engine Overheatinng","Hydrolic Oil lekage")
     @Inject
     lateinit var sharedPreference: SharedPreference
 
@@ -45,20 +48,49 @@ class InspectionFragment : BaseFragment<FragmentInspectionBinding>(R.layout.frag
     }
 
     private fun initializeView() {
-        mDataBinding.startNewButton.setOnClickListener {
-            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_inspection_to_navigation_step1_inspection)
+        mDataBinding.createReportButton.visibility = View.VISIBLE
+        mDataBinding.recyclerViewId.visibility = View.GONE
+        mDataBinding.createReportButton.setOnClickListener {
+            mDataBinding.createReportButton.visibility = View.GONE
+            mDataBinding.recyclerViewId.visibility = View.VISIBLE
+
+            /*Navigation.findNavController(requireView())
+                .navigate(R.id.action_navigation_inspection_to_navigation_step1_inspection)*/
         }
 
-        val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
+        val navController =
+            Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
 
-        mDataBinding.backArrowBtn.setOnClickListener{
+        mDataBinding.backArrowBtn.setOnClickListener {
             navController.navigateUp()
         }
-
-
+        dataList.clear()
+        dataList.add(
+            InspectionFormData(
+                "Engine Overheatinng",
+                concernLevel = "50%",
+                circle1 = true,
+                circle2 = true,
+                circle3 = true,
+                circle4 = false,
+                circle5 = false
+            )
+        )
+        dataList.add(
+            InspectionFormData(
+                "Hydrolic Oil lekage",
+                concernLevel = "10%",
+                circle1 = true,
+                circle2 = false,
+                circle3 = false,
+                circle4 = false,
+                circle5 = false
+            )
+        )
         val itemAdapter = InspectionItemAdapter(dataList, requireActivity())
         val layoutManager = LinearLayoutManager(requireActivity())
         mDataBinding.recyclerViewId.layoutManager = layoutManager
+        itemAdapter.listener = cardListener
         mDataBinding.recyclerViewId.adapter = itemAdapter
     }
 
@@ -66,5 +98,21 @@ class InspectionFragment : BaseFragment<FragmentInspectionBinding>(R.layout.frag
         DaggerInspectionFragmentComponent.builder().appComponent(UtellSDK.appComponent)
             .dashBoardFragmentModuleDi(DashBoardFragmentModuleDi())
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
+    }
+
+    private val cardListener = object : InspectionItemAdapter.InspectionCardEvent {
+        override fun onItemClicked(inspectionFormData: InspectionFormData) {
+            val bundle = Bundle().apply {
+                putSerializable("inspectionFormData", inspectionFormData)
+            }
+            Navigation.findNavController(requireView())
+                .navigate(R.id.action_navigation_inspection_to_navigation_step1_inspection, bundle)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mDataBinding.createReportButton.visibility = View.VISIBLE
+        mDataBinding.recyclerViewId.visibility = View.GONE
     }
 }

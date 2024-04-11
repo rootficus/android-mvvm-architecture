@@ -2,18 +2,20 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="@dimen/_8sdp">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/successTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="30dp"
+        android:layout_marginVertical="10dp"
         android:drawableStart="@drawable/group_11"
         android:drawablePadding="3dp"
         android:fontFamily="@font/roboto_regular"
         android:text="Success"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +28,7 @@
         android:fontFamily="@font/roboto_regular"
         android:text="Inspection Report Generated"
         android:textColor="#767676"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,12 +39,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="25dp"
+        android:layout_marginBottom="@dimen/_20sdp"
         android:drawableStart="@drawable/vector__6_"
         android:drawablePadding="5dp"
         android:fontFamily="@font/roboto_regular"
         android:text="Back"
         android:textColor="#076BFF"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@id/viewReportTxt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headingTxt" />
@@ -54,11 +57,20 @@
         android:fontFamily="@font/roboto_regular"
         android:text="View Report"
         android:textColor="#076BFF"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/backTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/backTxt"
         app:layout_constraintTop_toTopOf="@id/backTxt" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_20sdp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewReportTxt"
+        app:layout_constraintWidth_percent="0.75" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

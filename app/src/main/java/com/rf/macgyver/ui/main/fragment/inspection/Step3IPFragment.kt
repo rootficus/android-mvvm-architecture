@@ -1,17 +1,20 @@
 package com.rf.macgyver.ui.main.fragment.inspection
 
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.PopupWindow
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.rf.macgyver.R
 import com.rf.macgyver.databinding.FragmentStep3IpBinding
 import com.rf.macgyver.databinding.PopupInspectionStep3Binding
-import com.rf.macgyver.databinding.PopupStep2IpBinding
-import com.rf.macgyver.databinding.SuccessAlertDrBinding
-import com.rf.macgyver.databinding.SuccessAlertIpBinding
+import com.rf.macgyver.databinding.SuccessAlertIrBinding
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
@@ -23,7 +26,7 @@ import com.rf.macgyver.utils.NetworkHelper
 import com.rf.macgyver.utils.SharedPreference
 import javax.inject.Inject
 
-class Step3IPFragment: BaseFragment<FragmentStep3IpBinding>(R.layout.fragment_step3_ip) {
+class Step3IPFragment : BaseFragment<FragmentStep3IpBinding>(R.layout.fragment_step3_ip) {
 
     @Inject
     lateinit var sharedPreference: SharedPreference
@@ -47,27 +50,51 @@ class Step3IPFragment: BaseFragment<FragmentStep3IpBinding>(R.layout.fragment_st
     }
 
     private fun initializeView() {
-        val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
+        val navController =
+            Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
 
-        mDataBinding.backTxt.setOnClickListener{
+        mDataBinding.backTxt.setOnClickListener {
             navController.navigateUp()
         }
-        mDataBinding.overallCondSelectId.setOnClickListener{
-            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
-            val view = PopupInspectionStep3Binding.inflate(layoutInflater)
-            mBuilder.setView(view.root)
-            val dialog: android.app.AlertDialog? = mBuilder.create()
-            dialog?.show()
-        }
-        mDataBinding.generateReportTxt.setOnClickListener{
 
-            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
-            val view = SuccessAlertIpBinding.inflate(layoutInflater)
-            mBuilder.setView(view.root)
-            val dialog: android.app.AlertDialog? = mBuilder.create()
-            dialog?.show()
+        mDataBinding.availableBtn.setOnClickListener {
+            mDataBinding.priorityLayout.visibility = View.GONE
         }
+        mDataBinding.maintenanceRequiredId.setOnClickListener {
+            mDataBinding.priorityLayout.visibility = View.VISIBLE
+        }
+        mDataBinding.availableBtn.setOnClickListener {
+            mDataBinding.priorityLayout.visibility = View.VISIBLE
+        }
+        val popupView =
+            LayoutInflater.from(requireContext()).inflate(R.layout.popup_inspection_step3, null)
 
+        val popupWindow = PopupWindow(
+            popupView,
+            WindowManager.LayoutParams.WRAP_CONTENT,
+            WindowManager.LayoutParams.WRAP_CONTENT, true
+        )
+        mDataBinding.overallCondSelectId.setOnClickListener {
+            val location = IntArray(2)
+            mDataBinding.overallCondSelectId.getLocationOnScreen(location)
+            val x = location[0]
+            val y = location[1]
+            popupWindow.showAtLocation(popupView, Gravity.NO_GRAVITY, x, y)
+
+        }
+        mDataBinding.backOrGenerateCard.setOnClickListener {
+            val mBuilder = AlertDialog.Builder(requireActivity())
+            val view = SuccessAlertIrBinding.inflate(layoutInflater)
+            mBuilder.setView(view.root)
+            val dialog: AlertDialog = mBuilder.create()
+            view.backTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+            view.viewReportTxt.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.show()
+        }
 
     }
 

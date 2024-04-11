@@ -243,7 +243,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@drawable/dash_card_banner">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/IncidentReportHeading"
@@ -253,6 +254,7 @@
                     android:layout_marginVertical="40dp"
                     android:fontFamily="@font/roboto_bold"
                     android:text="Incident Report"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -264,7 +266,7 @@
                     android:layout_marginVertical="20dp"
                     android:fontFamily="@font/roboto_regular"
                     android:text="Daily content"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="11sp"
                     app:layout_constraintStart_toStartOf="@id/IncidentReportHeading"
                     app:layout_constraintTop_toBottomOf="@id/IncidentReportHeading" />
