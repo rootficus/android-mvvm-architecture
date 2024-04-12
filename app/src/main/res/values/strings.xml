@@ -67,7 +67,9 @@
     <string name="error_messages_verfication_fail">Enter correct 6 digit PinCode.</string>
     <string name="NO_INTERNET_CONNECTION">Please check your internet connection</string>
     <string name="PLEASE_ENTER_NAME">Please enter your name</string>
-    <string name="PLEASE_ENTER_BALANCE">Please enter your balance</string>
+    <string name="PLEASE_ENTER_EMAIL">Please enter your Email</string>
+
+    <string name="SELECT_ONE_OR_MORE_OPTIONS">Select one or more options</string>
     <string name="login_text">Login to your account</string>
     <string name="login_sub_heading"><![CDATA[Enter your username & password to login]]></string>
     <string name="PLEASE_ENTER_PASSWORD">Please enter password</string>

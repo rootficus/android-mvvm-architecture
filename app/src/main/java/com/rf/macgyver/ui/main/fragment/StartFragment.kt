@@ -3,8 +3,8 @@ package com.rf.macgyver.ui.main.fragment
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.rf.macgyver.R
 import com.rf.macgyver.databinding.FragmentStartBinding
@@ -20,17 +20,12 @@ import com.rf.macgyver.utils.NetworkHelper
 import com.rf.macgyver.utils.SharedPreference
 import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [StartFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class StartFragment : BaseFragment<FragmentStartBinding>(R.layout.fragment_start) {
+
+    private lateinit var text :String
+
+    private val checkBoxList = mutableListOf<String>()
 
     @Inject
     lateinit var sharedPreference: SharedPreference
@@ -58,11 +53,47 @@ class StartFragment : BaseFragment<FragmentStartBinding>(R.layout.fragment_start
             .signInFragmentModuleDi(SignInFragmentModuleDi())
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
-    private fun initializeView(){
-        mDataBinding.letsStartBtn.setOnClickListener{
-            val intent = Intent(requireActivity(), DashBoardActivity::class.java)
-            startActivity(intent)
-            requireActivity().finish()
+
+    private fun initializeView() {
+
+        mDataBinding.inspectionCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            text = mDataBinding.inspectionCheckbox.text.toString()
+            updateList(text, isChecked)
+        }
+        mDataBinding.fuelCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            text = mDataBinding.fuelCheckbox.text.toString()
+            updateList(text, isChecked)
+        }
+
+        mDataBinding.maintainanceCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            text = mDataBinding.maintainanceCheckbox.text.toString()
+            updateList(text, isChecked)
+        }
+
+        mDataBinding.safetyCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            text = mDataBinding.safetyCheckbox.text.toString()
+            updateList(text, isChecked)
+        }
+        mDataBinding.purchasingCheckbox.setOnCheckedChangeListener { _, isChecked ->
+            text = mDataBinding.purchasingCheckbox.text.toString()
+            updateList(text, isChecked)
+        }
+
+        mDataBinding.letsStartBtn.setOnClickListener {
+            if (checkBoxList.size >0) {
+                val intent = Intent(requireActivity(), DashBoardActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
+            } else {
+                Toast.makeText(context, "Select one or more options", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+    private fun updateList(text: String, isChecked: Boolean) {
+        if (isChecked) {
+            checkBoxList.add(text)
+        } else {
+            checkBoxList.remove(text)
         }
     }
 }

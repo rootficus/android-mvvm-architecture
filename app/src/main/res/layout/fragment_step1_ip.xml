@@ -207,7 +207,7 @@
                     app:layout_constraintTop_toBottomOf="@id/txtEngineStartUp" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/radiatorPlusBtn"
+                    android:id="@+id/radiatorCamBtn"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_marginEnd="12dp"
@@ -226,7 +226,7 @@
                     android:text="How dirty is your radiator?"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/radiatorPlusBtn" />
+                    app:layout_constraintTop_toBottomOf="@id/radiatorCamBtn" />
 
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -453,7 +453,7 @@
                     app:layout_constraintTop_toBottomOf="@id/card8" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/beltsPlusBtn"
+                    android:id="@+id/beltsCamBtn"
                     android:layout_width="22dp"
                     android:layout_height="22dp"
                     android:layout_marginEnd="12dp"
@@ -472,7 +472,7 @@
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/beltsPlusBtn" />
+                    app:layout_constraintTop_toBottomOf="@id/beltsCamBtn" />
 
 
                 <androidx.appcompat.widget.AppCompatImageView

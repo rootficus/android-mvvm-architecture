@@ -57,7 +57,21 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
 
     private fun initializeView(view: View) {
         mDataBinding.loginBtn.setOnClickListener{
-            findNavController().navigate(R.id.action_fragment_signin_to_fragment_company_info)
+            val name = mDataBinding.etUsername.text.toString()
+            val password = mDataBinding.etPassword.text.toString()
+            if (name.isEmpty()) {
+                Utility.callCustomToast(
+                    requireContext(),
+                    mActivity.getString(R.string.PLEASE_ENTER_NAME)
+                )
+            } else if (password.isEmpty()) {
+                Utility.callCustomToast(
+                    requireContext(),
+                    mActivity.getString(R.string.PLEASE_ENTER_PASSWORD)
+                )
+            } else {
+                findNavController().navigate(R.id.action_fragment_signin_to_fragment_company_info)
+            }
         }
         mDataBinding.signupBtn.setOnClickListener{
             findNavController().navigate(R.id.action_fragment_SignIn_to_fragment_signup)

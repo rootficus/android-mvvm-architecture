@@ -63,7 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Maintainance and Services"
+                    android:text="Maintenance and Services"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@id/inspectionCheckbox"
                     app:layout_constraintTop_toBottomOf="@id/inspectionCheckbox" />

@@ -63,7 +63,7 @@ class Step3IPFragment : BaseFragment<FragmentStep3IpBinding>(R.layout.fragment_s
         mDataBinding.maintenanceRequiredId.setOnClickListener {
             mDataBinding.priorityLayout.visibility = View.VISIBLE
         }
-        mDataBinding.availableBtn.setOnClickListener {
+        mDataBinding.breakdownBtn.setOnClickListener {
             mDataBinding.priorityLayout.visibility = View.VISIBLE
         }
         val popupView =

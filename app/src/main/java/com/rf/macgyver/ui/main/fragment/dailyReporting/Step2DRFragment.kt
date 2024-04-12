@@ -3,15 +3,13 @@ package com.rf.macgyver.ui.main.fragment.dailyReporting
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
-import androidx.navigation.Navigation.findNavController
 import com.rf.macgyver.R
-import com.rf.macgyver.databinding.AddVehicleAlertBinding
+import com.rf.macgyver.databinding.AlertCamDrBinding
 import com.rf.macgyver.databinding.FragmentStep2DRBinding
-import com.rf.macgyver.databinding.PopupInspectionStep3Binding
 import com.rf.macgyver.databinding.PopupStep2DrBinding
-import com.rf.macgyver.databinding.PopupStep2IpBinding
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
@@ -25,6 +23,7 @@ import javax.inject.Inject
 
 class Step2DRFragment : BaseFragment<FragmentStep2DRBinding>(R.layout.fragment_step2_d_r) {
 
+    private lateinit var text : String
     @Inject
     lateinit var sharedPreference: SharedPreference
 
@@ -47,44 +46,57 @@ class Step2DRFragment : BaseFragment<FragmentStep2DRBinding>(R.layout.fragment_s
 
     private fun initializeView() {
 
-        val binding = PopupStep2DrBinding.inflate(layoutInflater)
-
         mDataBinding.airCompressorPlusBtn.setOnClickListener{
-
-            val text = mDataBinding.airCompressorHeading.text.toString()
-            binding.headingId.setText(text)
-            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
-            val view = PopupStep2DrBinding.inflate(layoutInflater)
-            view.headingId.text = mDataBinding.airCompressorHeading.text.toString()
-            mBuilder.setView(view.root)
-            val dialog: android.app.AlertDialog? = mBuilder.create()
-            dialog?.show()
+            text = mDataBinding.airCompressorHeading.text.toString()
+            initializePlusButtonAlert(text)
         }
+
         mDataBinding.motorBearingPlusBtn.setOnClickListener{
-            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
-            val view = PopupStep2DrBinding.inflate(layoutInflater)
-            view.headingId.text = mDataBinding.motorBearingHeading.text.toString()
-            mBuilder.setView(view.root)
-            val dialog: android.app.AlertDialog? = mBuilder.create()
-            dialog?.show()
-        }
-        mDataBinding.coolerTempsPlusBtn.setOnClickListener{
-            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
-            val view = PopupStep2DrBinding.inflate(layoutInflater)
-            view.headingId.text = mDataBinding.coolerTempsHeading.text.toString()
-            mBuilder.setView(view.root)
-            val dialog: android.app.AlertDialog? = mBuilder.create()
-            dialog?.show()
-        }
-        mDataBinding.ispectCouplerPlusBtn.setOnClickListener{
-            val mBuilder = android.app.AlertDialog.Builder(requireActivity())
-            val view = PopupStep2DrBinding.inflate(layoutInflater)
-            view.headingId.text = mDataBinding.inspectCouplerHeading.text.toString()
-            mBuilder.setView(view.root)
-            val dialog: android.app.AlertDialog? = mBuilder.create()
-            dialog?.show()
+            text = mDataBinding.motorBearingHeading.text.toString()
+            initializePlusButtonAlert(text)
         }
 
+        mDataBinding.coolerTempsPlusBtn.setOnClickListener{
+            text = mDataBinding.coolerTempsHeading.text.toString()
+            initializePlusButtonAlert(text)
+        }
+
+        mDataBinding.ispectCouplerPlusBtn.setOnClickListener{
+            text = mDataBinding.inspectCouplerHeading.text.toString()
+            initializePlusButtonAlert(text)
+        }
+
+        mDataBinding.engineTempsPlusBtn.setOnClickListener{
+            text = mDataBinding.engineTempsHeading.text.toString()
+            initializePlusButtonAlert(text)
+        }
+
+        mDataBinding.coolantTempsPlusBtn.setOnClickListener{
+            text = mDataBinding.coolantTempsHeading.text.toString()
+            initializePlusButtonAlert(text)
+        }
+
+        mDataBinding.engineStartUpPlusBtn.setOnClickListener{
+            text = mDataBinding.engineHeading.text.toString()
+            initializePlusButtonAlert(text)
+        }
+
+        mDataBinding.vibrationPlusBtn.setOnClickListener{
+            text = mDataBinding.vibrationHeading.text.toString()
+            initializePlusButtonAlert(text)
+        }
+
+        mDataBinding.engineCamBtn.setOnClickListener{
+            initializeCamAlert()
+        }
+
+        mDataBinding.vibrationCamBtn.setOnClickListener{
+            initializeCamAlert()
+        }
+
+        mDataBinding.smellCamBtn.setOnClickListener{
+            initializeCamAlert()
+        }
         val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
 
         mDataBinding.completedTxt.setOnClickListener{
@@ -100,5 +112,34 @@ class Step2DRFragment : BaseFragment<FragmentStep2DRBinding>(R.layout.fragment_s
         DaggerStep2DRFragmentComponent.builder().appComponent(UtellSDK.appComponent)
             .dashBoardFragmentModuleDi(DashBoardFragmentModuleDi())
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
+    }
+
+    private fun initializePlusButtonAlert(text :String){
+
+        val mBuilder = AlertDialog.Builder(requireActivity())
+        val view = PopupStep2DrBinding.inflate(layoutInflater)
+        view.headingId.text = text
+        mBuilder.setView(view.root)
+        val dialog: AlertDialog = mBuilder.create()
+        view.cancelTxt.setOnClickListener {
+            dialog.dismiss()
+        }
+        view.DoneTxt.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
+    private fun initializeCamAlert(){
+        val mBuilder = AlertDialog.Builder(requireActivity())
+        val view = AlertCamDrBinding.inflate(layoutInflater)
+        mBuilder.setView(view.root)
+        val dialog: AlertDialog = mBuilder.create()
+        view.cancelTxt.setOnClickListener {
+            dialog.dismiss()
+        }
+        view.doneTxt.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 }
