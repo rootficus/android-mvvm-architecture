@@ -190,7 +190,7 @@ object PdfGenerator2 {
             document.add(challanParagraph)
 
             // Add QR code image to PDF
-            val qrCodeBitmap = generateQRCode("qrText", context)
+            val qrCodeBitmap = generateQRCode("https://geolgyminingjk.in/challan/${request.challanNumber}", context)
             qrCodeBitmap?.let {
                 val qrCodeImage = Image(ImageDataFactory.create(bitmapToByteArray(it)))
                 qrCodeImage.scaleToFit(85f, 85f)
@@ -400,8 +400,8 @@ object PdfGenerator2 {
 
             try {
                 document.close()
-                openPdfFile(context, file)
-                //showPdf(context, file)
+                //openPdfFile(context, file)
+                showPdf(context, file)
             } catch (e: IOException) {
                 e.printStackTrace()
             }

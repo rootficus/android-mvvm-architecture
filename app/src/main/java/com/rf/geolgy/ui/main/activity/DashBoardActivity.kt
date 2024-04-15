@@ -48,6 +48,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     var validTo: String = ""
     var rateOfMineral: String = ""
     var rateOfMineralTotal: String = ""
+    var expireInHours: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -64,6 +65,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         val permitEndDate: String = signInResponse.company?.permitEndDate.toString()
         rateOfMineral = signInResponse.company?.rateOfMineral.toString()
         rateOfMineralTotal = signInResponse.company?.rateOfMineralTotal.toString()
+        expireInHours = signInResponse.company?.expireInHours.toString()
         val qualityPercentage: String = signInResponse.company?.quantityPercentage.toString()
         val qualityAmount: String = signInResponse.company?.quantityAmount.toString()
         viewDataBinding?.txtValidity?.text = getString(R.string.validity_from)
@@ -152,13 +154,13 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         val calendar = Calendar.getInstance()
         val currentTime = calendar.time
         validFrom = sdf.format(currentTime)
-        calendar.add(Calendar.HOUR_OF_DAY, 3)
+        calendar.add(Calendar.HOUR_OF_DAY, expireInHours.toInt())
         val futureTime = calendar.time
         validTo = sdf.format(futureTime)
         viewDataBinding?.txtValidity?.text =
             "Validity from $validFrom to $validTo"
         viewDataBinding?.txtPoint9?.text =
-            "DATE & TIME of dispatch $validFrom to $validTo (Valid upto 3 Hours)"
+            "DATE & TIME of dispatch $validFrom to $validTo (Valid upto $expireInHours Hours)"
         challanNumber = Utility.generateRandomChallanString(12)
         viewDataBinding?.txtEchallanNumber?.text = getString(R.string.challan_number, challanNumber)
     }

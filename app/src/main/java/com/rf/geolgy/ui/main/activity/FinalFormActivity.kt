@@ -70,6 +70,7 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
     var gstNumber = ""
     var validFrom: String = ""
     var validTo: String = ""
+    var expireInHours: String = ""
     private var printManager: PrintManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,6 +100,7 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
         val rateOfMineralTotal: String = signInResponse.company?.rateOfMineralTotal.toString()
         val qualityPercentage: String = signInResponse.company?.quantityPercentage.toString()
         val qualityAmount: String = signInResponse.company?.quantityAmount.toString()
+        expireInHours = signInResponse.company?.expireInHours.toString()
         viewDataBinding?.txtValidity?.text = getString(R.string.validity_from)
         viewDataBinding?.edtPoint1?.text = signInResponse.company?.licenceType
 
@@ -217,13 +219,13 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
         val calendar = Calendar.getInstance()
         val currentTime = calendar.time
         validFrom = sdf.format(currentTime)
-        calendar.add(Calendar.HOUR_OF_DAY, 3)
+        calendar.add(Calendar.HOUR_OF_DAY, expireInHours.toInt())
         val futureTime = calendar.time
         validTo = sdf.format(futureTime)
         viewDataBinding?.txtValidity?.text =
             "Validity from $validFrom to $validTo"
         viewDataBinding?.txtPoint9?.text =
-            "DATE & TIME of dispatch $validFrom to $validTo (Valid upto 3 Hours)"
+            "DATE & TIME of dispatch $validFrom to $validTo (Valid upto $expireInHours Hours)"
         if (printJob != null && printBtnPressed) {
             if (printJob!!.isCompleted) {
                 // Showing Toast Message

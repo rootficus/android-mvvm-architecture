@@ -32,5 +32,6 @@ data class Company(
     @SerializedName("quantity_percentage") var quantityPercentage: String? = null,
     @SerializedName("quantity_amount") var quantityAmount: String? = null,
     @SerializedName("rate_of_mineral") var rateOfMineral: String? = null,
-    @SerializedName("rate_of_mineral_total") var rateOfMineralTotal: String? = null
+    @SerializedName("rate_of_mineral_total") var rateOfMineralTotal: String? = null,
+    @SerializedName("expire_in_hours") var expireInHours: String? = null
 ) : Serializable
