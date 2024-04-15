@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.rf.macgyver.R
-import com.rf.macgyver.databinding.FragmentDashboardBinding
 import com.rf.macgyver.databinding.FragmentSignUpBinding
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.utils.Utility

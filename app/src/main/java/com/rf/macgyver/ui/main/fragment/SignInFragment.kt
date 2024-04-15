@@ -1,13 +1,9 @@
 package com.rf.macgyver.ui.main.fragment
 
 import android.app.Dialog
-import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.text.method.PasswordTransformationMethod
 import android.view.View
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.rf.macgyver.R
@@ -19,7 +15,6 @@ import com.rf.macgyver.databinding.FragmentSignInBinding
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragmentModule
 import com.rf.macgyver.ui.base.BaseViewModelFactory
-import com.rf.macgyver.ui.main.activity.DashBoardActivity
 import com.rf.macgyver.ui.main.di.DaggerSignInFragmentComponent
 import com.rf.macgyver.ui.main.di.SignInFragmentModuleDi
 import com.rf.macgyver.ui.main.viewmodel.SignInViewModel

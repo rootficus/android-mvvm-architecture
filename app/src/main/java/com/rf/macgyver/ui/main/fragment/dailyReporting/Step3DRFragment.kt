@@ -4,10 +4,14 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.rf.macgyver.R
+import com.rf.macgyver.data.model.request.Step1DrData
+import com.rf.macgyver.data.model.request.Step2DrData
+import com.rf.macgyver.data.model.request.Step3DrData
 import com.rf.macgyver.databinding.FragmentStep3DRBinding
 import com.rf.macgyver.databinding.SuccessAlertDrBinding
 import com.rf.macgyver.sdkInit.UtellSDK
@@ -23,6 +27,10 @@ import javax.inject.Inject
 
 class Step3DRFragment : BaseFragment<FragmentStep3DRBinding>(R.layout.fragment_step3_d_r) {
 
+    private var step3DrData : Step3DrData = Step3DrData()
+    private lateinit var downtimeSpinnerVal : String
+    private lateinit var runtimeSpinnerValue : String
+    private lateinit var worklogSpinnerValue : String
 
     private var downtimeData = arrayOf("hours", "minutes")
     private var runtimeData = arrayOf("hours", "minutes")
@@ -50,19 +58,52 @@ class Step3DRFragment : BaseFragment<FragmentStep3DRBinding>(R.layout.fragment_s
     }
 
     private fun initializeView() {
+
+        val bundle = arguments
+
+        val step1Data: Step1DrData? =
+            bundle?.getSerializable("step1Data") as? Step1DrData
+        val step2Data : ArrayList<*>? = bundle?.getSerializable("step2Data") as? ArrayList<*>
+
         mDataBinding.generateReportTxt.setOnClickListener {
 
-            val mBuilder = AlertDialog.Builder(requireActivity())
-            val view = SuccessAlertDrBinding.inflate(layoutInflater)
-            mBuilder.setView(view.root)
-            val dialog: AlertDialog = mBuilder.create()
-            view.backTxt.setOnClickListener {
-                dialog.dismiss()
+            downtimeSpinnerVal = mDataBinding.downtimeSpinner.selectedItem.toString()
+            runtimeSpinnerValue = mDataBinding.runtimeSpinner.selectedItem.toString()
+            worklogSpinnerValue = mDataBinding.worklohSpinner.selectedItem.toString()
+            val string1 = mDataBinding.downtimeEdittext.text.toString()+""+ downtimeSpinnerVal
+            val string2 = mDataBinding.runtimeEdittext.text.toString() +""+ runtimeSpinnerValue
+            val string3 = mDataBinding.worklogEdittext.text.toString() +""+ worklogSpinnerValue
+
+            step3DrData.vehicleDowntime = string1
+            step3DrData.vehicleRuntime = string2
+            step3DrData.worklog = string3
+            step3DrData.downtimeNote = mDataBinding.downtimeNoteEdittext.text.toString()
+
+            if(string1.isEmpty() || string2.isEmpty() || string3.isEmpty() ||
+                step3DrData.downtimeNote!!.isEmpty()){
+                Toast.makeText(context, "please enter all the details", Toast.LENGTH_SHORT).show()
+            }else {
+                val bundle1 = Bundle().apply {
+                    putSerializable("step1DrData", step1Data)
+                    putSerializable("step2DrData", step2Data)
+                    putSerializable("step3DrData", step3DrData)
+                }
+
+                val mBuilder = AlertDialog.Builder(requireActivity())
+                val view = SuccessAlertDrBinding.inflate(layoutInflater)
+                mBuilder.setView(view.root)
+                val dialog: AlertDialog = mBuilder.create()
+
+                view.backTxt.setOnClickListener {
+                    dialog.dismiss()
+                }
+                view.viewReportTxt.setOnClickListener {
+                    Navigation.findNavController(requireView())
+                        .navigate(R.id.action_navigation_step3_report_to_navigation_daily_report_home_page,bundle1)
+                    dialog.dismiss()
+                }
+                dialog.show()
             }
-            view.viewReportTxt.setOnClickListener {
-                dialog.dismiss()
-            }
-            dialog.show()
         }
         val navController =
             Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)

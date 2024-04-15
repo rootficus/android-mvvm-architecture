@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 class InspectionFragment : BaseFragment<FragmentInspectionBinding>(R.layout.fragment_inspection) {
 
-    var dataList: ArrayList<InspectionFormData> = arrayListOf()
+    private var dataList: ArrayList<InspectionFormData> = arrayListOf()
 
     //arrayListOf("Engine Overheatinng","Hydrolic Oil lekage")
     @Inject

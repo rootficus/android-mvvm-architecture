@@ -8,6 +8,8 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.rf.macgyver.R
+import com.rf.macgyver.data.model.request.Step1DrData
+import com.rf.macgyver.data.model.request.Step3DrData
 import com.rf.macgyver.databinding.FragmentDailyReportingBinding
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
@@ -24,7 +26,7 @@ import javax.inject.Inject
 
 class DailyReportingFragment  : BaseFragment<FragmentDailyReportingBinding>(R.layout.fragment_daily_reporting) {
 
-    private var dataList: ArrayList<Triple<String,String,String>> = arrayListOf()
+    private var dataList: ArrayList<Step1DrData?> = arrayListOf()
     @Inject
     lateinit var sharedPreference: SharedPreference
 
@@ -49,6 +51,13 @@ class DailyReportingFragment  : BaseFragment<FragmentDailyReportingBinding>(R.la
     }
 
     private fun initializeView() {
+        val bundle = arguments
+
+        val step1Data: Step1DrData? =
+            bundle?.getSerializable("step1DrData") as? Step1DrData
+        val step2Data : ArrayList<*>? = bundle?.getSerializable("step2DrData") as? ArrayList<*>
+        val step3Data: Step3DrData? =
+            bundle?.getSerializable("step3DrData") as? Step3DrData
         mDataBinding.startNewButton.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.action_navigation_daily_report_to_navigation_step1_report)
         }
@@ -58,6 +67,8 @@ class DailyReportingFragment  : BaseFragment<FragmentDailyReportingBinding>(R.la
         mDataBinding.backArrowBtn.setOnClickListener{
             navController.navigateUp()
         }
+        val list = listOf(step1Data)
+        dataList = ArrayList(list)
 
         val itemAdapter = DailyReportingItemAdapter(dataList, requireActivity())
         val layoutManager = LinearLayoutManager(requireActivity())

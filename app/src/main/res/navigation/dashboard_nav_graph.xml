@@ -82,6 +82,7 @@
         android:label="Step2DRFragment"
         tools:layout="@layout/fragment_step2_d_r">
 
+
         <action
             android:id="@+id/action_navigation_step2_report_to_navigation_step3_report"
             app:destination="@id/navigation_step3_report" />
@@ -93,6 +94,9 @@
         android:name="com.rf.macgyver.ui.main.fragment.dailyReporting.Step3DRFragment"
         android:label="Step3DRFragment"
         tools:layout="@layout/fragment_step3_d_r">
+        <action
+            android:id="@+id/action_navigation_step3_report_to_navigation_daily_report_home_page"
+            app:destination="@id/navigation_daily_report" />
 
     </fragment>
 

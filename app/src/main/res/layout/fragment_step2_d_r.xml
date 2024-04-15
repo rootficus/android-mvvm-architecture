@@ -235,7 +235,7 @@
                         android:layout_marginVertical="6dp">
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/card1OKtxt"
+                            android:id="@+id/card1HotTxt"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
@@ -249,7 +249,7 @@
                             app:layout_constraintWidth_percent="0.17" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/card1FaultyTxt"
+                            android:id="@+id/card1ColdTxt"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
@@ -258,13 +258,13 @@
                             android:textAlignment="center"
                             android:textColor="#979797"
                             android:textSize="12sp"
-                            app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
-                            app:layout_constraintStart_toEndOf="@id/card1OKtxt"
-                            app:layout_constraintTop_toTopOf="@id/card1OKtxt"
+                            app:layout_constraintBottom_toBottomOf="@id/card1HotTxt"
+                            app:layout_constraintStart_toEndOf="@id/card1HotTxt"
+                            app:layout_constraintTop_toTopOf="@id/card1HotTxt"
                             app:layout_constraintWidth_percent="0.22" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/card1FaultyButOkTxt"
+                            android:id="@+id/card1WindyTxt"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
@@ -273,9 +273,9 @@
                             android:textAlignment="center"
                             android:textColor="#979797"
                             android:textSize="12sp"
-                            app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
-                            app:layout_constraintStart_toEndOf="@id/card1FaultyTxt"
-                            app:layout_constraintTop_toTopOf="@id/card1OKtxt"
+                            app:layout_constraintBottom_toBottomOf="@id/card1HotTxt"
+                            app:layout_constraintStart_toEndOf="@id/card1ColdTxt"
+                            app:layout_constraintTop_toTopOf="@id/card1HotTxt"
                             app:layout_constraintWidth_percent="0.2" />
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -288,10 +288,10 @@
                             android:textAlignment="center"
                             android:textColor="#979797"
                             android:textSize="12sp"
-                            app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
-                            app:layout_constraintStart_toEndOf="@id/card1FaultyButOkTxt"
-                            app:layout_constraintTop_toTopOf="@id/card1OKtxt"
-                            app:layout_constraintWidth_percent="0.2" />
+                            app:layout_constraintBottom_toBottomOf="@id/card1HotTxt"
+                            app:layout_constraintStart_toEndOf="@id/card1WindyTxt"
+                            app:layout_constraintTop_toTopOf="@id/card1HotTxt"
+                            app:layout_constraintWidth_percent="0.21" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/card1NATxt"
@@ -303,10 +303,10 @@
                             android:textAlignment="center"
                             android:textColor="#979797"
                             android:textSize="12sp"
-                            app:layout_constraintBottom_toBottomOf="@id/card1OKtxt"
+                            app:layout_constraintBottom_toBottomOf="@id/card1HotTxt"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/card1DownpourTxt"
-                            app:layout_constraintTop_toTopOf="@id/card1OKtxt"
+                            app:layout_constraintTop_toTopOf="@id/card1HotTxt"
                             app:layout_constraintWidth_percent="0.13" />
 
 
@@ -354,7 +354,7 @@
                         android:layout_marginVertical="6dp">
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/card2OKtxt"
+                            android:id="@+id/card2Softtxt"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
@@ -368,7 +368,7 @@
                             app:layout_constraintWidth_percent="0.16" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/card2FaultyTxt"
+                            android:id="@+id/card2Firmtxt"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
@@ -377,13 +377,13 @@
                             android:textAlignment="center"
                             android:textColor="#979797"
                             android:textSize="12sp"
-                            app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
-                            app:layout_constraintStart_toEndOf="@id/card2OKtxt"
-                            app:layout_constraintTop_toTopOf="@id/card2OKtxt"
+                            app:layout_constraintBottom_toBottomOf="@id/card2Softtxt"
+                            app:layout_constraintStart_toEndOf="@id/card2Softtxt"
+                            app:layout_constraintTop_toTopOf="@id/card2Softtxt"
                             app:layout_constraintWidth_percent="0.22" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/card2FaultyButOkTxt"
+                            android:id="@+id/card2LargeRoxkstxt"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
@@ -392,9 +392,9 @@
                             android:textAlignment="center"
                             android:textColor="#979797"
                             android:textSize="12sp"
-                            app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
-                            app:layout_constraintStart_toEndOf="@id/card2FaultyTxt"
-                            app:layout_constraintTop_toTopOf="@id/card2OKtxt"
+                            app:layout_constraintBottom_toBottomOf="@id/card2Softtxt"
+                            app:layout_constraintStart_toEndOf="@id/card2Firmtxt"
+                            app:layout_constraintTop_toTopOf="@id/card2Softtxt"
                             app:layout_constraintWidth_percent="0.22" />
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -407,10 +407,10 @@
                             android:textAlignment="center"
                             android:textColor="#979797"
                             android:textSize="12sp"
-                            app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
+                            app:layout_constraintBottom_toBottomOf="@id/card2Softtxt"
                             app:layout_constraintEnd_toStartOf="@id/card2NATxt"
-                            app:layout_constraintStart_toEndOf="@id/card2FaultyButOkTxt"
-                            app:layout_constraintTop_toTopOf="@id/card2OKtxt"
+                            app:layout_constraintStart_toEndOf="@id/card2LargeRoxkstxt"
+                            app:layout_constraintTop_toTopOf="@id/card2Softtxt"
                             app:layout_constraintWidth_percent="0.2" />
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -423,10 +423,10 @@
                             android:textAlignment="center"
                             android:textColor="#979797"
                             android:textSize="12sp"
-                            app:layout_constraintBottom_toBottomOf="@id/card2OKtxt"
+                            app:layout_constraintBottom_toBottomOf="@id/card2Softtxt"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/card2SlipperyTxt"
-                            app:layout_constraintTop_toTopOf="@id/card2OKtxt"
+                            app:layout_constraintTop_toTopOf="@id/card2Softtxt"
                             app:layout_constraintWidth_percent="0.2" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -509,11 +509,12 @@
                             android:text="Faulty but OK"
                             android:textAlignment="center"
                             android:textColor="#979797"
+                            android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="@id/card3OKtxt"
                             app:layout_constraintEnd_toStartOf="@id/card3NATxt"
                             app:layout_constraintStart_toEndOf="@id/card3FaultyTxt"
                             app:layout_constraintTop_toTopOf="@id/card3OKtxt"
-                            app:layout_constraintWidth_percent="0.24" />
+                            app:layout_constraintWidth_percent="0.25" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/card3NATxt"
@@ -616,7 +617,7 @@
                             app:layout_constraintEnd_toStartOf="@id/card4NATxt"
                             app:layout_constraintStart_toEndOf="@id/card4FaultyTxt"
                             app:layout_constraintTop_toTopOf="@id/card4OKtxt"
-                            app:layout_constraintWidth_percent="0.24" />
+                            app:layout_constraintWidth_percent="0.25" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/card4NATxt"
@@ -719,7 +720,7 @@
                             app:layout_constraintEnd_toStartOf="@id/card5NATxt"
                             app:layout_constraintStart_toEndOf="@id/card5FaultyTxt"
                             app:layout_constraintTop_toTopOf="@id/card5OKtxt"
-                            app:layout_constraintWidth_percent="0.24" />
+                            app:layout_constraintWidth_percent="0.25" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/card5NATxt"
@@ -1023,7 +1024,7 @@
                         android:layout_marginVertical="6dp">
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/card8OKtxt"
+                            android:id="@+id/card8Softtxt"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
@@ -1037,7 +1038,7 @@
                             app:layout_constraintWidth_percent="0.16" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/card8FaultyTxt"
+                            android:id="@+id/card8Firmtxt"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
@@ -1046,13 +1047,13 @@
                             android:textAlignment="center"
                             android:textColor="#979797"
                             android:textSize="12sp"
-                            app:layout_constraintBottom_toBottomOf="@id/card8OKtxt"
-                            app:layout_constraintStart_toEndOf="@id/card8OKtxt"
-                            app:layout_constraintTop_toTopOf="@id/card8OKtxt"
+                            app:layout_constraintBottom_toBottomOf="@id/card8Softtxt"
+                            app:layout_constraintStart_toEndOf="@id/card8Softtxt"
+                            app:layout_constraintTop_toTopOf="@id/card8Softtxt"
                             app:layout_constraintWidth_percent="0.22" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/card8FaultyButOkTxt"
+                            android:id="@+id/card8LargeRockstxt"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
@@ -1061,9 +1062,9 @@
                             android:textAlignment="center"
                             android:textColor="#979797"
                             android:textSize="12sp"
-                            app:layout_constraintBottom_toBottomOf="@id/card8OKtxt"
-                            app:layout_constraintStart_toEndOf="@id/card8FaultyTxt"
-                            app:layout_constraintTop_toTopOf="@id/card8OKtxt"
+                            app:layout_constraintBottom_toBottomOf="@id/card8Softtxt"
+                            app:layout_constraintStart_toEndOf="@id/card8Firmtxt"
+                            app:layout_constraintTop_toTopOf="@id/card8Softtxt"
                             app:layout_constraintWidth_percent="0.22" />
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -1076,10 +1077,10 @@
                             android:textAlignment="center"
                             android:textColor="#979797"
                             android:textSize="12sp"
-                            app:layout_constraintBottom_toBottomOf="@id/card8OKtxt"
+                            app:layout_constraintBottom_toBottomOf="@id/card8Softtxt"
                             app:layout_constraintEnd_toStartOf="@id/card8NATxt"
-                            app:layout_constraintStart_toEndOf="@id/card8FaultyButOkTxt"
-                            app:layout_constraintTop_toTopOf="@id/card8OKtxt"
+                            app:layout_constraintStart_toEndOf="@id/card8LargeRockstxt"
+                            app:layout_constraintTop_toTopOf="@id/card8Softtxt"
                             app:layout_constraintWidth_percent="0.2" />
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -1092,10 +1093,10 @@
                             android:textAlignment="center"
                             android:textColor="#979797"
                             android:textSize="12sp"
-                            app:layout_constraintBottom_toBottomOf="@id/card8OKtxt"
+                            app:layout_constraintBottom_toBottomOf="@id/card8Softtxt"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/card8SlipperyTxt"
-                            app:layout_constraintTop_toTopOf="@id/card8OKtxt"
+                            app:layout_constraintTop_toTopOf="@id/card8Softtxt"
                             app:layout_constraintWidth_percent="0.2" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,8 @@
     <color name="darkPrimary">#FFD778</color>
     <color name="greenColor">#4CAF50</color>
     <color name="orangeColor">#FF5722</color>
+
+    <color name="lightgray">#979797</color>
     <color name="teal_700">#FF018786</color>
 
     <color name="gray">#3B6C6C6C</color>
@@ -40,6 +42,7 @@
     </color> <!-- Replace with your desired background color -->
     <color name="customMenuItemSelected">@color/primaryBlue</color>
 
+    <color name="lightBlue">#8EBCFF</color>
     <!--   Home-->
     <color name="homeTextColor">@color/primaryBlue</color>
     <color name="bottomNacColor">@color/white</color>

@@ -8,9 +8,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.rf.macgyver.R
 import com.rf.macgyver.databinding.FragmentStep2IpBinding
-import com.rf.macgyver.databinding.PopupInspectionStep3Binding
 import com.rf.macgyver.databinding.PopupStep2IpBinding
-import com.rf.macgyver.databinding.SuccessAlertDrBinding
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule

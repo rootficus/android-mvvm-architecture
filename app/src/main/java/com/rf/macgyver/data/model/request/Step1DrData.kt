@@ -5,10 +5,10 @@ import java.io.Serializable
 data class Step1DrData (
     var date : String? = null,
     var day : String? = null,
-    val reportName: String? = null,
+    var reportName: String? = null,
     var name : String? = null,
     var shift : String? = null,
-    val vehicle :Vehicle? = null
+    var vehicle :Vehicle? = null
 ) :Serializable
 
 data class Vehicle(
