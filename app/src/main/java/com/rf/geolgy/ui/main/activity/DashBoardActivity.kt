@@ -4,13 +4,12 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.Spanned
-import android.view.Menu
 import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
@@ -24,7 +23,6 @@ import com.rf.geolgy.sdkInit.GeolgySDK
 import com.rf.geolgy.ui.base.BaseActivity
 import com.rf.geolgy.ui.base.BaseActivityModule
 import com.rf.geolgy.ui.base.BaseViewModelFactory
-import com.rf.geolgy.ui.main.adapter.CustomSpinnerAdapter
 import com.rf.geolgy.ui.main.di.DaggerDashBoardActivityComponent
 import com.rf.geolgy.ui.main.di.DashBoardActivityModule
 import com.rf.geolgy.ui.main.viewmodel.DashBoardViewModel
@@ -54,7 +52,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     var validTo: String = ""
     var rateOfMineral: String = ""
     var rateOfMineralTotal: String = ""
-    var expireInHours: String = "2"
+    var expireInHours: Int = 2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -67,6 +65,10 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     }
 
     private fun initialization(signInResponse: SignInResponse) {
+        viewModel.getExpireHour()?.let {
+            expireInHours = it
+        }
+        viewDataBinding?.spinnerExpire?.text = expireInHours.toString()
         addPopupMenu()
         val permitStartDate: String = signInResponse.company?.permitStartDate.toString()
         val permitEndDate: String = signInResponse.company?.permitEndDate.toString()
@@ -119,7 +121,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                     validFrom = validFrom,
                     validTo = validTo,
                     gstNumber = gstNumber,
-                    expireInHours = expireInHours
+                    expireInHours = viewDataBinding?.spinnerExpire?.text.toString()
                 )
                 createChallanAPI(createChallanRequest, gstNumber)
             } else {
@@ -134,22 +136,37 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     }
 
     private fun addPopupMenu() {
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, viewModel.items)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        viewDataBinding?.spinnerExpire?.adapter = adapter
-        viewDataBinding?.spinnerExpire?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                // Handle selection
-                val selectedItem = viewModel.items[position]
-                expireInHours = selectedItem.toString()
-                updateValidityTime(selectedItem.toInt())
-                Toast.makeText(applicationContext, "Selected: $selectedItem", Toast.LENGTH_SHORT).show()
-            }
+        // Create the ArrayAdapter
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, viewModel.items)
+        // Set up the PopupMenu
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Do nothing
-            }
+        val popupMenu = PopupMenu(
+            ContextThemeWrapper(this, R.style.PopupMenuStyle),
+            viewDataBinding!!.spinnerExpire
+        )
+        popupMenu.menu.add("Dynamic Item") // You can also add dynamic items to the menu
+
+        popupMenu.setOnMenuItemClickListener { item -> // Handle menu item click
+            expireInHours = item.title.toString().toInt()
+            viewModel.setExpireHour(expireInHours)
+            updateValidityTime(expireInHours)
+            Toast.makeText(this, "Clicked: " + item.title, Toast.LENGTH_SHORT).show()
+            viewDataBinding?.spinnerExpire?.text = item.title
+            true
         }
+
+        // Set up the ArrayAdapter as the menu for the PopupMenu
+
+        // Set up the ArrayAdapter as the menu for the PopupMenu
+        popupMenu.menu.clear()
+        for (i in 0 until adapter.count) {
+            adapter.getItem(i)?.let { popupMenu.menu.add(0, i, i, it) }
+        }
+
+        // Show the popup menu when the anchor view is clicked
+
+        // Show the popup menu when the anchor view is clicked
+        viewDataBinding?.spinnerExpire?.setOnClickListener { popupMenu.show() }
     }
 
     private fun makeTextBold(text: String): Spanned {
@@ -177,12 +194,11 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
 
     override fun onResume() {
         super.onResume()
-        updateValidityTime(2)
+        viewModel.getExpireHour()?.let { updateValidityTime(it) }
         viewDataBinding?.txtEchallanNumber?.text = getString(R.string.challan_number, challanNumber)
     }
 
-    fun updateValidityTime(validHours: Int)
-    {
+    private fun updateValidityTime(validHours: Int) {
         val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm a", Locale.getDefault())
         val calendar = Calendar.getInstance()
         val currentTime = calendar.time
@@ -196,6 +212,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
             "DATE & TIME of dispatch $validFrom to $validTo (Valid upto $validHours Hours)"
         challanNumber = Utility.generateRandomChallanString(12)
     }
+
     private fun verifyLogout() {
         val mBuilder = android.app.AlertDialog.Builder(this@DashBoardActivity)
             .setTitle(getString(R.string.log_out))
@@ -240,7 +257,10 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                         intent.putExtra("gstNumber", gstNumber)
                         intent.putExtra("rateOfMineral", rateOfMineral)
                         intent.putExtra("rateOfMineralTotal", rateOfMineralTotal)
-                        intent.putExtra("expireInHours", expireInHours)
+                        intent.putExtra(
+                            "expireInHours",
+                            viewDataBinding?.spinnerExpire?.text.toString()
+                        )
                         intent.putExtra("validTo", validTo)
                         intent.putExtra("validFrom", validFrom)
                         startActivity(intent)

@@ -42,6 +42,8 @@ object Constant {
 
     const val EDIT_TEXT_14 = "editText14"
 
+    const val EXPIRE_HOUR = "expireHour"
+
 }
 
 enum class APIResponseCode(val codeValue: Int) {

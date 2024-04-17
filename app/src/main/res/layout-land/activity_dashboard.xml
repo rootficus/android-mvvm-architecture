@@ -131,28 +131,39 @@
                 app:layout_constraintStart_toStartOf="@id/imgQRCode"
                 app:layout_constraintTop_toBottomOf="@id/imgQRCode" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/labelExpire"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                app:layout_constraintWidth_percent="0.15"
                 android:layout_height="wrap_content"
-                android:text="Expire hours"
-                app:layout_constraintBottom_toBottomOf="@id/spinnerExpire"
-                app:layout_constraintBottom_toTopOf="@id/txtValidity"
                 app:layout_constraintEnd_toEndOf="@id/txtValidity"
                 app:layout_constraintStart_toStartOf="@id/txtValidity"
-                app:layout_constraintTop_toTopOf="@id/spinnerExpire" />
+                app:layout_constraintBottom_toTopOf="@id/txtValidity">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/labelExpire"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/expire_hours"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/spinnerExpire"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/spinnerExpire" />
 
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/spinnerExpire"
-                android:layout_width="100dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="5dp"
-                android:background="@drawable/custom_hour_spinner_background"
-                android:popupBackground="@color/water_mark"
-                app:layout_constraintBottom_toTopOf="@id/txtValidity"
-                app:layout_constraintStart_toEndOf="@id/labelExpire" />
-
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/spinnerExpire"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    app:layout_constraintWidth_percent="0.35"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:paddingStart="10dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/custom_hour_spinner_background"
+                    android:popupBackground="@color/water_mark"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/labelExpire" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtValidity"
                 android:layout_width="wrap_content"

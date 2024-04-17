@@ -8,6 +8,7 @@ import com.rf.geolgy.data.model.response.CreateChallanResponse
 import com.rf.geolgy.data.remote.GeolgyApiServices
 import com.rf.geolgy.roomDB.GeolgyDatabase
 import com.rf.geolgy.ui.base.BaseRepository
+import com.rf.geolgy.utils.Constant
 import com.rf.geolgy.utils.SharedPreference
 
 class DashBoardRepository(
@@ -131,6 +132,13 @@ class DashBoardRepository(
 
     fun getEditText14(): String? {
         return sharedPreference.getEditText14()
+    }
+    fun setExpireHour(hour: Int?) {
+        hour?.let { sharedPreference.setExpireHour(hour) }
+    }
+
+    fun getExpireHour(): Int? {
+        return sharedPreference.getExpireHour()
     }
 
 }

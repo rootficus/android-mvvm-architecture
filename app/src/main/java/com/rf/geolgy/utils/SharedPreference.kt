@@ -7,6 +7,7 @@ import com.rf.geolgy.utils.Constant.EDIT_TEXT_14
 import com.rf.geolgy.utils.Constant.EDIT_TEXT_6
 import com.rf.geolgy.utils.Constant.EDIT_TEXT_7
 import com.rf.geolgy.utils.Constant.EDIT_TEXT_8
+import com.rf.geolgy.utils.Constant.EXPIRE_HOUR
 import com.rf.geolgy.utils.Constant.PREFS_IS_LOGIN
 import com.rf.geolgy.utils.Constant.PREF_PASSWORD
 import com.rf.geolgy.utils.Constant.PREF_PUSH_TOKEN
@@ -128,6 +129,13 @@ class SharedPreference(context: Context) {
 
     fun getEditText14(): String? {
         return pref.getString(EDIT_TEXT_14, "")
+    }
+    fun setExpireHour(hour: Int) {
+        pref.edit().putInt(EXPIRE_HOUR, hour).apply()
+    }
+
+    fun getExpireHour(): Int? {
+        return pref.getInt(EXPIRE_HOUR, 1)
     }
 
 

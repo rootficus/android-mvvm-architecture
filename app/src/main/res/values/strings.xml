@@ -76,5 +76,6 @@
     <string name="PLEASE_ENTER_PASSWORD">Enter Password</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="expire_hours">Expire hours</string>
 
 </resources>
