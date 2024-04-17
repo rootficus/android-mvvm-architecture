@@ -4,9 +4,14 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.Spanned
+import android.view.Menu
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import com.google.gson.Gson
@@ -19,6 +24,7 @@ import com.rf.geolgy.sdkInit.GeolgySDK
 import com.rf.geolgy.ui.base.BaseActivity
 import com.rf.geolgy.ui.base.BaseActivityModule
 import com.rf.geolgy.ui.base.BaseViewModelFactory
+import com.rf.geolgy.ui.main.adapter.CustomSpinnerAdapter
 import com.rf.geolgy.ui.main.di.DaggerDashBoardActivityComponent
 import com.rf.geolgy.ui.main.di.DashBoardActivityModule
 import com.rf.geolgy.ui.main.viewmodel.DashBoardViewModel
@@ -48,7 +54,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     var validTo: String = ""
     var rateOfMineral: String = ""
     var rateOfMineralTotal: String = ""
-    var expireInHours: String = ""
+    var expireInHours: String = "2"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
@@ -61,11 +67,12 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
     }
 
     private fun initialization(signInResponse: SignInResponse) {
+        addPopupMenu()
         val permitStartDate: String = signInResponse.company?.permitStartDate.toString()
         val permitEndDate: String = signInResponse.company?.permitEndDate.toString()
         rateOfMineral = signInResponse.company?.rateOfMineral.toString()
         rateOfMineralTotal = signInResponse.company?.rateOfMineralTotal.toString()
-        expireInHours = signInResponse.company?.expireInHours.toString()
+        //expireInHours = signInResponse.company?.expireInHours.toString()
         val qualityPercentage: String = signInResponse.company?.quantityPercentage.toString()
         val qualityAmount: String = signInResponse.company?.quantityAmount.toString()
         viewDataBinding?.txtValidity?.text = getString(R.string.validity_from)
@@ -111,7 +118,8 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                     challanNumber = challanNumber,
                     validFrom = validFrom,
                     validTo = validTo,
-                    gstNumber = gstNumber
+                    gstNumber = gstNumber,
+                    expireInHours = expireInHours
                 )
                 createChallanAPI(createChallanRequest, gstNumber)
             } else {
@@ -122,6 +130,25 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
 
         viewDataBinding?.btnLogout?.setOnClickListener {
             verifyLogout()
+        }
+    }
+
+    private fun addPopupMenu() {
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, viewModel.items)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        viewDataBinding?.spinnerExpire?.adapter = adapter
+        viewDataBinding?.spinnerExpire?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                // Handle selection
+                val selectedItem = viewModel.items[position]
+                expireInHours = selectedItem.toString()
+                updateValidityTime(selectedItem.toInt())
+                Toast.makeText(applicationContext, "Selected: $selectedItem", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Do nothing
+            }
         }
     }
 
@@ -150,21 +177,25 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
 
     override fun onResume() {
         super.onResume()
+        updateValidityTime(2)
+        viewDataBinding?.txtEchallanNumber?.text = getString(R.string.challan_number, challanNumber)
+    }
+
+    fun updateValidityTime(validHours: Int)
+    {
         val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm a", Locale.getDefault())
         val calendar = Calendar.getInstance()
         val currentTime = calendar.time
         validFrom = sdf.format(currentTime)
-        calendar.add(Calendar.HOUR_OF_DAY, expireInHours.toInt())
+        calendar.add(Calendar.HOUR_OF_DAY, validHours)
         val futureTime = calendar.time
         validTo = sdf.format(futureTime)
         viewDataBinding?.txtValidity?.text =
             "Validity from $validFrom to $validTo"
         viewDataBinding?.txtPoint9?.text =
-            "DATE & TIME of dispatch $validFrom to $validTo (Valid upto $expireInHours Hours)"
+            "DATE & TIME of dispatch $validFrom to $validTo (Valid upto $validHours Hours)"
         challanNumber = Utility.generateRandomChallanString(12)
-        viewDataBinding?.txtEchallanNumber?.text = getString(R.string.challan_number, challanNumber)
     }
-
     private fun verifyLogout() {
         val mBuilder = android.app.AlertDialog.Builder(this@DashBoardActivity)
             .setTitle(getString(R.string.log_out))
@@ -209,6 +240,9 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                         intent.putExtra("gstNumber", gstNumber)
                         intent.putExtra("rateOfMineral", rateOfMineral)
                         intent.putExtra("rateOfMineralTotal", rateOfMineralTotal)
+                        intent.putExtra("expireInHours", expireInHours)
+                        intent.putExtra("validTo", validTo)
+                        intent.putExtra("validFrom", validFrom)
                         startActivity(intent)
                     }
 

@@ -19,6 +19,8 @@ import javax.inject.Inject
 class DashBoardViewModel @Inject constructor(private val dashBoardRepository: DashBoardRepository) :
     BaseViewModel() {
 
+    val items: ArrayList<Int> = arrayListOf(1,2,3,4,5,6,7,8)
+
     val getCompanyDetailsResponseModel = MutableLiveData<ResponseData<CompanyDetailsResponse>>()
     fun getCompanyDetails(companyDetailsRequest: CompanyDetailsRequest) {
         getCompanyDetailsResponseModel.setLoading(null)

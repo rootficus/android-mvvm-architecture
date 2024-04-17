@@ -68,7 +68,7 @@ object PdfGenerator2 {
             val newPage = pdfDocument.addNewPage()
             val canvas = PdfCanvas(pdfDocument.firstPage)
 
-            val rect = Rectangle(36f, 700f, 200f, 16f)
+            val rect = Rectangle(36f, 680f, 200f, 16f)
 
             val font = PdfFontFactory.createFont()
             val boldFont = PdfFontFactory.createFont(FontConstants.HELVETICA_BOLD)
@@ -193,7 +193,7 @@ object PdfGenerator2 {
             val qrCodeBitmap = generateQRCode("https://geolgyminingjk.in/challan/${request.challanNumber}", context)
             qrCodeBitmap?.let {
                 val qrCodeImage = Image(ImageDataFactory.create(bitmapToByteArray(it)))
-                qrCodeImage.scaleToFit(85f, 85f)
+                qrCodeImage.scaleToFit(85f, 82f)
                 document.add(qrCodeImage)
             }
 
@@ -202,7 +202,7 @@ object PdfGenerator2 {
                 .setFont(font)
                 .setFontSize(8f)
                 .setMarginLeft(14F)
-                .setMarginTop(-8f)
+                .setMarginTop(5f)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setMultipliedLeading(0.6f)
             document.add(qrCodeParagraph)
@@ -500,6 +500,7 @@ object PdfGenerator2 {
     ) {
         val validFromText = Text(request.validFrom).setFont(boldFont)
         val validToText = Text(request.validTo).setFont(boldFont)
+        val validUpToText = Text(" (Valid upto ${request.expireInHours} hours)").setFont(boldFont)
 
         val pointTwo1 = "9. DATE & TIME of dispatch  "
         val pointTwo1Paragraph = Paragraph(pointTwo1)
@@ -513,7 +514,7 @@ object PdfGenerator2 {
         pointTwo1Paragraph.add(validFromText) // Add validFrom chunk
         pointTwo1Paragraph.add(" to ")
         pointTwo1Paragraph.add(validToText) // Add validTo chunk
-
+        pointTwo1Paragraph.add(validUpToText)
         document.add(pointTwo1Paragraph)
     }
 

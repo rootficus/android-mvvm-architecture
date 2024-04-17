@@ -132,6 +132,24 @@
                 app:layout_constraintTop_toBottomOf="@id/imgQRCode" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/labelExpire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Expire hours"
+                app:layout_constraintBottom_toBottomOf="@id/spinnerExpire"
+                app:layout_constraintBottom_toTopOf="@id/txtValidity"
+                app:layout_constraintStart_toStartOf="@id/txtValidity"
+                app:layout_constraintEnd_toEndOf="@id/txtValidity"
+                app:layout_constraintTop_toTopOf="@id/spinnerExpire" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinnerExpire"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/txtValidity"
+                app:layout_constraintStart_toEndOf="@id/labelExpire" />
+
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtValidity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -318,11 +336,11 @@
                 android:id="@+id/edtPoint6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:autofillHints="name"
                 android:hint="@string/name_location"
                 android:minWidth="200dp"
                 android:paddingHorizontal="5dp"
                 android:singleLine="true"
-                android:autofillHints="name"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/txtPoint6"

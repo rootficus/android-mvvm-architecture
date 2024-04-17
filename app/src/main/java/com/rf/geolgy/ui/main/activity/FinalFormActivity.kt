@@ -93,6 +93,10 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
         driverPhone = intent?.getString("2point15").toString()
         challanNumber = intent?.getString("challanNumber").toString()
         gstNumber = intent?.getString("gstNumber").toString()
+        expireInHours = intent?.getString("expireInHours").toString()
+        expireInHours = intent?.getString("expireInHours").toString()
+        validTo = intent?.getString("validTo").toString()
+        validFrom = intent?.getString("validFrom").toString()
 
         val permitStartDate: String = signInResponse.company?.permitStartDate.toString()
         val permitEndDate: String = signInResponse.company?.permitEndDate.toString()
@@ -100,7 +104,7 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
         val rateOfMineralTotal: String = signInResponse.company?.rateOfMineralTotal.toString()
         val qualityPercentage: String = signInResponse.company?.quantityPercentage.toString()
         val qualityAmount: String = signInResponse.company?.quantityAmount.toString()
-        expireInHours = signInResponse.company?.expireInHours.toString()
+        //expireInHours = signInResponse.company?.expireInHours.toString()
         viewDataBinding?.txtValidity?.text = getString(R.string.validity_from)
         viewDataBinding?.edtPoint1?.text = signInResponse.company?.licenceType
 
@@ -109,6 +113,10 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
             "Rate of Mineral <b>Rs.$rateOfMineral</b> Total Amount (Excluding GST and Transportation charges) <b>Rs.$rateOfMineralTotal</b>"
         val point12Text =
             "GST Bill/No. <b>$gstNumber</b> Quantity <b>$qualityPercentage%</b> Amount <b>Rs.$qualityAmount</b> (Enclose copy of GST Invoice)"
+        viewDataBinding?.txtValidity?.text =
+            "Validity from $validFrom to $validTo"
+        viewDataBinding?.txtPoint9?.text =
+            "DATE & TIME of dispatch $validFrom to $validTo (Valid upto $expireInHours Hours)"
         viewDataBinding?.txt2Point1?.text = makeTextBold(point2Text1)
         viewDataBinding?.txtPoint11?.text = makeTextBold(point11Text)
         viewDataBinding?.txtPoint12?.text = makeTextBold(point12Text)
@@ -154,7 +162,8 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
                 challanNumber = challanNumber,
                 validFrom = validFrom,
                 validTo = validTo,
-                gstNumber = gstNumber
+                gstNumber = gstNumber,
+                expireInHours = expireInHours
             )
             PdfGenerator2.createPdf(
                 this@FinalFormActivity,
@@ -218,14 +227,11 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
         val sdf = SimpleDateFormat("dd-MM-yyyy hh:mm a", Locale.getDefault())
         val calendar = Calendar.getInstance()
         val currentTime = calendar.time
-        validFrom = sdf.format(currentTime)
-        calendar.add(Calendar.HOUR_OF_DAY, expireInHours.toInt())
-        val futureTime = calendar.time
-        validTo = sdf.format(futureTime)
-        viewDataBinding?.txtValidity?.text =
-            "Validity from $validFrom to $validTo"
-        viewDataBinding?.txtPoint9?.text =
-            "DATE & TIME of dispatch $validFrom to $validTo (Valid upto $expireInHours Hours)"
+        //validFrom = sdf.format(currentTime)
+        //calendar.add(Calendar.HOUR_OF_DAY, expireInHours.toInt())
+        //val futureTime = calendar.time
+        //validTo = sdf.format(futureTime)
+
         if (printJob != null && printBtnPressed) {
             if (printJob!!.isCompleted) {
                 // Showing Toast Message
