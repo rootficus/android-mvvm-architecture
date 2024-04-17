@@ -23,11 +23,9 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatRadioButton
                     android:id="@+id/excellentCondId"
@@ -92,8 +90,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/notApplicableId" />
 
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </RadioGroup>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

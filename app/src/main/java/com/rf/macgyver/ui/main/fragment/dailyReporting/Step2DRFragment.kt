@@ -10,9 +10,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.rf.macgyver.R
-import com.rf.macgyver.data.model.request.QuestionData
-import com.rf.macgyver.data.model.request.Step1DrData
-import com.rf.macgyver.data.model.request.Step2DrData
+import com.rf.macgyver.data.model.request.dailyReportData.QuestionData
+import com.rf.macgyver.data.model.request.dailyReportData.Step1DrData
+import com.rf.macgyver.data.model.request.dailyReportData.Step2DrData
 import com.rf.macgyver.databinding.AlertCamDrBinding
 import com.rf.macgyver.databinding.FragmentStep2DRBinding
 import com.rf.macgyver.databinding.PopupStep2DrBinding
@@ -69,6 +69,8 @@ class Step2DRFragment : BaseFragment<FragmentStep2DRBinding>(R.layout.fragment_s
 
     private fun initializeView() {
         val bundle = arguments
+        val uniqueToken: String? =
+            bundle?.getString("uniqueToken")
 
         val step1Data: Step1DrData? =
             bundle?.getSerializable("step1DrData") as? Step1DrData
@@ -286,7 +288,7 @@ class Step2DRFragment : BaseFragment<FragmentStep2DRBinding>(R.layout.fragment_s
             ){
                 Toast.makeText(context, "Select an option for each", Toast.LENGTH_SHORT).show()
             }else {
-
+/*
                 val step2DrDataQ1 = Step2DrData(card1Data)
                 val step2DrDataQ2 = Step2DrData(card2Data)
                 val step2DrDataQ3 = Step2DrData(card3Data)
@@ -305,11 +307,20 @@ class Step2DRFragment : BaseFragment<FragmentStep2DRBinding>(R.layout.fragment_s
                 step2DrDataQ6.let { it1 -> dataList.add(it1) }
                 step2DrDataQ7.let { it1 -> dataList.add(it1) }
                 step2DrDataQ8.let { it1 -> dataList.add(it1) }
-                step2DrDataQ9.let { it1 -> dataList.add(it1) }
+                step2DrDataQ9.let { it1 -> dataList.add(it1) }*/
 
                 val bundle1 = Bundle().apply {
-                    putSerializable("step2Data", dataList)
+                    putSerializable("step2Q1Data", card1Data)
+                    putSerializable("step2Q2Data", card2Data)
+                    putSerializable("step2Q3Data", card3Data)
+                    putSerializable("step2Q4Data", card4Data)
+                    putSerializable("step2Q5Data", card5Data)
+                    putSerializable("step2Q6Data", card6Data)
+                    putSerializable("step2Q7Data", card7Data)
+                    putSerializable("step2Q8Data", card8Data)
+                    putSerializable("step2Q9Data", card9Data)
                     putSerializable("step1Data", step1Data)
+                    putString("uniqueToken",uniqueToken)
                 }
                 Navigation.findNavController(requireView())
                     .navigate(R.id.action_navigation_step2_report_to_navigation_step3_report,bundle1)

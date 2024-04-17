@@ -1,4 +1,4 @@
-package com.rf.macgyver.data.model.request
+package com.rf.macgyver.data.model.request.dailyReportData
 
 import java.io.Serializable
 

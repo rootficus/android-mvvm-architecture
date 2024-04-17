@@ -141,6 +141,9 @@
         android:name="com.rf.macgyver.ui.main.fragment.inspection.Step3IPFragment"
         android:label="Step3IPFragment"
         tools:layout="@layout/fragment_step3_ip">
+        <action
+            android:id="@+id/action_navigation_step3_inspection_to_navigation_inspection"
+            app:destination="@id/navigation_inspection" />
 
     </fragment>
 
@@ -182,6 +185,9 @@
         android:name="com.rf.macgyver.ui.main.fragment.incidentReport.Step3IRFragment"
         android:label="Step3IRFragment"
         tools:layout="@layout/fragment_step3_i_r">
+        <action
+            android:id="@+id/action_navigation_step3_incident_to_navigation_incident"
+            app:destination="@id/navigation_incident_report" />
 
     </fragment>
 

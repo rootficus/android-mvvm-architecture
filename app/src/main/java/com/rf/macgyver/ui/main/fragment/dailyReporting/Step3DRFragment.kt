@@ -9,11 +9,13 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.rf.macgyver.R
-import com.rf.macgyver.data.model.request.Step1DrData
-import com.rf.macgyver.data.model.request.Step2DrData
-import com.rf.macgyver.data.model.request.Step3DrData
+import com.rf.macgyver.data.model.request.dailyReportData.QuestionData
+import com.rf.macgyver.data.model.request.dailyReportData.Step1DrData
+import com.rf.macgyver.data.model.request.dailyReportData.Step3DrData
 import com.rf.macgyver.databinding.FragmentStep3DRBinding
 import com.rf.macgyver.databinding.SuccessAlertDrBinding
+import com.rf.macgyver.roomDB.MagDatabase
+import com.rf.macgyver.roomDB.model.DailyReporting
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
@@ -26,6 +28,9 @@ import com.rf.macgyver.utils.SharedPreference
 import javax.inject.Inject
 
 class Step3DRFragment : BaseFragment<FragmentStep3DRBinding>(R.layout.fragment_step3_d_r) {
+
+    private val database = context?.let { MagDatabase.getDatabase(it) }
+    private val dao = database?.magDao()
 
     private var step3DrData : Step3DrData = Step3DrData()
     private lateinit var downtimeSpinnerVal : String
@@ -63,7 +68,20 @@ class Step3DRFragment : BaseFragment<FragmentStep3DRBinding>(R.layout.fragment_s
 
         val step1Data: Step1DrData? =
             bundle?.getSerializable("step1Data") as? Step1DrData
-        val step2Data : ArrayList<*>? = bundle?.getSerializable("step2Data") as? ArrayList<*>
+
+        val uniqueToken: String? =
+            bundle?.getString("uniqueToken")
+        val step2Q1Data : QuestionData? = bundle?.getSerializable("step2Q1Data") as? QuestionData
+        val step2Q2Data : QuestionData? = bundle?.getSerializable("step2Q2Data") as? QuestionData
+        val step2Q3Data : QuestionData? = bundle?.getSerializable("step2Q3Data") as? QuestionData
+        val step2Q4Data : QuestionData? = bundle?.getSerializable("step2Q4Data") as? QuestionData
+        val step2Q5Data : QuestionData? = bundle?.getSerializable("step2Q5Data") as? QuestionData
+        val step2Q6Data : QuestionData? = bundle?.getSerializable("step2Q6Data") as? QuestionData
+        val step2Q7Data : QuestionData? = bundle?.getSerializable("step2Q7Data") as? QuestionData
+        val step2Q8Data : QuestionData? = bundle?.getSerializable("step2Q8Data") as? QuestionData
+        val step2Q9Data : QuestionData? = bundle?.getSerializable("step2Q9Data") as? QuestionData
+
+
 
         mDataBinding.generateReportTxt.setOnClickListener {
 
@@ -84,9 +102,7 @@ class Step3DRFragment : BaseFragment<FragmentStep3DRBinding>(R.layout.fragment_s
                 Toast.makeText(context, "please enter all the details", Toast.LENGTH_SHORT).show()
             }else {
                 val bundle1 = Bundle().apply {
-                    putSerializable("step1DrData", step1Data)
-                    putSerializable("step2DrData", step2Data)
-                    putSerializable("step3DrData", step3DrData)
+                    putString("uniqueId", uniqueToken)
                 }
 
                 val mBuilder = AlertDialog.Builder(requireActivity())
@@ -98,6 +114,17 @@ class Step3DRFragment : BaseFragment<FragmentStep3DRBinding>(R.layout.fragment_s
                     dialog.dismiss()
                 }
                 view.viewReportTxt.setOnClickListener {
+                    val entity = step1Data?.reportName?.let { it1 -> DailyReporting(uniqueToken = uniqueToken,
+                        reportName = it1, vehicleNo = step1Data.vehicle?.vehicleNo, name = step1Data.name, shift = step1Data.shift,
+                        vehicleName = step1Data.vehicle?.vehicleName, date = step1Data.date, day = step1Data.day , vehicleDowntime = step3DrData.vehicleDowntime ,
+                        vehicleRuntime = step3DrData.vehicleRuntime , vehicleWorkLog = step3DrData.worklog , downtimeNote = step3DrData.downtimeNote ,
+                        question1 = step2Q1Data, question2 = step2Q2Data, question3 = step2Q3Data, question4 = step2Q4Data, question5 = step2Q5Data, question6 = step2Q6Data,
+                        question7 = step2Q7Data, question8 = step2Q8Data, question9 = step2Q9Data) }
+
+                    if (entity != null) {
+                        viewmodel.insertDailyReporting(entity)
+                    }
+
                     Navigation.findNavController(requireView())
                         .navigate(R.id.action_navigation_step3_report_to_navigation_daily_report_home_page,bundle1)
                     dialog.dismiss()

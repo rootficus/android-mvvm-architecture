@@ -7,9 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.rf.macgyver.R
+import com.rf.macgyver.data.model.request.dailyReportData.Step1DrData
+import com.rf.macgyver.data.model.request.incidentReportData.Step1IRData
+import com.rf.macgyver.data.model.request.incidentReportData.Step2IRData
 import com.rf.macgyver.databinding.FragmentStep2IRBinding
 import com.rf.macgyver.databinding.FragmentStep2IpBinding
 import com.rf.macgyver.sdkInit.UtellSDK
@@ -53,10 +57,36 @@ class Step2IRFragment : BaseFragment<FragmentStep2IRBinding>(R.layout.fragment_s
     }
 
     private fun initializeView() {
+        val bundle = arguments
+        val uniqueToken : String? = bundle?.getString("uniqueToken")
+
+        val step1Data: Step1IRData? =
+            bundle?.getSerializable("step1IrData") as? Step1IRData
+
         val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
 
         mDataBinding.completedTxt.setOnClickListener{
-            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_step2_incident_to_navigation_step3_incident)
+            val incidentSeverityVal = mDataBinding.incidentSeveritySpinner.selectedItem.toString()
+            val weatherCondVal = mDataBinding.weatherConditionSpinner.selectedItem.toString()
+            val vehicleActivityVal = mDataBinding.vehicleActivitySpinner.selectedItem.toString()
+            val incidentAreaVal = mDataBinding.etIncidentAreaId.text.toString()
+            if(incidentAreaVal.isEmpty() || incidentSeverityVal.isEmpty() || weatherCondVal.isEmpty() || vehicleActivityVal.isEmpty()){
+                Toast.makeText(context, "Fill all the details", Toast.LENGTH_SHORT).show()
+            }else {
+                val step2IrData = Step2IRData(
+                    incidentArea = incidentAreaVal,
+                    incidentSeverity = incidentSeverityVal,
+                    vehicleActivity = vehicleActivityVal,
+                    weatherCondition = weatherCondVal
+                )
+                val bundle1 = Bundle().apply{
+                    putSerializable("step1IrData", step1Data)
+                    putSerializable("step2IrData", step2IrData)
+                    putString("uniqueToken",uniqueToken)
+                }
+                Navigation.findNavController(requireView())
+                    .navigate(R.id.action_navigation_step2_incident_to_navigation_step3_incident, bundle1)
+            }
         }
         mDataBinding.backTxt.setOnClickListener{
             navController.navigateUp()

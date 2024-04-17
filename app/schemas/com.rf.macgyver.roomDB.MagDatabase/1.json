@@ -2,51 +2,107 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "25ae2de8bf008a92f9e91137f79102cc",
+    "identityHash": "769a096883352ec762dbd9f4abb8b218",
     "entities": [
       {
-        "tableName": "smsRecord",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`messageId` TEXT NOT NULL, `senderId` TEXT, `message` TEXT, `operator` TEXT, `receiver` TEXT, `deviceId` TEXT, `simSlot` TEXT, `date` TEXT, `smsType` INTEGER NOT NULL, `messageType` TEXT, `syncStatus` INTEGER NOT NULL, PRIMARY KEY(`messageId`))",
+        "tableName": "loginDetails",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`emailId` TEXT NOT NULL, `uniqueToken` TEXT, `password` TEXT, `username` TEXT, `noOfVehicles` TEXT, `userRole` TEXT, `companyIndustry` TEXT, `motiveHVI` TEXT NOT NULL, PRIMARY KEY(`emailId`))",
         "fields": [
           {
-            "fieldPath": "messageId",
-            "columnName": "messageId",
+            "fieldPath": "emailId",
+            "columnName": "emailId",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "senderId",
-            "columnName": "senderId",
+            "fieldPath": "uniqueToken",
+            "columnName": "uniqueToken",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "message",
-            "columnName": "message",
+            "fieldPath": "password",
+            "columnName": "password",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "operator",
-            "columnName": "operator",
+            "fieldPath": "username",
+            "columnName": "username",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "receiver",
-            "columnName": "receiver",
+            "fieldPath": "noOfVehicles",
+            "columnName": "noOfVehicles",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "deviceId",
-            "columnName": "deviceId",
+            "fieldPath": "userRole",
+            "columnName": "userRole",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "simSlot",
-            "columnName": "simSlot",
+            "fieldPath": "companyIndustry",
+            "columnName": "companyIndustry",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "motiveHVI",
+            "columnName": "motiveHVI",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "emailId"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "dailyReporting",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`reportName` TEXT NOT NULL, `uniqueToken` TEXT, `name` TEXT, `shift` TEXT, `vehicleNo` TEXT, `vehicleName` TEXT, `date` TEXT, `day` TEXT, `question1` TEXT, `question2` TEXT, `question3` TEXT, `question4` TEXT, `question5` TEXT, `question6` TEXT, `question7` TEXT, `question8` TEXT, `question9` TEXT, `vehicleDowntime` TEXT, `downtimeNote` TEXT, `vehicleRuntime` TEXT, `vehicleWorkLog` TEXT, PRIMARY KEY(`reportName`))",
+        "fields": [
+          {
+            "fieldPath": "reportName",
+            "columnName": "reportName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "uniqueToken",
+            "columnName": "uniqueToken",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "shift",
+            "columnName": "shift",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vehicleNo",
+            "columnName": "vehicleNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vehicleName",
+            "columnName": "vehicleName",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -57,120 +113,330 @@
             "notNull": false
           },
           {
-            "fieldPath": "smsType",
-            "columnName": "smsType",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "messageType",
-            "columnName": "messageType",
+            "fieldPath": "day",
+            "columnName": "day",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "syncStatus",
-            "columnName": "syncStatus",
-            "affinity": "INTEGER",
-            "notNull": true
+            "fieldPath": "question1",
+            "columnName": "question1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question2",
+            "columnName": "question2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question3",
+            "columnName": "question3",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question4",
+            "columnName": "question4",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question5",
+            "columnName": "question5",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question6",
+            "columnName": "question6",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question7",
+            "columnName": "question7",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question8",
+            "columnName": "question8",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question9",
+            "columnName": "question9",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vehicleDowntime",
+            "columnName": "vehicleDowntime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "downtimeNote",
+            "columnName": "downtimeNote",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vehicleRuntime",
+            "columnName": "vehicleRuntime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vehicleWorkLog",
+            "columnName": "vehicleWorkLog",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
           "autoGenerate": false,
           "columnNames": [
-            "messageId"
+            "reportName"
           ]
         },
         "indices": [],
         "foreignKeys": []
       },
       {
-        "tableName": "modemSetting",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`simId` INTEGER NOT NULL, `type` TEXT, `operator` TEXT, `phoneNumber` TEXT, `deviceId` TEXT, `token` TEXT, `deviceInfo` TEXT, `userId` TEXT, `pinCode` INTEGER, `isActive` INTEGER NOT NULL, PRIMARY KEY(`simId`))",
+        "tableName": "inspectionForm",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`uniqueId` INTEGER NOT NULL, `uniqueToken` TEXT, `heading` TEXT, `faultyItems` TEXT, `overallCond` TEXT, `vehicleStatus` TEXT, `priority` TEXT, `isSafeToUse` TEXT, `isDeployed` TEXT, `additionalNote` TEXT, `question1` TEXT, `question2` TEXT, `question3` TEXT, `question4` TEXT, `question5` TEXT, `question6` TEXT, `question7` TEXT, `question8` TEXT, `question9` TEXT, `question10` TEXT, PRIMARY KEY(`uniqueId`))",
         "fields": [
           {
-            "fieldPath": "simId",
-            "columnName": "simId",
+            "fieldPath": "uniqueId",
+            "columnName": "uniqueId",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "type",
-            "columnName": "type",
+            "fieldPath": "uniqueToken",
+            "columnName": "uniqueToken",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "operator",
-            "columnName": "operator",
+            "fieldPath": "heading",
+            "columnName": "heading",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "phoneNumber",
-            "columnName": "phoneNumber",
+            "fieldPath": "faultyItems",
+            "columnName": "faultyItems",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "deviceId",
-            "columnName": "deviceId",
+            "fieldPath": "overallCond",
+            "columnName": "overallCond",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "token",
-            "columnName": "token",
+            "fieldPath": "vehicleStatus",
+            "columnName": "vehicleStatus",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "deviceInfo",
-            "columnName": "deviceInfo",
+            "fieldPath": "priority",
+            "columnName": "priority",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "userId",
-            "columnName": "userId",
+            "fieldPath": "isSafeToUse",
+            "columnName": "isSafeToUse",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "pinCode",
-            "columnName": "pinCode",
-            "affinity": "INTEGER",
+            "fieldPath": "isDeployed",
+            "columnName": "isDeployed",
+            "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "isActive",
-            "columnName": "isActive",
-            "affinity": "INTEGER",
-            "notNull": true
+            "fieldPath": "additionalNote",
+            "columnName": "additionalNote",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question1",
+            "columnName": "question1",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question2",
+            "columnName": "question2",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question3",
+            "columnName": "question3",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question4",
+            "columnName": "question4",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question5",
+            "columnName": "question5",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question6",
+            "columnName": "question6",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question7",
+            "columnName": "question7",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question8",
+            "columnName": "question8",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question9",
+            "columnName": "question9",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "question10",
+            "columnName": "question10",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
           "autoGenerate": false,
           "columnNames": [
-            "simId"
+            "uniqueId"
           ]
         },
         "indices": [],
         "foreignKeys": []
       },
       {
-        "tableName": "operatorRecord",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`operatorName` TEXT NOT NULL, `operatorPhoneNumberUSSD` TEXT, PRIMARY KEY(`operatorName`))",
+        "tableName": "incidentReport",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`incidentNo` TEXT NOT NULL, `uniqueToken` TEXT, `incidentDate` TEXT, `incidentTime` TEXT, `incidentLocation` TEXT, `vehicleNo` TEXT, `vehicleName` TEXT, `operatorName` TEXT, `typeOfIncident` TEXT NOT NULL, `incidentArea` TEXT, `incidentSeverity` TEXT, `weatherCondition` TEXT, `vehicleActivity` TEXT, `incidentCause` TEXT, `damagesList` TEXT, `additionalComment` TEXT, PRIMARY KEY(`incidentNo`))",
         "fields": [
+          {
+            "fieldPath": "incidentNo",
+            "columnName": "incidentNo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "uniqueToken",
+            "columnName": "uniqueToken",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "incidentDate",
+            "columnName": "incidentDate",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "incidentTime",
+            "columnName": "incidentTime",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "incidentLocation",
+            "columnName": "incidentLocation",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vehicleNo",
+            "columnName": "vehicleNo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vehicleName",
+            "columnName": "vehicleName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
           {
             "fieldPath": "operatorName",
             "columnName": "operatorName",
             "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "typeOfIncident",
+            "columnName": "typeOfIncident",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "operatorPhoneNumberUSSD",
-            "columnName": "operatorPhoneNumberUSSD",
+            "fieldPath": "incidentArea",
+            "columnName": "incidentArea",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "incidentSeverity",
+            "columnName": "incidentSeverity",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "weatherCondition",
+            "columnName": "weatherCondition",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "vehicleActivity",
+            "columnName": "vehicleActivity",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "incidentCause",
+            "columnName": "incidentCause",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "damagesList",
+            "columnName": "damagesList",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "additionalComment",
+            "columnName": "additionalComment",
             "affinity": "TEXT",
             "notNull": false
           }
@@ -178,57 +444,7 @@
         "primaryKey": {
           "autoGenerate": false,
           "columnNames": [
-            "operatorName"
-          ]
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "notificationRecord",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `notificationType` TEXT, `messageBody` TEXT, `isRead` INTEGER NOT NULL, `isSend` INTEGER NOT NULL, `createdAt` TEXT, PRIMARY KEY(`id`))",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "notificationType",
-            "columnName": "notificationType",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "messageBody",
-            "columnName": "messageBody",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "isRead",
-            "columnName": "isRead",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "isSend",
-            "columnName": "isSend",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "createdAt",
-            "columnName": "createdAt",
-            "affinity": "TEXT",
-            "notNull": false
-          }
-        ],
-        "primaryKey": {
-          "autoGenerate": false,
-          "columnNames": [
-            "id"
+            "incidentNo"
           ]
         },
         "indices": [],
@@ -238,7 +454,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '25ae2de8bf008a92f9e91137f79102cc')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '769a096883352ec762dbd9f4abb8b218')"
     ]
   }
 }

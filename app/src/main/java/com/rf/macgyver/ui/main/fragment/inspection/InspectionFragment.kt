@@ -7,7 +7,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rf.macgyver.R
-import com.rf.macgyver.data.model.request.InspectionFormData
+import com.rf.macgyver.data.model.request.dailyReportData.QuestionData
+import com.rf.macgyver.data.model.request.inspectionFormData.IPQuestionData
+import com.rf.macgyver.data.model.request.inspectionFormData.InspectionFormData
 import com.rf.macgyver.databinding.FragmentInspectionBinding
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
@@ -24,6 +26,8 @@ import javax.inject.Inject
 class InspectionFragment : BaseFragment<FragmentInspectionBinding>(R.layout.fragment_inspection) {
 
     private var dataList: ArrayList<InspectionFormData> = arrayListOf()
+
+    var uniqueToken: String? = null
 
     //arrayListOf("Engine Overheatinng","Hydrolic Oil lekage")
     @Inject
@@ -48,6 +52,10 @@ class InspectionFragment : BaseFragment<FragmentInspectionBinding>(R.layout.frag
     }
 
     private fun initializeView() {
+
+        val bundle = arguments
+        uniqueToken =
+            bundle?.getString("uniqueId")
         mDataBinding.createReportButton.visibility = View.VISIBLE
         mDataBinding.recyclerViewId.visibility = View.GONE
         mDataBinding.createReportButton.setOnClickListener {
@@ -102,8 +110,11 @@ class InspectionFragment : BaseFragment<FragmentInspectionBinding>(R.layout.frag
 
     private val cardListener = object : InspectionItemAdapter.InspectionCardEvent {
         override fun onItemClicked(inspectionFormData: InspectionFormData) {
+            val randomUniqueNumber = generateRandomUniqueNumber()
             val bundle = Bundle().apply {
                 putSerializable("inspectionFormData", inspectionFormData)
+                putString("uniqueToken",uniqueToken)
+                putInt("UniqueNo", randomUniqueNumber)
             }
             Navigation.findNavController(requireView())
                 .navigate(R.id.action_navigation_inspection_to_navigation_step1_inspection, bundle)
@@ -114,5 +125,8 @@ class InspectionFragment : BaseFragment<FragmentInspectionBinding>(R.layout.frag
         super.onResume()
         mDataBinding.createReportButton.visibility = View.VISIBLE
         mDataBinding.recyclerViewId.visibility = View.GONE
+    }
+    private fun generateRandomUniqueNumber(): Int {
+        return (0..Int.MAX_VALUE).random()
     }
 }

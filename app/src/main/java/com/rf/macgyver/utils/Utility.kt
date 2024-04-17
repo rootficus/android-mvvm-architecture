@@ -17,7 +17,6 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.rf.macgyver.R
 import com.rf.macgyver.data.model.Menus
 import com.rf.macgyver.data.model.Order
-import com.rf.macgyver.roomDB.dao.UtellDao
 import java.text.DecimalFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -119,9 +118,9 @@ object Utility {
         return time
     }
 
-    fun isNotificationExits(utellDao: UtellDao?, id: String): Boolean? {
+   /* fun isNotificationExits(utellDao: UtellDao?, id: String): Boolean? {
         return utellDao?.isNotificationExits(id)
-    }
+    }*/
 
     val currencySymbolBD = "৳"
     fun convertCurrencyFormat(currency: Float): String {

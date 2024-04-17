@@ -2,6 +2,7 @@ package com.rf.macgyver.ui.main.fragment
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
@@ -9,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.rf.macgyver.R
 import com.rf.macgyver.databinding.FragmentCompanyInfoBinding
+import com.rf.macgyver.roomDB.MagDatabase
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
@@ -22,6 +24,13 @@ import javax.inject.Inject
 
 class CompanyInfoFragment : BaseFragment<FragmentCompanyInfoBinding>(R.layout.fragment_company_info) {
 
+
+
+    private  var noOfVehicles :String? = null
+    private  var userRole :String? = null
+    private var companyIndustry : String? = null
+    private val database = context?.let { MagDatabase.getDatabase(it) }
+    val dao = database?.magDao()
 
     private var isAnyRadioButtonSelected = false
     private val card1List = mutableListOf<String>()
@@ -56,6 +65,19 @@ class CompanyInfoFragment : BaseFragment<FragmentCompanyInfoBinding>(R.layout.fr
     }
 
     private fun initializeVew(){
+        val bundle = arguments
+
+        val email: String? =
+            bundle?.getString("email")
+
+        val uniqueId: String? =
+            bundle?.getString("uniqueId")
+
+        if (uniqueId != null) {
+            Log.d("uniqueId", uniqueId)
+        }else{
+            Log.d("uniqueId","null")
+        }
 
         mDataBinding.card1RadioGrp.setOnCheckedChangeListener {  group, checkedId ->
             val checkedRadioButton = group.findViewById<RadioButton>(checkedId)
@@ -83,11 +105,31 @@ class CompanyInfoFragment : BaseFragment<FragmentCompanyInfoBinding>(R.layout.fr
 
         mDataBinding.nextBtn.setOnClickListener{
             if(isAnyRadioButtonSelected ) {
-                findNavController().navigate(R.id.action_fragment_company_info_to_fragment_start)
+
+                val card1RadioButtonId = mDataBinding.card1RadioGrp.checkedRadioButtonId
+                if (card1RadioButtonId != -1) {
+                    val selectedRadioButton: RadioButton? = view?.findViewById(card1RadioButtonId)
+                    noOfVehicles = selectedRadioButton?.text.toString()}
+
+                val card2RadioButtonId = mDataBinding.card2RadioGroup.checkedRadioButtonId
+                if (card2RadioButtonId != -1) {
+                    val selectedRadioButton: RadioButton? = view?.findViewById(card2RadioButtonId)
+                    userRole = selectedRadioButton?.text.toString()}
+
+                val card3RadioButtonId = mDataBinding.card1RadioGrp.checkedRadioButtonId
+                if (card3RadioButtonId != -1) {
+                    val selectedRadioButton: RadioButton? = view?.findViewById(card3RadioButtonId)
+                    companyIndustry = selectedRadioButton?.text.toString()}
+
+
+                viewmodel.updateCompanyInfo(email,companyIndustry,noOfVehicles,userRole)
+
+                findNavController().navigate(R.id.action_fragment_company_info_to_fragment_start, bundle)
             }else{
+
                 Toast.makeText(context, "Select option for each", Toast.LENGTH_SHORT).show()
             }
-        }
+         }
     }
     private fun card1Update(text : String){
 

@@ -43,12 +43,13 @@
         app:layout_constraintStart_toStartOf="@id/headingCard"
         app:layout_constraintTop_toBottomOf="@id/headingCard" />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/etIncidentDateId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:padding="4dp"
+        android:padding="2dp"
+        android:paddingStart="8dp"
         android:background="@drawable/edit_text_border"
         app:layout_constraintBottom_toBottomOf="@id/incidentDateHeading"
         app:layout_constraintEnd_toEndOf="@id/headingCard"
@@ -77,11 +78,12 @@
         app:layout_constraintStart_toStartOf="@id/headingCard"
         app:layout_constraintTop_toBottomOf="@id/idView1" />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/etVehicleNameId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="4dp"
+        android:padding="2dp"
+        android:paddingStart="8dp"
         android:background="@drawable/edit_text_border"
         app:layout_constraintBottom_toBottomOf="@id/vehicleNameHeading"
         app:layout_constraintEnd_toEndOf="@id/headingCard"
@@ -111,11 +113,12 @@
         app:layout_constraintStart_toStartOf="@id/headingCard"
         app:layout_constraintTop_toBottomOf="@id/idView2" />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/etvehicleNoId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="4dp"
+        android:padding="2dp"
+        android:paddingStart="8dp"
         android:background="@drawable/edit_text_border"
         app:layout_constraintBottom_toBottomOf="@id/vehicleNoHeading"
         app:layout_constraintEnd_toEndOf="@id/headingCard"
@@ -144,11 +147,12 @@
         app:layout_constraintStart_toStartOf="@id/headingCard"
         app:layout_constraintTop_toBottomOf="@id/idView3" />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/etLocationId"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="4dp"
+        android:padding="2dp"
+        android:paddingStart="8dp"
         android:background="@drawable/edit_text_border"
         app:layout_constraintEnd_toEndOf="@id/headingCard"
         app:layout_constraintStart_toStartOf="@id/etIncidentDateId"
@@ -176,11 +180,12 @@
         app:layout_constraintStart_toStartOf="@id/headingCard"
         app:layout_constraintTop_toBottomOf="@id/idView4" />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/etReportedById"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="4dp"
+        android:padding="2dp"
+        android:paddingStart="8dp"
         android:background="@drawable/edit_text_border"
         app:layout_constraintEnd_toEndOf="@id/headingCard"
         app:layout_constraintStart_toStartOf="@id/etIncidentDateId"

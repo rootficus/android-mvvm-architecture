@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.rf.macgyver.data.model.request.SignInRequest
 import com.rf.macgyver.data.model.response.SignInResponse
 import com.rf.macgyver.data.repository.SignInRepository
+import com.rf.macgyver.roomDB.model.LoginDetails
 import com.rf.macgyver.ui.base.BaseViewModel
 import com.rf.macgyver.utils.ResponseData
 import com.rf.macgyver.utils.setError
@@ -18,6 +19,8 @@ class SignInViewModel @Inject constructor(private val signInRepository: SignInRe
     BaseViewModel() {
 
     private val signInResponseModel = MutableLiveData<ResponseData<SignInResponse>>()
+
+
     fun signInNow(signInRequest: SignInRequest) {
         signInResponseModel.setLoading(null)
         viewModelScope.launch(Dispatchers.IO) {
@@ -28,6 +31,22 @@ class SignInViewModel @Inject constructor(private val signInRepository: SignInRe
         }
     }
 
+    fun updateCompanyInfo(id :String? , value1: String?, value2: String?, value3 : String?){
+        signInRepository.updateCompanyInfo(id,value1,value2,value3)
+    }
+
+    fun updateMotiveHVI(id :String? , value1: ArrayList<String>){
+        signInRepository.updateMotiveHVI(id,value1)
+    }
+
+
+    fun insertLoginDetails(loginDetails: LoginDetails){
+        signInRepository.insertLoginDetails(loginDetails)
+    }
+
+    fun updateLoginDetails(loginDetails: LoginDetails){
+        signInRepository.updateLoginDetails(loginDetails)
+    }
 
     fun setUserId(userId: String?) {
         signInRepository.setUserId(userId)

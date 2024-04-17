@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rf.macgyver.R
-import com.rf.macgyver.data.model.request.InspectionFormData
+import com.rf.macgyver.data.model.request.inspectionFormData.InspectionFormData
 import com.rf.macgyver.databinding.ItemInspectionBinding
 
 class InspectionItemAdapter(

@@ -10,9 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.rf.macgyver.R
-import com.rf.macgyver.data.model.request.Step1DrData
-import com.rf.macgyver.data.model.request.Step2DrData
-import com.rf.macgyver.data.model.request.Vehicle
+import com.rf.macgyver.data.model.request.dailyReportData.Step1DrData
+import com.rf.macgyver.data.model.request.dailyReportData.Vehicle
 import com.rf.macgyver.databinding.AddVehicleAlertBinding
 import com.rf.macgyver.databinding.FragmentStep1DRBinding
 import com.rf.macgyver.sdkInit.UtellSDK
@@ -58,6 +57,9 @@ class Step1DRFragment : BaseFragment<FragmentStep1DRBinding>(R.layout.fragment_s
     }
 
     private fun initializeView() {
+        val bundle = arguments
+        val uniqueId: String? =
+            bundle?.getString("uniqueId")
         mDataBinding.vehicleSelectTxt.setOnClickListener {
             val mBuilder = android.app.AlertDialog.Builder(requireActivity())
             val view = AddVehicleAlertBinding.inflate(layoutInflater)
@@ -94,11 +96,12 @@ class Step1DRFragment : BaseFragment<FragmentStep1DRBinding>(R.layout.fragment_s
                 Toast.makeText(context, "Please enter vehicle details", Toast.LENGTH_SHORT).show()
             }else
                 {
-                    val bundle = Bundle().apply {
+                    val bundle1 = Bundle().apply {
                         putSerializable("step1DrData", step1DrData)
+                        putString("uniqueToken",uniqueId)
                     }
                     Navigation.findNavController(requireView())
-                        .navigate(R.id.action_navigation_step1_report_to_navigation_step2_report,bundle)
+                        .navigate(R.id.action_navigation_step1_report_to_navigation_step2_report,bundle1)
                 }
             }
         val navController =

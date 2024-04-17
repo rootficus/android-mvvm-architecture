@@ -1,4 +1,4 @@
-package com.rf.macgyver.data.model.request
+package com.rf.macgyver.data.model.request.inspectionFormData
 
 import java.io.Serializable
 

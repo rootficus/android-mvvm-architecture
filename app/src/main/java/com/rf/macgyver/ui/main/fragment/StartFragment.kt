@@ -3,11 +3,14 @@ package com.rf.macgyver.ui.main.fragment
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.rf.macgyver.R
 import com.rf.macgyver.databinding.FragmentStartBinding
+import com.rf.macgyver.roomDB.MagDatabase
+import com.rf.macgyver.roomDB.model.LoginDetails
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
@@ -23,9 +26,13 @@ import javax.inject.Inject
 
 class StartFragment : BaseFragment<FragmentStartBinding>(R.layout.fragment_start) {
 
+
+    private val database = context?.let { MagDatabase.getDatabase(it) }
+    val dao = database?.magDao()
+
     private lateinit var text :String
 
-    private val checkBoxList = mutableListOf<String>()
+    private val checkBoxList = arrayListOf<String>()
 
     @Inject
     lateinit var sharedPreference: SharedPreference
@@ -56,6 +63,18 @@ class StartFragment : BaseFragment<FragmentStartBinding>(R.layout.fragment_start
 
     private fun initializeView() {
 
+        val bundle = arguments
+        val uniqueToken :String? =
+            bundle?.getString("uniqueId")
+        val email: String? =
+            bundle?.getString("email")
+
+        if (uniqueToken != null) {
+            Log.d("uniqueId", uniqueToken)
+        }else{
+            Log.d("uniqueId","null")
+        }
+
         mDataBinding.inspectionCheckbox.setOnCheckedChangeListener { _, isChecked ->
             text = mDataBinding.inspectionCheckbox.text.toString()
             updateList(text, isChecked)
@@ -81,7 +100,14 @@ class StartFragment : BaseFragment<FragmentStartBinding>(R.layout.fragment_start
 
         mDataBinding.letsStartBtn.setOnClickListener {
             if (checkBoxList.size >0) {
+
+                    viewmodel.updateMotiveHVI(email, checkBoxList)
+
+
                 val intent = Intent(requireActivity(), DashBoardActivity::class.java)
+                if (bundle != null) {
+                    intent.putExtra("bundle",bundle)
+                }
                 startActivity(intent)
                 requireActivity().finish()
             } else {

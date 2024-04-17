@@ -5,12 +5,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.rf.macgyver.R
+import com.rf.macgyver.data.model.request.incidentReportData.Step1IRData
 import com.rf.macgyver.databinding.FragmentIncidentReportBinding
+import com.rf.macgyver.roomDB.model.IncidentReport
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
 import com.rf.macgyver.ui.base.BaseViewModelFactory
+import com.rf.macgyver.ui.main.adapter.IncidentReportItemAdapter
 import com.rf.macgyver.ui.main.di.DaggerIncidentReportFragmentComponent
 import com.rf.macgyver.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel
@@ -21,6 +25,8 @@ import javax.inject.Inject
 
 class IncidentReportFragment :
     BaseFragment<FragmentIncidentReportBinding>(R.layout.fragment_incident_report) {
+
+        private var dataList:ArrayList<Step1IRData> = arrayListOf()
 
     @Inject
     lateinit var sharedPreference: SharedPreference
@@ -44,9 +50,22 @@ class IncidentReportFragment :
     }
 
     private fun initializeView() {
+        val bundle = arguments
+        val uniqueToken : String? =
+            bundle?.getString("uniqueId")
+        val incidentReportData : IncidentReport? = uniqueToken?.let { viewmodel.getIncidentReport(it) }
+        val step1IRData = Step1IRData(
+            incidentNo = incidentReportData?.incidentNo,
+            incidentDate = incidentReportData?.incidentDate,
+            incidentLocation = incidentReportData?.incidentLocation,
+            vehicleName = incidentReportData?.vehicleName,
+            vehicleNo = incidentReportData?.vehicleNo,
+            operatorName = incidentReportData?.operatorName
+
+        )
         mDataBinding.createReportButton.setOnClickListener {
             Navigation.findNavController(requireView())
-                .navigate(R.id.action_navigation_incident_report_to_navigation_step1_incident)
+                .navigate(R.id.action_navigation_incident_report_to_navigation_step1_incident, bundle)
         }
 
         val navController =
@@ -56,11 +75,13 @@ class IncidentReportFragment :
             navController.navigateUp()
         }
 
-        /*
-                val itemAdapter = IncidentReportItemAdapter(dataList, requireActivity())
-                val layoutManager = LinearLayoutManager(requireActivity())
-                mDataBinding.recyclerViewId.layoutManager = layoutManager
-                mDataBinding.recyclerViewId.adapter = itemAdapter*/
+        val list = listOf(step1IRData)
+        dataList = ArrayList(list)
+
+        val itemAdapter = IncidentReportItemAdapter(dataList, requireActivity())
+        val layoutManager = LinearLayoutManager(requireActivity())
+        mDataBinding.recyclerViewId.layoutManager = layoutManager
+        mDataBinding.recyclerViewId.adapter = itemAdapter
     }
 
     private fun initializeDagger() {

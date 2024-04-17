@@ -34,7 +34,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding, Any?>(R.layout.activi
             viewDataBinding?.progressView?.visibility = View.GONE
             Handler(Looper.getMainLooper()).postDelayed(
                 {
-                    startActivity(Intent(this@SplashActivity, DashBoardActivity::class.java))
+                    startActivity(Intent(this@SplashActivity, SignInActivity::class.java))
                     finishAffinity()
                 }, 1000
             )

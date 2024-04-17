@@ -4,19 +4,24 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.rf.macgyver.roomDB.dao.UtellDao
-import com.rf.macgyver.roomDB.model.ModemSetting
-import com.rf.macgyver.roomDB.model.NotificationRecord
-import com.rf.macgyver.roomDB.model.OperatorRecord
-import com.rf.macgyver.roomDB.model.SMSRecord
+import androidx.room.TypeConverters
+import com.rf.macgyver.roomDB.dao.MagDao
+import com.rf.macgyver.roomDB.model.Converters
+import com.rf.macgyver.roomDB.model.DailyReporting
+import com.rf.macgyver.roomDB.model.IPQuestionTypeConverter
+import com.rf.macgyver.roomDB.model.IncidentReport
+import com.rf.macgyver.roomDB.model.InspectionForm
+import com.rf.macgyver.roomDB.model.LoginDetails
+import com.rf.macgyver.roomDB.model.QuestionDataTypeConverter
 
 
 @Database(
-    entities = [SMSRecord::class, ModemSetting::class, OperatorRecord::class, NotificationRecord::class],
+    entities = [LoginDetails::class, DailyReporting::class, InspectionForm::class, IncidentReport::class],
     version = 1
 )
+@TypeConverters(Converters::class , QuestionDataTypeConverter :: class,  IPQuestionTypeConverter :: class)
 abstract class MagDatabase : RoomDatabase() {
-    abstract fun fioDao(): UtellDao?
+    abstract fun magDao(): MagDao?
 
     companion object {
         @Volatile
@@ -27,7 +32,7 @@ abstract class MagDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     MagDatabase::class.java,
-                    "FionDatabase.db"
+                    "MagDatabase.db"
                 ).allowMainThreadQueries().build()//.addMigrations(migration_1_2).build()
                 INSTANCE = instance
                 instance

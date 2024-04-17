@@ -2,6 +2,7 @@ package com.rf.macgyver.ui.main.fragment
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
@@ -11,6 +12,7 @@ import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
 import com.rf.macgyver.ui.base.BaseViewModelFactory
+import com.rf.macgyver.ui.main.activity.DashBoardActivity
 import com.rf.macgyver.ui.main.di.DaggerDashBoardFragmentComponent
 import com.rf.macgyver.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel
@@ -20,7 +22,7 @@ import javax.inject.Inject
 
 class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragment_dashboard) {
 
-
+    var uniqueId :String? = null
     @Inject
     lateinit var sharedPreference: SharedPreference
 
@@ -51,15 +53,32 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
     }
 
     private fun initializeView() {
+       /* val bundle = arguments
+        val uniqueId: String? =
+            bundle?.getString("uniqueId")*/
+        val receivedBundle = (activity as DashBoardActivity).intent.getBundleExtra("bundle")
+        if (receivedBundle != null) {
+            uniqueId = receivedBundle.getString("uniqueId")
+            // Do whatever you need with the data
+        }
+        if (uniqueId != null) {
+            Log.d("uniqueId", uniqueId!!)
+        }else{
+            Log.d("uniqueId","null")
+        }
+        val bundle =  Bundle().apply {
+            putString("uniqueId", uniqueId)
+        }
+
         mDataBinding.dailyCheckupCard.setOnClickListener {
-            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_dashboard_to_navigation_daily_report)
+            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_dashboard_to_navigation_daily_report, bundle)
         }
 
         mDataBinding.inspectionCard.setOnClickListener {
-            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_dashboard_to_navigation_inspection)
+            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_dashboard_to_navigation_inspection,bundle)
         }
         mDataBinding.IncidentReport.setOnClickListener {
-            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_dashboard_to_navigation_incident_report)
+            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_dashboard_to_navigation_incident_report,bundle)
         }
     }
 }

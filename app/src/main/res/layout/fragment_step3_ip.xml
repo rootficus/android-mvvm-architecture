@@ -102,7 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Step 1"
+                    android:text="Step 2"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="@id/doInspectiontxt"
                     app:layout_constraintTop_toTopOf="@id/step2Icon" />
@@ -293,6 +293,7 @@
                         android:padding="8dp"
                         android:paddingHorizontal="10dp"
                         android:text="Available"
+                        android:textColor="#979797"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -311,6 +312,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
                         android:padding="8dp"
+                        android:textColor="#979797"
                         android:text="Maintenance Required"
                         app:layout_constraintBottom_toBottomOf="@id/availableBtn"
                         app:layout_constraintEnd_toStartOf="@id/breakdownBtn"
@@ -333,6 +335,7 @@
                         android:fontFamily="@font/roboto_regular"
                         android:padding="8dp"
                         android:text="Breakdown"
+                        android:textColor="#979797"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -391,6 +394,7 @@
                             android:layout_weight="2"
                             android:fontFamily="@font/roboto_regular"
                             android:padding="5dp"
+                            android:textColor="#979797"
                             android:text="low"
                             android:textAlignment="center"
                             android:textSize="14sp" />
@@ -407,6 +411,7 @@
                             android:layout_weight="2"
                             android:fontFamily="@font/roboto_regular"
                             android:padding="5dp"
+                            android:textColor="#979797"
                             android:text="medium"
                             android:textAlignment="center"
                             android:textSize="14sp" />
@@ -423,6 +428,7 @@
                             android:layout_weight="2"
                             android:fontFamily="@font/roboto_regular"
                             android:padding="5dp"
+                            android:textColor="#979797"
                             android:text="high"
                             android:textAlignment="center"
                             android:textSize="14sp" />
@@ -439,6 +445,7 @@
                             android:layout_weight="3"
                             android:fontFamily="@font/roboto_regular"
                             android:padding="5dp"
+                            android:textColor="#979797"
                             android:text="emergency"
                             android:textAlignment="center"
                             android:textSize="14sp" />
@@ -499,6 +506,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
                         android:padding="8dp"
+                        android:textColor="#979797"
                         android:text="Yes"
                         android:textAlignment="center"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -520,6 +528,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
                         android:padding="8dp"
+                        android:textColor="#979797"
                         android:text="NO"
                         android:textAlignment="center"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -582,6 +591,7 @@
                         android:text="Yes"
                         android:textAlignment="center"
                         android:textSize="14sp"
+                        android:textColor="#979797"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -603,6 +613,7 @@
                         android:padding="8dp"
                         android:text="NO"
                         android:textAlignment="center"
+                        android:textColor="#979797"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

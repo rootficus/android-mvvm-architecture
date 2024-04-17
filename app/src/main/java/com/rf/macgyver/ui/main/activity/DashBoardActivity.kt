@@ -68,6 +68,11 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding, Any?>(R.layout.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val bundle = intent.getBundleExtra("bundle")
+        if (bundle != null) {
+            val uniqueToken = bundle.getString("uniqueId")
+            // Do whatever you need with the data
+        }
         //Utility.getPushToken(this@DashBoardActivity)
         initializationDagger()
         initializationView()

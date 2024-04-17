@@ -6,7 +6,6 @@ import android.util.Log
 import com.rf.macgyver.App
 import com.rf.macgyver.roomDB.MagDatabase
 import com.rf.macgyver.roomDB.model.NotificationMessageBody
-import com.rf.macgyver.roomDB.model.NotificationRecord
 import com.rf.macgyver.utils.Constant
 import com.rf.macgyver.utils.Constant.AGENT_REQUEST_TRANSACTION_BOTS
 import com.rf.macgyver.utils.Constant.UTELL_ACTION
@@ -105,8 +104,8 @@ open class MagFCMService : FirebaseMessagingService() {
             remoteMessage.data.getValue("message"),
             NotificationMessageBody::class.java
         )
-        if (Utility.isNotificationExits(
-                magDatabase.fioDao(),
+       /* if (Utility.isNotificationExits(
+                magDatabase.magDao(),
                 notificationMessageBody.id
             ) != true
         ) {
@@ -117,10 +116,10 @@ open class MagFCMService : FirebaseMessagingService() {
                     isSend = false,
                     createdAt = it.date
                 )
-                magDatabase.fioDao()?.insertNotification(notificationRecord)
+                magDatabase.magDao()?.insertNotification(notificationRecord)
                 sendBroadCast(applicationContext, notificationRecord)
             }
-        }
+        }*/
     }
 
     override fun onNewToken(token: String) {
@@ -133,7 +132,7 @@ open class MagFCMService : FirebaseMessagingService() {
         private const val TAG = "MyFirebaseMsgService"
     }
 
-    private fun sendBroadCast(context: Context, notificationRecord: NotificationRecord) {
+    /*private fun sendBroadCast(context: Context, notificationRecord: NotificationRecord) {
         if (App.isAppRunning) {
             if (notificationRecord.notificationType == Constant.NotificationType.MODEM_STATUS_CHANGE.param
                 || notificationRecord.notificationType == Constant.NotificationType.ADD_BALANCE_AGENT.param
@@ -157,8 +156,8 @@ open class MagFCMService : FirebaseMessagingService() {
                 notificationRecord.messageBody!!,
                 notificationRecord.id
             )
-        }
-    }
+        }*/
+   // }
 
     private fun getTitle(notificationType: String): String {
         return when (notificationType) {

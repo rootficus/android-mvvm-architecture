@@ -4,10 +4,8 @@ import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.rf.macgyver.R
-import com.rf.macgyver.data.model.request.Step1DrData
+import com.rf.macgyver.data.model.request.dailyReportData.Step1DrData
 import com.rf.macgyver.databinding.ItemDailyReportingBinding
 
 class DailyReportingItemAdapter (private var dataList: ArrayList<Step1DrData?>, private val context: Context?):
@@ -20,7 +18,7 @@ class DailyReportingItemAdapter (private var dataList: ArrayList<Step1DrData?>, 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         val cardData = dataList[position]
         holder.reportId.setText(cardData?.reportName)
-        holder.vehicleId.setText(cardData?.vehicle?.vehicleNo)
+        holder.vehicleId.setText(cardData?.vehicle?.vehicleName)
         holder.dateId.setText(cardData?.date)
         when(cardData?.day){
             "Sunday" ->  {holder.sunday.setBackgroundColor(Color.parseColor("#8EBCFF"))}

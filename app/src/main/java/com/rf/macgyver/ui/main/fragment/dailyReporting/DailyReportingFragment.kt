@@ -2,15 +2,18 @@ package com.rf.macgyver.ui.main.fragment.dailyReporting
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.rf.macgyver.R
-import com.rf.macgyver.data.model.request.Step1DrData
-import com.rf.macgyver.data.model.request.Step3DrData
+import com.rf.macgyver.data.model.request.dailyReportData.Step1DrData
+import com.rf.macgyver.data.model.request.dailyReportData.Step3DrData
+import com.rf.macgyver.data.model.request.dailyReportData.Vehicle
 import com.rf.macgyver.databinding.FragmentDailyReportingBinding
+import com.rf.macgyver.roomDB.model.DailyReporting
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
@@ -29,6 +32,10 @@ class DailyReportingFragment  : BaseFragment<FragmentDailyReportingBinding>(R.la
     private var dataList: ArrayList<Step1DrData?> = arrayListOf()
     @Inject
     lateinit var sharedPreference: SharedPreference
+
+    var uniqueId: String? = null
+    val step1Data: Step1DrData = Step1DrData()
+    val vehicle: Vehicle = Vehicle()
 
     private lateinit var itemTabLayout: TabLayout
 
@@ -52,21 +59,27 @@ class DailyReportingFragment  : BaseFragment<FragmentDailyReportingBinding>(R.la
 
     private fun initializeView() {
         val bundle = arguments
-
-        val step1Data: Step1DrData? =
-            bundle?.getSerializable("step1DrData") as? Step1DrData
-        val step2Data : ArrayList<*>? = bundle?.getSerializable("step2DrData") as? ArrayList<*>
-        val step3Data: Step3DrData? =
-            bundle?.getSerializable("step3DrData") as? Step3DrData
-        mDataBinding.startNewButton.setOnClickListener {
-            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_daily_report_to_navigation_step1_report)
+        uniqueId =
+            bundle?.getString("uniqueId")
+        if (uniqueId != null) {
+            Log.d("uniqueId", uniqueId!!)
+        }else{
+            Log.d("uniqueId","null")
         }
-
+        val dailyReportingData: DailyReporting? = uniqueId?.let { viewmodel.getDailyReportingData(it) }
         val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
 
         mDataBinding.backArrowBtn.setOnClickListener{
             navController.navigateUp()
         }
+        step1Data.reportName= dailyReportingData?.reportName
+        step1Data.date = dailyReportingData?.date
+        step1Data.day = dailyReportingData?.day
+        step1Data.name = dailyReportingData?.name
+        vehicle.vehicleName = dailyReportingData?.vehicleName
+        vehicle.vehicleNo = dailyReportingData?.vehicleNo
+        step1Data.vehicle = vehicle
+        step1Data.shift = dailyReportingData?.shift
         val list = listOf(step1Data)
         dataList = ArrayList(list)
 
@@ -75,10 +88,19 @@ class DailyReportingFragment  : BaseFragment<FragmentDailyReportingBinding>(R.la
         mDataBinding.recyclerViewId.layoutManager = layoutManager
         mDataBinding.recyclerViewId.adapter = itemAdapter
 
+        mDataBinding.startNewButton.setOnClickListener {
+            Navigation.findNavController(requireView()).navigate(R.id.action_navigation_daily_report_to_navigation_step1_report,bundle)
+        }
+
         itemTabLayout = mDataBinding.tabLayout
 
         itemTabLayout.addTab(itemTabLayout.newTab().setText("Running"))
         itemTabLayout.addTab(itemTabLayout.newTab().setText("Submitted"))
+    }
+
+    override fun onResume() {
+        super.onResume()
+
     }
 
     private fun initializeDagger() {

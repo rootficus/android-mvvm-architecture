@@ -1,11 +1,50 @@
 package com.rf.macgyver.ui.main.viewmodel
 
 import com.rf.macgyver.data.repository.DashBoardRepository
+import com.rf.macgyver.roomDB.model.DailyReporting
+import com.rf.macgyver.roomDB.model.IncidentReport
+import com.rf.macgyver.roomDB.model.InspectionForm
 import com.rf.macgyver.ui.base.BaseViewModel
 import javax.inject.Inject
 
 class DashBoardViewModel @Inject constructor(private val dashBoardRepository: DashBoardRepository) :
     BaseViewModel() {
+
+    fun insertInspectionForm(inspectionForm: InspectionForm)
+    {
+        dashBoardRepository.insertInspectionForm(inspectionForm)
+    }
+
+    fun getInspectionForm(uniqueToken : String) : InspectionForm?
+    {
+        return dashBoardRepository.getInspectionForm(uniqueToken)
+
+    }
+    fun updateInspectionForm(inspectionForm: InspectionForm)
+    {
+        dashBoardRepository.updateInspectionForm(inspectionForm)
+    }
+    fun insertIncidentReport(incidentReport: IncidentReport)
+    {
+        dashBoardRepository.insertIncidentReport(incidentReport)
+    }
+
+    fun getIncidentReport(uniqueToken : String) : IncidentReport?
+    {
+        return dashBoardRepository.getIncidentReport(uniqueToken)
+
+    }
+    fun updateIncidentReport(incidentReport: IncidentReport)
+    {
+        dashBoardRepository.updateIncidentReport(incidentReport)
+    }
+        fun insertDailyReporting(dailyReporting: DailyReporting){
+            dashBoardRepository.insertDailyReporting(dailyReporting)
+        }
+    fun getDailyReportingData(uniqueToken : String) : DailyReporting?
+    {
+        return dashBoardRepository.getDailyReportingData(uniqueToken)
+    }
 
     fun setFullName(fullName: String?) {
         dashBoardRepository.setFullName(fullName)
