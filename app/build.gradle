@@ -84,7 +84,7 @@ android {
         uat {
             dimension "default"
             buildConfigField("String", "VERSION", "\"UAT\"")
-            buildConfigField("String", "BASE_URL", "\"https://geolgyminingjk.in/\"")
+            buildConfigField("String", "BASE_URL", "\"http://192.168.1.78:3000/\"")
         }
         stage {
             dimension "default"

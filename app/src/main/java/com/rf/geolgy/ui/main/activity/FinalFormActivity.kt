@@ -163,7 +163,7 @@ class FinalFormActivity : BaseActivity<ActivityFinalFormBinding>(R.layout.activi
                 validFrom = validFrom,
                 validTo = validTo,
                 gstNumber = gstNumber,
-                expireInHours = expireInHours
+                expireInHours = expireInHours.toInt()
             )
             PdfGenerator2.createPdf(
                 this@FinalFormActivity,

@@ -121,7 +121,7 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                     validFrom = validFrom,
                     validTo = validTo,
                     gstNumber = gstNumber,
-                    expireInHours = viewDataBinding?.spinnerExpire?.text.toString()
+                    expireInHours = viewDataBinding?.spinnerExpire?.text.toString().toInt()
                 )
                 createChallanAPI(createChallanRequest, gstNumber)
             } else {

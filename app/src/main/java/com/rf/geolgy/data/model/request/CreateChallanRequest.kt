@@ -20,6 +20,6 @@ data class CreateChallanRequest(
     @SerializedName("valid_from") var validFrom: String?= null,
     @SerializedName("valid_to") var validTo: String?= null,
     @SerializedName("gst_number") var gstNumber: String?= null,
-    @SerializedName("expire_hour") var expireInHours: String?= null,
+    @SerializedName("expire_hour") var expireInHours: Int?= null,
 
     ) : Serializable
