@@ -34,7 +34,7 @@ class DailyReportingFragment  : BaseFragment<FragmentDailyReportingBinding>(R.la
     lateinit var sharedPreference: SharedPreference
 
     var uniqueId: String? = null
-    val step1Data: Step1DrData = Step1DrData()
+    private val step1Data: Step1DrData = Step1DrData()
     val vehicle: Vehicle = Vehicle()
 
     private lateinit var itemTabLayout: TabLayout
@@ -66,22 +66,28 @@ class DailyReportingFragment  : BaseFragment<FragmentDailyReportingBinding>(R.la
         }else{
             Log.d("uniqueId","null")
         }
-        val dailyReportingData: DailyReporting? = uniqueId?.let { viewmodel.getDailyReportingData(it) }
+        val dailyReportingList = uniqueId?.let { viewmodel.getDailyReportingData(it) }
+        val dailyReportingDataList  = dailyReportingList?.let { ArrayList(it) }
         val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
 
         mDataBinding.backArrowBtn.setOnClickListener{
             navController.navigateUp()
         }
-        step1Data.reportName= dailyReportingData?.reportName
-        step1Data.date = dailyReportingData?.date
-        step1Data.day = dailyReportingData?.day
-        step1Data.name = dailyReportingData?.name
-        vehicle.vehicleName = dailyReportingData?.vehicleName
-        vehicle.vehicleNo = dailyReportingData?.vehicleNo
-        step1Data.vehicle = vehicle
-        step1Data.shift = dailyReportingData?.shift
-        val list = listOf(step1Data)
-        dataList = ArrayList(list)
+        if (dailyReportingDataList != null) {
+            for (i in 0 until dailyReportingDataList.size){
+                step1Data.reportName = dailyReportingDataList[i]?.reportName
+                step1Data.date = dailyReportingDataList[i]?.date
+                step1Data.day = dailyReportingDataList[i]?.day
+                step1Data.name = dailyReportingDataList[i]?.name
+                vehicle.vehicleName = dailyReportingDataList[i]?.vehicleName
+                vehicle.vehicleNo = dailyReportingDataList[i]?.vehicleNo
+                step1Data.vehicle = vehicle
+                step1Data.shift = dailyReportingDataList[i]?.shift
+
+                dataList.add(step1Data)
+            }
+        }
+
 
         val itemAdapter = DailyReportingItemAdapter(dataList, requireActivity())
         val layoutManager = LinearLayoutManager(requireActivity())

@@ -31,6 +31,10 @@ class SignInViewModel @Inject constructor(private val signInRepository: SignInRe
         }
     }
 
+    fun getLoginDetails(email: String): LoginDetails?{
+        return signInRepository.getLoginDetails(email )
+    }
+
     fun updateCompanyInfo(id :String? , value1: String?, value2: String?, value3 : String?){
         signInRepository.updateCompanyInfo(id,value1,value2,value3)
     }

@@ -7,6 +7,7 @@ import com.rf.macgyver.roomDB.MagDatabase
 import com.rf.macgyver.sdkInit.di.AppComponent
 import com.rf.macgyver.ui.base.BaseFragmentModule
 import com.rf.macgyver.ui.base.BaseViewModelFactory
+import com.rf.macgyver.ui.main.fragment.AccountFragment
 import com.rf.macgyver.ui.main.fragment.DashBoardFragment
 import com.rf.macgyver.ui.main.fragment.dailyReporting.DailyReportingFragment
 import com.rf.macgyver.ui.main.fragment.dailyReporting.Step1DRFragment
@@ -204,4 +205,16 @@ interface Step3IPFragmentComponent {
 
 @Module(includes = [DashBoardFragmentModuleDi::class])
 class Step3IPFragmentModule
+
+@FragmentScope
+@Component(
+    dependencies = [AppComponent::class],
+    modules = [AccountFragmentModule::class, DashBoardFragmentModuleDi::class, BaseFragmentModule::class]
+)
+interface AccountFragmentComponent {
+    fun inject(accountFragment: AccountFragment)
+}
+
+@Module(includes = [DashBoardFragmentModuleDi::class])
+class AccountFragmentModule
 

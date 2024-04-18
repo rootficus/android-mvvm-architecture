@@ -87,7 +87,7 @@ class Step1DRFragment : BaseFragment<FragmentStep1DRBinding>(R.layout.fragment_s
 
             step1DrData.name = mDataBinding.nameId.text.toString()
             step1DrData.reportName = mDataBinding.reportName.text.toString()
-            if(step1DrData.name?.isEmpty() == true){
+            if(step1DrData.name.isNullOrEmpty()){
                 Toast.makeText(context, "Please Enter Name", Toast.LENGTH_SHORT).show()
             }
             else if(step1DrData.shift.isNullOrEmpty()){

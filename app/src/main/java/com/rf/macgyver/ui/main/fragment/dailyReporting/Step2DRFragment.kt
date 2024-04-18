@@ -282,9 +282,9 @@ class Step2DRFragment : BaseFragment<FragmentStep2DRBinding>(R.layout.fragment_s
         mDataBinding.completedTxt.setOnClickListener{
 
             if(
-                card1Data.selectedAnswer?.isEmpty() == true || card2Data.selectedAnswer?.isEmpty() == true || card3Data.selectedAnswer?.isEmpty() == true ||
-                card4Data.selectedAnswer?.isEmpty() == true || card5Data.selectedAnswer?.isEmpty() == true || card6Data.selectedAnswer?.isEmpty() == true ||
-                card7Data.selectedAnswer?.isEmpty() == true || card8Data.selectedAnswer?.isEmpty() == true || card9Data.selectedAnswer?.isEmpty() == true
+                card1Data.selectedAnswer.isNullOrEmpty() || card2Data.selectedAnswer.isNullOrEmpty() || card3Data.selectedAnswer.isNullOrEmpty() ||
+                card4Data.selectedAnswer.isNullOrEmpty() || card5Data.selectedAnswer.isNullOrEmpty() || card6Data.selectedAnswer.isNullOrEmpty() ||
+                card7Data.selectedAnswer.isNullOrEmpty() || card8Data.selectedAnswer.isNullOrEmpty() || card9Data.selectedAnswer.isNullOrEmpty()
             ){
                 Toast.makeText(context, "Select an option for each", Toast.LENGTH_SHORT).show()
             }else {

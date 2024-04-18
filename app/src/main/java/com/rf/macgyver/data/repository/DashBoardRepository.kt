@@ -17,6 +17,10 @@ class DashBoardRepository(
     val magDatabase: MagDatabase
 ) : BaseRepository() {
 
+    fun getLoginDetailsUsingToken(uniqueToken: String): LoginDetails?{
+        return magDatabase.magDao()?.getLoginDetailsUsingToken(uniqueToken )
+    }
+
     fun insertInspectionForm(inspectionForm: InspectionForm)
     {
         magDatabase.magDao()?.insertInspectionForm(inspectionForm)
@@ -36,7 +40,7 @@ class DashBoardRepository(
         magDatabase.magDao()?.insertDailyReporting(dailyReporting)
     }
 
-    fun getDailyReportingData(uniqueToken : String) : DailyReporting?
+    fun getDailyReportingData(uniqueToken : String) : List<DailyReporting>?
     {
         return magDatabase.magDao()?.getDailyReportingData(uniqueToken)
 
@@ -51,7 +55,7 @@ class DashBoardRepository(
         magDatabase.magDao()?.insertIncidentReport(incidentReport)
     }
 
-    fun getIncidentReport(uniqueToken : String) : IncidentReport?
+    fun getIncidentReport(uniqueToken : String) : List<IncidentReport>?
     {
         return magDatabase.magDao()?.getIncidentReport(uniqueToken)
 

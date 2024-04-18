@@ -4,12 +4,16 @@ import com.rf.macgyver.data.repository.DashBoardRepository
 import com.rf.macgyver.roomDB.model.DailyReporting
 import com.rf.macgyver.roomDB.model.IncidentReport
 import com.rf.macgyver.roomDB.model.InspectionForm
+import com.rf.macgyver.roomDB.model.LoginDetails
 import com.rf.macgyver.ui.base.BaseViewModel
 import javax.inject.Inject
 
 class DashBoardViewModel @Inject constructor(private val dashBoardRepository: DashBoardRepository) :
     BaseViewModel() {
 
+    fun getLoginDetailsUsingToken(uniqueToken: String): LoginDetails?{
+        return dashBoardRepository.getLoginDetailsUsingToken(uniqueToken )
+    }
     fun insertInspectionForm(inspectionForm: InspectionForm)
     {
         dashBoardRepository.insertInspectionForm(inspectionForm)
@@ -29,7 +33,7 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
         dashBoardRepository.insertIncidentReport(incidentReport)
     }
 
-    fun getIncidentReport(uniqueToken : String) : IncidentReport?
+    fun getIncidentReport(uniqueToken : String) : List<IncidentReport>?
     {
         return dashBoardRepository.getIncidentReport(uniqueToken)
 
@@ -41,7 +45,7 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
         fun insertDailyReporting(dailyReporting: DailyReporting){
             dashBoardRepository.insertDailyReporting(dailyReporting)
         }
-    fun getDailyReportingData(uniqueToken : String) : DailyReporting?
+    fun getDailyReportingData(uniqueToken : String) : List<DailyReporting>?
     {
         return dashBoardRepository.getDailyReportingData(uniqueToken)
     }

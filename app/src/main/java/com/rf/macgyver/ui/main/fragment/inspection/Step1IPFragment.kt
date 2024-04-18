@@ -79,9 +79,9 @@ class Step1IPFragment : BaseFragment<FragmentStep1IpBinding>(R.layout.fragment_s
 
         mDataBinding.nextTxt.setOnClickListener {
             if(
-                ques2Data.selectedAnswer?.isEmpty() == true || ques3Data.selectedAnswer?.isEmpty() == true || ques5Data.selectedAnswer?.isEmpty() == true ||
-                ques6Data.selectedAnswer?.isEmpty() == true || ques7Data.selectedAnswer?.isEmpty() == true || ques8Data.selectedAnswer?.isEmpty() == true ||
-                ques9Data.selectedAnswer?.isEmpty() == true){
+                ques2Data.selectedAnswer.isNullOrEmpty() || ques3Data.selectedAnswer.isNullOrEmpty() || ques5Data.selectedAnswer.isNullOrEmpty() ||
+                ques6Data.selectedAnswer.isNullOrEmpty() || ques7Data.selectedAnswer.isNullOrEmpty() || ques8Data.selectedAnswer.isNullOrEmpty() ||
+                ques9Data.selectedAnswer.isNullOrEmpty()){
                 Toast.makeText(context, "Select an option for each", Toast.LENGTH_SHORT).show()
             }else {
 

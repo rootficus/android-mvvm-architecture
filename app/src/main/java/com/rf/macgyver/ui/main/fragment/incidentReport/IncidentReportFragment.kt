@@ -53,16 +53,22 @@ class IncidentReportFragment :
         val bundle = arguments
         val uniqueToken : String? =
             bundle?.getString("uniqueId")
-        val incidentReportData : IncidentReport? = uniqueToken?.let { viewmodel.getIncidentReport(it) }
-        val step1IRData = Step1IRData(
-            incidentNo = incidentReportData?.incidentNo,
-            incidentDate = incidentReportData?.incidentDate,
-            incidentLocation = incidentReportData?.incidentLocation,
-            vehicleName = incidentReportData?.vehicleName,
-            vehicleNo = incidentReportData?.vehicleNo,
-            operatorName = incidentReportData?.operatorName
+        val incidentReportList  = uniqueToken?.let { viewmodel.getIncidentReport(it) }
+        val incidentReportDatalist : ArrayList<IncidentReport>? = incidentReportList?.let { ArrayList(it) }
 
-        )
+        val step1IRData = Step1IRData()
+        if (incidentReportDatalist != null) {
+            for(i in 0 until incidentReportDatalist.size){
+                step1IRData.incidentNo = incidentReportDatalist[i].incidentNo
+                step1IRData.incidentDate = incidentReportDatalist[i].incidentDate
+                step1IRData.incidentLocation = incidentReportDatalist[i].incidentLocation
+                step1IRData.vehicleName = incidentReportDatalist[i].vehicleName
+                step1IRData.vehicleNo = incidentReportDatalist[i].vehicleNo
+                step1IRData.operatorName = incidentReportDatalist[i].operatorName
+
+                dataList.add(step1IRData)
+            }
+        }
         mDataBinding.createReportButton.setOnClickListener {
             Navigation.findNavController(requireView())
                 .navigate(R.id.action_navigation_incident_report_to_navigation_step1_incident, bundle)
@@ -75,8 +81,7 @@ class IncidentReportFragment :
             navController.navigateUp()
         }
 
-        val list = listOf(step1IRData)
-        dataList = ArrayList(list)
+
 
         val itemAdapter = IncidentReportItemAdapter(dataList, requireActivity())
         val layoutManager = LinearLayoutManager(requireActivity())

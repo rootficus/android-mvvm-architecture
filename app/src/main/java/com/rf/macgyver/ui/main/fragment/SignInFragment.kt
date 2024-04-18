@@ -1,9 +1,10 @@
 package com.rf.macgyver.ui.main.fragment
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
-import android.text.method.PasswordTransformationMethod
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.rf.macgyver.R
@@ -12,9 +13,11 @@ import com.rf.macgyver.utils.NetworkHelper
 import com.rf.macgyver.utils.SharedPreference
 import javax.inject.Inject
 import com.rf.macgyver.databinding.FragmentSignInBinding
+import com.rf.macgyver.roomDB.model.LoginDetails
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragmentModule
 import com.rf.macgyver.ui.base.BaseViewModelFactory
+import com.rf.macgyver.ui.main.activity.DashBoardActivity
 import com.rf.macgyver.ui.main.di.DaggerSignInFragmentComponent
 import com.rf.macgyver.ui.main.di.SignInFragmentModuleDi
 import com.rf.macgyver.ui.main.viewmodel.SignInViewModel
@@ -52,9 +55,9 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
 
     private fun initializeView(view: View) {
         mDataBinding.loginBtn.setOnClickListener{
-            val name = mDataBinding.etUsername.text.toString()
+            val email = mDataBinding.etUsername.text.toString()
             val password = mDataBinding.etPassword.text.toString()
-            if (name.isEmpty()) {
+            if (email.isEmpty()) {
                 Utility.callCustomToast(
                     requireContext(),
                     mActivity.getString(R.string.PLEASE_ENTER_NAME)
@@ -65,12 +68,48 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                     mActivity.getString(R.string.PLEASE_ENTER_PASSWORD)
                 )
             } else {
-                findNavController().navigate(R.id.action_fragment_signin_to_fragment_company_info)
+
+                val loginDetails : LoginDetails? = viewmodel.getLoginDetails(email)
+
+                if(loginDetails!= null) {
+                    if (password == loginDetails.password) {
+                        val bundle = Bundle().apply {
+                            putString("uniqueId", loginDetails.uniqueToken)
+                        }
+                        if (loginDetails.companyIndustry.isNullOrEmpty() || loginDetails.noOfVehicles.isNullOrEmpty() /*|| loginDetails.userRole.isNullOrEmpty()*/) {
+                            findNavController().navigate(
+                                R.id.action_fragment_signin_to_fragment_company_info,
+                                bundle
+                            )
+                        } else if (loginDetails.motiveHVI.isEmpty()) {
+                            findNavController().navigate(
+                                R.id.action_fragment_signin_to_fragment_start,
+                                bundle
+                            )
+                        } else {
+                            val intent = Intent(requireActivity(), DashBoardActivity::class.java)
+                            intent.putExtra("bundle", bundle)
+                            startActivity(intent)
+                            requireActivity().finish()
+                        }
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "username and password do not match",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }else{
+                    Toast.makeText(requireContext(), "No account exists with this email", Toast.LENGTH_SHORT).show()
+                }
             }
         }
         mDataBinding.signupBtn.setOnClickListener{
+
             findNavController().navigate(R.id.action_fragment_SignIn_to_fragment_signup)
         }
+    }
+}
 
 
         /*binding = FragmentSignInBinding.inflate(layoutInflater)
@@ -131,7 +170,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             }
         })*/
 
-        mDataBinding.etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+        //mDataBinding.etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
 
 
         /*mDataBinding.passwordToggle.setOnClickListener {
@@ -178,7 +217,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                 )
             } else {
 //                callSignInAPI(view)
-            }}*/}}
+            }}*/
 
         /*mDataBinding.etName.setText(viewmodel.getEmail().toString())
         mDataBinding.etPassword.setText(viewmodel.getPassword().toString())*/

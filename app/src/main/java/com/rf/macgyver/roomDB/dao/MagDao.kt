@@ -26,6 +26,13 @@ interface MagDao {
     @Query("UPDATE loginDetails SET motiveHVI = :value1 WHERE emailId = :id")
     fun updateMotiveHVI(id: String?,  value1 : ArrayList<String>)
 
+    @Transaction
+    @Query("SELECT * FROM loginDetails WHERE emailId=:email")
+    fun getLoginDetails(email: String): LoginDetails
+    @Transaction
+    @Query("SELECT * FROM loginDetails WHERE uniqueToken=:uniqueToken")
+    fun getLoginDetailsUsingToken(uniqueToken: String): LoginDetails
+
     @Update
     fun updateDailyReporting(dailyReporting: DailyReporting): Int
 
@@ -34,7 +41,7 @@ interface MagDao {
 
     @Transaction
     @Query("SELECT * FROM dailyReporting WHERE uniqueToken=:uniqueToken")
-    fun getDailyReportingData(uniqueToken: String): DailyReporting
+    fun getDailyReportingData(uniqueToken: String): List<DailyReporting>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertIncidentReport(incidentReport: IncidentReport)
@@ -44,7 +51,7 @@ interface MagDao {
 
     @Transaction
     @Query("SELECT * FROM incidentReport WHERE uniqueToken=:uniqueToken")
-    fun getIncidentReport(uniqueToken: String): IncidentReport
+    fun getIncidentReport(uniqueToken: String): List<IncidentReport>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertInspectionForm(inspectionForm: InspectionForm)

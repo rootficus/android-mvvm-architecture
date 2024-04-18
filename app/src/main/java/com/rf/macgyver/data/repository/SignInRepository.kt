@@ -90,4 +90,8 @@ class SignInRepository(
     fun updateMotiveHVI(id :String? , value1: ArrayList<String>){
         magDatabase.magDao()?.updateMotiveHVI(id,value1)
     }
+
+    fun getLoginDetails(email: String): LoginDetails?{
+        return magDatabase.magDao()?.getLoginDetails(email )
+    }
 }

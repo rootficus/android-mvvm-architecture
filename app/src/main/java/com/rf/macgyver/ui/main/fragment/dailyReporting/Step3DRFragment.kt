@@ -88,7 +88,7 @@ class Step3DRFragment : BaseFragment<FragmentStep3DRBinding>(R.layout.fragment_s
             downtimeSpinnerVal = mDataBinding.downtimeSpinner.selectedItem.toString()
             runtimeSpinnerValue = mDataBinding.runtimeSpinner.selectedItem.toString()
             worklogSpinnerValue = mDataBinding.worklohSpinner.selectedItem.toString()
-            val string1 = mDataBinding.downtimeEdittext.text.toString()+""+ downtimeSpinnerVal
+            val string1 = mDataBinding.downtimeEdittext.text.toString()
             val string2 = mDataBinding.runtimeEdittext.text.toString() +""+ runtimeSpinnerValue
             val string3 = mDataBinding.worklogEdittext.text.toString() +""+ worklogSpinnerValue
 
@@ -97,8 +97,8 @@ class Step3DRFragment : BaseFragment<FragmentStep3DRBinding>(R.layout.fragment_s
             step3DrData.worklog = string3
             step3DrData.downtimeNote = mDataBinding.downtimeNoteEdittext.text.toString()
 
-            if(string1.isEmpty() || string2.isEmpty() || string3.isEmpty() ||
-                step3DrData.downtimeNote!!.isEmpty()){
+            if(mDataBinding.downtimeEdittext.text.isNullOrEmpty() || mDataBinding.runtimeEdittext.text.isNullOrEmpty() ||
+                mDataBinding.worklogEdittext.text.isNullOrEmpty() || step3DrData.downtimeNote.isNullOrEmpty()){
                 Toast.makeText(context, "please enter all the details", Toast.LENGTH_SHORT).show()
             }else {
                 val bundle1 = Bundle().apply {

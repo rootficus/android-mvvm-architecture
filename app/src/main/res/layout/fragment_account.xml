@@ -19,21 +19,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="18dp"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/roboto_bold"
             android:text="Profile"
             android:textSize="22sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/adminNameLabel"
+            android:id="@+id/adminNameHeading"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="20dp"
             android:drawableStart="@drawable/group"
-            android:drawableEnd="@drawable/group__4_"
             android:drawablePadding="5dp"
             android:fontFamily="@font/roboto_medium"
             android:gravity="center_vertical"
@@ -44,18 +42,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/profileHeading" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/adminName"
+            android:text="name"
+            android:textColor="@color/lightgray"
+            app:layout_constraintEnd_toEndOf="@id/adminNameHeading"
+            app:layout_constraintTop_toTopOf="@id/adminNameHeading"
+            app:layout_constraintBottom_toBottomOf="@id/adminNameHeading"
+            android:layout_marginEnd="20dp"/>
+
         <View
             android:id="@+id/view1"
             android:layout_width="0dp"
             android:layout_height="1.5dp"
             android:layout_marginVertical="5dp"
             android:background="#D3D3D3"
-            app:layout_constraintEnd_toEndOf="@id/adminNameLabel"
-            app:layout_constraintStart_toStartOf="@id/adminNameLabel"
-            app:layout_constraintTop_toBottomOf="@id/adminNameLabel" />
+            app:layout_constraintEnd_toEndOf="@id/adminNameHeading"
+            app:layout_constraintStart_toStartOf="@id/adminNameHeading"
+            app:layout_constraintTop_toBottomOf="@id/adminNameHeading" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/locationLabel"
+            android:id="@+id/locationHeading"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="12dp"
@@ -77,12 +86,12 @@
             android:layout_height="1.5dp"
             android:layout_marginVertical="5dp"
             android:background="#D3D3D3"
-            app:layout_constraintEnd_toEndOf="@id/locationLabel"
-            app:layout_constraintStart_toStartOf="@id/locationLabel"
-            app:layout_constraintTop_toBottomOf="@id/locationLabel" />
+            app:layout_constraintEnd_toEndOf="@id/locationHeading"
+            app:layout_constraintStart_toStartOf="@id/locationHeading"
+            app:layout_constraintTop_toBottomOf="@id/locationHeading" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/integrationLabel"
+            android:id="@+id/integrationHeading"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="12dp"
@@ -104,18 +113,17 @@
             android:layout_height="1.5dp"
             android:layout_marginVertical="5dp"
             android:background="#D3D3D3"
-            app:layout_constraintEnd_toEndOf="@id/integrationLabel"
-            app:layout_constraintStart_toStartOf="@id/integrationLabel"
-            app:layout_constraintTop_toBottomOf="@id/integrationLabel" />
+            app:layout_constraintEnd_toEndOf="@id/integrationHeading"
+            app:layout_constraintStart_toStartOf="@id/integrationHeading"
+            app:layout_constraintTop_toBottomOf="@id/integrationHeading" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/companyNameLabel"
+            android:id="@+id/companyNameHeading"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="12dp"
             android:drawableStart="@drawable/group__1_"
-            android:drawableEnd="@drawable/group__4_"
             android:drawablePadding="5dp"
             android:fontFamily="@font/roboto_medium"
             android:gravity="center_vertical"
@@ -125,6 +133,17 @@
             app:layout_constraintHeight_percent="0.06"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view7" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/companyName"
+            android:text="Company Name"
+            android:textColor="@color/lightgray"
+            app:layout_constraintEnd_toEndOf="@id/companyNameHeading"
+            app:layout_constraintTop_toTopOf="@id/companyNameHeading"
+            app:layout_constraintBottom_toBottomOf="@id/companyNameHeading"
+            android:layout_marginEnd="20dp"/>
+
 
         <View
             android:id="@+id/view3"
@@ -132,18 +151,17 @@
             android:layout_height="1.5dp"
             android:layout_marginVertical="5dp"
             android:background="#D3D3D3"
-            app:layout_constraintEnd_toEndOf="@id/companyNameLabel"
-            app:layout_constraintStart_toStartOf="@id/companyNameLabel"
-            app:layout_constraintTop_toBottomOf="@id/companyNameLabel" />
+            app:layout_constraintEnd_toEndOf="@id/companyNameHeading"
+            app:layout_constraintStart_toStartOf="@id/companyNameHeading"
+            app:layout_constraintTop_toBottomOf="@id/companyNameHeading" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/companyAddLabel"
+            android:id="@+id/companyAddHeading"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="12dp"
             android:drawableStart="@drawable/group__2_"
-            android:drawableEnd="@drawable/group__4_"
             android:drawablePadding="5dp"
             android:fontFamily="@font/roboto_medium"
             android:gravity="center_vertical"
@@ -153,6 +171,17 @@
             app:layout_constraintHeight_percent="0.06"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view3" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/companyAdd"
+            android:text="Company Address"
+            android:textColor="@color/lightgray"
+            app:layout_constraintEnd_toEndOf="@id/companyAddHeading"
+            app:layout_constraintTop_toTopOf="@id/companyAddHeading"
+            app:layout_constraintBottom_toBottomOf="@id/companyAddHeading"
+            android:layout_marginEnd="20dp"/>
+
 
         <View
             android:id="@+id/view4"
@@ -160,17 +189,16 @@
             android:layout_height="1.5dp"
             android:layout_marginVertical="5dp"
             android:background="#D3D3D3"
-            app:layout_constraintEnd_toEndOf="@id/companyAddLabel"
-            app:layout_constraintStart_toStartOf="@id/companyAddLabel"
-            app:layout_constraintTop_toBottomOf="@id/companyAddLabel" />
+            app:layout_constraintEnd_toEndOf="@id/companyAddHeading"
+            app:layout_constraintStart_toStartOf="@id/companyAddHeading"
+            app:layout_constraintTop_toBottomOf="@id/companyAddHeading" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/contactNoLabel"
+            android:id="@+id/contactNoHeading"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="12dp"
             android:drawableStart="@drawable/phone_1"
-            android:drawableEnd="@drawable/group__4_"
             android:drawablePadding="5dp"
             android:fontFamily="@font/roboto_medium"
             android:gravity="center_vertical"
@@ -180,6 +208,17 @@
             app:layout_constraintHeight_percent="0.06"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view4" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/contactNo"
+            android:text="XXXXXXXX"
+            android:textColor="@color/lightgray"
+            app:layout_constraintEnd_toEndOf="@id/contactNoHeading"
+            app:layout_constraintTop_toTopOf="@id/contactNoHeading"
+            app:layout_constraintBottom_toBottomOf="@id/contactNoHeading"
+            android:layout_marginEnd="20dp"/>
+
 
         <View
             android:id="@+id/view5"
@@ -187,12 +226,12 @@
             android:layout_height="1.5dp"
             android:layout_marginVertical="5dp"
             android:background="#D3D3D3"
-            app:layout_constraintEnd_toEndOf="@id/contactNoLabel"
-            app:layout_constraintStart_toStartOf="@id/contactNoLabel"
-            app:layout_constraintTop_toBottomOf="@id/contactNoLabel" />
+            app:layout_constraintEnd_toEndOf="@id/contactNoHeading"
+            app:layout_constraintStart_toStartOf="@id/contactNoHeading"
+            app:layout_constraintTop_toBottomOf="@id/contactNoHeading" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/signOutLabel"
+            android:id="@+id/signOutHeading"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="12dp"
@@ -215,9 +254,9 @@
             android:layout_height="1.5dp"
             android:layout_marginVertical="5dp"
             android:background="#D3D3D3"
-            app:layout_constraintEnd_toEndOf="@id/signOutLabel"
-            app:layout_constraintStart_toStartOf="@id/signOutLabel"
-            app:layout_constraintTop_toBottomOf="@id/signOutLabel" />
+            app:layout_constraintEnd_toEndOf="@id/signOutHeading"
+            app:layout_constraintStart_toStartOf="@id/signOutHeading"
+            app:layout_constraintTop_toBottomOf="@id/signOutHeading" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

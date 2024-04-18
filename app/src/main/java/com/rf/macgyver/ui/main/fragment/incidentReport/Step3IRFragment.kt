@@ -88,11 +88,11 @@ class Step3IRFragment : BaseFragment<FragmentStep3IRBinding>(R.layout.fragment_s
                 }
                 view.viewReportTxt.setOnClickListener {
                     val entity = step1Data?.incidentNo?.let { it1 ->
-                            IncidentReport(uniqueToken = uniqueToken,incidentNo = it1 , incidentDate = step1Data.incidentDate,incidentTime = step1Data.incidentTime, typeOfIncident = step1Data.typeOfIncident,
-                                incidentLocation = step1Data.incidentLocation, vehicleNo = step1Data.vehicleNo , vehicleName = step1Data.vehicleName, operatorName = step1Data.operatorName,
-                                 incidentArea = step2Data?.incidentArea, incidentSeverity = step2Data?.incidentSeverity,
-                                weatherCondition = step2Data?.weatherCondition, vehicleActivity = step2Data?.vehicleActivity, incidentCause = step3IrData.incidentCause,
-                                damagesList = step3IrData.damages, additionalComment = step3IrData.additionalComment)
+                            IncidentReport(uniqueToken = uniqueToken,incidentNo = it1 , incidentDate = step1Data.incidentDate,incidentTime = step1Data.incidentTime,
+                                typeOfIncident = step1Data.typeOfIncident, incidentLocation = step1Data.incidentLocation, vehicleNo = step1Data.vehicleNo ,
+                                vehicleName = step1Data.vehicleName, operatorName = step1Data.operatorName, incidentArea = step2Data?.incidentArea,
+                                incidentSeverity = step2Data?.incidentSeverity, weatherCondition = step2Data?.weatherCondition, vehicleActivity = step2Data?.vehicleActivity,
+                                incidentCause = step3IrData.incidentCause, damagesList = step3IrData.damages, additionalComment = step3IrData.additionalComment)
                     }
                     if (entity != null) {
                         viewmodel.insertIncidentReport(entity)

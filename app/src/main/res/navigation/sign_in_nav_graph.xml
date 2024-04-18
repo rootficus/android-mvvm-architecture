@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_fragment_signin_to_fragment_company_info"
             app:destination="@+id/fragment_company_info"/>
+        <action
+            android:id="@+id/action_fragment_signin_to_fragment_start"
+            app:destination="@+id/fragment_start"/>
     </fragment>
 
     <fragment

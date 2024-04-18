@@ -73,11 +73,6 @@ class CompanyInfoFragment : BaseFragment<FragmentCompanyInfoBinding>(R.layout.fr
         val uniqueId: String? =
             bundle?.getString("uniqueId")
 
-        if (uniqueId != null) {
-            Log.d("uniqueId", uniqueId)
-        }else{
-            Log.d("uniqueId","null")
-        }
 
         mDataBinding.card1RadioGrp.setOnCheckedChangeListener {  group, checkedId ->
             val checkedRadioButton = group.findViewById<RadioButton>(checkedId)
