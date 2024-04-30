@@ -36,6 +36,14 @@ class SharedPreference(context: Context) {
         return pref.getString(Constant.PREF_USER_ID, "")
     }
 
+    fun setUniqueToken(userId: String) {
+        pref.edit().putString(Constant.PREF_USER_ID, userId).apply()
+    }
+
+    fun getUniqueToken(): String? {
+        return pref.getString(Constant.PREF_USER_ID, "")
+    }
+
     fun setEmail(email: String) {
         pref.edit().putString(Constant.PREF_EMAIL, email).apply()
     }

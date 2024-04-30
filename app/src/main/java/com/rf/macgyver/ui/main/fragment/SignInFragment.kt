@@ -76,6 +76,10 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
                         val bundle = Bundle().apply {
                             putString("uniqueId", loginDetails.uniqueToken)
                         }
+                        sharedPreference.setEmail(email)
+                        sharedPreference.setPassword(password)
+                        loginDetails.username?.let { it1 -> sharedPreference.setUserId(it1) }
+                        loginDetails.uniqueToken?.let { it1 -> sharedPreference.setUniqueToken(it1) }
                         if (loginDetails.companyIndustry.isNullOrEmpty() || loginDetails.noOfVehicles.isNullOrEmpty() /*|| loginDetails.userRole.isNullOrEmpty()*/) {
                             findNavController().navigate(
                                 R.id.action_fragment_signin_to_fragment_company_info,

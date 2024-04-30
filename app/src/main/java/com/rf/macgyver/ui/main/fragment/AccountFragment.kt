@@ -1,6 +1,7 @@
 package com.rf.macgyver.ui.main.fragment
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -12,6 +13,7 @@ import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
 import com.rf.macgyver.ui.base.BaseViewModelFactory
 import com.rf.macgyver.ui.main.activity.DashBoardActivity
+import com.rf.macgyver.ui.main.activity.SignInActivity
 import com.rf.macgyver.ui.main.di.DaggerAccountFragmentComponent
 import com.rf.macgyver.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel
@@ -62,6 +64,12 @@ class AccountFragment : BaseFragment<FragmentAccountBinding>(R.layout.fragment_a
         }
         val loginDetails : LoginDetails? = uniqueId?.let { viewModel.getLoginDetailsUsingToken(it) }
         val name : String? = loginDetails?.username
-        mDataBinding.adminName.setText(name)
+        mDataBinding.adminName.text = name
+        mDataBinding.signOutHeading.setOnClickListener{
+            sharedPreference.resetSharedPref()
+            val intent = Intent(requireActivity(), SignInActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
+        }
     }
 }

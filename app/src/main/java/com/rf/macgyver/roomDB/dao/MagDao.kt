@@ -29,6 +29,10 @@ interface MagDao {
     @Transaction
     @Query("SELECT * FROM loginDetails WHERE emailId=:email")
     fun getLoginDetails(email: String): LoginDetails
+
+    @Transaction
+    @Query("SELECT * FROM loginDetails")
+    fun getLoginDetails(): LoginDetails
     @Transaction
     @Query("SELECT * FROM loginDetails WHERE uniqueToken=:uniqueToken")
     fun getLoginDetailsUsingToken(uniqueToken: String): LoginDetails

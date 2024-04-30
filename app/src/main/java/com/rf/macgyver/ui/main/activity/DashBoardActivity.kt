@@ -49,6 +49,8 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding, Any?>(R.layout.
         findViewById(R.id.headerMessageTextView)
     }*/
 
+    var bundle = Bundle()
+
     private var isShowing = false
 
     private val handler = Handler(Looper.getMainLooper())
@@ -68,11 +70,8 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding, Any?>(R.layout.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val bundle = intent.getBundleExtra("bundle")
-        if (bundle != null) {
-            val uniqueToken = bundle.getString("uniqueId")
-            // Do whatever you need with the data
-        }
+        bundle = intent.getBundleExtra("bundle")!!
+        val uniqueToken = bundle.getString("uniqueId")
         //Utility.getPushToken(this@DashBoardActivity)
         initializationDagger()
         initializationView()
@@ -93,12 +92,10 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding, Any?>(R.layout.
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.navigation_dashboard -> {
-                val bundle = Bundle()
                 jumpToAnotherFragment(R.id.navigation_dashboard, bundle)
             }
 
             R.id.navigation_account -> {
-                val bundle = Bundle()
                 jumpToAnotherFragment(R.id.navigation_account, bundle)
             }
             else-> return false

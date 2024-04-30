@@ -8,7 +8,6 @@
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
 
-
     <uses-feature android:name="android.hardware.camera.any" />
     <uses-feature
         android:name="android.hardware.telephony"
@@ -58,7 +57,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.rf.macgyver.fileprovider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

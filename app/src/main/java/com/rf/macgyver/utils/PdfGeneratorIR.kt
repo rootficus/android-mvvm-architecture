@@ -212,8 +212,8 @@ object PdfGeneratorIR {
 
 
 
-            for (i in 0..typeOfIncident.size){
-            val question2notePara = Paragraph(typeOfIncident[i])
+            for (i in 1..typeOfIncident.size){
+            val question2notePara = Paragraph(typeOfIncident[i-1])
                 .setFont(boldFont)
                 .setFontSize(12f)
                 .setMarginTop(5F)

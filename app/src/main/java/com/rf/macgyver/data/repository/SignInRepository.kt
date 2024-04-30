@@ -94,4 +94,8 @@ class SignInRepository(
     fun getLoginDetails(email: String): LoginDetails?{
         return magDatabase.magDao()?.getLoginDetails(email )
     }
+
+    fun getLoginDetails(): LoginDetails?{
+        return magDatabase.magDao()?.getLoginDetails( )
+    }
 }

@@ -53,6 +53,7 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
     }
 
     private fun initializeView() {
+
        /* val bundle = arguments
         val uniqueId: String? =
             bundle?.getString("uniqueId")*/
@@ -66,9 +67,14 @@ class DashBoardFragment : BaseFragment<FragmentDashboardBinding>(R.layout.fragme
         }else{
             Log.d("uniqueId","null")
         }
+
+        val loginDetails = uniqueId?.let { viewModel.getLoginDetailsUsingToken(it) }
+        mDataBinding.nameId.text = loginDetails?.username
         val bundle =  Bundle().apply {
             putString("uniqueId", uniqueId)
         }
+
+
 
         mDataBinding.dailyCheckupCard.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.action_navigation_dashboard_to_navigation_daily_report, bundle)

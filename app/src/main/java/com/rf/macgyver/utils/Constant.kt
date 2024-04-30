@@ -27,6 +27,8 @@ object Constant {
 
     const val PREF_USER_ID = "UserId"
 
+    const val PREF_UNIQUE_TOKEN= "Unique Token"
+
     const val PREF_USER_NAME = "UserName"
 
     const val PREF_EMAIL = "email"

@@ -47,6 +47,10 @@ object PdfGeneratorDR {
     private var vehicleName: String? = ""
     private var shift: String? = ""
     private var vehicleNo: String? = ""
+    var vehicleDowntime: String? = null
+    var downtimeNote: String? =null
+    var vehicleRuntime: String? = null
+    var vehicleWorkLog: String? = null
 
     fun createDrPdf(
         context: Activity,
@@ -60,6 +64,10 @@ object PdfGeneratorDR {
             vehicleName = entity.vehicleName.toString()
             shift = entity.shift.toString()
             vehicleNo = entity.vehicleNo.toString()
+            this.vehicleRuntime = entity.vehicleRuntime
+            this.vehicleDowntime = entity.vehicleDowntime
+            this.vehicleWorkLog = entity.vehicleWorkLog
+            this.downtimeNote = entity.downtimeNote
             val file = File(
                 context.getExternalFilesDir("PDF"),
                 "daily-report-${entity.reportName}.pdf"
@@ -146,12 +154,48 @@ object PdfGeneratorDR {
 
             val reportNamePara = Paragraph(reportName)
                 .setFont(boldFont)
-                .setFontSize(12f)
+                .setFontSize(14f)
                 .setMarginTop(5F)
                 .setTextAlignment(TextAlignment.CENTER)
                 .setMultipliedLeading(0.9f)
             reportNamePara.setMarginBottom(0f)
             document.add(reportNamePara)
+
+            val downtimePara = Paragraph(vehicleDowntime)
+                .setFont(font)
+                .setFontSize(14f)
+                .setMarginTop(5F)
+                .setTextAlignment(TextAlignment.CENTER)
+                .setMultipliedLeading(0.9f)
+            downtimePara.setMarginBottom(0f)
+            document.add(downtimePara)
+
+            val downtimeNotePara = Paragraph(downtimeNote)
+                .setFont(font)
+                .setFontSize(12f)
+                .setMarginTop(5F)
+                .setTextAlignment(TextAlignment.CENTER)
+                .setMultipliedLeading(0.9f)
+            downtimeNotePara.setMarginBottom(0f)
+            document.add(downtimeNotePara)
+
+            val runtimeParagraph = Paragraph(vehicleRuntime)
+                .setFont(font)
+                .setFontSize(14f)
+                .setMarginTop(5F)
+                .setTextAlignment(TextAlignment.CENTER)
+                .setMultipliedLeading(0.9f)
+            runtimeParagraph.setMarginBottom(0f)
+            document.add(runtimeParagraph)
+
+            val worklogParagraph = Paragraph(vehicleWorkLog)
+                .setFont(boldFont)
+                .setFontSize(12f)
+                .setMarginTop(5F)
+                .setTextAlignment(TextAlignment.CENTER)
+                .setMultipliedLeading(0.9f)
+            worklogParagraph.setMarginBottom(0f)
+            document.add(worklogParagraph)
 
             val question1 = entity.question1?.title
             val question1Title = Paragraph(question1)
