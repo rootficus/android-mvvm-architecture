@@ -1,7 +1,13 @@
 package com.rf.macgyver.ui.main.fragment.inspection
 
 import android.app.Dialog
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -12,6 +18,7 @@ import androidx.navigation.Navigation
 import com.rf.macgyver.R
 import com.rf.macgyver.data.model.request.inspectionFormData.IPQuestionData
 import com.rf.macgyver.data.model.request.inspectionFormData.InspectionFormData
+import com.rf.macgyver.databinding.AlertCamDrBinding
 import com.rf.macgyver.databinding.AlertCamIpBinding
 import com.rf.macgyver.databinding.FragmentStep1IpBinding
 import com.rf.macgyver.databinding.PopupStep2IpBinding
@@ -21,9 +28,12 @@ import com.rf.macgyver.ui.base.BaseFragmentModule
 import com.rf.macgyver.ui.base.BaseViewModelFactory
 import com.rf.macgyver.ui.main.di.DaggerStep1IPFragmentComponent
 import com.rf.macgyver.ui.main.di.DashBoardFragmentModuleDi
+import com.rf.macgyver.ui.main.fragment.dailyReporting.Step1DRFragment
+import com.rf.macgyver.ui.main.fragment.dailyReporting.Step2DRFragment
 import com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel
 import com.rf.macgyver.utils.NetworkHelper
 import com.rf.macgyver.utils.SharedPreference
+import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 class Step1IPFragment : BaseFragment<FragmentStep1IpBinding>(R.layout.fragment_step1_ip) {
@@ -33,6 +43,9 @@ class Step1IPFragment : BaseFragment<FragmentStep1IpBinding>(R.layout.fragment_s
     private var inspectionFormData= InspectionFormData()
     private var uniqueNo : Int = 0
     private var uniqueToken : String? = null
+
+    private val REQUEST_IMAGE_CAPTURE = 101
+    var imgUri : Uri? = null
 
     private  var ques1Data : IPQuestionData = IPQuestionData()
     private  var ques2Data : IPQuestionData = IPQuestionData()
@@ -315,8 +328,14 @@ class Step1IPFragment : BaseFragment<FragmentStep1IpBinding>(R.layout.fragment_s
 
     private fun initializeCamAlert(){
         val mBuilder = AlertDialog.Builder(requireActivity())
-        val view = AlertCamIpBinding.inflate(layoutInflater)
+        val view = AlertCamDrBinding.inflate(layoutInflater)
         mBuilder.setView(view.root)
+        view.camPlus1.setOnClickListener {
+            dispatchTakePictureIntent()
+        }
+        view.camPlus2.setOnClickListener {
+            dispatchTakePictureIntent()
+        }
         val dialog: AlertDialog = mBuilder.create()
         view.cancelTxt.setOnClickListener {
             dialog.dismiss()
@@ -325,6 +344,68 @@ class Step1IPFragment : BaseFragment<FragmentStep1IpBinding>(R.layout.fragment_s
             dialog.dismiss()
         }
         dialog.show()
+
+    }
+
+    private fun dispatchTakePictureIntent() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+        } else {
+            // Request camera permission
+            requestPermissions(
+                arrayOf(android.Manifest.permission.CAMERA),REQUEST_CAMERA_PERMISSION
+            )
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val view = AlertCamDrBinding.inflate(layoutInflater)
+        if (requestCode == REQUEST_IMAGE_CAPTURE ) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            view.camPlus1.setImageBitmap(imageBitmap)
+
+            val imageUri = getImageUriFromBitmap(requireContext(), imageBitmap)
+            imgUri = imageUri
+
+        }
+    }
+
+    private fun getImageUriFromBitmap(context: Context, bitmap: Bitmap): Uri {
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, "Title", null)
+        return Uri.parse(path)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CAMERA_PERMISSION) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, open camera
+                dispatchTakePictureIntent()
+            } else {
+                // Permission denied
+                // Handle permission denied case
+            }
+        }
+    }
+
+    companion object {
+        private const val REQUEST_CAMERA_PERMISSION = 1001
+
+        fun newInstance(): Step1IPFragment {
+            return Step1IPFragment()
+        }
     }
 
     private fun card1TextSelect(textview : TextView){

@@ -87,6 +87,10 @@
             android:id="@+id/action_navigation_step2_report_to_navigation_step3_report"
             app:destination="@id/navigation_step3_report" />
 
+        <action
+            android:id="@+id/action_navigation_step2_report_to_navigation_step2_DR_cam"
+            app:destination="@id/navigation_dr_step2_cam_screen" />
+
 
     </fragment>
     <fragment
@@ -97,6 +101,13 @@
         <action
             android:id="@+id/action_navigation_step3_report_to_navigation_daily_report_home_page"
             app:destination="@id/navigation_daily_report" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_dr_step2_cam_screen"
+        android:label="step2DRCamScreen"
+        tools:layout="@layout/alert_cam_dr">
 
     </fragment>
 

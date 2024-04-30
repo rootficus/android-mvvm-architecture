@@ -1,5 +1,6 @@
 package com.rf.macgyver.ui.main.fragment.incidentReport
 
+import PdfGeneratorIR.createIRPdf
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
@@ -12,14 +13,12 @@ import com.rf.macgyver.data.model.request.incidentReportData.Step1IRData
 import com.rf.macgyver.data.model.request.incidentReportData.Step2IRData
 import com.rf.macgyver.data.model.request.incidentReportData.Step3IRData
 import com.rf.macgyver.databinding.FragmentStep3IRBinding
-import com.rf.macgyver.databinding.SuccessAlertIpBinding
 import com.rf.macgyver.databinding.SuccessAlertIrBinding
 import com.rf.macgyver.roomDB.model.IncidentReport
 import com.rf.macgyver.sdkInit.UtellSDK
 import com.rf.macgyver.ui.base.BaseFragment
 import com.rf.macgyver.ui.base.BaseFragmentModule
 import com.rf.macgyver.ui.base.BaseViewModelFactory
-import com.rf.macgyver.ui.main.di.DaggerStep2IRFragmentComponent
 import com.rf.macgyver.ui.main.di.DaggerStep3IRFragmentComponent
 import com.rf.macgyver.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel
@@ -100,6 +99,10 @@ class Step3IRFragment : BaseFragment<FragmentStep3IRBinding>(R.layout.fragment_s
                     val bundle1 = Bundle().apply {
                         putString("uniqueId", uniqueToken)
                     }
+                    if (entity != null) {
+                        createIRPdf(requireActivity(), entity)
+                    }
+
                     Navigation.findNavController(requireView())
                         .navigate(R.id.action_navigation_step3_incident_to_navigation_incident,bundle1)
                     dialog.dismiss()

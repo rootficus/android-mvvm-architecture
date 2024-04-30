@@ -1,7 +1,13 @@
 package com.rf.macgyver.ui.main.fragment.dailyReporting
 
 import android.app.Dialog
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -25,14 +31,21 @@ import com.rf.macgyver.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel
 import com.rf.macgyver.utils.NetworkHelper
 import com.rf.macgyver.utils.SharedPreference
+import java.io.ByteArrayOutputStream
 import java.io.Serializable
 import javax.inject.Inject
+
 
 class Step2DRFragment : BaseFragment<FragmentStep2DRBinding>(R.layout.fragment_step2_d_r) {
 
     private var step1Data :Serializable? = null
 
     private var dataList: ArrayList<Step2DrData> = arrayListOf()
+
+
+    private val REQUEST_IMAGE_CAPTURE = 101
+
+    var imgUri : Uri? = null
 
     private  var card1Data : QuestionData = QuestionData()
     private  var card2Data : QuestionData = QuestionData()
@@ -267,15 +280,21 @@ class Step2DRFragment : BaseFragment<FragmentStep2DRBinding>(R.layout.fragment_s
         }
 
         mDataBinding.engineCamBtn.setOnClickListener{
+            imgUri = null
             initializeCamAlert()
+            card7Data.uri= imgUri.toString()
         }
 
         mDataBinding.vibrationCamBtn.setOnClickListener{
+            imgUri = null
             initializeCamAlert()
+            card8Data.uri= imgUri.toString()
         }
 
         mDataBinding.smellCamBtn.setOnClickListener{
+            imgUri = null
             initializeCamAlert()
+            card7Data.uri= imgUri.toString()
         }
         val navController = Navigation.findNavController(requireActivity(), R.id.navHostOnDashBoardFragment)
 
@@ -288,26 +307,6 @@ class Step2DRFragment : BaseFragment<FragmentStep2DRBinding>(R.layout.fragment_s
             ){
                 Toast.makeText(context, "Select an option for each", Toast.LENGTH_SHORT).show()
             }else {
-/*
-                val step2DrDataQ1 = Step2DrData(card1Data)
-                val step2DrDataQ2 = Step2DrData(card2Data)
-                val step2DrDataQ3 = Step2DrData(card3Data)
-                val step2DrDataQ4 = Step2DrData(card4Data)
-                val step2DrDataQ5 = Step2DrData(card5Data)
-                val step2DrDataQ6 = Step2DrData(card6Data)
-                val step2DrDataQ7 = Step2DrData(card7Data)
-                val step2DrDataQ8 = Step2DrData(card8Data)
-                val step2DrDataQ9 = Step2DrData(card9Data)
-
-                step2DrDataQ1.let { it1 -> dataList.add(it1) }
-                step2DrDataQ2.let { it1 -> dataList.add(it1) }
-                step2DrDataQ3.let { it1 -> dataList.add(it1) }
-                step2DrDataQ4.let { it1 -> dataList.add(it1) }
-                step2DrDataQ5.let { it1 -> dataList.add(it1) }
-                step2DrDataQ6.let { it1 -> dataList.add(it1) }
-                step2DrDataQ7.let { it1 -> dataList.add(it1) }
-                step2DrDataQ8.let { it1 -> dataList.add(it1) }
-                step2DrDataQ9.let { it1 -> dataList.add(it1) }*/
 
                 val bundle1 = Bundle().apply {
                     putSerializable("step2Q1Data", card1Data)
@@ -339,7 +338,7 @@ class Step2DRFragment : BaseFragment<FragmentStep2DRBinding>(R.layout.fragment_s
     }
 
     private fun initializePlusButtonAlert(text :String){
-
+        noteText = null
         val mBuilder = AlertDialog.Builder(requireActivity())
         val view = PopupStep2DrBinding.inflate(layoutInflater)
         view.headingId.text = text
@@ -349,10 +348,10 @@ class Step2DRFragment : BaseFragment<FragmentStep2DRBinding>(R.layout.fragment_s
             dialog.dismiss()
         }
         view.DoneTxt.setOnClickListener {
-            noteText = view.noteTxt.text.toString()
-            if(noteText?.isEmpty() == true){
+            if(view.etNoteId.text.isNullOrEmpty()){
                 Toast.makeText(context, "Please enter the note", Toast.LENGTH_SHORT).show()
             }else {
+                noteText = view.etNoteId.text.toString()
                 dialog.dismiss()
             }
         }
@@ -362,6 +361,12 @@ class Step2DRFragment : BaseFragment<FragmentStep2DRBinding>(R.layout.fragment_s
         val mBuilder = AlertDialog.Builder(requireActivity())
         val view = AlertCamDrBinding.inflate(layoutInflater)
         mBuilder.setView(view.root)
+        view.camPlus1.setOnClickListener {
+            dispatchTakePictureIntent()
+        }
+        view.camPlus2.setOnClickListener {
+            dispatchTakePictureIntent()
+        }
         val dialog: AlertDialog = mBuilder.create()
         view.cancelTxt.setOnClickListener {
             dialog.dismiss()
@@ -370,7 +375,72 @@ class Step2DRFragment : BaseFragment<FragmentStep2DRBinding>(R.layout.fragment_s
             dialog.dismiss()
         }
         dialog.show()
+
     }
+
+    private fun dispatchTakePictureIntent() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+        } else {
+            // Request camera permission
+            requestPermissions(
+                arrayOf(android.Manifest.permission.CAMERA),
+                REQUEST_CAMERA_PERMISSION
+            )
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val view = AlertCamDrBinding.inflate(layoutInflater)
+        if (requestCode == REQUEST_IMAGE_CAPTURE ) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            view.camPlus1.setImageBitmap(imageBitmap)
+
+            val imageUri = getImageUriFromBitmap(requireContext(), imageBitmap)
+            imgUri = imageUri
+
+        }
+    }
+
+    private fun getImageUriFromBitmap(context: Context, bitmap: Bitmap): Uri {
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, "Title", null)
+        return Uri.parse(path)
+    }
+
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CAMERA_PERMISSION) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, open camera
+                dispatchTakePictureIntent()
+            } else {
+                // Permission denied
+                // Handle permission denied case
+            }
+        }
+    }
+
+    companion object {
+        private const val REQUEST_CAMERA_PERMISSION = 1001
+
+        fun newInstance(): Step2DRFragment {
+            return Step2DRFragment()
+        }
+    }
+
 
     private fun card1TextSelect(textview : TextView){
         setBgWhiteTextGray(

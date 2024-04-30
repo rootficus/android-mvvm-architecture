@@ -1,5 +1,6 @@
 package com.rf.macgyver.ui.main.fragment.inspection
 
+import PdfGeneratorIP.createIPPdf
 import android.app.Dialog
 import android.os.Bundle
 import android.view.Gravity
@@ -195,6 +196,7 @@ class Step3IPFragment : BaseFragment<FragmentStep3IpBinding>(R.layout.fragment_s
                     val bundle1 = Bundle().apply {
                         putString("uniqueId", uniqueToken)
                     }
+                    createIPPdf(requireActivity(), entity)
                     Navigation.findNavController(requireView())
                         .navigate(R.id.action_navigation_step3_inspection_to_navigation_inspection,bundle1)
                     dialog.dismiss()

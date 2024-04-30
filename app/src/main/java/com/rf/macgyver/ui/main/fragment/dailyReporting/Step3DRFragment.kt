@@ -11,6 +11,7 @@ import androidx.navigation.Navigation
 import com.rf.macgyver.R
 import com.rf.macgyver.data.model.request.dailyReportData.QuestionData
 import com.rf.macgyver.data.model.request.dailyReportData.Step1DrData
+import com.rf.macgyver.data.model.request.dailyReportData.Step2DrData
 import com.rf.macgyver.data.model.request.dailyReportData.Step3DrData
 import com.rf.macgyver.databinding.FragmentStep3DRBinding
 import com.rf.macgyver.databinding.SuccessAlertDrBinding
@@ -24,6 +25,7 @@ import com.rf.macgyver.ui.main.di.DaggerStep3DRFragmentComponent
 import com.rf.macgyver.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel
 import com.rf.macgyver.utils.NetworkHelper
+import com.rf.macgyver.utils.PdfGeneratorDR.createDrPdf
 import com.rf.macgyver.utils.SharedPreference
 import javax.inject.Inject
 
@@ -36,6 +38,8 @@ class Step3DRFragment : BaseFragment<FragmentStep3DRBinding>(R.layout.fragment_s
     private lateinit var downtimeSpinnerVal : String
     private lateinit var runtimeSpinnerValue : String
     private lateinit var worklogSpinnerValue : String
+
+    private val dataList : ArrayList<Step2DrData> = arrayListOf()
 
     private var downtimeData = arrayOf("hours", "minutes")
     private var runtimeData = arrayOf("hours", "minutes")
@@ -82,6 +86,26 @@ class Step3DRFragment : BaseFragment<FragmentStep3DRBinding>(R.layout.fragment_s
         val step2Q9Data : QuestionData? = bundle?.getSerializable("step2Q9Data") as? QuestionData
 
 
+        val step2DrDataQ1 = Step2DrData(step2Q1Data)
+        val step2DrDataQ2 = Step2DrData(step2Q2Data)
+        val step2DrDataQ3 = Step2DrData(step2Q3Data)
+        val step2DrDataQ4 = Step2DrData(step2Q4Data)
+        val step2DrDataQ5 = Step2DrData(step2Q5Data)
+        val step2DrDataQ6 = Step2DrData(step2Q6Data)
+        val step2DrDataQ7 = Step2DrData(step2Q7Data)
+        val step2DrDataQ8 = Step2DrData(step2Q8Data)
+        val step2DrDataQ9 = Step2DrData(step2Q9Data)
+
+        step2DrDataQ1.let { it1 -> dataList.add(it1) }
+        step2DrDataQ2.let { it1 -> dataList.add(it1) }
+        step2DrDataQ3.let { it1 -> dataList.add(it1) }
+        step2DrDataQ4.let { it1 -> dataList.add(it1) }
+        step2DrDataQ5.let { it1 -> dataList.add(it1) }
+        step2DrDataQ6.let { it1 -> dataList.add(it1) }
+        step2DrDataQ7.let { it1 -> dataList.add(it1) }
+        step2DrDataQ8.let { it1 -> dataList.add(it1) }
+        step2DrDataQ9.let { it1 -> dataList.add(it1) }
+
 
         mDataBinding.generateReportTxt.setOnClickListener {
 
@@ -123,6 +147,7 @@ class Step3DRFragment : BaseFragment<FragmentStep3DRBinding>(R.layout.fragment_s
 
                     if (entity != null) {
                         viewmodel.insertDailyReporting(entity)
+                        createDrPdf(requireActivity(), entity)
                     }
 
                     Navigation.findNavController(requireView())
