@@ -27,7 +27,7 @@ import com.itextpdf.kernel.pdf.annot.PdfLinkAnnotation
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas
 import com.itextpdf.layout.Document
 import com.itextpdf.layout.element.Paragraph
-import com.itextpdf.layout.properties.TextAlignment
+import com.itextpdf.layout.property.TextAlignment
 import com.rf.macgyver.R
 import com.rf.macgyver.data.model.request.dailyReportData.Step1DrData
 import com.rf.macgyver.data.model.request.dailyReportData.Step2DrData
