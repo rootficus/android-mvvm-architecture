@@ -15,7 +15,7 @@ class SignInRepository(
     val accessAliDatabase: AccessAliDatabase
 ) : BaseRepository() {
 
-    fun signInNow(
+    /*fun signInNow(
         success: (signInResponse: SignInResponse) -> Unit,
         fail: (error: String) -> Unit,
         signInRequest: SignInRequest,
@@ -24,7 +24,7 @@ class SignInRepository(
         apiServices.signIn(signInRequest).apply {
             execute(this, success, fail, context, message)
         }
-    }
+    }*/
 
 
     fun setPassword(password: String?) {

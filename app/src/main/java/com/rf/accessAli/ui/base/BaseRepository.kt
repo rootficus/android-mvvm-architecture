@@ -2,11 +2,11 @@ package com.rf.accessAli.ui.base
 
 import android.content.Context
 import android.util.Log
-import com.rf.accessAli.utils.APIResponseCode
-import com.rf.accessAli.utils.enqueue
 import com.rf.accessAli.R
+import com.rf.accessAli.roomDB.model.UniversityData
 import org.json.JSONObject
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 import java.util.Objects
@@ -24,9 +24,42 @@ abstract class BaseRepository {
      * And you need only result as response
      * when 100 is success
      */
-    fun <P> execute(
-        call: Call<BaseResponseModel<P>>,
-        success: (payload: P) -> Unit,
+    fun execute(
+        call: Call<List<UniversityData>>,
+        context: Context,
+        success: (List<UniversityData>) -> Unit,
+        fail: (String) -> Unit
+    ) {
+        call.enqueue(object : Callback<List<UniversityData>> {
+            override fun onResponse(call: Call<List<UniversityData>>, response: Response<List<UniversityData>>) {
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    if (data != null) {
+                        success.invoke(data)
+                    } else {
+                        fail.invoke(context.getString(R.string.error_something_went_wrong))
+                    }
+                } else {
+                    fail.invoke(context.getString(R.string.error_something_went_wrong))
+                }
+            }
+
+            override fun onFailure(call: Call<List<UniversityData>>, t: Throwable) {
+                if (t.toString().contains("failed to connect")) {
+                    fail.invoke(context.getString(R.string.no_network))
+                } else {
+                    fail.invoke(context.getString(R.string.error_something_went_wrong))
+                    Log.i("Error Something", "::" + t.toString())
+                }
+            }
+        })
+    }
+
+
+
+    /*fun <P> execute1(
+        call: Call<BaseResponseModel3<P>>,
+        success: (payload: ArrayList<P>) -> Unit,
         fail: (error: String) -> Unit,
         context: Context,
         message: (message: String) -> Unit
@@ -38,28 +71,33 @@ abstract class BaseRepository {
                         APIResponseCode.ResponseCode200.codeValue -> {
                             response_.body()?.let { body_ ->
                                 body_.data?.let { results_ ->
-                                    success.invoke(results_)
-                                  /*  when (body_.status) {
-                                        200.0 -> {
-                                            success.invoke(results_)
-                                        }
+                                    if (body_.status != null) {
+                                        when (body_.status) {
+                                            200.0 -> {
+                                                ///success.invoke(results_)
+                                            }
 
-                                        200 -> {
-                                            success.invoke(results_)
-                                            // message.invoke(body_.message.toString())
-                                        }
+                                            200 -> {
+                                               // success.invoke(results_)
+                                                // message.invoke(body_.message.toString())
+                                            }
 
-                                        true -> {
-                                            success.invoke(results_)
-                                        }
+                                            true -> {
+                                                //success.invoke(results_)
+                                            }
 
-                                        else -> {
-                                            fail.invoke(
-                                                body_.message
-                                                    ?: context.getString(R.string.error_something_went_wrong)
-                                            )
+                                            else -> {
+                                                fail.invoke(
+                                                    body_.message
+                                                        ?: context.getString(R.string.error_something_went_wrong)
+                                                )
+                                            }
                                         }
-                                    }*/
+                                    } else if (body_.message.equals("success")) {
+                                       // success.invoke(results_)
+                                    } else if (body_.message!!.contains("Status")) {
+                                       // success.invoke(results_)
+                                    }
                                 } ?: kotlin.run {
                                     fail.invoke(
                                         body_.message
@@ -74,18 +112,10 @@ abstract class BaseRepository {
                         APIResponseCode.ResponseCode201.codeValue -> {
                             response_.body()?.let { body_ ->
                                 body_.data?.let { results_ ->
-                                    when (body_.status) {
-                                        200.0 -> {
-                                            success.invoke(results_)
-                                        }
-
+                                    when (body_.status ?: -1) {
                                         200 -> {
-                                            success.invoke(results_)
+                                            //success.invoke(results_)
                                             // message.invoke(body_.message.toString())
-                                        }
-
-                                        true -> {
-                                            success.invoke(results_)
                                         }
 
                                         else -> {
@@ -106,36 +136,19 @@ abstract class BaseRepository {
                             }
                         }
 
-                        APIResponseCode.ResponseCode404.codeValue -> {
-                            getErrorMessage(response_)?.let {
-                                fail.invoke(it)
-                            }
-                        }
-
-                        APIResponseCode.ResponseCode401.codeValue -> {
-                            getErrorBody(response_)?.let {
-                                fail.invoke(it)
-                            }
-                        }
-
                         APIResponseCode.ResponseCode403.codeValue -> {
                             getErrorMessage(response_)?.let {
                                 fail.invoke(it)
                             }
                         }
 
-                        APIResponseCode.ResponseCode422.codeValue -> {
-                            getErrorMessage(response_)?.let {
-                                fail.invoke(it)
-                            }
-                        }
-
-                        APIResponseCode.ResponseCode500.codeValue -> {
+                        else -> {
                             getErrorMessage(response_)?.let {
                                 fail.invoke(it)
                             }
                         }
                     }
+
                 } catch (e: Exception) {
                     fail.invoke(context.getString(R.string.error_something_went_wrong))
                 }
@@ -145,12 +158,51 @@ abstract class BaseRepository {
                 if (it.toString().contains("failed to connect")) {
                     fail.invoke(context.getString(R.string.no_network))
                 } else {
+                    Log.i("Error", "" + it.toString())
                     fail.invoke(context.getString(R.string.error_something_went_wrong))
-                    Log.i("Error Something", "::" + it.toString())
                 }
             }
         }
-    }
+    }*/
+   /* fun <P> execute1(
+        context: Context,
+        response: Response<BaseResponseModel2<P>>,
+        success: (payload: ArrayList<P>) -> Unit,
+        fail: (error: String) -> Unit
+    ) {
+        try {
+            if (response.isSuccessful) {
+                response.body()?.let { body_ ->
+                    body_.data?.let { results_ ->
+                        when (body_.status ?: -1) {
+                            APIResponseCode.ResponseCode100.codeValue -> {
+                                success.invoke(results_)
+                            }
+
+                            else -> {
+                                fail.invoke(
+                                    body_.message
+                                        ?: context.getString(R.string.error_something_went_wrong)
+                                )
+                            }
+                        }
+
+                    } ?: kotlin.run {
+                        fail.invoke(
+                            body_.message ?: context.getString(R.string.error_something_went_wrong)
+                        )
+                    }
+                } ?: kotlin.run {
+                    fail.invoke(context.getString(R.string.error_something_went_wrong))
+                }
+            } else {
+                fail.invoke(context.getString(R.string.error_something_went_wrong))
+            }
+        } catch (e: Exception) {
+            fail.invoke(context.getString(R.string.error_something_went_wrong))
+        }
+
+    }*/
 
     open fun getErrorBody(response: Response<*>): String? {
         val errorBody = response.errorBody()

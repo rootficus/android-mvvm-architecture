@@ -84,17 +84,17 @@ android {
         uat {
             dimension "default"
             buildConfigField("String", "VERSION", "\"UAT\"")
-            buildConfigField("String", "BASE_URL", "\"http://192.168.1.78:3000/\"")
+            buildConfigField("String", "BASE_URL", "\"http://universities.hipolabs.com/\"")
         }
         stage {
             dimension "default"
             buildConfigField("String", "VERSION", "\"STAGE\"")
-            buildConfigField("String", "BASE_URL", "\"https://accessAliminingjk.in/\"")
+            buildConfigField("String", "BASE_URL", "\"http://universities.hipolabs.com/\"")
         }
         prod {
             dimension "default"
             buildConfigField("String", "VERSION", "\"PROD\"")
-            buildConfigField("String", "BASE_URL", "\"https://accessAliminingjk.in/\"")
+            buildConfigField("String", "BASE_URL", "\"http://universities.hipolabs.com/\"")
         }
 
     }

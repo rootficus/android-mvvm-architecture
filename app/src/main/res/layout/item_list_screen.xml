@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/uniName"
+        android:text="University Name"
+        android:textSize="16sp"
+        android:paddingBottom="5dp"
+        android:layout_margin="15dp"
+        app:layout_constraintWidth_percent="0.75"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/uniState"
+        android:text="University State"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintTop_toBottomOf="@id/uniName"
+        app:layout_constraintStart_toStartOf="@id/uniName"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/arrowCard"
+        android:elevation="15dp"
+        app:cardCornerRadius="25dp"
+        android:layout_marginVertical="12dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/uniName"
+        app:layout_constraintWidth_percent="0.08"
+        app:layout_constraintBottom_toBottomOf="@id/uniState">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/arrowIcon"
+            android:layout_margin="4dp"
+            android:src="@drawable/right_arrow_svgrepo_com"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        app:layout_constraintTop_toBottomOf="@id/uniState"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/gray"
+        android:layout_marginTop="12dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

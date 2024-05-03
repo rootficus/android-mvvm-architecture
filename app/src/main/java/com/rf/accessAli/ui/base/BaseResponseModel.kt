@@ -8,8 +8,8 @@ import com.google.gson.annotations.SerializedName
  * RootFicus.
  */
 data class BaseResponseModel<P>(
-    @field:SerializedName("data")
-    val data: P? = null
+    //@field:SerializedName("data")
+    val data: ArrayList<P>? = null
 ) : ParentBaseModelResponse()
 
 data class BaseResponseModel2<P>(

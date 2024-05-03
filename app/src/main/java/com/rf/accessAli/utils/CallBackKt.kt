@@ -18,7 +18,11 @@ class CallBackKt<T> : Callback<T> {
     }
 
     override fun onResponse(call: Call<T>, response: Response<T>) {
-        onResponse?.invoke(response)
+        if (response.isSuccessful) {
+            onResponse?.invoke(response)
+        } else {
+            // Handle unsuccessful response
+            onFailure?.invoke(Throwable("Unsuccessful response: ${response.code()}"))
+        }
     }
-
 }

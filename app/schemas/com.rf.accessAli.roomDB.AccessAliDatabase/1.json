@@ -2,83 +2,53 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "17a4a9be7828c79ee77d2790a282acf2",
+    "identityHash": "da8e511b9289e33c03c2bf48763298d3",
     "entities": [
       {
-        "tableName": "smsRecord",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`messageId` TEXT NOT NULL, `senderId` TEXT, `message` TEXT, `operator` TEXT, `receiver` TEXT, `deviceId` TEXT, `simSlot` TEXT, `date` TEXT, `smsType` INTEGER NOT NULL, `messageType` TEXT, `syncStatus` INTEGER NOT NULL, PRIMARY KEY(`messageId`))",
+        "tableName": "UniversityData",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`alphaTwoCode` TEXT, `name` TEXT NOT NULL, `country` TEXT, `domain` TEXT, `webpages` TEXT, `stateProvince` TEXT, PRIMARY KEY(`name`))",
         "fields": [
           {
-            "fieldPath": "messageId",
-            "columnName": "messageId",
+            "fieldPath": "alphaTwoCode",
+            "columnName": "alphaTwoCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "senderId",
-            "columnName": "senderId",
+            "fieldPath": "country",
+            "columnName": "country",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "message",
-            "columnName": "message",
+            "fieldPath": "domain",
+            "columnName": "domain",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "operator",
-            "columnName": "operator",
+            "fieldPath": "webpages",
+            "columnName": "webpages",
             "affinity": "TEXT",
             "notNull": false
           },
           {
-            "fieldPath": "receiver",
-            "columnName": "receiver",
+            "fieldPath": "stateProvince",
+            "columnName": "stateProvince",
             "affinity": "TEXT",
             "notNull": false
-          },
-          {
-            "fieldPath": "deviceId",
-            "columnName": "deviceId",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "simSlot",
-            "columnName": "simSlot",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "date",
-            "columnName": "date",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "smsType",
-            "columnName": "smsType",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "messageType",
-            "columnName": "messageType",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "syncStatus",
-            "columnName": "syncStatus",
-            "affinity": "INTEGER",
-            "notNull": true
           }
         ],
         "primaryKey": {
           "autoGenerate": false,
           "columnNames": [
-            "messageId"
+            "name"
           ]
         },
         "indices": [],
@@ -88,7 +58,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '17a4a9be7828c79ee77d2790a282acf2')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'da8e511b9289e33c03c2bf48763298d3')"
     ]
   }
 }

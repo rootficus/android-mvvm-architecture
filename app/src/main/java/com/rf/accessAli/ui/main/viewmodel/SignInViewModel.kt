@@ -18,7 +18,7 @@ class SignInViewModel @Inject constructor(private val signInRepository: SignInRe
     BaseViewModel() {
 
     val signInResponseModel = MutableLiveData<ResponseData<SignInResponse>>()
-    fun signInNow(signInRequest: SignInRequest) {
+    /*fun signInNow(signInRequest: SignInRequest) {
         signInResponseModel.setLoading(null)
         viewModelScope.launch(Dispatchers.IO) {
             signInRepository.signInNow({ success -> signInResponseModel.setSuccess(success) },
@@ -26,7 +26,7 @@ class SignInViewModel @Inject constructor(private val signInRepository: SignInRe
                 signInRequest,
                 { message -> signInResponseModel.setError(message) })
         }
-    }
+    }*/
 
 
     fun setFullName(fullName: String?) {

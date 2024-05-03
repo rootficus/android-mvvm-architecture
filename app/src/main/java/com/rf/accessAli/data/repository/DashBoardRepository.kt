@@ -1,12 +1,9 @@
 package com.rf.accessAli.data.repository
 
 import android.content.Context
-import com.rf.accessAli.data.model.request.CompanyDetailsRequest
-import com.rf.accessAli.data.model.request.CreateChallanRequest
-import com.rf.accessAli.data.model.response.CompanyDetailsResponse
-import com.rf.accessAli.data.model.response.CreateChallanResponse
 import com.rf.accessAli.data.remote.AccessAliApiServices
 import com.rf.accessAli.roomDB.AccessAliDatabase
+import com.rf.accessAli.roomDB.model.UniversityData
 import com.rf.accessAli.ui.base.BaseRepository
 import com.rf.accessAli.utils.SharedPreference
 
@@ -17,28 +14,26 @@ class DashBoardRepository(
     val accessAliDatabase: AccessAliDatabase
 ) : BaseRepository() {
 
-    fun getCompanyDetails(
-        success: (companyDetailsResponse: CompanyDetailsResponse) -> Unit,
-        companyDetailsRequest: CompanyDetailsRequest,
+    fun getUniversityData(
+        success: (universityData: List<UniversityData>) -> Unit,
         fail: (error: String) -> Unit,
         message: (msg: String) -> Unit
     ) {
-        apiServices.getCompanyDetails(companyDetailsRequest).apply {
-            execute(this, success, fail, context, message)
+        apiServices.signIn().apply {
+            execute(this, context, success, fail)
         }
     }
 
-    fun createChallan(
-        success: (createChallanResponse: CreateChallanResponse) -> Unit,
-        createChallanRequest: CreateChallanRequest,
-        fail: (error: String) -> Unit,
-        message: (msg: String) -> Unit
-    ) {
-        apiServices.createChallan(createChallanRequest).apply {
-            execute(this, success, fail, context, message)
-        }
+    fun insertUniversityData(universityData: List<com.rf.accessAli.roomDB.model.UniversityData>)
+    {
+        accessAliDatabase.accessAliDao()?.insertUniversityData(universityData)
     }
 
+    fun getUniversityData() : List<UniversityData>?
+    {
+        return accessAliDatabase.accessAliDao()?.getUniversityData()
+
+    }
 
     fun setUserId(userId: String?) {
         userId?.let { sharedPreference.setUserId(it) }

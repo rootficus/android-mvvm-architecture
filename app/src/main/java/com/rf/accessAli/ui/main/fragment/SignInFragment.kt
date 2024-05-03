@@ -187,7 +187,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
 
     private fun callSignInAPI() {
 
-        if (networkHelper.isNetworkConnected()) {
+        /*if (networkHelper.isNetworkConnected()) {
             viewmodel.signInNow(
                 SignInRequest(
                     email = name,
@@ -224,6 +224,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             mDataBinding.progressBar.visibility = View.GONE
             showMessage(mActivity.getString(R.string.NO_INTERNET_CONNECTION))
         }
+    }*/
     }
 
     // Function to check if the new object already exists in the list

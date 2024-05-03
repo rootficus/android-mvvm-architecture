@@ -57,15 +57,15 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     }
 
     private fun goToNextScreen() {
-        if (viewmodel.isLogin()) {
+        //if (viewmodel.isLogin()) {
             viewDataBinding?.progressView?.visibility = View.GONE
             startActivity(Intent(this@SplashActivity, DashBoardActivity::class.java))
             finishAffinity()
-        } else {
+        /*} else {
             viewDataBinding?.progressView?.visibility = View.GONE
             startActivity(Intent(this@SplashActivity, SignInActivity::class.java))
             finishAffinity()
-        }
+        }*/
 
     }
 
