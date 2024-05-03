@@ -6,7 +6,7 @@
 
         <variable
             name="dashBoardViewModel"
-            type="com.rf.geolgy.ui.main.viewmodel.DashBoardViewModel" />
+            type="com.rf.accessAli.ui.main.viewmodel.DashBoardViewModel" />
     </data>
 
     <ScrollView

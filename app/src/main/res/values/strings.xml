@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Geolgy</string>
+    <string name="app_name">AccessAli</string>
     <string name="error_something_went_wrong">Something Went Wrong !!</string>
     <string name="no_network">No Internet.</string>
     <string name="login">Login</string>
@@ -20,14 +20,14 @@
     <string name="pinCode">Pin Code</string>
     <string name="PLEASE_ENTER_PIN">Please enter PinCode</string>
     <string name="PLEASE_ENTER_VALID">Please enter valid</string>
-    <string name="welcome_text">Welcome to Geolgy</string>
+    <string name="welcome_text">Welcome to AccessAli</string>
     <string name="continues">Continue</string>
     <string name="account_verified">Your Account \nis now Verified!</string>
     <string name="account_verified_sub">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</string>
     <string name="no_data_found">No Data Found</string>
     <string name="confirm_modems">Confirm Modem Info</string>
     <string name="PLEASE_ENTER_LAST_NAME">Please enter your last name</string>
-    <string name="geolgy">Geolgy</string>
+    <string name="accessAli">AccessAli</string>
     <string name="name">Name</string>
     <string name="mobile_number">Phone Number</string>
     <string name="invalid_access_token">Invalid access token</string>

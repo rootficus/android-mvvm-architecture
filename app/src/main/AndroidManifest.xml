@@ -63,7 +63,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
         <service
-            android:name=".service.GeolgyFCMService"
+            android:name=".service.AccessAliFCMService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

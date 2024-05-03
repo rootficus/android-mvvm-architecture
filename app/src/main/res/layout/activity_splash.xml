@@ -6,7 +6,7 @@
 
         <variable
             name="splashModel"
-            type="com.rf.geolgy.ui.main.viewmodel.SignInViewModel" />
+            type="com.rf.accessAli.ui.main.viewmodel.SignInViewModel" />
     </data>
 
 
@@ -31,7 +31,7 @@
             android:id="@+id/txtUtell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/geolgy"
+            android:text="@string/accessAli"
             android:textColor="@color/black"
             android:textSize="38sp"
             android:textStyle="bold"

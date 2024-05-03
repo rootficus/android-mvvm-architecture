@@ -19,18 +19,18 @@ android {
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/ASL2.0'
     }
-    namespace 'com.rf.geolgy'
+    namespace 'com.rf.accessAli'
     compileSdk 34
 
     defaultConfig {
         final BUILD_DATE = new Date().format('dd-MM-YYYY')
-        applicationId "com.rf.geolgy"
+        applicationId "com.rf.accessAli"
         minSdk 26
         //noinspection OldTargetApi
         targetSdk 34
-        versionCode 2
-        versionName "1.2.0"
-        setProperty("archivesBaseName", "Geolgy_" + BUILD_DATE+ "_V" + versionName)
+        versionCode 3
+        versionName "1.2.1"
+        setProperty("archivesBaseName", "accessAli_" + BUILD_DATE+ "_V" + versionName)
         vectorDrawables.useSupportLibrary = true
 
         javaCompileOptions {
@@ -89,12 +89,12 @@ android {
         stage {
             dimension "default"
             buildConfigField("String", "VERSION", "\"STAGE\"")
-            buildConfigField("String", "BASE_URL", "\"https://geolgyminingjk.in/\"")
+            buildConfigField("String", "BASE_URL", "\"https://accessAliminingjk.in/\"")
         }
         prod {
             dimension "default"
             buildConfigField("String", "VERSION", "\"PROD\"")
-            buildConfigField("String", "BASE_URL", "\"https://geolgyminingjk.in/\"")
+            buildConfigField("String", "BASE_URL", "\"https://accessAliminingjk.in/\"")
         }
 
     }

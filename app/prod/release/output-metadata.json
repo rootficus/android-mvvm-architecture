@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.rf.geolgy",
+  "applicationId": "com.rf.accessAli",
   "variantName": "prodRelease",
   "elements": [
     {
@@ -13,7 +13,7 @@
       "attributes": [],
       "versionCode": 1,
       "versionName": "1.0.1",
-      "outputFile": "Geolgy_15-03-2024_V1.0.1-prod-release.apk"
+      "outputFile": "AccessAli_15-03-2024_V1.0.1-prod-release.apk"
     }
   ],
   "elementType": "File"
