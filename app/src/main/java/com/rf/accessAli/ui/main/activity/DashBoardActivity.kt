@@ -2,7 +2,6 @@ package com.rf.accessAli.ui.main.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
@@ -14,7 +13,7 @@ import com.rf.accessAli.sdkInit.AccessAliSDK
 import com.rf.accessAli.ui.base.BaseActivity
 import com.rf.accessAli.ui.base.BaseActivityModule
 import com.rf.accessAli.ui.base.BaseViewModelFactory
-import com.rf.accessAli.ui.main.adapter.OrderListAdapter
+import com.rf.accessAli.ui.main.adapter.ListAdapter
 import com.rf.accessAli.ui.main.di.DaggerDashBoardActivityComponent
 import com.rf.accessAli.ui.main.di.DashBoardActivityModule
 import com.rf.accessAli.ui.main.viewmodel.DashBoardViewModel
@@ -22,7 +21,6 @@ import com.rf.accessAli.utils.NetworkHelper
 import com.rf.accessAli.utils.SharedPreference
 import com.rf.accessAli.utils.Status
 import javax.inject.Inject
-
 
 class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activity_dashboard) {
 
@@ -40,7 +38,6 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         initializationDagger()
-        //generateQRCode()
         initialization()
     }
 
@@ -56,14 +53,6 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
             .inject(this)
     }
 
-    override fun onResume() {
-        super.onResume()
-        /*viewModel.getExpireHour()?.let { updateValidityTime(it) }
-        challanNumber = Utility.generateRandomChallanString(12)
-        viewDataBinding?.txtEchallanNumber?.text = getString(R.string.challan_number, challanNumber)*/
-    }
-
-
     private fun universityDataAPI() {
         if (networkHelper.isNetworkConnected()) {
             viewModel.getUniversityData()
@@ -73,15 +62,11 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
                     Status.SUCCESS -> {
                         viewDataBinding?.progressBar?.visibility = View.GONE
                         val responseData : List<UniversityData>? = it.data
-                        Log.i("jhvkyvknkjnilb", responseData?.get(0)?.name.toString())
-
                         if (responseData != null) {
                             viewModel.insertUniversityData(responseData)
+                            setAdapter(responseData)
                         }
-                        val adapter = responseData?.let { it1 -> OrderListAdapter(this@DashBoardActivity,it1) }
-                        viewDataBinding?.listView?.layoutManager = LinearLayoutManager(applicationContext)
-                        adapter?.listener = cardListener
-                        viewDataBinding?.listView?.adapter = adapter
+
                     }
 
                     Status.ERROR -> {
@@ -96,14 +81,22 @@ class DashBoardActivity : BaseActivity<ActivityDashboardBinding>(R.layout.activi
             }
         } else {
             viewDataBinding?.progressBar?.visibility = View.GONE
+            viewModel.getUniversityDataDB()?.let { setAdapter(it) }
             showMessage(getString(R.string.NO_INTERNET_CONNECTION))
         }
     }
 
-    private val cardListener = object : OrderListAdapter.CardEvent {
-        override fun onCardClicked(data: UniversityData) {
+    private fun setAdapter(responseData: List<UniversityData>) {
+        val adapter = ListAdapter(this@DashBoardActivity, responseData)
+        viewDataBinding?.listView?.layoutManager = LinearLayoutManager(applicationContext)
+        adapter.listener = cardListener
+        viewDataBinding?.listView?.adapter = adapter
+    }
+
+    private val cardListener = object : ListAdapter.CardEvent {
+        override fun onCardClicked(data: UniversityData?) {
             if (data != null) {
-                val intent = Intent(this@DashBoardActivity, FinalFormActivity::class.java)
+                val intent = Intent(this@DashBoardActivity, DetailActivity::class.java)
                 intent.putExtra("Data", data)
                 startActivity(intent)
 

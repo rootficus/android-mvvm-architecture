@@ -26,7 +26,7 @@ class DashBoardViewModel @Inject constructor(private val dashBoardRepository: Da
         }
     }
 
-    fun insertUniversityData(universityData: List<com.rf.accessAli.roomDB.model.UniversityData>)
+    fun insertUniversityData(universityData: List<UniversityData>)
     {
         dashBoardRepository.insertUniversityData(universityData)
     }

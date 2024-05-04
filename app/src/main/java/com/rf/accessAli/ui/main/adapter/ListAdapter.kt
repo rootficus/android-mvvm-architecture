@@ -6,20 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rf.accessAli.databinding.ItemListScreenBinding
 import com.rf.accessAli.roomDB.model.UniversityData
-import com.rf.accessAli.utils.Constant
-import com.rf.accessAli.utils.Utility
 
-class OrderListAdapter(private var context: Context, private var itemList: List<UniversityData>) :
-    RecyclerView.Adapter<OrderListAdapter.ItemViewHolder>() {
-    private var selectedItem = 0
-
+class ListAdapter(private var context: Context, private var itemList: List<UniversityData>) :
+    RecyclerView.Adapter<ListAdapter.ItemViewHolder>() {
     interface CardEvent {
-        fun onCardClicked(data: UniversityData)
+        fun onCardClicked(data: UniversityData?)
     }
 
-
     var listener: CardEvent? = null
-
 
     inner class ItemViewHolder(val binding: ItemListScreenBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -41,24 +35,14 @@ class OrderListAdapter(private var context: Context, private var itemList: List<
         {
             binding.uniName.text = item.name
             binding.uniState.text = item.stateProvince
-            binding.arrowCard.setOnClickListener {
+            binding.itemLayout.setOnClickListener {
                 listener?.onCardClicked(item)
             }
-
-            // Update background color based on the selected item
-            //holder.itemView.isSelected = selectedItem == position
-
         }
     }
 
-
     override fun getItemCount(): Int {
         return itemList.size
-    }
-
-    fun filterList(filterList: ArrayList<UniversityData>) {
-        //itemList = filterList
-        notifyDataSetChanged()
     }
 
 }

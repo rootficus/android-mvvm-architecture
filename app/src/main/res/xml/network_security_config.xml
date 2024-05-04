@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">testapi.utell.com</domain>
-        <domain includeSubdomains="true">api.utell.com</domain>
         <domain includeSubdomains="true">universities.hipolabs.com</domain>
     </domain-config>
 </network-security-config>

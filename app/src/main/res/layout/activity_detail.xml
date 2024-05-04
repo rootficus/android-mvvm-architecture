@@ -19,78 +19,89 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingHorizontal="20dp"
+            android:paddingHorizontal="15dp"
             android:paddingVertical="10dp">
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgRefresh"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/refresh_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
             <androidx.cardview.widget.CardView
+                android:id="@+id/uniDescCard"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:id="@+id/uniDescCard"
                 android:elevation="12dp"
                 app:cardCornerRadius="20dp"
-                app:layout_constraintWidth_percent="0.95"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHeight_percent="0.55">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.55"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.98">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:layout_gravity="center">
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_gravity="center"
+                    android:padding="2dp">
+
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/uniName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/uniName"
+
                         android:text="University Name"
                         android:textSize="24sp"
                         android:textStyle="bold"
-                        android:layout_marginHorizontal="15dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/uniState"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/uniState"
+                        android:layout_marginVertical="12dp"
                         android:text="University State"
-                        android:layout_margin="12dp"
                         android:textSize="16sp"
-                        app:layout_constraintTop_toBottomOf="@id/uniName"
-                        app:layout_constraintStart_toStartOf="@id/uniName"/>
+                        app:layout_constraintStart_toStartOf="@id/uniName"
+                        app:layout_constraintTop_toBottomOf="@id/uniName" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/uniCountry"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/uniCountry"
-                        android:text="Country"
                         android:layout_marginVertical="12dp"
-                        app:layout_constraintWidth_percent="0.6"
+                        android:text="Country"
                         android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@id/uniState"
                         app:layout_constraintTop_toBottomOf="@id/uniState"
-                        app:layout_constraintStart_toStartOf="@id/uniState"/>
+                        app:layout_constraintWidth_percent="0.6" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/countryCode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/countryCode"
+                        android:layout_marginHorizontal="12dp"
                         android:text="xxxxx"
                         android:textSize="15sp"
-                        android:layout_marginHorizontal="12dp"
-                        app:layout_constraintTop_toTopOf="@id/uniCountry"
                         app:layout_constraintBottom_toBottomOf="@id/uniCountry"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/uniCountry" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/webpage"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/webpage"
-                        android:text="Webpage"
                         android:layout_marginVertical="12dp"
+                        android:text="Webpage"
                         android:textSize="16sp"
-                        app:layout_constraintTop_toBottomOf="@id/uniCountry"
-                        app:layout_constraintStart_toStartOf="@id/uniState"/>
+                        app:layout_constraintStart_toStartOf="@id/uniState"
+                        app:layout_constraintTop_toBottomOf="@id/uniCountry" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

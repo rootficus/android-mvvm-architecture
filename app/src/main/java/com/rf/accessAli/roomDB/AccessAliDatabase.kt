@@ -7,7 +7,6 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.rf.accessAli.roomDB.dao.AccessAliDao
 import com.rf.accessAli.roomDB.model.Converters
-import com.rf.accessAli.roomDB.model.SMSRecord
 import com.rf.accessAli.roomDB.model.UniversityData
 
 

@@ -8,6 +8,6 @@ interface AccessAliApiServices {
 
     @Headers("Content-Type:application/json")
     @GET("search?country=United%20Arab%20Emirates")
-    fun signIn(): Call<List<UniversityData>>
+    fun getUniversityData(): Call<List<UniversityData>>
 
 }

@@ -30,27 +30,17 @@
             android:exported="true"
             android:isScrollContainer="false"
             android:windowSoftInputMode="adjustPan">
-
-        </activity>
-        <activity
-            android:name=".ui.main.activity.FinalFormActivity"
-            android:exported="true"
-            android:isScrollContainer="false">
-
-        </activity>
-        <activity
-            android:name=".ui.main.activity.SignInActivity"
-            android:exported="true"
-            android:isScrollContainer="false"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
-            android:name=".ui.main.activity.SplashActivity"
-            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.main.activity.DetailActivity"
+            android:exported="true"
+            android:isScrollContainer="false">
+
         </activity>
 
         <provider
@@ -62,13 +52,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <service
-            android:name=".service.AccessAliFCMService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
 
     </application>
 

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="@dimen/_5sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -11,7 +13,6 @@
         android:text="University Name"
         android:textSize="16sp"
         android:paddingBottom="5dp"
-        android:layout_margin="15dp"
         app:layout_constraintWidth_percent="0.75"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -25,24 +26,22 @@
         app:layout_constraintTop_toBottomOf="@id/uniName"
         app:layout_constraintStart_toStartOf="@id/uniName"/>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+     <androidx.cardview.widget.CardView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:id="@+id/arrowCard"
         android:elevation="15dp"
         app:cardCornerRadius="25dp"
-        android:layout_marginVertical="12dp"
-        android:layout_marginHorizontal="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/uniName"
-        app:layout_constraintWidth_percent="0.08"
-        app:layout_constraintBottom_toBottomOf="@id/uniState">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/arrowIcon"
-            android:layout_margin="4dp"
+            android:layout_gravity="center"
+            android:scaleType="center"
             android:src="@drawable/right_arrow_svgrepo_com"/>
 
     </androidx.cardview.widget.CardView>

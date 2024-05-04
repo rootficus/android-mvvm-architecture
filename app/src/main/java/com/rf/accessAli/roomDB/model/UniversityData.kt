@@ -14,6 +14,6 @@ data class UniversityData(
     @SerializedName("name") var name: String,
     @SerializedName("country") var country: String? = null,
     @SerializedName("domain") var domain: ArrayList<String>? = null,
-    @SerializedName("webpages") var webpages: ArrayList<String>? =null,
+    @SerializedName("web_pages") var webpages: ArrayList<String>? =null,
     @SerializedName("state-province") var stateProvince: String? = null
 ) : Serializable
