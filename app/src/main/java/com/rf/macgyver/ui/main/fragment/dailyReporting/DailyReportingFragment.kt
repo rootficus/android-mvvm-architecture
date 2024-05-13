@@ -23,6 +23,7 @@ import com.rf.macgyver.ui.main.di.DaggerDailyReportingFragmentComponent
 import com.rf.macgyver.ui.main.di.DashBoardFragmentModuleDi
 import com.rf.macgyver.ui.main.viewmodel.DashBoardViewModel
 import com.rf.macgyver.utils.NetworkHelper
+import com.rf.macgyver.utils.PdfGeneratorDR
 import com.rf.macgyver.utils.SharedPreference
 import javax.inject.Inject
 
@@ -73,23 +74,9 @@ class DailyReportingFragment  : BaseFragment<FragmentDailyReportingBinding>(R.la
         mDataBinding.backArrowBtn.setOnClickListener{
             navController.navigateUp()
         }
-        if (dailyReportingDataList != null) {
-            for (i in 0 until dailyReportingDataList.size){
-                step1Data.reportName = dailyReportingDataList[i]?.reportName
-                step1Data.date = dailyReportingDataList[i]?.date
-                step1Data.day = dailyReportingDataList[i]?.day
-                step1Data.name = dailyReportingDataList[i]?.name
-                vehicle.vehicleName = dailyReportingDataList[i]?.vehicleName
-                vehicle.vehicleNo = dailyReportingDataList[i]?.vehicleNo
-                step1Data.vehicle = vehicle
-                step1Data.shift = dailyReportingDataList[i]?.shift
 
-                dataList.add(step1Data)
-            }
-        }
-
-
-        val itemAdapter = DailyReportingItemAdapter(dataList, requireActivity())
+        val itemAdapter =
+            dailyReportingDataList?.let { DailyReportingItemAdapter(it, requireActivity()) }
         val layoutManager = LinearLayoutManager(requireActivity())
         mDataBinding.recyclerViewId.layoutManager = layoutManager
         mDataBinding.recyclerViewId.adapter = itemAdapter

@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rf.macgyver.data.model.request.dailyReportData.Step1DrData
 import com.rf.macgyver.databinding.ItemDailyReportingBinding
+import com.rf.macgyver.roomDB.model.DailyReporting
 
-class DailyReportingItemAdapter (private var dataList: ArrayList<Step1DrData?>, private val context: Context?):
+class DailyReportingItemAdapter (private var dataList: ArrayList<DailyReporting>, private val context: Context?):
     RecyclerView.Adapter<DailyReportingItemAdapter.RecyclerViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val cartBinding = ItemDailyReportingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -18,7 +19,7 @@ class DailyReportingItemAdapter (private var dataList: ArrayList<Step1DrData?>, 
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         val cardData = dataList[position]
         holder.reportId.setText(cardData?.reportName)
-        holder.vehicleId.setText(cardData?.vehicle?.vehicleName)
+        holder.vehicleId.setText(cardData?.vehicleName)
         holder.dateId.setText(cardData?.date)
         when(cardData?.day){
             "Sunday" ->  {holder.sunday.setBackgroundColor(Color.parseColor("#8EBCFF"))}

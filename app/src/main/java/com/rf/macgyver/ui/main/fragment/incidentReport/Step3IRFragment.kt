@@ -1,5 +1,6 @@
 package com.rf.macgyver.ui.main.fragment.incidentReport
 
+import PdfGeneratorIR
 import PdfGeneratorIR.createIRPdf
 import android.app.Dialog
 import android.os.Bundle
@@ -95,12 +96,10 @@ class Step3IRFragment : BaseFragment<FragmentStep3IRBinding>(R.layout.fragment_s
                     }
                     if (entity != null) {
                         viewmodel.insertIncidentReport(entity)
+                        PdfGeneratorIR.createIRPdf(requireActivity(), entity)
                     }
                     val bundle1 = Bundle().apply {
                         putString("uniqueId", uniqueToken)
-                    }
-                    if (entity != null) {
-                        createIRPdf(requireActivity(), entity)
                     }
 
                     Navigation.findNavController(requireView())

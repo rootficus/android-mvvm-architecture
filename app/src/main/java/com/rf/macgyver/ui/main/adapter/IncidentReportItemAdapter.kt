@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rf.macgyver.data.model.request.incidentReportData.Step1IRData
 import com.rf.macgyver.databinding.ItemDailyReportingBinding
 import com.rf.macgyver.databinding.ItmIncidentReportBinding
+import com.rf.macgyver.roomDB.model.IncidentReport
 
-class IncidentReportItemAdapter(private var dataList: ArrayList<Step1IRData>, private val context: Context?):
+class IncidentReportItemAdapter(private var dataList: ArrayList<IncidentReport>, private val context: Context?):
     RecyclerView.Adapter<IncidentReportItemAdapter.RecyclerViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
         val binding = ItmIncidentReportBinding.inflate(LayoutInflater.from(parent.context), parent, false)

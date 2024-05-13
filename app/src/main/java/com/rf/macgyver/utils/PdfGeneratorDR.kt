@@ -70,12 +70,12 @@ object PdfGeneratorDR {
             this.downtimeNote = entity.downtimeNote
             val file = File(
                 context.getExternalFilesDir("PDF"),
-                "daily-report-${entity.reportName}.pdf"
+                "daily-report-${reportName}.pdf"
             )
             val writer = PdfWriter(file)
             val pdfDocument = PdfDocument(writer)
             val document = Document(pdfDocument)
-            document.setMargins(0f, 0f, 0f, 0f)
+            document.setMargins(10f, 8f, 8f, 8f)
             // Create a new page
             val newPage = pdfDocument.addNewPage()
             val canvas = PdfCanvas(pdfDocument.firstPage)
@@ -132,7 +132,7 @@ object PdfGeneratorDR {
                 currentPosition -= lineHeight
             }
 */
-            val dateLine = Paragraph("date")
+            val dateLine = Paragraph(date)
                 .setFont(boldFont)
                 .setFontSize(14f)
                 .setMarginTop(15F)
@@ -143,7 +143,7 @@ object PdfGeneratorDR {
             document.add(dateLine)
 
             val dayLine = Paragraph(day)
-                .setFont(boldFont)
+                .setFont(font)
                 .setFontSize(12f)
                 .setMarginTop(2F)
                 .setTextAlignment(TextAlignment.LEFT)
@@ -152,63 +152,86 @@ object PdfGeneratorDR {
             dayLine.setMarginBottom(0f)
             document.add(dayLine)
 
-            val reportNamePara = Paragraph(reportName)
+            val report = "Report : $reportName"
+
+            val reportNamePara = Paragraph(report)
                 .setFont(boldFont)
-                .setFontSize(14f)
+                .setFontSize(16f)
                 .setMarginTop(5F)
                 .setTextAlignment(TextAlignment.CENTER)
                 .setMultipliedLeading(0.9f)
             reportNamePara.setMarginBottom(0f)
             document.add(reportNamePara)
 
-            val downtimePara = Paragraph(vehicleDowntime)
-                .setFont(font)
-                .setFontSize(14f)
-                .setMarginTop(5F)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setMultipliedLeading(0.9f)
-            downtimePara.setMarginBottom(0f)
-            document.add(downtimePara)
+            val paragraphDowntime = Paragraph()
+            paragraphDowntime.add(
+                Paragraph("Vehicle Downtime : ")
+                    .setFont(boldFont)
+                    .setFontSize(12f)
+                    .setTextAlignment(TextAlignment.LEFT)
+            )
+            paragraphDowntime.add(
+                Paragraph(vehicleDowntime)
+                    .setFont(font)
+                    .setFontSize(12f)
+                    .setMarginLeft(4f)
+                    .setTextAlignment(TextAlignment.RIGHT)
+            )
+            paragraphDowntime.setMarginBottom(0f)
+            document.add(paragraphDowntime)
 
             val downtimeNotePara = Paragraph(downtimeNote)
                 .setFont(font)
                 .setFontSize(12f)
-                .setMarginTop(5F)
-                .setTextAlignment(TextAlignment.CENTER)
+                .setTextAlignment(TextAlignment.LEFT)
                 .setMultipliedLeading(0.9f)
             downtimeNotePara.setMarginBottom(0f)
             document.add(downtimeNotePara)
 
-            val runtimeParagraph = Paragraph(vehicleRuntime)
-                .setFont(font)
-                .setFontSize(14f)
-                .setMarginTop(5F)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setMultipliedLeading(0.9f)
-            runtimeParagraph.setMarginBottom(0f)
-            document.add(runtimeParagraph)
+            val paragraphRuntime = Paragraph()
+            paragraphRuntime.add(
+                Paragraph("Vehicle Runtime : ")
+                    .setFont(boldFont)
+                    .setFontSize(12f)
+                    .setTextAlignment(TextAlignment.LEFT)
+            )
+            paragraphRuntime.add(
+                Paragraph(vehicleRuntime)
+                    .setFont(font)
+                    .setFontSize(12f)
+                    .setMarginLeft(4f)
+                    .setTextAlignment(TextAlignment.RIGHT)
+            )
+            document.add(paragraphRuntime)
 
-            val worklogParagraph = Paragraph(vehicleWorkLog)
-                .setFont(boldFont)
-                .setFontSize(12f)
-                .setMarginTop(5F)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setMultipliedLeading(0.9f)
-            worklogParagraph.setMarginBottom(0f)
-            document.add(worklogParagraph)
+            val paragraphWorklog = Paragraph()
+            paragraphWorklog.add(
+                Paragraph("Worklog : ")
+                    .setFont(boldFont)
+                    .setFontSize(12f)
+                    .setTextAlignment(TextAlignment.LEFT)
+            )
+            paragraphWorklog.add(
+                Paragraph(vehicleWorkLog)
+                    .setFont(font)
+                    .setFontSize(12f)
+                    .setMarginLeft(4f)
+                    .setTextAlignment(TextAlignment.RIGHT)
+            )
+            document.add(paragraphWorklog)
 
             val question1 = entity.question1?.title
             val question1Title = Paragraph(question1)
                 .setFont(boldFont)
                 .setFontSize(12f)
-                .setMarginTop(5F)
+                .setMarginTop(8F)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setMultipliedLeading(0.9f)
             document.add(question1Title)
 
             val question1Ans = entity.question1?.selectedAnswer
             val question1AnsPara = Paragraph(question1Ans)
-                .setFont(boldFont)
+                .setFont(font)
                 .setFontSize(12f)
                 .setMarginTop(0F)
                 .setTextAlignment(TextAlignment.LEFT)
@@ -218,7 +241,7 @@ object PdfGeneratorDR {
             val question1Note = entity.question1?.note
             if (!question1Note.isNullOrEmpty()) { // Check if note is not null or empty
                 val question1notePara = Paragraph(question1Note)
-                    .setFont(boldFont)
+                    .setFont(font)
                     .setFontSize(12f)
                     .setMarginTop(5F)
                     .setTextAlignment(TextAlignment.LEFT)
@@ -231,14 +254,14 @@ object PdfGeneratorDR {
             val question2Title = Paragraph(question2)
                 .setFont(boldFont)
                 .setFontSize(12f)
-                .setMarginTop(5F)
+                .setMarginTop(8F)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setMultipliedLeading(0.9f)
             document.add(question2Title)
 
             val question2Ans = entity.question2?.selectedAnswer
             val question2AnsPara = Paragraph(question2Ans)
-                .setFont(boldFont)
+                .setFont(font)
                 .setFontSize(12f)
                 .setMarginTop(0F)
                 .setTextAlignment(TextAlignment.LEFT)
@@ -248,7 +271,7 @@ object PdfGeneratorDR {
             val question2Note = entity.question2?.note
             if (!question2Note.isNullOrEmpty()) { // Check if note is not null or empty
                 val question2notePara = Paragraph(question2Note)
-                    .setFont(boldFont)
+                    .setFont(font)
                     .setFontSize(12f)
                     .setMarginTop(5F)
                     .setTextAlignment(TextAlignment.LEFT)
@@ -261,14 +284,14 @@ object PdfGeneratorDR {
             val question3Title = Paragraph(question3)
                 .setFont(boldFont)
                 .setFontSize(12f)
-                .setMarginTop(5F)
+                .setMarginTop(8F)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setMultipliedLeading(0.9f)
             document.add(question3Title)
 
             val question3Ans = entity.question3?.selectedAnswer
             val question3AnsPara = Paragraph(question3Ans)
-                .setFont(boldFont)
+                .setFont(font)
                 .setFontSize(12f)
                 .setMarginTop(0F)
                 .setTextAlignment(TextAlignment.LEFT)
@@ -278,7 +301,7 @@ object PdfGeneratorDR {
             val question3Note = entity.question3?.note
             if (!question3Note.isNullOrEmpty()) { // Check if note is not null or empty
                 val question3notePara = Paragraph(question3Note)
-                    .setFont(boldFont)
+                    .setFont(font)
                     .setFontSize(12f)
                     .setMarginTop(5F)
                     .setTextAlignment(TextAlignment.LEFT)
@@ -290,14 +313,14 @@ object PdfGeneratorDR {
             val question4Title = Paragraph(question4)
                 .setFont(boldFont)
                 .setFontSize(12f)
-                .setMarginTop(5F)
+                .setMarginTop(8F)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setMultipliedLeading(0.9f)
             document.add(question4Title)
 
             val question4Ans = entity.question4?.selectedAnswer
             val question4AnsPara = Paragraph(question4Ans)
-                .setFont(boldFont)
+                .setFont(font)
                 .setFontSize(12f)
                 .setMarginTop(0F)
                 .setTextAlignment(TextAlignment.LEFT)
@@ -307,7 +330,7 @@ object PdfGeneratorDR {
             val question4Note = entity.question4?.note
             if (!question4Note.isNullOrEmpty()) { // Check if note is not null or empty
                 val question4notePara = Paragraph(question4Note)
-                    .setFont(boldFont)
+                    .setFont(font)
                     .setFontSize(12f)
                     .setMarginTop(5F)
                     .setTextAlignment(TextAlignment.LEFT)
@@ -319,14 +342,14 @@ object PdfGeneratorDR {
             val question5Title = Paragraph(question5)
                 .setFont(boldFont)
                 .setFontSize(12f)
-                .setMarginTop(5F)
+                .setMarginTop(8F)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setMultipliedLeading(0.9f)
             document.add(question5Title)
 
             val question5Ans = entity.question5?.selectedAnswer
             val question5AnsPara = Paragraph(question5Ans)
-                .setFont(boldFont)
+                .setFont(font)
                 .setFontSize(12f)
                 .setMarginTop(0F)
                 .setTextAlignment(TextAlignment.LEFT)
@@ -337,7 +360,7 @@ object PdfGeneratorDR {
             if (!question5Note.isNullOrEmpty()) { // Check if note is not null or empty
 
                 val question5notePara = Paragraph(question5Note)
-                    .setFont(boldFont)
+                    .setFont(font)
                     .setFontSize(12f)
                     .setMarginTop(5F)
                     .setTextAlignment(TextAlignment.LEFT)
@@ -349,14 +372,14 @@ object PdfGeneratorDR {
             val question6Title = Paragraph(question6)
                 .setFont(boldFont)
                 .setFontSize(12f)
-                .setMarginTop(5F)
+                .setMarginTop(8F)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setMultipliedLeading(0.9f)
             document.add(question6Title)
 
             val question6Ans = entity.question6?.selectedAnswer
             val question6AnsPara = Paragraph(question6Ans)
-                .setFont(boldFont)
+                .setFont(font)
                 .setFontSize(12f)
                 .setMarginTop(0F)
                 .setTextAlignment(TextAlignment.LEFT)
@@ -366,7 +389,7 @@ object PdfGeneratorDR {
             val question6Note = entity.question6?.note
             if (!question6Note.isNullOrEmpty()) { // Check if note is not null or empty
                 val question6notePara = Paragraph(question6Note)
-                    .setFont(boldFont)
+                    .setFont(font)
                     .setFontSize(12f)
                     .setMarginTop(5F)
                     .setTextAlignment(TextAlignment.LEFT)
@@ -378,14 +401,14 @@ object PdfGeneratorDR {
             val question7Title = Paragraph(question7)
                 .setFont(boldFont)
                 .setFontSize(12f)
-                .setMarginTop(5F)
+                .setMarginTop(8F)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setMultipliedLeading(0.9f)
             document.add(question7Title)
 
             val question7Ans = entity.question7?.selectedAnswer
             val question7AnsPara = Paragraph(question7Ans)
-                .setFont(boldFont)
+                .setFont(font)
                 .setFontSize(12f)
                 .setMarginTop(0F)
                 .setTextAlignment(TextAlignment.LEFT)
@@ -396,7 +419,7 @@ object PdfGeneratorDR {
             if (!question7Note.isNullOrEmpty()) { // Check if note is not null or empty
 
                 val question7notePara = Paragraph(question7Note)
-                    .setFont(boldFont)
+                    .setFont(font)
                     .setFontSize(12f)
                     .setMarginTop(5F)
                     .setTextAlignment(TextAlignment.LEFT)
@@ -408,14 +431,14 @@ object PdfGeneratorDR {
             val question8Title = Paragraph(question8)
                 .setFont(boldFont)
                 .setFontSize(12f)
-                .setMarginTop(5F)
+                .setMarginTop(8F)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setMultipliedLeading(0.9f)
             document.add(question8Title)
 
             val question8Ans = entity.question8?.selectedAnswer
             val question8AnsPara = Paragraph(question8Ans)
-                .setFont(boldFont)
+                .setFont(font)
                 .setFontSize(12f)
                 .setMarginTop(0F)
                 .setTextAlignment(TextAlignment.LEFT)
@@ -426,7 +449,7 @@ object PdfGeneratorDR {
             if (!question8Note.isNullOrEmpty()) { // Check if note is not null or empty
 
                 val question8notePara = Paragraph(question8Note)
-                    .setFont(boldFont)
+                    .setFont(font)
                     .setFontSize(12f)
                     .setMarginTop(5F)
                     .setTextAlignment(TextAlignment.LEFT)
@@ -438,14 +461,14 @@ object PdfGeneratorDR {
             val question9Title = Paragraph(question9)
                 .setFont(boldFont)
                 .setFontSize(12f)
-                .setMarginTop(5F)
+                .setMarginTop(8F)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setMultipliedLeading(0.9f)
             document.add(question9Title)
 
             val question9Ans = entity.question9?.selectedAnswer
             val question9AnsPara = Paragraph(question9Ans)
-                .setFont(boldFont)
+                .setFont(font)
                 .setFontSize(12f)
                 .setMarginTop(0F)
                 .setTextAlignment(TextAlignment.LEFT)
@@ -456,7 +479,7 @@ object PdfGeneratorDR {
             if (!question9Note.isNullOrEmpty()) { // Check if note is not null or empty
 
                 val question9notePara = Paragraph(question9Note)
-                    .setFont(boldFont)
+                    .setFont(font)
                     .setFontSize(12f)
                     .setMarginTop(5F)
                     .setTextAlignment(TextAlignment.CENTER)
@@ -473,7 +496,7 @@ object PdfGeneratorDR {
                 document.add(qrCodeImage)
             }*/
 
-            val qrCode = "(QR-Code)"
+            /*val qrCode = "(QR-Code)"
             val qrCodeParagraph = Paragraph(qrCode)
                 .setFont(font)
                 .setFontSize(8f)
@@ -481,7 +504,7 @@ object PdfGeneratorDR {
                 .setMarginTop(5f)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setMultipliedLeading(0.6f)
-            document.add(qrCodeParagraph)
+            document.add(qrCodeParagraph)*/
 
             /*val validFromTo = "Validity from ${request.validFrom} to ${request.validTo}"
             val validFromToParagraph = Paragraph(validFromTo)
@@ -679,9 +702,9 @@ object PdfGeneratorDR {
 
 
             try {
-                //document.close()
-                 openPdfFile(context, file)
-                //showPdf(context, file)
+                document.close()
+                 //openPdfFile(context, file)
+                showPdf(context, file)
             } catch (e: IOException) {
                 e.printStackTrace()
             }

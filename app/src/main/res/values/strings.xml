@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Utell Restaurant</string>
+    <string name="app_name">Macgyver</string>
     <string name="error_something_went_wrong">Something Went Wrong !!</string>
     <string name="no_network">No Internet.</string>
     <string name="login">Login</string>

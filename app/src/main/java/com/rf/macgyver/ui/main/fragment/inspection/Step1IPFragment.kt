@@ -1,5 +1,6 @@
 package com.rf.macgyver.ui.main.fragment.inspection
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -8,6 +9,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -16,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import com.rf.macgyver.R
+import com.rf.macgyver.data.model.request.dailyReportData.QuestionData
 import com.rf.macgyver.data.model.request.inspectionFormData.IPQuestionData
 import com.rf.macgyver.data.model.request.inspectionFormData.InspectionFormData
 import com.rf.macgyver.databinding.AlertCamDrBinding
@@ -45,8 +48,10 @@ class Step1IPFragment : BaseFragment<FragmentStep1IpBinding>(R.layout.fragment_s
     private var uniqueToken : String? = null
 
     private val REQUEST_IMAGE_CAPTURE = 101
-    var imgUri : Uri? = null
 
+    private var imgUri : ArrayList<Uri>? = arrayListOf()
+    var imageBitmap : Bitmap? = null
+    var imageUri : Uri? = null
     private  var ques1Data : IPQuestionData = IPQuestionData()
     private  var ques2Data : IPQuestionData = IPQuestionData()
     private  var ques3Data : IPQuestionData = IPQuestionData()
@@ -91,6 +96,9 @@ class Step1IPFragment : BaseFragment<FragmentStep1IpBinding>(R.layout.fragment_s
         uniqueNo  = bundle.getInt("UniqueNo")
 
         mDataBinding.nextTxt.setOnClickListener {
+            ques1Data.title = mDataBinding.radiatorHeading.text.toString()
+            ques4Data.title = mDataBinding.beltsHeading.text.toString()
+
             if(
                 ques2Data.selectedAnswer.isNullOrEmpty() || ques3Data.selectedAnswer.isNullOrEmpty() || ques5Data.selectedAnswer.isNullOrEmpty() ||
                 ques6Data.selectedAnswer.isNullOrEmpty() || ques7Data.selectedAnswer.isNullOrEmpty() || ques8Data.selectedAnswer.isNullOrEmpty() ||
@@ -249,57 +257,49 @@ class Step1IPFragment : BaseFragment<FragmentStep1IpBinding>(R.layout.fragment_s
 
         mDataBinding.bearingsPlusBtn.setOnClickListener{
             val text = mDataBinding.bearingsHeading.text.toString()
-            initializePlusButtonAlert(text)
-            ques6Data.note = noteText.toString()
+            initializePlusButtonAlert(text, ques6Data)
         }
 
         mDataBinding.smellPlusBtn.setOnClickListener{
             val text = mDataBinding.smellHeading.text.toString()
-            initializePlusButtonAlert(text)
-            ques5Data.note = noteText
+            initializePlusButtonAlert(text,ques5Data)
         }
 
         mDataBinding.engineStartUpPlusBtn.setOnClickListener{
             val text = mDataBinding.engineHeading.text.toString()
-            initializePlusButtonAlert(text)
-            ques2Data.note = noteText
+            initializePlusButtonAlert(text,ques2Data)
         }
 
         mDataBinding.vibrationPlusBtn.setOnClickListener{
             val text = mDataBinding.vibrationHeading.text.toString()
-            initializePlusButtonAlert(text)
-            ques3Data.note = noteText
+            initializePlusButtonAlert(text, ques3Data)
         }
 
         mDataBinding.hatchStartUpPlusBtn.setOnClickListener{
             val text = mDataBinding.hatchSHeading.text.toString()
-            initializePlusButtonAlert(text)
-            ques7Data.note = noteText
+            initializePlusButtonAlert(text, ques7Data)
         }
 
         mDataBinding.soundsPlusBtn.setOnClickListener{
             val text = mDataBinding.soundsHeading.text.toString()
-            initializePlusButtonAlert(text)
-            ques8Data.note = noteText
+            initializePlusButtonAlert(text, ques8Data)
         }
 
         mDataBinding.spinningPlusBtn.setOnClickListener{
             val text = mDataBinding.spinningHeading.text.toString()
-            initializePlusButtonAlert(text)
-            ques9Data.note = noteText
+            initializePlusButtonAlert(text,ques9Data)
         }
 
         mDataBinding.coolantPlusBtn.setOnClickListener{
             val text = mDataBinding.coolantHeading.text.toString()
-            initializePlusButtonAlert(text)
-            ques10Data.note = noteText
+            initializePlusButtonAlert(text,ques10Data)
         }
         mDataBinding.radiatorCamBtn.setOnClickListener{
-            initializeCamAlert()
+            initializeCamAlert(ques1Data)
         }
 
         mDataBinding.beltsCamBtn.setOnClickListener{
-            initializeCamAlert()
+            initializeCamAlert(ques4Data)
         }
     }
 
@@ -309,32 +309,41 @@ class Step1IPFragment : BaseFragment<FragmentStep1IpBinding>(R.layout.fragment_s
             .baseFragmentModule(BaseFragmentModule(mActivity)).build().inject(this)
     }
 
-    private fun initializePlusButtonAlert(text :String){
+    private fun initializePlusButtonAlert(text :String, card: IPQuestionData){
 
         val mBuilder = AlertDialog.Builder(requireActivity())
         val view = PopupStep2IpBinding.inflate(layoutInflater)
         view.headingId.text = text
         mBuilder.setView(view.root)
-        noteText = view.etNoteId.text.toString()
         val dialog: AlertDialog = mBuilder.create()
         view.cancelTxt.setOnClickListener {
             dialog.dismiss()
         }
         view.DoneTxt.setOnClickListener {
+            noteText = view.etNoteId.text.toString()
             dialog.dismiss()
+            card.note = noteText
         }
         dialog.show()
     }
 
-    private fun initializeCamAlert(){
+    private fun initializeCamAlert(card: IPQuestionData){
         val mBuilder = AlertDialog.Builder(requireActivity())
         val view = AlertCamDrBinding.inflate(layoutInflater)
         mBuilder.setView(view.root)
         view.camPlus1.setOnClickListener {
+            imageUri = null
             dispatchTakePictureIntent()
+            view.imageview1.visibility = View.VISIBLE
+            view.camPlus1.visibility = View.GONE
+            view.imageview1.setImageURI(imageUri)
         }
         view.camPlus2.setOnClickListener {
+            imageBitmap = null
             dispatchTakePictureIntent()
+            view.imageview2.visibility = View.VISIBLE
+            view.imageview2.setImageBitmap(imageBitmap)
+
         }
         val dialog: AlertDialog = mBuilder.create()
         view.cancelTxt.setOnClickListener {
@@ -342,6 +351,8 @@ class Step1IPFragment : BaseFragment<FragmentStep1IpBinding>(R.layout.fragment_s
         }
         view.doneTxt.setOnClickListener {
             dialog.dismiss()
+            card.uri = imgUri
+            imgUri = null
         }
         dialog.show()
 
@@ -358,7 +369,8 @@ class Step1IPFragment : BaseFragment<FragmentStep1IpBinding>(R.layout.fragment_s
         } else {
             // Request camera permission
             requestPermissions(
-                arrayOf(android.Manifest.permission.CAMERA),REQUEST_CAMERA_PERMISSION
+                arrayOf(android.Manifest.permission.CAMERA),
+                REQUEST_CAMERA_PERMISSION
             )
         }
     }
@@ -366,16 +378,19 @@ class Step1IPFragment : BaseFragment<FragmentStep1IpBinding>(R.layout.fragment_s
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val view = AlertCamDrBinding.inflate(layoutInflater)
-        if (requestCode == REQUEST_IMAGE_CAPTURE ) {
-            val imageBitmap = data?.extras?.get("data") as Bitmap
-            view.camPlus1.setImageBitmap(imageBitmap)
-
-            val imageUri = getImageUriFromBitmap(requireContext(), imageBitmap)
-            imgUri = imageUri
-
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+            imageBitmap = data?.extras?.get("data") as? Bitmap
+            if (imageBitmap != null) {
+                view.camPlus1.setImageBitmap(imageBitmap)
+                imageUri = getImageUriFromBitmap(requireContext(), imageBitmap!!)
+                imgUri?.add(imageUri!!)
+            } else {
+                Log.e("onActivityResult", "Failed to retrieve image bitmap from data extras.")
+            }
+        } else {
+            Log.e("onActivityResult", "Unexpected request code or result code.")
         }
     }
-
     private fun getImageUriFromBitmap(context: Context, bitmap: Bitmap): Uri {
         val bytes = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)

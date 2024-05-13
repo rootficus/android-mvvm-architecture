@@ -29,9 +29,8 @@ import com.itextpdf.layout.Document
 import com.itextpdf.layout.element.Paragraph
 import com.itextpdf.layout.property.TextAlignment
 import com.rf.macgyver.R
-import com.rf.macgyver.data.model.request.dailyReportData.Step1DrData
-import com.rf.macgyver.data.model.request.dailyReportData.Step2DrData
 import com.rf.macgyver.roomDB.model.IncidentReport
+import com.rf.macgyver.utils.PdfGeneratorDR
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
@@ -84,7 +83,7 @@ object PdfGeneratorIR {
             val writer = PdfWriter(file)
             val pdfDocument = PdfDocument(writer)
             val document = Document(pdfDocument)
-            document.setMargins(0f, 0f, 0f, 0f)
+            document.setMargins(15f, 10f, 10f, 10f)
             // Create a new page
             val newPage = pdfDocument.addNewPage()
             val canvas = PdfCanvas(pdfDocument.firstPage)
@@ -141,38 +140,68 @@ object PdfGeneratorIR {
                 currentPosition -= lineHeight
             }
 */
-            val dateLine = Paragraph(date)
-                .setFont(font)
-                .setFontSize(14f)
-                .setMarginTop(15F)
-                .setTextAlignment(TextAlignment.LEFT)
-                .setMultipliedLeading(0.9f)
 
-            dateLine.setMarginBottom(0f)
-            document.add(dateLine)
-
-            val dayLine = Paragraph(time)
-                .setFont(font)
-                .setFontSize(12f)
-                .setMarginTop(2F)
-                .setTextAlignment(TextAlignment.LEFT)
-                .setMultipliedLeading(0.9f)
-
-            dayLine.setMarginBottom(0f)
-            document.add(dayLine)
-
-            val reportNamePara = Paragraph(incidentNo)
+            val heading = "Incident No : ${incidentNo}"
+            val reportNamePara = Paragraph(heading)
                 .setFont(boldFont)
-                .setFontSize(14f)
+                .setFontSize(16f)
                 .setMarginTop(5F)
                 .setTextAlignment(TextAlignment.CENTER)
                 .setMultipliedLeading(0.9f)
             reportNamePara.setMarginBottom(0f)
             document.add(reportNamePara)
 
+            val datePara = Paragraph()
+            datePara.add(
+                Paragraph("Incident Date : ")
+                    .setFont(boldFont)
+                    .setFontSize(12f)
+                    .setTextAlignment(TextAlignment.LEFT)
+            )
+            datePara.add(
+                Paragraph(vehicleName)
+                    .setFont(font)
+                    .setFontSize(12f)
+                    .setMarginLeft(4f)
+                    .setTextAlignment(TextAlignment.RIGHT)
+            )
+            document.add(datePara)
+
+            val timePara = Paragraph()
+            timePara.add(
+                Paragraph("Incident TIme : ")
+                    .setFont(boldFont)
+                    .setFontSize(12f)
+                    .setTextAlignment(TextAlignment.LEFT)
+            )
+            timePara.add(
+                Paragraph(time)
+                    .setFont(font)
+                    .setFontSize(12f)
+                    .setMarginLeft(4f)
+                    .setTextAlignment(TextAlignment.RIGHT)
+            )
+            document.add(timePara)
+
+            val paraVehicleNo = Paragraph()
+            paraVehicleNo.add(
+                Paragraph("Vehicle Number : ")
+                    .setFont(boldFont)
+                    .setFontSize(12f)
+                    .setTextAlignment(TextAlignment.LEFT)
+            )
+            paraVehicleNo.add(
+                Paragraph(vehicleNo)
+                    .setFont(font)
+                    .setFontSize(12f)
+                    .setMarginLeft(4f)
+                    .setTextAlignment(TextAlignment.RIGHT)
+            )
+            document.add(paraVehicleNo)
+
             val paragraph = Paragraph()
             paragraph.add(
-                Paragraph(vehicleNo)
+                Paragraph("Vehicle Name : ")
                     .setFont(boldFont)
                     .setFontSize(12f)
                     .setTextAlignment(TextAlignment.LEFT)
@@ -181,103 +210,188 @@ object PdfGeneratorIR {
                 Paragraph(vehicleName)
                     .setFont(font)
                     .setFontSize(12f)
+                    .setMarginLeft(4f)
                     .setTextAlignment(TextAlignment.RIGHT)
             )
             document.add(paragraph)
 
-            val question2AnsPara = Paragraph(operatorName)
-                .setFont(boldFont)
-                .setFontSize(13f)
-                .setMarginTop(0F)
-                .setTextAlignment(TextAlignment.LEFT)
-                .setMultipliedLeading(0.9f)
-            document.add(question2AnsPara)
-
-            val question1notePara = Paragraph(incidentLoc)
-                .setFont(font)
-                .setFontSize(12f)
-                .setMarginTop(5F)
-                .setTextAlignment(TextAlignment.LEFT)
-                .setMultipliedLeading(0.9f)
-            document.add(question1notePara)
-
-
-            val question2Title = Paragraph(incidentArea)
-                .setFont(font)
-                .setFontSize(12f)
-                .setMarginTop(5F)
-                .setTextAlignment(TextAlignment.LEFT)
-                .setMultipliedLeading(0.9f)
-            document.add(question2Title)
-
-
-
-            for (i in 1..typeOfIncident.size){
-            val question2notePara = Paragraph(typeOfIncident[i-1])
-                .setFont(boldFont)
-                .setFontSize(12f)
-                .setMarginTop(5F)
-                .setTextAlignment(TextAlignment.LEFT)
-                .setMultipliedLeading(0.9f)
-            document.add(question2notePara)
-            }
-
-
-            val question3Title = Paragraph(incidentCause)
-                .setFont(boldFont)
-                .setFontSize(12f)
-                .setMarginTop(5F)
-                .setTextAlignment(TextAlignment.LEFT)
-                .setMultipliedLeading(0.9f)
-            document.add(question3Title)
-
-            val question3AnsPara = Paragraph(incidentSeverity)
-                .setFont(boldFont)
-                .setFontSize(12f)
-                .setMarginTop(0F)
-                .setTextAlignment(TextAlignment.LEFT)
-                .setMultipliedLeading(0.9f)
-            document.add(question3AnsPara)
-
-                val question3notePara = Paragraph(weatherCondition)
+            val operator = Paragraph()
+            operator.add(
+                Paragraph("Operator Name : ")
                     .setFont(boldFont)
                     .setFontSize(12f)
-                    .setMarginTop(5F)
                     .setTextAlignment(TextAlignment.LEFT)
-                    .setMultipliedLeading(0.9f)
-                document.add(question3notePara)
+            )
+            operator.add(
+                Paragraph(operatorName)
+                    .setFont(font)
+                    .setFontSize(12f)
+                    .setMarginLeft(4f)
+                    .setTextAlignment(TextAlignment.RIGHT)
+            )
+            document.add(operator)
 
-
-            val question4Title = Paragraph(vehicleActivity)
-                .setFont(boldFont)
-                .setFontSize(12f)
-                .setMarginTop(5F)
-                .setTextAlignment(TextAlignment.LEFT)
-                .setMultipliedLeading(0.9f)
-            document.add(question4Title)
-
-            val question4AnsPara = Paragraph(damagesList)
-                .setFont(boldFont)
-                .setFontSize(12f)
-                .setMarginTop(0F)
-                .setTextAlignment(TextAlignment.LEFT)
-                .setMultipliedLeading(0.9f)
-            document.add(question4AnsPara)
-
-
-
-            if (!additionalComment.isNullOrEmpty()) { // Check if note is not null or empty
-
-                val question7notePara = Paragraph(additionalComment)
+            val incidentLocation = Paragraph()
+            incidentLocation.add(
+                Paragraph("Incident Location : ")
                     .setFont(boldFont)
                     .setFontSize(12f)
-                    .setMarginTop(5F)
                     .setTextAlignment(TextAlignment.LEFT)
-                    .setMultipliedLeading(0.9f)
-                document.add(question7notePara)
+            )
+            incidentLocation.add(
+                Paragraph(incidentLoc)
+                    .setFont(font)
+                    .setFontSize(12f)
+                    .setMarginLeft(4f)
+                    .setTextAlignment(TextAlignment.RIGHT)
+            )
+            document.add(incidentLocation)
+
+
+            val incidentAreaPara = Paragraph()
+            incidentAreaPara.add(
+                Paragraph("Incident Area : ")
+                    .setFont(boldFont)
+                    .setFontSize(12f)
+                    .setTextAlignment(TextAlignment.LEFT)
+            )
+            incidentAreaPara.add(
+                Paragraph(incidentArea)
+                    .setFont(font)
+                    .setFontSize(12f)
+                    .setMarginLeft(4f)
+                    .setTextAlignment(TextAlignment.RIGHT)
+            )
+            document.add(incidentAreaPara)
+
+
+            val incidentCausePara = Paragraph()
+            incidentCausePara.add(
+                Paragraph("Incident Cause : ")
+                    .setFont(boldFont)
+                    .setFontSize(12f)
+                    .setTextAlignment(TextAlignment.LEFT)
+            )
+            incidentCausePara.add(
+                Paragraph(incidentCause)
+                    .setFont(font)
+                    .setFontSize(12f)
+                    .setMarginLeft(4f)
+                    .setTextAlignment(TextAlignment.RIGHT)
+            )
+            document.add(incidentCausePara)
+
+
+            val incidentType = Paragraph()
+            incidentType.add(
+                Paragraph("Types of incident : ")
+                    .setFont(boldFont)
+                    .setFontSize(12f)
+                    .setTextAlignment(TextAlignment.LEFT)
+            )
+            for (i in 0 until typeOfIncident.size){
+                incidentType.add(
+                    Paragraph(typeOfIncident[i])
+                        .setFont(font)
+                        .setFontSize(12f)
+                        .setMarginLeft(4f)
+                        .setTextAlignment(TextAlignment.RIGHT)
+                )
             }
+            document.add(incidentType)
+
+            val paraWeatherCond = Paragraph()
+            paraWeatherCond.add(
+                Paragraph("Weather Condition : ")
+                    .setFont(boldFont)
+                    .setFontSize(12f)
+                    .setTextAlignment(TextAlignment.LEFT)
+            )
+            paraWeatherCond.add(
+                Paragraph(weatherCondition)
+                    .setFont(font)
+                    .setFontSize(12f)
+                    .setMarginLeft(4f)
+                    .setTextAlignment(TextAlignment.RIGHT)
+            )
+            document.add(paraWeatherCond)
 
 
+            val paraIncidentSeverity = Paragraph()
+            paraIncidentSeverity.add(
+                Paragraph("Incident Severity : ")
+                    .setFont(boldFont)
+                    .setFontSize(12f)
+                    .setTextAlignment(TextAlignment.LEFT)
+            )
+            paraIncidentSeverity.add(
+                Paragraph(incidentSeverity)
+                    .setFont(font)
+                    .setFontSize(12f)
+                    .setMarginLeft(4f)
+                    .setTextAlignment(TextAlignment.RIGHT)
+            )
+            document.add(paraIncidentSeverity)
+
+
+            val paraVehicleActivity = Paragraph()
+            paraVehicleActivity.add(
+                Paragraph("Vehicle Activity : ")
+                    .setFont(boldFont)
+                    .setFontSize(12f)
+                    .setTextAlignment(TextAlignment.LEFT)
+            )
+            paraVehicleActivity.add(
+                Paragraph(vehicleActivity)
+                    .setFont(font)
+                    .setFontSize(12f)
+                    .setMarginLeft(4f)
+                    .setTextAlignment(TextAlignment.RIGHT)
+            )
+            document.add(paraVehicleActivity)
+
+            val paraDamagesList = Paragraph()
+            paraDamagesList.add(
+                Paragraph("Damages : ")
+                    .setFont(boldFont)
+                    .setFontSize(12f)
+                    .setTextAlignment(TextAlignment.LEFT)
+            )
+            paraDamagesList.add(
+                Paragraph(damagesList)
+                    .setFont(font)
+                    .setFontSize(12f)
+                    .setMarginLeft(4f)
+                    .setTextAlignment(TextAlignment.RIGHT)
+            )
+            document.add(paraDamagesList)
+
+
+            val paraAdditionalComment = Paragraph()
+            paraAdditionalComment.add(
+                Paragraph("Additional Comment : ")
+                    .setFont(boldFont)
+                    .setFontSize(12f)
+                    .setTextAlignment(TextAlignment.LEFT)
+            )
+            if (!additionalComment.isNullOrEmpty()) {
+                paraAdditionalComment.add(
+                    Paragraph(additionalComment)
+                        .setFont(font)
+                        .setFontSize(12f)
+                        .setMarginLeft(4f)
+                        .setTextAlignment(TextAlignment.RIGHT)
+                )
+            }else{
+                paraAdditionalComment.add(
+                    Paragraph("No Remark")
+                        .setFont(font)
+                        .setFontSize(12f)
+                        .setMarginLeft(4f)
+                        .setTextAlignment(TextAlignment.RIGHT)
+                )
+            }
+            document.add(paraAdditionalComment)
 
 
             // Add QR code image to PDF
@@ -494,9 +608,9 @@ object PdfGeneratorIR {
 
 
             try {
-                //document.close()
-                 openPdfFile(context, file)
-                //showPdf(context, file)
+                document.close()
+                //openPdfFile(context, file)
+                showPdf(context, file)
             } catch (e: IOException) {
                 e.printStackTrace()
             }
